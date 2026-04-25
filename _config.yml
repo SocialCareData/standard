@@ -1,0 +1,45 @@
+# Jekyll Configuration
+title: Social Care Interoperability Framework
+base_url: https://standard.socialcaredata.io
+description: Knowledge base and standards development for the social care interoperability framework
+theme_color: "#0f4b69"
+newsletter: https://github.us15.list-manage.com/subscribe?u=cc2fe06b8de4efcacfb9a9e18&id=410af499ef
+github_username: socialcaredata
+repository: socialcaredata/standard
+homepage:
+  title: Social Care Data
+  url: /
+nav:
+  - title: Publications
+    url: /publications
+  - title: Updates
+    url: /updates
+  - title: Calendar
+    url: /calendar
+pagefind: true
+footer:
+  copyright:
+    title: Crown Copyright
+    url: http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/
+  license:
+    title: Open Government License v3
+    url: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+styles:
+  input: /assets/css/
+  output: /assets/css/styles.css
+  rouge_theme: github
+  minify: true
+excerpt_separator: "<!--more-->"
+include: 
+  - _pages
+exclude:
+  - docker-compose.yml
+  - LICENSE
+  - README.md
+markdown: kramdown
+kramdown:
+  parse_block_html: true
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+rouge_theme: github

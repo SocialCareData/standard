@@ -1,0 +1,36 @@
+/* Social Navigation */
+.footer .social-nav ul {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer .social-nav li {
+    margin: 0;
+}
+
+.footer .social-nav a {
+    align-items: center;
+    display: flex;
+}
+
+.footer .social-nav .homepage-link a {
+    padding: 0;
+}
+
+.footer .social-nav img, .footer .social-nav svg {
+    height: 1.6rem;
+    width: 1.6rem;
+}
+
+/* Copyright Notice */
+.footer .copyright-notice {
+    border-top: 1px solid rgba(255, 255, 255, .7);
+    margin: var(--main-margin);
+    padding: var(--main-margin-narrow);
+}
