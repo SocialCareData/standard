@@ -29,7 +29,7 @@ Participants in the standards working groups agree to our <a href="/standards_wo
 
 There are currently two working groups, one for each currently prioritised focus area:
 
-1. [Multi-agency information sharing (MAIS)](/mais)
-1. [Children's social care placements](/placements)
+1. [Multi-agency information sharing (MAIS)](/mais_standards_working_group)
+1. [Children's social care placements](/placements_standards_working_group)
 
 To join one of our standards working groups, please contact the programme team by email at <a href="mailto:DataStandards-SocialCare@socialfinance.org.uk">DataStandards-SocialCare@socialfinance.org.uk</a>.

@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: /mais
+permalink: /mais_standards_working_group
 title: Multi-Agency Information Sharing (MAIS)
 breadcrumbs:
   - title: Standards Working Groups
@@ -13,15 +13,17 @@ Single view systems are those which allow a professional to see on one screen in
 
 The standards we will create include:
 
-* A Data Exchange Standard which will define how data is exchanged between systems  
-* A Person Standard which will provide a model for the data collected about individuals, focussing on:  
-  * data required to distinguish one person from another, and  
-  * data required to describe relationships between people.  
+* A Data Exchange Standard which will define how data is exchanged between systems
+* A Person Standard which will provide a model for the data collected about individuals, focussing on:
+  * data required to distinguish one person from another, and
+  * data required to describe relationships between people.
 * A Social Care Taxonomy which will define key concepts in children’s and adults' social care, starting with concepts needed to support the core use cases for single view systems.
+
 
 ## A serious and longstanding problem
 
 In many serious case reviews, following the death or serious injury of a child, poor information sharing between agencies that support children and families is cited as a key failing. The [Independent Review of Children’s Social Care](https://www.gov.uk/government/groups/independent-review-of-childrens-social-care), published in May 2022, highlighted technological barriers as a key contributor to challenges in multi-agency information sharing, with clunky IT systems making it difficult to: surface, review, and then share critical information. The national review into the deaths of Arthur Labinjo-Hughes and Star Hobson, published in 2022, likewise drew attention to this issue. In its 2024 manifesto, the Labour party pledged to improve data-sharing across services, to better support children and families who too often “fall through the cracks of public services”.
+
 
 ## Solutions have long existed, but are not scaling
 
@@ -33,12 +35,13 @@ There are established options for LAs to configure these systems themselves with
 
 The binding constraint on single view products spreading is the cost and difficulty of securing access to the data required to make them useful.
 
+
 ## We will address the barriers to scaling existing solutions
 
 A key barrier is the bespoke nature of work taking place between data-sharing partners:
 
-1. modelling the data,  
-2. defining how data will be exchanged between systems, and  
+1. modelling the data,
+2. defining how data will be exchanged between systems, and
 3. drafting and agreeing on [data sharing agreements](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/data-sharing-a-code-of-practice/data-sharing-agreements/) and [data protection impact assessments](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/guide-to-accountability-and-governance/data-protection-impact-assessments/).
 
 This work required agreeing upon and implementing data sharing programmes, and thus getting a functioning single view system, is unnecessarily slow, expensive, and uncertain.
@@ -49,7 +52,7 @@ Success means single view systems will be cheaper and faster to scale, so more L
 
 Ultimately:
 
-1. social workers will spend less time searching for information, and more time on direct work; and  
+1. social workers will spend less time searching for information, and more time on direct work; and
 2. children and adults at risk will be more identifiable, earlier, leading to early intervention and better outcomes.
 
 We will not develop single view systems or create data sharing agreements, as both already exist. Our role is to facilitate their spread.

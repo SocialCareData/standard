@@ -35,8 +35,8 @@ The programme will run for three years, from April 2025 to March 2028 by which t
 
 The first standards developed will focus on two areas:
 
-1. [Multi-agency information sharing (MAIS)](/mais/)
-1. [Children's social care placements](/placements/)
+1. [Multi-agency information sharing (MAIS)](/mais_standards_working_group)
+1. [Children's social care placements](/placements_standards_working_group)
 
 For each of these we expect to have draft standards ready for consultation in September 2025, in preparation for pilot programmes in January 2026.
 
