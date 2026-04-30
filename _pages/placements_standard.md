@@ -46,22 +46,22 @@ The top-level record. Captures the unique child identifier and links the placeme
 : Optional unique identifier of the placement record. _String_.
 
 <span id="placement-hasPlacementAvailability">hasPlacementAvailability</span>
-: The placement availability / referral details. See [PlacementAvailability](#placementavailability).
+: The placement availability / referral details. See [PlacementAvailability](/placements_standard#placementavailability).
 
 <span id="placement-hasPlacementRequirements">hasPlacementRequirements</span>
-: The child's needs the placement must accommodate. See [PlacementRequirements](#placementrequirements).
+: The child's needs the placement must accommodate. See [PlacementRequirements](/placements_standard#placementrequirements).
 
 <span id="placement-hasPlacementRecommendation">hasPlacementRecommendation</span>
-: The social worker's suitability judgement for each placement category. See [PlacementRecommendation](#placementrecommendation).
+: The social worker's suitability judgement for each placement category. See [PlacementRecommendation](/placements_standard#placementrecommendation).
 
 <span id="placement-hasRiskAssessment">hasRiskAssessment</span>
-: The risk assessment for the child. See [RiskAssessment](#riskassessment).
+: The risk assessment for the child. See [RiskAssessment](/placements_standard#riskassessment).
 
 <span id="placement-hasActualPlacement">hasActualPlacement</span>
-: The actual placement arranged for the child (optional - a referral may exist without yet having an actual placement). See [ActualPlacement](#actualplacement).
+: The actual placement arranged for the child (optional - a referral may exist without yet having an actual placement). See [ActualPlacement](/placements_standard#actualplacement).
 
 <span id="placement-hasQualityAssurance">hasQualityAssurance</span>
-: Metadata about who recorded each part and when. See [QualityAssurance](#qualityassurance).
+: Metadata about who recorded each part and when. See [QualityAssurance](/placements_standard#qualityassurance).
 
 #### Example
 
@@ -85,7 +85,7 @@ The top-level record. Captures the unique child identifier and links the placeme
 
 <div class="note">
   <h5 id="note-placement">Note - full lifecycle</h5>
-  <p>The example above only sketches the top-level wiring. See <a href="https://github.com/SocialCareData/data-model/blob/main/ontology/placements/shape/examples/valid-placement.jsonld"><code>shape/examples/valid-placement.jsonld</code></a> for a full lifecycle example, and <a href="https://github.com/SocialCareData/data-model/blob/main/ontology/placements/shape/examples/valid-other-options.jsonld"><code>valid-other-options.jsonld</code></a> for an example exercising every "Other" controlled-vocab option with paired free-text values.</p>
+  <p>The example above only sketches the top-level wiring. See <a href="/assets/shacl/examples/valid-placement.jsonld"><code>assets/shacl/examples/valid-placement.jsonld</code></a> for a full lifecycle example, and <a href="/assets/shacl/examples/valid-other-options.jsonld"><code>assets/shacl/examples/valid-other-options.jsonld</code></a> for an example exercising every "Other" controlled-vocab option with paired free-text values.</p>
 </div>
 
 
@@ -96,7 +96,7 @@ The referral request: how urgently the child needs to be placed, how many siblin
 #### Properties
 
 <span id="availability-neededBy">neededBy</span>
-: By when does the child need to find a home/ be placed by? Captures urgency rather than an absolute date. Allowed values are: `'Today'`, `'< 5 days'`, `'> 5 days'`.  See the [Placement Urgency Taxonomy](/placements/vocab/placement-urgency).
+: By when does the child need to find a home/ be placed by? Captures urgency rather than an absolute date. Allowed values are: `'Today'`, `'< 5 days'`, `'> 5 days'`.  See the [Placement Urgency Taxonomy](/placements_standard#placement-urgency-taxonomy).
 
 <span id="availability-siblingCount">siblingCount</span>
 : How many siblings should the child be placed together with? If child has no siblings/ does not need to be placed with siblings then input 0. _Integer_.
@@ -105,7 +105,7 @@ The referral request: how urgently the child needs to be placed, how many siblin
 : Is the preferred placement location in the same LA as the placing LA?. _Boolean_.
 
 <span id="availability-outOfLAReason">outOfLAReason</span>
-: If `isPreferredLocationLocal` is `false`, the reason the preferred placement is sought outside the placing LA. See the [Out of LA Reason Taxonomy](/placements/vocab/outof-la-reason).
+: If `isPreferredLocationLocal` is `false`, the reason the preferred placement is sought outside the placing LA. See the [Out of LA Reason Taxonomy](/placements_standard#out-of-la-reason-taxonomy).
 
 <span id="availability-outOfLAReasonOther">outOfLAReasonOther</span>
 : Free-text description when `outOfLAReason` is `'Other'`. Multi-valued. _String_.
@@ -127,7 +127,7 @@ The referral request: how urgently the child needs to be placed, how many siblin
 
 <div class="note">
   <h5 id="note-availability">Note</h5>
-  <p>See <a href="https://github.com/SocialCareData/data-model/blob/main/ontology/placements/shape/examples/valid-other-options.jsonld"><code>valid-other-options.jsonld</code></a> for a worked example using <code>olr:OutOfLAReasonOther</code> with multiple paired free-text reasons.</p>
+  <p>See <a href="/assets/shacl/examples/valid-other-options.jsonld"><code>assets/shacl/examples/valid-other-options.jsonld</code></a> for a worked example using <code>olr:OutOfLAReasonOther</code> with multiple paired free-text reasons.</p>
 </div>
 
 
@@ -141,7 +141,7 @@ The child's needs that the placement must accommodate: communication, cultural, 
 : Whether the child has any communication, language or learning needs.  Allowed values are: `'Yes'`, `'No'`, `'Not Specified'`.
 
 <span id="requirements-specificCommunicationRequirement">specificCommunicationRequirement</span>
-: Specific communication or language requirements such as `'ESOL'`, `'BSL'` etc. and use `'None'` if not applicable. Multi-valued. See the [Communication Need Taxonomy](/placements/vocab/communication-need).
+: Specific communication or language requirements such as `'ESOL'`, `'BSL'` etc. and use `'None'` if not applicable. Multi-valued. See the [Communication Need Taxonomy](/placements_standard#communication-need-taxonomy).
 
 <span id="requirements-specificCommunicationRequirementOther">specificCommunicationRequirementOther</span>
 : Free-text descriptions when `specificCommunicationRequirement` includes `'Other'`. Multi-valued. _String_.
@@ -156,13 +156,13 @@ The child's needs that the placement must accommodate: communication, cultural, 
 : Free-text descriptions when `'culturalNeeds` is `'Other'. Multi-valued.  _String_.
 
 <span id="requirements-livingCompanions">livingCompanions</span>
-: Are there any restrictions on who else can live in the same home? Or, would it help to have them living with other young people? See the [Living Arrangement Taxonomy](/placements/vocab/living-arrangement).
+: Are there any restrictions on who else can live in the same home? Or, would it help to have them living with other young people? See the [Living Arrangement Taxonomy](/placements_standard#living-arrangement-taxonomy).
 
 <span id="requirements-pets">pets</span>
 : Whether the child can live in a home with pets / animals. Allowed values are: `'Yes-must'`, `'Yes-can'`, `'No'`, `'Not known'`.
 
 <span id="requirements-additionalSupport">additionalSupport</span>
-: Additional support provision required. Multi-valued. Some allowed values are: `'Additional supervision'`, `'Therapeutic support'`, `'A worker for respite'`, `'Taxis to school'` etc.  See the [Support Type Taxonomy](/placements/vocab/support-type).
+: Additional support provision required. Multi-valued. Some allowed values are: `'Additional supervision'`, `'Therapeutic support'`, `'A worker for respite'`, `'Taxis to school'` etc.  See the [Support Type Taxonomy](/placements_standard#support-type-taxonomy).
 
 <span id="requirements-additionalSupportOther">additionalSupportOther</span>
 : Free-text descriptions when `additionalSupport` includes `'Other'`. Multi-valued. _String_.
@@ -191,7 +191,7 @@ The child's needs that the placement must accommodate: communication, cultural, 
 
 <div class="note">
   <h5 id="note-requirements">Note - "Other" pairings</h5>
-  <p>Each controlled-vocab field that exposes an "Other" option is paired with a multi-valued free-text property: <code>cn:Other</code> ↔ <code>specificCommunicationRequirementOther</code>, <code>cln:Other</code> ↔ <code>culturalNeedsOther</code>, <code>st:Other</code> ↔ <code>additionalSupportOther</code>. Whenever the "Other" concept is selected, the paired free-text property must be provided. See <a href="https://github.com/SocialCareData/data-model/blob/main/ontology/placements/shape/examples/valid-other-options.jsonld"><code>valid-other-options.jsonld</code></a>.</p>
+  <p>Each controlled-vocab field that exposes an "Other" option is paired with a multi-valued free-text property: <code>cn:Other</code> ↔ <code>specificCommunicationRequirementOther</code>, <code>cln:Other</code> ↔ <code>culturalNeedsOther</code>, <code>st:Other</code> ↔ <code>additionalSupportOther</code>. Whenever the "Other" concept is selected, the paired free-text property must be provided. See <a href="/assets/shacl/examples/valid-other-options.jsonld"><code>assets/shacl/examples/valid-other-options.jsonld</code></a>.</p>
 </div>
 
 
@@ -351,7 +351,7 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
 : How many siblings were actually placed together. _Integer_.
 
 <span id="actual-placementType">placementType</span>
-: Record the type of placement the child received either foster, residential or supported accommodation. See the [Placement Type Taxonomy](/placements/vocab/placement-type).
+: Record the type of placement the child received either foster, residential or supported accommodation. See the [Placement Type Taxonomy](/placements_standard#placement-type-taxonomy).
 
 #### Example
 
@@ -424,29 +424,96 @@ LA-internal metadata about who recorded each part of the placement record (refer
 
 ## Ontology
 
-The ontology for this specification is defined in Turtle format and is available at: [placements.ttl](https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/placements.ttl).
+The ontology for this specification is defined in Turtle format and is available at: [ontology.ttl](/assets/ttl/ontology.ttl).
 
 ## Taxonomies
 
-The model is parameterised by eleven SKOS controlled vocabularies. Selecting `Other` from any vocab that exposes it triggers the matching free-text companion property on the parent entity.
+The model is parameterised by six SKOS controlled vocabularies. Selecting `Other` from any vocabulary that exposes it triggers the matching free-text companion property on the parent entity.
 
-* [Communication Need Taxonomy](/placements/vocab/communication-need) - paired with `specificCommunicationRequirementOther`.
-* [Living Arrangement Taxonomy](/placements/vocab/living-arrangement)
-* [Out of LA Reason Taxonomy](/placements/vocab/outof-la-reason) - paired with `outOfLAReasonOther`.
-* [Placement Type Taxonomy](/placements/vocab/placement-type)
-* [Placement Urgency Taxonomy](/placements/vocab/placement-urgency)
-* [Support Type Taxonomy](/placements/vocab/support-type) - paired with `additionalSupportOther`.
+### Communication Need Taxonomy
+
+Specific communication and language requirements a child may have. Multi-valued: enter all that apply, or `None` if not applicable. Selecting `Other` triggers the paired free-text property `specificCommunicationRequirementOther` on `PlacementRequirements`.
+
+* `ESOL`: English for Speakers of Other Languages. English-language support is required.
+* `BSL`: British Sign Language is required.
+* `Makaton`: Makaton signing or symbol communication is required.
+* `Other`: Another communication or language requirement not listed. Supply details via `specificCommunicationRequirementOther`.
+* `None`: No specific communication or language requirements.
+
+Source vocabulary: [taxonomy-communication-need.ttl](/assets/ttl/taxonomy-communication-need.ttl). Used by `specificCommunicationRequirement` on [PlacementRequirements](/placements_standard#placementrequirements).
+
+### Living Arrangement Taxonomy
+
+Recommendations for who the child can be cared for alongside in a placement.
+
+* `Solo placement recommended`: A solo placement is recommended; the child should not live with other children.
+* `With other children recommended`: Living with other children is recommended.
+* `Only with other older children`: The child should only live with other children who are older.
+* `Only with other younger children`: The child should only live with other children who are younger.
+* `No preference`: No preference about who the child lives alongside.
+
+Source vocabulary: [taxonomy-living-arrangement.ttl](/assets/ttl/taxonomy-living-arrangement.ttl). Used by `livingCompanions` on [PlacementRequirements](/placements_standard#placementrequirements).
+
+### Out of LA Reason Taxonomy
+
+The reason why the preferred placement location is in a different LA than the placing LA. Used on `PlacementAvailability` when `isPreferredLocationLocal` is `false`. Selecting `Other` triggers the paired free-text property `outOfLAReasonOther`.
+
+* `Safeguarding concerns`: Placement is sought outside the placing LA due to safeguarding concerns.
+* `Bail conditions`: Placement is sought outside the placing LA because of bail conditions.
+* `Court order`: Placement is sought outside the placing LA because of a court order.
+* `Other`: Another reason not listed. Supply details via `outOfLAReasonOther`.
+
+Source vocabulary: [taxonomy-outof-la-reason.ttl](/assets/ttl/taxonomy-outof-la-reason.ttl). Used by `outOfLAReason` on [PlacementAvailability](/placements_standard#placementavailability).
+
+### Placement Type Taxonomy
+
+The type of placement the child receives.
+
+* `Foster`: A placement with an approved foster carer.
+* `Residential`: A placement in a residential children's home.
+* `Supported Accommodation`: A supported accommodation placement, typically for older young people.
+
+Source vocabulary: [taxonomy-placement-type.ttl](/assets/ttl/taxonomy-placement-type.ttl). Used by `placementType` on [ActualPlacement](/placements_standard#actualplacement).
+
+### Placement Urgency Taxonomy
+
+How urgently the child needs to be placed. Captures urgency rather than an absolute date, as deep-dive participants felt "date placement required by" was too subjective.
+
+* `Today`: Placement is needed today.
+* `< 5 days`: Placement is needed within five days.
+* `> 5 days`: Placement is needed in more than five days.
+
+Source vocabulary: [taxonomy-placement-urgency.ttl](/assets/ttl/taxonomy-placement-urgency.ttl). Used by `neededBy` on [PlacementAvailability](/placements_standard#placementavailability).
+
+### Support Type Taxonomy
+
+Additional support provision required alongside a placement. Multi-valued: select all that apply. Selecting `Other` triggers the paired free-text property `additionalSupportOther` on `PlacementRequirements`.
+
+* `Additional supervision`: Additional supervision is required.
+* `Therapeutic support`: Therapeutic support is required.
+* `A worker for respite`: A worker is required to provide respite.
+* `Taxis to school`: Taxis to and from school are required.
+* `NA`: Not applicable; no additional support is required.
+* `Other`: Other additional support is required. Supply details via `additionalSupportOther`.
+
+Source vocabulary: [taxonomy-support-type.ttl](/assets/ttl/taxonomy-support-type.ttl). Used by `additionalSupport` on [PlacementRequirements](/placements_standard#placementrequirements).
 
 ## Validation
 
-A [SHACL shape](https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/shape/placement-spec-shape.ttl) encodes:
+A [SHACL shape](/assets/shacl/shacl-shape.ttl) encodes:
 
-- structural cardinality (mirroring the OWL restrictions in `placements.ttl`),
+- structural cardinality (mirroring the OWL restrictions in [ontology.ttl](/assets/ttl/ontology.ttl)),
 - controlled-vocabulary enforcement (`sh:in` over each SKOS scheme),
 - pattern checks (UK postcode prefix on `placementLocation`),
 - conditional checks for the `Other` vocab pairings,
 - and severity-`Warning` cost sense-checks.
 
-A small Node.js [validator](https://github.com/SocialCareData/data-model/tree/main/ontology/placements/shape/validation) loads the shape and example records, applies the [JSON-LD context file](https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/shape/examples/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
+A small Node.js [validator](/assets/shacl/validation) loads the shape and example records, applies the [JSON-LD context file](/assets/shacl/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
+
+## 6. Standard placement reporting spreadsheet
+
+Use the standard spreadsheet template for reporting placements data:
+
+[National Placement Standard spreadsheet (April 2026, v2)](/assets/spreadsheet/20260427_National-Placement-Standard-Excel-April-2026_v2.xlsx)
 
 </article>
