@@ -8,9 +8,10 @@ const jsonld = require('jsonld')
 const rdf = require('rdf-ext').default
 const SHACLValidator = require('rdf-validate-shacl').default
 
-const SHAPE_FILE = path.resolve(__dirname, '..', 'placement-spec-shape.ttl')
+const SHAPE_FILE = path.resolve(__dirname, '..', 'shacl-shape.ttl')
 const EXAMPLES_DIR = path.resolve(__dirname, '..', 'examples')
-const PL_CHILD_ID = rdf.namedNode('https://socialcaredata.github.io/ontology/placements#childId')
+const SHACL_DIR = path.resolve(__dirname, '..')
+const PL_CHILD_ID = rdf.namedNode('https://ns.socialcaredata.io/placements/childId')
 
 const COLOURS = {
   reset: '\x1b[0m', red: '\x1b[31m', green: '\x1b[32m',
@@ -41,10 +42,10 @@ async function loadJsonLDFile (file) {
 }
 
 function listExamples () {
-  return fs.readdirSync(EXAMPLES_DIR)
+  return fs.readdirSync(SHACL_DIR)
     .filter(f => f.endsWith('.jsonld') && f !== 'context.jsonld')
     .sort()
-    .map(f => path.join(EXAMPLES_DIR, f))
+    .map(f => path.join(SHACL_DIR, f))
 }
 
 function summariseResult (r) {
