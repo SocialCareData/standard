@@ -1,8 +1,8 @@
-@prefix : <https://ns.socialcaredata.io/placements#> .
+@prefix : <https://ns.socialcaredata.io/placements/> .
 @prefix cn: <https://ns.socialcaredata.io/placements/communication-need#> .
 @prefix la: <https://ns.socialcaredata.io/placements/living-arrangement#> .
 @prefix pa: <https://ns.socialcaredata.io/placements/pets-allowance#> .
-@prefix pl: <https://ns.socialcaredata.io/placements#> .
+@prefix pl: <https://ns.socialcaredata.io/placements/> .
 @prefix pt: <https://ns.socialcaredata.io/placements/placement-type#> .
 @prefix pu: <https://ns.socialcaredata.io/placements/placement-urgency#> .
 @prefix rl: <https://ns.socialcaredata.io/placements/risk-level#> .
@@ -20,7 +20,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@base <https://ns.socialcaredata.io/placements#> .
+@base <https://ns.socialcaredata.io/placements/> .
 
 <https://ns.socialcaredata.io/placements> rdf:type owl:Ontology ;
       owl:imports <https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/vocab/communication-need.ttl> ,
