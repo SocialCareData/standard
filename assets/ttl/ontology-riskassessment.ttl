@@ -1,0 +1,259 @@
+@prefix : <https://ns.socialcaredata.io/placements/> .
+@prefix pl: <https://ns.socialcaredata.io/placements/> .
+@prefix rl: <https://ns.socialcaredata.io/placements/risk-level#> .
+
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <https://ns.socialcaredata.io/placements/> .
+
+<https://ns.socialcaredata.io/placements/ontology-riskassessment> rdf:type owl:Ontology ;
+      dct:creator "ODI / SocialCareData working group" ;
+      dct:description "An OWL ontology that models the RiskAssessment concept - assessment of risks to and from the child." ;
+      dct:issued "2026-04-27"^^xsd:date ;
+      dct:title "Children's Social Care Placements - Risk Assessment Ontology" ;
+      rdfs:label "Risk Assessment Ontology" ;
+      owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+skos:inScheme rdf:type owl:ObjectProperty .
+
+pl:riskCriminalExploitation rdf:type owl:ObjectProperty ,
+                                     owl:FunctionalProperty ;
+                            rdfs:domain pl:RiskAssessment ;
+                            rdfs:range skos:Concept ;
+                            rdfs:comment "Whether the child is known to be at risk of criminal exploitation." ;
+                            rdfs:label "risk: criminal exploitation" ;
+                            rdfs:seeAlso <https://ns.socialcaredata.io/placements/risk-level> .
+
+pl:riskDrugAlcohol rdf:type owl:ObjectProperty ,
+                            owl:FunctionalProperty ;
+                   rdfs:domain pl:RiskAssessment ;
+                   rdfs:range skos:Concept ;
+                   rdfs:comment "Whether the child is known to be at risk of drug and alcohol use." ;
+                   rdfs:label "risk: drug and alcohol use" ;
+                   rdfs:seeAlso <https://ns.socialcaredata.io/placements/risk-level> .
+
+pl:riskEatingDisorder rdf:type owl:ObjectProperty ,
+                               owl:FunctionalProperty ;
+                      rdfs:domain pl:RiskAssessment ;
+                      rdfs:range skos:Concept ;
+                      rdfs:comment "Whether the child is known to be at risk of an eating disorder." ;
+                      rdfs:label "risk: eating disorder" ;
+                      rdfs:seeAlso <https://ns.socialcaredata.io/placements/risk-level> .
+
+pl:riskMissing rdf:type owl:ObjectProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain pl:RiskAssessment ;
+               rdfs:range skos:Concept ;
+               rdfs:comment "Whether the child is known to be at risk of going missing." ;
+               rdfs:label "risk: going missing" ;
+               rdfs:seeAlso <https://ns.socialcaredata.io/placements/risk-level> .
+
+pl:riskSelfHarm rdf:type owl:ObjectProperty ,
+                         owl:FunctionalProperty ;
+                rdfs:domain pl:RiskAssessment ;
+                rdfs:range skos:Concept ;
+                rdfs:comment "Whether the child is known to be at risk of self-harm." ;
+                rdfs:label "risk: self-harm" ;
+                rdfs:seeAlso <https://ns.socialcaredata.io/placements/risk-level> .
+
+pl:riskSexualExploitation rdf:type owl:ObjectProperty ,
+                                   owl:FunctionalProperty ;
+                          rdfs:domain pl:RiskAssessment ;
+                          rdfs:range skos:Concept ;
+                          rdfs:comment "Whether the child is known to be at risk of sexual exploitation." ;
+                          rdfs:label "risk: sexual exploitation" ;
+                          rdfs:seeAlso <https://ns.socialcaredata.io/placements/risk-level> .
+
+pl:riskToOthersAnimals rdf:type owl:ObjectProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:domain pl:RiskAssessment ;
+                       rdfs:range skos:Concept ;
+                       rdfs:comment "Whether there is a known risk of harm to animals." ;
+                       rdfs:label "risk to others: harm to animals" ;
+                       rdfs:seeAlso <https://ns.socialcaredata.io/placements/risk-level> .
+
+pl:riskToOthersCriminal rdf:type owl:ObjectProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain pl:RiskAssessment ;
+                        rdfs:range skos:Concept ;
+                        rdfs:comment "Whether there is a known risk of criminal exploitation for others in the home." ;
+                        rdfs:label "risk to others: criminal exploitation" ;
+                        rdfs:seeAlso <https://ns.socialcaredata.io/placements/risk-level> .
+
+pl:riskToOthersFire rdf:type owl:ObjectProperty ,
+                             owl:FunctionalProperty ;
+                    rdfs:domain pl:RiskAssessment ;
+                    rdfs:range skos:Concept ;
+                    rdfs:comment "Whether there is a known risk of fire-setting." ;
+                    rdfs:label "risk to others: fire-setting" ;
+                    rdfs:seeAlso <https://ns.socialcaredata.io/placements/risk-level> .
+
+pl:riskToOthersPhysical rdf:type owl:ObjectProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain pl:RiskAssessment ;
+                        rdfs:range skos:Concept ;
+                        rdfs:comment "Whether there is a known risk of physical harm to others." ;
+                        rdfs:label "risk to others: physical harm" ;
+                        rdfs:seeAlso <https://ns.socialcaredata.io/placements/risk-level> .
+
+pl:riskToOthersSexual rdf:type owl:ObjectProperty ,
+                               owl:FunctionalProperty ;
+                      rdfs:domain pl:RiskAssessment ;
+                      rdfs:range skos:Concept ;
+                      rdfs:comment "Whether there is a known risk of sexual harm to others." ;
+                      rdfs:label "risk to others: sexual harm" ;
+                      rdfs:seeAlso <https://ns.socialcaredata.io/placements/risk-level> .
+
+#################################################################
+#    Data properties
+#################################################################
+
+pl:riskOther rdf:type owl:DatatypeProperty ;
+             rdfs:domain pl:RiskAssessment ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Free-text description of any other risks the child is exposed to that are not captured by the standard risk fields. Multi-valued." ;
+             rdfs:label "risk: other (free text)" .
+
+pl:riskToOthersOther rdf:type owl:DatatypeProperty ;
+                     rdfs:domain pl:RiskAssessment ;
+                     rdfs:range xsd:string ;
+                     rdfs:comment "Free-text description of any other risks to others or property that are not captured by the standard risk-to-others fields. Multi-valued." ;
+                     rdfs:label "risk to others: other (free text)" .
+
+#################################################################
+#    Classes
+#################################################################
+
+pl:RiskAssessment rdf:type owl:Class ;
+                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskCriminalExploitation ;
+                                    owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                        owl:onProperty skos:inScheme ;
+                                                        owl:hasValue <https://ns.socialcaredata.io/placements/risk-level>
+                                                      ]
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskCriminalExploitation ;
+                                    owl:cardinality "1"^^xsd:nonNegativeInteger
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskDrugAlcohol ;
+                                    owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                        owl:onProperty skos:inScheme ;
+                                                        owl:hasValue <https://ns.socialcaredata.io/placements/risk-level>
+                                                      ]
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskDrugAlcohol ;
+                                    owl:cardinality "1"^^xsd:nonNegativeInteger
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskEatingDisorder ;
+                                    owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                        owl:onProperty skos:inScheme ;
+                                                        owl:hasValue <https://ns.socialcaredata.io/placements/risk-level>
+                                                      ]
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskEatingDisorder ;
+                                    owl:cardinality "1"^^xsd:nonNegativeInteger
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskMissing ;
+                                    owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                        owl:onProperty skos:inScheme ;
+                                                        owl:hasValue <https://ns.socialcaredata.io/placements/risk-level>
+                                                      ]
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskMissing ;
+                                    owl:cardinality "1"^^xsd:nonNegativeInteger
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskSelfHarm ;
+                                    owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                        owl:onProperty skos:inScheme ;
+                                                        owl:hasValue <https://ns.socialcaredata.io/placements/risk-level>
+                                                      ]
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskSelfHarm ;
+                                    owl:cardinality "1"^^xsd:nonNegativeInteger
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskSexualExploitation ;
+                                    owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                        owl:onProperty skos:inScheme ;
+                                                        owl:hasValue <https://ns.socialcaredata.io/placements/risk-level>
+                                                      ]
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskSexualExploitation ;
+                                    owl:cardinality "1"^^xsd:nonNegativeInteger
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskToOthersAnimals ;
+                                    owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                        owl:onProperty skos:inScheme ;
+                                                        owl:hasValue <https://ns.socialcaredata.io/placements/risk-level>
+                                                      ]
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskToOthersAnimals ;
+                                    owl:cardinality "1"^^xsd:nonNegativeInteger
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskToOthersCriminal ;
+                                    owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                        owl:onProperty skos:inScheme ;
+                                                        owl:hasValue <https://ns.socialcaredata.io/placements/risk-level>
+                                                      ]
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskToOthersCriminal ;
+                                    owl:cardinality "1"^^xsd:nonNegativeInteger
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskToOthersFire ;
+                                    owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                        owl:onProperty skos:inScheme ;
+                                                        owl:hasValue <https://ns.socialcaredata.io/placements/risk-level>
+                                                      ]
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskToOthersFire ;
+                                    owl:cardinality "1"^^xsd:nonNegativeInteger
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskToOthersPhysical ;
+                                    owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                        owl:onProperty skos:inScheme ;
+                                                        owl:hasValue <https://ns.socialcaredata.io/placements/risk-level>
+                                                      ]
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskToOthersPhysical ;
+                                    owl:cardinality "1"^^xsd:nonNegativeInteger
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskToOthersSexual ;
+                                    owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                        owl:onProperty skos:inScheme ;
+                                                        owl:hasValue <https://ns.socialcaredata.io/placements/risk-level>
+                                                      ]
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty pl:riskToOthersSexual ;
+                                    owl:cardinality "1"^^xsd:nonNegativeInteger
+                                  ] ;
+                  rdfs:comment "Assessment of risks the child is exposed to (self-harm, sexual exploitation, criminal exploitation, drug/alcohol use, eating disorders, going missing) and risks the child poses to others or property (physical, sexual, fire-setting, animals, criminal exploitation). Each risk is recorded as 'no known risk' or 'risk present'. The 'other' free-text risks (riskOther, riskToOthersOther) are multi-valued." ;
+                  rdfs:label "Risk Assessment" .

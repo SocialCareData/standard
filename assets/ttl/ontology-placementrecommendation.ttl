@@ -1,0 +1,91 @@
+@prefix : <https://ns.socialcaredata.io/placements/> .
+@prefix pl: <https://ns.socialcaredata.io/placements/> .
+@prefix sl: <https://ns.socialcaredata.io/placements/suitability-level#> .
+
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <https://ns.socialcaredata.io/placements/> .
+
+<https://ns.socialcaredata.io/placements/ontology-placementrecommendation> rdf:type owl:Ontology ;
+      dct:creator "ODI / SocialCareData working group" ;
+      dct:description "An OWL ontology that models the PlacementRecommendation concept - social worker recommendation of placement types." ;
+      dct:issued "2026-04-27"^^xsd:date ;
+      dct:title "Children's Social Care Placements - Placement Recommendation Ontology" ;
+      rdfs:label "Placement Recommendation Ontology" ;
+      owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+skos:inScheme rdf:type owl:ObjectProperty .
+
+pl:fosterCareSuitability rdf:type owl:ObjectProperty ,
+                                  owl:FunctionalProperty ;
+                         rdfs:domain pl:PlacementRecommendation ;
+                         rdfs:range skos:Concept ;
+                         rdfs:comment "Suitability of foster care for this child, as judged by the social worker." ;
+                         rdfs:label "foster care suitability" ;
+                         rdfs:seeAlso <https://ns.socialcaredata.io/placements/suitability-level> .
+
+pl:residentialCareSuitability rdf:type owl:ObjectProperty ,
+                                       owl:FunctionalProperty ;
+                              rdfs:domain pl:PlacementRecommendation ;
+                              rdfs:range skos:Concept ;
+                              rdfs:comment "Suitability of residential care for this child." ;
+                              rdfs:label "residential care suitability" ;
+                              rdfs:seeAlso <https://ns.socialcaredata.io/placements/suitability-level> .
+
+pl:supportedAccommodationSuitability rdf:type owl:ObjectProperty ,
+                                              owl:FunctionalProperty ;
+                                     rdfs:domain pl:PlacementRecommendation ;
+                                     rdfs:range skos:Concept ;
+                                     rdfs:comment "Suitability of supported accommodation for this child." ;
+                                     rdfs:label "supported accommodation suitability" ;
+                                     rdfs:seeAlso <https://ns.socialcaredata.io/placements/suitability-level> .
+
+#################################################################
+#    Classes
+#################################################################
+
+pl:PlacementRecommendation rdf:type owl:Class ;
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty pl:fosterCareSuitability ;
+                                             owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty skos:inScheme ;
+                                                                 owl:hasValue <https://ns.socialcaredata.io/placements/suitability-level>
+                                                               ]
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty pl:fosterCareSuitability ;
+                                             owl:cardinality "1"^^xsd:nonNegativeInteger
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty pl:residentialCareSuitability ;
+                                             owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty skos:inScheme ;
+                                                                 owl:hasValue <https://ns.socialcaredata.io/placements/suitability-level>
+                                                               ]
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty pl:residentialCareSuitability ;
+                                             owl:cardinality "1"^^xsd:nonNegativeInteger
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty pl:supportedAccommodationSuitability ;
+                                             owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty skos:inScheme ;
+                                                                 owl:hasValue <https://ns.socialcaredata.io/placements/suitability-level>
+                                                               ]
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty pl:supportedAccommodationSuitability ;
+                                             owl:cardinality "1"^^xsd:nonNegativeInteger
+                                           ] ;
+                           rdfs:comment "The social worker's recommendation of which categories of placement (foster, residential, supported accommodation) are preferred, suitable but not preferred, unsuitable, or unspecified." ;
+                           rdfs:label "Placement Recommendation" .

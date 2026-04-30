@@ -1,0 +1,116 @@
+@prefix : <https://ns.socialcaredata.io/placements/> .
+@prefix pl: <https://ns.socialcaredata.io/placements/> .
+@prefix pu: <https://ns.socialcaredata.io/placements/placement-urgency#> .
+@prefix olr: <https://ns.socialcaredata.io/placements/outof-la-reason#> .
+
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <https://ns.socialcaredata.io/placements/> .
+
+<https://ns.socialcaredata.io/placements/ontology-placementavailability> rdf:type owl:Ontology ;
+      dct:creator "ODI / SocialCareData working group" ;
+      dct:description "An OWL ontology that models the PlacementAvailability concept - the placement availability record." ;
+      dct:issued "2026-04-27"^^xsd:date ;
+      dct:title "Children's Social Care Placements - Placement Availability Ontology" ;
+      rdfs:label "Placement Availability Ontology" ;
+      owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+skos:inScheme rdf:type owl:ObjectProperty .
+
+pl:neededBy rdf:type owl:ObjectProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain pl:PlacementAvailability ;
+            rdfs:range skos:Concept ;
+            rdfs:comment "When the child needs to be placed by. Captures urgency rather than an absolute date, as deep-dive participants felt 'date placement required by' was too subjective." ;
+            rdfs:label "needed by" ;
+            rdfs:seeAlso <https://ns.socialcaredata.io/placements/placement-urgency> .
+
+pl:outOfLAReason rdf:type owl:ObjectProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain pl:PlacementAvailability ;
+            rdfs:range skos:Concept ;
+            rdfs:comment "If preferred placement location is in a different LA than placing LA, why is this?" ;
+            rdfs:label "out of LA reason" ;
+            rdfs:seeAlso <https://ns.socialcaredata.io/placements/outof-la-reason> .
+
+#################################################################
+#    Data properties
+#################################################################
+
+pl:placementId rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain pl:PlacementAvailability ;
+               rdfs:range xsd:string ;
+               rdfs:comment "The unique identifier of the placement record within the LA case management system." ;
+               rdfs:label "placement ID" .
+
+pl:siblingCount rdf:type owl:DatatypeProperty ,
+                         owl:FunctionalProperty ;
+                rdfs:domain pl:PlacementAvailability ;
+                rdfs:range xsd:nonNegativeInteger ;
+                rdfs:comment "How many siblings the child should ideally be placed with according to the care plan. 0 if the child has no siblings or is not to be placed with siblings." ;
+                rdfs:label "sibling count" .
+
+pl:isPreferredLocationLocal rdf:type owl:DatatypeProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain pl:PlacementAvailability ;
+                     rdfs:range xsd:boolean ;
+                     rdfs:comment "Is the preferred placement location in the same LA as the placing LA?" ;
+                     rdfs:label "is preferred location local" .
+
+pl:outOfLAReasonOther rdf:type owl:DatatypeProperty ;
+                      rdfs:domain pl:PlacementAvailability ;
+                      rdfs:range xsd:string ;
+                      rdfs:comment "Free-text description of why the preferred placement location is in a different LA when the standard outof-la-reason options do not apply. Used when the 'Other' OutOfLAReason concept (olr:OutOfLAReasonOther) is selected. Multi-valued." ;
+                      rdfs:label "out of LA reason: other (free text)" .
+
+#################################################################
+#    Classes
+#################################################################
+
+pl:PlacementAvailability rdf:type owl:Class ;
+                         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:neededBy ;
+                                           owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                               owl:onProperty skos:inScheme ;
+                                                               owl:hasValue <https://ns.socialcaredata.io/placements/placement-urgency>
+                                                             ]
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:placementId ;
+                                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:neededBy ;
+                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:siblingCount ;
+                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:isPreferredLocationLocal ;
+                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:outOfLAReason ;
+                                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                           owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                               owl:onProperty skos:inScheme ;
+                                                               owl:hasValue <https://ns.socialcaredata.io/placements/outof-la-reason>
+                                                             ]
+                                         ]
+                                         ;
+                         rdfs:comment "A placement record covering the full lifecycle of a placement instance: the referral request (urgency, sibling count, isPreferredLocationLocal, outOfLAReason), the social-worker recommendation, the placement requirements (needs), the risk assessment, the actual placement found (if any), and quality-assurance metadata. Equivalent to the central 'PlacementAvailability' table in the data model diagram." ;
+                         rdfs:label "Placement Availability" ;
+                         skos:altLabel "Placement Availability" ,
+                                       "Placement Referral" .

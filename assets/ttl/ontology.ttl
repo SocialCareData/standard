@@ -1,0 +1,146 @@
+@prefix : <https://ns.socialcaredata.io/placements/> .
+@prefix pl: <https://ns.socialcaredata.io/placements/> .
+
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <https://ns.socialcaredata.io/placements/> .
+
+<https://ns.socialcaredata.io/placements> rdf:type owl:Ontology ;
+      owl:imports <https://ns.socialcaredata.io/placements/ontology-actualplacement> ,
+                  <https://ns.socialcaredata.io/placements/ontology-placementavailability> ,
+                  <https://ns.socialcaredata.io/placements/ontology-placementrecommendation> ,
+                  <https://ns.socialcaredata.io/placements/ontology-placementrequirements> ,
+                  <https://ns.socialcaredata.io/placements/ontology-qualityassurance> ,
+                  <https://ns.socialcaredata.io/placements/ontology-riskassessment> ,
+                  <https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/vocab/communication-need.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/vocab/cultural-need.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/vocab/living-arrangement.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/vocab/pets-allowance.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/vocab/placement-type.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/vocab/placement-urgency.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/vocab/presence-status.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/vocab/risk-level.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/vocab/suitability-level.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/vocab/support-type.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/vocab/outof-la-reason.ttl> ;
+      dct:creator "ODI / SocialCareData working group" ;
+      dct:description "An OWL ontology that models the data captured by a local authority when arranging a placement for a looked-after child." ;
+      dct:issued "2026-04-27"^^xsd:date ;
+      dct:title "Children's Social Care Placements Ontology" ;
+      rdfs:label "Placements Ontology" ;
+      owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+dct:creator rdf:type owl:AnnotationProperty .
+
+dct:issued rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+xsd:date rdf:type rdfs:Datatype .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+skos:inScheme rdf:type owl:ObjectProperty .
+
+pl:hasActualPlacement rdf:type owl:ObjectProperty ,
+                               owl:FunctionalProperty ;
+                      rdfs:domain pl:Placement ;
+                      rdfs:range pl:ActualPlacement ;
+                      rdfs:comment "Links a Placement to the ActualPlacement that was arranged. Optional - a referral may exist without (yet) having an actual placement." ;
+                      rdfs:label "has actual placement" .
+
+pl:hasPlacementAvailability rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf owl:topObjectProperty ;
+                            rdfs:domain pl:Placement ;
+                            rdfs:range pl:PlacementAvailability ;
+                            rdfs:label "has placement availability" .
+
+pl:hasPlacementRecommendation rdf:type owl:ObjectProperty ,
+                                       owl:FunctionalProperty ;
+                              rdfs:domain pl:Placement ;
+                              rdfs:range pl:PlacementRecommendation ;
+                              rdfs:comment "Links a Placement to its PlacementRecommendation." ;
+                              rdfs:label "has placement recommendation" .
+
+pl:hasPlacementRequirements rdf:type owl:ObjectProperty ,
+                                     owl:FunctionalProperty ;
+                            rdfs:domain pl:Placement ;
+                            rdfs:range pl:PlacementRequirements ;
+                            rdfs:comment "Links a Placement to its PlacementRequirements." ;
+                            rdfs:label "has placement requirements" .
+
+pl:hasQualityAssurance rdf:type owl:ObjectProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:domain pl:Placement ;
+                       rdfs:range pl:QualityAssurance ;
+                       rdfs:comment "Links a Placement to its QualityAssurance metadata." ;
+                       rdfs:label "has quality assurance" .
+
+pl:hasRiskAssessment rdf:type owl:ObjectProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain pl:Placement ;
+                     rdfs:range pl:RiskAssessment ;
+                     rdfs:comment "Links a Placement to its RiskAssessment." ;
+                     rdfs:label "has risk assessment" .
+
+#################################################################
+#    Data properties
+#################################################################
+
+pl:childId rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain pl:Placement ;
+           rdfs:range xsd:string ;
+           rdfs:comment "Identifier unique to each child within the LA, allowing linking between multiple referrals for the same child." ;
+           rdfs:label "child ID" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+pl:Placement rdf:type owl:Class ;
+             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                               owl:onProperty pl:childId ;
+                               owl:cardinality "1"^^xsd:nonNegativeInteger
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty pl:hasPlacementAvailability ;
+                               owl:cardinality "1"^^xsd:nonNegativeInteger
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty pl:hasPlacementRequirements ;
+                               owl:cardinality "1"^^xsd:nonNegativeInteger
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty pl:hasPlacementRecommendation ;
+                               owl:cardinality "1"^^xsd:nonNegativeInteger
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty pl:hasRiskAssessment ;
+                               owl:cardinality "1"^^xsd:nonNegativeInteger
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty pl:hasQualityAssurance ;
+                               owl:cardinality "1"^^xsd:nonNegativeInteger
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty pl:hasActualPlacement ;
+                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                             ] ;
+             rdfs:label "Placement" .
+

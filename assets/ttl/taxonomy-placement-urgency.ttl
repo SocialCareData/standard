@@ -1,0 +1,37 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix pu:    <https://ns.socialcaredata.io/placements/placement-urgency#> .
+
+<https://ns.socialcaredata.io/placements/placement-urgency> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Placement Urgency Vocabulary" ;
+    rdfs:label "Placement Urgency" ;
+    skos:prefLabel "Placement Urgency" ;
+    dct:description "Controlled vocabulary for the urgency of a placement request." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept pu:Today , pu:WithinFiveDays , pu:MoreThanFiveDays .
+
+pu:Today a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/placement-urgency> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/placement-urgency> ;
+    skos:prefLabel "Today" ;
+    skos:notation "today" ;
+    skos:definition "Placement is needed today." .
+
+pu:WithinFiveDays a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/placement-urgency> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/placement-urgency> ;
+    skos:prefLabel "Within 5 days" ;
+    skos:altLabel "<5 days" ;
+    skos:notation "lt-5-days" ;
+    skos:definition "Placement is needed within five days." .
+
+pu:MoreThanFiveDays a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/placement-urgency> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/placement-urgency> ;
+    skos:prefLabel "More than 5 days" ;
+    skos:altLabel ">5 days" ;
+    skos:notation "gt-5-days" ;
+    skos:definition "Placement is needed in more than five days." .

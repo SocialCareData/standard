@@ -1,0 +1,42 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix sl:    <https://ns.socialcaredata.io/placements/suitability-level#> .
+
+<https://ns.socialcaredata.io/placements/suitability-level> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Suitability Level Vocabulary" ;
+    rdfs:label "Suitability Level" ;
+    skos:prefLabel "Suitability Level" ;
+    dct:description "Controlled vocabulary for the social worker's judgement on how suitable a given placement category (foster, residential, supported accommodation) is for a child." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept sl:Preferred , sl:SuitableButNotPreferred , sl:Unsuitable , sl:NotSpecified .
+
+sl:Preferred a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/suitability-level> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/suitability-level> ;
+    skos:prefLabel "Preferred" ;
+    skos:notation "preferred" ;
+    skos:definition "This category of placement is the preferred option for the child." .
+
+sl:SuitableButNotPreferred a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/suitability-level> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/suitability-level> ;
+    skos:prefLabel "Suitable but not preferred" ;
+    skos:notation "suitable-not-preferred" ;
+    skos:definition "This category of placement would be suitable but is not the preferred option." .
+
+sl:Unsuitable a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/suitability-level> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/suitability-level> ;
+    skos:prefLabel "Unsuitable" ;
+    skos:notation "unsuitable" ;
+    skos:definition "This category of placement is unsuitable for the child." .
+
+sl:NotSpecified a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/suitability-level> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/suitability-level> ;
+    skos:prefLabel "Not specified" ;
+    skos:notation "not-specified" ;
+    skos:definition "Suitability has not been specified." .

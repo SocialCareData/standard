@@ -1,0 +1,42 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix olr:   <https://ns.socialcaredata.io/placements/outof-la-reason#> .
+
+<https://ns.socialcaredata.io/placements/outof-la-reason> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Out of Local Area Reason Vocabulary" ;
+    rdfs:label "Out of LA Reason" ;
+    skos:prefLabel "Out of LA Reason" ;
+    dct:description "Controlled vocabulary describing the reason why the preferred placement location is in a different LA." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept olr:SafeguardingConcerns , olr:BailConditions , olr:CourtOrder , olr:OutOfLAReasonOther .
+
+olr:SafeguardingConcerns a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/outof-la-reason> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/outof-la-reason> ;
+    skos:prefLabel "Safeguarding concerns" ;
+    skos:notation "safeguarding" ;
+    skos:definition "Placement is sought outside the placing LA due to safeguarding concerns." .
+
+olr:BailConditions a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/outof-la-reason> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/outof-la-reason> ;
+    skos:prefLabel "Bail conditions" ;
+    skos:notation "bail" ;
+    skos:definition "Placement is sought outside the placing LA because of bail conditions." .
+
+olr:CourtOrder a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/outof-la-reason> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/outof-la-reason> ;
+    skos:prefLabel "Court order" ;
+    skos:notation "court-order" ;
+    skos:definition "Placement is sought outside the placing LA because of a court order." .
+
+olr:OutOfLAReasonOther a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/outof-la-reason> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/outof-la-reason> ;
+    skos:prefLabel "Other" ;
+    skos:notation "other" ;
+    skos:definition "Another reason not listed. When this concept is selected, supply the details via the paired pl:outOfLAReasonOther free-text property on PlacementAvailability." .

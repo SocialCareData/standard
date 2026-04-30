@@ -1,0 +1,191 @@
+@prefix : <https://ns.socialcaredata.io/placements/> .
+@prefix cn: <https://ns.socialcaredata.io/placements/communication-need#> .
+@prefix la: <https://ns.socialcaredata.io/placements/living-arrangement#> .
+@prefix pa: <https://ns.socialcaredata.io/placements/pets-allowance#> .
+@prefix pl: <https://ns.socialcaredata.io/placements/> .
+@prefix st: <https://ns.socialcaredata.io/placements/support-type#> .
+@prefix cln: <https://ns.socialcaredata.io/placements/cultural-need#> .
+@prefix yns: <https://ns.socialcaredata.io/placements/presence-status#> .
+
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <https://ns.socialcaredata.io/placements/> .
+
+<https://ns.socialcaredata.io/placements/ontology-placementrequirements> rdf:type owl:Ontology ;
+      dct:creator "ODI / SocialCareData working group" ;
+      dct:description "An OWL ontology that models the PlacementRequirements concept - the child's needs that the placement must accommodate." ;
+      dct:issued "2026-04-27"^^xsd:date ;
+      dct:title "Children's Social Care Placements - Placement Requirements Ontology" ;
+      rdfs:label "Placement Requirements Ontology" ;
+      owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+skos:inScheme rdf:type owl:ObjectProperty .
+
+pl:additionalSupport rdf:type owl:ObjectProperty ;
+                     rdfs:domain pl:PlacementRequirements ;
+                     rdfs:range skos:Concept ;
+                     rdfs:comment "Additional support provision required (e.g., additional supervision, therapeutic support, taxis to school). Multi-valued." ;
+                     rdfs:label "additional support" ;
+                     rdfs:seeAlso <https://ns.socialcaredata.io/placements/support-type> .
+
+pl:communicationNeeds rdf:type owl:ObjectProperty ,
+                               owl:FunctionalProperty ;
+                      rdfs:domain pl:PlacementRequirements ;
+                      rdfs:range skos:Concept ;
+                      rdfs:comment "Whether the child has any communication, language or learning needs." ;
+                      rdfs:label "communication needs" ;
+                      rdfs:seeAlso <https://ns.socialcaredata.io/placements/presence-status> .
+
+pl:culturalNeeds rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain pl:PlacementRequirements ;
+                 rdfs:range skos:Concept ;
+                 rdfs:comment "Whether the placement must accommodate specific cultural needs (e.g., access to places of worship)." ;
+                 rdfs:label "cultural needs" ;
+                 rdfs:seeAlso <https://ns.socialcaredata.io/placements/cultural-need> .
+
+pl:livingCompanions rdf:type owl:ObjectProperty ,
+                             owl:FunctionalProperty ;
+                    rdfs:domain pl:PlacementRequirements ;
+                    rdfs:range skos:Concept ;
+                    rdfs:comment "Recommendation as to who the child can be cared for alongside (e.g., solo placement, with other children, only older children)." ;
+                    rdfs:label "living companions" ;
+                    rdfs:seeAlso <https://ns.socialcaredata.io/placements/living-arrangement> .
+
+pl:pets rdf:type owl:ObjectProperty ,
+                 owl:FunctionalProperty ;
+        rdfs:domain pl:PlacementRequirements ;
+        rdfs:range skos:Concept ;
+        rdfs:comment "Whether the child can or must live in a home with pets/animals." ;
+        rdfs:label "pets allowance" ;
+        rdfs:seeAlso <https://ns.socialcaredata.io/placements/pets-allowance> .
+
+pl:specificCommunicationRequirement rdf:type owl:ObjectProperty ;
+                                    rdfs:domain pl:PlacementRequirements ;
+                                    rdfs:range skos:Concept ;
+                                    rdfs:comment "Specific communication or language requirement (ESOL, BSL, Makaton, Other, None). Multi-valued: a placement may have several." ;
+                                    rdfs:label "specific communication requirement" ;
+                                    rdfs:seeAlso <https://ns.socialcaredata.io/placements/communication-need> .
+
+#################################################################
+#    Data properties
+#################################################################
+
+pl:additionalSupportOther rdf:type owl:DatatypeProperty ;
+                          rdfs:domain pl:PlacementRequirements ;
+                          rdfs:range xsd:string ;
+                          rdfs:comment "Free-text description of any additional support not captured by the standard SupportType options. Used when the 'Other' SupportType concept (st:Other) is selected. Multi-valued: a placement may have several." ;
+                          rdfs:label "additional support: other (free text)" .
+
+pl:culturalNeedsOther rdf:type owl:DatatypeProperty ;
+                      rdfs:domain pl:PlacementRequirements ;
+                      rdfs:range xsd:string ;
+                      rdfs:comment "Free-text description of cultural needs not captured by the standard CulturalNeed options. Used when the 'Other' CulturalNeed concept (cln:Other) is selected. Multi-valued." ;
+                      rdfs:label "cultural needs: other (free text)" .
+
+pl:specificCommunicationRequirementOther rdf:type owl:DatatypeProperty ;
+                                         rdfs:domain pl:PlacementRequirements ;
+                                         rdfs:range xsd:string ;
+                                         rdfs:comment "Free-text description of communication or language requirements not captured by the standard CommunicationNeed options. Used when the 'Other' CommunicationNeed concept (cn:Other) is among the selected specificCommunicationRequirement values. Multi-valued." ;
+                                         rdfs:label "specific communication requirement: other (free text)" .
+
+pl:deprivationOfLiberty rdf:type owl:DatatypeProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain pl:PlacementRequirements ;
+                        rdfs:range xsd:boolean ;
+                        rdfs:comment "Whether the child has a Deprivation of Liberty Order (DOL)." ;
+                        rdfs:label "deprivation of liberty order" .
+
+pl:homeAdaptationRequired rdf:type owl:DatatypeProperty ,
+                                   owl:FunctionalProperty ;
+                          rdfs:domain pl:PlacementRequirements ;
+                          rdfs:range xsd:boolean ;
+                          rdfs:comment "Whether adaptations to the home are required to accommodate the child's needs." ;
+                          rdfs:label "home adaptation required" .
+
+#################################################################
+#    Classes
+#################################################################
+
+pl:PlacementRequirements rdf:type owl:Class ;
+                         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:additionalSupport ;
+                                           owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                               owl:onProperty skos:inScheme ;
+                                                               owl:hasValue <https://ns.socialcaredata.io/placements/support-type>
+                                                             ]
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:communicationNeeds ;
+                                           owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                               owl:onProperty skos:inScheme ;
+                                                               owl:hasValue <https://ns.socialcaredata.io/placements/presence-status>
+                                                             ]
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:communicationNeeds ;
+                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:culturalNeeds ;
+                                           owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                               owl:onProperty skos:inScheme ;
+                                                               owl:hasValue <https://ns.socialcaredata.io/placements/cultural-need>
+                                                             ]
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:culturalNeeds ;
+                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:livingCompanions ;
+                                           owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                               owl:onProperty skos:inScheme ;
+                                                               owl:hasValue <https://ns.socialcaredata.io/placements/living-arrangement>
+                                                             ]
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:livingCompanions ;
+                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:pets ;
+                                           owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                               owl:onProperty skos:inScheme ;
+                                                               owl:hasValue <https://ns.socialcaredata.io/placements/pets-allowance>
+                                                             ]
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:pets ;
+                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:specificCommunicationRequirement ;
+                                           owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                               owl:onProperty skos:inScheme ;
+                                                               owl:hasValue <https://ns.socialcaredata.io/placements/communication-need>
+                                                             ]
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:specificCommunicationRequirement ;
+                                           owl:minCardinality "1"^^xsd:nonNegativeInteger
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:homeAdaptationRequired ;
+                                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty pl:deprivationOfLiberty ;
+                                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                         ] ;
+                         rdfs:comment "Requirements describing the child's needs that the placement must accommodate: communication, cultural, living companions, pets, additional support, deprivation of liberty, home adaptation." ;
+                         rdfs:label "Placement Requirements" .
