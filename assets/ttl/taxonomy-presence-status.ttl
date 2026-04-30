@@ -1,0 +1,35 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix yns:   <https://ns.socialcaredata.io/placements/presence-status#> .
+
+<https://ns.socialcaredata.io/placements/presence-status> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Yes / No / Not Specified Vocabulary" ;
+    rdfs:label "Yes / No / Not Specified" ;
+    skos:prefLabel "Yes / No / Not Specified" ;
+    dct:description "Three-valued data presence status vocabulary distinguishing affirmative, negative, and unspecified. Used where xsd:boolean is insufficient because 'not specified' must be a distinct option." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept yns:Yes , yns:No , yns:NotSpecified .
+
+yns:Yes a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/presence-status> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/presence-status> ;
+    skos:prefLabel "Yes" ;
+    skos:notation "yes" ;
+    skos:definition "Affirmative." .
+
+yns:No a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/presence-status> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/presence-status> ;
+    skos:prefLabel "No" ;
+    skos:notation "no" ;
+    skos:definition "Negative." .
+
+yns:NotSpecified a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/presence-status> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/presence-status> ;
+    skos:prefLabel "Not specified" ;
+    skos:notation "not-specified" ;
+    skos:definition "Not specified." .

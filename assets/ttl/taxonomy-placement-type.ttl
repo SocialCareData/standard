@@ -1,0 +1,36 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix pt:    <https://ns.socialcaredata.io/placements/placement-type#> .
+
+<https://ns.socialcaredata.io/placements/placement-type> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Placement Type Vocabulary" ;
+    rdfs:label "Placement Type" ;
+    skos:prefLabel "Placement Type" ;
+    dct:description "Controlled vocabulary for the type of placement a child receives." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept pt:Foster , pt:Residential , pt:SupportedAccommodation .
+
+pt:Foster a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/placement-type> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/placement-type> ;
+    skos:prefLabel "Foster" ;
+    skos:notation "foster" ;
+    skos:definition "A placement with an approved foster carer." .
+
+pt:Residential a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/placement-type> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/placement-type> ;
+    skos:prefLabel "Residential" ;
+    skos:notation "residential" ;
+    skos:definition "A placement in a residential children's home." .
+
+pt:SupportedAccommodation a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/placement-type> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/placement-type> ;
+    skos:prefLabel "Supported Accommodation" ;
+    skos:notation "supported-accommodation" ;
+    skos:definition "A supported accommodation placement (typically for older young people)." .

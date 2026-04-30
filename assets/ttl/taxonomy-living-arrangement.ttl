@@ -1,0 +1,49 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix la:    <https://ns.socialcaredata.io/placements/living-arrangement#> .
+
+<https://ns.socialcaredata.io/placements/living-arrangement> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Living Arrangement Vocabulary" ;
+    rdfs:label "Living Arrangement" ;
+    skos:prefLabel "Living Arrangement" ;
+    dct:description "Controlled vocabulary describing recommendations for who the child can be cared for alongside in a placement." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept la:SoloPlacement , la:WithOtherChildren , la:OnlyWithOlderChildren , la:OnlyWithYoungerChildren , la:NoPreference .
+
+la:SoloPlacement a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/living-arrangement> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/living-arrangement> ;
+    skos:prefLabel "Solo placement recommended" ;
+    skos:notation "solo" ;
+    skos:definition "A solo placement is recommended; the child should not live with other children." .
+
+la:WithOtherChildren a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/living-arrangement> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/living-arrangement> ;
+    skos:prefLabel "With other children recommended" ;
+    skos:notation "with-other-children" ;
+    skos:definition "Living with other children is recommended." .
+
+la:OnlyWithOlderChildren a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/living-arrangement> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/living-arrangement> ;
+    skos:prefLabel "Only with other older children" ;
+    skos:notation "only-older" ;
+    skos:definition "The child should only live with other children who are older." .
+
+la:OnlyWithYoungerChildren a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/living-arrangement> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/living-arrangement> ;
+    skos:prefLabel "Only with other younger children" ;
+    skos:notation "only-younger" ;
+    skos:definition "The child should only live with other children who are younger." .
+
+la:NoPreference a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/living-arrangement> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/living-arrangement> ;
+    skos:prefLabel "No preference" ;
+    skos:notation "no-preference" ;
+    skos:definition "No preference about who the child lives alongside." .

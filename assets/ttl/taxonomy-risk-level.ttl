@@ -1,0 +1,28 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix rl:    <https://ns.socialcaredata.io/placements/risk-level#> .
+
+<https://ns.socialcaredata.io/placements/risk-level> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Risk Level Vocabulary" ;
+    rdfs:label "Risk Level" ;
+    skos:prefLabel "Risk Level" ;
+    dct:description "Binary controlled vocabulary used to record whether a particular risk is present for a child or not. The previous three-level (high/moderate/low) scale was reduced to binary based on deep dive feedback that the wider scale introduced unhelpful subjectivity." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept rl:NoKnownRisk , rl:RiskPresent .
+
+rl:NoKnownRisk a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/risk-level> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/risk-level> ;
+    skos:prefLabel "No known risk" ;
+    skos:notation "no-known-risk" ;
+    skos:definition "There is no known risk." .
+
+rl:RiskPresent a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/risk-level> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/risk-level> ;
+    skos:prefLabel "Risk present" ;
+    skos:notation "risk-present" ;
+    skos:definition "A risk is known to be present." .

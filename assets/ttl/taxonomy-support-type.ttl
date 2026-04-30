@@ -1,0 +1,57 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix st:    <https://ns.socialcaredata.io/placements/support-type#> .
+
+<https://ns.socialcaredata.io/placements/support-type> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Support Type Vocabulary" ;
+    rdfs:label "Support Type" ;
+    skos:prefLabel "Support Type" ;
+    dct:description "Controlled vocabulary for additional support provision required alongside a placement. Multi-valued: select all that apply." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept st:AdditionalSupervision , st:TherapeuticSupport , st:WorkerForRespite , st:TaxisToSchool , st:NotApplicable , st:Other .
+
+st:AdditionalSupervision a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/support-type> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/support-type> ;
+    skos:prefLabel "Additional supervision" ;
+    skos:notation "additional-supervision" ;
+    skos:definition "Additional supervision is required." .
+
+st:TherapeuticSupport a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/support-type> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/support-type> ;
+    skos:prefLabel "Therapeutic support" ;
+    skos:notation "therapeutic-support" ;
+    skos:definition "Therapeutic support is required." .
+
+st:WorkerForRespite a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/support-type> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/support-type> ;
+    skos:prefLabel "A worker for respite" ;
+    skos:notation "worker-respite" ;
+    skos:definition "A worker is required to provide respite." .
+
+st:TaxisToSchool a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/support-type> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/support-type> ;
+    skos:prefLabel "Taxis to school" ;
+    skos:notation "taxis-to-school" ;
+    skos:definition "Taxis to and from school are required." .
+
+st:NotApplicable a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/support-type> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/support-type> ;
+    skos:prefLabel "Not applicable" ;
+    skos:altLabel "NA" ;
+    skos:notation "na" ;
+    skos:definition "No additional support is required." .
+
+st:Other a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/support-type> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/support-type> ;
+    skos:prefLabel "Other" ;
+    skos:notation "other" ;
+    skos:definition "Other additional support is required. When this concept is selected, supply the details via the paired pl:additionalSupportOther free-text property on PlacementRequirements." .

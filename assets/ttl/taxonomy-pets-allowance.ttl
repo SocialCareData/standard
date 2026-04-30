@@ -1,0 +1,42 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix pa:    <https://ns.socialcaredata.io/placements/pets-allowance#> .
+
+<https://ns.socialcaredata.io/placements/pets-allowance> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Pets Allowance Vocabulary" ;
+    rdfs:label "Pets Allowance" ;
+    skos:prefLabel "Pets Allowance" ;
+    dct:description "Controlled vocabulary describing whether a child can or must live in a home with pets/animals. Captures more nuance than a simple Yes/No." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept pa:YesMust , pa:YesCan , pa:No , pa:NotKnown .
+
+pa:YesMust a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/pets-allowance> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/pets-allowance> ;
+    skos:prefLabel "Yes - must" ;
+    skos:notation "yes-must" ;
+    skos:definition "The child must live in a home with pets/animals." .
+
+pa:YesCan a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/pets-allowance> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/pets-allowance> ;
+    skos:prefLabel "Yes - can" ;
+    skos:notation "yes-can" ;
+    skos:definition "The child can live in a home with pets/animals." .
+
+pa:No a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/pets-allowance> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/pets-allowance> ;
+    skos:prefLabel "No" ;
+    skos:notation "no" ;
+    skos:definition "The child cannot live in a home with pets/animals." .
+
+pa:NotKnown a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/pets-allowance> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/pets-allowance> ;
+    skos:prefLabel "Not known" ;
+    skos:notation "not-known" ;
+    skos:definition "Whether the child can live with pets/animals is not known." .

@@ -1,0 +1,51 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix cn:    <https://ns.socialcaredata.io/placements/communication-need#> .
+
+<https://ns.socialcaredata.io/placements/communication-need> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Communication Need Vocabulary" ;
+    rdfs:label "Communication Need" ;
+    skos:prefLabel "Communication Need" ;
+    dct:description "Controlled vocabulary for specific communication and language requirements a child may have. Multi-valued: enter all that apply, or 'None' if not applicable." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept cn:ESOL , cn:BSL , cn:Makaton , cn:Other , cn:None .
+
+cn:ESOL a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/communication-need> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/communication-need> ;
+    skos:prefLabel "ESOL" ;
+    skos:altLabel "English for Speakers of Other Languages" ;
+    skos:notation "esol" ;
+    skos:definition "English for Speakers of Other Languages support is required." .
+
+cn:BSL a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/communication-need> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/communication-need> ;
+    skos:prefLabel "BSL" ;
+    skos:altLabel "British Sign Language" ;
+    skos:notation "bsl" ;
+    skos:definition "British Sign Language is required." .
+
+cn:Makaton a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/communication-need> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/communication-need> ;
+    skos:prefLabel "Makaton" ;
+    skos:notation "makaton" ;
+    skos:definition "Makaton signing/symbol communication is required." .
+
+cn:Other a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/communication-need> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/communication-need> ;
+    skos:prefLabel "Other" ;
+    skos:notation "other" ;
+    skos:definition "Another communication or language requirement not listed. When this concept is selected, supply the details via the paired pl:specificCommunicationRequirementOther free-text property on PlacementRequirements." .
+
+cn:None a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/communication-need> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/communication-need> ;
+    skos:prefLabel "None" ;
+    skos:notation "none" ;
+    skos:definition "No specific communication or language requirements." .

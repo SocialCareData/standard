@@ -1,0 +1,42 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix cln:   <https://ns.socialcaredata.io/placements/cultural-need#> .
+
+<https://ns.socialcaredata.io/placements/cultural-need> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Cultural Need Vocabulary" ;
+    rdfs:label "Cultural Need" ;
+    skos:prefLabel "Cultural Need" ;
+    dct:description "Controlled vocabulary indicating whether a child has specific cultural needs that the placement home must accommodate (e.g., places of worship, religious activities)." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept cln:Required , cln:NotRequired , cln:NotKnown , cln:Other .
+
+cln:Required a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/cultural-need> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/cultural-need> ;
+    skos:prefLabel "Required" ;
+    skos:notation "required" ;
+    skos:definition "Specific cultural accommodations are required." .
+
+cln:NotRequired a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/cultural-need> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/cultural-need> ;
+    skos:prefLabel "Not required" ;
+    skos:notation "not-required" ;
+    skos:definition "No specific cultural accommodations are required." .
+
+cln:NotKnown a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/cultural-need> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/cultural-need> ;
+    skos:prefLabel "Not known" ;
+    skos:notation "not-known" ;
+    skos:definition "Whether cultural accommodations are required is not known." .
+
+cln:Other a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/placements/cultural-need> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/placements/cultural-need> ;
+    skos:prefLabel "Other" ;
+    skos:notation "other" ;
+    skos:definition "Other cultural needs apply. When this concept is selected, supply the details via the paired pl:culturalNeedsOther free-text property on PlacementRequirements." .
