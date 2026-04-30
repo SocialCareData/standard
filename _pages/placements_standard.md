@@ -447,6 +447,6 @@ A [SHACL shape](https://raw.githubusercontent.com/SocialCareData/data-model/refs
 - conditional checks for the `Other` vocab pairings,
 - and severity-`Warning` cost sense-checks.
 
-A small Node.js validator (`ontology/placements/shape/validation/`) loads the shape and example records, applies the [JSON-LD context file](https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/shape/examples/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
+A small Node.js [validator](https://github.com/SocialCareData/data-model/tree/main/ontology/placements/shape/validation) loads the shape and example records, applies the [JSON-LD context file](https://raw.githubusercontent.com/SocialCareData/data-model/refs/heads/main/ontology/placements/shape/examples/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
 
 </article>
