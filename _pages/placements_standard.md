@@ -510,7 +510,7 @@ A [SHACL shape](/assets/shacl/shacl-shape.ttl) encodes:
 
 A small Node.js [validator](/assets/shacl/validation) loads the shape and example records, applies the [JSON-LD context file](/assets/shacl/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
 
-## 6. Standard placement reporting spreadsheet
+## Standard Placement Reporting Spreadsheet
 
 Use the standard spreadsheet template for reporting placements data:
 
