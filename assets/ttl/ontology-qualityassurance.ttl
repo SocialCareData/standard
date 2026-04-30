@@ -1,0 +1,97 @@
+@prefix : <https://ns.socialcaredata.io/placements/> .
+@prefix pl: <https://ns.socialcaredata.io/placements/> .
+
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <https://ns.socialcaredata.io/placements/> .
+
+<https://ns.socialcaredata.io/placements/ontology-qualityassurance> rdf:type owl:Ontology ;
+      dct:creator "ODI / SocialCareData working group" ;
+      dct:description "An OWL ontology that models the QualityAssurance concept - metadata about data recording." ;
+      dct:issued "2026-04-27"^^xsd:date ;
+      dct:title "Children's Social Care Placements - Quality Assurance Ontology" ;
+      rdfs:label "Quality Assurance Ontology" ;
+      owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Data properties
+#################################################################
+
+pl:referralOfficerName rdf:type owl:DatatypeProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:domain pl:QualityAssurance ;
+                       rdfs:range xsd:string ;
+                       rdfs:comment "Name of the officer who recorded the referral information. Used for LA-internal QA only." ;
+                       rdfs:label "referral officer name" .
+
+pl:referralDate rdf:type owl:DatatypeProperty ,
+                         owl:FunctionalProperty ;
+                rdfs:domain pl:QualityAssurance ;
+                rdfs:range xsd:date ;
+                rdfs:comment "Date the referral data was captured." ;
+                rdfs:label "referral date" .
+
+pl:placementOfficerName rdf:type owl:DatatypeProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain pl:QualityAssurance ;
+                        rdfs:range xsd:string ;
+                        rdfs:comment "Name of the officer who recorded the actual placement information." ;
+                        rdfs:label "placement officer name" .
+
+pl:placementDate rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain pl:QualityAssurance ;
+                 rdfs:range xsd:date ;
+                 rdfs:comment "Date the actual placement data was captured." ;
+                 rdfs:label "placement date" .
+
+pl:costOfficerName rdf:type owl:DatatypeProperty ,
+                            owl:FunctionalProperty ;
+                   rdfs:domain pl:QualityAssurance ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "Name of the officer who recorded the placement cost data." ;
+                   rdfs:label "cost officer name" .
+
+pl:costDate rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain pl:QualityAssurance ;
+            rdfs:range xsd:date ;
+            rdfs:comment "Date the placement cost data was captured." ;
+            rdfs:label "cost date" .
+
+#################################################################
+#    Classes
+#################################################################
+
+pl:QualityAssurance rdf:type owl:Class ;
+                    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                      owl:onProperty pl:referralOfficerName ;
+                                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty pl:referralDate ;
+                                      owl:cardinality "1"^^xsd:nonNegativeInteger
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty pl:placementOfficerName ;
+                                      owl:cardinality "1"^^xsd:nonNegativeInteger
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty pl:placementDate ;
+                                      owl:cardinality "1"^^xsd:nonNegativeInteger
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty pl:costOfficerName ;
+                                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty pl:costDate ;
+                                      owl:cardinality "1"^^xsd:nonNegativeInteger
+                                    ] ;
+                    rdfs:comment "Metadata about who recorded each part of the placement record (referral, placement, cost) and when. Supports LA-internal review of data-entry practices; not intended to be shared beyond the recording LA." ;
+                    rdfs:label "Quality Assurance" .

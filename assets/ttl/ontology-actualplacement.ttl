@@ -1,0 +1,167 @@
+@prefix : <https://ns.socialcaredata.io/placements/> .
+@prefix pl: <https://ns.socialcaredata.io/placements/> .
+@prefix pt: <https://ns.socialcaredata.io/placements/placement-type#> .
+
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <https://ns.socialcaredata.io/placements/> .
+
+<https://ns.socialcaredata.io/placements/ontology-actualplacement> rdf:type owl:Ontology ;
+      dct:creator "ODI / SocialCareData working group" ;
+      dct:description "An OWL ontology that models the ActualPlacement concept - the placement actually arranged for the child." ;
+      dct:issued "2026-04-27"^^xsd:date ;
+      dct:title "Children's Social Care Placements - Actual Placement Ontology" ;
+      rdfs:label "Actual Placement Ontology" ;
+      owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+skos:inScheme rdf:type owl:ObjectProperty .
+
+pl:placementType rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain pl:ActualPlacement ;
+                 rdfs:range skos:Concept ;
+                 rdfs:comment "The type of placement the child received." ;
+                 rdfs:label "placement type" ;
+                 rdfs:seeAlso <https://ns.socialcaredata.io/placements/placement-type> .
+
+#################################################################
+#    Data properties
+#################################################################
+
+pl:placementLocation rdf:type owl:DatatypeProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain pl:ActualPlacement ;
+                     rdfs:range xsd:string ;
+                     rdfs:comment "First 3-4 digits of the postcode for the actual placement location. Captured in addition to the provider URN to ensure location is recorded for non-registered placements." ;
+                     rdfs:label "placement location" .
+
+pl:isLocationPreferred rdf:type owl:DatatypeProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:domain pl:ActualPlacement ;
+                       rdfs:range xsd:boolean ;
+                       rdfs:comment "Whether the actual placement location was a preferred location." ;
+                       rdfs:label "is location preferred" .
+
+pl:isEducationContinuous rdf:type owl:DatatypeProperty ,
+                                  owl:FunctionalProperty ;
+                         rdfs:domain pl:ActualPlacement ;
+                         rdfs:range xsd:boolean ;
+                         rdfs:comment "Whether the child's education was continuous (i.e., not disrupted) as a result of this placement. In some cases an education disruption may be in line with the care plan." ;
+                         rdfs:label "is education continuous" .
+
+pl:providerURN rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain pl:ActualPlacement ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Provider Unique Reference Number, linked to Ofsted registration. Allows the placement to be linked to Ofsted data about the provider." ;
+               rdfs:label "provider URN" .
+
+pl:siblingsPlacedTogether rdf:type owl:DatatypeProperty ,
+                                   owl:FunctionalProperty ;
+                          rdfs:domain pl:ActualPlacement ;
+                          rdfs:range xsd:nonNegativeInteger ;
+                          rdfs:comment "How many siblings were actually placed together. Allows comparison with the intended sibling count from the referral." ;
+                          rdfs:label "siblings placed together" .
+
+pl:totalWeeklyCost rdf:type owl:DatatypeProperty ,
+                            owl:FunctionalProperty ;
+                   rdfs:domain pl:ActualPlacement ;
+                   rdfs:range xsd:decimal ;
+                   rdfs:comment "Total weekly fee paid for the placement, excluding VAT. Captures the actual fee paid rather than the fee agreed at the point of IPA, as discussed in deep-dive sessions." ;
+                   rdfs:label "total weekly cost" .
+
+pl:coreWeeklyCost rdf:type owl:DatatypeProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain pl:ActualPlacement ;
+                  rdfs:range xsd:decimal ;
+                  rdfs:comment "Total weekly core cost: the basic price quoted by a provider to deliver the service outlined in their Statement of Purpose, excluding any additional costs incurred to meet a specific child's needs." ;
+                  rdfs:label "core weekly cost" .
+
+pl:additionalSupportWeeklyCost rdf:type owl:DatatypeProperty ,
+                                        owl:FunctionalProperty ;
+                               rdfs:domain pl:ActualPlacement ;
+                               rdfs:range xsd:decimal ;
+                               rdfs:comment "Total weekly additional-support cost: costs incurred over and above the core cost to meet the specific needs of the child (e.g., increased staff ratios, sleep-in/waking-night staff, transport beyond the core contract, child-specific therapy or tutoring)." ;
+                               rdfs:label "additional support weekly cost" .
+
+pl:educationWeeklyCost rdf:type owl:DatatypeProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:domain pl:ActualPlacement ;
+                       rdfs:range xsd:decimal ;
+                       rdfs:comment "Total weekly education cost: recorded when the placement includes both care and registered education provision." ;
+                       rdfs:label "education weekly cost" .
+
+pl:otherWeeklyCost rdf:type owl:DatatypeProperty ,
+                            owl:FunctionalProperty ;
+                   rdfs:domain pl:ActualPlacement ;
+                   rdfs:range xsd:decimal ;
+                   rdfs:comment "Any weekly placement costs that do not clearly fall within the core, additional-support or education categories." ;
+                   rdfs:label "other weekly cost" .
+
+#################################################################
+#    Classes
+#################################################################
+
+pl:ActualPlacement rdf:type owl:Class ;
+                   rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                     owl:onProperty pl:placementType ;
+                                     owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                         owl:onProperty skos:inScheme ;
+                                                         owl:hasValue <https://ns.socialcaredata.io/placements/placement-type>
+                                                       ]
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty pl:totalWeeklyCost ;
+                                     owl:cardinality "1"^^xsd:nonNegativeInteger
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty pl:placementLocation ;
+                                     owl:cardinality "1"^^xsd:nonNegativeInteger
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty pl:isLocationPreferred ;
+                                     owl:cardinality "1"^^xsd:nonNegativeInteger
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty pl:isEducationContinuous ;
+                                     owl:cardinality "1"^^xsd:nonNegativeInteger
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty pl:providerURN ;
+                                     owl:cardinality "1"^^xsd:nonNegativeInteger
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty pl:siblingsPlacedTogether ;
+                                     owl:cardinality "1"^^xsd:nonNegativeInteger
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty pl:placementType ;
+                                     owl:cardinality "1"^^xsd:nonNegativeInteger
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty pl:coreWeeklyCost ;
+                                     owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty pl:additionalSupportWeeklyCost ;
+                                     owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty pl:educationWeeklyCost ;
+                                     owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty pl:otherWeeklyCost ;
+                                     owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                   ] ;
+                   rdfs:comment "Describes the placement actually arranged for the child, including weekly cost (with optional breakdown into core / additional-support / education / other), location, provider URN, sibling co-placement and educational continuity. Optional - a Placement may not (yet) have an ActualPlacement." ;
+                   rdfs:label "Actual Placement" .
