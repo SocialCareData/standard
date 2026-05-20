@@ -12,6 +12,8 @@ homepage:
 nav:
   - title: Publications
     url: /publications
+  - title: Use Cases
+    url: /use_cases
   - title: Updates
     url: /updates
   - title: Calendar
@@ -30,7 +32,7 @@ styles:
   rouge_theme: github
   minify: true
 excerpt_separator: "<!--more-->"
-include: 
+include:
   - _pages
 exclude:
   - docker-compose.yml
