@@ -516,4 +516,8 @@ Use the standard spreadsheet template for reporting placements data:
 
 [National Placement Standard spreadsheet (April 2026, v2)](/assets/spreadsheet/20260427_National-Placement-Standard-Excel-April-2026_v2.xlsx)
 
+## Report an issue
+
+If you spot an issue with this standard, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Placements+Standard" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+
 </article>

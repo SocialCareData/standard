@@ -27,7 +27,7 @@ The Placements Data Standard will standardise some of the data collected about c
 
 ### Scope
 
-The standard helps LAs:
+**The standard helps LAs:**
 
 - Better understand placement sufficiency: what provision is needed where, and at what notice
 - Speak the same data ‘language’ as neighbours to form regional view of sufficiency gaps
@@ -35,7 +35,7 @@ The standard helps LAs:
 - Make like-for-like comparisons of placement cost
 - Forecast future demand for different placement types
 
-It has been designed to:
+**It has been designed to:**
 
 - Create the smallest possible burden on frontline staff
 - Minimise the amount of change required by LAs for adoption
@@ -98,7 +98,7 @@ Although, as the table above shows, there are many models already gathering plac
 
 ## Out of Scope
 
-**The standard will *not***:
+**The standard will  *not***:
 
 - Preclude LAs from gathering additional data fields to suit local needs
 - Impose a process for how the data is gathered in each LA (i.e. some LAs may embed these fields in a CMS referral form, others may gather this in excel etc)
@@ -112,5 +112,13 @@ Although, as the table above shows, there are many models already gathering plac
 - Best way to record preferred location of the placement in a way that allows meaningful aggregate level comparison with actual placement location, especially for dense urban regions
 - Best way to define ‘preferred’ placement
 - Best quality assurance approach to ensure high fidelity data entry
+
+## Report an issue
+
+If you spot an issue with this use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Placements+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+
+## Future use cases
+
+If you would like to suggest a future use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Suggesting+a+Placements+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
 
 </article>
