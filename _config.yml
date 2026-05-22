@@ -10,10 +10,10 @@ homepage:
   title: Social Care Data
   url: /
 nav:
-  - title: Publications
-    url: /publications
   - title: Use Cases
     url: /use_cases
+  - title: Publications
+    url: /publications
   - title: Updates
     url: /updates
   - title: Calendar
