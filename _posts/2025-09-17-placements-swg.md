@@ -84,11 +84,11 @@ Maddy facilitated voting on the proposed design decisions, encouraged detailed f
 
 #### Design Considerations Deep Dive 1
 
-![Describing the actual placement voted in at 80%](/assets/img/placements-swg-deep-dive-1.png)
+![Describing the actual placement voted in at 80%](/assets/img/placements/placements-swg-deep-dive-1.png)
 
 #### Design Considerations Deep Dive 2
 
-![What determines placement availability: accepted resolution with further comments to be noted voted at 50%](/assets/img/placements-swg-deep-dive-2.png)
+![What determines placement availability: accepted resolution with further comments to be noted voted at 50%](/assets/img/placements/placements-swg-deep-dive-2.png)
 
 ### Planning Future Deep Dives
 

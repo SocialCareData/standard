@@ -73,7 +73,7 @@ From hospital admission and discharges to information from mental health service
 
 #### Priority use cases: where standards can unlock joined-up care
 
-From our engagement, a set of high-impact, shared use cases consistently rose to the top. These include:
+From our engagement, a set of high-impact, shared [use cases](/use_cases) consistently rose to the top. These include:
 
 - Accessing information to complete assessments and reviews without chasing other teams;
 - Receiving timely notifications about hospital admissions and discharges;

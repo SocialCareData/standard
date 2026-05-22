@@ -28,7 +28,7 @@ The children's social care placements standard helps regions to answer its suffi
 
 The following diagram illustrates the elements of the Children's Social Care Placements Ontology.
 
-<p class="data-model-diagram"><img src="/assets/img/placements-data-model.svg" alt="Placements Data Model" title="Placements Data Model" /></p>
+<p class="data-model-diagram"><img src="/assets/img/placements/placements-data-model.svg" alt="Placements Data Model" title="Placements Data Model" /></p>
 
 A `Placement` is the top-level record covering the full lifecycle of a placement instance. It aggregates six sub-components: the referral availability, the social-worker recommendation, the requirements describing the child's needs, the risk assessment, optionally the actual placement that was arranged, and quality-assurance metadata about who recorded each part and when.
 
@@ -515,5 +515,9 @@ A small Node.js [validator](/assets/shacl/validation) loads the shape and exampl
 Use the standard spreadsheet template for reporting placements data:
 
 [National Placement Standard spreadsheet (April 2026, v2)](/assets/spreadsheet/20260427_National-Placement-Standard-Excel-April-2026_v2.xlsx)
+
+## Report an issue
+
+If you spot an issue with this standard, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Placements+Standard" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
 
 </article>

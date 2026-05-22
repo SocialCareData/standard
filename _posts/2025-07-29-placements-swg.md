@@ -131,7 +131,7 @@ breadcrumbs:
 
 ### Long List of Potential Use Cases
 
-- Better Sufficiency Analysis (primary use case for release 1)
+- Better Sufficiency Analysis (primary [use case](/use_case_children_social_care_placements) for release 1)
 - Home search / placement finding.
 - Outcomes tracking.
 - Contract monitoring.
