@@ -109,7 +109,7 @@ The PDS response pattern is detailed in the data dictionary. Only some of its fi
 
 As previously mentioned, GET is currently operating with an extremely basic specification for describing a Person as part of a search request. This is based on the PDS’s spec, itself a minimal spec for searching nicely-structured NHS data. Underpinning the PDS is FHIR.
 
-FHIR also underpins our standard description of a Person. Our specification was built to be the search pattern for GET to use, even if it is filtered down to something smaller for the query to the NHS PDS. The spec should also be the standard pattern for Person records to follow when kept in CMSs.
+We ensured our model for Person is compatible with FHIR. A subset of the properties used to describe a person can be used to query the NHS PDS.
 
 But GET is already being piloted and seeing success: why should they want to use our person spec rather than the seemingly well-performing bare one they have themselves?
 
