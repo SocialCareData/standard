@@ -17,8 +17,7 @@ regenerate: true
 
 ## Summary
 
-A central pillar of our Data Standards for Social Care programme is our work on developing a common, interoperable means to identify and describe an individual that is a subject of care. This standard, a [Person specification](https://socialcaredata.github.io/spec/person/?tab=specification), was designed to represent the minimum information that should be
-recorded about a Person in a Care Management System (CMS) in order to enable their identification as part of multi-agency information sharing (MAIS).
+A central pillar of our Data Standards for Social Care programme is our work on developing a common, interoperable means to identify and describe an individual that is a subject of care. This standard, a [Person specification](https://socialcaredata.github.io/spec/person/?tab=specification), was designed to represent the minimum information that should be recorded about a Person in a Care Management System (CMS) in order to enable their identification as part of multi-agency information sharing (MAIS).
 
 ## Multi-agency information sharing (MAIS) requires a standard way to describe a `Person`
 
@@ -34,54 +33,15 @@ Homogenising person records opens the door to building APIs for MAIS. That is, m
 
 APIs are being built as part of the larger MAIS programme within the Department for Education by Hippo Digital. They have three kinds of APIs in mind.
 
-<style>
-  .custom-blue-table {
-    border-collapse: separate;
-    border-spacing: 5px; /* Creates the white gaps between cells */
-    width: 70%;
-    margin: 20px 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  }
+***Table-1***
+{: style="text-align: center;"}
 
-  .custom-blue-table td {
-    padding: 15px 20px;
-    vertical-align: middle;
-    font-size: 16px;
-    line-height: 1.4;
-  }
-
-  /* Left Column (Blue Header Blocks) */
-  .custom-blue-table td.label-cell {
-    background-color: #0b2265; /* Deep corporate/NHS blue */
-    color: #ffffff;
-    font-weight: bold;
-    width: 35%; /* Adjusts how wide the blue section is */
-  }
-
-  /* Right Column (Light Grey Blocks) */
-  .custom-blue-table td.content-cell {
-    background-color: #f1f2f4; /* Light grey background */
-    color: #202020;
-  }
-</style>
-
-<table class="custom-blue-table">
-  <tbody>
-    <tr>
-      <td class="label-cell">GET</td>
-      <td class="content-cell">Would enable users to find the NHS number of a person they are enquiring about.</td>
-    </tr>
-    <tr>
-      <td class="label-cell">FIND (incorporating GET)</td>
-      <td class="content-cell">Would enable users to find out which other agencies and services know about the person they are enquiring about.</td>
-    </tr>
-    <tr>
-      <td class="label-cell">FETCH (incorporating FIND and GET)</td>
-      <td class="content-cell">Would enable users to find out what information other agencies and services have about the person they are enquiring about.</td>
-    </tr>
-  </tbody>
-  <caption>Table-1</caption>
-</table>
+|  Service |  Description |
+| :--- | :--- |
+| **GET** | Would enable users to find the NHS number of a person they are enquiring about. |
+| **FIND (incorporating GET)** | Would enable users to find out which other agencies and services know about the person they are enquiring about. |
+| **FETCH (incorporating FIND and GET)** | Would enable users to find out what information other agencies and services have about the person they are enquiring about. |
+{: .table-bordered}
 
 ### Query
 
@@ -103,7 +63,7 @@ In table 2, we also compare our standard, Hippo’s GET API spec, and the [PDS F
 
 The Personal Demographics Service (PDS) responds to a query with a FHIR Patient object that contains the NHS number (if it was already provided in the request, then the number is validated) of the requested person. FIND and FETCH would use the provided NHS number, as a single unique identifier, to query health, police, and social care systems across the UK in order to identify where the subject person is already known.
 
-The PDS response pattern is detailed in the data dictionary. Only some of its fields are compared in Table 2.
+The PDS response pattern is detailed in the data dictionary. Only some of its fields are compared in Table-2.
 
 ## Comparing specs
 
@@ -119,340 +79,35 @@ Our standard was built by navigating these intricacies, referencing other data s
 
 The table below serves compare our `Person` standard to the current GET API spec, the [PDS query](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir#get-/Patient) pattern, and [FHIR’s Patient](https://build.fhir.org/patient.html) object. We align common fields and provide notes where there is divergence.
 
-<table class="matrix-table">
-  <caption>Table-2 (with RelatedPerson and PrimaryContactProfessional removed from our Person standard)</caption>
-  <thead>
-    <tr>
-      <th style="width: 20%;">Our Person Standard</th>
-      <th style="width: 12%;">GET OpenAPI spec</th>
-      <th style="width: 14%;">PDS</th>
-      <th style="width: 15%;">FHIR</th>
-      <th style="width: 39%;">Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <strong>Identifier.value</strong>
-        <div class="meta-info">
-          Cardinality: 1..1 (in a 1..* Identifier Object)<br><br>
-          Definition: A single unique identifier attached to the person (e.g., NHS number).
-        </div>
-      </td>
-      <td>
-        <strong>personID</strong><br>
-        <span class="meta-info">(NHS number, provided in response only, not a query param)</span>
-      </td>
-      <td></td>
-      <td><strong>Identifier.value</strong></td>
-      <td>
-        A unique identifier attached to the person. In GET and the PDS, this is their NHS number; in our standard and FHIR, this can be any identifier (with cardinality &gt; 1).<br><br>
-        This is because the NHS number of a person is not necessarily known to a system the person is recorded in, like a CMS. NHS numbers are mostly used in health settings, whereas CMSes use internal, alphanumeric unique IDs as references.<br><br>
-        With the overarching programme soon to enforce NHS number as the single unique identifier of a person, it is likely that all identifiers across all systems will be homogenised as NHS numbers. Until that is the case, though, there is a need to respect the fact that people may be known by multiple heterogenous IDs across systems.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Identifier.system</strong>
-        <div class="meta-info">
-          Cardinality: 1..1 (in a 1..* Identifier Object)<br><br>
-          Definition: System that the identifier adheres to (e.g., https://fhir.nhs.uk/Id/nhs-number).
-        </div>
-      </td>
-      <td></td>
-      <td></td>
-      <td><strong>Identifier.system</strong></td>
-      <td>With our choice to enable identifiers to be more than just NHS numbers, there comes a requirement to designate the kind of identifier each value is. We can do so with FHIR's standard Identifier pattern, using a URL namespace to designate the organisational system the identifier is part of.</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Name.familyName</strong>
-        <div class="meta-info">
-          Cardinality: 1..* (in a 1..1 Name Object)<br><br>
-          Definition: Surname or family name.
-        </div>
-      </td>
-      <td><strong>family</strong></td>
-      <td><strong>family</strong></td>
-      <td><strong>HumanName.family</strong></td>
-      <td>n/a</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Name.givenNames</strong>
-        <div class="meta-info">
-          Cardinality: 1..* (in a 1..1 Name Object)<br><br>
-          Definition: First and any middle names.
-        </div>
-      </td>
-      <td><strong>given</strong></td>
-      <td><strong>given</strong></td>
-      <td><strong>HumanName.given</strong></td>
-      <td>n/a</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Name.preferredNames</strong>
-        <div class="meta-info">
-          Cardinality: 0..* (in a 1..1 Name)<br><br>
-          Definition: Any preferred given or middle names used by the person.
-        </div>
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>We include a field for preferred names, as does PDS, to better enable matching; knowing a Joseph prefers Joe means a wider net can be cast when making a search for their record.</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Name.use</strong>
-        <div class="meta-info">
-          Cardinality: 0..1 (in a 1..1 Name Object)<br><br>
-          Definition: How this name instance is used.
-        </div>
-      </td>
-      <td></td>
-      <td></td>
-      <td><strong>HumanName.use</strong></td>
-      <td>
-        As we brought Adult Social Care into our programme, a field to define the "type" of a name was made important: an adult can change their name, whether part of marriage or as a formal name change when they are above 18. Knowing these names, and what they were previously, means there is more data to use in the search for a record.<br><br>
-        You wouldn't necessarily use this field as part of the search. You wouldn't say "their maiden name was Jane Smith and now it's Jane Doe"; the search would just entail queries for both Jane Smith and Jane Doe.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong>DateOfBirth.date</strong>
-        <div class="meta-info">
-          Cardinality: 0..1 (in a 1..1 DateOfBirth Object)<br><br>
-          Definition: ISO8601 formatted date of birth (YYYY-MM-DD).
-        </div>
-      </td>
-      <td><strong>birthDate</strong></td>
-      <td><strong>birthdate</strong></td>
-      <td><strong>birthDate</strong></td>
-      <td>GET doesn't mandate ISO8601 format but it's assumed</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>DateOfBirth.accuracyIndicator</strong>
-        <div class="meta-info">
-          Cardinality: 0..1 (in a 1..1 DateOfBirth Object)<br><br>
-          Definition: Indicates which parts of the date are known to be accurate (A), estimated (E) or unknown (U).
-        </div>
-      </td>
-      <td></td>
-      <td></td>
-      <td><strong>extension:date-accuracy-indicator</strong></td>
-      <td>
-        One of the first problems raised by the working group was that across social care, dates of birth were not always known or accurate. This accuracy indicator still needs to be worked on, but essentially enables fuzziness in the recording of DoB. We could extend it to include the expected date of births for unborn children.<br><br>
-        Less of a search parameter and more of a rule for the search -- saying "look around this date" rather than "look for this date"
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Deceased.deceasedStatus</strong>
-        <div class="meta-info">
-          Cardinality: 1..1 (in a 1..1 Deceased Object)<br><br>
-          Definition: True / False for if person is deceased.
-        </div>
-      </td>
-      <td></td>
-      <td></td>
-      <td><strong>deceasedBoolean</strong></td>
-      <td>Adult Social Care systems require deaths to be recorded on a Person's record. This is part of statutory data collection, enabling analysis of mortality, but also ensures that resources aren't allocated to people that are deceased. It is also an important search parameter / filter.</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Deceased.date</strong>
-        <div class="meta-info">
-          Cardinality: 0..1 (in a 1..* Deceased Object)<br><br>
-          Definition: ISO8601 formatted date of death (YYYY-MM-DD).
-        </div>
-      </td>
-      <td></td>
-      <td><strong>death-date</strong></td>
-      <td><strong>deceasedDatetime</strong></td>
-      <td>Date of Death could be simultaneous with deceasedStatus; after all, having a date of death means that a person is deceased. However, date of death is not always known.</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Address.line1</strong>
-        <div class="meta-info">
-          Cardinality: 1..1 (in a 1..* Address Object)<br><br>
-          Definition: Street address, c/o.
-        </div>
-      </td>
-      <td></td>
-      <td><strong>address.line</strong><br><span class="meta-info">(in response only, not a query param)</span></td>
-      <td><strong>address.line</strong></td>
-      <td>While Address lines are generally heterogeneously recorded and difficult to use for a search, the working group still thinks they're important as part of the minimum spec of a Person record. Operating with postcode alone is sometimes fine, but not always, especially in high density residential areas.</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Address.line2</strong>
-        <div class="meta-info">
-          Cardinality: 0..1 (in a 1..* Address Object)<br><br>
-          Definition: Apartment, suite, unit, building, floor, etc.
-        </div>
-      </td>
-      <td></td>
-      <td><strong>address.line</strong><br><span class="meta-info">(in response only, not a query param)</span></td>
-      <td><strong>address.line</strong></td>
-      <td>While Address lines are generally heterogeneously recorded and difficult to use for a search, the working group still thinks they're important as part of the minimum spec of a Person record. Operating with postcode alone is sometimes fine, but not always, especially in high density residential areas.</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Address.city</strong>
-        <div class="meta-info">
-          Cardinality: 1..1 (in a 1..* Address Object)<br><br>
-          Definition: City, town, or village.
-        </div>
-      </td>
-      <td></td>
-      <td><strong>address.city</strong><br><span class="meta-info">(in response only, not a query param)</span></td>
-      <td><strong>address.city</strong></td>
-      <td>City is a useful filter for a search and generally more homogeneously recorded than address lines are.</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Address.postcode</strong>
-        <div class="meta-info">
-          Cardinality: 1..1 (in a 1..* Address Object)<br><br>
-          Definition: Postcode.
-        </div>
-      </td>
-      <td><strong>addressPostalCode</strong></td>
-      <td><strong>address-postalcode</strong></td>
-      <td><strong>address.postalCode</strong></td>
-      <td>Postcode is the defacto search parameter when it comes to residential location. However, operating with postcode alone can be difficulty in high density residential areas.</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Address.UPRN</strong>
-        <div class="meta-info">
-          Cardinality: 0..1 (in a 1..* Address Object)<br><br>
-          Definition: Unique Property Reference Number of the address.
-        </div>
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>
-        At the time of building our person spec, the government was drafting guidance (that has been published, <a href="https://www.gov.uk/government/publications/open-standards-for-government/identifying-property-and-street-information">here</a>) that recommends "systems, services and applications that store or publish data sets containing property and street information must use the UPRN and USRN identifiers."<br><br>
-        Unique Property Reference Numbers (UPRNs) are the unique identifiers for every addressable location in Great Britain.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Address.USRN</strong>
-        <div class="meta-info">
-          Cardinality: 0..1 (in a 1..* Address Object)<br><br>
-          Definition: Unique Street Reference Number of the address.
-        </div>
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>
-        At the time of building our person spec, the government was drafting guidance (that has been published, <a href="https://www.gov.uk/government/publications/open-standards-for-government/identifying-property-and-street-information">here</a>) that recommends "systems, services and applications that store or publish data sets containing property and street information must use the UPRN and USRN identifiers."<br><br>
-        Unique Street Reference Numbers (USRNs) are the unique identifiers for every street in Great Britain.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Address.use</strong>
-        <div class="meta-info">
-          Cardinality: 0..1 (in a 1..* Address Object)<br><br>
-          Definition: How this address is used.
-        </div>
-      </td>
-      <td></td>
-      <td><strong>address.use</strong><br><span class="meta-info">(in response only, not a query param)</span></td>
-      <td><strong>address.use</strong></td>
-      <td>This field enables demarcation of the kind of address. The current code system -- FHIR's address-use -- is not particularly useful for the social care use case, which could include the address of foster care, placements, or something else.</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Gender</strong>
-        <div class="meta-info">
-          Cardinality: 1..1<br><br>
-          Definition: The person's stated gender. This information does not pertain to biological sex. Uses NHS PERSON_STATED_GENDER_CODE.
-        </div>
-      </td>
-      <td><strong>gender</strong></td>
-      <td><strong>gender</strong></td>
-      <td><strong>gender</strong></td>
-      <td>
-        Gender and Sex were major points of interest amongst ourselves and the working group.<br><br>
-        Gender was seen to be an important search parameter that could not be left out of the design of our person standard. We sought to include it by representing it as "person stated gender" -- the gender a person identifies as, when asked.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Sex</strong>
-        <div class="meta-info">
-          Cardinality: 0..1<br><br>
-          Definition: Observed phenotypic sex, where recorded. Uses NHS PERSON_PHENOTYPIC_SEX
-        </div>
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>
-        Importantly, while our work on gender was being ratified by the working group, <a href="https://www.bbc.co.uk/news/live/cvgq9ejql39t">a landmark decision by the supreme court</a> was followed by an extreme focus on transgender identification in official systems and services. Government guidance published before and during this time period recommended phenotypic, biological sex or to be recorded in social care systems.<br><br>
-        Importantly, this would be recorded as per the sex on birth certificate. <a href="https://www.gov.uk/government/publications/children-looked-after-return-2024-to-2025-guide">Some guidance</a> allows gender recognition certificates too -- but note that this requires the individual to be &gt;18 and officially diagnosed with gender dysphoria.<br><br>
-        We felt that this was an extremely difficult subject to navigate, and went through multiple iterations. While government policy takes priority, references to a person's phenotypic sex can potentially distress subjects of care, and even the act of benign record-keeping can lead to case worker confusion or, in worst case scenarios, biased care delivery.<br><br>
-        We settled on having Person Stated gender, as above, and an optional field for Phenotypic Sex. Note that, in FHIR, clinical sex is not an attribute of a person.<br><br>
-        Read more about Gender and Sex in <a href="https://github.com/SocialCareData/person-standard/issues/24">this issue thread</a>.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Ethnicity</strong>
-        <div class="meta-info">
-          Cardinality: 1..1<br><br>
-          Definition: The person's stated ethnicity, according to ONS 18+1 (the categories used in the 2021 census, can include "not provided").
-        </div>
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>
-        Ethnicity was added to our person standard as part of adjusting it for Adult Social Care, where it is statutorily required. It's not necessarily recorded in Child Social Care.<br><br>
-        We noted that this is less of a tense issue than Gender and Sex, above. The NHS and ONS already have standard means of describing the info.
-      </td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><strong>phone</strong></td>
-      <td><strong>phone</strong></td>
-      <td><strong>telecom(ContactPoint)</strong></td>
-      <td>
-        Our person standard does not have phone number because the primary aim is not to facilitate contact with the subject of care, but rather to facilitate contact with people who know about the subject of care.<br><br>
-        Phone and email of the subject person -- especially when it came to Children -- were more information than required, therefore.<br><br>
-        We could add this, as the info can in some cases act as a unique identifier to help matching. Hasn't been decided yet.
-      </td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><strong>email</strong></td>
-      <td><strong>email</strong></td>
-      <td><strong>telecom(ContactPoint)</strong></td>
-      <td>
-        Our person standard does not have email because the primary aim is not to facilitate contact with the subject of care, but rather to facilitate contact with people who know about the subject of care.<br><br>
-        Phone and email of the subject person -- especially when it came to Children -- were more information than required, therefore.<br><br>
-        We could add this, as the info can in some cases act as a unique identifier to help matching. Hasn't been decided yet.
-      </td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td><strong>general-practitioner</strong></td>
-      <td><strong>generalPractitioner</strong></td>
-      <td>The PDS allows queries to have codes for the individual's GP practice.</td>
-    </tr>
-  </tbody>
-</table>
+***Table-2 (with RelatedPerson and PrimaryContactProfessional removed from our Person standard)***
+{: style="text-align: center;"}
+
+| Our Person Standard | GET OpenAPI spec | PDS | FHIR | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| **Identifier.value** <br><br> Cardinality: 1..1 (in a 1..* Identifier Object) <br><br> Definition: A single unique identifier attached to the person (e.g., NHS number). | **personID** <br> (NHS number, provided in response only, not a query param) | | **Identifier.value** | A unique identifier attached to the person. In GET and the PDS, this is their NHS number; in our standard and FHIR, this can be any identifier (with cardinality > 1). <br><br> This is because the NHS number of a person is not necessarily known to a system the person is recorded in, like a CMS. NHS numbers are mostly used in health settings, whereas CMSes use internal, alphanumeric unique IDs as references. <br><br> With the overarching programme soon to enforce NHS number as the single unique identifier of a person, it is likely that all identifiers across all systems will be homogenised as NHS numbers. Until that is the case, though, there is a need to respect the fact that people may be known by multiple heterogenous IDs across systems. |
+| **Identifier.system** <br><br> Cardinality: 1..1 (in a 1..* Identifier Object) <br><br> Definition: System that the identifier adheres to (e.g., https://fhir.nhs.uk/Id/nhs-number). | | | **Identifier.system** | With our choice to enable identifiers to be more than just NHS numbers, there comes a requirement to designate the kind of identifier each value is. We can do so with FHIR's standard Identifier pattern, using a URL namespace to designate the organisational system the identifier is part of. |
+| **Name.familyName** <br><br> Cardinality: 1..* (in a 1..1 Name Object) <br><br> Definition: Surname or family name. | **family** | **family** | **HumanName.family** | n/a |
+| **Name.givenNames** <br><br> Cardinality: 1..* (in a 1..1 Name Object) <br><br> Definition: First and any middle names. | **given** | **given** | **HumanName.given** | n/a |
+| **Name.preferredNames** <br><br> Cardinality: 0..* (in a 1..1 Name) <br><br> Definition: Any preferred given or middle names used by the person. | | | | We include a field for preferred names, as does PDS, to better enable matching; knowing a Joseph prefers Joe means a wider net can be cast when making a search for their record. |
+| **Name.use** <br><br> Cardinality: 0..1 (in a 1..1 Name Object) <br><br> Definition: How this name instance is used. | | | **HumanName.use** | As we brought Adult Social Care into our programme, a field to define the "type" of a name was made important: an adult can change their name, whether part of marriage or as a formal name change when they are above 18. Knowing these names, and what they were previously, means there is more data to use in the search for a record. <br><br> You wouldn't necessarily use this field as part of the search. You wouldn't say "their maiden name was Jane Smith and now it's Jane Doe"; the search would just entail queries for both Jane Smith and Jane Doe. |
+| **DateOfBirth.date** <br><br> Cardinality: 0..1 (in a 1..1 DateOfBirth Object) <br><br> Definition: ISO8601 formatted date of birth (YYYY-MM-DD). | **birthDate** | **birthdate** | **birthDate** | GET doesn't mandate ISO8601 format but it's assumed |
+| **DateOfBirth.accuracyIndicator** <br><br> Cardinality: 0..1 (in a 1..1 DateOfBirth Object) <br><br> Definition: Indicates which parts of the date are known to be accurate (A), estimated (E) or unknown (U). | | | **extension:date-accuracy-indicator** | One of the first problems raised by the working group was that across social care, dates of birth were not always known or accurate. This accuracy indicator still needs to be worked on, but essentially enables fuzziness in the recording of DoB. We could extend it to include the expected date of births for unborn children. <br><br> Less of a search parameter and more of a rule for the search -- saying "look around this date" rather than "look for this date" |
+| **Deceased.deceasedStatus** <br><br> Cardinality: 1..1 (in a 1..1 Deceased Object) <br><br> Definition: True / False for if person is deceased. | | | **deceasedBoolean** | Adult Social Care systems require deaths to be recorded on a Person's record. This is part of statutory data collection, enabling analysis of mortality, but also ensures that resources aren't allocated to people that are deceased. It is also an important search parameter / filter. |
+| **Deceased.date** <br><br> Cardinality: 0..1 (in a 1..* Deceased Object) <br><br> Definition: ISO8601 formatted date of death (YYYY-MM-DD). | | **death-date** | **deceasedDatetime** | Date of Death could be simultaneous with deceasedStatus; after all, having a date of death means that a person is deceased. However, date of death is not always known. |
+| **Address.line1** <br><br> Cardinality: 1..1 (in a 1..* Address Object) <br><br> Definition: Street address, c/o. | | **address.line** <br> (in response only, not a query param) | **address.line** | While Address lines are generally heterogeneously recorded and difficult to use for a search, the working group still thinks they're important as part of the minimum spec of a Person record. Operating with postcode alone is sometimes fine, but not always, especially in high density residential areas. |
+| **Address.line2** <br><br> Cardinality: 0..1 (in a 1..* Address Object) <br><br> Definition: Apartment, suite, unit, building, floor, etc. | | **address.line** <br> (in response only, not a query param) | **address.line** | While Address lines are generally heterogeneously recorded and difficult to use for a search, the working group still thinks they're important as part of the minimum spec of a Person record. Operating with postcode alone is sometimes fine, but not always, especially in high density residential areas. |
+| **Address.city** <br><br> Cardinality: 1..1 (in a 1..* Address Object) <br><br> Definition: City, town, or village. | | **address.city** <br> (in response only, not a query param) | **address.city** | City is a useful filter for a search and generally more homogeneously recorded than address lines are. |
+| **Address.postcode** <br><br> Cardinality: 1..1 (in a 1..* Address Object) <br><br> Definition: Postcode. | **addressPostalCode** | **address-postalcode** | **address.postalCode** | Postcode is the defacto search parameter when it comes to residential location. However, operating with postcode alone can be difficulty in high density residential areas. |
+| **Address.UPRN** <br><br> Cardinality: 0..1 (in a 1..* Address Object) <br><br> Definition: Unique Property Reference Number of the address. | | | | At the time of building our person spec, the government was drafting guidance (that has been published, [here](https://www.gov.uk/government/publications/open-standards-for-government/identifying-property-and-street-information)) that recommends "systems, services and applications that store or publish data sets containing property and street information must use the UPRN and USRN identifiers." <br><br> Unique Property Reference Numbers (UPRNs) are the unique identifiers for every addressable location in Great Britain. |
+| **Address.USRN** <br><br> Cardinality: 0..1 (in a 1..* Address Object) <br><br> Definition: Unique Street Reference Number of the address. | | | | At the time of building our person spec, the government was drafting guidance (that has been published, [here](https://www.gov.uk/government/publications/open-standards-for-government/identifying-property-and-street-information)) that recommends "systems, services and applications that store or publish data sets containing property and street information must use the UPRN and USRN identifiers." <br><br> Unique Street Reference Numbers (USRNs) are the unique identifiers for every street in Great Britain. |
+| **Address.use** <br><br> Cardinality: 0..1 (in a 1..* Address Object) <br><br> Definition: How this address is used. | | **address.use** <br> (in response only, not a query param) | **address.use** | This field enables demarcation of the kind of address. The current code system -- FHIR's address-use -- is not particularly useful for the social care use case, which could include the address of foster care, placements, or something else. |
+| **Gender** <br><br> Cardinality: 1..1 <br><br> Definition: The person's stated gender. This information does not pertain to biological sex. Uses NHS PERSON_STATED_GENDER_CODE. | **gender** | **gender** | **gender** | Gender and Sex were major points of interest amongst ourselves and the working group. <br><br> Gender was seen to be an important search parameter that could not be left out of the design of our person standard. We sought to include it by representing it as "person stated gender" -- the gender a person identifies as, when asked. |
+| **Sex** <br><br> Cardinality: 0..1 <br><br> Definition: Observed phenotypic sex, where recorded. Uses NHS PERSON_PHENOTYPIC_SEX | | | | Importantly, while our work on gender was being ratified by the working group, [a landmark decision by the supreme court](https://www.bbc.co.uk/news/live/cvgq9ejql39t) was followed by an extreme focus on transgender identification in official systems and services. Government guidance published before and during this time period recommended phenotypic, biological sex or to be recorded in social care systems. <br><br> Importantly, this would be recorded as per the sex on birth certificate. [Some guidance](https://www.gov.uk/government/publications/children-looked-after-return-2024-to-2025-guide) allows gender recognition certificates too -- but note that this requires the individual to be >18 and officially diagnosed with gender dysphoria. <br><br> We felt that this was an extremely difficult subject to navigate, and went through multiple iterations. While government policy takes priority, references to a person's phenotypic sex can potentially distress subjects of care, and even the act of benign record-keeping can lead to case worker confusion or, in worst case scenarios, biased care delivery. <br><br> We settled on having Person Stated gender, as above, and an optional field for Phenotypic Sex. Note that, in FHIR, clinical sex is not an attribute of a person. <br><br> Read more about Gender and Sex in [this issue thread](https://github.com/SocialCareData/person-standard/issues/24). |
+| **Ethnicity** <br><br> Cardinality: 1..1 <br><br> Definition: The person's stated ethnicity, according to ONS 18+1 (the categories used in the 2021 census, can include "not provided"). | | | | Ethnicity was added to our person standard as part of adjusting it for Adult Social Care, where it is statutorily required. It's not necessarily recorded in Child Social Care. <br><br> We noted that this is less of a tense issue than Gender and Sex, above. The NHS and ONS already have standard means of describing the info. |
+| | **phone** | **phone** | **telecom(ContactPoint)** | Our person standard does not have phone number because the primary aim is not to facilitate contact with the subject of care, but rather to facilitate contact with people who know about the subject of care. <br><br> Phone and email of the subject person -- especially when it came to Children -- were more information than required, therefore. <br><br> We could add this, as the info can in some cases act as a unique identifier to help matching. Hasn't been decided yet. |
+| | **email** | **email** | **telecom(ContactPoint)** | Our person standard does not have email because the primary aim is not to facilitate contact with the subject of care, but rather to facilitate contact with people who know about the subject of care. <br><br> Phone and email of the subject person -- especially when it came to Children -- were more information than required, therefore. <br><br> We could add this, as the info can in some cases act as a unique identifier to help matching. Hasn't been decided yet. |
+| | | **general-practitioner** | **generalPractitioner** | The PDS allows queries to have codes for the individual's GP practice. |
+{: .table-bordered}
 
 ## Appendix I – the Hippo GET OpenAPI spec (truncated)
 
