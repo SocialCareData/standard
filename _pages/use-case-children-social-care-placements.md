@@ -19,7 +19,7 @@ breadcrumbs:
 
 <article class="numbered-headings">
 
-## Introduction
+## Summary
 
 The Placements Data Standard will standardise some of the data collected about children’s social care placements. The goal of this standard is to support better analysis of placement sufficiency at the local and regional level, tackle high costs in the care market and improve outcomes for children in care.
 
