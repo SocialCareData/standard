@@ -129,3 +129,11 @@ Is this problem felt as acutely across adult’s and children’s systems?
 ## Additional Sources
 
 [OFSTED Annex A Data Requirements](https://www.gov.uk/government/publications/deleted-inspecting-local-authority-childrens-services/inspecting-local-authority-childrens-services#Annex-A)
+
+## Report an issue
+
+If you spot an issue with this use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Analysing+Information+from+CMS+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+
+## Future use cases
+
+If you would like to suggest a future use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Suggesting+a+Analysing+Information+from+CMS+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.

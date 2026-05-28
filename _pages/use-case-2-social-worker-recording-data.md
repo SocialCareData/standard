@@ -198,3 +198,11 @@ Several applications offer this for social work specifically, for example Magic 
 
 - [IASSW / IFSW -- Global Standards for Social Work
   Education](https://www.ifsw.org/global-standards-for-social-work-education-and-training/)
+
+## Report an issue
+
+If you spot an issue with this use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Social+Worker+Recording+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+
+## Future use cases
+
+If you would like to suggest a future use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Suggesting+a+Social+Worker+Recording+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.

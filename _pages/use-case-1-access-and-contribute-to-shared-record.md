@@ -173,3 +173,11 @@ Existing functionality and standards
   <https://evanschris.com/work/futuregov/familystory.html>
 
 - <https://theprsb.org/standards/aboutme/>
+
+## Report an issue
+
+If you spot an issue with this use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Access+Shared+Record+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+
+## Future use cases
+
+If you would like to suggest a future use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Suggesting+a+Access+Shared+Record+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.

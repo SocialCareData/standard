@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /use_case_supporting_cms_migration
-title: Supporting CMS migration
+title: Supporting CMS Migration
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
@@ -64,3 +64,11 @@ Futuregov spent two years building a family-friendly CMS (Family Story) with the
 ## Open Questions
 
 ## Additional Sources
+
+## Report an issue
+
+If you spot an issue with this use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Supporting+CMS+Migration+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+
+## Future use cases
+
+If you would like to suggest a future use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Suggesting+a+Supporting+CMS+Migration+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.

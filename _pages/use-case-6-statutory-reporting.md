@@ -184,3 +184,11 @@ ASC returns:
 ## Open Questions
 
 ## Additional Sources
+
+## Report an issue
+
+If you spot an issue with this use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Statutory+Reporting+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+
+## Future use cases
+
+If you would like to suggest a future use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Suggesting+a+Statutory+Reporting+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.

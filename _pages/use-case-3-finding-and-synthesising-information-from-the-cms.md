@@ -120,3 +120,11 @@ This could lead to:
 - [North Yorkshire Council: Using AI to reimagine Children's Social Care
   \| Local Government
   Association](https://www.local.gov.uk/case-studies/north-yorkshire-council-using-ai-reimagine-childrens-social-care)
+
+## Report an issue
+
+If you spot an issue with this use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Find+Information+CMS+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+
+## Future use cases
+
+If you would like to suggest a future use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Suggesting+a+Find+Information+CMS+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
