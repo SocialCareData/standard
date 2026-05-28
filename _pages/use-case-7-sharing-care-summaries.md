@@ -19,6 +19,9 @@ breadcrumbs:
 
 <article class="numbered-headings">
 
+Identifier: `7`
+{: style="color: #888888; font-size: 0.85em; margin-top: 5px;"}
+
 ## Summary
 
 As a social work admin support team, I need to be able to create a version of someone’s care records which are intelligible to them and do not breach duties of confidentiality to others, so that I can uphold the LA’s ethical and legal responsibility to them.  I need to compile and share them in a way that minimises the traumatising impact of reading them on the person.As an adult who has left the care system, I need to access a copy of my records which I can understand, so I can understand what decisions were made about me and why.

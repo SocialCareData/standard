@@ -19,6 +19,9 @@ breadcrumbs:
 
 <article class="numbered-headings">
 
+Identifier: `6`
+{: style="color: #888888; font-size: 0.85em; margin-top: 5px;"}
+
 ## Summary
 
 As a local authority responsible for statutory social care reporting, I need reliable, standardised, high‑quality data and efficient processes for generating and submitting statutory returns (e.g. CLD or SSDA903), so that national bodies (DfE/DHSC) receive accurate, timely, comparable information that supports policymaking, oversight, and service improvement.
