@@ -12,4 +12,6 @@ title: Use Cases
 1. [Supporting CMS migration](/use_case_supporting_cms_migration)
 1. [Analysing information from the CMS](/use_case_analysing_information_from_the_cms)
 1. [Social Care Statutory Reporting](/use_case_statutory_reporting)
+1. [Sharing Care Summaries](/use_case_sharing_care_summaries)
+1. [Transition from Children’s Social Care to Adult Social Care](/use_case_csc_to_asc_transitions)
 
