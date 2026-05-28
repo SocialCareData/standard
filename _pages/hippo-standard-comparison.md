@@ -101,7 +101,7 @@ In table 2, we also compare our standard, Hippo’s GET API spec, and the [PDS F
 
 ### Response
 
-The PDS responds to a query with a FHIR Patient object that contains the NHS number (if it was already provided in the request, then the number is validated) of the requested person. FIND and FETCH would use the provided NHS number, as a single unique identifier, to query health, police, and social care systems across the UK in order to identify where the subject person is already known.
+The Personal Demographics Service (PDS) responds to a query with a FHIR Patient object that contains the NHS number (if it was already provided in the request, then the number is validated) of the requested person. FIND and FETCH would use the provided NHS number, as a single unique identifier, to query health, police, and social care systems across the UK in order to identify where the subject person is already known.
 
 The PDS response pattern is detailed in the data dictionary. Only some of its fields are compared in Table 2.
 
