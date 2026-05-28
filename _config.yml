@@ -6,6 +6,19 @@ theme_color: "#0f4b69"
 newsletter: https://github.us15.list-manage.com/subscribe?u=cc2fe06b8de4efcacfb9a9e18&id=410af499ef
 github_username: socialcaredata
 repository: socialcaredata/standard
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
 homepage:
   title: Social Care Data
   url: /

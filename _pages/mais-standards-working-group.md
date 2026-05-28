@@ -1,5 +1,4 @@
 ---
-layout: default
 permalink: /mais_standards_working_group
 title: Multi-Agency Information Sharing (MAIS)
 breadcrumbs:

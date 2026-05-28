@@ -1,5 +1,4 @@
 ---
-layout: post
 permalink: /2026-04-07-newsletter
 title: Newsletter 4 - Data Standards for Social Care
 categories:

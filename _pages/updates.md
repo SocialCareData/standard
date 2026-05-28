@@ -1,5 +1,4 @@
 ---
-layout: default
 permalink: /updates
 title: Updates
 regenerate: true

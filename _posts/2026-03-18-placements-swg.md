@@ -1,5 +1,4 @@
 ---
-layout: post
 permalink: /2026-03-18-placements-swg
 title: Placements Standards Working Group Meeting 4
 categories:

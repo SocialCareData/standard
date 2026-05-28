@@ -1,5 +1,4 @@
 ---
-layout: post
 permalink: /2025-09-16-newsletter
 title: Newsletter 1 - Hello from the team!
 categories:

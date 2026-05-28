@@ -1,5 +1,4 @@
 ---
-layout: default
 permalink: /
 title: Social Care Interoperability Framework
 ---

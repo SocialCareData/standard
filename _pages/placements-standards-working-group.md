@@ -1,5 +1,4 @@
 ---
-layout: default
 permalink: /placements_standards_working_group
 title: Children's Social Care Placements
 breadcrumbs:

@@ -1,5 +1,4 @@
 ---
-layout: post
 permalink: /2025-12-15-newsletter
 title: Newsletter 3 - Engagement Highlights & Year-End Reflections
 categories:

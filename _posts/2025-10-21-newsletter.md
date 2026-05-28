@@ -1,5 +1,4 @@
 ---
-layout: post
 permalink: /2025-10-21-newsletter
 title: Newsletter 2 - Rapid Progress in the Southwest pilot
 categories:

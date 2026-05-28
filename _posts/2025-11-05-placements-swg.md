@@ -1,6 +1,5 @@
 ---
-layout: post
-permalink: /updates/placements-2025-11-05
+permalink: /2025-11-05-placements-swg
 title: Placements Standards Working Group Meeting 3
 categories:
   - Working Group

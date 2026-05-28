@@ -1,5 +1,4 @@
 ---
-layout: post
 permalink: /2025-09-17-placements-swg
 title: Placements Standards Working Group Meeting 2
 categories:

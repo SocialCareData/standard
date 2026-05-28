@@ -1,5 +1,4 @@
 ---
-layout: post
 permalink: /2025-09-22-mais-information-governance
 title: MAIS Information Governance Deep Dive
 categories:

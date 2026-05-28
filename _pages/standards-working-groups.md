@@ -1,5 +1,4 @@
 ---
-layout: default
 permalink: /standards_working_groups
 title: Standards Working Groups
 ---
