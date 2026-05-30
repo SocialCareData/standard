@@ -10,6 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: actions/setup-node@v6
+
+      - name: Install Pagefind
+        run: npm install -g pagefind
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.4'
@@ -17,11 +22,6 @@ jobs:
 
       - name: Build Jekyll
         run: bundle exec jekyll build
-
-      - uses: actions/setup-node@v6
-
-      - name: Create Search Index with Pagefind
-        run: npx pagefind --site _site
 
       - uses: actions/upload-pages-artifact@v5
         with:
