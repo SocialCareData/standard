@@ -58,7 +58,6 @@ exclude:
 markdown: kramdown
 kramdown:
   parse_block_html: true
-  smart_quotes: lsquo,rsquo,ldquo,rdquo
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     css_class: highlight
