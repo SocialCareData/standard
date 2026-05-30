@@ -1,6 +1,6 @@
 # posts
 Jekyll::Hooks.register :posts, :post_init do |post|
-  post.data["permalink"] = "/#{post.basename_without_ext}"
+  post.data["permalink"] = "/#{post.basename_without_ext.tr("-", "_")}"
 end
 
 # pages
@@ -9,6 +9,6 @@ Jekyll::Hooks.register :pages, :post_init do |page|
   if page.basename == "index"
     page.data["permalink"] = "/"
   else
-    page.data["permalink"] = "/#{page.basename}"
+    page.data["permalink"] = "/#{page.basename.tr("-", "_")}"
   end
 end
