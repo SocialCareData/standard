@@ -4,16 +4,18 @@ document.addEventListener('DOMContentLoaded', function() {
   const nav = document.querySelector('.header .nav')
 
   hamburgerButton.addEventListener('click', function() {
-    nav.classList.toggle('open')
+    const isOpen = nav.classList.toggle('open')
     hamburgerButton.classList.toggle('active')
+    hamburgerButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false')
   })
 
   /* Close menu when clicking on a link */
   const navLinks = document.querySelectorAll('.header .nav a')
   navLinks.forEach(link => {
     link.addEventListener('click', function() {
-      nav.classList.remove('open');
-      hamburgerButton.classList.remove('active');
+      nav.classList.remove('open')
+      hamburgerButton.classList.remove('active')
+      hamburgerButton.setAttribute('aria-expanded', 'false')
     })
   })
 
