@@ -4,8 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const nav = document.querySelector('.header .nav')
 
   hamburgerButton.addEventListener('click', function() {
-    nav.classList.toggle('open')
+    const isOpen = nav.classList.toggle('open')
     hamburgerButton.classList.toggle('active')
+    hamburgerButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false')
   })
 
   /* Open Pagefind search modal when the search button is clicked */
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     link.addEventListener('click', function() {
       nav.classList.remove('open');
       hamburgerButton.classList.remove('active');
+      hamburgerButton.setAttribute('aria-expanded', 'false')
     })
   })
 

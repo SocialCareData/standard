@@ -27,7 +27,7 @@
     <body>
         <header class="header nojs">{% if site.homepage %}
             <a class="home" href="{{ site.homepage.url }}">{{ site.homepage.title }}</a>{% endif %}{% if site.nav %}
-            <nav class="nav">
+            <nav class="nav" id="primary-nav">
                 <ul>{% for link in site.nav %}
                     <li><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}{% if site.pagefind %}
                     <li>
@@ -40,7 +40,7 @@
                     </li>{% endif %}
                 </ul>
             </nav>{% endif %}
-            <button class="hamburger-menu" aria-label="Toggle navigation menu">
+            <button class="hamburger-menu" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
                 <span></span>
                 <span></span>
                 <span></span>
