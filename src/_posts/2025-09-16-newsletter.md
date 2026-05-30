@@ -48,9 +48,9 @@ The outcome? Less time chasing data. More time with children. Earlier identifica
 **Want to help shape an interoperable future?**
 
 - Review and comment on our emerging standards at: https://socialcaredata.github.io/spec/
-- Join the next [MAIS Working Group on 08th October](/updates/mais-2025-10-08). Email [DataStandards-SocialCare@socialfinance.org.uk](mailto:DataStandards-SocialCare@socialfinance.org.uk) to join.
+- Join the next [MAIS Working Group on 08th October](/updates/2025_10_08_mais_swg). Email [DataStandards-SocialCare@socialfinance.org.uk](mailto:DataStandards-SocialCare@socialfinance.org.uk) to join.
 
-**Useful links:** [More on MAIS](/mais); [Person Data Standard Specification](https://github.com/SocialCareData/person-standard); [Data Exchange Standard](https://github.com/SocialCareData/data-exchange-standard).
+**Useful links:** [More on MAIS](/mais_standards_working_group); [Person Data Standard Specification](https://github.com/SocialCareData/person-standard); [Data Exchange Standard](https://github.com/SocialCareData/data-exchange-standard).
 
 
 ### 2. On Our Way to a Shared Standard for Children’s Care Placements
@@ -68,7 +68,7 @@ Our goal is clear: to agree a minimum viable product (MVP) for the standard by N
 
 **Want to get involved?** Join the Working Group by emailing [ivjyot.oberoi@socialfinance.org.uk](mailto:ivjyot.oberoi@socialfinance.org.uk) or sign up for upcoming Deep Dives using the links below.
 
-**Useful links:** [Placements Working Group Sessions](/updates/?category=Placements); [Placements Specification](https://github.com/SocialCareData/placements-standard); [Issues Raised](https://github.com/SocialCareData/placements-standard/issues).
+**Useful links:** [Placements Working Group Sessions](/updates?category=Placements); [Placements Specification](https://github.com/SocialCareData/placements-standard); [Issues Raised](https://github.com/SocialCareData/placements-standard/issues).
 
 
 ### 3. Prioritising What Matters in Adult Social Care

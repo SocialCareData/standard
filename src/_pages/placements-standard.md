@@ -506,7 +506,7 @@ A [SHACL shape](/assets/shacl/shacl-shape.ttl) encodes:
 - conditional checks for the `Other` vocab pairings,
 - and severity-`Warning` cost sense-checks.
 
-A small Node.js [validator](/assets/shacl/validation) loads the shape and example records, applies the [JSON-LD context file](/assets/shacl/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
+A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, applies the [JSON-LD context file](/assets/shacl/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
 
 ## Standard Placement Reporting Spreadsheet
 
