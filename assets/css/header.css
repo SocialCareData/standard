@@ -34,16 +34,27 @@
   margin: 0;
 }
 
-.header .nav a {
+.header .nav a,
+.header .nav .search-button {
   display: block;
   font-size: 1.2rem;
   padding: .4rem .8rem;
   border-radius: 0.25rem;
+  margin: 0 auto;
   text-align: center;
   transition: background-color 0.3s ease;
 }
 
-.header .nav a:hover {
+.header .nav .search-button {
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.header .nav a:hover,
+.header .nav .search-button:hover {
   background-color: var(--background-highlight);
 }
 
@@ -83,6 +94,16 @@
   .header:not(.nojs) .nav a {
     font-size: 1.6rem;
     padding: .8rem 1.6rem;
+  }
+
+  .header:not(.nojs) .nav .search-button {
+    padding: .6rem 1.6rem;
+    width: 100%;
+  }
+
+  .header:not(.nojs) .nav .search-button .icon-text {
+    height: 32px;
+    width: 32px;
   }
 
   /* Transition */

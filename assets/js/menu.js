@@ -17,6 +17,17 @@ document.addEventListener('DOMContentLoaded', function() {
     })
   })
 
+  /* Open Pagefind search modal when the search button is clicked */
+  const searchButton = document.querySelector('.header .search-button')
+  if (searchButton) {
+    searchButton.addEventListener('click', function() {
+      const modal = document.querySelector('pagefind-modal')
+      if (modal) {
+        modal.open()
+      }
+    })
+  }
+
   /* Handle viewport resize to prevent unwanted menu transitions */
   let resizeTimeout;
   window.addEventListener('resize', function() {
