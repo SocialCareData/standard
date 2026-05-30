@@ -6,13 +6,13 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for helping improve the social care interoperability standard.
-        Please describe the content issue as clearly as you can.
+        Thanks for helping improve the social care interoperability standards.
+        Please describe the issue you identified as clearly as you can.
   - type: dropdown
     id: category
     attributes:
       label: Category
-      description: What version of our software are you running?
+      description: What is the issue about?
       options:
         - Placements Standard
         - Use Cases
