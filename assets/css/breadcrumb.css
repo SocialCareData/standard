@@ -17,7 +17,8 @@
   padding: 0;
 }
 
-.breadcrumb a {
+.breadcrumb a,
+.breadcrumb span {
   align-items: center;
   display: flex;
   justify-content: center;
