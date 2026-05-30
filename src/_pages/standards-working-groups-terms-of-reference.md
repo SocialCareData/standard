@@ -5,7 +5,9 @@ breadcrumbs:
     url: /standards_working_groups
 ---
 
-## 1. Introduction/Purpose
+<article class="numbered-headings">
+
+## Introduction/Purpose
 
 This document outlines the Terms of Reference (ToR) for the Standards Working Group(s) established to develop Data Standards for Children’s Social Care Case Management Systems.
 
@@ -14,12 +16,12 @@ Standards Working Group(s) will be convened to ensure standards are developed th
 The Standards Working Group(s) will be responsible for making technical recommendations to the steering group and DfE.
 
 
-## 2. Initiative Overview
+## Initiative Overview
 
 The Data Standards for Children’s Social Care initiative has been established by the DfE to resolve long standing issues with the creation, use and accessibility of data about children in the English social care system. The initiative aims to develop and implement open standards for data to improve data quality and accessibility across child social care systems.
 
 
-## 3. Standards Working Group Responsibilities
+## Standards Working Group Responsibilities
 
 The Standards Working Group will:
 
@@ -30,7 +32,7 @@ The Standards Working Group will:
 - Promote the adoption of the standards, supporting organisations in developing business cases for change.
 
 
-## 4. Membership
+## Membership
 
 The standards working group will include subject matter experts from the:
 
@@ -43,7 +45,7 @@ The Standards Working Group will be a community of delivery. Membership will be 
 The Group will be chaired by a member of the project team.
 
 
-## 6. Meeting Frequency and Format
+## Meeting Frequency and Format
 
 - The Standards Working Group(s) will work collaboratively as a delivery team; they will meet on a schedule required to deliver recommendations.
 - Meetings will be primarily held online, but in-person workshops will be held to co-work on specific products/artefacts. These will be held at a central location, for example, the ODI’s offices at St Pancras.
@@ -51,20 +53,20 @@ The Group will be chaired by a member of the project team.
 - Meetings will be recorded, with a short meeting summary and slides published online.
 
 
-## 7. Roles and Responsibilities of Members
+## Roles and Responsibilities of Members
 
 - Members: Responsible for actively participating in meetings, providing constructive feedback, and contributing to the overall success of the Initiative.
 - Chair: Responsible for chairing meetings, ensuring effective discussions, and facilitating decision-making.
 - Secretariat: Responsible for logistics, and ensuring meetings are recorded and these recordings are shared.
 
 
-## 8. Reporting and Communication
+## Reporting and Communication
 
 - The Chair will provide regular progress reports from the Standards Working
 Group to the Steering Group.
 
 
-## 9. Decision-Making Process
+## Decision-Making Process
 
 - Decisions will be made by consensus. If consensus cannot be reached a simple
 majority vote will be undertaken.
@@ -72,20 +74,22 @@ majority vote will be undertaken.
 - If a consensus cannot be reached the Working Group may ask the Steering Group for direction.
 
 
-## 10. Confidentiality
+## Confidentiality
 
 Outputs from meetings (including papers, minutes and any communications/social media) will be shared openly. These will be published under an open licence (CC-BY). Working Group attendees' consent to be publicly listed as participants in meetings.
 
 
-## 11. Competition Law and Conflicts of Interest
+## Competition Law and Conflicts of Interest
 
 Group members must ensure that in participating in the Group they do not engage in anti-competitive activity. Group members must advise the secretariat if they think there is a risk of [anti-competitive activity](https://www.gov.uk/cartels-price-fixing/types-of-anticompetitive-activity) occurring due to the groups work.
 
 Group members are to declare any direct or indirect interest (whether personal, or by a duty of loyalty to another organisation) that conflicts or might conflict with the interests of this programme at the outset of any discussion on the relevant issue. Declarations of conflicts of interest will be noted in the public record of discussions, together with details of any proposals made.
 
 
-## 12. Duration and Review
+## Duration and Review
 
 - The Reference Group will operate for the duration of the Initiative.
 - These Terms of Reference will be reviewed and updated at least annually.
 - These Terms of Reference should be reviewed before: 10 July 2026.
+
+</article>
