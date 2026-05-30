@@ -8,6 +8,18 @@ body:
       value: |
         Thanks for helping improve the social care interoperability standard.
         Please describe the content issue as clearly as you can.
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What version of our software are you running?
+      options:
+        - Placements Standard
+        - Use Cases
+        - Website Content
+      default: 0
+    validations:
+      required: true
   - type: input
     id: page
     attributes:
