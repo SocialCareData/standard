@@ -24,7 +24,7 @@ jobs:
         run: bundle exec jekyll build
 
       - name: Check internal links
-        run: bundle exec ruby script/check_links.rb _site
+        run: bundle exec ruby ./script/check_internal_links.rb dist
 
       - uses: actions/upload-pages-artifact@v5
         with:
