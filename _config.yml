@@ -12,15 +12,15 @@ defaults:
   -
     scope:
       path: ""
-      type: "pages"
+      type: pages
     values:
-      layout: "default"
+      layout: default
   -
     scope:
       path: ""
-      type: "posts"
+      type: posts
     values:
-      layout: "post"
+      layout: post
 homepage:
   title: Social Care Data
   url: /
@@ -46,7 +46,7 @@ styles:
   output: /assets/css/styles.css
   rouge_theme: github
   minify: true
-excerpt_separator: "<!--more-->"
+excerpt_separator: <!--more-->
 include:
   - _pages
 exclude:
@@ -58,4 +58,4 @@ kramdown:
   parse_block_html: true
   syntax_highlighter: rouge
   syntax_highlighter_opts:
-    css_class: 'highlight'
+    css_class: highlight
