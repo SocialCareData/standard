@@ -4,9 +4,9 @@
         <meta charset="utf-8" />
         <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="{{ site.theme_color }}">{% if page.permalink %}
+        <meta name="theme-color" content="{{ site.theme_color }}">
 
-        <link rel="canonical" href="{{ page.permalink | prepend: site.url }}">{% endif %}
+        <link rel="canonical" href="{{ page.url | absolute_url }}">
 
         <link rel="icon" href="/favicon.ico">
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">
