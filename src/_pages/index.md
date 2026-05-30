@@ -4,7 +4,7 @@ title: Social Care Interoperability Framework
 
 [Social Finance](https://www.socialfinance.org.uk/), [the Open Data Institute](https://theodi.org/) and [Coram](https://www.coram.org.uk/) are working in partnership to develop a social care interoperability framework.
 
-The framework is a set of interoperability standards for children and adult social care (data and protocol). Standard compliance ensures information systems can meaningfully interact with one another without requiring custom translation layers. Concretely, adoption of the social care interoperability framework reduces cost, risks, and unpredictability of cross-system integrations, now and for future [use cases](/use_cases).
+The framework is a set of interoperability standards for children and adult social care (data and protocol). Adoption of the social care interoperability framework reduces the cost, risk, and unpredictability of cross-system integrations, now and for future [use cases](/use_cases).
 
 
 ## Programme Overview

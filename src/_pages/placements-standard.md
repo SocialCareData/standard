@@ -100,7 +100,7 @@ The referral request: how urgently the child needs to be placed, how many siblin
 : How many siblings should the child be placed together with? If child has no siblings/ does not need to be placed with siblings then input 0. _Integer_.
 
 <span id="availability-isPreferredLocationLocal">isPreferredLocationLocal</span>
-: Is the preferred placement location in the same LA as the placing LA?. _Boolean_.
+: Is the preferred placement location in the same LA as the placing LA? _Boolean_.
 
 <span id="availability-outOfLAReason">outOfLAReason</span>
 : If `isPreferredLocationLocal` is `false`, the reason the preferred placement is sought outside the placing LA. See the [Out of LA Reason Taxonomy](/placements_standard#out-of-la-reason-taxonomy).
@@ -151,7 +151,7 @@ The child's needs that the placement must accommodate: communication, cultural, 
 : Whether the placement must accommodate specific cultural needs (e.g. access to places of worship, religious activities).  Allowed values are: `'Required'`, `'Not Required'`, `'Not Known'`, `'Other'`.
 
 <span id="requirements-culturalNeedsOther">culturalNeedsOther</span>
-: Free-text descriptions when `'culturalNeeds` is `'Other'. Multi-valued.  _String_.
+: Free-text descriptions when `culturalNeeds` is `Other`. Multi-valued.  _String_.
 
 <span id="requirements-livingCompanions">livingCompanions</span>
 : Are there any restrictions on who else can live in the same home? Or, would it help to have them living with other young people? See the [Living Arrangement Taxonomy](/placements_standard#living-arrangement-taxonomy).

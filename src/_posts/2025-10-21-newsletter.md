@@ -40,7 +40,7 @@ We’ve now held three Standards Development Working Groups and a Deep Dive to d
 
 
 
-Our most recent Working Group session focused on the standards required for one system to be able to give another enough information to automatically apply its Information Governance (IG) policies - speeding up repsonses by removing the wait for a human review. The approach we developed in that session provides a standard and lightweight means for:
+Our most recent Working Group session focused on the standards required for one system to be able to give another enough information to automatically apply its Information Governance (IG) policies - speeding up responses by removing the wait for a human review. The approach we developed in that session provides a standard and lightweight means for:
 
 - Any controller to provide a machine readable statement of what types of response (if any) are pre-approved and in what circumstances. For e.g., ‘we can confirm whether or not a child has been known to social work at our LA and provide both dates and a social worker’s contact details, if request is demonstrably from another LA and if they have confirmed it is made in the context of S47 enquiries’.
 - A system to make such a request, including the necessary assertions and evidence.

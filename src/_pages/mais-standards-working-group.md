@@ -5,14 +5,14 @@ breadcrumbs:
     url: /standards_working_groups
 ---
 
-Whilst we have broader ambitions for the programme as a whole, we are focussing in the first instance on a narrowly scoped set of standards designed to unblock the use of [single view systems](https://en.wikipedia.org/wiki/Single_customer_view), as an aid to [multi-agency information sharing](https://www.gov.uk/government/publications/improving-multi-agency-information-sharing).
+Whilst we have broader ambitions for the programme as a whole, we are focusing in the first instance on a narrowly scoped set of standards designed to unblock the use of [single view systems](https://en.wikipedia.org/wiki/Single_customer_view), as an aid to [multi-agency information sharing](https://www.gov.uk/government/publications/improving-multi-agency-information-sharing).
 
 Single view systems are those which allow a professional to see on one screen information from multiple agencies. An example is Stockport council’s [Family Context](https://www.stockport.gov.uk/news/stockport-council-to-showcase-award-winning-family-context-tool) tool. Family Context is used by social work and child protection professionals as well as in several regional [shared care records](https://transform.england.nhs.uk/information-governance/guidance/summary-of-information-governance-framework-shared-care-records/) used by health and care professionals.
 
 The standards we will create include:
 
 * A Data Exchange Standard which will define how data is exchanged between systems
-* A Person Standard which will provide a model for the data collected about individuals, focussing on:
+* A Person Standard which will provide a model for the data collected about individuals, focusing on:
   * data required to distinguish one person from another, and
   * data required to describe relationships between people.
 * A Social Care Taxonomy which will define key concepts in children’s and adults' social care, starting with concepts needed to support the core use cases for single view systems.
