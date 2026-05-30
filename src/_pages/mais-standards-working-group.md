@@ -20,7 +20,7 @@ The standards we will create include:
 
 ## A serious and longstanding problem
 
-In many serious case reviews, following the death or serious injury of a child, poor information sharing between agencies that support children and families is cited as a key failing. The [Independent Review of Children’s Social Care](https://www.gov.uk/government/groups/independent-review-of-childrens-social-care), published in May 2022, highlighted technological barriers as a key contributor to challenges in multi-agency information sharing, with clunky IT systems making it difficult to: surface, review, and then share critical information. The national review into the deaths of Arthur Labinjo-Hughes and Star Hobson, published in 2022, likewise drew attention to this issue. In its 2024 manifesto, the Labour party pledged to improve data-sharing across services, to better support children and families who too often “fall through the cracks of public services”.
+In many serious case reviews, following the death or serious injury of a child, poor information sharing between agencies that support children and families is cited as a key failing. The [Independent Review of Children’s Social Care](https://www.gov.uk/government/groups/independent-review-of-childrens-social-care), published in May 2022, highlighted technological barriers as a key contributor to challenges in multi-agency information sharing, with clunky IT systems making it difficult to surface, review, and then share critical information. The national review into the deaths of Arthur Labinjo-Hughes and Star Hobson, published in 2022, likewise drew attention to this issue. In its 2024 manifesto, the Labour Party pledged to improve data-sharing across services, to better support children and families who too often “fall through the cracks of public services”.
 
 
 ## Solutions have long existed, but are not scaling
@@ -42,7 +42,7 @@ A key barrier is the bespoke nature of work taking place between data-sharing pa
 2. defining how data will be exchanged between systems, and
 3. drafting and agreeing on [data sharing agreements](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/data-sharing-a-code-of-practice/data-sharing-agreements/) and [data protection impact assessments](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/guide-to-accountability-and-governance/data-protection-impact-assessments/).
 
-This work required agreeing upon and implementing data sharing programmes, and thus getting a functioning single view system, is unnecessarily slow, expensive, and uncertain.
+This work — required to agree upon and implement data sharing programmes, and thus to get a functioning single view system — is unnecessarily slow, expensive, and uncertain.
 
 We tackle this by standardising the process with key partners within social care. This is part of the value proposition of the social care interoperability framework.
 

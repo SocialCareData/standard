@@ -45,7 +45,7 @@ We made several assumptions in the design of the proposed data standard:
 
 - Placement teams rather than social workers or finance teams will either directly enter or ‘own’ the data being proposed in the standard. In cases where they are not directly entering the data (e.g. because they are taking it from a referral form), the placement teams would be responsible for the data’s fidelity to the standard.
 - The additional work for a placement worker of entering this data is approximately 90 seconds (based on initial pilots of this data model).
-- While total cost agreed at IPA may sometimes be an inaccurate representation of true cost, it is ‘accurate enough’ to enable useful life-for-like cost comparisons and regional cost analysis.
+- While total cost agreed at IPA may sometimes be an inaccurate representation of true cost, it is ‘accurate enough’ to enable useful like-for-like cost comparisons and regional cost analysis.
 
 ### Design Process
 
@@ -67,17 +67,17 @@ The placements data standard was subsequently reviewed and refined by a cross se
 
 **Care market costs are unsustainable and child outcomes poor.**
 
-The market for children’s social care placements—that is, the accommodation and support provided to children when they are taken into the care of the local authority—has been described by the [Local Government Association](https://www.local.gov.uk/about/news/childrens-social-care-placements-costing-ps10000-plus-rise-sharply-five-years-new-lga) as “broken”. There is evidence of residential care costs increasing by c. 70% on average over the last 5 years. Further around half of children in residential care nationally are placed more than 20 miles from home.
+The market for children’s social care placements—that is, the accommodation and support provided to children when they are taken into the care of the local authority—has been described by the [Local Government Association](https://www.local.gov.uk/about/news/childrens-social-care-placements-costing-ps10000-plus-rise-sharply-five-years-new-lga) as “broken”. There is evidence of residential care costs increasing by c. 70% on average over the last 5 years. Further, around half of children in residential care nationally are placed more than 20 miles from home.
 
 **Market intelligence is key but hard without a shared data language.**
 
 Managing this market—essentially ensuring that the right provision is available in the right place and at the right notice—requires market intelligence. LAs must have a clear picture of supply and demand in order to be able to tell providers what new provision they would be likely to pay for, or to make decisions about where to invest their own funds, or to guarantee payments.
 
-Although some solutions may be local, there is consensus that regional market coordination is key given the regional or national scale of operations of many residential providers. Regional coordination requires regional intelligence about where and what additional supply . Few regions are able to provide this currently. Although technical and legal barriers exist they are increasingly being solved. The more fundamental issue is a lack of the shared data ‘language’ between neighbouring LAs that would enable ‘like-for-like’ comparison and analysis.
+Although some solutions may be local, there is consensus that regional market coordination is key given the regional or national scale of operations of many residential providers. Regional coordination requires regional intelligence about where additional supply is needed, and of what type. Few regions are able to provide this currently. Although technical and legal barriers exist they are increasingly being solved. The more fundamental issue is a lack of the shared data ‘language’ between neighbouring LAs that would enable ‘like-for-like’ comparison and analysis.
 
-Key items like child needs, determinants of placement availability, services provided, and costs of placements tend to captured in different ways by different LAs, making it hard to answer fundamental questions about regional placement sufficiency.
+Key items like child needs, determinants of placement availability, services provided, and costs of placements tend to be captured in different ways by different LAs, making it hard to answer fundamental questions about regional placement sufficiency.
 
-The placement standard aims to solve that problem by creating a standard way to describing placements which allows any region to answer its sufficiency questions, whilst placing the smallest burden on busy placement teams, and representing the smallest cost of change.
+The placement standard aims to solve that problem by creating a standard way to describe placements that allows any region to answer its sufficiency questions, whilst placing the smallest burden on busy placement teams, and representing the smallest cost of change.
 
 ### Other approaches
 
@@ -87,16 +87,16 @@ Local Authorities already gather standardised statutory data (e.g. the CLA Censu
 - Which demographic characteristics are more likely to be associated with being placed far from home?
 - Which providers are being placed with most often?
 
-Further, some regions are developing their own standardised placement cost data models to start generating regional insight into market cost trends, and many LAs are utilising software solutions like BERRI, CANs and Care Cubed to build a database of costs, placement needs and outcome data. The table below provides an overview of the data models we are aware of.
+Further, some regions are developing their own standardised placement cost data models to start generating regional insight into market cost trends, and many LAs are utilising software solutions like BERRI, CANS and Care Cubed to build a database of costs, placement needs and outcome data. The table below provides an overview of the data models we are aware of.
 
 <p><img src="/assets/img/placements/data-models-overview.png" alt="Overview of Data Models" title="Overview of Data Models" /></p>
-<small>*\* Determinants of placement availability refers to factors that are likely to dictate whether a foster carer or provider are able to accept a referral and at what price. This includes things like home adaptations required, additional support requirements, risks etc.*</small>
+<small>*\* Determinants of placement availability refers to factors that are likely to dictate whether a foster carer or provider is able to accept a referral and at what price. This includes things like home adaptations required, additional support requirements, risks etc.*</small>
 
 Although, as the table above shows, there are many models already gathering placement cost data, and some gathering other types of data necessary to meaningful regional sufficiency analysis, we are aware of none that gather all this data in a way that readily enables quantitative insight into where key sufficiency gaps are. The data models we are aware of (above) that capture rich insight on determinants of placement availability, preferred placement and child outcomes (BERRI, CANS and IMPOWER) are models designed to be used by social workers, rather than placement teams. While data of this sort gathered by social workers is invaluable for individual care planning, it is not designed primarily to support aggregate analysis or enable meaningful ‘apples for apples’ comparison with neighbours. This is because the data is largely qualitative and many key fields such as needs and risks are largely uncategorised.
 
 ## Out of Scope
 
-**The standard will  *not***:
+**The standard will *not***:
 
 - Preclude LAs from gathering additional data fields to suit local needs
 - Impose a process for how the data is gathered in each LA (i.e. some LAs may embed these fields in a CMS referral form, others may gather this in excel etc)

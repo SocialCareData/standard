@@ -22,21 +22,21 @@ Improved analysis
 : Enabling analysis of interactions between services. For example, to understand the impact of timely [children and adolescent mental health services (CAMHS)](https://www.nhs.uk/mental-health/children-and-young-adults/mental-health-support/mental-health-services/) provision (or its absence) on children's journeys into care.
 
 Reduced administration
-: Enabling easier systems integration with Case Management Systems (CMSs) via standard interfaces. For example, to let social workers use productivity-enhancing tools that help creating routine exchange notes and notifications.
+: Enabling easier systems integration with Case Management Systems (CMSs) via standard interfaces. For example, to let social workers use productivity-enhancing tools that help create routine exchange notes and notifications.
 
 The social care interoperability framework standards will also enable normalised approaches to data sharing which implement privacy by design and by default (as per [ICO guidance](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/guide-to-accountability-and-governance/data-protection-by-design-and-by-default/)).
 
 
 ## Timescales and Initial Priorities
 
-The programme will run for three years, from April 2025 to March 2028 by which time we will have implemented a first set of standards, and created the structures for the work to continue.
+The programme will run for three years, from April 2025 to March 2028, by which time we will have implemented a first set of standards, and created the structures for the work to continue.
 
 The first standards developed will focus on two areas:
 
 1. [Multi-agency information sharing (MAIS)](/mais_standards_working_group)
 1. [Children's social care placements](/placements_standards_working_group)
 
-For each of these we expect to have draft standards ready for consultation in September 2025, in preparation for pilot programmes in January 2026.
+For each of these, we expect to have draft standards ready for consultation in September 2025, in preparation for pilot programmes in January 2026.
 
 
 ## Governance and Openness

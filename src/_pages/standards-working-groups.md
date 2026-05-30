@@ -5,20 +5,20 @@ title: Standards Working Groups
 
 ## What is a standards working group?
 
-The aim of a standards working group is to ensure standards are developed that:​
+The aim of a standards working group is to ensure standards are developed that:
 
-- Meet the needs of all stakeholders.​
-- Directly address requirements identified.​
-- Are within the guardrails set by the steering group.​
+- Meet the needs of all stakeholders.
+- Directly address requirements identified.
+- Are within the guardrails set by the steering group.
 
 
-The Standards Working Groups will: ​
+The Standards Working Groups will:
 
-- Own the enterprise data architecture and technical roadmaps required to enable open data standards to be implemented and adopted by stakeholders. ​
-- Research, recommend or create data standards that respond to the use cases. ​
-- Commission the technical infrastructure required to implement the standards. ​
-- Collaborate to test the standards and infrastructure delivered by the standardisation initiative to ensure it is operable and performant. ​
-- Promote the adoption of the standards, supporting organisations in developing business cases for change. ​
+- Own the enterprise data architecture and technical roadmaps required to enable open data standards to be implemented and adopted by stakeholders.
+- Research, recommend or create data standards that respond to the use cases.
+- Commission the technical infrastructure required to implement the standards.
+- Collaborate to test the standards and infrastructure delivered by the standardisation initiative to ensure it is operable and performant.
+- Promote the adoption of the standards, supporting organisations in developing business cases for change.
 
 
 ## Participation

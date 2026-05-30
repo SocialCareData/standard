@@ -18,7 +18,7 @@ The Standards Working Group(s) will be responsible for making technical recommen
 
 ## Initiative Overview
 
-The Data Standards for Children’s Social Care initiative has been established by the DfE to resolve long standing issues with the creation, use and accessibility of data about children in the English social care system. The initiative aims to develop and implement open standards for data to improve data quality and accessibility across child social care systems.
+The Data Standards for Children’s Social Care initiative has been established by the DfE to resolve long-standing issues with the creation, use and accessibility of data about children in the English social care system. The initiative aims to develop and implement open standards for data to improve data quality and accessibility across child social care systems.
 
 
 ## Standards Working Group Responsibilities
@@ -40,7 +40,7 @@ The standards working group will include subject matter experts from the:
 1. Users - organisations who will be impacted by the standards
 1. Open Data Standards experts – From the CSC sector and associated sectors such as health and education. Including standards experts from within relevant government departments.
 
-The Standards Working Group will be a community of delivery. Membership will be by open, but members will be required to register and commit time to the work of the group. The group will work openly publishing minutes of meetings, drafts products and other artefacts.
+The Standards Working Group will be a community of delivery. Membership will be open, but members will be required to register and commit time to the work of the group. The group will work openly, publishing minutes of meetings, draft products and other artefacts.
 
 The Group will be chaired by a member of the project team.
 
@@ -62,14 +62,13 @@ The Group will be chaired by a member of the project team.
 
 ## Reporting and Communication
 
-- The Chair will provide regular progress reports from the Standards Working
-Group to the Steering Group.
+- The Chair will provide regular progress reports from the Standards Working Group to the Steering Group.
 
 
 ## Decision-Making Process
 
-- Decisions will be made by consensus. If consensus cannot be reached a simple
-majority vote will be undertaken.
+- Decisions will be made by consensus. If consensus cannot be reached, a simple
+majority vote will be held.
 - Any dissenting opinions will be recorded in the meeting minutes.
 - If a consensus cannot be reached the Working Group may ask the Steering Group for direction.
 
@@ -81,15 +80,15 @@ Outputs from meetings (including papers, minutes and any communications/social m
 
 ## Competition Law and Conflicts of Interest
 
-Group members must ensure that in participating in the Group they do not engage in anti-competitive activity. Group members must advise the secretariat if they think there is a risk of [anti-competitive activity](https://www.gov.uk/cartels-price-fixing/types-of-anticompetitive-activity) occurring due to the groups work.
+Group members must ensure that in participating in the Group they do not engage in anti-competitive activity. Group members must advise the secretariat if they think there is a risk of [anti-competitive activity](https://www.gov.uk/cartels-price-fixing/types-of-anticompetitive-activity) occurring due to the group's work.
 
 Group members are to declare any direct or indirect interest (whether personal, or by a duty of loyalty to another organisation) that conflicts or might conflict with the interests of this programme at the outset of any discussion on the relevant issue. Declarations of conflicts of interest will be noted in the public record of discussions, together with details of any proposals made.
 
 
 ## Duration and Review
 
-- The Reference Group will operate for the duration of the Initiative.
+- The Standards Working Group will operate for the duration of the Initiative.
 - These Terms of Reference will be reviewed and updated at least annually.
-- These Terms of Reference should be reviewed before: 10 July 2026.
+- These Terms of Reference should be reviewed before 10 July 2026.
 
 </article>

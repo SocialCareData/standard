@@ -19,7 +19,7 @@ breadcrumbs:
 
 ## Introduction
 
-The children's social care placements standard helps regions to answer its sufficiency questions by establishing a common data model to gather data about placements.
+The children's social care placements standard helps regions to answer their sufficiency questions by establishing a common data model to gather data about placements.
 
 
 ## Data Model
@@ -247,7 +247,7 @@ Records the risks the child is exposed to (six categories) and the risks the chi
 : Risk of going missing. Allowed values are: `'No known risk'`, `'Risk Present'`.
 
 <span id="risk-riskSexualExploitation">riskSexualExploitation</span>
-: Risk of sexual exploitation.
+: Risk of sexual exploitation. Allowed values are: `'No known risk'`, `'Risk Present'`.
 
 ##### Risks to others or property
 
@@ -264,7 +264,7 @@ Records the risks the child is exposed to (six categories) and the risks the chi
 : Risk of harm to animals. Allowed values are: `'No known risk'`, `'Risk Present'`.
 
 <span id="risk-riskToOthersCriminal">riskToOthersCriminal</span>
-: Risk of criminal exploitation for others in the home. Allowed values are: `'No known risk'`, `'Risk Present'`.
+: Risk of criminal exploitation of others in the home. Allowed values are: `'No known risk'`, `'Risk Present'`.
 
 ##### Free-text catch-alls
 
@@ -318,7 +318,7 @@ This should not include any additional costs incurred to meet the specific needs
 
 Costs incurred over and above the core cost to meet the specific and potentially changing needs of a child or young person.
 
-These may include: Increased staff ratios (e.g. 1:1 or 2:1 support) during the day or overnight; Additional staffing such as sleep-in staff or waking night staff; Bed blocking arrangements; Transport provision beyond what is included in the core contract; Therapy commissioned specifically for a child, which is not part of the standard provision within the home; Tutoring outside a formal education placement, often temporary until a registered school placement is secured; Any other cost not routinely covered within the core placement cost that the local authority agrees to fund to meet the child’s needs. Optional. _Integer_.
+These may include: Increased staff ratios (e.g. 1:1 or 2:1 support) during the day or overnight; Additional staffing such as sleep-in staff or waking night staff; Bed-blocking arrangements; Transport provision beyond what is included in the core contract; Therapy commissioned specifically for a child, which is not part of the standard provision within the home; Tutoring outside a formal education placement, often temporary until a registered school placement is secured; Any other cost not routinely covered within the core placement cost that the local authority agrees to fund to meet the child’s needs. Optional. _Integer_.
 
 <span id="actual-educationWeeklyCost">educationWeeklyCost</span>
 : What is the total weekly education cost of the placement?
@@ -329,9 +329,9 @@ This should be recorded when the placement includes both care and registered edu
 : Any weekly placement costs that do not clearly fall within the core, additional-support or education categories. Optional. _Integer_.
 
 <span id="actual-totalWeeklyCost">totalWeeklyCost</span>
-: Total weekly cost (actual weekly fee paid)
+: Total weekly cost (actual weekly fee paid).
 
-What is the total weekly fee associated with the placement? (excluding VAT). _Integer_.
+The total weekly fee associated with the placement, excluding VAT. _Integer_.
 
 <span id="actual-placementLocation">placementLocation</span>
 : First 3-4 characters of the postcode for the actual placement location (e.g. `TA3`, `BS10`). Captured in addition to the provider URN to ensure location is recorded for non-registered placements. _String_.
@@ -340,7 +340,7 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
 : Whether the actual placement location was a preferred location. _Boolean_.
 
 <span id="actual-isEducationContinuous">isEducationContinuous</span>
-: Was child's education disrupted as a result of this placement? _Boolean_.
+: Was the child's education continuous through this placement (i.e. not disrupted as a result of the placement)? _Boolean_.
 
 <span id="actual-providerURN">providerURN</span>
 : Provider URN linked to Ofsted registration. _String_.
@@ -368,7 +368,7 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
   "isEducationContinuous": false,
   "providerURN": "ABCD10293002",
   "siblingsPlacedTogether": 1,
-  "placementType": "Residential",
+  "placementType": "Residential"
 }
 {% endhighlight %}
 </div>
