@@ -47,7 +47,7 @@ body {
 
 h1 {
   font-weight: 800;
-  margin-top: 0;
+  margin: var(--main-margin-narrow);
 }
 
 h2, h3, h4, h5, h6 {
@@ -302,4 +302,9 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
 .numbered-headings h4::before {
   counter-increment: h4;
   content: counter(h2) "." counter(h3) "." counter(h4) " ";
+}
+
+.publish-dates {
+  font-style: italic;
+  margin: var(--main-margin-narrow);
 }
