@@ -1,6 +1,9 @@
 ---
 permalink: /2025-07-29-placements-swg
 title: Placements Standards Working Group Meeting 1
+description: Welcome to the placements standards working group.
+author:
+  name: Ivjyot Oberoi
 categories:
   - Working Group
   - Placements

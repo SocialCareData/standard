@@ -1,6 +1,9 @@
 ---
 permalink: /2025-09-22-mais-information-governance
 title: MAIS Information Governance Deep Dive
+description: Exploring governance rule for the s47 use case and list of obligations/audit fields to satisfy IG and explainability.
+author:
+  name: Andrew Newman
 categories:
   - MAIS
 breadcrumbs:
@@ -38,7 +41,7 @@ Assume matching methodologies are adequate to return match, possible matches, no
 
 Today’s output:
 
-- Draft computable information governance rule for the s47 use case
+- Draft computable information governance rule for the s47 use case.
 - Draft list of obligations/audit fields to satisfy IG and explainability.
 
 #### Typical s47 scenario walk through

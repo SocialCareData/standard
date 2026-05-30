@@ -1,6 +1,9 @@
 ---
 permalink: /2025-09-16-newsletter
 title: Newsletter 1 - Hello from the team!
+description: We’re excited to launch the very first edition of the Data Standards for Social Care newsletter.
+author:
+  name: The Data Standards for Social Care Team
 categories:
   - Newsletter
 breadcrumbs:
