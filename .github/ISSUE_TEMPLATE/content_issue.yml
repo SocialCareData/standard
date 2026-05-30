@@ -1,0 +1,39 @@
+name: Content / standard issue
+description: Report a problem with the social care interoperability standard, its content, or documentation.
+title: "[Content]: "
+labels: ["content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve the social care interoperability standard.
+        Please describe the content issue as clearly as you can.
+  - type: input
+    id: page
+    attributes:
+      label: Affected page or section
+      description: URL on https://standard.socialcaredata.io or path in the repo (e.g. `_posts/2024-01-01-example.md`).
+      placeholder: https://standard.socialcaredata.io/use_cases
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong?
+      description: Describe the issue — incorrect, unclear, out of date, missing context, broken example, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested change
+      description: If you have a concrete proposal for the new wording or content, share it here.
+    validations:
+      required: false
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Links to specs, prior discussions, related issues, or authoritative sources.
+    validations:
+      required: false
