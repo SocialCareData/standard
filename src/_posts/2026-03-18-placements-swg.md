@@ -1,5 +1,5 @@
 ---
-permalink: /2026-03-18-placements-swg
+permalink: /2026_03_18_placements_swg
 title: Placements Standards Working Group Meeting 4
 description: This meeting convened stakeholders to review progress and next steps in the rollout of the Placement Data Standard for children’s social care, focusing on regional pilots, technical design issues, and future governance. Participants discussed learnings from recent implementations, addressed outstanding design challenges, and considered strategies for scaling and sustaining the standard nationally. The session emphasised collaborative problem-solving, integration with broader sector reforms, and the importance of ongoing stakeholder engagement. The group also explored mechanisms for incentivising adoption and ensuring the standard remains relevant as sector needs evolve.
 categories:

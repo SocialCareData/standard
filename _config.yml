@@ -8,6 +8,8 @@ theme_color: "#0f4b69"
 newsletter: https://github.us15.list-manage.com/subscribe?u=cc2fe06b8de4efcacfb9a9e18&id=410af499ef
 github_username: socialcaredata
 repository: socialcaredata/standard
+source: src
+destination: dist
 defaults:
   -
     scope:

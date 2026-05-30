@@ -1,6 +1,7 @@
+_site
+dist
 .DS_STORE
 .jekyll-cache
 .jekyll-metadata
 Gemfile.lock
-_site
 *.local
