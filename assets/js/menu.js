@@ -8,6 +8,17 @@ document.addEventListener('DOMContentLoaded', function() {
     hamburgerButton.classList.toggle('active')
   })
 
+  /* Open Pagefind search modal when the search button is clicked */
+  const searchButton = document.querySelector('.header .search-button')
+  if (searchButton) {
+    searchButton.addEventListener('click', function() {
+      const modal = document.querySelector('pagefind-modal')
+      if (modal) {
+        modal.open()
+      }
+    })
+  }
+
   /* Close menu when clicking on a link */
   const navLinks = document.querySelectorAll('.header .nav a')
   navLinks.forEach(link => {
