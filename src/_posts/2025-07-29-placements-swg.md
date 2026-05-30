@@ -1,5 +1,4 @@
 ---
-permalink: /2025_07_29_placements_swg
 title: Placements Standards Working Group Meeting 1
 description: Welcome to the placements standards working group.
 author:

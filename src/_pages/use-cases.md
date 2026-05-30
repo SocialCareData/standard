@@ -1,5 +1,4 @@
 ---
-permalink: /use_cases
 title: Use Cases
 ---
 

@@ -1,5 +1,4 @@
 ---
-permalink: /publications
 title: Publications
 ---
 

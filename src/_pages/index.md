@@ -1,5 +1,4 @@
 ---
-permalink: /
 title: Social Care Interoperability Framework
 ---
 

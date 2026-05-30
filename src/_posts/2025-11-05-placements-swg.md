@@ -1,5 +1,4 @@
 ---
-permalink: /2025_11_05_placements_swg
 title: Placements Standards Working Group Meeting 3
 description: Programme Overview, Objectives and Design Decisions on Placement Data
 author:

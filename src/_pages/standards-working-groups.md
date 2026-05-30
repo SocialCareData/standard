@@ -1,5 +1,4 @@
 ---
-permalink: /standards_working_groups
 title: Standards Working Groups
 ---
 

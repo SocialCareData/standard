@@ -1,5 +1,4 @@
 ---
-permalink: /2025_09_17_placements_swg
 title: Placements Standards Working Group Meeting 2
 description: Overview of the three-year programme to develop data and technological standards for the children's social care sector
 author:

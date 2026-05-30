@@ -1,5 +1,4 @@
 ---
-permalink: /mais_standards_working_group
 title: Multi-Agency Information Sharing (MAIS)
 breadcrumbs:
   - title: Standards Working Groups

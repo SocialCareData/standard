@@ -1,5 +1,4 @@
 ---
-permalink: /use_case_children_social_care_placements
 title: Children's Social Care Placements Use Case
 breadcrumbs:
   - title: Use Cases

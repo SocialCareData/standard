@@ -1,5 +1,4 @@
 ---
-permalink: /2025_10_21_newsletter
 title: Newsletter 2 - Rapid Progress in the Southwest pilot
 description: This edition shares updates from each strand of the programme - Placements, Multi-Agency Information Sharing (MAIS), and Adult Social Care (ASC).
 author:

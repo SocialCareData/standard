@@ -1,5 +1,4 @@
 ---
-permalink: /standards_working_groups_terms_of_reference
 title: Standards Working Groups Terms of Reference
 breadcrumbs:
   - title: Standards Working Groups
