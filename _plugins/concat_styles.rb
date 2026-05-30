@@ -12,8 +12,15 @@ module Jekyll
     end
 
     def write(dest)
+      out = File.join(dest, @dir, @name)
+      FileUtils.mkdir_p(File.dirname(out))
+      File.write(out, build_content)
+      true
+    end
+
+    def build_content(extra_files = [])
       source_dir = File.join(@site.source, @input_dir)
-      css_files = Dir.glob(File.join(source_dir, '**', '*.css')).sort
+      css_files = Dir.glob(File.join(source_dir, '**', '*.css')).sort + Array(extra_files)
 
       content = css_files.map { |f| File.read(f) }.join("\n")
 
@@ -30,10 +37,11 @@ module Jekyll
           .strip
       end
 
-      out = File.join(dest, @dir, @name)
-      FileUtils.mkdir_p(File.dirname(out))
-      File.write(out, content)
-      true
+      content
+    end
+
+    def output_path(dest)
+      File.join(dest, @dir, @name)
     end
 
     def modified?
