@@ -151,7 +151,7 @@ The child's needs that the placement must accommodate: communication, cultural, 
 : Whether the placement must accommodate specific cultural needs (e.g. access to places of worship, religious activities).  Allowed values are: `'Required'`, `'Not Required'`, `'Not Known'`, `'Other'`.
 
 <span id="requirements-culturalNeedsOther">culturalNeedsOther</span>
-: Free-text descriptions when `culturalNeeds` is `'Other'`. Multi-valued.  _String_.
+: Free-text descriptions when `culturalNeeds` is `Other`. Multi-valued.  _String_.
 
 <span id="requirements-livingCompanions">livingCompanions</span>
 : Are there any restrictions on who else can live in the same home? Or, would it help to have them living with other young people? See the [Living Arrangement Taxonomy](/placements_standard#living-arrangement-taxonomy).
