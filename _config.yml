@@ -1,11 +1,28 @@
 # Jekyll Configuration
 title: Social Care Interoperability Framework
-base_url: https://standard.socialcaredata.io
+url: https://standard.socialcaredata.io
 description: Knowledge base and standards development for the social care interoperability framework
+lang: en
+locale: en_GB
 theme_color: "#0f4b69"
 newsletter: https://github.us15.list-manage.com/subscribe?u=cc2fe06b8de4efcacfb9a9e18&id=410af499ef
 github_username: socialcaredata
 repository: socialcaredata/standard
+source: src
+destination: dist
+defaults:
+  -
+    scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+  -
+    scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
 homepage:
   title: Social Care Data
   url: /
@@ -31,7 +48,7 @@ styles:
   output: /assets/css/styles.css
   rouge_theme: github
   minify: true
-excerpt_separator: "<!--more-->"
+excerpt_separator: <!--more-->
 include:
   - _pages
 exclude:
@@ -43,5 +60,7 @@ kramdown:
   parse_block_html: true
   syntax_highlighter: rouge
   syntax_highlighter_opts:
-    css_class: 'highlight'
-rouge_theme: github
+    css_class: highlight
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
