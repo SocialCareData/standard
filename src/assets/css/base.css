@@ -308,3 +308,20 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
   font-style: italic;
   margin: var(--main-margin-narrow);
 }
+
+.table-bordered {
+border-collapse: collapse;
+width: 95%;
+margin: 15px 0;
+}
+
+.table-bordered th,
+.table-bordered td {
+border: 1px solid #cccccc;
+padding: 10px;
+text-align: left;
+}
+
+.table-bordered th {
+background-color: #f5f5f5;
+}
