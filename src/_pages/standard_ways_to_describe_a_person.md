@@ -1,5 +1,5 @@
 ---
-title: Comparing specifications: Standard ways to describe a Person
+title: Standard ways to describe a Person
 tags:
   - Interoperability
 ---
@@ -60,7 +60,7 @@ In the GET service, a user submits a query built from what is known about a pers
 
 FIND and FETCH would then use the returned NHS number, as a single unique identifier, to query health, police, and social care systems across the UK in order to identify where the subject person is already known.
 
-## Comparing specs
+## Comparing specifications
 
 GET's current specification for describing a `Person` is based on the PDS's query pattern, which is itself based on FHIR. Our Person specification is also FHIR-compatible — a subset of its properties can be used to query the NHS PDS directly.
 
