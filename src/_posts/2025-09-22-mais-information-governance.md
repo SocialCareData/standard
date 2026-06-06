@@ -3,7 +3,7 @@ title: MAIS Information Governance Deep Dive
 description: Exploring governance rule for the s47 use case and list of obligations/audit fields to satisfy IG and explainability.
 author:
   name: Andrew Newman
-categories:
+tags:
   - MAIS
 breadcrumbs:
   - title: Updates

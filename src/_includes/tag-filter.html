@@ -1,0 +1,30 @@
+{% assign _tf_tags = "" | split: "" %}
+{% for _tf_item in include.items %}
+  {% for _tf_tag in _tf_item.tags %}
+    {% unless _tf_tags contains _tf_tag %}
+      {% if include.exclude_tag == _tf_tag %}{% else %}
+        {% assign _tf_tags = _tf_tags | push: _tf_tag %}
+      {% endif %}
+    {% endunless %}
+  {% endfor %}
+{% endfor %}
+{% assign _tf_sorted = _tf_tags | sort %}
+
+{% unless _tf_sorted.size == 0 %}
+<nav class="tag-filter">
+  <a class="tag" href="{{ page.permalink }}">All</a>{% for _tf_tag in _tf_sorted %}<a class="tag" href="{{ page.permalink }}?tag={{ _tf_tag | url_encode }}">{{ _tf_tag }}</a>{% endfor %}
+</nav>
+{% endunless %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const params = new URLSearchParams(window.location.search);
+    const tag = params.get('tag');
+    if (tag) {
+      document.querySelectorAll('.article-list li').forEach(function (li) {
+        const tags = li.getAttribute('data-tags').split(',');
+        li.style.display = tags.includes(tag) ? '' : 'none';
+      });
+    }
+  });
+</script>

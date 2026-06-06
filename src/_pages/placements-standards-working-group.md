@@ -3,6 +3,9 @@ title: Children's Social Care Placements
 breadcrumbs:
   - title: Standards Working Groups
     url: /standards_working_groups
+tags:
+  - Placements
+  - Working Group
 ---
 
 We will develop a standard which:

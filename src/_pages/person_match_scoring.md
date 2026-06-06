@@ -1,6 +1,7 @@
 ---
 title: 'Person Matching Implementation Guide'
-regenerate: true
+tags:
+  - Interoperability
 ---
 
 <nav class="toc numbered-toc">

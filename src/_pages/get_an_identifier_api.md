@@ -1,6 +1,7 @@
 ---
-title: 'Comparing specifications: Standard ways to describe a Person'
-regenerate: true
+title: Comparing specifications: Standard ways to describe a Person
+tags:
+  - Interoperability
 ---
 
 <nav class="toc numbered-toc">

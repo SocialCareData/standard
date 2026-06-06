@@ -1,5 +1,8 @@
 ---
 title: Standards Working Groups
+tags:
+  - Programme
+  - Working Group
 ---
 
 

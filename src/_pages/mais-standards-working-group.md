@@ -3,6 +3,9 @@ title: Multi-Agency Information Sharing (MAIS)
 breadcrumbs:
   - title: Standards Working Groups
     url: /standards_working_groups
+tags:
+  - Working Group
+  - MAIS
 ---
 
 Whilst we have broader ambitions for the programme as a whole, we are focusing in the first instance on a narrowly scoped set of standards designed to unblock the use of [single view systems](https://en.wikipedia.org/wiki/Single_customer_view), as an aid to [multi-agency information sharing](https://www.gov.uk/government/publications/improving-multi-agency-information-sharing).

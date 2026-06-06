@@ -3,6 +3,10 @@ title: Children's Social Care Placements Use Case
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
+tags:
+  - Placements
+  - Use Case
+reference: UC1
 ---
 
 

@@ -3,7 +3,7 @@ title: Placements Standards Working Group Meeting 3
 description: Programme Overview, Objectives and Design Decisions on Placement Data
 author:
   name: Ivjyot Oberoi
-categories:
+tags:
   - Working Group
   - Placements
 breadcrumbs:

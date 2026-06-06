@@ -1,0 +1,1 @@
+{% assign _pt_tags = include.item.tags %}{% if _pt_tags.size > 0 %}<span class="tags">{% for _pt_tag in _pt_tags %}{% if include.exclude_tag == _pt_tag %}{% else %}<a class="tag" href="{{ page.permalink }}?tag={{ _pt_tag | url_encode }}">{{ _pt_tag }}</a>{% unless forloop.last %} {% endunless %}{% endif %}{% endfor %}</span>{% endif %}

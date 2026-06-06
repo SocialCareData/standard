@@ -1,0 +1,41 @@
+Interoperability:
+  - name: "Matthieu Bosquet"
+    github: "matthieubosquet"
+    current: true
+MAIS:
+  - name: "Harry Angus"
+    github: ""
+    current: true
+Newsletter:
+  - name: "Abida Noshin"
+    github: ""
+    current: true
+Placements:
+  - name: "Madeline Goldie"
+    github: ""
+    current: true
+  - name: "Ivjyot Oberoy"
+    github: "ivjyot-oberoi"
+    current: true
+Programme:
+  - name: "Tom Rintoul"
+    github: ""
+    current: true
+Publication:
+  - name: "Andrew Newman"
+    github: ""
+    current: true
+  - name: "Matthieu Bosquet"
+    github: "matthieubosquet"
+    current: true
+Use Case:
+  - name: "Charlotte Moberly"
+    github: "charlottemoberly"
+    current: true
+Working Group:
+  - name: "Andrew Newman"
+    github: ""
+    current: true
+  - name: "Neil Majithia"
+    github: "nevadam"
+    current: true

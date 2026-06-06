@@ -174,14 +174,14 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
   padding: .9rem 1.6rem 1rem 1.5rem;
 }
 
-.category {
+.tag {
   border-radius: 1rem;
   font-size: .9rem;
   margin-right: .6rem;
   padding: .1rem .7rem .2rem .6rem;
 }
 
-.main-link, .category {
+.main-link, .tag {
   background: var(--main-link-background);
   color: var(--main-link-color);
   cursor: pointer;
@@ -189,7 +189,7 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
   text-decoration: none;
 }
 
-.main-link:hover, .category:hover {
+.main-link:hover, .tag:hover {
   background: var(--main-link-background-hover);
   color: var(--main-link-color-hover);
   transition: var(--main-link-transition);

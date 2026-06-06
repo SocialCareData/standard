@@ -3,7 +3,7 @@ title: Placements Standards Working Group Meeting 1
 description: Welcome to the placements standards working group.
 author:
   name: Ivjyot Oberoi
-categories:
+tags:
   - Working Group
   - Placements
 breadcrumbs:
