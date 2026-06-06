@@ -21,7 +21,7 @@
     const params = new URLSearchParams(window.location.search);
     const tag = params.get('tag');
     if (tag) {
-      document.querySelectorAll('.article-list li').forEach(function (li) {
+      document.querySelectorAll('.content-list li').forEach(function (li) {
         const tags = li.getAttribute('data-tags').split(',');
         li.style.display = tags.includes(tag) ? '' : 'none';
       });

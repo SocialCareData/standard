@@ -11,7 +11,7 @@ regenerate: true
 {% include tag-filter.html items=use_cases exclude_tag="Use Case" %}
 
 {% if use_cases.size > 0 %}
-<ol class="article-list">
+<ol class="content-list">
 {% for p in use_cases %}
   <li>
     <h2 class="heading">{% if p.reference %}[{{ p.reference }}]{% endif %} <a href="{{ p.url }}">{{ p.title }}</a></h2>

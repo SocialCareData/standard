@@ -10,7 +10,7 @@ regenerate: true
 {% include tag-filter.html items=site.posts %}
 
 {% if site.posts.size > 0 %}
-<ul class="article-list">
+<ul class="content-list">
 {% for post in site.posts %}
   <li data-tags="{{ post.tags | join: ',' }}">
     <h2 class="heading"><a href="{{ post.url }}">{{ post.title }}</a></h2>

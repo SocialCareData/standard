@@ -8,7 +8,7 @@ regenerate: true
 
 {% assign publications = site.pages | where_exp: "p", "p.tags contains 'Publication' and p.url != page.url" | sort: "title" %}
 {% if publications.size > 0 %}
-<ul class="article-list">
+<ul class="content-list">
 {% for p in publications %}
   <li>
     <h2 class="heading"><a href="{{ p.url }}">{{ p.title }}</a></h2>

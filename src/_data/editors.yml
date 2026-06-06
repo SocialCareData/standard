@@ -1,44 +1,58 @@
-Interoperability:
-  - name: "Matthieu Bosquet"
-    github: "matthieubosquet"
-    current: true
-MAIS:
-  - name: "Harry Angus"
-    github: ""
-    current: true
-  - name: "Ferry Lichtenberg"
-    github: ""
-    current: true
-Newsletter:
-  - name: "Abida Noshin"
-    github: "abidanoshin"
-    current: true
-Placements:
-  - name: "Madeline Goldie"
-    github: "MaddyGoldie"
-    current: true
-  - name: "Ivjyot Oberoy"
-    github: "ivjyot-oberoi"
-    current: true
-Programme:
-  - name: "Tom Rintoul"
-    github: "tomrintoul-SF"
-    current: true
-Publication:
-  - name: "Andrew Newman"
-    github: "andjnewman"
-    current: true
-  - name: "Matthieu Bosquet"
-    github: "matthieubosquet"
-    current: true
-Use Case:
-  - name: "Charlotte Moberly"
-    github: "charlottemoberly"
-    current: true
-Working Group:
-  - name: "Andrew Newman"
-    github: "andjnewman"
-    current: true
-  - name: "Neil Majithia"
-    github: "nevadam"
-    current: true
+Matthieu Bosquet:
+  github: "matthieubosquet"
+  current: true
+  tags:
+    - Interoperability
+    - Publication
+Harry Angus:
+  github: ""
+  current: false
+  tags:
+    - MAIS
+Huseyin Kir:
+  github: "hkir-dev"
+  current: true
+  tags:
+    - Interoperability
+    - Publication
+Ferry Lichtenberg:
+  github: ""
+  current: true
+  tags:
+    - MAIS
+Abida Noshin:
+  github: "abidanoshin"
+  current: true
+  tags:
+    - Newsletter
+Madeline Goldie:
+  github: "MaddyGoldie"
+  current: true
+  tags:
+    - Placements
+Ivjyot Oberoy:
+  github: "ivjyot-oberoi"
+  current: true
+  tags:
+    - Placements
+Tom Rintoul:
+  github: "tomrintoul-SF"
+  current: true
+  tags:
+    - Programme
+Andrew Newman:
+  github: "andjnewman"
+  current: true
+  tags:
+    - Publication
+    - Working Group
+Charlotte Moberly:
+  github: "charlottemoberly"
+  current: true
+  tags:
+    - Use Case
+Neil Majithia:
+  github: "nevadam"
+  current: true
+  tags:
+    - Working Group
