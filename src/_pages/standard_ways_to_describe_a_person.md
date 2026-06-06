@@ -56,7 +56,7 @@ APIs are being built as part of the larger MAIS programme within the Department 
 | **FETCH (incorporating FIND and GET)** | Would enable users to find out what information other agencies and services have about the person they are enquiring about. |
 {:.table-bordered}
 
-In the GET service, a user submits a query built from what is known about a person — names, address, and so on — to the NHS [Person Demographics Service (PDS)](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir), a FHIR API. The PDS matches against internal NHS data and responds with a FHIR Patient object containing the person's NHS number. Matching requires the query data to align with NHS records, whether via exact or fuzzy matching; we explore matching via FHIR [here](/person_match_scoring).
+In the GET service, a user submits a query built from what is known about a person — names, address, and so on — to the NHS [Person Demographics Service (PDS)](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir), a FHIR API. The PDS matches against internal NHS data and responds with a FHIR Patient object containing the person's NHS number. Matching requires the query data to align with NHS records, whether via exact or fuzzy matching; we explore matching via FHIR [here](/person_matching_implementation).
 
 FIND and FETCH would then use the returned NHS number, as a single unique identifier, to query health, police, and social care systems across the UK in order to identify where the subject person is already known.
 
