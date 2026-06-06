@@ -68,7 +68,6 @@ The Person specification includes additional fields beyond those in the current 
 
 The table below compares our `Person` standard to the current GET API spec, the [PDS query](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir#get-/Patient) pattern, and [FHIR's Patient](https://build.fhir.org/patient.html) object. Common fields are aligned across columns; notes describe each Person field's rationale and how it relates to GET.
 
-***Table-3 (with RelatedPerson and PrimaryContactProfessional removed from our Person standard)***
 {: style="text-align: center;"}
 
 | Get an Identifier API | Person Standard | PDS | FHIR | Notes |
@@ -334,5 +333,6 @@ components:
 
 ## Feedback
 
-We welcome feedback on this comparison — including comments on specific fields and notes in Table-3, how we have characterised the GET API or PDS, suggestions for alignment between the specifications, or corrections to errors. Please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+HIPPO+Specification+Comparison&category=Website+Content&page={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a> to share your thoughts.
+We welcome feedback on this comparison including comments on specific fields and notes in the specifications comparison table.
 
+Suggest alignment between the specifications or erratas by <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+HIPPO+Specification+Comparison&category=Website+Content&page={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener noreferrer">creating a new issue on GitHub</a>.
