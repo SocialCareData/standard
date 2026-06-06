@@ -6,24 +6,27 @@ MAIS:
   - name: "Harry Angus"
     github: ""
     current: true
+  - name: "Ferry Lichtenberg"
+    github: ""
+    current: true
 Newsletter:
   - name: "Abida Noshin"
-    github: ""
+    github: "abidanoshin"
     current: true
 Placements:
   - name: "Madeline Goldie"
-    github: ""
+    github: "MaddyGoldie"
     current: true
   - name: "Ivjyot Oberoy"
     github: "ivjyot-oberoi"
     current: true
 Programme:
   - name: "Tom Rintoul"
-    github: ""
+    github: "tomrintoul-SF"
     current: true
 Publication:
   - name: "Andrew Newman"
-    github: ""
+    github: "andjnewman"
     current: true
   - name: "Matthieu Bosquet"
     github: "matthieubosquet"
@@ -34,7 +37,7 @@ Use Case:
     current: true
 Working Group:
   - name: "Andrew Newman"
-    github: ""
+    github: "andjnewman"
     current: true
   - name: "Neil Majithia"
     github: "nevadam"
