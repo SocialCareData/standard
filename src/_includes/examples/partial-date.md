@@ -1,8 +1,8 @@
 <div class="example">
-  <h5 id="example-date-of-birth">Example - DateOfBirth</h5>
+  <h5 id="example-partial-date">Example - PartialDate</h5>
 {% highlight json %}
 {
-  "@type": "DateOfBirth",
+  "@type": "PartialDate",
   "date": "2017-09-01",
   "accuracyIndicator": "AAA"
 }

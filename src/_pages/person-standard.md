@@ -46,7 +46,7 @@ The following diagram illustrates the elements of the Person Standard.
 
 <p class="data-model-diagram"><img src="/assets/img/person/person-data-model.svg" alt="Person Data Model" title="Person Data Model" width="80%"/></p>
 
-A `Person` is the top-level record. It aggregates one or more `Identifier`s, one or more `Name`s, exactly one `dateOfBirth` (with `PartialDate`), zero or more `Address`es, zero or more `Contact` entries, zero or more `PersonRelationship`s linking to other people, an optional `isDeceased` flag and optional `deceasedDate` (with `PartialDate`), and zero or more `Status` entries. Cross-system matches established with other agencies are recorded as `matchedPersonRef` — an array of `Identifier`s pointing to the same person as it is known in other systems. The person's gender, observed sex, and ethnicity are captured via controlled vocabularies.
+A `Person` is the top-level record. It aggregates one or more `Identifier`s, one or more `Name`s, zero or more `Address`es, zero or more `Contact` entries, zero or more `PersonRelationship`s linking to other people, an optional `dateOfBirth` (with `PartialDate`), an optional `isDeceased` flag and optional `deceasedDate` (with `PartialDate`). Cross-system matches established with other agencies are recorded as `matchedPersonRef` — an array of `Identifier`s pointing to the same person as it is known in other systems. The person's gender, observed sex, and ethnicity are captured via controlled vocabularies.
 
 
 ### Person
@@ -224,7 +224,7 @@ Container for a date that may not be fully known or precise, extended with an ac
 
 #### Example
 
-{% include examples/date-of-birth.md %}
+{% include examples/partial-date.md %}
 
 ## Vocabularies
 
