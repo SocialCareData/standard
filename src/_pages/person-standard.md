@@ -46,7 +46,7 @@ The following diagram illustrates the elements of the Person Standard.
 
 <p class="data-model-diagram"><img src="/assets/img/person/person-data-model.svg" alt="Person Data Model" title="Person Data Model" width="80%"/></p>
 
-A `Person` is the top-level record. It aggregates one or more `Identifier`s, one or more `Name`s, exactly one `DateOfBirth`, zero or more `Address`es, zero or more `PersonRelationship`s linking to other people, an optional `Deceased` sub-record, and zero or more `Status` entries. Cross-system matches established with other agencies are recorded as `matchedPersonRef` — an array of `Identifier`s pointing to the same person as it is known in other systems. The person's gender, observed sex, and ethnicity are captured via controlled vocabularies.
+A `Person` is the top-level record. It aggregates one or more `Identifier`s, one or more `Name`s, exactly one `dateOfBirth` (with `PartialDate`), zero or more `Address`es, zero or more `Contact` entries, zero or more `PersonRelationship`s linking to other people, an optional `isDeceased` flag and optional `deceasedDate` (with `PartialDate`), and zero or more `Status` entries. Cross-system matches established with other agencies are recorded as `matchedPersonRef` — an array of `Identifier`s pointing to the same person as it is known in other systems. The person's gender, observed sex, and ethnicity are captured via controlled vocabularies.
 
 
 ### Person
@@ -59,19 +59,22 @@ The top-level record describing an individual. Consolidates the core identity at
 : Unique identifiers associated with the person (e.g. NHS number, internal case-management system ID). Multi-valued. See [Identifier](/person_standard#identifier).
 
 <span id="person-names">name</span>
-: One or more names for the person, each with a usage indicating its purpose (legal, usual, former, etc.). Multi-valued. See [Name](/person_standard#name).
+: One or more names for the person, each with a usage indicating its purpose (usual, maiden, nickname, etc.). Multi-valued. See [Name](/person_standard#name).
 
 <span id="person-dateOfBirth">dateOfBirth</span>
-: The person's date of birth, with an optional accuracy indicator. Optional. See [DateOfBirth](/person_standard#dateofbirth).
+: The person's date of birth, with an optional accuracy indicator. Optional. See [PartialDate](/person_standard#partialdate).
 
-<span id="person-deceased">deceased</span>
-: Whether the person is deceased, with optional date of death. Optional. See [Deceased](/person_standard#deceased).
+<span id="person-isDeceased">isDeceased</span>
+: Whether the person is deceased. Optional. _Boolean_.
 
-<span id="person-addresses">addresses</span>
+<span id="person-deceasedDate">deceasedDate</span>
+: The person's date of death, with an optional accuracy indicator. Optional — `isDeceased` may be `true` without a known date. See [PartialDate](/person_standard#partialdate).
+
+<span id="person-addresses">address</span>
 : Physical addresses where the person can be contacted. Multi-valued. Optional. See [Address](/person_standard#address).
 
 <span id="person-contact">contact</span>
-: Person's contact information. Multi-valued. Optional. See [Address](/person_standard#contact).
+: Person's contact information. Multi-valued. Optional. See [Contact](/person_standard#contact).
 
 <span id="person-gender">gender</span>
 : The person's stated gender. Optional. See the [Person Gender Code Vocabulary](/person_standard#person-gender-code-vocabulary).
@@ -86,10 +89,10 @@ The top-level record describing an individual. Consolidates the core identity at
 : References to other people related to this person, with the kind of relationship. Multi-valued. See [PersonRelationship](/person_standard#personrelationship).
 
 <span id="person-relatedPeople">primaryContactProfessionals</span>
-: References to the primary professionals related to this person. For example, care coordinators or a GP. Multi-valued. Optional. See Professional. TODO Professional standard to be published
+: References to the primary professionals related to this person. For example, care coordinators or a GP. Multi-valued. Optional. See Professional. [TODO Professional standard to be published]
 
 <span id="person-matchedPersonRef">matchedPersonRef</span>
-: A reference to another ConnectedPerson or Person record, if a match has been identified. Multi-valued. Optional. See [Identifier](/person_standard#identifier) entity for the structure.
+: A reference to another Person record, if a match has been identified. Multi-valued. Optional. See [Identifier](/person_standard#identifier) entity for the structure.
 
 #### Example
 
@@ -97,7 +100,7 @@ The top-level record describing an individual. Consolidates the core identity at
 
 <div class="note">
   <h5 id="note-person">Note - conformance minimum</h5>
-  <p>A conformant <code>Person</code> record MUST include at least one <code>Identifier</code>, at least one <code>Name</code> with a family name and at least one given name, and a <code>DateOfBirth</code>. All other properties are OPTIONAL where their cardinality permits, though several are statutorily required by specific data collections (e.g. <code>ethnicCode</code> in adult social care).</p>
+  <p>A conformant <code>Person</code> record MUST include at least one <code>Identifier</code>, at least one <code>Name</code> with a family name and at least one given name. All other properties are OPTIONAL where their cardinality permits, though several are statutorily required by specific data collections (e.g. <code>ethnicCode</code> in adult social care, and <code>isDeceased</code> with optional <code>deceasedDate</code>).</p>
 </div>
 
 
@@ -160,14 +163,34 @@ A postal address for the person. Aligned with FHIR `Address`. Addresses are post
 : UK postcode in standard format (e.g. `AB1 2CD`). _String_.
 
 <span id="address-UPRN">UPRN</span>
-: Unique Property Reference Number of the address. Optional. _Integer_.
+: Unique Property Reference Number of the address. Optional. _String_.
 
 <span id="address-USRN">USRN</span>
-: Unique Street Reference Number of the address. Optional. _Integer_.
+: Unique Street Reference Number of the address. Optional. _String_.
 
 #### Example
 
 {% include examples/address.md %}
+
+
+### Contact
+
+Contact details for a person, such as a home, work, or other contact channel grouping.
+
+#### Properties
+
+<span id="contact-name">name</span>
+: Name of the contact type (for example, "Home", "Work", "Other"). Recommended. _String_.
+
+<span id="contact-email">email</span>
+: One or more email addresses. Optional. Multi-valued. _String_.
+
+<span id="contact-telephone">telephone</span>
+: One or more telephone numbers. Optional. Multi-valued. _String_.
+
+#### Example
+
+{% include examples/contact.md %}
 
 
 ### PersonRelationship
@@ -187,39 +210,21 @@ A typed reference from one person to another. The reference is by `Identifier` (
 {% include examples/person-relationship.md %}
 
 
-### DateOfBirth
+### PartialDate
 
-Container for the person's date of birth, aligned with FHIR `Patient.birthDate` and extended with an accuracy indicator. Dates of birth are not always known precisely in social care; the indicator allows downstream systems to interpret a date appropriately rather than treating an estimate as exact.
+Container for a date that may not be fully known or precise, extended with an accuracy indicator. Dates are not always known precisely in social care; the accuracy indicator allows downstream systems to interpret a date appropriately rather than treating an estimate as exact. Used for dates of birth and dates of death.
 
 #### Properties
 
-<span id="dateofbirth-date">date</span>
-: ISO 8601-formatted date of birth (`YYYY-MM-DD`). _Date_.
+<span id="partialdate-date">date</span>
+: ISO 8601-formatted date (`YYYY-MM-DD`). _Date_.
 
-<span id="dateofbirth-accuracyIndicator">accuracyIndicator</span>
+<span id="partialdate-accuracyIndicator">accuracyIndicator</span>
 : A three-character code in day–month–year order indicating which parts of the date are accurate, estimated, or unknown. Optional. See the [Date Accuracy Indicator Vocabulary](/person_standard#date-accuracy-indicator-vocabulary).
 
 #### Example
 
 {% include examples/date-of-birth.md %}
-
-
-### Deceased
-
-Captures whether a person is deceased and, where known, the date of death. Required for statutory data collection in adult social care, and used to filter deceased individuals out of service allocation. Aligned with FHIR `Patient.deceasedBoolean` and `Patient.deceasedDateTime`.
-
-#### Properties
-
-<span id="deceased-deceasedStatus">deceasedStatus</span>
-: Whether the person is deceased. _Boolean_.
-
-<span id="deceased-date">date</span>
-: ISO 8601-formatted date of death (`YYYY-MM-DD`). Optional — `deceasedStatus` may be `true` without a known date. _Date_.
-
-#### Example
-
-{% include examples/deceased.md %}
-
 
 ## Vocabularies
 
@@ -261,18 +266,6 @@ Used by [`PersonRelationship.relationship`](/person_standard#personrelationship-
 
 {% include vocabularies/person-relationship-code.md %}
 
-
-## Conformance
-
-The following keywords are used to define requirement levels (per [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)):
-
-- **MUST**: an absolute requirement of the specification.
-- **SHOULD**: there may exist valid reasons in particular circumstances to ignore a particular item, but the full implications must be understood and carefully weighed before choosing a different course.
-- **MAY**: the item is truly optional. An implementation which does not include a particular option MUST be prepared to interoperate with another implementation which does include the option, though perhaps with reduced functionality.
-
-A conformant record MUST include at least a [`familyName`](/person_standard#name-familyName), at least one [`givenName`](/person_standard#name-givenNames), and a [`DateOfBirth`](/person_standard#dateofbirth).
-
-
 ## Alignment with other specifications
 
 In creating this specification we reviewed and aligned with:
@@ -286,7 +279,7 @@ In creating this specification we reviewed and aligned with:
 - [schema.org](https://schema.org/)
 - iStandUK Scalable Approach to Vulnerability via Interoperability (SAVVI)
 
-The Person Standard is a reduced subset of the FHIR `Patient` resource, extended where social-care-specific use cases require it (e.g. `ethnicCode` with ONS 18+1, the `accuracyIndicator` on `DateOfBirth`, and `matchedPersonRef` for cross-system matches). A subset of its properties can be used to query the NHS PDS directly.
+The Person Standard is a reduced subset of the FHIR `Patient` resource, extended where social-care-specific use cases require it (e.g. `ethnicCode` with ONS 18+1, the `accuracyIndicator` on `PartialDate`, and `matchedPersonRef` for cross-system matches). A subset of its properties can be used to query the NHS PDS directly.
 
 ### See also
 

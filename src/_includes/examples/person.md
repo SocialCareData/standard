@@ -7,8 +7,9 @@
   "@type": "Person",
   "identifiers":      [ { "see Identifier example" } ],
   "names":            [ { "see Name example" } ],
-  "dateOfBirth":      { "see DateOfBirth example" },
-  "addresses":        [ { "see Address example" } ],
+  "dateOfBirth":      { "see PartialDate example" },
+  "isDeceased":       false
+  "address":        [ { "see Address example" } ],
   "gender":           "2",
   "sexCode":          "2",
   "ethnicCode":       "17",
@@ -16,8 +17,7 @@
   "relatedPeople":    [ { "see PersonRelationship example" } ],
   "matchedPersonRef": [
     { "@type": "Identifier", "value": "EDU-987654", "system": "https://example.org/Id/lea-code" }
-  ],
-  "statuses":         [ { "see Status example" } ]
+  ]
 }
 {% endhighlight %}
 </div>

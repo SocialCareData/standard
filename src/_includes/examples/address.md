@@ -7,8 +7,8 @@
   "line2": "Flat 3B",
   "city": "Anytown",
   "postcode": "AB1 2CD",
-  "UPRN": 100012345678,
-  "USRN": 12345678
+  "UPRN": "100012345678",
+  "USRN": "12345678"
 }
 {% endhighlight %}
 </div>
