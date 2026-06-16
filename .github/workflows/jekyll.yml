@@ -27,8 +27,8 @@ jobs:
         run: bundle exec ruby scripts/check_internal_links.rb dist
 
       - name: Check external links
+        timeout-minutes: 15
         run: bundle exec ruby scripts/check_external_links.rb dist
-
       - uses: actions/upload-pages-artifact@v5
         with:
           path: ./dist
