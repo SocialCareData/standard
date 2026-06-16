@@ -96,7 +96,29 @@ The top-level record describing an individual. Consolidates the core identity at
 
 #### Example
 
-{% include examples/person.md %}
+<div class="example">
+  <h5 id="example-person">Example - Person (top level)</h5>
+{% highlight json %}
+{
+  "@context": "https://socialcaredata.github.io/ontology/person/context.jsonld",
+  "@id": "ex:person-9434765919",
+  "@type": "Person",
+  "identifiers":      [ { "see Identifier example" } ],
+  "names":            [ { "see Name example" } ],
+  "dateOfBirth":      { "see PartialDate example" },
+  "isDeceased":       false
+  "address":        [ { "see Address example" } ],
+  "gender":           "2",
+  "sexCode":          "2",
+  "ethnicCode":       "17",
+  "deceased":         { "see Deceased example" },
+  "relatedPeople":    [ { "see PersonRelationship example" } ],
+  "matchedPersonRef": [
+    { "@type": "Identifier", "value": "EDU-987654", "system": "https://example.org/Id/lea-code" }
+  ]
+}
+{% endhighlight %}
+</div>
 
 <div class="note">
   <h5 id="note-person">Note - conformance minimum</h5>
@@ -118,7 +140,16 @@ A single identifier for a person, comprising the value and the system in whose n
 
 #### Example
 
-{% include examples/identifier.md %}
+<div class="example">
+  <h5 id="example-identifier">Example - Identifier</h5>
+{% highlight json %}
+{
+  "@type": "Identifier",
+  "value": "9434765919",
+  "system": "https://fhir.nhs.uk/Id/nhs-number"
+}
+{% endhighlight %}
+</div>
 
 
 ### Name
@@ -141,7 +172,18 @@ Container for a person's name parts, aligned with FHIR `HumanName`. A person may
 
 #### Example
 
-{% include examples/name.md %}
+<div class="example">
+  <h5 id="example-name">Example - Name</h5>
+{% highlight json %}
+{
+  "@type": "Name",
+  "familyName": ["Doe"],
+  "givenNames": ["Jane", "Elizabeth"],
+  "preferredNames": "Janie",
+  "use": "official"
+}
+{% endhighlight %}
+</div>
 
 
 ### Address
@@ -170,8 +212,20 @@ A postal address for the person. Aligned with FHIR `Address`. Addresses are post
 
 #### Example
 
-{% include examples/address.md %}
-
+<div class="example">
+  <h5 id="example-address">Example - Address</h5>
+{% highlight json %}
+{
+  "@type": "Address",
+  "line1": "1 High Street",
+  "line2": "Flat 3B",
+  "city": "Anytown",
+  "postcode": "AB1 2CD",
+  "UPRN": "100012345678",
+  "USRN": "12345678"
+}
+{% endhighlight %}
+</div>
 
 ### Contact
 
@@ -190,7 +244,18 @@ Contact details for a person, such as a home, work, or other contact channel gro
 
 #### Example
 
-{% include examples/contact.md %}
+<div class="example">
+  <h5 id="example-contact">Example - Contact</h5>
+{% highlight json %}
+{
+  "@type": "Contact",
+  "name": "Home",
+  "email": ["jane.doe@example.org"],
+  "telephone": ["+44 20 7946 0000"]
+}
+{% endhighlight %}
+</div>
+
 
 
 ### PersonRelationship
@@ -207,7 +272,20 @@ A typed reference from one person to another. The reference is by `Identifier` (
 
 #### Example
 
-{% include examples/person-relationship.md %}
+<div class="example">
+  <h5 id="example-person-relationship">Example - PersonRelationship</h5>
+{% highlight json %}
+{
+  "@type": "PersonRelationship",
+  "identifier": {
+    "@type": "Identifier",
+    "value": "12345",
+    "system": "https://example.org/Id/local-person-id"
+  },
+  "relationship": ["MTH"]
+}
+{% endhighlight %}
+</div>
 
 
 ### PartialDate
@@ -224,7 +302,16 @@ Container for a date that may not be fully known or precise, extended with an ac
 
 #### Example
 
-{% include examples/partial-date.md %}
+<div class="example">
+  <h5 id="example-partial-date">Example - PartialDate</h5>
+{% highlight json %}
+{
+  "@type": "PartialDate",
+  "date": "2017-09-01",
+  "accuracyIndicator": "AAA"
+}
+{% endhighlight %}
+</div>
 
 ## Vocabularies
 
@@ -234,37 +321,225 @@ The model is parameterised by six controlled vocabularies, each held in its own 
 
 Used by [`Name.use`](/person_standard#name-use).
 
-{% include vocabularies/name-use.md %}
+Indicates the intended purpose of a person's name, allowing applications to select the appropriate name for specific contexts. A name is assumed to be current unless it is marked as `temp` or `old`. Aligned with the [FHIR `name-use`](https://hl7.org/fhir/valueset-name-use.html) value set.
+
+| Code | Label | Definition |
+| :--- | :--- | :--- |
+| `usual` | Usual name | The name commonly used by the person — what they normally go by. |
+| `official` | Official name | The formal name registered in a government register; may not be the name commonly used. |
+| `temp` | Temporary name | A temporary name; assigned at birth, in emergencies, or where the person's full name is not yet known. |
+| `nickname` | Nickname | An informal name not part of the person's formal or usual name. |
+| `anonymous` | Anonymous | A pseudonym used to protect the person's privacy. |
+| `old` | Old name | A name no longer in use, or never correct, but retained for record-matching purposes. |
+| `maiden` | Maiden name | A name used prior to marriage. Applies regardless of gender. |
+{:.table-bordered}
 
 ### Person Gender Code Vocabulary
 
 Used by [`Person.gender`](/person_standard#person-gender).
 
-{% include vocabularies/person-gender-code.md %}
+Represents a person's stated gender identity, as distinct from biological sex. Aligned with the NHS Data Dictionary [`PERSON_STATED_GENDER_CODE`](https://www.datadictionary.nhs.uk/attributes/person_stated_gender_code.html).
+
+| Code | Label | Definition |
+| :--- | :--- | :--- |
+| `1` | Male | The person identifies as male. |
+| `2` | Female | The person identifies as female. |
+| `9` | Indeterminate | Unable to be classified as either male or female. |
+| `X` | Not Known | Not recorded, or information unavailable. |
+{:.table-bordered}
 
 ### Person Sex Code Vocabulary
 
 Used by [`Person.sexCode`](/person_standard#person-sexCode).
 
-{% include vocabularies/person-sex-code.md %}
+Documents observed phenotypic sex where recorded, representing biological characteristics rather than gender identity. Aligned with NHS PDS `PERSON_PHENOTYPIC_SEX`.
+
+| Code | Label | Definition |
+| :--- | :--- | :--- |
+| `1` | Male | The person is phenotypically male. |
+| `2` | Female | The person is phenotypically female. |
+| `9` | Indeterminate | Unable to be classified phenotypically as either male or female. |
+| `X` | Not Known | Not recorded, or information unavailable. |
+{:.table-bordered}
 
 ### Person Ethnic Code Vocabulary
 
 Used by [`Person.ethnicCode`](/person_standard#person-ethnicCode).
 
-{% include vocabularies/person-ethnic-code.md %}
+The person's stated ethnicity. Uses [ONS Census 2021 Ethnic group classification 20b](https://www.ons.gov.uk/census/census2021dictionary/variablesbytopic/ethnicgroupnationalidentitylanguageandreligionvariablescensus2021/ethnicgroup/classifications#:~:text=Ethnic%20group%20classification%2020b) codes.
+
+| Code | Label |
+| :--- | :--- |
+| `1` | Asian, Asian British or Asian Welsh: Bangladeshi |
+| `2` | Asian, Asian British or Asian Welsh: Chinese |
+| `3` | Asian, Asian British or Asian Welsh: Indian |
+| `4` | Asian, Asian British or Asian Welsh: Pakistani |
+| `5` | Asian, Asian British or Asian Welsh: Other Asian |
+| `6` | Black, Black British, Black Welsh, Caribbean or African: African |
+| `7` | Black, Black British, Black Welsh, Caribbean or African: Caribbean |
+| `8` | Black, Black British, Black Welsh, Caribbean or African: Other Black |
+| `9` | Mixed or Multiple ethnic groups: White and Asian |
+| `10` | Mixed or Multiple ethnic groups: White and Black African |
+| `11` | Mixed or Multiple ethnic groups: White and Black Caribbean |
+| `12` | Mixed or Multiple ethnic groups: Other Mixed or Multiple ethnic groups |
+| `13` | White: English, Welsh, Scottish, Northern Irish or British |
+| `14` | White: Irish |
+| `15` | White: Gypsy or Irish Traveller |
+| `16` | White: Roma |
+| `17` | White: Other White |
+| `18` | Other ethnic group: Arab |
+| `19` | Other ethnic group: Any other ethnic group |
+| `-8` | Does not apply* |
+
+*Students and schoolchildren living away during term-time.
+{:.table-bordered}
 
 ### Date Accuracy Indicator Vocabulary
 
 Used by [`DateOfBirth.accuracyIndicator`](/person_standard#dateofbirth-accuracyIndicator).
 
-{% include vocabularies/date-accuracy-indicator.md %}
+A three-character code indicating the accuracy of each component of a date, in **day–month–year** order. Each position uses one of three letters:
+
+- **`A`** — Accurate. The component is known to be correct.
+- **`E`** — Estimated. The component has been estimated from other evidence.
+- **`U`** — Unknown. The component is not known.
+
+| Position | Component |
+| :--- | :--- |
+| 1 | Day |
+| 2 | Month |
+| 3 | Year |
+{:.table-bordered}
+
+Worked examples:
+
+| Code | Meaning |
+| :--- | :--- |
+| `AAA` | Day, month, and year are all known to be accurate. |
+| `UUE` | Day and month are unknown; year is estimated. |
+| `UAA` | Day is unknown; month and year are accurate. |
+| `EEA` | Day and month are estimated; year is accurate. |
+| `UUU` | The full date is unknown (placeholder date should be treated as a guess). |
+{:.table-bordered}
+
+Aligned with the FHIR [`date-accuracy-indicator`](https://hl7.org/fhir/extension-date-accuracy-indicator.html) extension pattern.
 
 ### Person Relationship Code Vocabulary
 
 Used by [`PersonRelationship.relationship`](/person_standard#personrelationship-relationship).
 
-{% include vocabularies/person-relationship-code.md %}
+Characterises personal relationships between individuals, including family, spousal, foster, adoptive, and other social connections. Aligned with the HL7 v3 [`PersonalRelationshipRoleType`](https://terminology.hl7.org/CodeSystem-v3-RoleCode.html) value set.
+
+| Code | Label | Definition |
+| :--- | :--- | :--- |
+| `FAMMEMB` | Family member | A familial relationship between two people. |
+| `CHILD` | Child | Offspring of the scoping person. |
+| `NCHILD` | Natural child | Offspring determined by birth. |
+| `CHLDADOPT` | Adopted child | A child legally adopted and raised by the scoping person. |
+| `DAUADOPT` | Adopted daughter | A female child legally adopted and raised by the scoping person. |
+| `SONADOPT` | Adopted son | A male child legally adopted and raised by the scoping person. |
+| `CHLDFOST` | Foster child | A child receiving parental care without legal or blood ties. |
+| `DAUFOST` | Foster daughter | A female child receiving foster parental care. |
+| `SONFOST` | Foster son | A male child receiving foster parental care. |
+| `DAUC` | Daughter | A female child (of any type) of the scoping person. |
+| `DAU` | Natural daughter | Female offspring of the scoping person. |
+| `STPDAU` | Stepdaughter | A daughter of the scoping person's spouse by a previous union. |
+| `SON` | Natural son | Male offspring of the scoping person. |
+| `SONC` | Son | A male child (of any type) of the scoping person. |
+| `STPSON` | Stepson | A son of the scoping person's spouse by a previous union. |
+| `STPCHLD` | Stepchild | A child of the scoping person's spouse by a previous union. |
+| `EXT` | Extended family member | A non-immediate genetic or legal relative (e.g. aunt, cousin). |
+| `AUNT` | Aunt | Sister of the scoping person's parent. |
+| `MAUNT` | Maternal aunt | Biological sister of the scoping person's biological mother. |
+| `PAUNT` | Paternal aunt | Biological sister of the scoping person's biological father. |
+| `UNCLE` | Uncle | Brother of the scoping person's parent. |
+| `MUNCLE` | Maternal uncle | Biological brother of the scoping person's biological mother. |
+| `PUNCLE` | Paternal uncle | Biological brother of the scoping person's biological father. |
+| `COUSN` | Cousin | A relative descended from a common ancestor by multiple steps. |
+| `MCOUSN` | Maternal cousin | Biological relative via the scoping person's mother's line. |
+| `PCOUSN` | Paternal cousin | Biological relative via the scoping person's father's line. |
+| `NIENEPH` | Niece/nephew | Child of the scoping person's sibling. |
+| `NEPHEW` | Nephew | Son of the scoping person's sibling. |
+| `NIECE` | Niece | Daughter of the scoping person's sibling. |
+| `GGRPRN` | Great-grandparent | Parent of the scoping person's grandparent. |
+| `GGRFTH` | Great-grandfather | Father of the scoping person's grandparent. |
+| `MGGRFTH` | Maternal great-grandfather | Biological father of the scoping person's maternal grandparent. |
+| `PGGRFTH` | Paternal great-grandfather | Biological father of the scoping person's paternal grandparent. |
+| `GGRMTH` | Great-grandmother | Mother of the scoping person's grandparent. |
+| `MGGRMTH` | Maternal great-grandmother | Biological mother of the scoping person's maternal grandparent. |
+| `PGGRMTH` | Paternal great-grandmother | Biological mother of the scoping person's paternal grandparent. |
+| `MGGRPRN` | Maternal great-grandparent | Biological parent of the scoping person's maternal grandparent. |
+| `PGGRPRN` | Paternal great-grandparent | Biological parent of the scoping person's paternal grandparent. |
+| `GRPRN` | Grandparent | Parent of the scoping person's parent. |
+| `GRFTH` | Grandfather | Father of the scoping person's parent. |
+| `MGRFTH` | Maternal grandfather | Biological father of the scoping person's biological mother. |
+| `PGRFTH` | Paternal grandfather | Biological father of the scoping person's biological father. |
+| `GRMTH` | Grandmother | Mother of the scoping person's parent. |
+| `MGRMTH` | Maternal grandmother | Biological mother of the scoping person's biological mother. |
+| `PGRMTH` | Paternal grandmother | Biological mother of the scoping person's biological father. |
+| `MGRPRN` | Maternal grandparent | Biological parent of the scoping person's biological mother. |
+| `PGRPRN` | Paternal grandparent | Biological parent of the scoping person's biological father. |
+| `GRNDCHILD` | Grandchild | Child of the scoping person's son or daughter. |
+| `GRNDDAU` | Granddaughter | Daughter of the scoping person's child. |
+| `GRNDSON` | Grandson | Son of the scoping person's child. |
+| `INLAW` | In-law | A member of the scoping person's spouse's immediate family. |
+| `CHLDINLAW` | Child-in-law | Spouse of the scoping person's child. |
+| `DAUINLAW` | Daughter-in-law | Wife of the scoping person's son. |
+| `SONINLAW` | Son-in-law | Husband of the scoping person's daughter. |
+| `PRNINLAW` | Parent-in-law | A parent of the scoping person's spouse. |
+| `FTHINLAW` | Father-in-law | Father of the scoping person's spouse. |
+| `MTHINLAW` | Mother-in-law | Mother of the scoping person's spouse. |
+| `SIBINLAW` | Sibling-in-law | The spouse's sibling or the spouse of the scoping person's sibling. |
+| `BROINLAW` | Brother-in-law | The spouse's brother, or the husband of the scoping person's sister. |
+| `SISINLAW` | Sister-in-law | The spouse's sister, or the wife of the scoping person's brother. |
+| `PRN` | Parent | One who begets, gives birth to, or raises the scoping person. |
+| `NPRN` | Natural parent | Biological parent. |
+| `ADOPTP` | Adoptive parent | A parent who legally adopted the scoping person. |
+| `ADOPTF` | Adoptive father | A male parent who legally adopted the scoping person. |
+| `ADOPTM` | Adoptive mother | A female parent who legally adopted the scoping person. |
+| `PRNFOST` | Foster parent | A state-certified caregiver for the scoping person as a foster child. |
+| `STPPRN` | Stepparent | Spouse of the scoping person's parent, where they are not the biological parent. |
+| `FTH` | Father | Male parent. |
+| `NFTH` | Natural father | Male biological parent. |
+| `FTHFOST` | Foster father | Male state-certified caregiver for the scoping person as a foster child. |
+| `STPFTH` | Stepfather | Husband of the scoping person's mother, where he is not the biological father. |
+| `MTH` | Mother | Female parent. |
+| `NMTH` | Natural mother | Female biological parent. |
+| `GESTM` | Gestational mother | A woman whose womb carried the foetus (distinct from biological mother where surrogacy is involved). |
+| `MTHFOST` | Foster mother | Female state-certified caregiver for the scoping person as a foster child. |
+| `STPMTH` | Stepmother | Wife of the scoping person's father, where she is not the biological mother. |
+| `SIB` | Sibling | Shares one or both parents with the scoping person. |
+| `NSIB` | Natural sibling | Both biological parents in common with the scoping person. |
+| `HSIB` | Half-sibling | Related to the scoping person by a single biological parent. |
+| `STPSIB` | Stepsibling | A child of the scoping person's stepparent. |
+| `BRO` | Brother | Male sibling. |
+| `NBRO` | Natural brother | Male sibling with the same biological parents as the scoping person. |
+| `HBRO` | Half-brother | Male sibling related by a single biological parent. |
+| `STPBRO` | Stepbrother | A son of the scoping person's stepparent. |
+| `SIS` | Sister | Female sibling. |
+| `NSIS` | Natural sister | Female sibling with the same biological parents as the scoping person. |
+| `HSIS` | Half-sister | Female sibling related by a single biological parent. |
+| `STPSIS` | Stepsister | A daughter of the scoping person's stepparent. |
+| `TWIN` | Twin | A twin from the same womb or parental pairing as the scoping person. |
+| `TWINBRO` | Twin brother | Male twin. |
+| `TWINSIS` | Twin sister | Female twin. |
+| `ITWIN` | Identical twin | A twin from the same egg/sperm pair as the scoping person. |
+| `ITWINBRO` | Identical twin brother | Male identical twin. |
+| `ITWINSIS` | Identical twin sister | Female identical twin. |
+| `FTWIN` | Fraternal twin | A twin from distinct egg/sperm pairs. |
+| `FTWINBRO` | Fraternal twin brother | Male fraternal twin. |
+| `FTWINSIS` | Fraternal twin sister | Female fraternal twin. |
+| `SPS` | Spouse | Marriage partner. |
+| `HUSB` | Husband | A man joined in marriage. |
+| `WIFE` | Wife | A woman joined in marriage. |
+| `FMRSPS` | Former spouse | A previously married partner; the marriage has been dissolved. |
+| `DOMPART` | Domestic partner | A cohabiting partner who is not a spouse. |
+| `SIGOTHR` | Significant other | A person important to the scoping person's well-being (spouse or equivalent). |
+| `FRND` | Friend | A known, liked, and trusted person who is not a relative. |
+| `NBOR` | Neighbour | A person living nearby. |
+| `ROOM` | Roommate | A person sharing living quarters. |
+| `ONESELF` | Self | A relationship of the person with themselves (used to express identity links). |
+{:.table-bordered}
 
 ## Alignment with other specifications
 
