@@ -8,8 +8,8 @@ const jsonld = require('jsonld')
 const rdf = require('rdf-ext').default
 const SHACLValidator = require('rdf-validate-shacl').default
 
-const SHAPE_FILE = path.resolve(__dirname, '..', 'shacl-shape.ttl')
-const EXAMPLES_DIR = path.resolve(__dirname, '..', 'examples')
+const SHAPE_FILE = path.resolve(__dirname, '..', 'placements-shacl-shape.ttl')
+const EXAMPLES_DIR = path.resolve(__dirname, '..', 'examples/placement')
 const SHACL_DIR = path.resolve(__dirname, '..')
 const PL_CHILD_ID = rdf.namedNode('https://ns.socialcaredata.io/placements/childId')
 
@@ -32,7 +32,7 @@ function parseNQuads (text) {
 async function loadJsonLDFile (file) {
   const doc = JSON.parse(fs.readFileSync(file, 'utf8'))
   // Inline the relative @context so jsonld doesn't need a document loader.
-  if (typeof doc['@context'] === 'string' && doc['@context'].startsWith('./')) {
+  if (typeof doc['@context'] === 'string' && ( doc['@context'].startsWith('./') || doc['@context'].startsWith('../') )) {
     const ctxPath = path.join(path.dirname(file), doc['@context'])
     const ctx = JSON.parse(fs.readFileSync(ctxPath, 'utf8'))
     doc['@context'] = ctx['@context']
@@ -42,10 +42,10 @@ async function loadJsonLDFile (file) {
 }
 
 function listExamples () {
-  return fs.readdirSync(SHACL_DIR)
+  return fs.readdirSync(EXAMPLES_DIR)
     .filter(f => f.endsWith('.jsonld') && f !== 'context.jsonld')
     .sort()
-    .map(f => path.join(SHACL_DIR, f))
+    .map(f => path.join(EXAMPLES_DIR, f))
 }
 
 function summariseResult (r) {

@@ -1,21 +1,21 @@
 {
-  "@context": "./context.jsonld",
-  "@id": "ex:INVALID-004",
+  "@context": "../../placements-context.jsonld",
+  "@id": "ex:INVALID-003",
   "@type": "Placement",
 
-  "childId": "INVALID004",
+  "childId": "INVALID003",
 
   "hasPlacementAvailability": {
-    "@id": "ex:INVALID-004/availability",
+    "@id": "ex:INVALID-003/availability",
     "@type": "PlacementAvailability",
-    "placementId": "PLC-INVALID-004",
+    "placementId": "PLC-INVALID-003",
     "neededBy": "MoreThanFiveDays",
     "isPreferredLocationLocal": false,
     "outOfLAReason": "CourtOrder"
   },
 
   "hasPlacementRequirements": {
-    "@id": "ex:INVALID-004/requirements",
+    "@id": "ex:INVALID-003/requirements",
     "@type": "PlacementRequirements",
     "communicationNeeds": "No",
     "specificCommunicationRequirement": ["None"],
@@ -26,7 +26,7 @@
   },
 
   "hasPlacementRecommendation": {
-    "@id": "ex:INVALID-004/recommendation",
+    "@id": "ex:INVALID-003/recommendation",
     "@type": "PlacementRecommendation",
     "fosterCareSuitability": "Preferred",
     "residentialCareSuitability": "NotSpecified",
@@ -34,7 +34,7 @@
   },
 
   "hasRiskAssessment": {
-    "@id": "ex:INVALID-004/risk",
+    "@id": "ex:INVALID-003/risk",
     "@type": "RiskAssessment",
     "riskSelfHarm":             "NoKnownRisk",
     "riskCriminalExploitation": "NoKnownRisk",
@@ -50,19 +50,19 @@
   },
 
   "hasActualPlacement": {
-    "@id": "ex:INVALID-004/actual",
+    "@id": "ex:INVALID-003/actual",
     "@type": "ActualPlacement",
-    "placementType": "Residential",
-    "providerURN": "URN-9999",
-    "placementLocation": "BS10",
+    "placementType": "Foster",
+    "providerURN": "URN-2030",
+    "placementLocation": "NOT A POSTCODE",
     "isLocationPreferred": true,
     "isEducationContinuous": true,
     "siblingsPlacedTogether": 0,
-    "totalWeeklyCost": 50
+    "totalWeeklyCost": 1500.00
   },
 
   "hasQualityAssurance": {
-    "@id": "ex:INVALID-004/qa",
+    "@id": "ex:INVALID-003/qa",
     "@type": "QualityAssurance",
     "referralDate":  "2024-02-12",
     "placementOfficerName": "Beth Green",

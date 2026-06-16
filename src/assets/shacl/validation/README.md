@@ -1,6 +1,6 @@
 # Placement Spec validator
 
-Runs the SHACL shape in `../placement-spec-shape.ttl` against the JSON-LD examples
+Runs the SHACL shape in `../placements-shacl-shape.ttl` against the JSON-LD examples
 in `../examples/` and prints a conformance report for each.
 
 ## Usage
@@ -8,7 +8,7 @@ in `../examples/` and prints a conformance report for each.
 ```bash
 npm install
 node validate.js                         # validates every example
-node validate.js ../examples/valid-placement.jsonld   # one file
+node validate.js ../examples/placement/valid-placement.jsonld   # one file
 ```
 
 Exit code is `0` if every example behaves as expected — i.e. files named

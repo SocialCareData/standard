@@ -1,5 +1,5 @@
 {
-  "@context": "./context.jsonld",
+  "@context": "../../placements-context.jsonld",
   "@id": "ex:OTHER-001",
   "@type": "Placement",
 

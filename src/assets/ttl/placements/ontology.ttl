@@ -11,23 +11,23 @@
 @base <https://ns.socialcaredata.io/placements/> .
 
 <https://ns.socialcaredata.io/placements> rdf:type owl:Ontology ;
-      owl:imports <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/ontology-actualplacement> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/ontology-placementavailability> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/ontology-placementrecommendation> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/ontology-placementrequirements> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/ontology-qualityassurance> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/ontology-riskassessment> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/taxonomy-communication-need.ttl> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/taxonomy-cultural-need.ttl> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/taxonomy-living-arrangement.ttl> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/taxonomy-pets-allowance.ttl> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/taxonomy-vocab/placement-type.ttl> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/taxonomy-placement-urgency.ttl> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/taxonomy-presence-status.ttl> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/taxonomy-risk-level.ttl> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/taxonomy-suitability-level.ttl> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/taxonomy-support-type.ttl> ,
-                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/taxonomy-outof-la-reason.ttl> ;
+      owl:imports <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/ontology-actualplacement> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/ontology-placementavailability> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/ontology-placementrecommendation> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/ontology-placementrequirements> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/ontology-qualityassurance> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/ontology-riskassessment> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/taxonomy-communication-need.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/taxonomy-cultural-need.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/taxonomy-living-arrangement.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/taxonomy-pets-allowance.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/taxonomy-placement-type.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/taxonomy-placement-urgency.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/taxonomy-presence-status.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/taxonomy-risk-level.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/taxonomy-suitability-level.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/taxonomy-support-type.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/placements/taxonomy-outof-la-reason.ttl> ;
       dct:creator "ODI / SocialCareData working group" ;
       dct:description "An OWL ontology that models the data captured by a local authority when arranging a placement for a looked-after child." ;
       dct:issued "2026-04-27"^^xsd:date ;

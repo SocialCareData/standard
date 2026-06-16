@@ -1,32 +1,32 @@
 {
-  "@context": "./context.jsonld",
-  "@id": "ex:INVALID-003",
+  "@context": "../../placements-context.jsonld",
+  "@id": "ex:INVALID-002",
   "@type": "Placement",
 
-  "childId": "INVALID003",
+  "childId": "INVALID002",
 
   "hasPlacementAvailability": {
-    "@id": "ex:INVALID-003/availability",
+    "@id": "ex:INVALID-002/availability",
     "@type": "PlacementAvailability",
-    "placementId": "PLC-INVALID-003",
-    "neededBy": "MoreThanFiveDays",
+    "placementId": "PLC-INVALID-002",
+    "neededBy": "Today",
     "isPreferredLocationLocal": false,
     "outOfLAReason": "CourtOrder"
   },
 
   "hasPlacementRequirements": {
-    "@id": "ex:INVALID-003/requirements",
+    "@id": "ex:INVALID-002/requirements",
     "@type": "PlacementRequirements",
-    "communicationNeeds": "No",
-    "specificCommunicationRequirement": ["None"],
+    "communicationNeeds": "NotSpecified",
+    "specificCommunicationRequirement": ["XYZ"],
     "culturalNeeds": "NotRequired",
     "livingCompanions": "NoPreference",
-    "pets": "YesCan",
+    "pets": "MaybePets",
     "homeAdaptationRequired": false
   },
 
   "hasPlacementRecommendation": {
-    "@id": "ex:INVALID-003/recommendation",
+    "@id": "ex:INVALID-002/recommendation",
     "@type": "PlacementRecommendation",
     "fosterCareSuitability": "Preferred",
     "residentialCareSuitability": "NotSpecified",
@@ -34,9 +34,9 @@
   },
 
   "hasRiskAssessment": {
-    "@id": "ex:INVALID-003/risk",
+    "@id": "ex:INVALID-002/risk",
     "@type": "RiskAssessment",
-    "riskSelfHarm":             "NoKnownRisk",
+    "riskSelfHarm":             "Severe",
     "riskCriminalExploitation": "NoKnownRisk",
     "riskDrugAlcohol":          "NoKnownRisk",
     "riskEatingDisorder":       "NoKnownRisk",
@@ -49,20 +49,8 @@
     "riskToOthersCriminal":     "NoKnownRisk"
   },
 
-  "hasActualPlacement": {
-    "@id": "ex:INVALID-003/actual",
-    "@type": "ActualPlacement",
-    "placementType": "Foster",
-    "providerURN": "URN-2030",
-    "placementLocation": "NOT A POSTCODE",
-    "isLocationPreferred": true,
-    "isEducationContinuous": true,
-    "siblingsPlacedTogether": 0,
-    "totalWeeklyCost": 1500.00
-  },
-
   "hasQualityAssurance": {
-    "@id": "ex:INVALID-003/qa",
+    "@id": "ex:INVALID-002/qa",
     "@type": "QualityAssurance",
     "referralDate":  "2024-02-12",
     "placementOfficerName": "Beth Green",

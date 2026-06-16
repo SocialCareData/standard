@@ -1,32 +1,31 @@
 {
-  "@context": "./context.jsonld",
-  "@id": "ex:INVALID-002",
+  "@context": "../../placements-context.jsonld",
+  "@id": "ex:INVALID-005",
   "@type": "Placement",
 
-  "childId": "INVALID002",
+  "placementId": "PLC-INVALID-005",
+  "childId": "INVALID005",
 
   "hasPlacementAvailability": {
-    "@id": "ex:INVALID-002/availability",
+    "@id": "ex:INVALID-005/availability",
     "@type": "PlacementAvailability",
-    "placementId": "PLC-INVALID-002",
-    "neededBy": "Today",
-    "isPreferredLocationLocal": false,
-    "outOfLAReason": "CourtOrder"
+    "neededBy": "MoreThanFiveDays",
+    "isPreferredLocationLocal": true
   },
 
   "hasPlacementRequirements": {
-    "@id": "ex:INVALID-002/requirements",
+    "@id": "ex:INVALID-005/requirements",
     "@type": "PlacementRequirements",
-    "communicationNeeds": "NotSpecified",
-    "specificCommunicationRequirement": ["XYZ"],
+    "communicationNeeds": "No",
+    "specificCommunicationRequirement": ["None"],
     "culturalNeeds": "NotRequired",
     "livingCompanions": "NoPreference",
-    "pets": "MaybePets",
+    "pets": "YesCan",
     "homeAdaptationRequired": false
   },
 
   "hasPlacementRecommendation": {
-    "@id": "ex:INVALID-002/recommendation",
+    "@id": "ex:INVALID-005/recommendation",
     "@type": "PlacementRecommendation",
     "fosterCareSuitability": "Preferred",
     "residentialCareSuitability": "NotSpecified",
@@ -34,9 +33,9 @@
   },
 
   "hasRiskAssessment": {
-    "@id": "ex:INVALID-002/risk",
+    "@id": "ex:INVALID-005/risk",
     "@type": "RiskAssessment",
-    "riskSelfHarm":             "Severe",
+    "riskSelfHarm":             "NoKnownRisk",
     "riskCriminalExploitation": "NoKnownRisk",
     "riskDrugAlcohol":          "NoKnownRisk",
     "riskEatingDisorder":       "NoKnownRisk",
@@ -49,8 +48,23 @@
     "riskToOthersCriminal":     "NoKnownRisk"
   },
 
+  "hasActualPlacement": {
+    "@id": "ex:INVALID-005/actual",
+    "@type": "ActualPlacement",
+    "placementType": "Foster",
+    "providerURN": "URN-7777",
+    "placementLocation": "TA3",
+    "isLocationPreferred": true,
+    "isEducationContinuous": true,
+    "siblingsPlacedTogether": 0,
+    "totalWeeklyCost":             1800.00,
+    "coreWeeklyCost":              1500.00,
+    "additionalSupportWeeklyCost":  350.00,
+    "otherWeeklyCost":              -50.00
+  },
+
   "hasQualityAssurance": {
-    "@id": "ex:INVALID-002/qa",
+    "@id": "ex:INVALID-005/qa",
     "@type": "QualityAssurance",
     "referralDate":  "2024-02-12",
     "placementOfficerName": "Beth Green",

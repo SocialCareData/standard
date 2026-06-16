@@ -1,31 +1,32 @@
 {
-  "@context": "./context.jsonld",
-  "@id": "ex:INVALID-005",
+  "@context": "../../placements-context.jsonld",
+  "@id": "ex:NEEDEDBY-001",
   "@type": "Placement",
 
-  "placementId": "PLC-INVALID-005",
-  "childId": "INVALID005",
+  "placementId": "PLC-NEEDEDBY-001",
+  "childId": "NEEDEDBY001",
 
   "hasPlacementAvailability": {
-    "@id": "ex:INVALID-005/availability",
+    "@id": "ex:NEEDEDBY-001/availability",
     "@type": "PlacementAvailability",
-    "neededBy": "MoreThanFiveDays",
+    "neededBy": "> 5 days",
     "isPreferredLocationLocal": true
   },
 
   "hasPlacementRequirements": {
-    "@id": "ex:INVALID-005/requirements",
+    "@id": "ex:NEEDEDBY-001/requirements",
     "@type": "PlacementRequirements",
     "communicationNeeds": "No",
     "specificCommunicationRequirement": ["None"],
     "culturalNeeds": "NotRequired",
     "livingCompanions": "NoPreference",
     "pets": "YesCan",
-    "homeAdaptationRequired": false
+    "homeAdaptationRequired": false,
+    "deprivationOfLiberty": false
   },
 
   "hasPlacementRecommendation": {
-    "@id": "ex:INVALID-005/recommendation",
+    "@id": "ex:NEEDEDBY-001/recommendation",
     "@type": "PlacementRecommendation",
     "fosterCareSuitability": "Preferred",
     "residentialCareSuitability": "NotSpecified",
@@ -33,7 +34,7 @@
   },
 
   "hasRiskAssessment": {
-    "@id": "ex:INVALID-005/risk",
+    "@id": "ex:NEEDEDBY-001/risk",
     "@type": "RiskAssessment",
     "riskSelfHarm":             "NoKnownRisk",
     "riskCriminalExploitation": "NoKnownRisk",
@@ -48,27 +49,12 @@
     "riskToOthersCriminal":     "NoKnownRisk"
   },
 
-  "hasActualPlacement": {
-    "@id": "ex:INVALID-005/actual",
-    "@type": "ActualPlacement",
-    "placementType": "Foster",
-    "providerURN": "URN-7777",
-    "placementLocation": "TA3",
-    "isLocationPreferred": true,
-    "isEducationContinuous": true,
-    "siblingsPlacedTogether": 0,
-    "totalWeeklyCost":             1800.00,
-    "coreWeeklyCost":              1500.00,
-    "additionalSupportWeeklyCost":  350.00,
-    "otherWeeklyCost":              -50.00
-  },
-
   "hasQualityAssurance": {
-    "@id": "ex:INVALID-005/qa",
+    "@id": "ex:NEEDEDBY-001/qa",
     "@type": "QualityAssurance",
-    "referralDate":  "2024-02-12",
-    "placementOfficerName": "Beth Green",
-    "placementDate": "2024-03-21",
-    "costDate":      "2024-03-25"
+    "referralDate": "2024-05-01",
+    "placementOfficerName": "Jordan Lee",
+    "placementDate": "2024-05-05",
+    "costDate": "2024-05-07"
   }
 }
