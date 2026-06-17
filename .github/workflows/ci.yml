@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+
+      - name: Install Pagefind
+        run: npm install -g pagefind
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      - name: Build Jekyll
+        timeout-minutes: 15
+        run: bundle exec jekyll build
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./dist

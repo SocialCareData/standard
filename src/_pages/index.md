@@ -82,7 +82,7 @@ Social care interoperability framework workstream lead
 ## License
 
 Copyright and licensing
-: Unless otherwise stated, the content on this website is [© Crown copyright](http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/) and is made available under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). This means you can copy, publish, distribute, and adapt the content, as long as you follow the terms of the licence (including attribution).
+: Unless otherwise stated, the content on this website is [© Crown copyright](https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/) and is made available under the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). This means you can copy, publish, distribute, and adapt the content, as long as you follow the terms of the licence (including attribution).
 
 Software and source code
 : Any software or source code published on this website is released under the [MIT Licence](https://github.com/socialcaredata/standard/blob/main/LICENSE.MIT), unless otherwise stated in the relevant repository or accompanying documentation.
