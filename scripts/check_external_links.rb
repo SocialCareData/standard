@@ -21,15 +21,30 @@ def check(href)
   http.open_timeout = 10
   http.read_timeout = 10
 
-  req = Net::HTTP::Get.new(uri.request_uri)
-  req['User-Agent'] = USER_AGENT
-  res = http.request(req)
+  attempts = 0
+  begin
+    attempts += 1
 
-  code = res.code.to_i
-  return nil if code >= 200 && code < 400
-  "HTTP #{code}"
-rescue StandardError => e
-  "#{e.class}: #{e.message}"
+    req = Net::HTTP::Head.new(uri.request_uri)
+    req['User-Agent'] = USER_AGENT
+    res = http.request(req)
+
+    # Some servers don't support HEAD.
+    if [405, 501].include?(res.code.to_i)
+      req = Net::HTTP::Get.new(uri.request_uri)
+      req['User-Agent'] = USER_AGENT
+      res = http.request(req)
+    end
+
+    code = res.code.to_i
+    return nil if code >= 200 && code < 400
+    "HTTP #{code}"
+  rescue Net::OpenTimeout, Net::ReadTimeout, Errno::ECONNRESET, EOFError => e
+    retry if attempts < 3
+    "#{e.class}: #{e.message}"
+  rescue StandardError => e
+    "#{e.class}: #{e.message}"
+  end
 end
 
 Find.find(site) do |path|
