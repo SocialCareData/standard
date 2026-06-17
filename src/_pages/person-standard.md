@@ -422,7 +422,7 @@ Worked examples:
 | `UUU` | The full date is unknown (placeholder date should be treated as a guess). |
 {:.table-bordered}
 
-Aligned with the FHIR [`date-accuracy-indicator`](https://hl7.org/fhir/extension-date-accuracy-indicator.html) extension pattern.
+Aligned with the FHIR [`date-accuracy-indicator`](https://build.fhir.org/ig/hl7au/au-fhir-base/StructureDefinition-date-accuracy-indicator.html) extension pattern.
 
 ### Person Relationship Code Vocabulary
 
