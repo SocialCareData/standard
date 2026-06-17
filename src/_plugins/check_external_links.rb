@@ -42,7 +42,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
       end
 
       code = res.code.to_i
-      return nil if code >= 200 && code < 400
+      return nil if (code >= 200 && code < 400) || code == 403
       "HTTP #{code}"
     rescue Net::OpenTimeout, Net::ReadTimeout, Errno::ECONNRESET, EOFError => e
       retry if attempts < 3
