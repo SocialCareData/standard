@@ -36,6 +36,8 @@ nav:
   - title: Calendar
     url: /calendar
 pagefind: true
+check_internal_links: true
+check_external_links: false
 footer:
   copyright:
     title: Crown Copyright
