@@ -1,12 +1,12 @@
 ---
-title: Access and contribute to a shared record by the subject of that record or their family.
+title: Access and contribute to a shared record by the subject of that record or their family
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
 tags:
   - Placements
   - Use Case
-reference: UC1
+reference: UC01
 ---
 
 
