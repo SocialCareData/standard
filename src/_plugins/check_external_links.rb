@@ -1,5 +1,6 @@
 Jekyll::Hooks.register :site, :post_write do |site|
   next unless site.config['check_external_links']
+  next if site.config['watch']
 
   require 'find'
   require 'nokogiri'
