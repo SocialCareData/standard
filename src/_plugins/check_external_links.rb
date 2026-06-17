@@ -7,9 +7,16 @@ Jekyll::Hooks.register :site, :post_write do |site|
   require 'uri'
 
   dest       = site.dest
-  user_agent = 'Mozilla/5.0 (compatible; SocialCareData-link-checker/1.0)'
+  user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36'
   broken     = []
   seen       = {}
+
+  set_headers = lambda do |req|
+    req['User-Agent']      = user_agent
+    req['Accept']          = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    req['Accept-Language'] = 'en-GB,en;q=0.9'
+    req['Accept-Encoding'] = 'gzip, deflate, br'
+  end
 
   check = lambda do |href|
     uri  = URI(href)
@@ -23,13 +30,13 @@ Jekyll::Hooks.register :site, :post_write do |site|
       attempts += 1
 
       req = Net::HTTP::Head.new(uri.request_uri)
-      req['User-Agent'] = user_agent
+      set_headers.call(req)
       res = http.request(req)
 
       # Some servers don't support HEAD.
       if [405, 501].include?(res.code.to_i)
         req = Net::HTTP::Get.new(uri.request_uri)
-        req['User-Agent'] = user_agent
+        set_headers.call(req)
         res = http.request(req)
       end
 
