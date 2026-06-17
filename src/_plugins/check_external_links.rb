@@ -34,8 +34,9 @@ Jekyll::Hooks.register :site, :post_write do |site|
       set_headers.call(req)
       res = http.request(req)
 
-      # Some servers don't support HEAD.
-      if [405, 501].include?(res.code.to_i)
+      # Some servers don't handle HEAD correctly (e.g. returning 404/405/501
+      # for URLs that are valid via GET), so fall back to GET on any error.
+      if res.code.to_i >= 400 && res.code.to_i != 403
         req = Net::HTTP::Get.new(uri.request_uri)
         set_headers.call(req)
         res = http.request(req)
