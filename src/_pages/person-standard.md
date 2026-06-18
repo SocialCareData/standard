@@ -46,7 +46,7 @@ The following diagram illustrates the elements of the Person Standard.
 
 <p class="data-model-diagram"><img src="/assets/img/person/person-data-model.svg" alt="Person Data Model" title="Person Data Model" width="80%"/></p>
 
-A `Person` is the top-level record. It aggregates one or more `Identifier`s, one or more `Name`s, zero or more `Address`es, zero or more `Contact` entries, zero or more `PersonRelationship`s linking to other people, an optional `dateOfBirth` (with `PartialDate`), an optional `isDeceased` flag and optional `deceasedDate` (with `PartialDate`). Cross-system matches established with other agencies are recorded as `matchedPersonRef` — an array of `Identifier`s pointing to the same person as it is known in other systems. The person's gender, observed sex, and ethnicity are captured via controlled vocabularies.
+A `Person` is the top-level record. It aggregates one or more `Identifier`s, one or more `Name`s, zero or more `Address`es, zero or more `Contact` entries, zero or more `PersonRelationship`s linking to other people, an optional `dateOfBirth` (with `PartialDate`), an optional `isDeceased` flag and optional `deceasedDate` (with `PartialDate`). Cross-system matches established with other agencies are recorded as `matchedPersonRef` — an array of `Identifier`s pointing to the same person as it is known in other systems. The person's gender, phenotypic sex, and ethnicity are captured via controlled vocabularies.
 
 
 ### Person
@@ -55,7 +55,7 @@ The top-level record describing an individual. Consolidates the core identity at
 
 #### Properties
 
-<span id="person-identifiers">identifiers</span>
+<span id="person-identifier">identifier</span>
 : Unique identifiers associated with the person (e.g. NHS number, internal case-management system ID). Multi-valued. See [Identifier](/person_standard#identifier).
 
 <span id="person-names">name</span>
@@ -76,19 +76,19 @@ The top-level record describing an individual. Consolidates the core identity at
 <span id="person-contact">contact</span>
 : Person's contact information. Multi-valued. Optional. See [Contact](/person_standard#contact).
 
-<span id="person-gender">gender</span>
-: The person's stated gender. Optional. See the [Person Gender Code Vocabulary](/person_standard#person-gender-code-vocabulary).
+<span id="person-genderCode">genderCode</span>
+: The person's stated gender. Optional. See the [Gender Code Vocabulary](/person_standard#gender-code-vocabulary).
 
 <span id="person-sexCode">sexCode</span>
-: Observed phenotypic sex, where recorded. Optional. See the [Person Sex Code Vocabulary](/person_standard#person-sex-code-vocabulary).
+: Observed phenotypic sex, where recorded. Optional. See the [Phenotypic Sex Code Vocabulary](/person_standard#phenotypic-sex-code-vocabulary).
 
-<span id="person-ethnicCode">ethnicCode</span>
-: The person's stated ethnicity, using the ONS 18+1 categories from the 2021 census. Statutorily required in adult social care; optional elsewhere. See the [Person Ethnic Code Vocabulary](/person_standard#person-ethnic-code-vocabulary).
+<span id="person-ethnicityCode">ethnicityCode</span>
+: The person's stated ethnicity, using the ONS 18+1 categories from the 2021 census. Statutorily required in adult social care; optional elsewhere. See the [Ethnicity Code Vocabulary](/person_standard#ethnicity-code-vocabulary).
 
-<span id="person-relatedPeople">relatedPeople</span>
+<span id="person-relatedPerson">relatedPerson</span>
 : References to other people related to this person, with the kind of relationship. Multi-valued. See [PersonRelationship](/person_standard#personrelationship).
 
-<span id="person-relatedPeople">primaryContactProfessionals</span>
+<span id="person-primaryContactProfessional">primaryContactProfessional</span>
 : References to the primary professionals related to this person. For example, care coordinators or a GP. Multi-valued. Optional. See Professional. [TODO Professional standard to be published]
 
 <span id="person-matchedPersonRef">matchedPersonRef</span>
@@ -103,16 +103,15 @@ The top-level record describing an individual. Consolidates the core identity at
   "@context": "https://socialcaredata.github.io/ontology/person/context.jsonld",
   "@id": "ex:person-9434765919",
   "@type": "Person",
-  "identifiers":      [ { "see Identifier example" } ],
+  "identifier":      [ { "see Identifier example" } ],
   "names":            [ { "see Name example" } ],
   "dateOfBirth":      { "see PartialDate example" },
   "isDeceased":       false
   "address":        [ { "see Address example" } ],
-  "gender":           "2",
+  "genderCode":           "2",
   "sexCode":          "2",
-  "ethnicCode":       "17",
-  "deceased":         { "see Deceased example" },
-  "relatedPeople":    [ { "see PersonRelationship example" } ],
+  "ethnicityCode":       "17",
+  "relatedPerson":    [ { "see PersonRelationship example" } ],
   "matchedPersonRef": [
     { "@type": "Identifier", "value": "EDU-987654", "system": "https://example.org/Id/lea-code" }
   ]
@@ -122,7 +121,7 @@ The top-level record describing an individual. Consolidates the core identity at
 
 <div class="note">
   <h5 id="note-person">Note - conformance minimum</h5>
-  <p>A conformant <code>Person</code> record MUST include at least one <code>Identifier</code>, at least one <code>Name</code> with a family name and at least one given name. All other properties are OPTIONAL where their cardinality permits, though several are statutorily required by specific data collections (e.g. <code>ethnicCode</code> in adult social care, and <code>isDeceased</code> with optional <code>deceasedDate</code>).</p>
+  <p>A conformant <code>Person</code> record MUST include at least one <code>Identifier</code>, at least one <code>Name</code> with a family name and at least one given name. All other properties are OPTIONAL where their cardinality permits, though several are statutorily required by specific data collections (e.g. <code>ethnicityCode</code> in adult social care, and <code>isDeceased</code> with optional <code>deceasedDate</code>).</p>
 </div>
 
 
@@ -161,14 +160,14 @@ Container for a person's name parts, aligned with FHIR `HumanName`. A person may
 <span id="name-familyName">familyName</span>
 : The surname or family name. Multi-valued to support compound or hyphenated family names recorded as separate parts. _String_.
 
-<span id="name-givenNames">givenNames</span>
+<span id="name-givenName">givenName</span>
 : The first name and any middle names. Multi-valued. _String_.
 
-<span id="name-preferredNames">preferredNames</span>
+<span id="name-preferredName">preferredName</span>
 : Any preferred given or middle name(s) used by the person — for example, "Joe" where their legal first name is "Joseph". Optional. _String_.
 
-<span id="name-use">use</span>
-: The purpose of this name instance — current/official, former, nickname, etc. Optional. See the [Name Use Vocabulary](/person_standard#name-use-vocabulary).
+<span id="name-use-code">use</span>
+: The purpose of this name instance — current/official, former, nickname, etc. Optional. See the [Name Use Code Vocabulary](/person_standard#name-use-code-vocabulary).
 
 #### Example
 
@@ -178,8 +177,8 @@ Container for a person's name parts, aligned with FHIR `HumanName`. A person may
 {
   "@type": "Name",
   "familyName": ["Doe"],
-  "givenNames": ["Jane", "Elizabeth"],
-  "preferredNames": "Janie",
+  "givenName": ["Jane", "Elizabeth"],
+  "preferredName": "Janie",
   "use": "official"
 }
 {% endhighlight %}
@@ -210,6 +209,10 @@ A postal address for the person. Aligned with FHIR `Address`. Addresses are post
 <span id="address-USRN">USRN</span>
 : Unique Street Reference Number of the address. Optional. _String_.
 
+<span id="address-use-code">use</span>
+: How this address is used — home, work, temp, etc. Optional. See the [Address Use Code Vocabulary](/person_standard#address-use-code-vocabulary).
+
+
 #### Example
 
 <div class="example">
@@ -222,7 +225,8 @@ A postal address for the person. Aligned with FHIR `Address`. Addresses are post
   "city": "Anytown",
   "postcode": "AB1 2CD",
   "UPRN": "100012345678",
-  "USRN": "12345678"
+  "USRN": "12345678",
+  "use": "home"
 }
 {% endhighlight %}
 </div>
@@ -315,9 +319,9 @@ Container for a date that may not be fully known or precise, extended with an ac
 
 ## Vocabularies
 
-The model is parameterised by six controlled vocabularies, each held in its own include file under `src/_includes/vocabularies/`.
+The model is parameterised by seven controlled vocabularies, each held in its own include file under `src/_includes/vocabularies/`.
 
-### Name Use Vocabulary
+### Name Use Code Vocabulary
 
 Used by [`Name.use`](/person_standard#name-use).
 
@@ -334,9 +338,24 @@ Indicates the intended purpose of a person's name, allowing applications to sele
 | `maiden` | Maiden name | A name used prior to marriage. Applies regardless of gender. |
 {:.table-bordered}
 
-### Person Gender Code Vocabulary
+### Address Use Code Vocabulary
 
-Used by [`Person.gender`](/person_standard#person-gender).
+Used by [`Address.use`](/person_standard#address-use-code).
+
+Specifies how an address is used, allowing applications to prioritise addresses based on context. Aligned with the [FHIR `address-use`](https://build.fhir.org/valueset-address-use.html) value set.
+
+| Code | Label | Definition |
+| :--- | :--- | :--- |
+| `home` | Home | A communication address at a home. |
+| `work` | Work | An office address. First choice for business related contacts during business hours. |
+| `temp` | Temporary | A temporary address. The period can provide more detailed information. |
+| `old` | Old / Incorrect | This address is no longer in use (or was never correct but retained for records). |
+| `billing` | Billing | An address to be used to send bills, invoices, receipts etc. |
+{:.table-bordered}
+
+### Gender Code Vocabulary
+
+Used by [`Person.genderCode`](/person_standard#person-genderCode).
 
 Represents a person's stated gender identity, as distinct from biological sex. Aligned with the NHS Data Dictionary [`PERSON_STATED_GENDER_CODE`](https://www.datadictionary.nhs.uk/attributes/person_stated_gender_code.html).
 
@@ -348,7 +367,7 @@ Represents a person's stated gender identity, as distinct from biological sex. A
 | `X` | Not Known | Not recorded, or information unavailable. |
 {:.table-bordered}
 
-### Person Sex Code Vocabulary
+### Phenotypic Sex Code Vocabulary
 
 Used by [`Person.sexCode`](/person_standard#person-sexCode).
 
@@ -362,9 +381,9 @@ Documents observed phenotypic sex where recorded, representing biological charac
 | `X` | Not Known | Not recorded, or information unavailable. |
 {:.table-bordered}
 
-### Person Ethnic Code Vocabulary
+### Ethnicity Code Vocabulary
 
-Used by [`Person.ethnicCode`](/person_standard#person-ethnicCode).
+Used by [`Person.ethnicityCode`](/person_standard#person-ethnicityCode).
 
 The person's stated ethnicity. Uses [ONS Census 2021 Ethnic group classification 20b](https://www.ons.gov.uk/census/census2021dictionary/variablesbytopic/ethnicgroupnationalidentitylanguageandreligionvariablescensus2021/ethnicgroup/classifications#:~:text=Ethnic%20group%20classification%2020b) codes.
 
@@ -554,7 +573,7 @@ In creating this specification we reviewed and aligned with:
 - [schema.org](https://schema.org/)
 - iStandUK Scalable Approach to Vulnerability via Interoperability (SAVVI)
 
-The Person Standard is a reduced subset of the FHIR `Patient` resource, extended where social-care-specific use cases require it (e.g. `ethnicCode` with ONS 18+1, the `accuracyIndicator` on `PartialDate`, and `matchedPersonRef` for cross-system matches). A subset of its properties can be used to query the NHS PDS directly.
+The Person Standard is a reduced subset of the FHIR `Patient` resource, extended where social-care-specific use cases require it (e.g. `ethnicityCode` with ONS 18+1, the `accuracyIndicator` on `PartialDate`, and `matchedPersonRef` for cross-system matches). A subset of its properties can be used to query the NHS PDS directly.
 
 ### See also
 
