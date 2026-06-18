@@ -34,7 +34,7 @@ breadcrumbs:
 
 -  Social Finance recapped the project. They outlined the three-year partnership with Quorum, Open Data Institute, and DfE to develop data and technological standards for children's social care, focusing this working group on improving data analysis and strategic decision-making in the placement market, with participants from a wide range of sectors contributing.
 - Programme Scope: Ivjyot explained that the programme aims to improve data sharing to support safeguarding decisions, enhance productivity for social workers, and increase power sharing with children and families, with this working group specifically focusing on improving sufficiency analysis and strategic decision-making in the children's social care market.
-- Timeline and Collaboration: The first year is dedicated to establishing foundational standards, demonstrating benefits, and building a network of collaborators, with the intention to release a suite of standards over the next two to two and a half years, based on input from the working group and prioritised [use cases](/use_case_children_social_care_placements).
+- Timeline and Collaboration: The first year is dedicated to establishing foundational standards, demonstrating benefits, and building a network of collaborators, with the intention to release a suite of standards over the next two to two and a half years, based on input from the working group and prioritised [use cases](/UC00_standardising_children_social_care_placements_data).
 
 ### Design Decisions on Placement Cost Data
 
