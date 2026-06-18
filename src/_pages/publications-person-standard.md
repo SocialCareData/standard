@@ -56,37 +56,37 @@ The top-level record describing an individual. Consolidates the core identity at
 #### Properties
 
 <span id="person-identifier">identifier</span>
-: Unique identifiers associated with the person (e.g. NHS number, internal case-management system ID). Multi-valued. See [Identifier](/person_standard#identifier).
+: Unique identifiers associated with the person (e.g. NHS number, internal case-management system ID). Multi-valued. See [Identifier](#identifier).
 
 <span id="person-name">name</span>
-: One or more names for the person, each with a usage indicating its purpose (usual, maiden, nickname, etc.). Multi-valued. See [Name](/person_standard#name).
+: One or more names for the person, each with a usage indicating its purpose (usual, maiden, nickname, etc.). Multi-valued. See [Name](#name).
 
 <span id="person-dateOfBirth">dateOfBirth</span>
-: The person's date of birth, with an optional accuracy indicator. Optional. See [PartialDate](/person_standard#partialdate).
+: The person's date of birth, with an optional accuracy indicator. Optional. See [PartialDate](#partialdate).
 
 <span id="person-isDeceased">isDeceased</span>
 : Whether the person is deceased. Optional. _Boolean_.
 
 <span id="person-deceasedDate">deceasedDate</span>
-: The person's date of death, with an optional accuracy indicator. Optional — `isDeceased` may be `true` without a known date. See [PartialDate](/person_standard#partialdate).
+: The person's date of death, with an optional accuracy indicator. Optional — `isDeceased` may be `true` without a known date. See [PartialDate](#partialdate).
 
 <span id="person-addresses">address</span>
-: Physical addresses where the person can be contacted. Multi-valued. Optional. See [Address](/person_standard#address).
+: Physical addresses where the person can be contacted. Multi-valued. Optional. See [Address](#address).
 
 <span id="person-contact">contact</span>
-: Person's contact information. Multi-valued. Optional. See [Contact](/person_standard#contact).
+: Person's contact information. Multi-valued. Optional. See [Contact](#contact).
 
 <span id="person-genderCode">genderCode</span>
-: The person's stated gender. Optional. See the [Gender Code Vocabulary](/person_standard#gender-code-vocabulary).
+: The person's stated gender. Optional. See the [Gender Code Vocabulary](#gender-code-vocabulary).
 
 <span id="person-sexCode">sexCode</span>
-: Observed phenotypic sex, where recorded. Optional. See the [Phenotypic Sex Code Vocabulary](/person_standard#phenotypic-sex-code-vocabulary).
+: Observed phenotypic sex, where recorded. Optional. See the [Phenotypic Sex Code Vocabulary](#phenotypic-sex-code-vocabulary).
 
 <span id="person-ethnicityCode">ethnicityCode</span>
-: The person's stated ethnicity, using the ONS 18+1 categories from the 2021 census. Statutorily required in adult social care; optional elsewhere. See the [Ethnicity Code Vocabulary](/person_standard#ethnicity-code-vocabulary).
+: The person's stated ethnicity, using the ONS 18+1 categories from the 2021 census. Statutorily required in adult social care; optional elsewhere. See the [Ethnicity Code Vocabulary](#ethnicity-code-vocabulary).
 
 <span id="person-relatedPerson">relatedPerson</span>
-: References to other people related to this person, with the kind of relationship. Multi-valued. See [PersonRelationship](/person_standard#personrelationship).
+: References to other people related to this person, with the kind of relationship. Multi-valued. See [PersonRelationship](#personrelationship).
 
 <span id="person-primaryContactProfessional">primaryContactProfessional</span>
 : References to the primary professionals related to this person. For example, care coordinators or a GP. Multi-valued. Optional. See `Professional`.
@@ -94,7 +94,7 @@ The top-level record describing an individual. Consolidates the core identity at
 _The `Professional` entity will be defined in a forthcoming Professional Data Standard. Until that standard is published, implementers should record professional references using the `Identifier` structure (system + value)._
 
 <span id="person-matchedPersonRef">matchedPersonRef</span>
-: A reference to another Person record, if a match has been identified. Multi-valued. Optional. See [Identifier](/person_standard#identifier) entity for the structure.
+: A reference to another Person record, if a match has been identified. Multi-valued. Optional. See [Identifier](#identifier) entity for the structure.
 
 #### Example
 
@@ -169,7 +169,7 @@ Container for a person's name parts, aligned with FHIR `HumanName`. A person may
 : Any preferred given or middle name(s) used by the person — for example, "Joe" where their legal first name is "Joseph". Optional. _String_.
 
 <span id="name-use-code">use</span>
-: The purpose of this name instance — current/official, former, nickname, etc. Optional. See the [Name Use Code Vocabulary](/person_standard#name-use-code-vocabulary).
+: The purpose of this name instance — current/official, former, nickname, etc. Optional. See the [Name Use Code Vocabulary](#name-use-code-vocabulary).
 
 #### Example
 
@@ -212,7 +212,7 @@ A postal address for the person. Aligned with FHIR `Address`. Addresses are post
 : Unique Street Reference Number of the address. Optional. _String_.
 
 <span id="address-use-code">use</span>
-: How this address is used — home, work, temp, etc. Optional. See the [Address Use Code Vocabulary](/person_standard#address-use-code-vocabulary).
+: How this address is used — home, work, temp, etc. Optional. See the [Address Use Code Vocabulary](#address-use-code-vocabulary).
 
 
 #### Example
@@ -271,10 +271,10 @@ A typed reference from one person to another. The reference is by `Identifier` (
 #### Properties
 
 <span id="personrelationship-identifier">identifier</span>
-: Reference to the related person's `Identifier` (system + value). See [Identifier](/person_standard#identifier).
+: Reference to the related person's `Identifier` (system + value). See [Identifier](#identifier).
 
 <span id="personrelationship-relationship">relationship</span>
-: One or more codes describing the kind of relationship. Multi-valued. See the [Person Relationship Code Vocabulary](/person_standard#person-relationship-code-vocabulary).
+: One or more codes describing the kind of relationship. Multi-valued. See the [Person Relationship Code Vocabulary](#person-relationship-code-vocabulary).
 
 #### Example
 
@@ -304,7 +304,7 @@ Container for a date that may not be fully known or precise, extended with an ac
 : ISO 8601-formatted date (`YYYY-MM-DD`). _Date_.
 
 <span id="partialdate-accuracyIndicator">accuracyIndicator</span>
-: A three-character code in day–month–year order indicating which parts of the date are accurate, estimated, or unknown. Optional. See the [Date Accuracy Indicator Vocabulary](/person_standard#date-accuracy-indicator-vocabulary).
+: A three-character code in day–month–year order indicating which parts of the date are accurate, estimated, or unknown. Optional. See the [Date Accuracy Indicator Vocabulary](#date-accuracy-indicator-vocabulary).
 
 #### Example
 
@@ -326,7 +326,7 @@ The model is parameterised by seven controlled vocabularies, each held in its ow
 
 ### Name Use Code Vocabulary
 
-Used by [`Name.use`](/person_standard#name-use).
+Used by [`Name.use`](#name-use).
 
 Indicates the intended purpose of a person's name, allowing applications to select the appropriate name for specific contexts. A name is assumed to be current unless it is marked as `temp` or `old`. Aligned with the [FHIR `name-use`](https://hl7.org/fhir/valueset-name-use.html) value set.
 
@@ -343,7 +343,7 @@ Indicates the intended purpose of a person's name, allowing applications to sele
 
 ### Address Use Code Vocabulary
 
-Used by [`Address.use`](/person_standard#address-use-code).
+Used by [`Address.use`](#address-use-code).
 
 Specifies how an address is used, allowing applications to prioritise addresses based on context. Aligned with the [FHIR `address-use`](https://build.fhir.org/valueset-address-use.html) value set. Plays a similar role to the [GDS](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42) `Residence > Residence Status > Residence Type` attribute.
 
@@ -358,7 +358,7 @@ Specifies how an address is used, allowing applications to prioritise addresses 
 
 ### Gender Code Vocabulary
 
-Used by [`Person.genderCode`](/person_standard#person-genderCode).
+Used by [`Person.genderCode`](#person-genderCode).
 
 Represents a person's stated gender identity, as distinct from biological sex. Aligned with the NHS Data Dictionary [`PERSON_STATED_GENDER_CODE`](https://www.datadictionary.nhs.uk/attributes/person_stated_gender_code.html).
 
@@ -372,7 +372,7 @@ Represents a person's stated gender identity, as distinct from biological sex. A
 
 ### Phenotypic Sex Code Vocabulary
 
-Used by [`Person.sexCode`](/person_standard#person-sexCode).
+Used by [`Person.sexCode`](#person-sexCode).
 
 Documents observed phenotypic sex where recorded, representing biological characteristics rather than gender identity. Aligned with NHS PDS `PERSON_PHENOTYPIC_SEX`.
 
@@ -386,7 +386,7 @@ Documents observed phenotypic sex where recorded, representing biological charac
 
 ### Ethnicity Code Vocabulary
 
-Used by [`Person.ethnicityCode`](/person_standard#person-ethnicityCode).
+Used by [`Person.ethnicityCode`](#person-ethnicityCode).
 
 The person's stated ethnicity. Uses [ONS Census 2021 Ethnic group classification 20b](https://www.ons.gov.uk/census/census2021dictionary/variablesbytopic/ethnicgroupnationalidentitylanguageandreligionvariablescensus2021/ethnicgroup/classifications#:~:text=Ethnic%20group%20classification%2020b) codes.
 
@@ -418,7 +418,7 @@ The person's stated ethnicity. Uses [ONS Census 2021 Ethnic group classification
 
 ### Date Accuracy Indicator Vocabulary
 
-Used by [`PartialDate.accuracyIndicator`](/person_standard#partialdate-accuracyIndicator).
+Used by [`PartialDate.accuracyIndicator`](#partialdate-accuracyIndicator).
 
 A three-character code indicating the accuracy of each component of a date, in **day–month–year** order. Each position uses one of three letters:
 
@@ -448,7 +448,7 @@ Aligned with the FHIR [`date-accuracy-indicator`](https://build.fhir.org/ig/hl7a
 
 ### Person Relationship Code Vocabulary
 
-Used by [`PersonRelationship.relationship`](/person_standard#personrelationship-relationship).
+Used by [`PersonRelationship.relationship`](#personrelationship-relationship).
 
 Characterises personal relationships between individuals, including family, spousal, foster, adoptive, and other social connections. Aligned with the HL7 v3 [`PersonalRelationshipRoleType`](https://terminology.hl7.org/CodeSystem-v3-RoleCode.html) value set.
 
@@ -581,8 +581,8 @@ The Person Standard is a reduced subset of the FHIR `Patient` resource, extended
 
 ### See also
 
-- [Standard ways to describe a Person](/standard_ways_to_describe_a_person) — comparison of this standard with the Hippo GET API, NHS PDS, and the FHIR Patient resource.
-- [Person matching implementation](/person_matching_implementation) — how `matchedPersonRef` is established via the FHIR `$match` operation.
+- [Standard ways to describe a Person](/standards_comparison_ways_to_describe_a_person) — comparison of this standard with the Hippo GET API, NHS PDS, and the FHIR Patient resource.
+- [Person matching implementation](/standards_comparison_person_matching) — how `matchedPersonRef` is established via the FHIR `$match` operation.
 
 
 ## Report an issue

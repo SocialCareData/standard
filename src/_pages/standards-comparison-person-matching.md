@@ -1,5 +1,5 @@
 ---
-title: Person matching implementation
+title: "Standards comparison: Person matching implementation"
 tags:
   - Interoperability
   - MAIS
@@ -15,13 +15,12 @@ tags:
 
 <article class="numbered-headings">
 
-
-
 ## Introduction
 
 Matching, in this context, describes the technical details of a query operation in some database system containing person data (like a FHIR Master Patient Index) based on some set of (demographic and other) details about a person.
 
 The input details given are likely to be lacking in many cases (incomplete, wrong etc.), so the matching operation must be such that it produces results even in situations where a high-confidence, deterministic equivalence based on authoritative identification cannot be ascertained.
+
 
 ## The matching operation
 
@@ -35,13 +34,14 @@ Technical details for the implementation of the matching operation are specified
 
 Technical details of the person input data structure the query is required to find are specified in the [Person Data Standard (Identification)](https://socialcaredata.github.io/spec/person).
 
-#### ❗Note about response from Data Exchange Standard
+#### Note about response from Data Exchange Standard
 
 The Data Exchange Standard mandates a response object that is defined as a single FHIR `Parameters` resource with a boolean `match` parameter and a `contact` parameter which is an "Organization or a ContactPoint".
 
 However The FHIR `$match` operation is defined to return a `SearchSetBundle` out parameter which is defined to "contain a set of Patient records that represent possible matches", later also described as "a bundle containing patient records, ordered from most likely to least likely".
 
 We should probably modify the data exchange standard to follow FHIR more closely. This seems especially important in the case of lower quality (incomplete) match inputs which result in lower confidence query results. In these cases the expected output from the matching operation is an ordered collection of potential matches with their associated confidence scores.
+
 
 ## Scoring Matches
 
@@ -56,12 +56,14 @@ The following match grading system has been adjusted from [section 4.7 of the FH
 |    Good   |   .6  | Given Name(s) & Family Name & Date of Birth                              |
 {: .table-bordered}
 
-❗Some attributes from the Person Data Standard are missing from this table and should probably be considered as well:
+Some attributes from the Person Data Standard are missing from this table and should probably be considered as well:
+
 - UPRN
 - USRN
 - Preferred Name(s)
 
 Gender and sex are not referenced here due to the outcome of conversation with the working group, where participants were wary of the heterogeneity in gender/sex recording between systems.
+
 
 ## Matching Attributes
 
@@ -113,6 +115,7 @@ Dates should be normalized and compared in a probabilistic manner as examplified
 ### Postcode
 
 Taking into account the structure of UK postcodes with outward code denoting a large region and inward code denoting a specific smaller region, consider a algorithm like that of figure 6 on page 34 of the `Person_ID` Handbook:
+
 
 ## NHS Personal Demographics Service flow diagram
 

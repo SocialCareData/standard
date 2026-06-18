@@ -1,5 +1,5 @@
 ---
-title: "Use Case: Standardising children's social care placements data"
+title: "Standardising children's social care placements data"
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
