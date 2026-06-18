@@ -2,6 +2,7 @@
 title: Standard ways to describe a Person
 tags:
   - Interoperability
+  - MAIS
 ---
 
 <nav class="toc numbered-toc">
@@ -70,7 +71,7 @@ The table below compares our `Person` standard to the current GET API spec, the 
 
 {: style="text-align: center;"}
 
-| Get an Identifier API | Person Standard | PDS | FHIR | Notes |
+| Get an Identifier API | Person Standard | NHS PDS | FHIR | Notes |
 | :--- | :--- | :--- | :--- | :--- |
 | **personID** <br> (NHS number, provided in response only, not a query param) | **Identifier.value** <br><br> Cardinality: 1..1 (in a 1..* Identifier Object) <br><br> Definition: A single unique identifier attached to the person (e.g., NHS number). | | **Identifier.value** | GET and PDS use the NHS number as the single identifier. Our standard and FHIR permit multiple identifiers because care management systems often use internal alphanumeric IDs and may not hold an NHS number for every person on record. <br><br> The wider programme is moving toward NHS number as the single identifier across systems; until that convergence, the standard accommodates multiple heterogeneous identifiers. |
 | | **Identifier.system** <br><br> Cardinality: 1..1 (in a 1..* Identifier Object) <br><br> Definition: System that the identifier adheres to (e.g., https://fhir.nhs.uk/Id/nhs-number). | | **Identifier.system** | Required where more than one identifier type is permitted, to disambiguate. Follows the FHIR Identifier pattern using a URL namespace. |
