@@ -1,5 +1,5 @@
 ---
-title: Access and contribute to a shared record by the subject of that record or their family
+title: "Use Case: Access and contribute to a shared record by the subject of that record or their family"
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
