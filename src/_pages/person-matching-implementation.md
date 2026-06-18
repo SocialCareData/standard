@@ -2,6 +2,7 @@
 title: Person matching implementation
 tags:
   - Interoperability
+  - MAIS
 ---
 
 <nav class="toc numbered-toc">

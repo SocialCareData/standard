@@ -2,6 +2,7 @@
 title: Standard ways to describe a Person
 tags:
   - Interoperability
+  - MAIS
 ---
 
 <nav class="toc numbered-toc">
