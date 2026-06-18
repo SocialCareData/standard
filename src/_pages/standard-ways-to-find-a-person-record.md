@@ -98,7 +98,7 @@ The FIND response is a set of search results (`searchResultItem` entries), compa
 
 {: style="text-align: center;"}
 
-| FIND searchResultItem | SC Standard | FHIR DocumentReference | IHE XDS.b DocumentEntry | Notes |
+| FIND searchResultItem | Social Care Data Standard | FHIR DocumentReference | IHE XDS.b DocumentEntry | Notes |
 | :--- | :--- | :--- | :--- | :--- |
 | **recordType** <br><br> Cardinality: 1..1 <br><br> Definition: one of `childrens-services`, `crime-justice`, `education`, `health`, `personal` | **n/a** <br><br>Somewhat analogous to [services](https://socialcaredata.github.io/spec/service-episode/?tab=service) in SC data model:<br>- youth-offending<br>- primary-school<br>- high-school<br>- SEN-primary-school<br>- SEN-high-school<br>- alternative-provision-school<br>- social-care<br>- family-court<br>- CAMHS<br><br>This is not a complete list of services. | **`type`** (CodeableConcept) and **`category`** (CodeableConcept, 0..*) <br><br> [LOINC Document Ontology](https://loinc.org/document-ontology/current-version/) | **`typeCode`** (CodedValue) and **`classCode`** (high-level CodedValue) <br><br> [LOINC Document Ontology](https://loinc.org/document-ontology/current-version/) | FIND uses a coarse five-value enum spanning sectors. A controlled vocabulary for social care record types would be helpful; currently this behaves more like a broad record category. |
 | **recordURL** <br><br> Cardinality: 1..1 <br><br> Definition: URL where the record may be retrieved. | **n/a** | **`content.attachment.url`** | **URI** |  |
