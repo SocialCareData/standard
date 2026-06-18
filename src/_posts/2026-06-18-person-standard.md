@@ -1,6 +1,17 @@
 ---
 title: Person Standard
 description: A common data model for identifying and describing a person across social care systems, designed to unblock multi-agency information sharing and single-view use cases.
+changelog:
+  - The Person and ConnectedPerson entities have been unified into a single Person entity. The two shared approximately 80% of their fields and differed mainly in cardinality requirements.
+  - Validation strictness is now handled through context-specific profiles (shape files) rather than separate entity types, aligning with how FHIR manages validation variance across use contexts.
+  - RelatedPerson references changed from URI to Identifier.
+  - matchedPersonRef references changed from URI to Identifier
+  - PartialDate extracted as a reusable datatype
+  - Deceased.date upgraded to PartialDate
+  - UPRN and USRN type corrected from Float16 to String
+  - Plural property names changed to singular (for example, givenNames > givenName)
+  - Property names standardised for consistency (for example, ethnicCode > ethnicityCode - "ethnic" is an adjective; "ethnicity" is the correct noun form.)
+  - Vocabulary names decoupled from entity context (for example, PersonEthnicity > EthnicityCode)
 breadcrumbs:
   - title: Publications
     url: /publications
@@ -587,10 +598,5 @@ The Person Standard is a reduced subset of the FHIR `Patient` resource, extended
 ## Report an issue
 
 If you spot an issue with this standard, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Person+Standard%3A%20&page=https%3A%2F%2Fstandard.socialcaredata.io%2Fperson_standard&category=Person+Standard" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
-
-
-## Versions
-
-{% include versions.html %}
 
 </article>
