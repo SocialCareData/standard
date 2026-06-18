@@ -1,8 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches: [main]
   pull_request:
 
 jobs:
@@ -24,7 +22,3 @@ jobs:
       - name: Build Jekyll
         timeout-minutes: 15
         run: bundle exec jekyll build
-
-      - uses: actions/upload-pages-artifact@v5
-        with:
-          path: ./dist
