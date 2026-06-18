@@ -1,6 +1,11 @@
 ---
 title: Children's Social Care Placements Standard
 description: The children's social care placements standard helps regions answer their sufficiency questions by establishing a common data model to gather data about placements.
+changelog:
+  - Removed unused quality assurance fields
+  - Added data validation rules
+  - Updated reporting spreadsheet
+  - Added CSV format
 breadcrumbs:
   - title: Publications
     url: /publications
@@ -424,11 +429,9 @@ LA-internal metadata about who recorded each part of the placement record (refer
 {% endhighlight %}
 </div>
 
-
 ## Ontology
 
 The ontology for this specification is defined in Turtle format and is available at: [ontology.ttl](/assets/ttl/ontology.ttl).
-
 
 ## Taxonomies
 
@@ -502,7 +505,6 @@ Additional support provision required alongside a placement. Multi-valued: selec
 
 Source vocabulary: [taxonomy-support-type.ttl](/assets/ttl/taxonomy-support-type.ttl). Used by `additionalSupport` on [PlacementRequirements](/placements_standard#placementrequirements).
 
-
 ## Validation
 
 A [SHACL shape](/assets/shacl/shacl-shape.ttl) encodes:
@@ -515,21 +517,14 @@ A [SHACL shape](/assets/shacl/shacl-shape.ttl) encodes:
 
 A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, applies the [JSON-LD context file](/assets/shacl/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
 
-
 ## Standard Placement Reporting Spreadsheet
 
 Use the standard spreadsheet template for reporting placements data:
 
 [National Placement Standard spreadsheet (April 2026, v2)](/assets/spreadsheet/20260427_National-Placement-Standard-Excel-April-2026_v2.xlsx)
 
-
 ## Report an issue
 
 If you spot an issue with this standard, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Placements+Standard%3A%20&page=https%3A%2F%2Fstandard.socialcaredata.io%2Fplacements_standard&category=Placements+Standard" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
-
-
-## Versions
-
-{% include versions.html %}
 
 </article>
