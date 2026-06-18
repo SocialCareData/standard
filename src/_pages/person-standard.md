@@ -1,5 +1,6 @@
 ---
 title: Person Standard
+canonical: /2026_06_18_person_standard
 description: A common data model for identifying and describing a person across social care systems, designed to unblock multi-agency information sharing and single-view use cases.
 breadcrumbs:
   - title: Publications
