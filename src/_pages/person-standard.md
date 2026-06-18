@@ -33,7 +33,7 @@ This Person Standard will standardise some of the data collected about individua
 
 ### Scope
 
-This standard applies to the digital collection, storage, and exchange of key personal details to enable the Single View use case, as an enabler for multi-agency information sharing. It supersedes the earlier draft published at [github.com/SocialCareData/person-standard](https://github.com/SocialCareData/person-standard) and consolidates the person-related entities from the wider data model at [socialcaredata.github.io/data-model](https://socialcaredata.github.io/data-model/).
+This standard applies to the digital collection, storage, and exchange of key personal details to enable the Single View use case, as an enabler for multi-agency information sharing.
 
 ### Audience
 
@@ -46,19 +46,19 @@ The following diagram illustrates the elements of the Person Standard.
 
 <p class="data-model-diagram"><img src="/assets/img/person/person-data-model.svg" alt="Person Data Model" title="Person Data Model" width="80%"/></p>
 
-A `Person` is the top-level record. It aggregates one or more `Identifier`s, one or more `Name`s, zero or more `Address`es, zero or more `Contact` entries, zero or more `PersonRelationship`s linking to other people, an optional `dateOfBirth` (with `PartialDate`), an optional `isDeceased` flag and optional `deceasedDate` (with `PartialDate`). Cross-system matches established with other agencies are recorded as `matchedPersonRef` — an array of `Identifier`s pointing to the same person as it is known in other systems. The person's gender, phenotypic sex, and ethnicity are captured via controlled vocabularies.
+A `Person` is the top-level record. It aggregates zero or more `Identifier`s, one or more `Name`s, zero or more `Address`es, zero or more `Contact` entries, zero or more `PersonRelationship`s linking to other people, an optional `dateOfBirth` (with `PartialDate`), an optional `isDeceased` flag and optional `deceasedDate` (with `PartialDate`). Cross-system matches established with other agencies are recorded as `matchedPersonRef` — an array of `Identifier`s pointing to the same person as it is known in other systems. The person's gender, phenotypic sex, and ethnicity are captured via controlled vocabularies.
 
 
 ### Person
 
-The top-level record describing an individual. Consolidates the core identity attributes required to distinguish one person from another and to record relationships between individuals.
+The top-level record describing an individual. Consolidates the core identity attributes required to distinguish one person from another and to record relationships between individuals. Corresponds to the [Person](https://build.fhir.org/person.html) entity in FHIR and root `Person` entity in the [GDS Person Domain Logical Model](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42) (Domain Expert Group on Person - DEGoP).
 
 #### Properties
 
 <span id="person-identifier">identifier</span>
 : Unique identifiers associated with the person (e.g. NHS number, internal case-management system ID). Multi-valued. See [Identifier](/person_standard#identifier).
 
-<span id="person-names">name</span>
+<span id="person-name">name</span>
 : One or more names for the person, each with a usage indicating its purpose (usual, maiden, nickname, etc.). Multi-valued. See [Name](/person_standard#name).
 
 <span id="person-dateOfBirth">dateOfBirth</span>
@@ -89,7 +89,9 @@ The top-level record describing an individual. Consolidates the core identity at
 : References to other people related to this person, with the kind of relationship. Multi-valued. See [PersonRelationship](/person_standard#personrelationship).
 
 <span id="person-primaryContactProfessional">primaryContactProfessional</span>
-: References to the primary professionals related to this person. For example, care coordinators or a GP. Multi-valued. Optional. See Professional. [TODO Professional standard to be published]
+: References to the primary professionals related to this person. For example, care coordinators or a GP. Multi-valued. Optional. See `Professional`.
+
+_The `Professional` entity will be defined in a forthcoming Professional Data Standard. Until that standard is published, implementers should record professional references using the `Identifier` structure (system + value)._
 
 <span id="person-matchedPersonRef">matchedPersonRef</span>
 : A reference to another Person record, if a match has been identified. Multi-valued. Optional. See [Identifier](/person_standard#identifier) entity for the structure.
@@ -104,7 +106,7 @@ The top-level record describing an individual. Consolidates the core identity at
   "@id": "ex:person-9434765919",
   "@type": "Person",
   "identifier":      [ { "see Identifier example" } ],
-  "names":            [ { "see Name example" } ],
+  "name":            [ { "see Name example" } ],
   "dateOfBirth":      { "see PartialDate example" },
   "isDeceased":       false
   "address":        [ { "see Address example" } ],
@@ -127,7 +129,7 @@ The top-level record describing an individual. Consolidates the core identity at
 
 ### Identifier
 
-A single identifier for a person, comprising the value and the system in whose namespace the value is unique. Aligned with [FHIR `Identifier`](https://build.fhir.org/datatypes.html#Identifier) and the NHS PDS `UNIQUE_REFERENCE` definition.
+A single identifier for a person, comprising the value and the system in whose namespace the value is unique. Aligned with [FHIR `Identifier`](https://build.fhir.org/datatypes.html#Identifier), the NHS PDS `UNIQUE_REFERENCE` definition and the `Person Identifiers > Person's Identifiers` cluster in the [GDS Person Domain Logical Model](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42).
 
 #### Properties
 
@@ -153,7 +155,7 @@ A single identifier for a person, comprising the value and the system in whose n
 
 ### Name
 
-Container for a person's name parts, aligned with FHIR `HumanName`. A person may have multiple names with different uses (e.g. an official legal name plus a former maiden name retained for matching against legacy records).
+Container for a person's name parts, aligned with FHIR `HumanName`. A person may have multiple names with different uses (e.g. an official legal name plus a former maiden name retained for matching against legacy records). Maps to the [GDS Person Domain Logical Model](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42) `Name` cluster.
 
 #### Properties
 
@@ -187,7 +189,7 @@ Container for a person's name parts, aligned with FHIR `HumanName`. A person may
 
 ### Address
 
-A postal address for the person. Aligned with FHIR `Address`. Addresses are postal-convention based rather than coordinate based; UPRN and USRN are included to support property- and street-level disambiguation per [government guidance on property and street information](https://www.gov.uk/government/publications/open-standards-for-government/identifying-property-and-street-information).
+A postal address for the person. Aligned with FHIR `Address`. Addresses are postal-convention based rather than coordinate based; UPRN and USRN are included to support property- and street-level disambiguation per [government guidance on property and street information](https://www.gov.uk/government/publications/open-standards-for-government/identifying-property-and-street-information). Maps to the [GDS Person Domain Logical Model](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42) `Residence > Residence Identification` cluster (`Residence Location` and `Jurisdiction of Residence`).
 
 #### Properties
 
@@ -342,7 +344,7 @@ Indicates the intended purpose of a person's name, allowing applications to sele
 
 Used by [`Address.use`](/person_standard#address-use-code).
 
-Specifies how an address is used, allowing applications to prioritise addresses based on context. Aligned with the [FHIR `address-use`](https://build.fhir.org/valueset-address-use.html) value set.
+Specifies how an address is used, allowing applications to prioritise addresses based on context. Aligned with the [FHIR `address-use`](https://build.fhir.org/valueset-address-use.html) value set. Plays a similar role to the [GDS](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42) `Residence > Residence Status > Residence Type` attribute.
 
 | Code | Label | Definition |
 | :--- | :--- | :--- |
@@ -415,7 +417,7 @@ The person's stated ethnicity. Uses [ONS Census 2021 Ethnic group classification
 
 ### Date Accuracy Indicator Vocabulary
 
-Used by [`DateOfBirth.accuracyIndicator`](/person_standard#dateofbirth-accuracyIndicator).
+Used by [`PartialDate.accuracyIndicator`](/person_standard#partialdate-accuracyIndicator).
 
 A three-character code indicating the accuracy of each component of a date, in **day–month–year** order. Each position uses one of three letters:
 
@@ -572,6 +574,7 @@ In creating this specification we reviewed and aligned with:
 - Department for Education Common Basic Dataset (CBDS)
 - [schema.org](https://schema.org/)
 - iStandUK Scalable Approach to Vulnerability via Interoperability (SAVVI)
+- GDS / DSIT [Person Domain Logical Model](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42)
 
 The Person Standard is a reduced subset of the FHIR `Patient` resource, extended where social-care-specific use cases require it (e.g. `ethnicityCode` with ONS 18+1, the `accuracyIndicator` on `PartialDate`, and `matchedPersonRef` for cross-system matches). A subset of its properties can be used to query the NHS PDS directly.
 
