@@ -37,11 +37,11 @@ It focuses on how FIND supports multi-agency information sharing (MAIS), what it
 
 ## Related work: Standard ways to describe a Person
 
-This document builds on earlier work that compares the Person data model with Hippo Digital's GET service: [Standard ways to describe a Person](https://standard.socialcaredata.io/standard_ways_to_describe_a_person).
+This document builds on earlier work that compares the Person data model with Hippo Digital's GET service: [Standard ways to describe a Person](https://standard.socialcaredata.io/standards_comparison_ways_to_describe_a_person).
 
 ## How GET, FIND and FETCH work together
 
-A successful GET request returns the NHS number of a person. By itself, this does not provide the full safeguarding picture, but it is foundational for broader information sharing. The [previous document in this series](https://standard.socialcaredata.io/standard_ways_to_describe_a_person) lays out the current plan for APIs to be built in order support automated MAIS processes, as part of the overall DfE MAIS programme.
+A successful GET request returns the NHS number of a person. By itself, this does not provide the full safeguarding picture, but it is foundational for broader information sharing. The [previous document in this series](https://standard.socialcaredata.io/standards_comparison_ways_to_describe_a_person) lays out the current plan for APIs to be built in order support automated MAIS processes, as part of the overall DfE MAIS programme.
 
 Within the MAIS model, GET, FIND and FETCH are intended to operate as a sequence:
 
