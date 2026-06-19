@@ -181,7 +181,6 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
 .tag {
   border-radius: 1rem;
   font-size: .9rem;
-  margin-right: .6rem;
   padding: .1rem .7rem .2rem .6rem;
 }
 
@@ -232,7 +231,7 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
 }
 
 .content-list li {
-  margin-top: .25rem;
+  margin-top: .4rem;
 }
 
 .content-list .heading, .event-list .heading {
@@ -241,6 +240,19 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
 
 .content-list li span, .event-list li span {
   margin-right: .6rem;
+}
+
+.content-list li p {
+  margin: .4rem 0;
+}
+
+.flex-list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin: 0;
+  padding: 0;
 }
 
 /* W3C spec notes and examples style boxes */

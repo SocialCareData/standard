@@ -12,7 +12,10 @@
 
 {% unless _tf_sorted.size == 0 %}
 <nav class="tag-filter">
-  <a class="tag" href="{{ page.permalink }}">All</a>{% for _tf_tag in _tf_sorted %}<a class="tag" href="{{ page.permalink }}?tag={{ _tf_tag | url_encode }}">{{ _tf_tag }}</a>{% endfor %}
+  <ul class="flex-list">
+    <li><a class="tag" href="{{ page.permalink }}">All</a></li>{% for _tf_tag in _tf_sorted %}
+    <li><a class="tag" href="{{ page.permalink }}?tag={{ _tf_tag | url_encode }}">{{ _tf_tag }}</a></li>{% endfor %}
+  </ul>
 </nav>
 {% endunless %}
 

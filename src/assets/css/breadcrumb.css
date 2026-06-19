@@ -43,7 +43,7 @@
   pointer-events: none;
 }
 
-.breadcrumb li + li::before {
+.breadcrumb li:not(:last-child)::after{
   color: #d9d9d9;
   content: "/";
   margin: 0 1rem 0 0;
