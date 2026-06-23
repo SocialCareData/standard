@@ -1,0 +1,15 @@
+{
+  "@context": "../../person-context.jsonld",
+  "@id": "ex:person-bad-accuracy",
+  "@type": "Person",
+
+  "identifier": [
+    { "@type": "Identifier", "value": "3333333333", "system": "https://fhir.nhs.uk/Id/nhs-number" }
+  ],
+
+  "name": [
+    { "@type": "Name", "familyName": ["Bloggs"], "givenName": ["Joe"], "use": "official" }
+  ],
+
+  "dateOfBirth": { "@type": "PartialDate", "date": "1990-06-01", "accuracyIndicator": "ABC" }
+}

@@ -1,0 +1,67 @@
+@prefix p: <https://ns.socialcaredata.io/person/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://ns.socialcaredata.io/person/ontology-name> rdf:type owl:Ontology ;
+    dct:title "Name Class Ontology" ;
+    dct:description "Definition of the Name class — a person's name parts with an optional use indicator." ;
+    owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Data properties
+#################################################################
+
+p:familyName rdf:type owl:DatatypeProperty ;
+    rdfs:domain p:Name ;
+    rdfs:range xsd:string ;
+    rdfs:label "family name" ;
+    rdfs:comment "The surname or family name. Multi-valued to support compound or hyphenated family names recorded as separate parts." .
+
+p:givenName rdf:type owl:DatatypeProperty ;
+    rdfs:domain p:Name ;
+    rdfs:range xsd:string ;
+    rdfs:label "given name" ;
+    rdfs:comment "The first name and any middle names. Multi-valued." .
+
+p:preferredName rdf:type owl:DatatypeProperty ;
+    rdfs:domain p:Name ;
+    rdfs:range xsd:string ;
+    rdfs:label "preferred name" ;
+    rdfs:comment "Any preferred given or middle name(s) used by the person." .
+
+#################################################################
+#    Object Properties
+#
+#    p:use is shared between Name (Name Use Code vocabulary) and Address
+#    (Address Use Code vocabulary). It is declared here without a domain
+#    restriction; valid value sets per containing class are enforced by SHACL.
+#################################################################
+
+p:use rdf:type owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:label "use" ;
+    rdfs:comment "How an instance is used — e.g. the purpose of a Name or the use of an Address. The applicable vocabulary depends on the containing class (Name Use Code for Name, Address Use Code for Address)." .
+
+#################################################################
+#    Classes
+#################################################################
+
+p:Name rdf:type owl:Class ;
+    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                      owl:onProperty p:familyName ;
+                      owl:minCardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:givenName ;
+                      owl:minCardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:use ;
+                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                    ] ;
+    rdfs:label "Name" ;
+    rdfs:comment "Container for a person's name parts, aligned with FHIR HumanName." .

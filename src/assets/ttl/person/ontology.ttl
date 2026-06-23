@@ -1,0 +1,49 @@
+@prefix : <https://ns.socialcaredata.io/person/> .
+@prefix p: <https://ns.socialcaredata.io/person/> .
+
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <https://ns.socialcaredata.io/person/> .
+
+<https://ns.socialcaredata.io/person> rdf:type owl:Ontology ;
+      owl:imports <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/ontology-person.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/ontology-identifier.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/ontology-name.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/ontology-address.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/ontology-contact.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/ontology-person-relationship.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/ontology-partial-date.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/taxonomy-name-use-code.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/taxonomy-address-use-code.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/taxonomy-gender-code.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/taxonomy-phenotypic-sex-code.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/taxonomy-ethnicity-code.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/taxonomy-date-accuracy-indicator.ttl> ,
+                  <https://raw.githubusercontent.com/SocialCareData/standard/refs/heads/main/assets/ttl/person/taxonomy-person-relationship-code.ttl> ;
+      dct:creator "ODI / SocialCareData working group" ;
+      dct:description "An OWL ontology that models the data captured to identify a person and describe their relationships across social care systems." ;
+      dct:issued "2026-06-16"^^xsd:date ;
+      dct:title "Person Ontology" ;
+      rdfs:label "Person Ontology" ;
+      owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+dct:creator rdf:type owl:AnnotationProperty .
+
+dct:issued rdf:type owl:AnnotationProperty .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+xsd:date rdf:type rdfs:Datatype .
+
+xsd:anyURI rdf:type rdfs:Datatype .

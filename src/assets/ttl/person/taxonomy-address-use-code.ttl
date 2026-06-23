@@ -1,0 +1,50 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix auc:   <https://ns.socialcaredata.io/person/address-use-code#> .
+
+<https://ns.socialcaredata.io/person/address-use-code> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Address Use Code Vocabulary" ;
+    rdfs:label "Address Use Code" ;
+    skos:prefLabel "Address Use Code" ;
+    dct:description "Specifies how an address is used, allowing applications to prioritise addresses based on context. Aligned with the FHIR address-use value set." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept auc:Home , auc:Work , auc:Temp , auc:Old , auc:Billing .
+
+auc:Home a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:prefLabel "Home" ;
+    skos:notation "home" ;
+    skos:definition "A communication address at a home." .
+
+auc:Work a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:prefLabel "Work" ;
+    skos:notation "work" ;
+    skos:definition "An office address. First choice for business-related contacts during business hours." .
+
+auc:Temp a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:prefLabel "Temporary" ;
+    skos:notation "temp" ;
+    skos:definition "A temporary address. The period can provide more detailed information." .
+
+auc:Old a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:prefLabel "Old / Incorrect" ;
+    skos:notation "old" ;
+    skos:definition "This address is no longer in use (or was never correct but retained for records)." .
+
+auc:Billing a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:prefLabel "Billing" ;
+    skos:notation "billing" ;
+    skos:definition "An address to be used to send bills, invoices, receipts etc." .

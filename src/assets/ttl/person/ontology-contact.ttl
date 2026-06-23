@@ -1,0 +1,46 @@
+@prefix p: <https://ns.socialcaredata.io/person/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://ns.socialcaredata.io/person/ontology-contact> rdf:type owl:Ontology ;
+    dct:title "Contact Class Ontology" ;
+    dct:description "Definition of the Contact class — contact details for a person, grouped by type (e.g. Home, Work)." ;
+    owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Data properties
+#################################################################
+
+p:contactName rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+    rdfs:domain p:Contact ;
+    rdfs:range xsd:string ;
+    rdfs:label "contact name" ;
+    rdfs:comment "Name of the contact type (for example, 'Home', 'Work', 'Other'). Serialised in JSON-LD as 'name'." .
+
+p:email rdf:type owl:DatatypeProperty ;
+    rdfs:domain p:Contact ;
+    rdfs:range xsd:string ;
+    rdfs:label "email" ;
+    rdfs:comment "One or more email addresses. Multi-valued." .
+
+p:telephone rdf:type owl:DatatypeProperty ;
+    rdfs:domain p:Contact ;
+    rdfs:range xsd:string ;
+    rdfs:label "telephone" ;
+    rdfs:comment "One or more telephone numbers. Multi-valued." .
+
+#################################################################
+#    Classes
+#################################################################
+
+p:Contact rdf:type owl:Class ;
+    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                      owl:onProperty p:contactName ;
+                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                    ] ;
+    rdfs:label "Contact" ;
+    rdfs:comment "Contact details for a person, such as a home, work, or other contact channel grouping." .

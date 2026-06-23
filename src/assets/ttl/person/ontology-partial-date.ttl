@@ -1,0 +1,45 @@
+@prefix p: <https://ns.socialcaredata.io/person/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://ns.socialcaredata.io/person/ontology-partial-date> rdf:type owl:Ontology ;
+    dct:title "PartialDate Class Ontology" ;
+    dct:description "Definition of the PartialDate class — a date with an optional three-character accuracy indicator in day-month-year order." ;
+    owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Data properties
+#################################################################
+
+p:date rdf:type owl:DatatypeProperty ,
+                owl:FunctionalProperty ;
+    rdfs:domain p:PartialDate ;
+    rdfs:range xsd:date ;
+    rdfs:label "date" ;
+    rdfs:comment "ISO 8601-formatted date (YYYY-MM-DD)." .
+
+p:accuracyIndicator rdf:type owl:DatatypeProperty ,
+                             owl:FunctionalProperty ;
+    rdfs:domain p:PartialDate ;
+    rdfs:range xsd:string ;
+    rdfs:label "accuracy indicator" ;
+    rdfs:comment "A three-character code in day-month-year order indicating which parts of the date are accurate, estimated, or unknown. Each position uses one of A (Accurate), E (Estimated), U (Unknown)." .
+
+#################################################################
+#    Classes
+#################################################################
+
+p:PartialDate rdf:type owl:Class ;
+    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                      owl:onProperty p:date ;
+                      owl:cardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:accuracyIndicator ;
+                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                    ] ;
+    rdfs:label "PartialDate" ;
+    rdfs:comment "Container for a date that may not be fully known or precise, extended with an accuracy indicator." .

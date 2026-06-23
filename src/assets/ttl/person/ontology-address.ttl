@@ -1,0 +1,102 @@
+@prefix p: <https://ns.socialcaredata.io/person/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://ns.socialcaredata.io/person/ontology-address> rdf:type owl:Ontology ;
+    dct:title "Address Class Ontology" ;
+    dct:description "Definition of the Address class — a postal address aligned with FHIR Address, extended with UPRN and USRN for UK property/street disambiguation." ;
+    owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Data properties
+#################################################################
+
+p:line1 rdf:type owl:DatatypeProperty ,
+                 owl:FunctionalProperty ;
+    rdfs:domain p:Address ;
+    rdfs:range xsd:string ;
+    rdfs:label "line 1" ;
+    rdfs:comment "Street address (e.g. '1 High Street') or care-of line." .
+
+p:line2 rdf:type owl:DatatypeProperty ,
+                 owl:FunctionalProperty ;
+    rdfs:domain p:Address ;
+    rdfs:range xsd:string ;
+    rdfs:label "line 2" ;
+    rdfs:comment "Apartment, suite, unit, building, floor, etc." .
+
+p:city rdf:type owl:DatatypeProperty ,
+                owl:FunctionalProperty ;
+    rdfs:domain p:Address ;
+    rdfs:range xsd:string ;
+    rdfs:label "city" ;
+    rdfs:comment "City, town, or village." .
+
+p:postcode rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+    rdfs:domain p:Address ;
+    rdfs:range xsd:string ;
+    rdfs:label "postcode" ;
+    rdfs:comment "UK postcode in standard format (e.g. 'AB1 2CD')." .
+
+p:UPRN rdf:type owl:DatatypeProperty ,
+                owl:FunctionalProperty ;
+    rdfs:domain p:Address ;
+    rdfs:range xsd:string ;
+    rdfs:label "UPRN" ;
+    rdfs:comment "Unique Property Reference Number of the address." .
+
+p:USRN rdf:type owl:DatatypeProperty ,
+                owl:FunctionalProperty ;
+    rdfs:domain p:Address ;
+    rdfs:range xsd:string ;
+    rdfs:label "USRN" ;
+    rdfs:comment "Unique Street Reference Number of the address." .
+
+#################################################################
+#    Object Properties
+#
+#    Address.use reuses p:use from ontology-name.ttl (no domain restriction
+#    so it is shared with Name). The valid value set for Address is the
+#    Address Use Code vocabulary, enforced via SHACL.
+#################################################################
+
+#################################################################
+#    Classes
+#################################################################
+
+p:Address rdf:type owl:Class ;
+    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                      owl:onProperty p:line1 ;
+                      owl:cardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:line2 ;
+                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:city ;
+                      owl:cardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:postcode ;
+                      owl:cardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:UPRN ;
+                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:USRN ;
+                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:use ;
+                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                    ] ;
+    rdfs:label "Address" ;
+    rdfs:comment "A postal address for the person." .

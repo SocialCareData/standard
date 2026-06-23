@@ -1,0 +1,19 @@
+{
+  "@context": "../../person-context.jsonld",
+  "@id": "ex:person-9434765919",
+  "@type": "Person",
+
+  "identifier": [
+    { "@type": "Identifier", "value": "9434765919", "system": "https://fhir.nhs.uk/Id/nhs-number" }
+  ],
+
+  "name": [
+    { "@type": "Name", "familyName": ["Doe"], "givenName": ["Jane", "Elizabeth"], "use": "official" }
+  ],
+
+  "dateOfBirth":   { "@type": "PartialDate", "date": "1985-04-12", "accuracyIndicator": "AAA" },
+  "isDeceased":    false,
+  "genderCode":    "2",
+  "sexCode":       "2",
+  "ethnicityCode": "17"
+}

@@ -1,0 +1,145 @@
+@prefix p: <https://ns.socialcaredata.io/person/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://ns.socialcaredata.io/person/ontology-person> rdf:type owl:Ontology ;
+    dct:title "Person Class Ontology" ;
+    dct:description "Definition of the top-level Person class and the object/data properties that compose a Person record." ;
+    owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Object Properties
+#
+#    p:identifier is shared with PersonRelationship; declared in
+#    ontology-identifier.ttl without an rdfs:domain restriction so it can
+#    appear on both Person and PersonRelationship.
+#################################################################
+
+p:name rdf:type owl:ObjectProperty ;
+    rdfs:domain p:Person ;
+    rdfs:range p:Name ;
+    rdfs:label "name" ;
+    rdfs:comment "One or more names for the person, each with a usage indicating its purpose. Multi-valued." .
+
+p:dateOfBirth rdf:type owl:ObjectProperty ,
+                       owl:FunctionalProperty ;
+    rdfs:domain p:Person ;
+    rdfs:range p:PartialDate ;
+    rdfs:label "date of birth" ;
+    rdfs:comment "The person's date of birth, with an optional accuracy indicator." .
+
+p:deceasedDate rdf:type owl:ObjectProperty ,
+                        owl:FunctionalProperty ;
+    rdfs:domain p:Person ;
+    rdfs:range p:PartialDate ;
+    rdfs:label "deceased date" ;
+    rdfs:comment "The person's date of death, with an optional accuracy indicator." .
+
+p:address rdf:type owl:ObjectProperty ;
+    rdfs:domain p:Person ;
+    rdfs:range p:Address ;
+    rdfs:label "address" ;
+    rdfs:comment "Physical addresses where the person can be contacted. Multi-valued." .
+
+p:contact rdf:type owl:ObjectProperty ;
+    rdfs:domain p:Person ;
+    rdfs:range p:Contact ;
+    rdfs:label "contact" ;
+    rdfs:comment "Contact channel groupings (e.g. Home, Work) holding emails and telephone numbers. Multi-valued." .
+
+p:relatedPerson rdf:type owl:ObjectProperty ;
+    rdfs:domain p:Person ;
+    rdfs:range p:PersonRelationship ;
+    rdfs:label "related person" ;
+    rdfs:comment "References to other people related to this person, each qualified with the kind of relationship. Multi-valued." .
+
+p:primaryContactProfessional rdf:type owl:ObjectProperty ;
+    rdfs:domain p:Person ;
+    rdfs:range p:Identifier ;
+    rdfs:label "primary contact professional" ;
+    rdfs:comment "References to the primary professionals related to this person (e.g. care coordinators or a GP). Multi-valued. Recorded as Identifier (system + value) until a dedicated Professional standard is published." .
+
+p:matchedPersonRef rdf:type owl:ObjectProperty ;
+    rdfs:domain p:Person ;
+    rdfs:range p:Identifier ;
+    rdfs:label "matched person ref" ;
+    rdfs:comment "References to the same person as known in other systems. Multi-valued." .
+
+#################################################################
+#    Data properties
+#################################################################
+
+p:isDeceased rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+    rdfs:domain p:Person ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "is deceased" ;
+    rdfs:comment "Whether the person is deceased." .
+
+p:genderCode rdf:type owl:ObjectProperty ,
+                      owl:FunctionalProperty ;
+    rdfs:domain p:Person ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso <https://ns.socialcaredata.io/person/gender-code> ;
+    rdfs:label "gender code" ;
+    rdfs:comment "The person's stated gender identity. See the Gender Code vocabulary." .
+
+p:sexCode rdf:type owl:ObjectProperty ,
+                   owl:FunctionalProperty ;
+    rdfs:domain p:Person ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    rdfs:label "sex code" ;
+    rdfs:comment "Observed phenotypic sex where recorded. See the Phenotypic Sex Code vocabulary." .
+
+p:ethnicityCode rdf:type owl:ObjectProperty ,
+                         owl:FunctionalProperty ;
+    rdfs:domain p:Person ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    rdfs:label "ethnicity code" ;
+    rdfs:comment "The person's stated ethnicity (ONS 2021 census 20b). See the Ethnicity Code vocabulary." .
+
+#################################################################
+#    Classes
+#################################################################
+
+p:Person rdf:type owl:Class ;
+    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                      owl:onProperty p:identifier ;
+                      owl:minCardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:name ;
+                      owl:minCardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:dateOfBirth ;
+                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:isDeceased ;
+                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:deceasedDate ;
+                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:genderCode ;
+                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:sexCode ;
+                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:ethnicityCode ;
+                      owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                    ] ;
+    rdfs:label "Person" ;
+    rdfs:comment "The top-level record describing an individual across social care systems." .

@@ -1,0 +1,36 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dai:   <https://ns.socialcaredata.io/person/date-accuracy-indicator#> .
+
+<https://ns.socialcaredata.io/person/date-accuracy-indicator> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Date Accuracy Indicator Vocabulary" ;
+    rdfs:label "Date Accuracy Indicator" ;
+    skos:prefLabel "Date Accuracy Indicator" ;
+    dct:description "The position alphabet (A, E, U) used to build a three-character accuracy indicator on a PartialDate, in day-month-year order. The complete indicator is a 3-character string drawn from this alphabet (e.g. AAA, UUE, UAA); the regex ^[AEU]{3}$ is enforced by SHACL. Aligned with the FHIR date-accuracy-indicator extension pattern." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept dai:Accurate , dai:Estimated , dai:Unknown .
+
+dai:Accurate a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/date-accuracy-indicator> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/date-accuracy-indicator> ;
+    skos:prefLabel "Accurate" ;
+    skos:notation "A" ;
+    skos:definition "The date component is known to be correct." .
+
+dai:Estimated a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/date-accuracy-indicator> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/date-accuracy-indicator> ;
+    skos:prefLabel "Estimated" ;
+    skos:notation "E" ;
+    skos:definition "The date component has been estimated from other evidence." .
+
+dai:Unknown a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/date-accuracy-indicator> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/date-accuracy-indicator> ;
+    skos:prefLabel "Unknown" ;
+    skos:notation "U" ;
+    skos:definition "The date component is not known." .

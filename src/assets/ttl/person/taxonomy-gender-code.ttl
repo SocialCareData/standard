@@ -1,0 +1,43 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix gc:    <https://ns.socialcaredata.io/person/gender-code#> .
+
+<https://ns.socialcaredata.io/person/gender-code> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Gender Code Vocabulary" ;
+    rdfs:label "Gender Code" ;
+    skos:prefLabel "Gender Code" ;
+    dct:description "Represents a person's stated gender identity, distinct from biological sex. Aligned with NHS Data Dictionary PERSON_STATED_GENDER_CODE." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept gc:Male , gc:Female , gc:Indeterminate , gc:NotKnown .
+
+gc:Male a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/gender-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/gender-code> ;
+    skos:prefLabel "Male" ;
+    skos:notation "1" ;
+    skos:definition "The person identifies as male." .
+
+gc:Female a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/gender-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/gender-code> ;
+    skos:prefLabel "Female" ;
+    skos:notation "2" ;
+    skos:definition "The person identifies as female." .
+
+gc:Indeterminate a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/gender-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/gender-code> ;
+    skos:prefLabel "Indeterminate" ;
+    skos:notation "9" ;
+    skos:definition "Unable to be classified as either male or female." .
+
+gc:NotKnown a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/gender-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/gender-code> ;
+    skos:prefLabel "Not Known" ;
+    skos:notation "X" ;
+    skos:definition "Not recorded, or information unavailable." .

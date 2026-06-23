@@ -1,0 +1,142 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix ec:    <https://ns.socialcaredata.io/person/ethnicity-code#> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Ethnicity Code Vocabulary" ;
+    rdfs:label "Ethnicity Code" ;
+    skos:prefLabel "Ethnicity Code" ;
+    dct:description "The person's stated ethnicity. Uses ONS Census 2021 Ethnic group classification 20b codes." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept
+        ec:AsianBangladeshi , ec:AsianChinese , ec:AsianIndian , ec:AsianPakistani , ec:AsianOther ,
+        ec:BlackAfrican , ec:BlackCaribbean , ec:BlackOther ,
+        ec:MixedWhiteAsian , ec:MixedWhiteBlackAfrican , ec:MixedWhiteBlackCaribbean , ec:MixedOther ,
+        ec:WhiteBritish , ec:WhiteIrish , ec:WhiteGypsyOrIrishTraveller , ec:WhiteRoma , ec:WhiteOther ,
+        ec:OtherArab , ec:OtherAny ,
+        ec:DoesNotApply .
+
+ec:AsianBangladeshi a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Asian, Asian British or Asian Welsh: Bangladeshi" ;
+    skos:notation "1" .
+
+ec:AsianChinese a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Asian, Asian British or Asian Welsh: Chinese" ;
+    skos:notation "2" .
+
+ec:AsianIndian a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Asian, Asian British or Asian Welsh: Indian" ;
+    skos:notation "3" .
+
+ec:AsianPakistani a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Asian, Asian British or Asian Welsh: Pakistani" ;
+    skos:notation "4" .
+
+ec:AsianOther a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Asian, Asian British or Asian Welsh: Other Asian" ;
+    skos:notation "5" .
+
+ec:BlackAfrican a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Black, Black British, Black Welsh, Caribbean or African: African" ;
+    skos:notation "6" .
+
+ec:BlackCaribbean a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Black, Black British, Black Welsh, Caribbean or African: Caribbean" ;
+    skos:notation "7" .
+
+ec:BlackOther a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Black, Black British, Black Welsh, Caribbean or African: Other Black" ;
+    skos:notation "8" .
+
+ec:MixedWhiteAsian a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Mixed or Multiple ethnic groups: White and Asian" ;
+    skos:notation "9" .
+
+ec:MixedWhiteBlackAfrican a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Mixed or Multiple ethnic groups: White and Black African" ;
+    skos:notation "10" .
+
+ec:MixedWhiteBlackCaribbean a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Mixed or Multiple ethnic groups: White and Black Caribbean" ;
+    skos:notation "11" .
+
+ec:MixedOther a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Mixed or Multiple ethnic groups: Other Mixed or Multiple ethnic groups" ;
+    skos:notation "12" .
+
+ec:WhiteBritish a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "White: English, Welsh, Scottish, Northern Irish or British" ;
+    skos:notation "13" .
+
+ec:WhiteIrish a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "White: Irish" ;
+    skos:notation "14" .
+
+ec:WhiteGypsyOrIrishTraveller a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "White: Gypsy or Irish Traveller" ;
+    skos:notation "15" .
+
+ec:WhiteRoma a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "White: Roma" ;
+    skos:notation "16" .
+
+ec:WhiteOther a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "White: Other White" ;
+    skos:notation "17" .
+
+ec:OtherArab a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Other ethnic group: Arab" ;
+    skos:notation "18" .
+
+ec:OtherAny a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Other ethnic group: Any other ethnic group" ;
+    skos:notation "19" .
+
+ec:DoesNotApply a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:prefLabel "Does not apply" ;
+    skos:notation "-8" ;
+    skos:definition "Students and schoolchildren living away during term-time." .

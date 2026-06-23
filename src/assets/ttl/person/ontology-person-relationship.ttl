@@ -1,0 +1,43 @@
+@prefix p: <https://ns.socialcaredata.io/person/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://ns.socialcaredata.io/person/ontology-person-relationship> rdf:type owl:Ontology ;
+    dct:title "PersonRelationship Class Ontology" ;
+    dct:description "Definition of the PersonRelationship class — a typed reference from one person to another, qualified by one or more relationship codes." ;
+    owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Object Properties
+#
+#    PersonRelationship.identifier reuses p:identifier from
+#    ontology-identifier.ttl (no domain restriction so it is shared with
+#    Person). Cardinality is enforced on PersonRelationship via owl:Restriction.
+#################################################################
+
+p:relationship rdf:type owl:ObjectProperty ;
+    rdfs:domain p:PersonRelationship ;
+    rdfs:range skos:Concept ;
+    rdfs:seeAlso <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    rdfs:label "relationship" ;
+    rdfs:comment "One or more codes describing the kind of relationship. Multi-valued. See the Person Relationship Code vocabulary." .
+
+#################################################################
+#    Classes
+#################################################################
+
+p:PersonRelationship rdf:type owl:Class ;
+    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                      owl:onProperty p:identifier ;
+                      owl:cardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:relationship ;
+                      owl:minCardinality "1"^^xsd:nonNegativeInteger
+                    ] ;
+    rdfs:label "PersonRelationship" ;
+    rdfs:comment "A typed reference from one person to another. The reference is by Identifier (so the related person may live in a different system)." .

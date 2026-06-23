@@ -1,0 +1,13 @@
+{
+  "@context": "../../person-context.jsonld",
+  "@id": "ex:person-name-missing-parts",
+  "@type": "Person",
+
+  "identifier": [
+    { "@type": "Identifier", "value": "5555555555", "system": "https://fhir.nhs.uk/Id/nhs-number" }
+  ],
+
+  "name": [
+    { "@type": "Name", "familyName": ["Only"], "use": "official" }
+  ]
+}

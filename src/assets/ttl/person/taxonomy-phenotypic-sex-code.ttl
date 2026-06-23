@@ -1,0 +1,43 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix psc:   <https://ns.socialcaredata.io/person/phenotypic-sex-code#> .
+
+<https://ns.socialcaredata.io/person/phenotypic-sex-code> a owl:Ontology , skos:ConceptScheme ;
+    dct:title "Phenotypic Sex Code Vocabulary" ;
+    rdfs:label "Phenotypic Sex Code" ;
+    skos:prefLabel "Phenotypic Sex Code" ;
+    dct:description "Documents observed phenotypic sex where recorded, representing biological characteristics rather than gender identity. Aligned with NHS PDS PERSON_PHENOTYPIC_SEX." ;
+    owl:versionInfo "1.0.0" ;
+    skos:hasTopConcept psc:Male , psc:Female , psc:Indeterminate , psc:NotKnown .
+
+psc:Male a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    skos:prefLabel "Male" ;
+    skos:notation "1" ;
+    skos:definition "The person is phenotypically male." .
+
+psc:Female a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    skos:prefLabel "Female" ;
+    skos:notation "2" ;
+    skos:definition "The person is phenotypically female." .
+
+psc:Indeterminate a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    skos:prefLabel "Indeterminate" ;
+    skos:notation "9" ;
+    skos:definition "Unable to be classified phenotypically as either male or female." .
+
+psc:NotKnown a skos:Concept ;
+    skos:inScheme <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    skos:topConceptOf <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    skos:prefLabel "Not Known" ;
+    skos:notation "X" ;
+    skos:definition "Not recorded, or information unavailable." .

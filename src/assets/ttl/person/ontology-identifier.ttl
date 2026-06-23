@@ -1,0 +1,59 @@
+@prefix p: <https://ns.socialcaredata.io/person/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://ns.socialcaredata.io/person/ontology-identifier> rdf:type owl:Ontology ;
+    dct:title "Identifier Class Ontology" ;
+    dct:description "Definition of the Identifier class — a value plus the URI of the system in whose namespace it is unique." ;
+    owl:versionInfo "1.0.0" .
+
+#################################################################
+#    Object Properties
+#
+#    p:identifier is shared between Person, PersonRelationship and any other
+#    place that references an Identifier. No rdfs:domain restriction so the
+#    property can be reused; cardinality is enforced per-class via
+#    owl:Restriction and SHACL.
+#################################################################
+
+p:identifier rdf:type owl:ObjectProperty ;
+    rdfs:range p:Identifier ;
+    rdfs:label "identifier" ;
+    rdfs:comment "A reference to an Identifier (system + value). Used by Person, PersonRelationship and other classes that link to an Identifier." .
+
+#################################################################
+#    Data properties
+#################################################################
+
+p:value rdf:type owl:DatatypeProperty ,
+                 owl:FunctionalProperty ;
+    rdfs:domain p:Identifier ;
+    rdfs:range xsd:string ;
+    rdfs:label "value" ;
+    rdfs:comment "The identifier value, unique within the issuing system." .
+
+p:system rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+    rdfs:domain p:Identifier ;
+    rdfs:range xsd:anyURI ;
+    rdfs:label "system" ;
+    rdfs:comment "The URI of the system or namespace within which the identifier is unique." .
+
+#################################################################
+#    Classes
+#################################################################
+
+p:Identifier rdf:type owl:Class ;
+    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                      owl:onProperty p:value ;
+                      owl:cardinality "1"^^xsd:nonNegativeInteger
+                    ] ,
+                    [ rdf:type owl:Restriction ;
+                      owl:onProperty p:system ;
+                      owl:cardinality "1"^^xsd:nonNegativeInteger
+                    ] ;
+    rdfs:label "Identifier" ;
+    rdfs:comment "A single identifier for a person, comprising the value and the system in whose namespace the value is unique." .
