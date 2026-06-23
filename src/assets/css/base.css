@@ -139,7 +139,7 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
 
 /** Max content width */
 @media (min-width: 1280px) {
-    header, .breadcrumb ol, main > *, footer {
+    header, .banner p, .breadcrumb ol, main > *, footer {
         margin: 0 auto;
         max-width: calc(1280px - 6.2rem);
     }
