@@ -34,9 +34,17 @@
     border-top: 1px solid rgba(255, 255, 255, .7);
     display: flex;
     flex-wrap: wrap;
-    gap: 0 1.6rem;
+    gap: 0 2.6rem;
     margin: var(--main-margin);
     padding: var(--main-margin-narrow);
+}
+
+.footer .copyright-notice p {
+    margin: 0;
+}
+
+.footer .copyright-notice p a {
+    text-wrap: wrap;
 }
 
 .footer .crown-copyright svg {
