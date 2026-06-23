@@ -12,43 +12,56 @@
 @prefix psc:   <https://ns.socialcaredata.io/person/phenotypic-sex-code#> .
 @prefix ec:    <https://ns.socialcaredata.io/person/ethnicity-code#> .
 @prefix prc:   <https://ns.socialcaredata.io/person/person-relationship-code#> .
-@prefix :      <https://ns.socialcaredata.io/person/shape#> .
+@prefix :      <https://ns.socialcaredata.io/person/connected-shape#> .
 
 
-<https://ns.socialcaredata.io/person/shape> a owl:Ontology ;
-    dct:title "Person Standard SHACL Shapes" ;
-    rdfs:label "Person Standard Shapes" ;
-    dct:description "SHACL shapes validating the structure, datatype, and controlled-vocabulary use of p:Person records and their sub-entities." ;
+<https://ns.socialcaredata.io/person/connected-shape> a owl:Ontology ;
+    dct:title "Person Standard SHACL Shapes — Connected Person profile" ;
+    rdfs:label "Person Standard Shapes (Connected Person)" ;
+    dct:description "Profile shapes for a p:Person who is recorded as connected to a subject of care (e.g. a family member, friend, or other related individual). All demographic data is optional; only a Name is mandatory. Sub-entity shapes (Identifier, Name, Address, Contact, PersonRelationship, PartialDate) are identical to the base profile." ;
     owl:versionInfo "1.0.0" .
 
 
 #################################################################
-#    Person (top-level)
+#    Person (Connected)
+#
+#    identifier                  0..*
+#    name                        1..1
+#    dateOfBirth                 0..1
+#    isDeceased                  0..1
+#    deceasedDate                0..1
+#    address                     0..*
+#    contact                     0..1
+#    genderCode                  0..1
+#    sexCode                     0..1
+#    ethnicityCode               0..1
+#    relatedPerson               0..1
+#    primaryContactProfessional  0..*
+#    matchedPersonRef            0..*
 #################################################################
 
 :PersonShape a sh:NodeShape ;
     sh:targetClass p:Person ;
-    rdfs:label "Person shape" ;
+    rdfs:label "Person shape (Connected)" ;
     sh:property [
         sh:path p:identifier ;
         sh:class p:Identifier ;
         sh:nodeKind sh:BlankNodeOrIRI ;
-        sh:minCount 1 ;
-        sh:message "Person must have at least one Identifier."
+        sh:message "identifier must reference Identifier nodes (multi-valued, optional)."
     ] ;
     sh:property [
         sh:path p:name ;
         sh:class p:Name ;
         sh:nodeKind sh:BlankNodeOrIRI ;
-        sh:minCount 1 ;
-        sh:message "Person must have at least one Name."
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Connected Person must have exactly one Name."
     ] ;
     sh:property [
         sh:path p:dateOfBirth ;
         sh:class p:PartialDate ;
         sh:nodeKind sh:BlankNodeOrIRI ;
         sh:maxCount 1 ;
-        sh:message "Person may have at most one dateOfBirth."
+        sh:message "Connected Person may have at most one dateOfBirth."
     ] ;
     sh:property [
         sh:path p:isDeceased ;
@@ -61,19 +74,20 @@
         sh:class p:PartialDate ;
         sh:nodeKind sh:BlankNodeOrIRI ;
         sh:maxCount 1 ;
-        sh:message "Person may have at most one deceasedDate."
+        sh:message "Connected Person may have at most one deceasedDate."
     ] ;
     sh:property [
         sh:path p:address ;
         sh:class p:Address ;
         sh:nodeKind sh:BlankNodeOrIRI ;
-        sh:message "address must reference Address nodes (multi-valued)."
+        sh:message "address must reference Address nodes (multi-valued, optional)."
     ] ;
     sh:property [
         sh:path p:contact ;
         sh:class p:Contact ;
         sh:nodeKind sh:BlankNodeOrIRI ;
-        sh:message "contact must reference Contact nodes (multi-valued)."
+        sh:maxCount 1 ;
+        sh:message "Connected Person may have at most one Contact."
     ] ;
     sh:property [
         sh:path p:genderCode ;
@@ -107,7 +121,8 @@
         sh:path p:relatedPerson ;
         sh:class p:PersonRelationship ;
         sh:nodeKind sh:BlankNodeOrIRI ;
-        sh:message "relatedPerson must reference PersonRelationship nodes (multi-valued)."
+        sh:maxCount 1 ;
+        sh:message "Connected Person may have at most one relatedPerson reference."
     ] ;
     sh:property [
         sh:path p:primaryContactProfessional ;
@@ -322,22 +337,4 @@
         sh:maxCount 1 ;
         sh:pattern "^[AEU]{3}$" ;
         sh:message "PartialDate.accuracyIndicator must be a 3-character string drawn from {A,E,U} in day-month-year order (e.g. AAA, UUE, UAA)."
-    ] .
-
-
-#################################################################
-#    Conditional: isDeceased=true with no deceasedDate (Warning)
-#    Statutorily required in adult social care; warning elsewhere.
-#################################################################
-
-:DeceasedDatePresenceShape a sh:NodeShape ;
-    sh:targetClass p:Person ;
-    rdfs:label "Deceased date presence (warning)" ;
-    sh:severity sh:Warning ;
-    sh:message "When isDeceased is true, deceasedDate is statutorily required in adult social care; consider providing one." ;
-    sh:not [
-        sh:and (
-            [ sh:property [ sh:path p:isDeceased ; sh:hasValue true ] ]
-            [ sh:property [ sh:path p:deceasedDate ; sh:maxCount 0 ] ]
-        )
     ] .

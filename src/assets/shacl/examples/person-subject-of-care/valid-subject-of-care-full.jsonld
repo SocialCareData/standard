@@ -1,21 +1,18 @@
 {
   "@context": "../../person-context.jsonld",
-  "@id": "ex:person-9876543210",
+  "@id": "ex:person-9002345678",
   "@type": "Person",
 
   "identifier": [
-    { "@type": "Identifier", "value": "9876543210", "system": "https://fhir.nhs.uk/Id/nhs-number" },
+    { "@type": "Identifier", "value": "9002345678", "system": "https://fhir.nhs.uk/Id/nhs-number" },
     { "@type": "Identifier", "value": "LA-12345",   "system": "https://example.org/Id/local-authority-id" }
   ],
 
   "name": [
-    { "@type": "Name", "familyName": ["Smith"],                   "givenName": ["Sarah", "Anne"], "preferredName": "Sarah", "use": "official" },
-    { "@type": "Name", "familyName": ["Jones"],                   "givenName": ["Sarah"],         "use": "maiden" },
-    { "@type": "Name", "familyName": ["Smith", "Jones-Williams"], "givenName": ["Sarah"],         "use": "usual" }
+    { "@type": "Name", "familyName": ["Smith"], "givenName": ["Sarah", "Anne"], "preferredName": "Sarah", "use": "official" }
   ],
 
-  "dateOfBirth": { "@type": "PartialDate", "date": "1972-01-15", "accuracyIndicator": "UAA" },
-
+  "dateOfBirth":  { "@type": "PartialDate", "date": "1972-01-15", "accuracyIndicator": "UAA" },
   "isDeceased":   true,
   "deceasedDate": { "@type": "PartialDate", "date": "2025-11-30", "accuracyIndicator": "AAA" },
 
@@ -26,7 +23,7 @@
 
   "contact": [
     { "@type": "Contact", "name": "Home", "email": ["sarah.smith@example.org"], "telephone": ["+44 20 7946 0000"] },
-    { "@type": "Contact", "name": "Work", "email": ["sarah.smith@work.example.org", "ss@work.example.org"], "telephone": ["+44 20 7946 0001"] }
+    { "@type": "Contact", "name": "Work", "email": ["sarah.smith@work.example.org"], "telephone": ["+44 20 7946 0001"] }
   ],
 
   "genderCode":    "2",
@@ -36,7 +33,7 @@
   "relatedPerson": [
     {
       "@type": "PersonRelationship",
-      "identifier": { "@type": "Identifier", "value": "9434765919", "system": "https://fhir.nhs.uk/Id/nhs-number" },
+      "identifier": { "@type": "Identifier", "value": "9009999991", "system": "https://fhir.nhs.uk/Id/nhs-number" },
       "relationship": ["MTH"]
     },
     {

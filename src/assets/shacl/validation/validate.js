@@ -19,9 +19,14 @@ const STANDARDS = {
       makeDuplicatePropertyCheck('https://ns.socialcaredata.io/placements/childId', 'childId')
     ],
   },
-  person: {
-    shapeFile: path.resolve(SHACL_DIR, 'person-shacl-shape.ttl'),
-    examplesDir: path.resolve(SHACL_DIR, 'examples/person'),
+  'person-subject-of-care': {
+    shapeFile: path.resolve(SHACL_DIR, 'person-subject-of-care-shacl-shape.ttl'),
+    examplesDir: path.resolve(SHACL_DIR, 'examples/person-subject-of-care'),
+    crossRecordChecks: [checkDuplicatePersonIdentifiers],
+  },
+  'person-connected': {
+    shapeFile: path.resolve(SHACL_DIR, 'person-connected-shacl-shape.ttl'),
+    examplesDir: path.resolve(SHACL_DIR, 'examples/person-connected'),
     crossRecordChecks: [checkDuplicatePersonIdentifiers],
   },
 }

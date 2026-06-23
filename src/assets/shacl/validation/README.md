@@ -11,13 +11,14 @@ npm install
 
 # Validate one named standard (default: all registered)
 node validate.js --standard=placements
-node validate.js --standard=person
+node validate.js --standard=person-subject-of-care
+node validate.js --standard=person-connected
 
 # Validate every registered standard in sequence
 node validate.js
 
 # Validate a single file against a chosen standard
-node validate.js --standard=person ../examples/person/valid-person.jsonld
+node validate.js --standard=person-subject-of-care ../examples/person-subject-of-care/valid-subject-of-care.jsonld
 ```
 
 Exit code is `0` if every example behaves as expected — files named
@@ -28,8 +29,16 @@ conform — otherwise `1`.
 
 | Name | Shape file | Examples directory |
 | :--- | :--- | :--- |
-| `placements` | `../placements-shacl-shape.ttl` | `../examples/placement/` |
-| `person`     | `../person-shacl-shape.ttl`     | `../examples/person/`    |
+| `placements`               | `../placements-shacl-shape.ttl`              | `../examples/placement/`             |
+| `person-subject-of-care`   | `../person-subject-of-care-shacl-shape.ttl`  | `../examples/person-subject-of-care/` |
+| `person-connected`         | `../person-connected-shacl-shape.ttl`        | `../examples/person-connected/`      |
+
+The two `person-*` shapes are profiles of the same `p:Person` data model. The
+**subject-of-care** profile enforces stricter cardinalities (identifier,
+single name, dateOfBirth, isDeceased, address, genderCode and ethnicityCode
+all required); the **connected** profile only mandates a single Name and is
+intended for related/connected people referenced from a subject-of-care
+record.
 
 ## Adding a new standard
 
@@ -58,8 +67,8 @@ The SHACL shapes encode the cardinality, datatype and controlled-vocabulary
 restrictions documented in each standard's specification page under
 `src/_pages/<name>-standard.md`. Cross-record uniqueness rules that SHACL
 Core can't express (duplicate `childId` in placements, duplicate
-`(system, value)` Identifier in person) are implemented in JavaScript at the
-bottom of `validate.js`.
+`(system, value)` Identifier directly on a `p:Person` for the person
+standards) are implemented in JavaScript at the bottom of `validate.js`.
 
 ## Engine
 
