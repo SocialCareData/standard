@@ -67,7 +67,7 @@ Programme director
 : Tom Rintoul, [tom.rintoul@socialfinance.org.uk](mailto:tom.rintoul@socialfinance.org.uk)
 
 Multi-agency information sharing workstream lead
-: Harry Angus, [harry.angus@socialfinance.org.uk](mailto:harry.angus@socialfinance.org.uk)
+: Ferry Lichtenberg, [ferry.lichtenberg@socialfinance.org.uk](mailto:ferry.lichtenberg@socialfinance.org.uk)
 
 Children's social care placements workstream lead
 : Madeline Goldie, [madeline.goldie@socialfinance.org.uk](mailto:madeline.goldie@socialfinance.org.uk)
