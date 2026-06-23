@@ -1,0 +1,25 @@
+/* Breadcrumb */
+.banner {
+  background-color: #fff;
+  color: #202542;
+  font-size: 1rem;
+  margin: 0;
+  padding: var(--main-padding-narrow);
+}
+
+.banner strong {
+    background-color: #d2e2f1;
+    border-radius: 1px;
+    font-weight: normal;
+    margin: -2px 8px -3px 0;
+    padding: 2px 8px 3px;
+}
+
+.banner a {
+  text-decoration: none;
+}
+
+.banner a:hover,
+.banner a:focus {
+  text-decoration: underline;
+}

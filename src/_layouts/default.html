@@ -23,6 +23,7 @@
     </script>
 
     <body>
+        {% include banner.html %}
         <header class="header nojs">{% if site.homepage %}
             <a class="home" href="{{ site.homepage.url }}">{{ site.homepage.title }}</a>{% endif %}{% if site.nav %}
             <nav class="nav" id="main-menu" aria-label="Main navigation menu">
