@@ -365,16 +365,6 @@
         sh:in ( rl:NoKnownRisk rl:RiskPresent ) ;
         sh:minCount 1 ; sh:maxCount 1 ;
         sh:message "riskToOthersCriminal is required."
-    ] ;
-
-    # Free text for "other" categories (multi-valued)
-    sh:property [
-        sh:path pl:riskOther ;
-        sh:datatype xsd:string
-    ] ;
-    sh:property [
-        sh:path pl:riskToOthersOther ;
-        sh:datatype xsd:string
     ] .
 
 

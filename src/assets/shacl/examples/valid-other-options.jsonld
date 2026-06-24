@@ -65,14 +65,7 @@
     "riskToOthersSexual":       "No known risk",
     "riskToOthersFire":         "No known risk",
     "riskToOthersAnimals":      "No known risk",
-    "riskToOthersCriminal":     "No known risk",
-    "riskOther": [
-      "Sensitivity to sudden loud noises following past trauma"
-    ],
-    "riskToOthersOther": [
-      "Verbal aggression toward staff during transitions",
-      "Damage to communal property when distressed"
-    ]
+    "riskToOthersCriminal":     "No known risk"
   },
 
   "hasQualityAssurance": {

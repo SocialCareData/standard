@@ -16,6 +16,7 @@ tags:
 
 1. TOC
 {:toc}
+{::options toc_levels="2..3" /}
 
 </nav>
 
@@ -270,14 +271,6 @@ Records the risks the child is exposed to (six categories) and the risks the chi
 <span id="risk-riskToOthersCriminal">riskToOthersCriminal</span>
 : Risk of criminal exploitation for others in the home. Allowed values are: `'No known risk'`, `'Risk Present'`.
 
-##### Free-text catch-alls
-
-<span id="risk-riskOther">riskOther</span>
-: Free-text description of any other risks the child is exposed to that are not captured by the standard risk fields. Multi-valued. _String_.
-
-<span id="risk-riskToOthersOther">riskToOthersOther</span>
-: Free-text description of any other risks to others or property. Multi-valued. _String_.
-
 #### Example
 
 <div class="example">
@@ -295,10 +288,7 @@ Records the risks the child is exposed to (six categories) and the risks the chi
   "riskToOthersSexual":       "No known risk",
   "riskToOthersFire":         "No known risk",
   "riskToOthersAnimals":      "No known risk",
-  "riskToOthersCriminal":     "No known risk",
-  "riskToOthersOther": [
-    "Verbal aggression toward staff during transitions"
-  ]
+  "riskToOthersCriminal":     "No known risk"
 }
 {% endhighlight %}
 </div>

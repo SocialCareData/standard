@@ -47,10 +47,7 @@
     "riskToOthersSexual":       "No known risk",
     "riskToOthersFire":         "No known risk",
     "riskToOthersAnimals":      "No known risk",
-    "riskToOthersCriminal":     "No known risk",
-    "riskToOthersOther": [
-      "Verbal aggression toward staff during transitions"
-    ]
+    "riskToOthersCriminal":     "No known risk"
   },
 
   "hasActualPlacement": {
