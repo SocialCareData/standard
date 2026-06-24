@@ -1,5 +1,5 @@
 ---
-title: Social Care Interoperability Framework
+title: Social Care Interoperability Standards
 tags:
   - Programme
 ---
@@ -42,9 +42,7 @@ To ensure that everyone who may be able to benefit from data standardisation can
 
 1. We establish [open working groups](/standards_working_groups) to advise on the scope and content of each standard and ensure they address the needs of all stakeholders.
 1. We share our standards openly as they are developed, enabling the widest audience to input to their development.
-1. We publish minutes of our working group meetings to enable stakeholders to understand how decisions have been made.
-
-We publish [minutes of our working group meetings](/updates?tag=Working+Group) and a list of [upcoming meetings](/calendar) across the Programme to enable stakeholders to understand how we have made decisions.
+1. We publish [minutes of our working group meetings](/updates?tag=Working+Group) and a list of [upcoming meetings](/calendar) across the Programme to enable stakeholders to understand how we have made decisions.
 
 An independent steering group provides overall project governance, leadership and independent advice to DfE and DHSC. The group brings together leaders from across the sector, as well as experts on standards and interoperability. It contributes to cross-government initiatives on standards governance, and maintains contact with related standards programmes in the NHS, criminal justice, and local government.
 
