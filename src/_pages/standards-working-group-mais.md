@@ -47,7 +47,7 @@ A key barrier is the bespoke nature of work taking place between data-sharing pa
 
 This work required agreeing upon and implementing data sharing programmes, and thus getting a functioning single view system, is unnecessarily slow, expensive, and uncertain.
 
-We tackle this by standardising the process with key partners within social care. This is part of the value proposition of the social care interoperability framework.
+We tackle this by standardising the process with key partners within social care. This is part of the value proposition of the social care interoperability standards.
 
 Success means single view systems will be cheaper and faster to scale, so more LAs will have access to them, and multi-agency information sharing will be easier.
 
