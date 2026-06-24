@@ -48,22 +48,22 @@ The top-level record. Captures the unique child identifier and links the placeme
 : Optional unique identifier of the placement record. _String_.
 
 <span id="placement-hasPlacementAvailability">hasPlacementAvailability</span>
-: The placement availability / referral details. See [PlacementAvailability](/placements_standard#placementavailability).
+: The placement availability / referral details. See [PlacementAvailability](#placementavailability).
 
 <span id="placement-hasPlacementRequirements">hasPlacementRequirements</span>
-: The child's needs the placement must accommodate. See [PlacementRequirements](/placements_standard#placementrequirements).
+: The child's needs the placement must accommodate. See [PlacementRequirements](#placementrequirements).
 
 <span id="placement-hasPlacementRecommendation">hasPlacementRecommendation</span>
-: The social worker's suitability judgement for each placement category. See [PlacementRecommendation](/placements_standard#placementrecommendation).
+: The social worker's suitability judgement for each placement category. See [PlacementRecommendation](#placementrecommendation).
 
 <span id="placement-hasRiskAssessment">hasRiskAssessment</span>
-: The risk assessment for the child. See [RiskAssessment](/placements_standard#riskassessment).
+: The risk assessment for the child. See [RiskAssessment](#riskassessment).
 
 <span id="placement-hasActualPlacement">hasActualPlacement</span>
-: The actual placement arranged for the child (optional - a referral may exist without yet having an actual placement). See [ActualPlacement](/placements_standard#actualplacement).
+: The actual placement arranged for the child (optional - a referral may exist without yet having an actual placement). See [ActualPlacement](#actualplacement).
 
 <span id="placement-hasQualityAssurance">hasQualityAssurance</span>
-: Metadata about who recorded each part and when. See [QualityAssurance](/placements_standard#qualityassurance).
+: Metadata about who recorded each part and when. See [QualityAssurance](#qualityassurance).
 
 #### Example
 
@@ -98,7 +98,7 @@ The referral request: how urgently the child needs to be placed, how many siblin
 #### Properties
 
 <span id="availability-neededBy">neededBy</span>
-: By when does the child need to find a home/ be placed by? Captures urgency rather than an absolute date. Allowed values are: `'Today'`, `'< 5 days'`, `'> 5 days'`.  See the [Placement Urgency Taxonomy](/placements_standard#placement-urgency-taxonomy).
+: By when does the child need to find a home/ be placed by? Captures urgency rather than an absolute date. Allowed values are: `'Today'`, `'< 5 days'`, `'> 5 days'`.  See the [Placement Urgency Taxonomy](#placement-urgency-taxonomy).
 
 <span id="availability-siblingCount">siblingCount</span>
 : How many siblings should the child be placed together with? If child has no siblings/ does not need to be placed with siblings then input 0. _Integer_.
@@ -107,7 +107,7 @@ The referral request: how urgently the child needs to be placed, how many siblin
 : Is the preferred placement location in the same LA as the placing LA? _Boolean_.
 
 <span id="availability-outOfLAReason">outOfLAReason</span>
-: If `isPreferredLocationLocal` is `false`, the reason the preferred placement is sought outside the placing LA. See the [Out of LA Reason Taxonomy](/placements_standard#out-of-la-reason-taxonomy).
+: If `isPreferredLocationLocal` is `false`, the reason the preferred placement is sought outside the placing LA. See the [Out of LA Reason Taxonomy](#out-of-la-reason-taxonomy).
 
 <span id="availability-outOfLAReasonOther">outOfLAReasonOther</span>
 : Free-text description when `outOfLAReason` is `'Other'`. Multi-valued. _String_.
@@ -143,7 +143,7 @@ The child's needs that the placement must accommodate: communication, cultural, 
 : Whether the child has any communication, language or learning needs.  Allowed values are: `'Yes'`, `'No'`, `'Not Specified'`.
 
 <span id="requirements-specificCommunicationRequirement">specificCommunicationRequirement</span>
-: Specific communication or language requirements such as `'ESOL'`, `'BSL'` etc. and use `'None'` if not applicable. Multi-valued. See the [Communication Need Taxonomy](/placements_standard#communication-need-taxonomy).
+: Specific communication or language requirements such as `'ESOL'`, `'BSL'` etc. and use `'None'` if not applicable. Multi-valued. See the [Communication Need Taxonomy](#communication-need-taxonomy).
 
 <span id="requirements-specificCommunicationRequirementOther">specificCommunicationRequirementOther</span>
 : Free-text descriptions when `specificCommunicationRequirement` includes `'Other'`. Multi-valued. _String_.
@@ -158,13 +158,13 @@ The child's needs that the placement must accommodate: communication, cultural, 
 : Free-text descriptions when `culturalNeeds` is `Other`. Multi-valued.  _String_.
 
 <span id="requirements-livingCompanions">livingCompanions</span>
-: Are there any restrictions on who else can live in the same home? Or, would it help to have them living with other young people? See the [Living Arrangement Taxonomy](/placements_standard#living-arrangement-taxonomy).
+: Are there any restrictions on who else can live in the same home? Or, would it help to have them living with other young people? See the [Living Arrangement Taxonomy](#living-arrangement-taxonomy).
 
 <span id="requirements-pets">pets</span>
 : Whether the child can live in a home with pets / animals. Allowed values are: `'Yes-must'`, `'Yes-can'`, `'No'`, `'Not known'`.
 
 <span id="requirements-additionalSupport">additionalSupport</span>
-: Additional support provision required. Multi-valued. Some allowed values are: `'Additional supervision'`, `'Therapeutic support'`, `'A worker for respite'`, `'Taxis to school'` etc.  See the [Support Type Taxonomy](/placements_standard#support-type-taxonomy).
+: Additional support provision required. Multi-valued. Some allowed values are: `'Additional supervision'`, `'Therapeutic support'`, `'A worker for respite'`, `'Taxis to school'` etc.  See the [Support Type Taxonomy](#support-type-taxonomy).
 
 <span id="requirements-additionalSupportOther">additionalSupportOther</span>
 : Free-text descriptions when `additionalSupport` includes `'Other'`. Multi-valued. _String_.
@@ -353,7 +353,7 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
 : How many siblings were actually placed together. _Integer_.
 
 <span id="actual-placementType">placementType</span>
-: Record the type of placement the child received either foster, residential or supported accommodation. See the [Placement Type Taxonomy](/placements_standard#placement-type-taxonomy).
+: Record the type of placement the child received either foster, residential or supported accommodation. See the [Placement Type Taxonomy](#placement-type-taxonomy).
 
 #### Example
 
@@ -444,7 +444,7 @@ Specific communication and language requirements a child may have. Multi-valued:
 * `Other`: Another communication or language requirement not listed. Supply details via `specificCommunicationRequirementOther`.
 * `None`: No specific communication or language requirements.
 
-Source vocabulary: [taxonomy-communication-need.ttl](/assets/ttl/taxonomy-communication-need.ttl). Used by `specificCommunicationRequirement` on [PlacementRequirements](/placements_standard#placementrequirements).
+Source vocabulary: [taxonomy-communication-need.ttl](/assets/ttl/taxonomy-communication-need.ttl). Used by `specificCommunicationRequirement` on [PlacementRequirements](#placementrequirements).
 
 ### Living Arrangement Taxonomy
 
@@ -456,7 +456,7 @@ Recommendations for who the child can be cared for alongside in a placement.
 * `Only with other younger children`: The child should only live with other children who are younger.
 * `No preference`: No preference about who the child lives alongside.
 
-Source vocabulary: [taxonomy-living-arrangement.ttl](/assets/ttl/taxonomy-living-arrangement.ttl). Used by `livingCompanions` on [PlacementRequirements](/placements_standard#placementrequirements).
+Source vocabulary: [taxonomy-living-arrangement.ttl](/assets/ttl/taxonomy-living-arrangement.ttl). Used by `livingCompanions` on [PlacementRequirements](#placementrequirements).
 
 ### Out of LA Reason Taxonomy
 
@@ -467,7 +467,7 @@ The reason why the preferred placement location is in a different LA than the pl
 * `Court order`: Placement is sought outside the placing LA because of a court order.
 * `Other`: Another reason not listed. Supply details via `outOfLAReasonOther`.
 
-Source vocabulary: [taxonomy-outof-la-reason.ttl](/assets/ttl/taxonomy-outof-la-reason.ttl). Used by `outOfLAReason` on [PlacementAvailability](/placements_standard#placementavailability).
+Source vocabulary: [taxonomy-outof-la-reason.ttl](/assets/ttl/taxonomy-outof-la-reason.ttl). Used by `outOfLAReason` on [PlacementAvailability](#placementavailability).
 
 ### Placement Type Taxonomy
 
@@ -477,7 +477,7 @@ The type of placement the child receives.
 * `Residential`: A placement in a residential children's home.
 * `Supported Accommodation`: A supported accommodation placement, typically for older young people.
 
-Source vocabulary: [taxonomy-placement-type.ttl](/assets/ttl/taxonomy-placement-type.ttl). Used by `placementType` on [ActualPlacement](/placements_standard#actualplacement).
+Source vocabulary: [taxonomy-placement-type.ttl](/assets/ttl/taxonomy-placement-type.ttl). Used by `placementType` on [ActualPlacement](#actualplacement).
 
 ### Placement Urgency Taxonomy
 
@@ -487,7 +487,7 @@ How urgently the child needs to be placed. Captures urgency rather than an absol
 * `< 5 days`: Placement is needed within five days.
 * `> 5 days`: Placement is needed in more than five days.
 
-Source vocabulary: [taxonomy-placement-urgency.ttl](/assets/ttl/taxonomy-placement-urgency.ttl). Used by `neededBy` on [PlacementAvailability](/placements_standard#placementavailability).
+Source vocabulary: [taxonomy-placement-urgency.ttl](/assets/ttl/taxonomy-placement-urgency.ttl). Used by `neededBy` on [PlacementAvailability](#placementavailability).
 
 ### Support Type Taxonomy
 
@@ -500,7 +500,7 @@ Additional support provision required alongside a placement. Multi-valued: selec
 * `NA`: Not applicable; no additional support is required.
 * `Other`: Other additional support is required. Supply details via `additionalSupportOther`.
 
-Source vocabulary: [taxonomy-support-type.ttl](/assets/ttl/taxonomy-support-type.ttl). Used by `additionalSupport` on [PlacementRequirements](/placements_standard#placementrequirements).
+Source vocabulary: [taxonomy-support-type.ttl](/assets/ttl/taxonomy-support-type.ttl). Used by `additionalSupport` on [PlacementRequirements](#placementrequirements).
 
 
 ## Validation
