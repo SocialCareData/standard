@@ -1,0 +1,12 @@
+---
+layout: default
+---
+
+<dl class="standard-version">{% if page.current %}
+    <dt>Latest</dt>
+    <df><a href="{{ page.current }}">{{ page.current }}</a></df>{% endif %}
+    <dt>Version</dt>
+    <df><time datetime="{{ page.date | date_to_xmlschema }}" class="version-tag">{{ page.date | date: "%-d %B %Y" }}</time></df>
+</dl>
+
+{{ content }}
