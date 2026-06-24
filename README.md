@@ -1,6 +1,6 @@
-# Social Care Interoperability Framework
+# Social Care Interoperability Standards
 
-[Social Finance](https://www.socialfinance.org.uk/), [the Open Data Institute](https://theodi.org/) and [Coram](https://www.coram.org.uk/) are working in partnership to develop a social care interoperability framework.
+[Social Finance](https://www.socialfinance.org.uk/), [the Open Data Institute](https://theodi.org/) and [Coram](https://www.coram.org.uk/) are working in partnership to develop a social care interoperability standards.
 
 
 ## Standards Website

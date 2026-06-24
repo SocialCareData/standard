@@ -1,5 +1,5 @@
 ---
-title: Social Care Interoperability Framework Editors
+title: Social Care Interoperability Standards Editors
 tags:
   - Programme
 regenerate: true
