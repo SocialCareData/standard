@@ -1,4 +1,6 @@
 ---
+layout: version
+current: /publications_placements_standard
 title: Children's Social Care Placements Standard
 description: The children's social care placements standard helps regions answer their sufficiency questions by establishing a common data model to gather data about placements.
 changelog:
@@ -512,7 +514,7 @@ A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape 
 
 Use the standard spreadsheet template for reporting placements data:
 
-[National Placement Standard spreadsheet (April 2026, v2)](/assets/spreadsheet/20260427_National-Placement-Standard-Excel-April-2026_v2.xlsx)
+[National Placement Standard spreadsheet (April 2026, v2)](/assets/spreadsheet/National-Placement-Standard-Excel-20260624.xlsx)
 
 
 ## Report an issue
