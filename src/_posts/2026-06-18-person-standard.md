@@ -1,7 +1,7 @@
 ---
 layout: version
 current: /publications_person_standard
-title: Person Standard
+title: Person Standard (2026-06-18)
 description: A common data model for identifying and describing a person across social care systems, designed to unblock multi-agency information sharing and single-view use cases.
 changelog:
   - The Person and ConnectedPerson entities have been unified into a single Person entity. The two shared approximately 80% of their fields and differed mainly in cardinality requirements.
