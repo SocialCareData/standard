@@ -512,9 +512,7 @@ A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape 
 
 ## Standard Placement Reporting Spreadsheet
 
-Use the standard spreadsheet template for reporting placements data:
-
-[National Placement Standard spreadsheet (April 2026, v2)](/assets/spreadsheet/National-Placement-Standard-Excel-20260624.xlsx)
+Use the [National Placement Standard spreadsheet template (June 2026, v3)](/assets/spreadsheet/National-Placement-Standard-Excel-20260624.xlsx) for reporting placements data.
 
 
 ## Report an issue
