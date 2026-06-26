@@ -3,7 +3,7 @@ title: Placements Standards Working Group Meeting 1
 description: Welcome to the placements standards working group.
 author:
   name: Ivjyot Oberoi
-categories:
+tags:
   - Working Group
   - Placements
 breadcrumbs:
@@ -132,7 +132,7 @@ breadcrumbs:
 
 ### Long List of Potential Use Cases
 
-- Better Sufficiency Analysis (primary [use case](/use_case_children_social_care_placements) for release 1)
+- Better Sufficiency Analysis (primary [use case](/UC00_standardising_children_social_care_placements_data) for release 1)
 - Home search / placement finding.
 - Outcomes tracking.
 - Contract monitoring.

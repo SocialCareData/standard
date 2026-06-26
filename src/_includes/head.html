@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="{{ site.theme_color }}">
 
-        <link rel="canonical" href="{{ page.url | absolute_url }}">
+        <link rel="canonical" href="{% if page.canonical %}{{ page.canonical | absolute_url }}{% else %}{{ page.url | absolute_url }}{% endif %}">
 
         <link rel="icon" href="/favicon.ico">
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">

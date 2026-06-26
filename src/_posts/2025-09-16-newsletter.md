@@ -3,7 +3,7 @@ title: Newsletter 1 - Hello from the team!
 description: We’re excited to launch the very first edition of the Data Standards for Social Care newsletter.
 author:
   name: The Data Standards for Social Care Team
-categories:
+tags:
   - Newsletter
 breadcrumbs:
   - title: Updates
@@ -50,7 +50,7 @@ The outcome? Less time chasing data. More time with children. Earlier identifica
 - Review and comment on our emerging standards at: https://socialcaredata.github.io/spec/
 - Join the next [MAIS Working Group on 08th October](/2025_10_08_mais_swg). Email [DataStandards-SocialCare@socialfinance.org.uk](mailto:DataStandards-SocialCare@socialfinance.org.uk) to join.
 
-**Useful links:** [More on MAIS](/mais_standards_working_group); [Person Data Standard Specification](https://github.com/SocialCareData/person-standard); [Data Exchange Standard](https://github.com/SocialCareData/data-exchange-standard).
+**Useful links:** [More on MAIS](/standards_working_group_mais); [Person Data Standard Specification](https://github.com/SocialCareData/person-standard); [Data Exchange Standard](https://github.com/SocialCareData/data-exchange-standard).
 
 
 ### 2. On Our Way to a Shared Standard for Children’s Care Placements

@@ -117,18 +117,6 @@ pl:riskToOthersSexual rdf:type owl:ObjectProperty ,
 #    Data properties
 #################################################################
 
-pl:riskOther rdf:type owl:DatatypeProperty ;
-             rdfs:domain pl:RiskAssessment ;
-             rdfs:range xsd:string ;
-             rdfs:comment "Free-text description of any other risks the child is exposed to that are not captured by the standard risk fields. Multi-valued." ;
-             rdfs:label "risk: other (free text)" .
-
-pl:riskToOthersOther rdf:type owl:DatatypeProperty ;
-                     rdfs:domain pl:RiskAssessment ;
-                     rdfs:range xsd:string ;
-                     rdfs:comment "Free-text description of any other risks to others or property that are not captured by the standard risk-to-others fields. Multi-valued." ;
-                     rdfs:label "risk to others: other (free text)" .
-
 #################################################################
 #    Classes
 #################################################################
@@ -255,5 +243,5 @@ pl:RiskAssessment rdf:type owl:Class ;
                                     owl:onProperty pl:riskToOthersSexual ;
                                     owl:cardinality "1"^^xsd:nonNegativeInteger
                                   ] ;
-                  rdfs:comment "Assessment of risks the child is exposed to (self-harm, sexual exploitation, criminal exploitation, drug/alcohol use, eating disorders, going missing) and risks the child poses to others or property (physical, sexual, fire-setting, animals, criminal exploitation). Each risk is recorded as 'no known risk' or 'risk present'. The 'other' free-text risks (riskOther, riskToOthersOther) are multi-valued." ;
+                  rdfs:comment "Assessment of risks the child is exposed to (self-harm, sexual exploitation, criminal exploitation, drug/alcohol use, eating disorders, going missing) and risks the child poses to others or property (physical, sexual, fire-setting, animals, criminal exploitation). Each risk is recorded as 'no known risk' or 'risk present'." ;
                   rdfs:label "Risk Assessment" .

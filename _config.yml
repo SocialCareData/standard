@@ -1,7 +1,7 @@
 # Jekyll Configuration
-title: Social Care Interoperability Framework
+title: Social Care Interoperability Standards
 url: https://standard.socialcaredata.io
-description: Knowledge base and standards development for the social care interoperability framework
+description: Knowledge base and social care interoperability standards development
 lang: en
 locale: en_GB
 theme_color: "#0f4b69"
@@ -36,10 +36,13 @@ nav:
   - title: Calendar
     url: /calendar
 pagefind: true
+check_internal_links: true
+check_external_links: true
+check_insecure_links: true
 footer:
   copyright:
     title: Crown Copyright
-    url: http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/
+    url: https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/
   license:
     title: Open Government License v3
     url: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/

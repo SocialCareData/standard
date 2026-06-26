@@ -3,7 +3,7 @@ title: Placements Standards Working Group Meeting 2
 description: Overview of the three-year programme to develop data and technological standards for the children's social care sector
 author:
   name: Ivjyot Oberoi
-categories:
+tags:
   - Working Group
   - Placements
 breadcrumbs:

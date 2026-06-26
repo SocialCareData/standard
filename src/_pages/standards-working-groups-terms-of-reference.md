@@ -3,6 +3,9 @@ title: Standards Working Groups Terms of Reference
 breadcrumbs:
   - title: Standards Working Groups
     url: /standards_working_groups
+tags:
+  - Programme
+  - Working Group
 ---
 
 <article class="numbered-headings">

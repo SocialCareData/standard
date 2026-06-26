@@ -11,6 +11,8 @@
   --main-highlight-3-background: rgb(246, 243, 243);
   --main-text-background: rgb(255, 255, 255);
   --main-text-color: rgb(21, 35, 54);
+  --main-tag-background: rgb(210, 226, 241);
+  --main-tag-color: rgb(21, 35, 54);
   --main-link-background: rgb(188, 231, 211);
   --main-link-background-hover: rgb(193, 237, 215);
   --main-link-color: rgb(10, 18, 28);
@@ -48,6 +50,10 @@ body {
 h1 {
   font-weight: 800;
   margin: var(--main-margin-narrow);
+}
+
+h2 {
+  margin: 2rem 0 1.2rem 0;
 }
 
 h2, h3, h4, h5, h6 {
@@ -135,7 +141,7 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
 
 /** Max content width */
 @media (min-width: 1280px) {
-    header, .breadcrumb ol, main > *, footer {
+    header, .banner p, .breadcrumb ol, main > *, footer {
         margin: 0 auto;
         max-width: calc(1280px - 6.2rem);
     }
@@ -174,14 +180,13 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
   padding: .9rem 1.6rem 1rem 1.5rem;
 }
 
-.category {
+.tag {
   border-radius: 1rem;
   font-size: .9rem;
-  margin-right: .6rem;
   padding: .1rem .7rem .2rem .6rem;
 }
 
-.main-link, .category {
+.main-link, .tag {
   background: var(--main-link-background);
   color: var(--main-link-color);
   cursor: pointer;
@@ -189,7 +194,7 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
   text-decoration: none;
 }
 
-.main-link:hover, .category:hover {
+.main-link:hover, .tag:hover {
   background: var(--main-link-background-hover);
   color: var(--main-link-color-hover);
   transition: var(--main-link-transition);
@@ -222,18 +227,34 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
     right: 10px;
 }
 
-.article-list, .event-list {
+.content-list, .event-list {
   list-style-type: none;
-  margin-top: 2rem;
   padding: 0;
 }
 
-.article-list .heading, .event-list .heading {
+.content-list li {
+  margin-top: .4rem;
+}
+
+.content-list .heading, .event-list .heading {
   margin-bottom: .25rem;
 }
 
-.article-list li span, .event-list li span {
+.content-list li span, .event-list li span {
   margin-right: .6rem;
+}
+
+.content-list li p {
+  margin: .4rem 0;
+}
+
+.flex-list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin: 0;
+  padding: 0;
 }
 
 /* W3C spec notes and examples style boxes */
@@ -307,4 +328,30 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
 .publish-dates {
   font-style: italic;
   margin: var(--main-margin-narrow);
+}
+
+.table-bordered {
+border-collapse: collapse;
+width: 95%;
+margin: 15px 0;
+}
+
+.table-bordered th,
+.table-bordered td {
+border: 1px solid #cccccc;
+padding: 10px;
+text-align: left;
+}
+
+.table-bordered th {
+background-color: #f5f5f5;
+}
+
+.version-tag {
+    background-color: var(--main-tag-background);
+    color: var(--main-tag-color);
+    border-radius: 1px;
+    font-weight: normal;
+    margin: -2px 6px -3px 0;
+    padding: 2px 8px 3px;
 }

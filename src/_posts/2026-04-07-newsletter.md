@@ -3,7 +3,7 @@ title: Newsletter 4 - Data Standards for Social Care
 description: Since our last edition, we’ve seen strong progress across all three workstreams. As we move further into 2026, momentum is building, with growing adoption of our placements standard, deeper thinking on multi-agency information sharing (MAIS), and a clearer direction for Adult Social Care.
 author:
   name: The Data Standards for Social Care Team
-categories:
+tags:
   - Newsletter
 breadcrumbs:
   - title: Updates

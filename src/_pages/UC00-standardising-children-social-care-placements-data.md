@@ -1,8 +1,12 @@
 ---
-title: Children's Social Care Placements Use Case
+title: "Standardising children's social care placements data"
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
+tags:
+  - Placements
+  - Use Case
+reference: UC00
 ---
 
 
@@ -25,7 +29,7 @@ The Placements Data Standard will standardise some of the data collected about c
 
 ### Scope
 
-**The standard helps LAs:**
+#### The standard helps LAs
 
 - Better understand placement sufficiency: what provision is needed where, and at what notice
 - Speak the same data ‘language’ as neighbours to form regional view of sufficiency gaps
@@ -33,7 +37,7 @@ The Placements Data Standard will standardise some of the data collected about c
 - Make like-for-like comparisons of placement cost
 - Forecast future demand for different placement types
 
-**It has been designed to:**
+#### It has been designed to
 
 - Create the smallest possible burden on frontline staff
 - Minimise the amount of change required by LAs for adoption
@@ -61,15 +65,16 @@ To develop the initial prototype for the placements data standard, Social Financ
 
 The placements data standard was subsequently reviewed and refined by a cross sector Working Group of 60+ stakeholders, and trialled in three regions.
 
+
 ## Landscape Review
 
 ### The challenge / opportunity
 
-**Care market costs are unsustainable and child outcomes poor.**
+#### Care market costs are unsustainable and child outcomes poor
 
 The market for children’s social care placements—that is, the accommodation and support provided to children when they are taken into the care of the local authority—has been described by the [Local Government Association](https://www.local.gov.uk/about/news/childrens-social-care-placements-costing-ps10000-plus-rise-sharply-five-years-new-lga) as “broken”. There is evidence of residential care costs increasing by c. 70% on average over the last 5 years. Further around half of children in residential care nationally are placed more than 20 miles from home.
 
-**Market intelligence is key but hard without a shared data language.**
+#### Market intelligence is key but hard without a shared data language
 
 Managing this market—essentially ensuring that the right provision is available in the right place and at the right notice—requires market intelligence. LAs must have a clear picture of supply and demand in order to be able to tell providers what new provision they would be likely to pay for, or to make decisions about where to invest their own funds, or to guarantee payments.
 
@@ -89,10 +94,26 @@ Local Authorities already gather standardised statutory data (e.g. the CLA Censu
 
 Further, some regions are developing their own standardised placement cost data models to start generating regional insight into market cost trends, and many LAs are utilising software solutions like BERRI, CANs and Care Cubed to build a database of costs, placement needs and outcome data. The table below provides an overview of the data models we are aware of.
 
-<p><img src="/assets/img/placements/data-models-overview.png" alt="Overview of Data Models" title="Overview of Data Models" /></p>
-<small>*\* Determinants of placement availability refers to factors that are likely to dictate whether a foster carer or provider are able to accept a referral and at what price. This includes things like home adaptations required, additional support requirements, risks etc.*</small>
+| | Placement costs - child level | Determinants of availability\* | Preferred placement | Child-level outcomes |
+|---|:---:|:---:|:---:|:---:|
+| Southwest Sufficiency dataset | ✓ | ✓ | ✓ | |
+| Placements North West dataset | ✓ | | | |
+| White Rose placement dataset | ✓ | | | |
+| Southeast placement cost dataset | ✓ | | | |
+| West Midlands procurement dataset | ✓ | | | |
+| Care Cubed | ✓ | | | |
+| E-brokerage tools (various) | ✓ | | ? | |
+| Framework agreements (various) | ✓ | ✓ | | |
+| BERRI | ✓ | ✓ | ✓ | ✓ |
+| CANS | ✓ | ✓ | ✓ | ✓ |
+| IMPOWER Valuing Care | ✓ | ✓ | ✓ | ✓ |
+| **Proposed NI Placement Standard** | ✓ | ✓ | ✓ | |
+{: .table-bordered}
+
+*\* Determinants of placement availability refers to factors that are likely to dictate whether a foster carer or provider are able to accept a referral and at what price. This includes things like home adaptations required, additional support requirements, risks etc.*
 
 Although, as the table above shows, there are many models already gathering placement cost data, and some gathering other types of data necessary to meaningful regional sufficiency analysis, we are aware of none that gather all this data in a way that readily enables quantitative insight into where key sufficiency gaps are. The data models we are aware of (above) that capture rich insight on determinants of placement availability, preferred placement and child outcomes (BERRI, CANS and IMPOWER) are models designed to be used by social workers, rather than placement teams. While data of this sort gathered by social workers is invaluable for individual care planning, it is not designed primarily to support aggregate analysis or enable meaningful ‘apples for apples’ comparison with neighbours. This is because the data is largely qualitative and many key fields such as needs and risks are largely uncategorised.
+
 
 ## Out of Scope
 
