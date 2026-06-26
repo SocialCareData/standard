@@ -3,6 +3,10 @@ title: Contributing Data to NRL
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
+tags:
+  - MAIS
+  - Use Case
+reference: UC15
 ---
 
 
@@ -17,8 +21,10 @@ breadcrumbs:
 
 <article class="numbered-headings">
 
-Identifier: `10b`
-{: style="color: #888888; font-size: 0.85em; margin-top: 5px;"}
+Identifier: `UC15`<br>
+This was split from [UC10 (multi agency inquiries)](/UC10_multi_agency_enquiries)<br>
+Used to be called `UC10b`
+{: style="color: #888888; font-size: 0.9em; margin-top: 5px;"}
 
 ## Summary
 
@@ -30,7 +36,7 @@ As the administrator of a social care CMS...
 
 ## Description
 
-[Contact Details from SUI & NRL for Safeguarding](/use_case_14_nrl_sui) use case (10a) summarises the experience and requirements of the user when interacting with the NRL
+[UC14 Contact Details from SUI & NRL for Safeguarding](/UC14_nrl_sui) use case (10a) summarises the experience and requirements of the user when interacting with the NRL
 
 This use case (10b) instead is focused on the requirements on the organisation who holds the information that the individual user wants to access
 

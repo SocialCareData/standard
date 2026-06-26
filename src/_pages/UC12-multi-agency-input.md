@@ -3,6 +3,10 @@ title: Multi-agency Input into a Person’s Record
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
+tags:
+  - MAIS
+  - Use Case
+reference: UC12
 ---
 
 
@@ -17,8 +21,8 @@ breadcrumbs:
 
 <article class="numbered-headings">
 
-Identifier: `12`
-{: style="color: #888888; font-size: 0.85em; margin-top: 5px;"}
+Identifier: `UC12`
+{: style="color: #888888; font-size: 0.9em; margin-top: 5px;"}
 
 ## Summary
 
@@ -94,7 +98,7 @@ For Adult’s Social Care, professionals contributing to a shared record could i
 - Primary and secondary care practitioners, reablement
 - Care workers/ managers
 - VCS staff
-- The person in receipt of care and their carer (see [use case 1](/use_case_1_access_and_contribute_to_shared_record))
+- The person in receipt of care and their carer (see [UC01 Access and contribute to a shared record](/UC01_access_and_contribute_to_a_shared_record_by_the_subject_of_that_record_or_their_family))
 
 ### Benefits
 

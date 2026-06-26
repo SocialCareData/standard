@@ -3,6 +3,10 @@ title: Finding and Synthesising Information from the CMS
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
+tags:
+  - MAIS
+  - Use Case
+reference: UC03
 ---
 
 
@@ -17,8 +21,8 @@ breadcrumbs:
 
 <article class="numbered-headings">
 
-Identifier: `3`
-{: style="color: #888888; font-size: 0.85em; margin-top: 5px;"}
+Identifier: `UC03`
+{: style="color: #888888; font-size: 0.9em; margin-top: 5px;"}
 
 ## Summary
 

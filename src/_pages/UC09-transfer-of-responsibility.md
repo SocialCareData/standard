@@ -3,6 +3,10 @@ title: Transfer of Responsibility
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
+tags:
+  - MAIS
+  - Use Case
+reference: UC09
 ---
 
 
@@ -17,8 +21,8 @@ breadcrumbs:
 
 <article class="numbered-headings">
 
-Identifier: `9`
-{: style="color: #888888; font-size: 0.85em; margin-top: 5px;"}
+Identifier: `UC09`
+{: style="color: #888888; font-size: 0.9em; margin-top: 5px;"}
 
 ## Summary
 

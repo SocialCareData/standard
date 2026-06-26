@@ -3,6 +3,10 @@ title: Contact Details from SUI & NRL for Safeguarding
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
+tags:
+  - MAIS
+  - Use Case
+reference: UC14
 ---
 
 
@@ -17,8 +21,10 @@ breadcrumbs:
 
 <article class="numbered-headings">
 
-Identifier: `10a`
-{: style="color: #888888; font-size: 0.85em; margin-top: 5px;"}
+Identifier: `UC14`<br>
+This was split from [UC10 (multi agency inquiries)](/UC10_multi_agency_enquiries)<br>
+Used to be called `UC10a`
+{: style="color: #888888; font-size: 0.9em; margin-top: 5px;"}
 
 ## Summary
 
@@ -26,7 +32,7 @@ As a social worker conducting safeguarding enquiries, I need the contact details
 
 ## Description
 
-To move from [Multi-agency Enquiries](/use_case_10_multi_agency_enquiries) use case (10) -- this use case (10a). Here we are specifying what systems need to do in order to interface with the NRL. All participating implementations must be able to interact with the NRL
+To move from [UC10 Multi-agency Enquiries](/UC10_multi_agency_enquiries) use case -- this use case (10a). Here we are specifying what systems need to do in order to interface with the NRL. All participating implementations must be able to interact with the NRL
 
 Two national service will exist:
 
