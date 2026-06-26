@@ -49,20 +49,20 @@ Unlike adult’s, the returns for children’s are generally consistent and can 
 ### Data
 
 **CLD** requires detailed, [person-level ASC data](https://www.ardengemcsu.nhs.uk/adult-social-care-client-level-data/) including:
-- Demographic and identifying information
-- Contact, Referral & Service Request Data
-- Assessment and review dates and outcomes
-- Long-term and short-term & reablement support episodes
-- Care package components and start/end dates
-- Provider information where applicable
-- Safeguarding elements (where relevant to CLD specification)
+* Demographic and identifying information
+* Contact, Referral & Service Request Data
+* Assessment and review dates and outcomes
+* Long-term and short-term & reablement support episodes
+* Care package components and start/end dates
+* Provider information where applicable
+* Safeguarding elements (where relevant to CLD specification)
 
 **Key data characteristics:**
 
-- Longitudinal (tracking people over time)
-- Event-based (e.g., starts and stops of support)
-- Dependent on consistent definitions across teams
-- Drawn from multiple internal systems (CMS, brokerage, finance)
+* Longitudinal (tracking people over time)
+* Event-based (e.g., starts and stops of support)
+* Dependent on consistent definitions across teams
+* Drawn from multiple internal systems (CMS, brokerage, finance)
 
 
 ASC returns:
@@ -153,9 +153,9 @@ ASC returns:
 
 ### Benefits/Goal/Value/Purpose
 
-- To fulfil the local authority’s statutory obligation to submit data to government departments
-- To ensure the national dataset accurately reflects local activity, enabling DHSC/ DfE to use the data to inform policy
-- For local authorities to have high quality, comparable data for benchmarking, care market oversight, service planning and commissioning.
+* To fulfil the local authority’s statutory obligation to submit data to government departments
+* To ensure the national dataset accurately reflects local activity, enabling DHSC/ DfE to use the data to inform policy
+* For local authorities to have high quality, comparable data for benchmarking, care market oversight, service planning and commissioning.
 
 ### Processes
 
@@ -168,21 +168,21 @@ ASC returns:
 
 ## Landscape Review
 
-- CLD replaced previous annual returns (SALT) and is the first national collection of social care records, submitted quarterly. It began in July 2023.
-- It is possible to link this data with health on a national scale, enabling in-depth analysis of patterns of health and care use and evaluation of how effective and integrated services are
-- Due to the historical lack of national standardisation in ASC, LAs configure their CMS products around local practice.
-- Work has been done to standardise language for care providers DiSC - MODS
+* CLD replaced previous annual returns (SALT) and is the first national collection of social care records, submitted quarterly. It began in July 2023.
+* It is possible to link this data with health on a national scale, enabling in-depth analysis of patterns of health and care use and evaluation of how effective and integrated services are
+* Due to the historical lack of national standardisation in ASC, LAs configure their CMS products around local practice.
+* Work has been done to standardise language for care providers DiSC * MODS
 
 **Benefits for addressing this use case**
 
-- **For local authorities:** Reduced administrative burden, faster and more accurate reporting, better planning and benchmarking insights. 
-- **For the sector:** Standardised data enables more efficient allocation of resources, better oversight of care quality, and lays the foundation for AI and analytics applications. 
-- **For people in receipt of care:** Improved reporting and insights support better safeguarding and service planning, contributing to safer, more effective care. 
+* **For local authorities:** Reduced administrative burden, faster and more accurate reporting, better planning and benchmarking insights. 
+* **For the sector:** Standardised data enables more efficient allocation of resources, better oversight of care quality, and lays the foundation for AI and analytics applications. 
+* **For people in receipt of care:** Improved reporting and insights support better safeguarding and service planning, contributing to safer, more effective care. 
 
 **Daily APIs to support statutory return data:**
 
-- Outside of our project, there is another project underway at DfE where the creation of APIs to support LA to DfE data transfer to allow a potential move to automated daily returns is being explored with suppliers
-- This team has created specifications and may fund suppliers directly to create the APIs required to facilitate these transfers. Tom knows more detail about this programme.
+* Outside of our project, there is another project underway at DfE where the creation of APIs to support LA to DfE data transfer to allow a potential move to automated daily returns is being explored with suppliers
+* This team has created specifications and may fund suppliers directly to create the APIs required to facilitate these transfers. Tom knows more detail about this programme.
 
 ## Out of Scope
 

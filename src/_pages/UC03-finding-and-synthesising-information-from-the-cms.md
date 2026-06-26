@@ -62,18 +62,18 @@ Synthesising e.g. notes about why someone is in care, recent events, for one of 
 
 Finding information enables many purposes e.g.:
 
-- Producing outputs for children
-- Analysing patterns of behaviour and risk over time
-- Arriving at decisions
-- Sharing information with other agencies
+* Producing outputs for children
+* Analysing patterns of behaviour and risk over time
+* Arriving at decisions
+* Sharing information with other agencies
 
 Synthesis of information is required for many purposes e.g.:
 
-- Production of chronologies
-- Case summaries for internal reporting
-- Reports to courts and other agencies
-- Requests to other agencies for information, coordination, or resources
-- Briefing materials for someone about to start work with the person (e.g. new SW, care provider, or other service)
+* Production of chronologies
+* Case summaries for internal reporting
+* Reports to courts and other agencies
+* Requests to other agencies for information, coordination, or resources
+* Briefing materials for someone about to start work with the person (e.g. new SW, care provider, or other service)
 
 ### Processes
 
@@ -87,30 +87,30 @@ North Yorkshire Council are a key example here of where the council has used AI 
 
 **The primary problem**
 
-- Social workers spend too much time at their desk on tasks that do not support their practice or the children and families they are supporting.
+* Social workers spend too much time at their desk on tasks that do not support their practice or the children and families they are supporting.
 
 **The secondary problem**
 
-- Case management systems replicate paper-based systems, consequently making it hard to find specific information across large case files. Information is captured haphazardly cross multiple places
-- Social workers need to synthesise a lot of information to produce key outputs (e.g. chronologies), arrive at decisions concerning the child/their family, and when deciding to share information with other agencies.
-- Social workers spent quite significant amounts of time copy-pasting information from old forms into new ones because of absent or ineffective prepopulation of fields.
+* Case management systems replicate paper-based systems, consequently making it hard to find specific information across large case files. Information is captured haphazardly cross multiple places
+* Social workers need to synthesise a lot of information to produce key outputs (e.g. chronologies), arrive at decisions concerning the child/their family, and when deciding to share information with other agencies.
+* Social workers spent quite significant amounts of time copy-pasting information from old forms into new ones because of absent or ineffective prepopulation of fields.
 
 For Social Worker information retrieval, we envision a world where:
 
-- Social workers can easily find the information that they need when they need to produce outputs for children, arrive at decisions and share information with other agencies.
-- Tasks which require the synthesis of large amounts of information (e.g. the production of chronologies) become more straightforward and less burdensome.
+* Social workers can easily find the information that they need when they need to produce outputs for children, arrive at decisions and share information with other agencies.
+* Tasks which require the synthesis of large amounts of information (e.g. the production of chronologies) become more straightforward and less burdensome.
 
 ### Potential solutions
 
-- Integration with third party providers/improved functionality of existing systems to support improved search, summarisation and prioritisation of information, potentially using AI tools to support.
-- Integration with third party providers/improved functionality of existing systems for specific outputs (e.g. genograms and chronologies).
+* Integration with third party providers/improved functionality of existing systems to support improved search, summarisation and prioritisation of information, potentially using AI tools to support.
+* Integration with third party providers/improved functionality of existing systems for specific outputs (e.g. genograms and chronologies).
 
 This could lead to:
 
-- The user experience for social workers when using their case management systems improves, increasing their capacity to assess risk.
-- Children and families spend more time with their social workers and have a reduced need to repeat information.
-- A thriving market for tools which integrate with CMS’ emerges, compounding these benefits.
-- Data collated from different agencies allows for a timelier and more accurate assessment of risk.
+* The user experience for social workers when using their case management systems improves, increasing their capacity to assess risk.
+* Children and families spend more time with their social workers and have a reduced need to repeat information.
+* A thriving market for tools which integrate with CMS’ emerges, compounding these benefits.
+* Data collated from different agencies allows for a timelier and more accurate assessment of risk.
 
 ## Out of Scope
 
@@ -118,13 +118,11 @@ This could lead to:
 
 ## Open Questions
 
-- Is this always going to have to be part of the job? The same way in which we can struggle to find emails hidden in our inbox – is this an innate challenge of using digital systems?
+* Is this always going to have to be part of the job? The same way in which we can struggle to find emails hidden in our inbox – is this an innate challenge of using digital systems?
 
 ## Additional Sources
 
-- [North Yorkshire Council: Using AI to reimagine Children's Social Care
-  \| Local Government
-  Association](https://www.local.gov.uk/case-studies/north-yorkshire-council-using-ai-reimagine-childrens-social-care)
+* [North Yorkshire Council: Using AI to reimagine Children's Social Care | Local Government Association](https://www.local.gov.uk/case-studies/north-yorkshire-council-using-ai-reimagine-childrens-social-care)
 
 ## Report an issue
 

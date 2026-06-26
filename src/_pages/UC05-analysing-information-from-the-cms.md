@@ -48,13 +48,13 @@ As a social work team manager, I need to be able to track the performance of my 
 
 Social work performance leads need access to quality data and quality data analysis to support the decisions they need to make. Typical decisions include:
 
-- **Allocation of resources:** where in a geography should they allocate social work teams and resource, where should budgets be invested
-- **Performance management:** are social work teams overworked relative to others, which teams are performing most effectively, where are teams failing to meet their statutory responsibilities
-- **Workforce planning:** what future demand can be anticipated, what skills or roles are needed, and where recruitment or retention efforts should be prioritised.
-- **Risk management:** which cases, teams, or localities present emerging risks, and which areas require escalation, intervention, or additional monitoring.
-- **Service redesign and improvement:** which processes or pathways are performing poorly, where delays or bottlenecks are most acute, and where redesign could improve outcomes or reduce cost.
-- **Demand forecasting:** what patterns in referrals, offers of support, or safeguarding activity indicate rising pressure, and how to prepare capacity accordingly.
-- **Outcome evaluation:** which interventions or services are having the desired impact, what evidence supports continuation or expansion, and where to decommission or shift investment.
+* **Allocation of resources:** where in a geography should they allocate social work teams and resource, where should budgets be invested
+* **Performance management:** are social work teams overworked relative to others, which teams are performing most effectively, where are teams failing to meet their statutory responsibilities
+* **Workforce planning:** what future demand can be anticipated, what skills or roles are needed, and where recruitment or retention efforts should be prioritised.
+* **Risk management:** which cases, teams, or localities present emerging risks, and which areas require escalation, intervention, or additional monitoring.
+* **Service redesign and improvement:** which processes or pathways are performing poorly, where delays or bottlenecks are most acute, and where redesign could improve outcomes or reduce cost.
+* **Demand forecasting:** what patterns in referrals, offers of support, or safeguarding activity indicate rising pressure, and how to prepare capacity accordingly.
+* **Outcome evaluation:** which interventions or services are having the desired impact, what evidence supports continuation or expansion, and where to decommission or shift investment.
 
 Social Care case management systems are not designed to allow social worker leaders and performance teams to conduct this level and breadth of analysis. The are designed to be record management solutions, not data analysis tools. Across our research and previous work we heard that native reporting functionality within case management systems was not flexible, or reliable enough, meaning that teams would typically perform analysis on copies of data taken from the CMS. We also heard that the ability to perform this level of analysis was variable depending on the local authority: some could not take copies of their CMS data, whilst some lacked the analytical capacity to perform such analysis.
 
@@ -64,23 +64,23 @@ As much as possible, we want to reduce the barriers to enable local authorities 
 
 Naturally, we’re interested in lots of data for this use case. This could include:
 
-- Demand and social worker caseload data
-- Financial data
-- Workforce data
-- Outcomes data
-- Compliance data
-- Demographic data
-- Placements data
+* Demand and social worker caseload data
+* Financial data
+* Workforce data
+* Outcomes data
+* Compliance data
+* Demographic data
+* Placements data
 
 ### Benefits/Goal/Value/Purpose
 
 This analysis supports:
 
-- Improved understanding of need  and outcomes contributes to more effective future service planning (e.g. effective resource allocation, accurate budgets)
-- Service improvement (identification of repeated patterns, challenges/pain points, gaps, areas of poor outcomes)
-- Reporting and compliance – more effective at understanding where local authorities are not meeting their statutory requirements
-- Happier social workers – if resources are allocated well and their workload feels manageable
-- Better supported citizens
+* Improved understanding of need  and outcomes contributes to more effective future service planning (e.g. effective resource allocation, accurate budgets)
+* Service improvement (identification of repeated patterns, challenges/pain points, gaps, areas of poor outcomes)
+* Reporting and compliance – more effective at understanding where local authorities are not meeting their statutory requirements
+* Happier social workers – if resources are allocated well and their workload feels manageable
+* Better supported citizens
 
 ### Processes
 
@@ -102,25 +102,25 @@ A lack of joined up data across internal and external systems limits local autho
 
 **The secondary problem**
 
-- The ‘back ends’ of local authority and partner systems do not integrate well.
-- Local authorities miss opportunities that could be realised by bringing data together.
-- Analytical capacity within local authorities often cannot stretch to support strategic analysis as well as statutory reporting.
+* The ‘back ends’ of local authority and partner systems do not integrate well.
+* Local authorities miss opportunities that could be realised by bringing data together.
+* Analytical capacity within local authorities often cannot stretch to support strategic analysis as well as statutory reporting.
 
 For data richness and reporting, we envision a world where:
 
-- Bringing together disparate datasets into a single place (e.g. data lake or data warehouses) does not pose a significant barrier for local authorities.
-- Local authorities are able to use a combination of their own data (from across different departments) and partnership data to perform strategic analysis to understand need, then make and evidence effective decisions off the back of this analysis.
+* Bringing together disparate datasets into a single place (e.g. data lake or data warehouses) does not pose a significant barrier for local authorities.
+* Local authorities are able to use a combination of their own data (from across different departments) and partnership data to perform strategic analysis to understand need, then make and evidence effective decisions off the back of this analysis.
 
 ### Potential solutions
 
-- A suite of centrally developed dashboards supporting specific analysis that can ‘plug and play’ with local authority data.
-- Standard data operating model for local authorities.
+* A suite of centrally developed dashboards supporting specific analysis that can ‘plug and play’ with local authority data.
+* Standard data operating model for local authorities.
 
 Leading to:
 
-- Better understanding of need through joining together data will improve forecasting and decrease the risk of inaccurate budgets.
-- Will support the move towards the ‘right’ KPI’s that are more impactful for children and families.
-- Reduced duplication of effort across local authorities.
+* Better understanding of need through joining together data will improve forecasting and decrease the risk of inaccurate budgets.
+* Will support the move towards the ‘right’ KPI’s that are more impactful for children and families.
+* Reduced duplication of effort across local authorities.
 
 ## Out of Scope
 
@@ -133,7 +133,7 @@ Is this problem felt as acutely across adult’s and children’s systems?
 
 ## Additional Sources
 
-[OFSTED Annex A Data Requirements](https://www.gov.uk/government/publications/deleted-inspecting-local-authority-childrens-services/inspecting-local-authority-childrens-services#Annex-A)
+* [OFSTED Annex A Data Requirements](https://www.gov.uk/government/publications/deleted-inspecting-local-authority-childrens-services/inspecting-local-authority-childrens-services#Annex-A)
 
 ## Report an issue
 

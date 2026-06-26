@@ -48,10 +48,10 @@ We want to be able to ‘drag and drop’, as much as possible, a child’s reco
 
 ### Data
 
-- History of interventions
-- Historic case notes
-- Previous plans, case summaries, etc
-- Chronologies of significant events in the child’s life
+* History of interventions
+* Historic case notes
+* Previous plans, case summaries, etc
+* Chronologies of significant events in the child’s life
 
 ### Benefits/Goal/Value/Purpose
 

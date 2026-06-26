@@ -54,11 +54,11 @@ Everything in the case management system: config, cases, people, history, places
 
 ### Benefits/Goal/Value/Purpose
 
-- Making it easier to transfer between systems will support competition within the CMS market, as vendors will have to  create innovative features that offer a better experience for social workers
+* Making it easier to transfer between systems will support competition within the CMS market, as vendors will have to  create innovative features that offer a better experience for social workers
 
 ### Processes
 
-- This is an incredibly intensive process at the moment, taking many months (even years) to transfer between systems. Local authorities know this, so it is rare that this happens
+* This is an incredibly intensive process at the moment, taking many months (even years) to transfer between systems. Local authorities know this, so it is rare that this happens
 
 ## Landscape Review
 

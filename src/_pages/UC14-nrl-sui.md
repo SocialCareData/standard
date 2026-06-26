@@ -36,28 +36,28 @@ To move from [UC10 Multi-agency Enquiries](/UC10_multi_agency_enquiries) use cas
 
 Two national service will exist:
 
-- Find a SUI
-- Find a record
+* Find a SUI
+* Find a record
 
 ### Data
 
 What goes in:
 
-- Details to identify the individual -- demographic information
-- Weighted by confidence
-- Service involvement (my relationship with them)
-- SUI (if they have it)
+* Details to identify the individual -- demographic information
+* Weighted by confidence
+* Service involvement (my relationship with them)
+* SUI (if they have it)
 
 What comes out:
 
-- First: SUI -- which is then submitted to the second
-- whether the information that I've provided has allowed the system to match to a specific individual
-- List of services which are declaring they've had an interaction with that SUI
-  - Ideally: Names and contact details of related professionals
+* First: SUI -- which is then submitted to the second
+* whether the information that I've provided has allowed the system to match to a specific individual
+* List of services which are declaring they've had an interaction with that SUI
+  * Ideally: Names and contact details of related professionals
 
 End of the process:
 
-- The social worker then sends an email/picks up the phone to the new contact
+* The social worker then sends an email/picks up the phone to the new contact
 
 ### Benefits/Goal/Value/Purpose
 
@@ -65,31 +65,31 @@ End of the process:
 
 This consists of:
 
-- A request for a SUI to a “find a SUI service”
-- A return of a SUI to the requestor
-- A request utilising that SUI to a “find a record service”
-- A return of a list of services
+* A request for a SUI to a “find a SUI service”
+* A return of a SUI to the requestor
+* A request utilising that SUI to a “find a record service”
+* A return of a list of services
 
 Additional requirements:
 
-- Find a sui service request
-- Find a sui service response
-- Find a sui service protocol
-- Find a record request
-- Find a record response
-- Find a record protocol
-- Both requests must include information to facilitate an audit trail
+* Find a sui service request
+* Find a sui service response
+* Find a sui service protocol
+* Find a record request
+* Find a record response
+* Find a record protocol
+* Both requests must include information to facilitate an audit trail
 
 Assumed out of scope
 
-- Matching specification
-- Business logic for “find a record”
+* Matching specification
+* Business logic for “find a record”
 
 Assumptions:
 
-- Services are well known
-- There will be a requirement to authorise users
-- Need to have an identified audit request
+* Services are well known
+* There will be a requirement to authorise users
+* Need to have an identified audit request
 
 ## Landscape Review
 

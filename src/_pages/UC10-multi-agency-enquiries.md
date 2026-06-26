@@ -29,42 +29,25 @@ Identifier: `UC10`
 **Overview:** accessing and understanding relevant information about an individual across agencies to support safe, timely, and well-coordinated decision-making
 
 **Sub-use cases:**
-<ol type="A" style="font-weight: bold;">
-  <li>
-    Frontline practitioner enquiries when beginning work with an individual
-    <ol style="font-weight: normal;" type="i">
-      <li>As a professional starting work directly with an individual, I want to know their history of involvement with professionals, including concerns, interventions, and outcomes.  This helps me plan my work with them and avoids them feeling they have to explain their story repeatedly. </li>
-      <li>As a professional starting work directly with an individual, I want to be able to contact other professionals who are currently supporting them or who have in the past.  This helps us co-ordinate our work and learn from each other. </li>
-      <li>As a MASH officer / social worker who has received a referral about a child, I want to be able to quickly find information about that child or their family members held by other professionals in order to triage and allocate them appropriately (allocation decision usually signed off by manager).</li>
-    </ol>
-  </li>
 
-  <li>
-    Safeguarding enquiries (use cases 10a/14 and 10b/15)
-    <ol style="font-weight: normal;" type="i">
-      <li>As a social worker conducting safeguarding enquiries, I need the contact details of other professionals hold pertinent information about the subject so that I can coordinate information sharing and support to allow for effective analysis and decision making. </li>
-      <li>As the administrator of a social care CMS, I need to contribute records about which individuals we are (or have been) working with to the ‘Find a Record’ service, so that professionals in other organisations can rely on the responses they get from ‘Find a Record’. </li>
-    </ol>
-  </li>
+* **Frontline practitioner enquiries when beginning work with an individual**
+  * As a professional starting work directly with an individual, I want to know their history of involvement with professionals, including concerns, interventions, and outcomes.  This helps me plan my work with them and avoids them feeling they have to explain their story repeatedly.
+  * As a professional starting work directly with an individual, I want to be able to contact other professionals who are currently supporting them or who have in the past.  This helps us co-ordinate our work and learn from each other.
+  * As a MASH officer / social worker who has received a referral about a child, I want to be able to quickly find information about that child or their family members held by other professionals in order to triage and allocate them appropriately (allocation decision usually signed off by manager).
 
-  <li>
-    Enquiries for CSC statutory processes
-    <ol style="font-weight: normal;" type="i">
-      <li>As a social work manager, I need to be able to read all information held by professionals about a child and their family to inform my decision whether to initiate a child protection investigation under CA s.47. </li>
-      <li>As a social worker conducting a s.47 investigation, I need to contact all other professionals involved with a family to invite them to share information and decision-making as a professional network. </li>
-      <li>As a social worker supporting a child under CA s.17 (Child in Need) I need to access information held by other professionals about the child, where the child’s parent or carer has consented to this information sharing. </li>
-    </ol>
-  </li>
+* **Safeguarding enquiries (use cases 10a/14 and 10b/15)**
+  * As a social worker conducting safeguarding enquiries, I need the contact details of other professionals hold pertinent information about the subject so that I can coordinate information sharing and support to allow for effective analysis and decision making.
+  * As the administrator of a social care CMS, I need to contribute records about which individuals we are (or have been) working with to the ‘Find a Record’ service, so that professionals in other organisations can rely on the responses they get from ‘Find a Record’.
 
-  <li>
-    Enquiries for ASC assessment and care coordination
-    <ol style="font-weight: normal;" type="i">
-      <li>As an ASC social worker, I need to gather up-to-date health and community health information, carer information and other information about a person relevant to complete a Care Act assessment including assessing their capacity and seeking information on legal orders.</li>
-      <li>As an ASC social worker, I need to see employment and benefits information from DWP so that I can understand their income and entitlements which determines how much the LA pays for the package of care.</li>
-      <li>As an ASC social worker, I need to see provider information e.g. Dols assessments; care plans, safeguarding information and outcomes so that I can review and adjust a person’s LA care plan.</li>
-    </ol>
-  </li>
-</ol>
+ * **Enquiries for CSC statutory processes**
+  * As a social work manager, I need to be able to read all information held by professionals about a child and their family to inform my decision whether to initiate a child protection investigation under CA s.47.
+  * As a social worker conducting a s.47 investigation, I need to contact all other professionals involved with a family to invite them to share information and decision-making as a professional network.
+  * As a social worker supporting a child under CA s.17 (Child in Need) I need to access information held by other professionals about the child, where the child’s parent or carer has consented to this information sharing.
+
+ * **Enquiries for ASC assessment and care coordination**
+  * As an ASC social worker, I need to gather up-to-date health and community health information, carer information and other information about a person relevant to complete a Care Act assessment including assessing their capacity and seeking information on legal orders.
+  * As an ASC social worker, I need to see employment and benefits information from DWP so that I can understand their income and entitlements which determines how much the LA pays for the package of care.
+  * As an ASC social worker, I need to see provider information e.g. Dols assessments; care plans, safeguarding information and outcomes so that I can review and adjust a person’s LA care plan.
 
 ## Description
 
@@ -80,34 +63,34 @@ There are also many cases where individuals exist in systems that a practitioner
 
 ### Data
 
-- Find out which systems hold information about an individual, so practitioners know where to start their search
-- Find out who else is currently working with that individual, or has previously worked with that individual
-- Find out who else is related to that individual (e.g. who else might be present at an address, who a child’s parents are so the practitioner can also query their service involvement)
-- Find out about related addresses for that individual (different agencies might hold different information)
-- Find out about events (e.g. exclusion, DV incident) that are important to providing effective support and safeguarding to a child/individual
+* Find out which systems hold information about an individual, so practitioners know where to start their search
+* Find out who else is currently working with that individual, or has previously worked with that individual
+* Find out who else is related to that individual (e.g. who else might be present at an address, who a child’s parents are so the practitioner can also query their service involvement)
+* Find out about related addresses for that individual (different agencies might hold different information)
+* Find out about events (e.g. exclusion, DV incident) that are important to providing effective support and safeguarding to a child/individual
 
 ASC systems a CMS may need information from (see: foundational spec):
 
-- Department for Work and Pensions (DWP)
-- National Health systems, including:
-  - NHS Spine
-  - CP-IS or equivalent (e.g. for Wales)
-  - PDS (Patient Demographic Service) for NHS number validation
-- Shared Care Records
-- Emergency Services (Police, Ambulance, Fire)
-- Housing systems (e.g. Capita)
-- Child and Adult Mental Health services
-- Hospital admission and discharge data feeds
-- Local NHS and healthcare systems, including GPs and Primary Care
-- Education systems
-- Finance and payments systems
-- Reablement systems
-- Document Management Solutions (e.g. SharePoint, Objective Connect)
-- Council Tax and Housing Benefit systems
-- Youth Justice services
-- HR and Workforce systems
-- Court Deputy/Legal systems (e.g. Caspar)
-- Contact Centre / Front Door solutions
+* Department for Work and Pensions (DWP)
+* National Health systems, including:
+  * NHS Spine
+  * CP-IS or equivalent (e.g. for Wales)
+  * PDS (Patient Demographic Service) for NHS number validation
+* Shared Care Records
+* Emergency Services (Police, Ambulance, Fire)
+* Housing systems (e.g. Capita)
+* Child and Adult Mental Health services
+* Hospital admission and discharge data feeds
+* Local NHS and healthcare systems, including GPs and Primary Care
+* Education systems
+* Finance and payments systems
+* Reablement systems
+* Document Management Solutions (e.g. SharePoint, Objective Connect)
+* Council Tax and Housing Benefit systems
+* Youth Justice services
+* HR and Workforce systems
+* Court Deputy/Legal systems (e.g. Caspar)
+* Contact Centre / Front Door solutions
 
 ### Benefits/Goal/Value/Purpose
 
@@ -129,71 +112,55 @@ It is hard for practitioners to support and make effective decisions for childre
 
 **The secondary problem**
 
-- Practitioners need to gain access to different systems to see information about children/adults that they are working with but are often unable to.
-- Families/individuals repeat their stories multiple times to different practitioners, who all hold data within their own systems.
-- There is a nervousness for practitioners of what should be shared and when.
-- Practitioners are unable to access multiagency chronologies of involvements and significant events.
-- Serious case reviews show that a small number of families take deliberate steps to avoid professionals learning about their past.  This may include using different names and moving to different parts of the country.  We probably shouldn’t try to solve this problem with data, but should build things that incorporate an understanding of it.
+* Practitioners need to gain access to different systems to see information about children/adults that they are working with but are often unable to.
+* Families/individuals repeat their stories multiple times to different practitioners, who all hold data within their own systems.
+* There is a nervousness for practitioners of what should be shared and when.
+* Practitioners are unable to access multiagency chronologies of involvements and significant events.
+* Serious case reviews show that a small number of families take deliberate steps to avoid professionals learning about their past.  This may include using different names and moving to different parts of the country.  We probably shouldn’t try to solve this problem with data, but should build things that incorporate an understanding of it.
 
 ### Potential solutions
 
-- CMS’s from across safeguarding partners can connect to one another, enabling a window into the relevant parts of a child’s record.
-- Integration with tools which support the creation of multiagency chronologies.
+* CMS’s from across safeguarding partners can connect to one another, enabling a window into the relevant parts of a child’s record.
+* Integration with tools which support the creation of multiagency chronologies.
 
 This could mean:
 
-- Social workers save time having to seek out information held by other agencies about a child/family, improving interventions and threshold decision making.
-- Other safeguarding stakeholders can support children and families more effectively.
-- Increased safety for children, reducing the risk of them ‘falling through the gaps’.
-- Increased likelihood of being able to intervene earlier before need escalates.
+* Social workers save time having to seek out information held by other agencies about a child/family, improving interventions and threshold decision making.
+* Other safeguarding stakeholders can support children and families more effectively.
+* Increased safety for children, reducing the risk of them ‘falling through the gaps’.
+* Increased likelihood of being able to intervene earlier before need escalates.
 
 It should also be noted that there is a wider multiagency sharing programme within DfE attempting to tackle this problem for CSC. There is a team dedicated to building out national infrastructure required to gather the SUI, and an architecture team whose role is to advise on options for national architecture.
 
 There are also pockets of work to address this via shared care records and via supplier solutions, however they vary in reliability and usefulness for social workers (i.e. shared care record has a health lens).
 
-- **Shared Care record:** National policy encourages the use of shared care records as central to joined-up care e.g. London Care Record have 26 Adult Social Care Teams accessing this.  Existing suppliers provide access either at procurement or as an add-on with a cost attached.
+* **Shared Care record:** National policy encourages the use of shared care records as central to joined-up care e.g. London Care Record have 26 Adult Social Care Teams accessing this.  Existing suppliers provide access either at procurement or as an add-on with a cost attached.
 
 ## Out of Scope
 
-- Information sharing guidance.
-- Work on the SUI
+* Information sharing guidance.
+* Work on the SUI
 
 ## Open Questions
 
-- What will the new guidance say around information sharing under Families First for Children?
+* What will the new guidance say around information sharing under Families First for Children?
 
 ## Additional Sources
 
 *CSC*
 
-- [Working Together to Safeguard Children
-  2023](https://assets.publishing.service.gov.uk/media/6849a7b67cba25f610c7db3f/Working_together_to_safeguard_children_2023_-_statutory_guidance.pdf)
+* [Working Together to Safeguard Children 2023](https://assets.publishing.service.gov.uk/media/6849a7b67cba25f610c7db3f/Working_together_to_safeguard_children_2023_-_statutory_guidance.pdf)
+* [Working Together 2023 - Statutory Guidance](https://assets.publishing.service.gov.uk/media/65797f1e0467eb000d55f689/Working_together_to_safeguard_children_2023_-_statutory_framework.pdf)
+* [Information Sharing Guidance for Safeguarding Professionals - DfE 2024](https://assets.publishing.service.gov.uk/media/66320b06c084007696fca731/Info_sharing_advice_content_May_2024.pdf)
+* [ICO - Guidance for safeguarding children information sharing](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/a-10-step-guide-to-sharing-information-to-safeguard-children/)
 
-- [Working Together 2023 - Statutory
-  Guidance](https://assets.publishing.service.gov.uk/media/65797f1e0467eb000d55f689/Working_together_to_safeguard_children_2023_-_statutory_framework.pdf)
+*ASC*
 
-- [Information Sharing Guidance for Safeguarding Professionals - DfE
-  2024](https://assets.publishing.service.gov.uk/media/66320b06c084007696fca731/Info_sharing_advice_content_May_2024.pdf)
-
-- [ICO - Guidance for safeguarding children information
-  sharing](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/a-10-step-guide-to-sharing-information-to-safeguard-children/)
-
-ASC
-
-- [Information sharing in social
-  care](https://transform.england.nhs.uk/information-governance/guidance/information-sharing-in-social-care/)
-
-- [Safeguarding statutory guidance -
-  adults](https://www.gov.uk/government/publications/care-act-statutory-guidance/care-and-support-statutory-guidance#safeguarding-1)
-
-- [Assessment Statutory guidance -
-  adults](https://www.gov.uk/government/publications/care-act-statutory-guidance/care-and-support-statutory-guidance#first-contact-and-identifying-needs)
-
-- [Transitional safeguarding
-  briefing](https://www.adass.org.uk/wp-content/uploads/2025/10/transitional-safeguarding-briefing-for-sector-leaders-sb-all-web.pdf)
-
-- [ASC CMS
-  foundational-specification](https://khub.net/web/ascait/foundational-specification)
+* [Information sharing in social care](https://transform.england.nhs.uk/information-governance/guidance/information-sharing-in-social-care/)
+* [Safeguarding statutory guidance - adults](https://www.gov.uk/government/publications/care-act-statutory-guidance/care-and-support-statutory-guidance#safeguarding-1)
+* [Assessment Statutory guidance - adults](https://www.gov.uk/government/publications/care-act-statutory-guidance/care-and-support-statutory-guidance#first-contact-and-identifying-needs)
+* [Transitional safeguarding briefing](https://www.adass.org.uk/wp-content/uploads/2025/10/transitional-safeguarding-briefing-for-sector-leaders-sb-all-web.pdf)
+* [ASC CMS foundational-specification](https://khub.net/web/ascait/foundational-specification)
 
 ## Report an issue
 

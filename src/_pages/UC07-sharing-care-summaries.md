@@ -48,12 +48,12 @@ Records will include information from case files containing care leaver’s pers
 
 This could include:
 
-- Case notes, visits and conversation records (including email exchanges)
-- Assessments and plans
-- Information about placements, school, medical information
-- Key decisions and rationale
-- Care leaving information
-- Photos, etc.
+* Case notes, visits and conversation records (including email exchanges)
+* Assessments and plans
+* Information about placements, school, medical information
+* Key decisions and rationale
+* Care leaving information
+* Photos, etc.
 
 Some data will need to be excluded from the record shared with the care leaver, particularly as requests are made under the DPA. For example, personal data relating to third parties may be excluded.
 
@@ -61,10 +61,10 @@ Some data will need to be excluded from the record shared with the care leaver, 
 
 Access to records with comprehensive information and a clear story can help care leavers in a number of ways including:
 
-- Understanding their personal history and family background
-- Understanding decisions made about them, including reasons why they were in care.  Psychologically, this sense-making process is an important part of releasing emotional trauma.
-- To try and contact those who were significant during their time in care or relatives
-- Medical information
+* Understanding their personal history and family background
+* Understanding decisions made about them, including reasons why they were in care.  Psychologically, this sense-making process is an important part of releasing emotional trauma.
+* To try and contact those who were significant during their time in care or relatives
+* Medical information
 
 ### Processes
 
@@ -76,28 +76,28 @@ Care leavers typically request their records through a Subject Access Request un
 
 **The primary problem**
 
-- The process for care leavers of accessing their children’s social care record is a difficult experience and can be re-traumatising.
+* The process for care leavers of accessing their children’s social care record is a difficult experience and can be re-traumatising.
 
 **The secondary problem**
 
-- There is often a significant time lag between requesting records and receiving them. When they arrive, they are significantly redacted and can be of poor quality.
-- The process of pulling together a subject access request (SAR) for care leavers is time consuming, requires multiple contacts and puts a lot of pressure on the social work teams.
+* There is often a significant time lag between requesting records and receiving them. When they arrive, they are significantly redacted and can be of poor quality.
+* The process of pulling together a subject access request (SAR) for care leavers is time consuming, requires multiple contacts and puts a lot of pressure on the social work teams.
 
 For care leavers attempting to access their records, we envision a world where:
 
-- Data about children is standardisable, searchable and retrievable, easing the burden on social workers responding to care leavers requesting access to their records.
-- Those receiving access to the records receive quality outputs with clear information in a timely way.
-- Less time spent in individual data processing allows resources to be transferred to more professional support for those receiving access to their records.
+* Data about children is standardisable, searchable and retrievable, easing the burden on social workers responding to care leavers requesting access to their records.
+* Those receiving access to the records receive quality outputs with clear information in a timely way.
+* Less time spent in individual data processing allows resources to be transferred to more professional support for those receiving access to their records.
 
 ### Potential solutions
 
-- Integration with third party providers/improved functionality of existing systems to support search, summarisation and prioritisation including AI tools.
-- Integration with third party providers/improved functionality of existing systems to support with specific tasks (e.g. redaction) including AI tools.
+* Integration with third party providers/improved functionality of existing systems to support search, summarisation and prioritisation including AI tools.
+* Integration with third party providers/improved functionality of existing systems to support with specific tasks (e.g. redaction) including AI tools.
 
 This could lead to:
 
-- Improved experience of people accessing their records once they leave care.
-- Time savings for social workers and support staff who need to redact records.
+* Improved experience of people accessing their records once they leave care.
+* Time savings for social workers and support staff who need to redact records.
 
 ## Out of Scope
 
@@ -108,10 +108,8 @@ This could lead to:
 
 ## Additional Sources
 
-- [Storyteller App - Coram](https://www.coram.org.uk/storyteller-app/)
-
-- [The MIRRA Project](https://blogs.ucl.ac.uk/mirra/2017-2019/) -
-  experiences of adult care leavers reading their files
+* [Storyteller App - Coram](https://www.coram.org.uk/storyteller-app/)
+* [The MIRRA Project](https://blogs.ucl.ac.uk/mirra/2017-2019/) - experiences of adult care leavers reading their files
 
 ## Report an issue
 

@@ -48,21 +48,21 @@ Services will have to share with the NRL a comprehensive list of service users t
 
 The ‘Find a Record’ service will exist, and solve an important service for frontline safeguarding professionals. But to be useful, anyone querying it must have confidence that the responses they receive are based on:
 
-- Responses from all relevant organisations
-- A comprehensive, reliable, and up to date picture of who each organisation has contact with
+* Responses from all relevant organisations
+* A comprehensive, reliable, and up to date picture of who each organisation has contact with
 
 ### Processes
 
 Initial upload process:
 
-- Relevant individuals
-- Data sharing policies
+* Relevant individuals
+* Data sharing policies
 
 Maintenance process:
 
-- On an agreed cadence each participating organisation will update the find a record service with up to date:
-  - Information of identities of service users it has contact with
-- A standardised way of describing services, professionals, service involvements
+* On an agreed cadence each participating organisation will update the find a record service with up to date:
+  * Information of identities of service users it has contact with
+* A standardised way of describing services, professionals, service involvements
 
 ## Landscape Review
 
