@@ -1,5 +1,5 @@
 ---
-title: Social Worker Recording Use Case
+title: Social Worker Recording
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
@@ -21,108 +21,73 @@ reference: UC02
 
 <article class="numbered-headings">
 
-Identifier: `UC02`
+Identifier: `UC02`<br>
+http://socialfinance.example.com/use-cases/2498<br>
 {: style="color: #888888; font-size: 0.9em; margin-top: 5px;"}
 
 ## Summary
 
-As a professional working with a client, I need to write/ record freeform records of activities and observations following an interaction with a client so that relevant information is kept for further reference. I need these notes to then be easily added to their CMS record.
+As a professional working with a client, I need to create written records of activities and observations following an interaction with a client, or their representative so that relevant information is captured  for further reference. I need these notes to reflect   to their CMS record.
 
-**Sub-use cases:**
+**User Stories:**
 * **Children’s Social Worker visiting a child and family**
-    * As a social worker visiting a child and family, I need to make a record of the visit that includes a narrative account, my observations, my analysis, and any expressed wishes and feelings of the child or family.
+  * As a social worker visiting a child and family, I need to make a record of the visit that includes a narrative account, my observations, my analysis, and any expressed wishes and feelings of the child or family.
 
-* **Adults Social Worker visiting a client**
-    * As a social worker visiting an individual, I need to make a record of the visit that includes a narrative account, my observations, my analysis, and any input from the individual.
+* **Adults Social Work assessor  visiting an adult**
+  * As a social worker visiting an individual, I need to make a record of the visit that includes a narrative account, my observations, my analysis, and any input from the individual and or their representative.
 
 ## Description
 
-### Data
+### The Challenge / Opportunity
 
-The notes may describe variously:
-
-* My observations, about the individual, their circumstances and other factual information.
-* The stated wishes and feelings of the client themselves.
-* Decisions, and how they have been reached
-* My reflections on what the significance of those observations or decisions might be (e.g. in relation to an assessment of someone’s current capacity, in relation to a judgement about risk, I relation to whether or not a care plan is adequate).
-* Actions which should now take place
-
-The notes are mainly free text, but I will also need to record some structured information
-
-* at the very least enough to make these notes discoverable and link them to their context (e.g. subject of care, care giver, date/time, case).
-* and to meet statutory requirements regarding recording of adherence to specified processes and timescales (e.g. event X within Y days of event Z)
-* Sometimes this will go further, including structured information summarising the nature and purpose of the activity, risks, actions, etc. or for the purposes of completing the Care Act assessment.
-* The extent to which structured information is used varies by LA and the nature of this data and definitions of data also varies by LA i.e. one LA care act assessment data is not the same as another LA’s.
-
-### Benefits
-I make these notes for a number of reasons:
-
-* To provide for formal accountability for my decisions and actions as a professional (Ofsted, CQC and employer)
-* To allow my employer to collate and track data across a large population and make good strategic decisions.
-* To convene a clear plan for professionals and family to share responsibility for improvement over time.
-* As an archive to give understanding to future professionals (who may not be able to speak to me directly).
-* To give understanding to the client, now or in the future, to aid their sensemaking and to be accountable to them for life-changing decisions that were made on their behalf.
-* To capture relevant information that I may need to refer back to later in my care of the individual
-* As an aid to decision-making * writing up these observations helps me to structure my thoughts, and to reflect on what I should do next
-* To document this thinking, for my future self and for anyone who may replace me, so that the information is not lost
-* For the benefit of the subject of care, who has the right to know what decisions have been made and why
-* So that people providing relevant services can access the information if relevant to them (particularly decisions and actions).
-* So that the quality of my work can be made transparent to my colleagues (e.g. supervisor, quality team) and Ofsted
-* To establish an evidential record which can later be relied on in court proceedings if required.
-
-### Processes
-Historically there have been three main patterns:
-
-1. Taking no contemporaneous notes, and writing a structured note later, from memory
-1. Making some contemporaneous notes whilst meeting with the client (analogue or digital) and re-working these into a structured note later
-1. Making the structured note whilst meeting with the client.
-
-## Landscape Review
-
-### The challenge / opportunity
+**Primary Challenge**
 
 A key pain point in note taking has been the amount of time this takes for social workers. Estimates vary, but coalesce around a figure of 50% of working time spent recording or finding information.
 
 If this were reduced, then the gains would be shared between:
 
-* Social workers reducing over-work, and therefore being happier, and less likely to leave the profession (a major concern)
-* Social workers doing more direct work with families, and therefore both increasing their impact and likely being ore satisfied in they work and more likely to stay in the profession.
+* Social workers reducing over-work, and therefore being happier, and less likely to leave the profession (a major concern). Social workers doing more direct work with families, and therefore both increasing their impact and likely being ore satisfied in they work and more likely to stay in the profession.
+* Several applications offer transcription/note-taking support for social work specifically, for example Magic Notes, and Minute. However, users, buyers and vendors have indicated that its utility and security is undermined by the inability to integrate with CMS. CMS vendors are also in the process of providing this functionality within their applications.
 
-### Potential solutions
+The notes are mainly free text, but social workers will also need to record some structured information:
 
-#### The interoperability lever
+* At the very least enough to make these notes discoverable and link them to their context (e.g. subject of care, care giver, date/time, case).
+* and to meet statutory requirements regarding recording of adherence to specified processes and timescales (e.g. event X within Y days of event Z)
+* Sometimes this will go further, including structured information summarising the nature and purpose of the activity, risks, actions, etc. or for the purposes of completing the Care Act assessment.
+* The extent to which structured information is used varies by LA and the nature of this data and definitions of data also varies by LA i.e. one LA care act assessment data is not the same as another LA’s.
 
-Third party tools have pioneered AI transcription and labelling in social work.
+**Opportunity**
 
-But users, buyers, and vendors of the third-party software complain that its utility and security is undermined by the inability to integrate with CMS.
+* Enable integration of third-party tools that can support AI transcription with CMS systems. This would mean:
+  * The interaction is recorded, and transcribed to provide a contemporaneous note
+  * Structured and semi structured summary content (e.g. ‘actions, decisions, key points) is automatically created
+  * This may then be agreed, or edited then agreed, as a fair representation by all or some of the people involved in the conversation.
+  * It is possible to achieve a level of accuracy that is higher than the average social worker using historical approaches.
+* Enable this to happen in a safe/secure way (by removing incentives for using risky workarounds)
+* AI transcription is a rare example of capital being invested in social care technology outside of the CMS products. If it is seen as a success, then more investment may flow into the market, to the benefit of social care providers and ultimately those receiving social care.
 
-Primary goal: if standards can deliver that integration, they can accelerate uptake of AI transcription.
+**Relevant Care Record Components**
 
-Secondary goal: we assume that unsafe (IG, InfoSec) workarounds are being used. Standards can remove the incentive for this risky behaviour.
+A Care Record Component is a distinct unit of information that could be captured within the Case Management System (CMS). These components range from the structural entities required to safely manage a case to the person-centred details that form a holistic view of an individual's life and journey.
 
-Secondary goal: this is an unusual example of capital being invested in social care technology outside of the CMS products. If it is seen as a success, then more investment may flow into the market, to the benefit of social care providers and ultimately those receiving social care.
+* Social worker’s observations, about the individual, their circumstances and other factual information
+* The stated wishes and feelings of the client themselves
+* Decisions, and how they have been reached
+* Social workers reflections on what the significance of those observations or decisions might be (e.g. in relation to an assessment of someone’s current capacity, in relation to a judgement about risk, in relation to whether or not a care plan is adequate).
+* Actions which should now take place
 
-#### Using AI
-
-The emergence of AI transcription has created a new pattern in which:
-
-* The interaction is recorded, and transcribed to provide a contemporaneous note
-* Structured and semi structured summary content (e.g. ‘actions, decisions, key points) is automatically created
-* This may then be agreed, or edited then agreed, as a fair representation by all or some of the people involved in the conversation.
-* It is possible to achieve a level of accuracy that is higher than the average social worker using historical approaches.
-
-Several applications offer this for social work specifically, for example Magic Notes, and Minute. CMS vendors are in the process of providing this functionality within their applications.
+### Benefits
+Beyond time-saving, transcription will support improved accuracy and detail of notes:
+* Provide a clear record of professional decisions, actions and rationale, supporting accountability to regulators, employers and, where required, courts.
+* Enable local authorities to collate and analyse information across cases, supporting service oversight, quality assurance and strategic decision-making.
+* Support continuity of care by making relevant information accessible to future professionals and services involved in the individual’s care.
+* Help professionals structure their analysis, reflect on next steps and document thinking so that key information is not lost over time.
+* Give the individual, child or family a clear account of decisions made, actions agreed and the reasons behind them, supporting transparency and sense-making.
+* Provide a shared basis for planning, action and responsibility between professionals, families and other relevant services.
 
 ## Out of Scope
 
-* Creating formal assessments, recommendations, and care plans (i.e. changing what a social worker needs to record)
-
-## Open Questions
-
-1. Reference data substantiating and expanding upon point discussed under challenge/opportunity. There is a reasonably large academic and professional literature on this.
-1. Debates about evidential validity of all (or more interestingly some) AI transcriptions therefore:
-  * How to maintain link back to an authoritative document e.g. the recording (and maybe soon how to show it is not altered or entirely synthetic?). Challenge of not wanting to store many long audio files and pay AWS/MSFT costs.
-  * How to address concerns re some transcription tools over others (certification etc).
+1. Creating formal assessments, recommendations, and care plans (i.e. changing what a social worker needs to record)
 
 ## Additional Sources
 
@@ -153,8 +118,7 @@ Several applications offer this for social work specifically, for example Magic 
 
 * [BASW -- Professional Capabilities Framework RecordingGuidance](https://www.basw.co.uk/resources/pcf-guidance-recording)
 * [DfE -- Knowledge and Skills Statements (KSS)](https://www.gov.uk/government/publications/knowledge-and-skills-statements-for-child-and-family-soc)
-* [Community Care Inform -- Case Recording Practice
-  Guides](https://www.communitycare.co.uk/2017/02/13/case-recording-top-tips-writing-clear-accurate-records/)
+* [Community Care Inform -- Case Recording Practice Guides](https://www.communitycare.co.uk/2017/02/13/case-recording-top-tips-writing-clear-accurate-records/)
 
 ### International Standards
 
