@@ -13,7 +13,7 @@ regenerate: true
 {% if use_cases.size > 0 %}
 <ol class="content-list">
 {% for p in use_cases %}
-  <li>
+  <li data-tags="{{ p.tags | join: ',' }}">
     <h2 class="heading">{% if p.reference %}[{{ p.reference }}]{% endif %} <a href="{{ p.url }}">{{ p.title }}</a></h2>
     {% include tags.html item=p exclude_tag="Use Case" %}
   </li>

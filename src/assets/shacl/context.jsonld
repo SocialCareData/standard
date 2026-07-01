@@ -78,8 +78,6 @@
     "riskToOthersFire":          { "@id": "pl:riskToOthersFire",          "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/risk-level#", "Risk Present": "rl:RiskPresent", "No known risk": "rl:NoKnownRisk" } },
     "riskToOthersAnimals":       { "@id": "pl:riskToOthersAnimals",       "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/risk-level#", "Risk Present": "rl:RiskPresent", "No known risk": "rl:NoKnownRisk" } },
     "riskToOthersCriminal":      { "@id": "pl:riskToOthersCriminal",      "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/risk-level#", "Risk Present": "rl:RiskPresent", "No known risk": "rl:NoKnownRisk" } },
-    "riskOther":                 { "@id": "pl:riskOther",         "@container": "@set" },
-    "riskToOthersOther":         { "@id": "pl:riskToOthersOther", "@container": "@set" },
 
     "placementType":           { "@id": "pl:placementType", "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/placement-type#", "Supported Accommodation": "pt:SupportedAccommodation" } },
     "providerURN":             "pl:providerURN",
