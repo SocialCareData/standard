@@ -1,5 +1,5 @@
 ---
-title: "Standards comparison: Person matching implementation"
+title: "Standards comparison: person matching"
 tags:
   - Interoperability
   - MAIS
