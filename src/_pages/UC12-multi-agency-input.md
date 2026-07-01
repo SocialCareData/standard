@@ -1,5 +1,5 @@
 ---
-title: Multi-agency Input into a Person’s Record
+title: Multiagency Input into a Person’s Record
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
@@ -26,29 +26,54 @@ Identifier: `UC12`
 
 ## Summary
 
+**Use stories**
+
 * **CSC multi-agency team input**
   * As a practitioner working in a multiagency team, I need all key partners to be able to view relevant aspects of a child’s record and input into the record of a child I am providing care for, so that the record provides a full picture of the child and their needs.
   * As a practitioner working in a multiagency team, I need to a record of who has contributed to assessments and other key forms/documents so that I can have a better understanding of why certain decisions have been made and where to go for more information.
-  * As a practitioner working in a multiagency team but not employed by CS, I need access to CMS to view and edit children’s case files where I am the allocated professional (FFC).
+  * As a practitioner working in a multiagency team but not employed by CS, I need access to CMS to view and edit children’s case files where I am the allocated professional. This is particularly important under the Families First for Children changes.
 
 * **External input into an adult social care record**
   * As a care provider/ care worker I can contribute observations or concerns (e.g., missed visits, safeguarding flags; poc) directly into a shared record, so that other professionals working with the person can have an up-to-date understanding of care and any risks.
-  * As a mental health practitioner, I can record updates linked to a person’s wellbeing, so that social care can respond proactively.
-  * As a reablement manager, I need to add information about a new care package to a shared record so that care workers can carry out care and social workers can view the details of the care package.
+  * As a mental health practitioner, I can record updates linked to a person’s wellbeing, so that social care can respond appropriately.
+  * As a reablement co-ordinator/manager, I need to add information about a new care package to a shared record so that care workers can carry out care and social workers can view the details of the care package.
 
 ## Description
 
-Cases, especially more complex ones, will require input from a range of agencies and specialisms. At present, these agencies will record interactions and involvements with the individual on their own case management system, with the local authority case record being the ‘master’ record due to the local authority holding the statutory responsibility for the care of that individual.
+Case records, especially more complex ones, will require input from a range of agencies and specialisms. At present, these agencies will record interactions and involvements with the individual on their own case management system, with the local authority case record being recorded only by the allocated social worker, and that being the ‘master’ record due to the local authority holding the statutory responsibility for the care of that individual.
 
 As highlighted in other use cases, this siloed working can lead to a range of inefficiencies and challenges around information sharing, increasing risks for individuals and raising frustrations with them having to ‘repeat their story’ to multiple practitioners who they are working with.
 
-Current government initiatives, such as the Families First programme, are increasing the impetus for local authorities to engage in multiagency case management through multidisciplinary Family Help teams. This is also the case in the health service and within adult’s social care, with the NHS increasing funding for the creation of community based multidisciplinary teams.
+Current government initiatives, such as the Families First programme and Neighbourhood health Framework, are increasing the need for local authorities to engage in multiagency case management through multidisciplinary Family Help teams. This is also the case in the health service and within adult’s social care, with the NHS increasing funding for the creation of community based multidisciplinary teams.
 
-This multiagency work does however create a recording challenge: where should information about the case be kept? Presently, the onus remains on the local authority as the ‘lead practitioner’ to double key information to maintain the master record, which may create additional recording burdens on already stretched social workers. Being able to have multiple agencies access, and input into specific parts of the child’s/adult’s record could remedy this problem, allowing true multiagency work and recording to be established.
+This multiagency work does however create a recording challenge: where should information about the case be kept? Presently, the onus remains on the local authority as the ‘lead practitioner’ to double key information to maintain the master record, which may create additional recording burdens on already stretched social workers.
 
-### Data
+### The Challenge / Opportunity
 
-Records will need different input from different partners within a multiagency team. This might include:
+**CSC**
+
+**The challenge**
+
+* When practitioners work in a multiagency team, it is difficult to obtain input from all key partners into a child’s record. This process is managed ‘off’ CMS and results in the social worker having to chase for information from partners.
+* To get round this challenge, multiagency practitioners are often given multiple laptops to access various systems.
+* In ASC, Shared Care records do some of this, but most shared care records are predominantly read-only for ASC and providers. Also, LA case management systems may receive data from health or providers but rarely enable bi-directional, multi-agency editing. Cross-agency input is often achieved through parallel systems, emails, Word documents, PDF attachments, secure messages, or manual uploads rather than a single shared system of record.
+* As a result of these challenges:
+  * Information becomes duplicated and inconsistent.
+  * Conflicting terminology from different professions is not reconciled.
+  * Updates lag behind real activity.
+  * Practitioners have fragmented visibility of each other's contributions.
+  * The data subject may be asked repeatedly for information already known by other agencies.
+
+**The Opportunity**
+
+* Being able to have multiple agencies access, and input into specific parts of the child’s/adult’s record could remedy this problem, enabling coordinated, real-time updates across teams, reduce duplication, and ensure a holistic, person-centred view.
+* Enabling:
+  * Any professional within a multi-agency team to access the relevant parts of a child record to input key information about their work with a child and their family, without having to use an additional laptop.
+  * A child’s record to show a history of who contributed to their assessments, plans and other key forms/documents, giving them a better understanding of why certain decisions were made about them.
+
+### Care Record Components
+
+A Care Record Component is a distinct unit of information that could be captured within the Case Management System (CMS). These components range from the structural entities required to safely manage a case to the person-centred details that form a holistic view of an individual's life and journey. Relevant care record components for this use case include:
 
 * Personal and demographic data about a child and their family
 * Data on recent events / incidents
@@ -87,7 +112,7 @@ For Adult’s Social Care, professionals contributing to a shared record could i
 * Primary and secondary care practitioners, reablement
 * Care workers/ managers
 * VCS staff
-* The person in receipt of care and their carer (see [UC01 Access and contribute to a shared record](/UC01_access_and_contribute_to_a_shared_record_by_the_subject_of_that_record_or_their_family))
+* The person in receipt of care and their carer (see [use case 1](UC01_access_and_contribute_to_a_shared_record_by_the_subject_of_that_record_or_their_family))
 
 ### Benefits
 
@@ -98,65 +123,12 @@ With ability to input:
 * Time savings for the multiagency team.
 * Children and families receive a more integrated, joined up service offer from their multiagency team.
 
-### Processes
-
-* At present, teams will record involvements on their own case management systems
-* In ASC there are also the use of external apps e.g. for reablement, where information about care is entered. This is not currently fed directly into the CMS which leads to missing/unlinked care information about a person.
-* It is the responsibility of the social worker to maintain the central record of involvements across the partnership
-* Sometimes multiagency practitioners ‘hosted’ within local authority teams (e.g. CAMHS practitioners or IDVAs) will be given a local authority laptop to manage this challenge, allowing them to log into the various systems they require access to
-
-## Landscape Review
-
-### The challenge / opportunity
-
-**CSC**
-
-  **The primary problem**
-
-  When practitioners work in a multiagency team, it is difficult to obtain input from all key partners into a child’s record. This process is managed ‘off’ CMS and results in the social worker having to chase for information from partners.
-
-  **The secondary problem**
-
-  To get round this challenge, multiagency practitioners are often given multiple laptops to access various systems.
-
-  For multi-agency input into a child’s record, we envision a world where:
-
-  * Any professional within a multi-agency team can access the relevant parts of a child record to input key information about their work with a child and their family, without having to use an additional laptop.
-  * A child’s record will show a history of who contributed to their assessments, plans and other key forms/documents, giving them a better understanding of why certain decisions were made about them.
-
-**ASC**
-
-This requires a shared understanding of language – health terms are not necessarily the same as social work terms and different local authorities capture data in different ways.
-
-Shared Care records do some of this, but most shared care records are predominantly read-only for ASC and providers. Also, LA case management systems (e.g., Liquidlogic, Mosaic) may receive data from health or providers but rarely enable bi-directional, multi-agency editing. Cross-agency input is often achieved through parallel systems, emails, Word documents, PDF attachments, secure messages, or manual uploads rather than a single shared system of record.
-
-As a result:
-
-* Information becomes duplicated and inconsistent.
-* Conflicting terminology from different professions is not reconciled.
-* Updates lag behind real activity.
-* Practitioners have fragmented visibility of each other's contributions.
-* The data subject may be asked repeatedly for information already known by other agencies.
-
-Establishing a multi-agency input capability within a shared record would enable coordinated, real-time updates across teams, reduce duplication, and ensure a holistic, person-centred view.
-
-### Potential solutions
-
-* A mechanism across case management systems that ensures the security of data held within the CMS whilst granting approved agencies or practitioners the ability to view and edit a child’s record.
-* Some CMS providers offer ‘portal’ functionality for local authorities at an additional charge, which allows for named workers to contribute to certain sections of the record. However this is not universally taken up by local authorities and comes with an additional cost.
-
-## Out of Scope
-
-## Open Questions
-
-* How do we align to the shared care record?
-* To what extent does portal functionality already within CMS solve this problem, and to what extent can we make this available at a lower cost to LAs?
-
 ## Additional Sources
 
 * [Families First Partnership programme - GOV.UK](https://www.gov.uk/government/publications/families-first-partnership-programme)
 * [NHS England » Shared care records](https://www.england.nhs.uk/digitaltechnology/connecteddigitalsystems/shared-care-records/)
 * [Multidisciplinary teams working for integrated care - SCIE](https://www.scie.org.uk/integrated-care/research-practice/activities/multidisciplinary-teams/)
+* [Neighbourhood health framework - GOV.UK](https://www.gov.uk/government/publications/neighbourhood-health-framework/neighbourhood-health-framework)
 
 ## Report an issue
 

@@ -72,7 +72,7 @@ Synthesis of information is required for many purposes e.g.:
   * Social workers can easily find the information that they need when they need to produce outputs for children, arrive at decisions and share information with other agencies.
   * Tasks which require the synthesis of large amounts of information (e.g. the production of chronologies) become more straightforward and less burdensome.
 
-## Care Record Components
+### Care Record Components
 
 A Care Record Component is a distinct unit of information that could be captured within the Case Management System (CMS). These components range from the structural entities required to safely manage a case to the person-centred details that form a holistic view of an individual's life and journey.
 

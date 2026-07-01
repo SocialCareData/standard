@@ -30,18 +30,48 @@ As an adult social worker or transitions manager, I can receive, track, and act 
 
 ## Description
 
-The Care Act provides a framework for LA’s to support children transitioning to adulthood.  Young people approaching adulthood may require ongoing care and support needs.  Transitioning from Children’s Social Care (CSC) to Adult Social Care (ASC) must ensure i.e. there is a transfer of responsibility from children’s services to adult’s services once a young person turns 18. This process often begins from around age 14 (differs with LA) and may involve a dedicated transitions team (not all local authorities have these).
+The Care Act provides a framework for LA’s to support children transitioning to adulthood.  Young people approaching adulthood may require ongoing care and support needs.  There is a transfer of responsibility from children’s services to adult’s services once a young person turns 18. This process often begins from around age 14 (differs with LA) and may involve a dedicated transitions team (not all local authorities have these).
 
-Key points:
+* Transitions may involve multiple actors: children’s social workers, transitions managers, adult social workers, occupational therapists, education staff, housing and care providers. Not all local authorities have dedicated transitions teams; practices vary widely.
 
-* Transitions may involve multiple actors: children’s social workers, transitions managers, adult social workers, occupational therapists, education staff, housing and care providers.
 * The workflow is often managed via Case Management Systems (CMS) in both CSC and ASC, but not all fields or data are automatically shared across systems.
+
 * Panels may be held to review eligibility and coordinate transition plans.
+
 * Outcomes include determining adult care eligibility, planning support, and ensuring continuity of care aligned with the Children & family’s assessment and EHCP.
+
+* CSC operates in a context where services are typically free at the point of delivery, with statutory eligibility based on safeguarding and children’s welfare.
+
+* ASC operates in a context where services may be means-tested, optional/voluntary, or require a personal budget and financial assessment. This introduces additional complexity in transition planning and data requirements
 
 This use case ensures that transition information is accurate, timely, and complete, reducing duplication or delay the development of needs for care and support and gaps in service.
 
-### Data
+### The Challenge / Opportunity
+
+**Primary Challenge**
+
+Service context:
+
+* Delays or gaps in data handover can directly impact safeguarding, care continuity, and outcomes for young people. 
+* Social workers may not automatically share relevant fields from a child’s records to an adult’s record which then requires manual re-keying, increasing administrative burden and the risk of missing critical data
+* While there are transition integrations, these are not always reliable, and sharing information between different agencies using different systems can be challenging
+* CLD data is often incomplete due to inconsistent recording and sharing of information locally; missing data on adults’ CMS
+
+**Opportunity**
+
+The standards programme could:
+
+* Improve consistent recording of transition activity: create common definitions and fields so local authorities can identify, code and track young people in transition more reliably.
+* Support interoperability between CSC and ASC systems: enable structured information exchange between case management systems, reducing manual re-keying, document chasing and inconsistent transfer of records.
+* Define a minimum transition dataset: set out the core information that should be captured and shared between children’s and adults’ services, including needs, risks, current plans, key professionals, transition milestones and agreed next steps.
+* Strengthen proportionate information sharing: clarify what information should be shared, when, with whom and for what purpose to support timely assessment, planning and safeguarding.
+* Improve oversight and reporting: support better local monitoring of transition progress and improve the quality of data available for CLD and national analysis.
+
+However, it is important to note that some transition problems relate to local practice, including whether planning starts early enough, how well children’s and adults’ teams work together, and whether young people and families receive a clear, coordinated handover. Standards cannot resolve these issues on their own. However, they could support better practice by making transition activity easier to identify, record, share and monitor across children’s and adults’ services.
+
+### Care Record Components
+
+A Care Record Component is a distinct unit of information that could be captured within the Case Management System (CMS). These components range from the structural entities required to safely manage a case to the person-centred details that form a holistic view of an individual's life and journey. Relevant care record components for this use case include:
 
 * Demographics, IDs, contact information
 * Children’s Social Care Information: Current CSC plan (CIN, CP, LAC), key risks, safeguarding history, multi-agency involvement.
@@ -52,7 +82,7 @@ This use case ensures that transition information is accurate, timely, and compl
 * Care Act Assessment and care planning data
 * Financial & Funding Information
 
-### Goal/Purpose
+### Benefits
 
 * Ensure continuity of care from childhood to adulthood.
 * Provide timely, accurate information to adult social workers to reduce delays or duplication to ensure children transition successfully to adulthood.
@@ -61,49 +91,7 @@ This use case ensures that transition information is accurate, timely, and compl
 * Ensure compliance with statutory duties under the Care Act 2014 (for ASC) and relevant children’s social care legislation.
 * Contribute to structured, interoperable datasets for local and national analysis.
 
-### Processes
-
-* Young person identified as approaching adulthood and potential need for adult services.
-* Children’s social worker flags case to transitions/ASC team.
-* Transitions team records information in ASC CMS, tracks referral, and initiates preparing for adulthood panel.
-* Panel reviews eligibility, identifies risks, and coordinates multi-agency input.
-* If eligible, adult social worker is assigned. Relevant data from CSC CMS is reviewed and manually or automatically migrated to ASC CMS.
-* Adult social worker conducts or completes assessment of needs in ASC CMS.
-* Care plan and personal budget agreed; support begins at age 18 (or earlier if appropriate).
-* Transitions team continues to monitor and update records as necessary.
-
-## Landscape Review
-
-Service context:
-
-* Not all local authorities have dedicated transitions teams; practices vary widely.
-* CSC operates in a context where services are typically free at the point of delivery, with statutory eligibility based on safeguarding and children’s welfare.
-* ASC operates in a context where services may be means-tested, optional/voluntary, or require a personal budget and financial assessment. This introduces additional complexity in transition planning and data requirements.
-* Delays or gaps in data handover can directly impact safeguarding, care continuity, and outcomes for young people. 
-* While the primary actors are CSC and ASC social workers and transition managers, other teams (e.g., SEND teams, brokerage, occupational therapy) may also contribute data or planning.
-
-CMS context: 
-
-* Current CMSs may not automatically share relevant fields from a child’s records which then requires manual re-keying, increasing administrative burden and the risk of missing critical data. 
-* The main CMS suppliers do have transitions integrations (Mosaic offer easy transition if both CSC and ASC use Mosaic; Liquidlogic operate on different versions presenting its own implications) but they are unreliable. A transitions manager: "2 years ago we lost 20 referrals and did not know why. When CYP start the transition process, and it fails, the system does not notify us"
-* Some LAs will have different CMS suppliers for adult’s and children’s. Where they have the same supplier, they can still have interoperability challenges.  
-* Suppliers don’t integrate with Education resulting on SEN information not always available
-
-National guidance and reporting:
-
-* National guidance (e.g., ADASS “Preparing for Adulthood Report 2024”) highlights the importance of early identification, multi-agency coordination, and structured planning.
-* The team responsible for the CLD collection at DHSC noted that data is incomplete, due to:
-  * Inconsistent recording and sharing of information locally between children’s, transitions, and adults’ teams
-  * Missing data on the adults’ CMS
-  * Information not extracted/submitted to CLD because it’s considered out of scope (e.g., some pre-18 activity may be reasonably interpreted as excluded)
-* There is likely to be new practice guidance developed by government (TBC)
-
-## Out of Scope
-
-## Open Questions
-
-* What level of automated data transfer between CSC and ASC is feasible/ desirable?
-* How should data from other agencies (health, education, providers) be represented?
+These benefits depend on standards being implemented alongside effective local transition practice, clear governance and appropriate information-sharing arrangements.
 
 ## Additional Sources
 

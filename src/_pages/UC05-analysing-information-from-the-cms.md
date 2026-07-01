@@ -26,23 +26,16 @@ Identifier: `UC05`
 
 ## Summary
 
-**Generic:** As a social care leader, I need timely, accurate, and comprehensive analysis of data from across the case management system and related services so that I can understand need, monitor risk, plan resources effectively, and ensure statutory responsibilities are met.
+**Overview:** As a social care leader, I need timely, accurate, and comprehensive analysis of data from across the case management system and related services so that I can understand need, monitor risk, plan resources effectively, and ensure statutory responsibilities are met.
 
-**Examples**
-
-As a social work senior leader, I need to be able to analyse data about children being supported by my service area, so that I can make decisions about service planning.
-
-As a social work senior leader, I need to analyse pathways through services, to identify opportunities for operational improvement and/or earlier intervention
-
-As a social work senior leader, I need to model scenarios of future service demand, expenditure, and outcomes, to make decisions about where to put our resources
-
-As a social work leader, I need to quantify the risk of specific events happening to specific people in a specific timeframe, so that I can identify opportunities for prevention and early intervention.
-
-As a social work leader, I need to be able to quickly audit specific sections of case files across all cases in order to prepare for inspection.
-
-As a social work team manager, I need to be able to monitor risk on children allocated within my team and ensure professionals are making good decisions and following up on actions necessary to keep children safe.
-
-As a social work team manager, I need to be able to track the performance of my supervisees against targets and statutory requirements.
+**User Stories**
+* As a social work senior leader, I need to be able to analyse data about children or adults being supported by my service area, so that I can make decisions about service planning.
+* As a social work senior leader, I need to analyse pathways through services, to identify opportunities for operational improvement and/or earlier intervention
+* As a social work senior leader, I need to model scenarios of future service demand, expenditure, and outcomes, to make decisions about where to put our resources
+* As a social work leader, I need to quantify the risk of specific events happening to specific people in a specific timeframe, so that I can identify opportunities for prevention and early intervention.
+* As a social work leader, I need to be able to quickly audit specific sections of case files across all cases in order to prepare for inspection.
+* As a social work team manager, I need to be able to monitor risk on children and adults allocated within my team and ensure professionals are making good decisions and following up on actions necessary to keep child/adult safe.
+* As a social work team manager, I need to be able to track the performance of my supervisees against targets and statutory requirements.
 
 ## Description
 
@@ -56,13 +49,33 @@ Social work performance leads need access to quality data and quality data analy
 * **Demand forecasting:** what patterns in referrals, offers of support, or safeguarding activity indicate rising pressure, and how to prepare capacity accordingly.
 * **Outcome evaluation:** which interventions or services are having the desired impact, what evidence supports continuation or expansion, and where to decommission or shift investment.
 
-Social Care case management systems are not designed to allow social worker leaders and performance teams to conduct this level and breadth of analysis. The are designed to be record management solutions, not data analysis tools. Across our research and previous work we heard that native reporting functionality within case management systems was not flexible, or reliable enough, meaning that teams would typically perform analysis on copies of data taken from the CMS. We also heard that the ability to perform this level of analysis was variable depending on the local authority: some could not take copies of their CMS data, whilst some lacked the analytical capacity to perform such analysis.
+Social Care case management systems are not designed to allow social worker leaders and performance teams to conduct this level and breadth of analysis. The are designed to be record management solutions, not data analysis tools. Across our research and previous work, we heard that native reporting functionality within case management systems was not flexible, or reliable enough, meaning that teams would typically perform analysis on copies of data taken from the CMS. We also heard that the ability to perform this level of analysis was variable depending on the local authority: some could not take copies of their CMS data, whilst some lacked the analytical capacity to perform such analysis.
 
 As much as possible, we want to reduce the barriers to enable local authorities to conduct the sort of analysis outlined above. This might include through better access to data, making it easier to join together data between systems (e.g. HR, finance and CMS data), or through making it easier for local authorities to utilise off the shelf advanced analytical tools.
 
-### Data
+### The Challenge/Opportunity
 
-Naturally, we’re interested in lots of data for this use case. This could include:
+**The primary problem**
+
+A lack of joined up data across internal and external systems limits local authorities’ ability to perform strategic analysis, leading to inefficiencies and less impactful decisions.
+
+**The secondary problem**
+* The ‘back ends’ of local authority and partner systems do not integrate well.
+* Local authorities miss opportunities that could be realised by bringing data together.
+* Analytical capacity within local authorities often cannot stretch to support strategic analysis as well as statutory reporting.
+
+**The opportunity**
+* Support LAs ability to bring together disparate datasets into a single space
+* Support LAs to be able to use a combination of their own data (from across different departments) and partnership data to perform strategic analysis to understand need, then make and evidence effective decisions off the back of this analysis.
+
+Leading to:
+* Better understanding of need through joining together data will improve forecasting and decrease the risk of inaccurate budgets.
+* Will support the move towards the ‘right’ KPI’s that are more impactful for children, families and adults supported by social care.
+* Reduced duplication of effort across local authorities.
+
+### Care Record Components
+
+A Care Record Component is a distinct unit of information that could be captured within the Case Management System (CMS). These components range from the structural entities required to safely manage a case to the person-centred details that form a holistic view of an individual's life and journey. Relevant care record components for this use case include:
 
 * Demand and social worker caseload data
 * Financial data
@@ -72,64 +85,18 @@ Naturally, we’re interested in lots of data for this use case. This could incl
 * Demographic data
 * Placements data
 
-### Benefits/Goal/Value/Purpose
+### Benefits
 
-This analysis supports:
+Enabling this analysis supports:
 
-* Improved understanding of need  and outcomes contributes to more effective future service planning (e.g. effective resource allocation, accurate budgets)
-* Service improvement (identification of repeated patterns, challenges/pain points, gaps, areas of poor outcomes)
+* Improved understanding of need and outcomes contributes to more effective future service planning (e.g. effective resource allocation, accurate budgets)
+* Service improvement (identification of repeated patterns, challenges/pain points, gaps, areas of poor outcomes) and better support
 * Reporting and compliance – more effective at understanding where local authorities are not meeting their statutory requirements
-* Happier social workers – if resources are allocated well and their workload feels manageable
-* Better supported citizens
-
-### Processes
-
-This depends on the local authority and what access to technology/analytical resource they have. Some local authorities will take extracts from key systems and manage these through data warehouses/data lakes.
-
-Other local authorities will not have access to the data layer of their CMS, meaning they are unable to extract this data and merge this with other systems.
-
-The ‘typical’ approach, is copies of data are taken and then tools (such as PowerBI) are used to create dashboards that performance leads can then interact with to get the information they need. Bespoke requests for pieces of specific analysis will also be made to reporting teams.
-
-The case for most local authorities however is that most analytical capacity is taken up by creating ‘statutory returns’, reporting data that is sent back to government on key metrics taken from the CMS.
-
-## Landscape Review
-
-### The challenge / opportunity
-
-**The primary problem**
-
-A lack of joined up data across internal and external systems limits local authorities’ ability to perform strategic analysis, leading to inefficiencies and less impactful decisions.
-
-**The secondary problem**
-
-* The ‘back ends’ of local authority and partner systems do not integrate well.
-* Local authorities miss opportunities that could be realised by bringing data together.
-* Analytical capacity within local authorities often cannot stretch to support strategic analysis as well as statutory reporting.
-
-For data richness and reporting, we envision a world where:
-
-* Bringing together disparate datasets into a single place (e.g. data lake or data warehouses) does not pose a significant barrier for local authorities.
-* Local authorities are able to use a combination of their own data (from across different departments) and partnership data to perform strategic analysis to understand need, then make and evidence effective decisions off the back of this analysis.
-
-### Potential solutions
-
-* A suite of centrally developed dashboards supporting specific analysis that can ‘plug and play’ with local authority data.
-* Standard data operating model for local authorities.
-
-Leading to:
-
-* Better understanding of need through joining together data will improve forecasting and decrease the risk of inaccurate budgets.
-* Will support the move towards the ‘right’ KPI’s that are more impactful for children and families.
-* Reduced duplication of effort across local authorities.
 
 ## Out of Scope
 
 1. Single child identifier.
 2. Recruitment and retention challenges around technical roles.
-
-## Open Questions
-
-Is this problem felt as acutely across adult’s and children’s systems?
 
 ## Additional Sources
 
