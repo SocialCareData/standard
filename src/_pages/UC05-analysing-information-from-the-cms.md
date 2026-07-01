@@ -21,8 +21,6 @@ reference: UC05
 
 <article class="numbered-headings">
 
-Identifier: `UC05`
-{: style="color: #888888; font-size: 0.9em; margin-top: 5px;"}
 
 ## Summary
 

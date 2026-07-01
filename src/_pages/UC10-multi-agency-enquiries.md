@@ -21,12 +21,6 @@ reference: UC10
 
 <article class="numbered-headings">
 
-Identifier: `UC10`
-{: style="color: #888888; font-size: 0.9em; margin-top: 5px;"}
-* [UC14](/UC14_nrl_sui) (previously 10a) <br>
-* [UC15](/UC15_contributing_data_to_nrl) (previously 10b) <br>
-{: style="color: #888888; font-size: 0.9em; margin-top: 5px;"}
-
 ## Summary
 
 **Overview:** accessing and understanding relevant information about an individual across agencies to support safe, timely, and well-coordinated decision-making

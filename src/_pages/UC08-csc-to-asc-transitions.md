@@ -21,8 +21,6 @@ reference: UC08
 
 <article class="numbered-headings">
 
-Identifier: `UC08`
-{: style="color: #888888; font-size: 0.9em; margin-top: 5px;"}
 
 ## Summary
 

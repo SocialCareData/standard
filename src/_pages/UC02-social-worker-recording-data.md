@@ -21,9 +21,6 @@ reference: UC02
 
 <article class="numbered-headings">
 
-Identifier: `UC02`<br>
-http://socialfinance.example.com/use-cases/2498<br>
-{: style="color: #888888; font-size: 0.9em; margin-top: 5px;"}
 
 ## Summary
 

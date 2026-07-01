@@ -26,7 +26,7 @@ Identifier: `UC12`
 
 ## Summary
 
-**Use stories**
+**User stories**
 
 * **CSC multi-agency team input**
   * As a practitioner working in a multiagency team, I need all key partners to be able to view relevant aspects of a child’s record and input into the record of a child I am providing care for, so that the record provides a full picture of the child and their needs.
