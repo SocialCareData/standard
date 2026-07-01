@@ -38,9 +38,9 @@ Identifier: `UC10`
   * As a professional starting work directly with an individual, I want to be able to contact other professionals who are currently supporting them or who have in the past.  This helps us co-ordinate our work and learn from each other to provide the best outcomes for the child/family/adult.
   * As a frontline practitioner who has received a referral about a child/adult, I want to be able to quickly find information about that child/adult or their family members held by other professionals in order to triage and allocate them appropriately (allocation decision usually signed off by manager).
 
-* **Safeguarding enquiries (use cases 10a/14 and 10b/15)**
+* **Safeguarding enquiries (see separate use cases 14 and 15)**
   * As a social worker conducting safeguarding enquiries, I need the contact details of other professionals who hold pertinent information about the subject so that I can coordinate information sharing and support to allow for effective analysis and decision making.
-  * As the administrator of a social care CMS, I need to contribute records about which individuals we are (or have been) working with to the `Find a Record` service, so that professionals in other organisations can rely on the responses they get from `Find a Record`.
+  * As the administrator of a social care CMS, I need to be able to contribute records about which individuals we are (or have been) working with to a single view service, so that professionals in other organisations can rely on the responses they get when searching for who holds records about a person.
 
 * **Enquiries for CSC statutory processes**
   * As a social work manager, I need to be able to read all information held by professionals about a child and their family to inform my decision whether to initiate a child protection investigation under CA s.47.
