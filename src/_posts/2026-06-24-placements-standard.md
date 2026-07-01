@@ -1,7 +1,10 @@
 ---
+layout: version
 current: /publications_placements_standard
-title: Children's Social Care Placements Standard
+title: Children's Social Care Placements Standard (2026-06-24)
 description: The children's social care placements standard helps regions answer their sufficiency questions by establishing a common data model to gather data about placements.
+changelog:
+  - Removed RiskAssessment.riskOther and RiskAssessment.riskToOthersOther text fields
 breadcrumbs:
   - title: Publications
     url: /publications

@@ -1,4 +1,4 @@
-{% assign versions = site.posts | where: "title", page.title | sort: "date" | reverse %}
+{% assign versions = site.posts | where: "current", page.current | sort: "date" | reverse %}
 {% if versions.size > 0 %}
 <ul class="content-list">
 {% for post in versions %}

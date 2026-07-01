@@ -1,45 +1,8 @@
-Matthieu Bosquet:
-  github: "matthieubosquet"
-  current: true
-  tags:
-    - Interoperability
-    - Publication
-Harry Angus:
-  github: ""
-  current: false
-  tags:
-    - MAIS
-Huseyin Kir:
-  github: "hkir-dev"
-  current: true
-  tags:
-    - Interoperability
-    - Publication
-Ferry Lichtenberg:
-  github: ""
-  current: true
-  tags:
-    - MAIS
 Abida Noshin:
   github: "abidanoshin"
   current: true
   tags:
     - Newsletter
-Madeline Goldie:
-  github: "MaddyGoldie"
-  current: true
-  tags:
-    - Placements
-Ivjyot Oberoy:
-  github: "ivjyot-oberoi"
-  current: true
-  tags:
-    - Placements
-Tom Rintoul:
-  github: "tomrintoul-SF"
-  current: true
-  tags:
-    - Programme
 Andrew Newman:
   github: "andjnewman"
   current: true
@@ -51,8 +14,45 @@ Charlotte Moberly:
   current: true
   tags:
     - Use Case
+Ferry Lichtenberg:
+  github: ""
+  current: true
+  tags:
+    - MAIS
+Harry Angus:
+  github: ""
+  current: false
+  tags:
+    - MAIS
+Huseyin Kir:
+  github: "hkir-dev"
+  current: true
+  tags:
+    - Interoperability
+    - Publication
+Ivjyot Oberoy:
+  github: "ivjyot-oberoi"
+  current: true
+  tags:
+    - Placements
+Madeline Goldie:
+  github: "MaddyGoldie"
+  current: true
+  tags:
+    - Placements
+Matthieu Bosquet:
+  github: "matthieubosquet"
+  current: true
+  tags:
+    - Interoperability
+    - Publication
 Neil Majithia:
   github: "nevadam"
   current: true
   tags:
     - Working Group
+Tom Rintoul:
+  github: "tomrintoul-SF"
+  current: true
+  tags:
+    - Programme

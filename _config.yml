@@ -1,7 +1,7 @@
 # Jekyll Configuration
-title: Social Care Interoperability Framework
+title: Social Care Interoperability Standards
 url: https://standard.socialcaredata.io
-description: Knowledge base and standards development for the social care interoperability framework
+description: Knowledge base and social care interoperability standards development
 lang: en
 locale: en_GB
 theme_color: "#0f4b69"
