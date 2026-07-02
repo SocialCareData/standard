@@ -21,7 +21,7 @@ reference: UC00
 
 <article class="numbered-headings">
 
-## Introduction
+## Summary
 
 The Placements Data Standard will standardise some of the data collected about children’s social care placements. The goal of this standard is to support better analysis of placement sufficiency at the local and regional level, tackle high costs in the care market and improve outcomes for children in care.
 
@@ -134,10 +134,10 @@ Although, as the table above shows, there are many models already gathering plac
 
 ## Report an issue
 
-If you spot an issue with this use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Placements+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+If you spot an issue with this use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Placements+Use+Case&category=Placements+Standard&page={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
 
 ## Future use cases
 
-If you would like to suggest a future use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Suggesting+a+Placements+Use+Case" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+If you would like to suggest a future use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Suggesting+a+Placements+Use+Case&category=Placements+Standard&page={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
 
 </article>

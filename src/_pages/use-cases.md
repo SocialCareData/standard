@@ -6,7 +6,7 @@ tags:
 regenerate: true
 ---
 
-{% assign use_cases = site.pages | where_exp: "p", "p.tags contains 'Use Case' and p.url != page.url" | sort: "title" %}
+{% assign use_cases = site.pages | where_exp: "p", "p.tags contains 'Use Case' and p.url != page.url" | sort_natural: "reference" %}
 
 {% include tag-filter.html items=use_cases exclude_tag="Use Case" %}
 

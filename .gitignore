@@ -5,3 +5,4 @@ dist
 .jekyll-metadata
 Gemfile.lock
 *.local
+node_modules/

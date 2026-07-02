@@ -119,45 +119,22 @@ Taking into account the structure of UK postcodes with outward code denoting a l
 
 ## NHS Personal Demographics Service flow diagram
 
-<div style="width: 50%; max-width: 500px; margin: 0 auto;">
+<div>
 
 ```mermaid
 flowchart TD
     LEGEND[PDS: ]
 
-    Start([Compare query _postcode_
-    with PDS _postcodes_])
-    2[Consider current
-    _postcodes_]
-    3[Set score
-    =_n_/_length of PDS postcode_
-    _n_ characters match
-    perfectly the first _n_
-    characters of the
-    postcodes in the PDS.]
-    4{Is there at
-    least one
-    score > 0?}
-    5{Is there a
-    preceding
-    _historical_
-    _postcode_ in
-    PDS?}
-    6[Consider ALL _historical_
-    _postcodes_]
+    Start([Compare query _postcode_ with PDS _postcodes_])
+    2[Consider current _postcodes_]
+    3[Set score =_n_/_length of PDS postcode_ _n_ characters match perfectly the first _n_ characters of the postcodes in the PDS.]
+    4{Is there at least one score > 0?}
+    5{Is there a preceding _historical_ _postcode_ in PDS?}
+    6[Consider ALL _historical_ _postcodes_]
     7[Set postcode score = 0]
-    8[Set score
-    =_n_/_length of PDS postcode_
-    _n_ characters match
-    perfectly the first _n_
-    characters of the
-    postcodes in the PDS.]
-    9{Is there at
-    least one
-    score > 0?}
-    Stop([Take the highest
-    postcode score
-    Return postcode score])
+    8[Set score =_n_/_length of PDS postcode_ _n_ characters match perfectly the first _n_ characters of the postcodes in the PDS.]
+    9{Is there at least one score > 0?}
+    Stop([Take the highest postcode score Return postcode score])
 
     Start --> 2
     2 --> 3
