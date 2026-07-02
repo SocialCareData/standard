@@ -21,6 +21,8 @@
   --link-color: rgb(48, 86, 169);
   --link-color-hover: rgb(56, 111, 196);
   --link-transition: color 0.3s ease;
+  --table-head-background: rgb(245, 245, 245);
+  --table-border-color: rgb(204, 204, 204);
   --main-margin: 1.5rem 0 1.6rem;
   --main-margin-narrow: .5rem 0 .6rem;
   --main-padding: 1.5rem 3.2rem 1.6rem 3.1rem;
@@ -139,7 +141,7 @@ main article img {
   max-width: 90%;
 }
 
-main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
+main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-small {
   max-width: var(--article-text-max-width);
 }
 
@@ -336,20 +338,19 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote) {
 }
 
 .table-bordered {
-border-collapse: collapse;
-width: 95%;
-margin: 15px 0;
+  border-collapse: collapse;
+  margin: 15px 0;
 }
 
 .table-bordered th,
 .table-bordered td {
-border: 1px solid #cccccc;
-padding: 10px;
-text-align: left;
+  border: 1px solid var(--table-border-color);
+  padding: 10px;
+  text-align: left;
 }
 
 .table-bordered th {
-background-color: #f5f5f5;
+  background-color: var(--table-head-background);
 }
 
 .version-tag {
