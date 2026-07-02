@@ -18,7 +18,7 @@ tags:
 
 ## Summary
 
-A central pillar of our Data Standards for Social Care programme is our work on developing a common, interoperable means to identify and describe an individual that is a subject of care. The [Person specification](https://standard.socialcaredata.io/publications_person_standard), was designed to represent the minimum information that should be recorded about a Person in a Care Management System (CMS) in order to enable their identification as part of multi-agency information sharing (MAIS).
+A central pillar of our Data Standards for Social Care programme is our work on developing a common, interoperable means to identify and describe an individual that is a subject of care. The [Person specification](/publications_person_standard), was designed to represent the minimum information that should be recorded about a Person in a Care Management System (CMS) in order to enable their identification as part of multi-agency information sharing (MAIS).
 
 This document compares our Person specification against the Hippo Digital's current GET API specification, the NHS [Person Demographics Service (PDS)](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir) query pattern, the [FHIR Patient](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir#get-/Patient), and the [GDS Person Domain logical model](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42) resources. Its purpose is to support a joint conversation between the Data Standards team and Hippo Digital on aligning the Person model used across the GET, FIND, and FETCH services.
 
@@ -27,7 +27,7 @@ This document compares our Person specification against the Hippo Digital's curr
 
 | Specification | Version / Source |
 | :--- | :--- |
-| Person specification | [Latest published version](https://standard.socialcaredata.io/publications_person_standard) |
+| Person specification | [Latest published version](/publications_person_standard) |
 | GET API | OpenAPI spec, version `0.9.0` (extract in Appendix I) |
 | NHS PDS | [Personal Demographics Service FHIR API, `GET /Patient`](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir#get-/Patient) |
 | FHIR Patient | [Patient resource](https://build.fhir.org/patient.html) |
