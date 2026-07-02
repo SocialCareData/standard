@@ -74,6 +74,11 @@ a:hover {
   transition: var(--link-color-transition);
 }
 
+table {
+  display: block;
+  overflow-x: auto;
+}
+
 blockquote {
   background-color: var(--main-highlight-3-background);
   border-radius: .3rem;
