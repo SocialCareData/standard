@@ -24,12 +24,12 @@
     "QualityAssurance":          "pl:QualityAssurance",
 
     "childId":                       "pl:childId",
-    "hasPlacementAvailability":      { "@id": "pl:hasPlacementAvailability",      "@type": "@id" },
-    "hasPlacementRequirements":      { "@id": "pl:hasPlacementRequirements",      "@type": "@id" },
-    "hasPlacementRecommendation":    { "@id": "pl:hasPlacementRecommendation",    "@type": "@id" },
-    "hasRiskAssessment":             { "@id": "pl:hasRiskAssessment",             "@type": "@id" },
-    "hasActualPlacement":            { "@id": "pl:hasActualPlacement",            "@type": "@id" },
-    "hasQualityAssurance":           { "@id": "pl:hasQualityAssurance",           "@type": "@id" },
+    "placementAvailability":      { "@id": "pl:placementAvailability",      "@type": "@id" },
+    "placementRequirements":      { "@id": "pl:placementRequirements",      "@type": "@id" },
+    "placementRecommendation":    { "@id": "pl:placementRecommendation",    "@type": "@id" },
+    "riskAssessment":             { "@id": "pl:riskAssessment",             "@type": "@id" },
+    "actualPlacement":            { "@id": "pl:actualPlacement",            "@type": "@id" },
+    "qualityAssurance":           { "@id": "pl:qualityAssurance",           "@type": "@id" },
 
     "placementId":          "pl:placementId",
     "neededBy":             { "@id": "pl:neededBy",             "@type": "@vocab", "@context": {

@@ -56,46 +56,46 @@ xsd:date rdf:type rdfs:Datatype .
 
 skos:inScheme rdf:type owl:ObjectProperty .
 
-pl:hasActualPlacement rdf:type owl:ObjectProperty ,
+pl:actualPlacement rdf:type owl:ObjectProperty ,
                                owl:FunctionalProperty ;
                       rdfs:domain pl:Placement ;
                       rdfs:range pl:ActualPlacement ;
                       rdfs:comment "Links a Placement to the ActualPlacement that was arranged. Optional - a referral may exist without (yet) having an actual placement." ;
-                      rdfs:label "has actual placement" .
+                      rdfs:label "actual placement" .
 
-pl:hasPlacementAvailability rdf:type owl:ObjectProperty ;
+pl:placementAvailability rdf:type owl:ObjectProperty ;
                             rdfs:subPropertyOf owl:topObjectProperty ;
                             rdfs:domain pl:Placement ;
                             rdfs:range pl:PlacementAvailability ;
-                            rdfs:label "has placement availability" .
+                            rdfs:label "placement availability" .
 
-pl:hasPlacementRecommendation rdf:type owl:ObjectProperty ,
+pl:placementRecommendation rdf:type owl:ObjectProperty ,
                                        owl:FunctionalProperty ;
                               rdfs:domain pl:Placement ;
                               rdfs:range pl:PlacementRecommendation ;
                               rdfs:comment "Links a Placement to its PlacementRecommendation." ;
-                              rdfs:label "has placement recommendation" .
+                              rdfs:label "placement recommendation" .
 
-pl:hasPlacementRequirements rdf:type owl:ObjectProperty ,
+pl:placementRequirements rdf:type owl:ObjectProperty ,
                                      owl:FunctionalProperty ;
                             rdfs:domain pl:Placement ;
                             rdfs:range pl:PlacementRequirements ;
                             rdfs:comment "Links a Placement to its PlacementRequirements." ;
-                            rdfs:label "has placement requirements" .
+                            rdfs:label "placement requirements" .
 
-pl:hasQualityAssurance rdf:type owl:ObjectProperty ,
+pl:qualityAssurance rdf:type owl:ObjectProperty ,
                                 owl:FunctionalProperty ;
                        rdfs:domain pl:Placement ;
                        rdfs:range pl:QualityAssurance ;
                        rdfs:comment "Links a Placement to its QualityAssurance metadata." ;
-                       rdfs:label "has quality assurance" .
+                       rdfs:label "quality assurance" .
 
-pl:hasRiskAssessment rdf:type owl:ObjectProperty ,
+pl:riskAssessment rdf:type owl:ObjectProperty ,
                               owl:FunctionalProperty ;
                      rdfs:domain pl:Placement ;
                      rdfs:range pl:RiskAssessment ;
                      rdfs:comment "Links a Placement to its RiskAssessment." ;
-                     rdfs:label "has risk assessment" .
+                     rdfs:label "risk assessment" .
 
 #################################################################
 #    Data properties
@@ -119,27 +119,27 @@ pl:Placement rdf:type owl:Class ;
                                owl:cardinality "1"^^xsd:nonNegativeInteger
                              ] ,
                              [ rdf:type owl:Restriction ;
-                               owl:onProperty pl:hasPlacementAvailability ;
+                               owl:onProperty pl:placementAvailability ;
                                owl:cardinality "1"^^xsd:nonNegativeInteger
                              ] ,
                              [ rdf:type owl:Restriction ;
-                               owl:onProperty pl:hasPlacementRequirements ;
+                               owl:onProperty pl:placementRequirements ;
                                owl:cardinality "1"^^xsd:nonNegativeInteger
                              ] ,
                              [ rdf:type owl:Restriction ;
-                               owl:onProperty pl:hasPlacementRecommendation ;
+                               owl:onProperty pl:placementRecommendation ;
                                owl:cardinality "1"^^xsd:nonNegativeInteger
                              ] ,
                              [ rdf:type owl:Restriction ;
-                               owl:onProperty pl:hasRiskAssessment ;
+                               owl:onProperty pl:riskAssessment ;
                                owl:cardinality "1"^^xsd:nonNegativeInteger
                              ] ,
                              [ rdf:type owl:Restriction ;
-                               owl:onProperty pl:hasQualityAssurance ;
+                               owl:onProperty pl:qualityAssurance ;
                                owl:cardinality "1"^^xsd:nonNegativeInteger
                              ] ,
                              [ rdf:type owl:Restriction ;
-                               owl:onProperty pl:hasActualPlacement ;
+                               owl:onProperty pl:actualPlacement ;
                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
                              ] ;
              rdfs:label "Placement" .
