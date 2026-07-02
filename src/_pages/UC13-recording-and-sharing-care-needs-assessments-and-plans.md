@@ -21,26 +21,22 @@ reference: UC13
 
 <article class="numbered-headings">
 
-
-## Summary
-
-**User stories**
+## User stories
 
 * **Recording care needs**
 
   As an adult social worker or delegated professional (e.g., OT/physio), I can record a person’s care needs, and outcomes in a structured, standardised way, so that the local authority can determine eligibility, resource allocation, plan support, ensure continuity of care, facilitate sharing with other professionals, and improve oversight and service quality.
 
   I can do this directly into my case management system or via an application that supports my note-taking, for example a third-party AI transcription tool.
-
 * **Sharing assessments and plans**
   * As a social care professional, I want to share relevant parts of an assessment and care plan with:
     * Healthcare professionals so that they can coordinate effectively, ensure continuity of care, and support integrated health and care planning.
     * Care providers so that providers have the information they need to support me as an individual.
     * Housing services where relevant so that housing officers/ providers can understand my needs, risks and adjustments (eg equipment) enabling them to provide safe a suitable accommodation.
     * Other external agencies where relevant e.g. voluntary sector providers, so that multi-agency partners have the relevant details they need to deliver coordinated, person-centred support.
-
 * **Citizen access to assessments and plans**
   * As an adult having my needs assessed, I would like to see a copy of the assessment as well as the care/support plan (or shared, with consent, to an appointed advocate; legal power of attorney; deputy or family member) so that I can understand my assessed needs and what support I am eligible for, and what has been refused (to be able to challenge decisions if necessary). I want to ensure my wellbeing was considered [_note: links to 1Bi_]
+
 
 ## Description
 
@@ -64,7 +60,7 @@ Structured, standardised recording is also critical for:
 * Aggregation of data for local and national policy insights.
 * Transparency and accountability to support citizen empowerment.
 
-### The Challenge / Opportunity
+### Primary challenge
 
 * Currently, variation exists across local authorities in how assessments are conducted and recorded.
 * Regulatory oversight (CQC) and national reporting (DHSC / CLD) increasingly rely on structured, comparable data.
@@ -72,13 +68,13 @@ Structured, standardised recording is also critical for:
 * Multi-agency working is common, involving providers, health professionals, OTs, advocates, and carers.
 * Assessment is not just administrative; it is a professional intervention critical to person-centred care.
 
-**The Opportunity**
+### Opportunity
 
 * There is an opportunity to define a common core dataset and sharing standard for assessments and care plans, enabling relevant information to follow the adult across local authority, provider, health and housing settings while still allowing local variation in assessment practice.
 * It is proposed that between the LA and care provider, only one care plan should exist.  The Care Act assessment itself differs in every LA, but recommendation for consistency in how the criteria is recorded would help if an adult lives in one area but placed in a care home in another.
 * Recommendation for the Vendors to redesign API so tabs in the assessment can be seen live in health integration systems.
 
-### Care Record Components
+### Care record components
 
 Key information captured during the assessment includes:
 
@@ -102,7 +98,8 @@ Key information captured during the assessment includes:
 * To provide evidence for legal, safeguarding, or complaints processes.
 * To comply with statutory recording requirements under the Care Act 2014.
 
-## Additional Sources
+
+## Additional sources
 
 * **SCIE:** [Legal duties for recording an assessment of needs](https://www.scie.org.uk/care-act-2014/factsheets/care-act-factsheet-3-legal-duties-for-recording-an-assessment-of-needs-for-care-and-support)
 * **SCIE:** [Assessment & eligibility: fluctuating needs](https://www.scie.org.uk/assessment-and-eligibility/fluctuating-needs/)
@@ -113,9 +110,11 @@ Key information captured during the assessment includes:
 * **The King's Fund:** [Social Care 360: Quality](https://www.kingsfund.org.uk/insight-and-analysis/long-reads/social-care-360-quality)
 * **Cambridge BJPsych Bulletin:** [Personalisation and Social Care Assessment](https://www.cambridge.org/core/journals/bjpsych-bulletin/article/personalisation-and-social-care-assessment-the-care-act-2014/ADE7C621B17CFB09E8D3B01E024FF8E1)
 
+
 ## Report an issue
 
 If you spot an issue with this use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Recording+and+Sharing+ASC+Needs+Assessments+and+Care+Plans+Use+Case&category=Use+Cases&page={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+
 
 ## Future use cases
 

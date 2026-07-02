@@ -24,9 +24,11 @@ reference: UC05
 
 ## Summary
 
-**Overview:** As a social care leader, I need timely, accurate, and comprehensive analysis of data from across the case management system and related services so that I can understand need, monitor risk, plan resources effectively, and ensure statutory responsibilities are met.
+As a social care leader, I need timely, accurate, and comprehensive analysis of data from across the case management system and related services so that I can understand need, monitor risk, plan resources effectively, and ensure statutory responsibilities are met.
 
-**User Stories**
+
+## User stories
+
 * As a social work senior leader, I need to be able to analyse data about children or adults being supported by my service area, so that I can make decisions about service planning.
 * As a social work senior leader, I need to analyse pathways through services, to identify opportunities for operational improvement and/or earlier intervention
 * As a social work senior leader, I need to model scenarios of future service demand, expenditure, and outcomes, to make decisions about where to put our resources
@@ -34,6 +36,7 @@ reference: UC05
 * As a social work leader, I need to be able to quickly audit specific sections of case files across all cases in order to prepare for inspection.
 * As a social work team manager, I need to be able to monitor risk on children and adults allocated within my team and ensure professionals are making good decisions and following up on actions necessary to keep child/adult safe.
 * As a social work team manager, I need to be able to track the performance of my supervisees against targets and statutory requirements.
+
 
 ## Description
 
@@ -51,7 +54,7 @@ Social Care case management systems are not designed to allow social worker lead
 
 As much as possible, we want to reduce the barriers to enable local authorities to conduct the sort of analysis outlined above. This might include through better access to data, making it easier to join together data between systems (e.g. HR, finance and CMS data), or through making it easier for local authorities to utilise off the shelf advanced analytical tools.
 
-### The Challenge/Opportunity
+### Primary challenge
 
 **The primary problem**
 
@@ -62,6 +65,8 @@ A lack of joined up data across internal and external systems limits local autho
 * Local authorities miss opportunities that could be realised by bringing data together.
 * Analytical capacity within local authorities often cannot stretch to support strategic analysis as well as statutory reporting.
 
+### Opportunity
+
 **The opportunity**
 * Support LAs ability to bring together disparate datasets into a single space
 * Support LAs to be able to use a combination of their own data (from across different departments) and partnership data to perform strategic analysis to understand need, then make and evidence effective decisions off the back of this analysis.
@@ -71,7 +76,7 @@ Leading to:
 * Will support the move towards the ‘right’ KPI’s that are more impactful for children, families and adults supported by social care.
 * Reduced duplication of effort across local authorities.
 
-### Care Record Components
+### Care record components
 
 A Care Record Component is a distinct unit of information that could be captured within the Case Management System (CMS). These components range from the structural entities required to safely manage a case to the person-centred details that form a holistic view of an individual's life and journey. Relevant care record components for this use case include:
 
@@ -91,18 +96,22 @@ Enabling this analysis supports:
 * Service improvement (identification of repeated patterns, challenges/pain points, gaps, areas of poor outcomes) and better support
 * Reporting and compliance – more effective at understanding where local authorities are not meeting their statutory requirements
 
-## Out of Scope
+
+## Out of scope
 
 1. Single child identifier.
 2. Recruitment and retention challenges around technical roles.
 
-## Additional Sources
+
+## Additional sources
 
 * [OFSTED Annex A Data Requirements](https://www.gov.uk/government/publications/deleted-inspecting-local-authority-childrens-services/inspecting-local-authority-childrens-services#Annex-A)
+
 
 ## Report an issue
 
 If you spot an issue with this use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Analysing+Information+from+CMS+Use+Case&category=Use+Cases&page={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+
 
 ## Future use cases
 

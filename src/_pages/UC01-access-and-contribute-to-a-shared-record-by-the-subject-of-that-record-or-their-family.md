@@ -23,7 +23,8 @@ reference: UC01
 
 Supporting access and contribution to a shared care record (from the data subject and family networks) in a way that accurately represents the person’s voice, experience and preferences.
 
-### User Stories
+
+## User stories
 
 * **Child/ young person contributing to their record**
     * As a child/ young person I need to be able to share my experiences and preferences and for this to be represented on my record
@@ -46,9 +47,8 @@ Both children’s and adults’ social workers are legally required to reflect t
 
 **For adults in receipt of care**, control over what data is held and the ability to update and add to a record is even more important. In Adult Social Care, people often move between services (e.g., hospital, mental health, community support, home care). Without shared records, social workers and partners must rely on manual enquiries, repeated questions, or incomplete historical information. This creates risk, inefficiency, and frustration for the person. Data subjects should be able to add or verify information about what matters to them, their goals, routines, and preferences, which are core to Care Act–compliant assessments and person-centred support planning.
 
-### THE CHALLENGE / OPPORTUNITY
 
-#### Primary challenge
+### Primary challenge
 
 * The voice of the child/family always needs to go through the social worker.
 * CMS’ do not consistently support non-professional care actors from contributing towards a record
@@ -60,15 +60,18 @@ Secondary challenges
 * Current systems for coproduction are hard to use and difficult to navigate.
 * Digital divide and accessibility issues: Family members may have accessibility needs, learning difficulties, language barriers, psychological challenges, or other personality traits that create barriers to them accessing and contributing to secure records (e.g. via two-factor authentication) In addition, some may not have access to the right tools e.g. laptops, consistent internet access.
 
-#### Opportunity
+
+### Opportunity
+
 * Enable integration of ‘family facing’ digital tools that can capture the voice of the child and family, whether they use written, text, voice, photos, videos or drawing.
 * Only appropriate information from the child’s record will be available during sessions with families.
 * Outputs from these tools are stored within the CMS in the correct place and can be easily retrieved.
 * Children, family and network members can input into co-produced records as and when they need to.
 
-### CARE RECORD COMPONENTS
 
-A Care Record Component is a distinct unit of information that could be captured within the Case Management System (CMS). These components range from the structural entities required to safely manage a case to the person-centred details that form a holistic view of an individual's life and journey. Relevant care record components for this use case include:
+### Care record components
+
+A care record component is a distinct unit of information that could be captured within the Case Management System (CMS). These components range from the structural entities required to safely manage a case to the person-centred details that form a holistic view of an individual's life and journey. Relevant care record components for this use case include:
 
 * Record of experience – this might be structured feedback gathered at regular meeting such as a CP Conference or CLA Review, or in response to a significant interaction with a professional e.g. a social worker visit.
 * Responses to specific assessments or plans – this might be to indicate agreement or disagreement with the professionals’ views and plans set out in these documents.  Should be included as part of the final version of the assessment or plan.
@@ -76,12 +79,14 @@ A Care Record Component is a distinct unit of information that could be captured
 * Preferences and communication needs
 * Media records - using voice, video or image files to capture voice of children/individuals, integrated within the persons CMS record
 
-### BENEFITS
+
+### Benefits
 
 When inputting in any form:
 
 * Children and families’ input is taken into account when making decisions about them (including encouraging Family Group Decision Making processes)
 * Individuals in receipt of care can see their records reflect their own voice and decisions
+
 
 If able to directly input, then:
 
@@ -89,6 +94,7 @@ If able to directly input, then:
 * Local authorities can monitor and evidence the extent to which children are families are being directly consulted and involved in the work undertaken with them.
 * Social workers can use a variety of tools to capture the input from children/ individuals without having to duplicate effort (e.g. writing up and summarising an interview ).
 * Children and families’ views are stored in consistent and searchable form
+
 
 ## Out of scope
 

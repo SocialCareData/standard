@@ -26,18 +26,19 @@ reference: UC02
 
 As a professional working with a client, I need to create written records of activities and observations following an interaction with a client, or their representative so that relevant information is captured  for further reference. I need these notes to reflect   to their CMS record.
 
-**User Stories:**
+
+## User stories
+
 * **Children’s Social Worker visiting a child and family**
   * As a social worker visiting a child and family, I need to make a record of the visit that includes a narrative account, my observations, my analysis, and any expressed wishes and feelings of the child or family.
 
 * **Adults Social Work assessor  visiting an adult**
   * As a social worker visiting an individual, I need to make a record of the visit that includes a narrative account, my observations, my analysis, and any input from the individual and or their representative.
 
+
 ## Description
 
-### The Challenge / Opportunity
-
-**Primary Challenge**
+### Primary challenge
 
 A key pain point in note taking has been the amount of time this takes for social workers. Estimates vary, but coalesce around a figure of 50% of working time spent recording or finding information.
 
@@ -53,7 +54,8 @@ The notes are mainly free text, but social workers will also need to record some
 * Sometimes this will go further, including structured information summarising the nature and purpose of the activity, risks, actions, etc. or for the purposes of completing the Care Act assessment.
 * The extent to which structured information is used varies by LA and the nature of this data and definitions of data also varies by LA i.e. one LA care act assessment data is not the same as another LA’s.
 
-**Opportunity**
+
+### Opportunity
 
 * Enable integration of third-party tools that can support AI transcription with CMS systems. This would mean:
   * The interaction is recorded, and transcribed to provide a contemporaneous note
@@ -63,7 +65,8 @@ The notes are mainly free text, but social workers will also need to record some
 * Enable this to happen in a safe/secure way (by removing incentives for using risky workarounds)
 * AI transcription is a rare example of capital being invested in social care technology outside of the CMS products. If it is seen as a success, then more investment may flow into the market, to the benefit of social care providers and ultimately those receiving social care.
 
-**Relevant Care Record Components**
+
+### Care record components
 
 A Care Record Component is a distinct unit of information that could be captured within the Case Management System (CMS). These components range from the structural entities required to safely manage a case to the person-centred details that form a holistic view of an individual's life and journey.
 
@@ -73,8 +76,11 @@ A Care Record Component is a distinct unit of information that could be captured
 * Social workers reflections on what the significance of those observations or decisions might be (e.g. in relation to an assessment of someone’s current capacity, in relation to a judgement about risk, in relation to whether or not a care plan is adequate).
 * Actions which should now take place
 
+
 ### Benefits
+
 Beyond time-saving, transcription will support improved accuracy and detail of notes:
+
 * Provide a clear record of professional decisions, actions and rationale, supporting accountability to regulators, employers and, where required, courts.
 * Enable local authorities to collate and analyse information across cases, supporting service oversight, quality assurance and strategic decision-making.
 * Support continuity of care by making relevant information accessible to future professionals and services involved in the individual’s care.
@@ -82,11 +88,13 @@ Beyond time-saving, transcription will support improved accuracy and detail of n
 * Give the individual, child or family a clear account of decisions made, actions agreed and the reasons behind them, supporting transparency and sense-making.
 * Provide a shared basis for planning, action and responsibility between professionals, families and other relevant services.
 
-## Out of Scope
+
+## Out of scope
 
 1. Creating formal assessments, recommendations, and care plans (i.e. changing what a social worker needs to record)
 
-## Additional Sources
+
+## Additional sources
 
 ### Professional and Regulatory Guidance (UK)
 
@@ -95,6 +103,7 @@ Beyond time-saving, transcription will support improved accuracy and detail of n
 1.  [Department for Education (DfE) -- Case Management Systems](https://www.gov.uk/government/publications/childrens-social-care-improving-case-management-systems/)
 1.  [Social Work Inspection Agency (SWIA) -- Scotland](https://www.careinspectorate.com/images/documents/1535/ontherecord1%5B1%5D.pdf)
 1.  [Local Authority Case Recording Policies (TRIX Standard Example)](https://westberkscs.trixonline.co.uk/chapter/case-recording-and-policy-guidance)
+
 
 ### Academic Literature -- Observation, Analysis and Recording
 
@@ -105,11 +114,13 @@ Beyond time-saving, transcription will support improved accuracy and detail of n
 <!-- * [Trevithick -- Knowledge, Assessment and Recording](https://www.routledge.com/Social-Work-Skills-and-Knowledge-A-Practice-Handbook/Trevithick/p/book/97) -->
 * [Ruch, Turney & Ward -- Relationship-Based Practice](https://www.jkp.com/9781843109099/relationshipbased-social-work/)
 
+
 ### Rights, Identity and Life-Story Work
 
 <!-- * [MIRRA Project -- Children's Rights and Records](https://www.researchinpractice.org.uk/media/zzubiysq/good_practice_in_recording_and_access_to_recor) -->
 * [Featherstone, White & Morris -- Ethical and Rights-Based Approaches](https://policy.bristoluniversitypress.co.uk/re-imagining-child-protection)
 <!-- * [The National Archives -- Looked-After Children Records Guidance](https://www.nationalarchives.gov.uk/information-management/manage-information/planning-care-records/) -->
+
 
 ### Professional Education and Training Materials
 
@@ -122,9 +133,11 @@ Beyond time-saving, transcription will support improved accuracy and detail of n
 * [NASW (US) -- Standards for Social Work Case Management](https://www.socialworkers.org/LinkClick.aspx?fileticket=LYdJms6qzkY%3d&portalid=0)
 * [IASSW / IFSW -- Global Standards for Social Work Education](https://www.ifsw.org/global-standards-for-social-work-education-and-training/)
 
+
 ## Report an issue
 
 If you spot an issue with this use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Social+Worker+Recording+Use+Case&category=Use+Cases&page={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+
 
 ## Future use cases
 

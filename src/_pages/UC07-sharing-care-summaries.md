@@ -21,16 +21,16 @@ reference: UC07
 
 <article class="numbered-headings">
 
-
 ## Summary
 
 Enable creation and sharing of intelligible summaries of records to share with those who have left the care system.
 
-**User Stories**
+
+## User stories
 
 * As a social work admin support team, I need to be able to create a version of someone’s care records which are intelligible to them and do not breach duties of confidentiality to others, so that I can uphold the LA’s ethical and legal responsibility to them.  I need to compile and share them in a way that minimises the traumatising impact of reading them on the person.
-
 * As an adult who has left the care system, I need to access a copy of my records which I can understand, so I can understand what decisions were made about me and why
+
 
 ## Description
 
@@ -46,23 +46,19 @@ Young people have a legal right to access their CSC case records from the age of
 
 Young people have a right to their records after they leave the care system, to understand what decisions were made about them and why. This arduous, admin heavy activity theoretically could be supported through the use and application of AI tools, designed to synthesise and draw out key themes from large volumes of information. However, the sensitive nature of the information being reviewed by these tools, and the importance of getting these records ‘right’ for care leavers poses a significant risk for the application of untested tools and a strong argument for a professional ‘human in the loop’.
 
-## Landscape Review
-
-### The Challenge / Opportunity
-
-**The challenge**
+### Primary challenge
 
 * The process for care leavers of accessing their children’s social care record is a difficult experience and can be re-traumatising.
 * There is often a significant time lag between requesting records and receiving them. When they arrive, they are significantly redacted and can be of poor quality.
 * The process of pulling together a subject access request (SAR) for care leavers is time consuming, requires multiple contacts and puts a lot of pressure on the social work teams.
 
-**The opportunity**
+### Opportunity
 
 * Enable integration with third party providers/improved functionality of existing systems to support search, summarisation and prioritisation including AI tools.
 * Ensure data about children is standardisable, searchable and retrievable, easing the burden on social workers responding to care leavers requesting access to their records and meaning those receiving access to the records receive quality outputs with clear information in a timely way.
 * Less time spent in individual data processing allows resources to be transferred to more professional support for those receiving access to their records.
 
-### Care Record Components
+### Care record components
 
 Records will include information from case files containing care leaver’s personal data.
 
@@ -86,19 +82,23 @@ Access to records with comprehensive information and a clear story can help care
 * To try and contact those who were significant during their time in care or relatives
 * Medical information
 
-## Out of Scope
+
+## Out of scope
 
 1. Information sharing guidance
 2. Decisions about how local authorities support adults accessing their records
 
-## Additional Sources
+
+## Additional sources
 
 * [Storyteller App - Coram](https://www.coram.org.uk/storyteller-app/)
 * [The MIRRA Project](https://blogs.ucl.ac.uk/mirra/2017-2019/) - experiences of adult care leavers reading their files
 
+
 ## Report an issue
 
 If you spot an issue with this use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding+Sharing+Care+Summaries+Use+Case&category=Use+Cases&page={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+
 
 ## Future use cases
 
