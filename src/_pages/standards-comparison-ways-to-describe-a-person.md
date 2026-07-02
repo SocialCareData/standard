@@ -23,8 +23,6 @@ A central pillar of our Data Standards for Social Care programme is our work on 
 This document compares our Person specification against the Hippo Digital's current GET API specification, the NHS [Person Demographics Service (PDS)](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir) query pattern, the [FHIR Patient](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir#get-/Patient), and the [GDS Person Domain logical model](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42) resources. Its purpose is to support a joint conversation between the Data Standards team and Hippo Digital on aligning the Person model used across the GET, FIND, and FETCH services.
 
 ***Table-1***
-{: style="text-align: center;"}
-
 | Specification | Version / Source |
 | :--- | :--- |
 | Person specification | [Latest published version](/publications_person_standard) |
@@ -48,15 +46,12 @@ Homogenising person records opens the door to building APIs for MAIS. That is, m
 
 APIs are being built as part of the larger MAIS programme within the Department for Education by Hippo Digital. They have three kinds of APIs in mind.
 
-***Table-2***
-{: style="text-align: center;"}
-
 |  Service |  Description |
 | :--- | :--- |
-| **GET** | Would enable users to find the NHS number of a person they are enquiring about. |
-| **FIND (incorporating GET)** | Would enable users to find out which other agencies and services know about the person they are enquiring about. |
-| **FETCH (incorporating FIND and GET)** | Would enable users to find out what information other agencies and services have about the person they are enquiring about. |
-{:.table-bordered}
+| **GET an identifier** | Would enable users to find the NHS number of a person they are enquiring about. |
+| **FIND a record (relies on GET)** | Would enable users to find out which other agencies and services know about the person they are enquiring about. |
+| **FETCH a record (relies on GET and FIND)** | Would enable users to find out what information other agencies and services have about the person they are enquiring about. |
+{:.table-bordered .table-small}
 
 In the GET service, a user submits a query built from what is known about a person — names, address, and so on — to the NHS [Person Demographics Service (PDS)](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir), a FHIR API. The PDS matches against internal NHS data and responds with a FHIR Patient object containing the person's NHS number. Matching requires the query data to align with NHS records, whether via exact or fuzzy matching; we explore matching via FHIR [here](/standards_comparison_person_matching).
 
@@ -69,8 +64,6 @@ GET's current specification for describing a `Person` is based on the PDS's quer
 The Person specification includes additional fields beyond those in the current GET spec, addressing social care–specific cases where minimal demographic data may not be sufficient for accurate identification. Misidentification and mismatching can have serious implications for the individual. Our standard was developed in consultation with social care practitioners and aligns with relevant PRSB standards.
 
 The table below compares our `Person` standard to the current GET API spec, the [PDS query](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir#get-/Patient) pattern, [FHIR's Patient](https://build.fhir.org/patient.html) object, and the [GDS Person Domain logical model](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42). Common fields are aligned across columns; notes describe each Person field's rationale and how it relates to GET.
-
-{: style="text-align: center;"}
 
 | Get an Identifier API | Person Standard | NHS PDS | FHIR | GDS Person Logical Model | Notes |
 | :--- | :--- | :--- | :--- | :--- | :--- |
