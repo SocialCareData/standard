@@ -113,7 +113,8 @@ Key information captured during the assessment includes:
 * **CQC:** [State of Care 2024--2025 report](https://www.cqc.org.uk/publications/major-report/state-care/2024-2025/systems/laa)
 * **Community Care:** [Assessment information gaps and access issues](https://www.communitycare.co.uk/2024/10/16/assessors-lack-of-social-work-experience-among-criticisms-of-cqc-council-checks-in-damning-review/)
 * **The King's Fund:** [Social Care 360: Quality](https://www.kingsfund.org.uk/insight-and-analysis/long-reads/social-care-360-quality)
-* **Cambridge BJPsych Bulletin:** [Personalisation and Social Care Assessment](https://www.cambridge.org/core/journals/bjpsych-bulletin/article/personalisation-and-social-care-assessment-the-care-act-2014/ADE7C621B17CFB09E8D3B01E024FF8E1)
+
+<!-- * **Cambridge BJPsych Bulletin:** [Personalisation and Social Care Assessment](https://www.cambridge.org/core/journals/bjpsych-bulletin/article/personalisation-and-social-care-assessment-the-care-act-2014/ADE7C621B17CFB09E8D3B01E024FF8E1) (link broken) -->
 
 
 ## Report an issue
