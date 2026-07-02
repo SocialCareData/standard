@@ -21,6 +21,11 @@ reference: UC12
 
 <article class="numbered-headings">
 
+## Summary
+
+Enable multiple agencies and professionals involved in a person’s care to view and contribute directly to relevant parts of a shared record, so that the record reflects a complete and up-to-date picture. This supports coordinated, real-time working across multiple agencies while maintaining a clear history of who contributed what and why.
+
+
 ## User stories
 
 * **CSC multi-agency team input**

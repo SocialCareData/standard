@@ -21,6 +21,11 @@ reference: UC13
 
 <article class="numbered-headings">
 
+## Summary
+
+Enable adult social care needs assessments and care plans to be recorded in a structured, standardised way and shared securely across the professionals, agencies and individuals involved in a person’s care. This supports consistent determination of eligibility and resource allocation, continuity of care across local authority, health, provider and housing settings, and gives the person (or their appointed representative) access to understand and, where necessary, challenge decisions about their support.
+
+
 ## User stories
 
 * **Recording care needs**
