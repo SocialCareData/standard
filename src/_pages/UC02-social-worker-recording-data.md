@@ -102,19 +102,19 @@ Beyond time-saving, transcription will support improved accuracy and detail of n
 * [Ferguson -- Reflective Practice and Recording](https://pure-oai.bham.ac.uk/ws/portalfiles/portal/48965759/Ferguson_How_Social_Workers_Social_Work_)
 * [Taylor & White -- Reasoning, Reflexivity and Documentation](https://global.oup.com/academic/product/practising-reflexivity-in-health-and-welfare-9780335205096)
 * [Parton -- Risk, Governance and Documentation](https://www.palgrave.com/gp/book/9781137426024)
-* [Trevithick -- Knowledge, Assessment and Recording](https://www.routledge.com/Social-Work-Skills-and-Knowledge-A-Practice-Handbook/Trevithick/p/book/97)
+<!-- * [Trevithick -- Knowledge, Assessment and Recording](https://www.routledge.com/Social-Work-Skills-and-Knowledge-A-Practice-Handbook/Trevithick/p/book/97) -->
 * [Ruch, Turney & Ward -- Relationship-Based Practice](https://www.jkp.com/9781843109099/relationshipbased-social-work/)
 
 ### Rights, Identity and Life-Story Work
 
-* [MIRRA Project -- Children's Rights and Records](https://www.researchinpractice.org.uk/media/zzubiysq/good_practice_in_recording_and_access_to_recor)
+<!-- * [MIRRA Project -- Children's Rights and Records](https://www.researchinpractice.org.uk/media/zzubiysq/good_practice_in_recording_and_access_to_recor) -->
 * [Featherstone, White & Morris -- Ethical and Rights-Based Approaches](https://policy.bristoluniversitypress.co.uk/re-imagining-child-protection)
-* [The National Archives -- Looked-After Children Records Guidance](https://www.nationalarchives.gov.uk/information-management/manage-information/planning-care-records/)
+<!-- * [The National Archives -- Looked-After Children Records Guidance](https://www.nationalarchives.gov.uk/information-management/manage-information/planning-care-records/) -->
 
 ### Professional Education and Training Materials
 
 * [BASW -- Professional Capabilities Framework RecordingGuidance](https://www.basw.co.uk/resources/pcf-guidance-recording)
-* [DfE -- Knowledge and Skills Statements (KSS)](https://www.gov.uk/government/publications/knowledge-and-skills-statements-for-child-and-family-soc)
+<!-- * [DfE -- Knowledge and Skills Statements (KSS)](https://www.gov.uk/government/publications/knowledge-and-skills-statements-for-child-and-family-soc) -->
 * [Community Care Inform -- Case Recording Practice Guides](https://www.communitycare.co.uk/2017/02/13/case-recording-top-tips-writing-clear-accurate-records/)
 
 ### International Standards
