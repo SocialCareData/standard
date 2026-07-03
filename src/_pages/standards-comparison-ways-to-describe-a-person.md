@@ -23,6 +23,7 @@ A central pillar of our Data Standards for Social Care programme is our work on 
 This document compares our Person specification against the Hippo Digital's current GET API specification, the NHS [Person Demographics Service (PDS)](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir) query pattern, the [FHIR Patient](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir#get-/Patient), and the [GDS Person Domain logical model](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42) resources. Its purpose is to support a joint conversation between the Data Standards team and Hippo Digital on aligning the Person model used across the GET, FIND, and FETCH services.
 
 ***Table-1***
+
 | Specification | Version / Source |
 | :--- | :--- |
 | Person specification | [Latest published version](/publications_person_standard) |
