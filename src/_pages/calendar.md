@@ -2,6 +2,7 @@
 title: Calendar
 tags:
   - Working Group
+regenerate: true
 ---
 
 Data standards for social care [standards working groups](/standards_working_groups) meetings (find out how to [participate](/standards_working_groups#participation)).
