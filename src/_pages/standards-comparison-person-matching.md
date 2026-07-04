@@ -158,3 +158,5 @@ flowchart TD
 - [Patient Matching](https://hl7.org/fhir/us/identity-matching/patient-matching.html) (Interoperable Digital Identity and Patient Matching, Identity-focused FHIR implementation guide, HL7)
 - [The `Person_ID` Handbook](https://digital.nhs.uk/services/personal-demographics-service/master-person-service/the-person_id-handbook) (NHS England Digital)
 - [Patient EMPI Match](https://simplifier.net/guide/ca-on-pcr-r4-query-iguide-v2.0/patientempimatch?version=current) (Provincial Client Registry (PCR) HL7 FHIR® Implementation Guide v2.0.0)
+
+{% include mermaid.html %}
