@@ -1,9 +1,27 @@
+x-jekyll: &jekyll
+  build:
+    context: .
+    dockerfile: Dockerfile
+  volumes:
+    - .:/dist
+
 services:
+  # Default: `docker compose up` -> live-reloading dev server on :4000
   socialcaredata-jekyll:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    <<: *jekyll
     ports:
       - 4000:4000
-    volumes:
-      - .:/dist
+
+  # `docker compose run --rm build` -> one-off production build into ./dist
+  build:
+    <<: *jekyll
+    profiles: [build]
+    command: ["jekyll", "build"]
+
+  # `docker compose up serve` -> serve without --watch/--incremental
+  serve:
+    <<: *jekyll
+    profiles: [serve]
+    ports:
+      - 4000:4000
+    command: ["jekyll", "serve", "--host", "0.0.0.0"]
