@@ -255,7 +255,7 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
   margin: .4rem 0;
 }
 
-.flex-list {
+.tag-list {
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;

@@ -11,11 +11,12 @@ regenerate: true
 {% include tag-filter.html items=use_cases exclude_tag="Use Case" %}
 
 {% if use_cases.size > 0 %}
-<ol class="content-list">
-{% for p in use_cases %}
-  <li data-tags="{{ p.tags | join: ',' }}">
-    <h2 class="heading">{% if p.reference %}[{{ p.reference }}]{% endif %} <a href="{{ p.url }}">{{ p.title }}</a></h2>
-    {% include tags.html item=p exclude_tag="Use Case" %}
+<ol class="content-list tag-filtered-list">
+{% for uc in use_cases %}
+  <li data-tags="{{ uc.tags | join: ',' }}">
+    <h2 class="heading">{% if uc.reference %}[{{ uc.reference }}]{% endif %} <a href="{{ uc.url }}">{{ uc.title }}</a></h2>
+    {% assign uc_tags = uc.tags | where_exp: "t", "t != 'Use Case'" %}
+    {% include tags.html tags=uc_tags %}
   </li>
 {% endfor %}
 </ol>
