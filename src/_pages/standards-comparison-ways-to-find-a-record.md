@@ -1,4 +1,5 @@
 ---
+layout: publication
 title: "Standards comparison: ways to find a record"
 tags:
   - Interoperability

@@ -18,7 +18,7 @@ As 2025 wraps up, we’re sharing highlights from our time at NCASC 2025, and a 
 A huge thank you to everyone we’ve worked with — your insight and energy continue to drive our important work forward.
 
 
-## 1. NCASC 2025: Key Moments
+## NCASC 2025: Key Moments
 
 ### What we got up to
 
@@ -40,7 +40,7 @@ NCASC was a great opportunity for us to connect and learn, and we’re looking f
 
 ![Social Finance stand and Team at NCACS 2025](/assets/img/newsletter-3-ncacs.jpg)
 
-## 2. CYP and VCSE Engagement
+## CYP and VCSE Engagement
 
 ### Insights from Care-Experienced Young People
 
@@ -65,7 +65,7 @@ Our roundtable with VCS leaders on 25th November reinforced their vital role in 
 These insights will inform the next phase of standards development, ensuring that the voices of those most affected remain central to the project and achieving our aims.
 
 
-## 3. 2025 in Review
+## 2025 in Review
 
 Our spreadsheets have almost burst at the seams trying to keep track of the number of people, from different LAs, suppliers, and others who have joined our working groups during 2025. Thank you so much for your engagement!
 
@@ -108,7 +108,7 @@ We are lucky to be chaired by Prof Sir Anthony Finklestein, and to have children
 With the expansion of the programme to cover adult social care we have been joined by Mark Nicholas (Chief Social Worker at NHS Digital, and Clinical Director for the NHS App), among others. They’ll advise on where we should focus our efforts and hold us to account.
 
 
-## 4. Looking Ahead to 2026
+## Looking Ahead to 2026
 
 [Andrew](https://theodi.org/profile/andrew-newman/) at the Open Data Institute said when we started this ***‘We’ve got three years in which to do fifteen years’ work’***. That’s partly an encouragement to move fast, but it’s also a reminder that what we prioritise first is critical.
 

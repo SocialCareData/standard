@@ -11,19 +11,6 @@ breadcrumbs:
     url: /updates
 ---
 
-
-
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of contents</h2>
-
-1. TOC
-{:toc}
-{::options toc_levels="2..3" /}
-
-</nav>
-
-<article class="numbered-headings">
-
 ## Links
 
 [Placements standard working group 1 slides](/assets/pdf/placements-swg-1.pdf)
@@ -193,5 +180,3 @@ Responses can be via GitHub or email.
 ## See also
 
 [Related Discussion on GitHub](https://github.com/orgs/SocialCareData/discussions/5)
-
-</article>

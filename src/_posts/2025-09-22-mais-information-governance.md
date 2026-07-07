@@ -10,18 +10,6 @@ breadcrumbs:
     url: /updates
 ---
 
-
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of contents</h2>
-
-1. TOC
-{:toc}
-{::options toc_levels="2..3" /}
-
-</nav>
-
-<article class="numbered-headings">
-
 ## Links
 
 [MAIS information governance deep dive slides](/assets/pdf/mais-ig-deep-dive.pdf)
@@ -308,5 +296,3 @@ So, when a partner 'signs up' to our ecosystem of data exchange, that could enta
 Have suggested that part of the functionality of the services at the centre be to hold not just details of end-point and current status (e.g. on/off) but also a structured and public record of which DSAs they are signed up to, and the config they have re what data they'll respond to for what use cases, where they do and dont allow automatic decision making etc.
 
 In part so that there is a central view of which orgs have signed up and which have not, and of which orgs have fully implemented and which have not. Which would go a long way to making the change mgmt task more manageable.
-
-</article>

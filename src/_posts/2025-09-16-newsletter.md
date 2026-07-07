@@ -30,7 +30,7 @@ We promise to bring you worthwhile stories, as well as opportunities to contribu
 
 ## Programme Updates
 
-### 1. From Clunky to Connected: Enabling Easier Multi-Agency Information Sharing (MAIS)
+### From Clunky to Connected: Enabling Easier Multi-Agency Information Sharing (MAIS)
 
 ***Single View*** systems bring information from multiple agencies onto one screen, helping frontline workers see who already knows an individual in receipt of care and what support is in place. But they are hard to build, often involving the negotiation of data sharing agreements, building, and managing large datasets and expensive technology.
 
@@ -53,7 +53,7 @@ The outcome? Less time chasing data. More time with children. Earlier identifica
 **Useful links:** [More on MAIS](/standards_working_group_mais); [Person Data Standard Specification](https://github.com/SocialCareData/person-standard); [Data Exchange Standard](https://github.com/SocialCareData/data-exchange-standard).
 
 
-### 2. On Our Way to a Shared Standard for Children’s Care Placements
+### On Our Way to a Shared Standard for Children’s Care Placements
 
 Our **South West pilot** is underway, aiming for **placement sufficiency** so that every child has access to the right placement at the right time. To ensure the standard is both practical and widely supported, we’re combining Working Group discussions with focused Deep Dives – tackling complex design questions in detail.
 
@@ -71,7 +71,7 @@ Our goal is clear: to agree a minimum viable product (MVP) for the standard by N
 **Useful links:** [Placements Working Group Sessions](/updates?category=Placements); [Placements Specification](https://github.com/SocialCareData/placements-standard); [Issues Raised](https://github.com/SocialCareData/placements-standard/issues).
 
 
-### 3. Prioritising What Matters in Adult Social Care
+### Prioritising What Matters in Adult Social Care
 
 As DHSC integrates into the programme, we’re working with colleagues in Adult Social Care to identify the issues that matter most and where shared standards can deliver the biggest benefits.
 

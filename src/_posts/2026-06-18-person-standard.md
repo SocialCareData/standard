@@ -23,18 +23,6 @@ tags:
   - MAIS
 ---
 
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of Contents</h2>
-
-1. TOC
-{:toc}
-{::options toc_levels="2..3" /}
-
-</nav>
-
-<article class="numbered-headings">
-
-
 ## Introduction
 
 The Person Standard standardises the data collected about individuals in children's and adults' social care systems, focusing initially on the fields required to distinguish one person from another and to describe relationships between people. Its goal is to unblock the use of single-view systems as an aid to multi-agency information sharing (MAIS).
@@ -605,5 +593,3 @@ If you spot an issue with this standard, please <a href="https://github.com/Soci
 ## Versions
 
 {% include versions.html %}
-
-</article>

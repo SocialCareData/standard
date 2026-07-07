@@ -2,11 +2,24 @@
 layout: default
 ---
 
-<dl class="standard-version">{% if page.current %}
-    <dt>Latest</dt>
-    <df><a href="{{ page.current }}">{{ page.current }}</a></df>{% endif %}
-    <dt>Version</dt>
-    <df><time datetime="{{ page.date | date_to_xmlschema }}" class="version-tag">{{ page.date | date: "%-d %B %Y" }}</time></df>
-</dl>
+<nav class="toc numbered-toc">
 
-{{ content }}
+    <h2 id="table-of-contents">Table of Contents</h2>
+
+    {% toc %}
+
+</nav>
+
+<article class="numbered-headings">
+
+    <dl class="standard-version">{% if page.current %}
+        <dt>Latest</dt>
+        <df><a href="{{ page.current }}">{{ page.current }}</a></df>{% endif %}
+        <dt>Version</dt>
+        <df><time datetime="{{ page.date | date_to_xmlschema }}" class="version-tag">{{ page.date | date: "%-d %B %Y" }}</time></df>
+    </dl>
+
+    {{ content }}
+
+</article>
+

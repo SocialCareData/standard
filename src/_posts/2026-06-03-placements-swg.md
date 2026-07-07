@@ -9,17 +9,6 @@ breadcrumbs:
     url: /updates
 ---
 
-
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of Contents</h2>
-
-1. TOC
-{:toc}
-
-</nav>
-
-<article class="numbered-headings">
-
 Session Slides: [20260603-WorkingGroup_2.pptx](https://github.com/user-attachments/files/29643571/20260603-WorkingGroup_2.pptx)
 
 ## National Placement Standards Program Overview
@@ -71,6 +60,3 @@ Madeline outlined the next steps for the program, including the upcoming release
 - Madeline proposed establishing a community of practice to connect stakeholders working on data standards across the children's social care sector, aiming to share knowledge, map ongoing initiatives, and potentially inform the standards program pipeline.
 - The team is considering prioritizing new data standards, particularly around the fostering pipeline, to match demand and supply data. Input from the group will be sought, and working groups may be formed for specific topics.
 - Madeline noted that another strand of the program is focused on multi-agency information sharing and the development of a single unique identifier, with opportunities for interested participants to join related working groups.
-
-
-</article>

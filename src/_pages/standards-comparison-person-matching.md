@@ -1,4 +1,5 @@
 ---
+layout: publication
 title: "Standards comparison: person matching"
 tags:
   - Interoperability
