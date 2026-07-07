@@ -1,9 +1,13 @@
 ---
 layout: publication
 title: "Standards comparison: ways to find a record"
+breadcrumbs:
+  - title: Publications
+    url: /publications
 tags:
   - Interoperability
   - MAIS
+  - Publication
 ---
 
 <nav class="toc numbered-toc">
