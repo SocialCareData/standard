@@ -10,17 +10,6 @@ tags:
   - Publication
 ---
 
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of Contents</h2>
-
-1. TOC
-{:toc}
-
-</nav>
-
-<article class="numbered-headings">
-
-
 ## Summary
 
 A central pillar of our Data Standards for Social Care programme is our work on developing a common, interoperable means to identify and describe an individual that is a subject of care. The [Person specification](/publications_person_standard), was designed to represent the minimum information that should be recorded about a Person in a Care Management System (CMS) in order to enable their identification as part of multi-agency information sharing (MAIS).
@@ -38,6 +27,7 @@ This document compares our Person specification against the Hippo Digital's curr
 | GDS Person Domain logical model | [Person Domain, Logical Model V1](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42) |
 {:.table-bordered}
 
+
 ## Multi-agency information sharing (MAIS)
 
 Social workers rarely operate with complete information about an individual case. However, incomplete information is a leading cause of negative safeguarding and wellbeing outcomes, with asymmetries propagating into potentially severe worst-case scenarios.
@@ -45,6 +35,7 @@ Social workers rarely operate with complete information about an individual case
 MAIS is the category of processes designed to facilitate better information sharing between services for safeguarding. Say for example a child, in school, is referred by their teacher to social services on account of suspected physical harm, emotional harm, sexual abuse, or neglect. A safeguarding lead in the local authority’s Multi-agency safeguarding hub (MASH) team make enquiries (via section 17 or 47 of the Children Act) to different services – healthcare, police, and social services – in order to understand the background of the child and any significant factors that may require social care support, child protection plans, or emergency court orders.
 
 However, when enquiring to multiple agencies, there is a problem: each agency will have its own system, storing data about the child in different ways. At a local level, this can be manageable, but when enquiries reach regional or national scale (in more geographically mobile cases, which are common in social care), heterogeneity slows down searches for records and requires manual effort where there are no API endpoints for query.
+
 
 ## MAIS APIs via Hippo Digital’s GET, FIND, FETCH
 
@@ -62,6 +53,7 @@ APIs are being built as part of the larger MAIS programme within the Department 
 In the GET service, a user submits a query built from what is known about a person — names, address, and so on — to the NHS [Person Demographics Service (PDS)](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir), a FHIR API. The PDS matches against internal NHS data and responds with a FHIR Patient object containing the person's NHS number. Matching requires the query data to align with NHS records, whether via exact or fuzzy matching; we explore matching via FHIR [here](/standards_comparison_person_matching).
 
 FIND and FETCH would then use the returned NHS number, as a single unique identifier, to query health, police, and social care systems across the UK in order to identify where the subject person is already known.
+
 
 ## Comparing specifications
 
@@ -98,6 +90,7 @@ The table below compares our `Person` standard to the current GET API spec, the 
 | | **relatedPerson** <br><br> Cardinality: 0..* <br><br> Definition: References to other people related to this person, each qualified by one or more relationship codes. See `PersonRelationship` (an `Identifier` reference plus one or more relationship codes). | **contact** <br> (`relationship`; in response only) | **Person.link.target** `RelatedPerson` | | Captures family, foster, adoptive and other social connections needed for safeguarding and single-view assembly of a person's network. Relationship codes use the HL7 v3 `PersonalRelationshipRoleType` value set — the same set FHIR binds to on `Patient.contact.relationship`. Not a matching parameter itself. |
 | | **primaryContactProfessional** <br><br> Cardinality: 0..* <br><br> Definition: References to the primary professionals related to this person (e.g. care coordinators or a GP). | **general-practitioner** | **generalPractitioner** | | Identifies key professionals involved in the person's care. The GP case aligns with FHIR `generalPractitioner`; broader professional roles have no single FHIR field and are referenced by identifier. |
 {: .table-bordered}
+
 
 ## Appendix I – the Hippo GET an Identifier OpenAPI spec
 

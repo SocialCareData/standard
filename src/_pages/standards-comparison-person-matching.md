@@ -10,16 +10,6 @@ tags:
   - Publication
 ---
 
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of Contents</h2>
-
-1. TOC
-{:toc}
-
-</nav>
-
-<article class="numbered-headings">
-
 ## Introduction
 
 Matching, in this context, describes the technical details of a query operation in some database system containing person data (like a FHIR Master Patient Index) based on some set of (demographic and other) details about a person.
@@ -158,6 +148,7 @@ flowchart TD
 ```
 
 </div>
+
 
 ## Related documents
 - [Patient Matching](https://hl7.org/fhir/us/identity-matching/patient-matching.html) (Interoperable Digital Identity and Patient Matching, Identity-focused FHIR implementation guide, HL7)

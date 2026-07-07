@@ -10,17 +10,6 @@ tags:
   - Publication
 ---
 
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of Contents</h2>
-
-1. TOC
-{:toc}
-
-</nav>
-
-<article class="numbered-headings">
-
-
 ## Summary
 
 The aim of multi-agency information sharing (MAIS) is to provide more complete information about a person in care or a person being referred to services, for social workers to make faster, more well-evidenced decisions. Currently, MAIS processes involve safeguarding leads making enquiries to different services (healthcare, police, and social services) via telephone or email. At a local level, this can be manageable though inefficient, but when enquiries reach regional or national scale (in more geographically mobile cases, which are common in social care), manual enquiries slow down searches for records and risk blind spots where part of a person’s history are missed out, potentially with dire consequences.
@@ -40,9 +29,11 @@ It focuses on how FIND supports multi-agency information sharing (MAIS), what it
 | IHE XCA / XDS.b DocumentEntry | [IHE ITI TF Volume 3, ch-4.2](https://profiles.ihe.net/ITI/TF/Volume3/ch-4.2.html) |
 {:.table-bordered}
 
+
 ## Related work: Standard ways to describe a Person
 
 This document builds on earlier work that compares the Person data model with Hippo Digital's GET service: [Standard ways to describe a Person](/standards_comparison_ways_to_describe_a_person).
+
 
 ## How GET, FIND and FETCH work together
 
@@ -68,6 +59,7 @@ In this flow:
 
 The [Independent Review of Children's Social Care](https://www.gov.uk/government/publications/independent-review-of-childrens-social-care-final-report) (2022) highlighted that fragmented systems and manual enquiry processes can slow safeguarding decisions. The GET-FIND-FETCH sequence aims to reduce that friction, especially where cases cross local boundaries.
 
+
 ## In focus: FIND API
 
 Structurally, FIND has two endpoints and an asynchronous lifecycle:
@@ -88,6 +80,7 @@ searchResultItem:
 
 Conceptually, each item is a pointer to a record rather than the record content itself.
 
+
 ## Request fields
 
 {: style="text-align: center;"}
@@ -96,6 +89,7 @@ Conceptually, each item is a pointer to a record rather than the record content 
 | :--- | :--- |
 | **suid** <br><br> (NHS number) | The single unique identifier attached to the person being searched for, in other words their NHS number according to a previous GET request. |
 {:.table-bordered}
+
 
 ## Response fields
 
@@ -111,6 +105,7 @@ The FIND response is a set of search results (`searchResultItem` entries), compa
 | **custodianName** <br><br> Cardinality: 1..1 <br><br> Definition: Name of the organisation that holds the record. | **n/a** | **`custodian` -> `Organization.name`** | **`authorInstitution`** | Display-only field. |
 | **recordID** <br><br> Cardinality: 0..1 <br><br> Definition: Unique ID of the record within the holding system. | Partial overlap with **`Identifier.value`**. | **`identifier`** | **`uniqueId`** | FIND treats this as optional, making `recordURL` the only guaranteed reference. |
 {:.table-bordered}
+
 
 ## Appendix I - the Hippo FIND OpenAPI spec
 
@@ -391,10 +386,9 @@ components:
 
 </details>
 
+
 ## Feedback
 
 We welcome feedback on this comparison including comments on specific fields and notes in the specifications comparison table.
 
 Suggest alignment between the specifications or erratas by <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Issue+regarding:+Standard+ways+to+find+a+Person+record&category=Website+Content&page={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener noreferrer">creating a new issue on GitHub</a>.
-
-</article>
