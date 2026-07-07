@@ -1,4 +1,5 @@
 ---
+layout: publication
 current: /publications_placements_standard
 title: Children's Social Care Placements Standard
 description: The children's social care placements standard helps regions answer their sufficiency questions by establishing a common data model to gather data about placements.
@@ -9,19 +10,6 @@ tags:
   - Placements
   - Publication
 ---
-
-
-
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of Contents</h2>
-
-1. TOC
-{:toc}
-{::options toc_levels="2..3" /}
-
-</nav>
-
-<article class="numbered-headings">
 
 ## Introduction
 
@@ -520,5 +508,3 @@ If you spot an issue with this standard, please <a href="https://github.com/Soci
 ## Versions
 
 {% include versions.html %}
-
-</article>
