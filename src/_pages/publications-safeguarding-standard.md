@@ -68,7 +68,7 @@ An organisation involved in the safeguarding or wellbeing of a person — for ex
 : Unique identifiers associated with the organisation. Multi-valued (`1..*`). See [Person Standard → Identifier](/publications_person_standard#identifier).
 
 <span id="organisation-name">name</span>
-: The official name of the organisation. (`1..1`). _String_.
+: The official name of the organisation. Required (`1..1`). _String_.
 
 <span id="organisation-alias">alias</span>
 : Other names the organisation is known by. Multi-valued. Optional (`0..*`). _String_.
@@ -124,7 +124,7 @@ A service involved in the safeguarding or wellbeing of a person — the specific
 : Unique identifiers associated with the service. Multi-valued (`1..*`). See [PersonStandard → Identifier](/publications_person_standard#identifier).
 
 <span id="service-name">name</span>
-: The official name of the service. (`1..1`). _String_.
+: The official name of the service. Required (`1..1`). _String_.
 
 <span id="service-alias">alias</span>
 : Other names the service is known by. Multi-valued. Optional (`0..*`). _String_.
@@ -167,15 +167,15 @@ A service involved in the safeguarding or wellbeing of a person — the specific
 
 ### Professional
 
-An individual acting in a formal role within an organisation who has responsibilities relating to a person's safety, wellbeing, care or support — for example undertaking assessments, creating and monitoring plans, or sharing information in a multi-agency context. A professional's involvement may be ongoing or relate to a specific service episode, and multiple professionals from different agencies may work with one person at once. Corresponds to the [Professional Data Standard](https://github.com/SocialCareData/professional-standard).
+An individual acting in a formal role within an organisation who has responsibilities relating to a person's safety, wellbeing, care or support — for example undertaking assessments, creating and monitoring plans, or sharing information in a multi-agency context.
 
 #### Properties
 
 <span id="professional-identifier">identifier</span>
-: Unique identifiers associated with the professional (e.g. an NHS number or a Social Work England registration number). Multi-valued (`1..*`). See [Person Standard → Identifier](/publications_person_standard#identifier).
+: Unique identifiers associated with the professional. Multi-valued (`1..*`). See [Person Standard → Identifier](/publications_person_standard#identifier).
 
 <span id="professional-name">name</span>
-: The professional's name. (`1..1`). See [Person Standard → Name](/publications_person_standard#name).
+: The professional's name. Required (`1..1`). See [Person Standard → Name](/publications_person_standard#name).
 
 <span id="professional-role">role</span>
 : Text describing the professional's occupational role — for example their position in an organogram. Multi-valued (`1..*`). _String_.
@@ -184,7 +184,7 @@ An individual acting in a formal role within an organisation who has responsibil
 : The professional's current working status. Optional (`0..1`). _Boolean_.
 
 <span id="professional-contact">contact</span>
-: The professional's contact information. (`1..1`). See [Person Standard → Contact](/publications_person_standard#contact).
+: The professional's contact information. Required (`1..1`). See [Person Standard → Contact](/publications_person_standard#contact).
 
 <span id="professional-relatedService">relatedService</span>
 : References to `Service`s the professional is related to. Multi-valued. Optional (`0..*`). See [Service](#service). Each reference is by [Person Standard → Identifier](/publications_person_standard#identifier).
@@ -199,12 +199,12 @@ An individual acting in a formal role within an organisation who has responsibil
 {% highlight json %}
 {
   "@type": "Professional",
-  "identifier": [ { "@type": "Identifier", "value": "SW1234567", "system": "https://www.socialworkengland.org.uk/Id/registration" } ],
+  "identifier": [ { "@type": "Identifier", "value": "SW1234567", "system": "https://example.org/Id/registration" } ],
   "name": { "see Person Standard Name" },
   "role": ["Social Worker", "Team Lead - Referral & Assessment"],
   "status": true,
   "contact": { "see Person Standard Contact" },
-  "relatedService": [ { "ref": { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } } ]
+  "relatedService": [ { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } ]
 }
 {% endhighlight %}
 </div>
@@ -212,7 +212,11 @@ An individual acting in a formal role within an organisation who has responsibil
 
 ### ServiceEpisode
 
-A bounded period during which an individual receives a defined service, intervention, or package of support from a service or professional. A service episode represents a structured engagement rather than a single interaction, and may encompass multiple contacts, assessments and reviews. A person may have simultaneous or sequential episodes across different providers; changes in their number, intensity, duration or overlap may signal shifts in a person's circumstances, and patterns over time reveal their care trajectory and system involvement. Corresponds to the [Service Episode Data Standard](https://github.com/SocialCareData/service-episode-standard).
+A service episode is a bounded period during which an individual receives a defined service, intervention, or package of support from a service or professional. It has a recognisable start and end point, though duration may vary from a single contact to sustained involvement over time.
+
+A service episode represents structured engagement rather than a single interaction, and may include multiple contacts, assessments, reviews, or actions within its timeframe. Individuals may experience multiple concurrent or sequential service episodes across different services or organisations.
+
+While a single service episode may reflect routine support, changes in the number, intensity, duration, or overlap of service episodes may indicate shifts in need, complexity, risk, or stability. Patterns of service episodes over time contribute to understanding an individual’s care trajectory and system involvement.
 
 #### Properties
 
@@ -249,9 +253,17 @@ A bounded period during which an individual receives a defined service, interven
   "@type": "ServiceEpisode",
   "identifier": [ { "@type": "Identifier", "value": "EP-2026-0001", "system": "https://example.org/Id/episode" } ],
   "type": ["cin-plan"],
-  "subjectPerson": [ { "see SubjectPerson example" } ],
-  "relatedProfessional": [ { "see RelatedProfessional example" } ],
-  "relatedService": [ { "ref": { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } } ],
+  "subjectPerson": [ {
+    "@type": "SubjectPerson",
+    "person": { "@type": "Identifier", "value": "9434765919", "system": "https://fhir.nhs.uk/Id/nhs-number" },
+    "involvement": "SBJ"
+  } ],
+  "relatedProfessional": [ {
+    "@type": "RelatedProfessional",
+    "professional": { "@type": "Identifier", "value": "SW1234567", "system": "https://example.org/Id/registration" },
+    "involvement": "PPRF"
+  } ],
+  "relatedService": [ { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } ],
   "timeInformation": [ { "see TimeInformation example" } ],
   "location": ["Anytown Family Centre"],
   "finding": [ { "see Finding example" } ]
@@ -262,7 +274,9 @@ A bounded period during which an individual receives a defined service, interven
 
 ### LifeEvent
 
-A significant, time-bound occurrence in an individual's life that may have implications for their safety, wellbeing or development — for example attendance at A&E, a child being reported as missing, or an exclusion from school. Life events are not inherently positive or negative, but can indicate to safeguarding and wellbeing professionals levels of risk, vulnerability, need or changes in support requirements. Professionals typically weigh the **recency**, **frequency**, **gravity** and **context** of a life event alongside other factors. Corresponds to the [Life Event Data Standard](https://github.com/SocialCareData/life-event-standard).
+A life event is a significant, time-bound occurence in an individual's life that may have implications for their safety, wellbeing or development. They are not inherently positive or negative, but can indicate to safeguarding and wellbeing professionals levels of risk, vulnerability, need or changes in support requirements. Examples of life events in this space could include attendance at A+E, a child being reported as missing or an exclusion from school.
+
+Safeguarding professionals will be interested in the recency of events (when the event most recently happened), frequency (how frequently that incident is occurring), gravity (how serious the incident is when it occurs) and how the event combines with other events and factors in the individual's life to ascertain the support needs.
 
 #### Properties
 
@@ -273,10 +287,10 @@ A significant, time-bound occurrence in an individual's life that may have impli
 : Code for the type of the life event (e.g. birth, death, missing episode). Multi-valued (`1..*`). See the [Event Code Vocabulary](#event-code-vocabulary).
 
 <span id="event-subjectPerson">subjectPerson</span>
-: References to the `Person`(s) the life event concerns, each qualified by the nature of their involvement. Multi-valued (`1..*`). See [SubjectPerson](#subjectperson).
+: References to the `Person`(s) the life event concerns. Multi-valued (`1..*`). See [SubjectPerson](#subjectperson).
 
 <span id="event-relatedProfessional">relatedProfessional</span>
-: References to the `Professional`(s) involved in the life event, each qualified by the nature of their involvement. Multi-valued. Optional (`0..*`). See [RelatedProfessional](#relatedprofessional).
+: References to the `Professional`(s) involved in the life event. Multi-valued. Optional (`0..*`). See [RelatedProfessional](#relatedprofessional).
 
 <span id="event-relatedService">relatedService</span>
 : References to the `Service`(s) involved in the life event. Multi-valued. Optional (`0..*`). See [Service](#service). Each reference is by [Person Standard → Identifier](/publications_person_standard#identifier).
@@ -296,10 +310,21 @@ A significant, time-bound occurrence in an individual's life that may have impli
   "@type": "LifeEvent",
   "identifier": [ { "@type": "Identifier", "value": "LE-2026-0007", "system": "https://example.org/Id/life-event" } ],
   "type": ["missing-person"],
-  "subjectPerson": [ { "see SubjectPerson example" } ],
-  "relatedProfessional": [ { "see RelatedProfessional example" } ],
-  "relatedService": [ { "ref": { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } } ],
-  "timeInformation": [ { "see TimeInformation example" } ],
+  "subjectPerson": [ {
+    "@type": "SubjectPerson",
+    "person": { "@type": "Identifier", "value": "9434765919", "system": "https://fhir.nhs.uk/Id/nhs-number" },
+    "involvement": "SBJ"
+  } ],
+  "relatedProfessional": [ {
+    "@type": "RelatedProfessional",
+    "professional": { "@type": "Identifier", "value": "SW1234567", "system": "https://example.org/Id/registration" },
+    "involvement": "PPRF"
+  } ],
+  "relatedService": [ { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } ],
+  "timeInformation": [ {
+    "@type": "TimeInformation",
+    "startDateTime": "2026-05-01T09:30:00Z"
+  } ],
   "location": ["Anytown town centre"]
 }
 {% endhighlight %}
@@ -308,15 +333,15 @@ A significant, time-bound occurrence in an individual's life that may have impli
 
 ### SubjectPerson
 
-A typed reference to a `Person` involved in a service episode or life event. The reference is by [Person Standard → Identifier](/publications_person_standard#identifier) (so the person may live in a different system) and is qualified by the nature of their involvement.
+A typed reference to a `Person` involved in a service episode or life event.
 
 #### Properties
 
 <span id="subjectperson-person">person</span>
-: A reference to a `Person` record involved in the episode or life event, by [Person Standard → Identifier](/publications_person_standard#identifier). (`1..1`).
+: A reference to a `Person` record involved in the episode or life event, by [Person Standard → Identifier](/publications_person_standard#identifier). Required (`1..1`).
 
 <span id="subjectperson-involvement">involvement</span>
-: Code for the nature of the person's involvement. (`1..1`). See the [Involvement Code Vocabulary](#involvement-code-vocabulary).
+: Code for the nature of the person's involvement. Required (`1..1`). See the [Involvement Code Vocabulary](#involvement-code-vocabulary).
 
 #### Example
 
@@ -334,15 +359,15 @@ A typed reference to a `Person` involved in a service episode or life event. The
 
 ### RelatedProfessional
 
-A typed reference to a `Professional` involved in a service episode or life event. The reference is by [Person Standard → Identifier](/publications_person_standard#identifier) and is qualified by the nature of their involvement.
+A typed reference to a `Professional` involved in a service episode or life event.
 
 #### Properties
 
 <span id="relatedprofessional-professional">professional</span>
-: A reference to a `Professional` record involved in the episode or life event, by [Person Standard → Identifier](/publications_person_standard#identifier). (`1..1`).
+: A reference to a `Professional` record involved in the episode or life event, by [Person Standard → Identifier](/publications_person_standard#identifier). Required (`1..1`).
 
 <span id="relatedprofessional-involvement">involvement</span>
-: Code for the nature of the professional's involvement. (`1..1`). See the [Involvement Code Vocabulary](#involvement-code-vocabulary).
+: Code for the nature of the professional's involvement. Required (`1..1`). See the [Involvement Code Vocabulary](#involvement-code-vocabulary).
 
 #### Example
 
@@ -351,7 +376,7 @@ A typed reference to a `Professional` involved in a service episode or life even
 {% highlight json %}
 {
   "@type": "RelatedProfessional",
-  "professional": { "@type": "Identifier", "value": "SW1234567", "system": "https://www.socialworkengland.org.uk/Id/registration" },
+  "professional": { "@type": "Identifier", "value": "SW1234567", "system": "https://example.org/Id/registration" },
   "involvement": "PPRF"
 }
 {% endhighlight %}
@@ -365,7 +390,7 @@ Details about the timing of a service episode or life event, including when it s
 #### Properties
 
 <span id="timeinformation-startDateTime">startDateTime</span>
-: The start of the episode or life event, as an ISO 8601 date-time. (`1..1`). _DateTime_.
+: The start of the episode or life event, as an ISO 8601 date-time. Required (`1..1`). _DateTime_.
 
 <span id="timeinformation-endDateTime">endDateTime</span>
 : The end of the episode or life event, as an ISO 8601 date-time. Optional (`0..1`). _DateTime_.
@@ -382,7 +407,7 @@ Details about the timing of a service episode or life event, including when it s
   "@type": "TimeInformation",
   "startDateTime": "2026-05-01T09:30:00Z",
   "endDateTime": "2026-05-01T11:00:00Z",
-  "frequency": { "system": "http://snomed.info/sct", "code": "<SNOMED CT concept, descendant of 272123002>", "display": "Weekly" }
+  "frequency": "snomed:225761000"
 }
 {% endhighlight %}
 </div>
@@ -410,8 +435,18 @@ An observation or measurement made during the course of a service episode about 
 {% highlight json %}
 {
   "@type": "Finding",
-  "observation": [ { "see Observation example" } ],
-  "measurement": [ { "see Measurement example" } ],
+  "observation": [ {
+    "@type": "Observation",
+    "type": "NEET",
+    "startDate": "2026-03-15T13:02:00",
+    "endDate": "2026-06-30T10:20:00"
+  } ],
+  "measurement": [ {
+    "@type": "Measurement",
+    "value": 12,
+    "unit": "count",
+    "type": "Authorised Absences"
+  } ],
   "text": ["Home environment observed to be stable and supportive."]
 }
 {% endhighlight %}
@@ -425,10 +460,10 @@ A qualitative observation that represents an attribute of the subject or their c
 #### Properties
 
 <span id="observation-type">type</span>
-: The type of observation. (`1..1`). See the [Observation Type Vocabulary](#observation-type-vocabulary).
+: The type of observation. Required (`1..1`). See the [Observation Type Vocabulary](#observation-type-vocabulary).
 
 <span id="observation-startDate">startDate</span>
-: The date at which this observation was first true (e.g. the estimated date the subject became NEET), as an ISO 8601 date-time. (`1..1`). _DateTime_.
+: The date at which this observation was first true (e.g. the estimated date the subject became NEET), as an ISO 8601 date-time. Required (`1..1`). _DateTime_.
 
 <span id="observation-endDate">endDate</span>
 : The date at which this observation was made false (e.g. the estimated date the subject stopped being NEET). Present only if the observation is now outdated. Optional (`0..1`). _DateTime_.
@@ -441,8 +476,8 @@ A qualitative observation that represents an attribute of the subject or their c
 {
   "@type": "Observation",
   "type": "NEET",
-  "startDate": "2026-03-15",
-  "endDate": "2026-06-30"
+  "startDate": "2026-03-15T13:02:00",
+  "endDate": "2026-06-30T10:20:00"
 }
 {% endhighlight %}
 </div>
@@ -455,13 +490,13 @@ A quantitative measurement of something related to the subject or their circumst
 #### Properties
 
 <span id="measurement-value">value</span>
-: A decimal number representing the value of the measurement (e.g. `25`, `0.67`, `806.75`). (`1..1`). _Float_.
+: A decimal number representing the value of the measurement (e.g. `25`, `0.67`, `806.75`). Required (`1..1`). _Float_.
 
 <span id="measurement-unit">unit</span>
-: The unit of measurement (e.g. `cm`, `%`, `count`). (`1..1`). See the [Measurement Unit Vocabulary](#measurement-unit-vocabulary).
+: The unit of measurement. Required (`1..1`). See the [Measurement Unit Vocabulary](#measurement-unit-vocabulary).
 
 <span id="measurement-type">type</span>
-: The type of measurement. (`1..1`). See the [Measurement Type Vocabulary](#measurement-type-vocabulary).
+: The type of measurement. Required (`1..1`). See the [Measurement Type Vocabulary](#measurement-type-vocabulary).
 
 #### Example
 
@@ -627,14 +662,14 @@ This standard does **not** define its own involvement codes. Instead, use a code
 
 Used by [`TimeInformation.frequency`](#timeinformation-frequency) to record the frequency of an episode or life event, including whether it is spontaneous.
 
-This standard does **not** define its own frequency codes. Instead, use a SNOMED CT concept that is a descendant of [Frequencies (272123002)](https://snomedbrowser.org/?perspective=full&conceptId1=272123002&edition=MAIN/2026-07-01&release=&languages=en), taking the numeric SNOMED CT concept identifier as the `code` value. Look concepts up in the [SNOMED CT browser](https://snomedbrowser.org/?perspective=full&conceptId1=272123002&edition=MAIN/2026-07-01&release=&languages=en); some illustrative concepts from that hierarchy are shown below.
+This standard does **not** define its own frequency codes. Instead, use a SNOMED CT concept that is a descendant of [Frequencies (272123002)](https://snomedbrowser.org/?perspective=full&conceptId1=272123002&edition=MAIN/2026-07-01&release=&languages=en), taking the numeric SNOMED CT concept identifier as the `code` value with the `snomed` prefix. Look concepts up in the [SNOMED CT browser](https://snomedbrowser.org/?perspective=full&conceptId1=272123002&edition=MAIN/2026-07-01&release=&languages=en); some illustrative concepts from that hierarchy are shown below.
 
 | Code | Display |
 | :--- | :--- |
-| 229797004 | Once daily |
-| 14497002 | Weekly |
-| 255238004 | Continuous |
-| 225761000 | As required |
+| snomed:229797004 | Once daily |
+| snomed:14497002 | Weekly |
+| snomed:255238004 | Continuous |
+| snomed:225761000 | As required |
 {:.table-bordered}
 
 ### Observation Type Vocabulary
