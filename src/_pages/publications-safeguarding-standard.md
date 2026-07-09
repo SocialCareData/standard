@@ -76,8 +76,8 @@ An organisation involved in the safeguarding or wellbeing of a person — for ex
 <span id="organisation-type">type</span>
 : Code for the kind of organisation. Multi-valued (`1..*`). See the [Organisation Code Vocabulary](#organisation-code-vocabulary).
 
-<span id="organisation-status">status</span>
-: Code for the organisation's status. Optional (`0..1`). See the [Organisation Status Code Vocabulary](#organisation-status-code-vocabulary).
+<span id="organisation-status">active</span>
+: Code for the organisation's status. Optional (`0..1`). _Boolean_.
 
 <span id="organisation-address">address</span>
 : Physical location(s) of the organisation. Multi-valued. Optional (`0..*`). See [Person Standard → Address](/publications_person_standard#address).
@@ -104,7 +104,7 @@ An organisation involved in the safeguarding or wellbeing of a person — for ex
   "name": "Anytown Metropolitan Borough Council",
   "alias": ["Anytown Council"],
   "type": ["local-authority"],
-  "status": "active",
+  "active": true,
   "address": [ { "see Person Standard Address" } ],
   "contact": [ { "see Person Standard Contact" } ],
   "relatedProfessional": [ { "@type": "Identifier", "value": "PRF-001", "system": "https://example.org/Id/professional" } ]
@@ -132,8 +132,8 @@ A service involved in the safeguarding or wellbeing of a person — the specific
 <span id="service-type">type</span>
 : Code for the kind of service. Multi-valued (`1..*`). See the [Service Code Vocabulary](#service-code-vocabulary).
 
-<span id="service-status">status</span>
-: Code for the service's status. Optional (`0..1`). See the [Active Code Vocabulary](#active-code-vocabulary).
+<span id="service-status">active</span>
+: Code for the service's status. Optional (`0..1`). _Boolean_.
 
 <span id="service-address">address</span>
 : Physical location(s) of the service. Multi-valued. Optional (`0..*`). See [Person Standard → Address](/publications_person_standard#address).
@@ -157,7 +157,7 @@ A service involved in the safeguarding or wellbeing of a person — the specific
   "identifier": [ { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } ],
   "name": "Children's Social Care - Referral & Assessment",
   "type": ["social-worker-support"],
-  "status": "active",
+  "active": true,
   "contact": [ { "see Person Standard Contact" } ],
   "relatedOrganisation": [ { "@type": "Identifier", "value": "12345678", "system": "https://example.org/Id/example-organisation" } ]
 }
@@ -542,9 +542,6 @@ Used by [`Organisation.type`](#organisation-type). Codes to indicate the type of
 
 </details>
 
-### Organisation Status Code Vocabulary
-
-Used by [`Organisation.status`](#organisation-status). Codes for the status of an organisation. _Vocabulary to be published._
 
 ### Service Code Vocabulary
 
@@ -593,9 +590,6 @@ Used by [`Service.type`](#service-type). Codes to indicate the type of service.
 
 </details>
 
-### Active Code Vocabulary
-
-Used by [`Service.status`](#service-status). Codes for the active status of a service. _Vocabulary to be published._
 
 ### Episode Code Vocabulary
 
@@ -781,10 +775,9 @@ Used by [`Measurement.type`](#measurement-type). Codes to indicate the type of m
 
 | Code | Description |
 | :--- | :--- |
-| `Attendance` | _Definition to be confirmed._ |
-| `Authorised Absences` | _Definition to be confirmed._ |
-| `School average attendance` | _Definition to be confirmed._ |
-| `Unauthorised Absences` | _Definition to be confirmed._ |
+| `Attendance` | Pupil attendance % at school |
+| `Authorised Absences` | Pupil % absences from school that are authorised |
+| `Unauthorised Absences` | Pupil % absences from school that are unauthorised |
 | `caring-hours-per-week` | Total hours spent caring per week |
 {:.table-bordered}
 
