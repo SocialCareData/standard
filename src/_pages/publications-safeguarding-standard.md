@@ -382,7 +382,7 @@ Details about the timing of a service episode or life event, including when it s
   "@type": "TimeInformation",
   "startDateTime": "2026-05-01T09:30:00Z",
   "endDateTime": "2026-05-01T11:00:00Z",
-  "frequency": "260007"
+  "frequency": { "system": "http://snomed.info/sct", "code": "<SNOMED CT concept, descendant of 272123002>", "display": "Weekly" }
 }
 {% endhighlight %}
 </div>
@@ -609,11 +609,33 @@ Used by [`LifeEvent.type`](#event-type). Codes to indicate the type of life even
 
 ### Involvement Code Vocabulary
 
-Used by [`SubjectPerson.involvement`](#subjectperson-involvement) and [`RelatedProfessional.involvement`](#relatedprofessional-involvement). Codes for the nature of a person's or professional's involvement. Aligned with the HL7 [`ParticipationType`](https://terminology.hl7.org/5.2.0/CodeSystem-v3-ParticipationType.html) code system.
+Used by [`SubjectPerson.involvement`](#subjectperson-involvement) and [`RelatedProfessional.involvement`](#relatedprofessional-involvement) to record the nature of a person's or professional's involvement.
+
+This standard does **not** define its own involvement codes. Instead, use a code from the HL7 v3 [`ParticipationType`](https://terminology.hl7.org/5.2.0/CodeSystem-v3-ParticipationType.html) code system directly, taking the `code` value from that system. The full list of codes and their definitions is maintained by HL7 at the link above; a few illustrative examples are shown below.
+
+| Code | Display |
+| :--- | :--- |
+| `SBJ` | Subject |
+| `PPRF` | Primary performer |
+| `WIT` | Witness |
+| `RESP` | Responsible party |
+| `AUT` | Author (originator) |
+| `INF` | Informant |
+{:.table-bordered}
 
 ### Frequency Code Vocabulary
 
-Used by [`TimeInformation.frequency`](#timeinformation-frequency). Codes for the frequency of an episode or life event, including whether it is spontaneous. Aligned with [SNOMED CT frequencies](https://browser.ihtsdotools.org/?perspective=full&conceptId1=272123002&edition=MAIN&languages=en).
+Used by [`TimeInformation.frequency`](#timeinformation-frequency) to record the frequency of an episode or life event, including whether it is spontaneous.
+
+This standard does **not** define its own frequency codes. Instead, use a SNOMED CT concept that is a descendant of [Frequencies (272123002)](https://snomedbrowser.org/?perspective=full&conceptId1=272123002&edition=MAIN/2026-07-01&release=&languages=en), taking the numeric SNOMED CT concept identifier as the `code` value. Look concepts up in the [SNOMED CT browser](https://snomedbrowser.org/?perspective=full&conceptId1=272123002&edition=MAIN/2026-07-01&release=&languages=en); some illustrative concepts from that hierarchy are shown below.
+
+| Code | Display |
+| :--- | :--- |
+| 229797004 | Once daily |
+| 14497002 | Weekly |
+| 255238004 | Continuous |
+| 225761000 | As required |
+{:.table-bordered}
 
 ### Observation Type Vocabulary
 
