@@ -581,7 +581,6 @@ The Person Standard is a reduced subset of the FHIR `Patient` resource, extended
 
 ### See also
 
-- [Standard ways to describe a Person](/standards_comparison_ways_to_describe_a_person) — comparison of this standard with the Hippo GET API, NHS PDS, and the FHIR Patient resource.
 - [Person matching implementation](/standards_comparison_person_matching) — how `matchedPersonRef` is established via the FHIR `$match` operation.
 
 
