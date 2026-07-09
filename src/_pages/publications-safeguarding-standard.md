@@ -107,8 +107,8 @@ An organisation involved in the safeguarding or wellbeing of a person — for ex
   "status": "active",
   "address": [ { "see Person Standard Address" } ],
   "contact": [ { "see Person Standard Contact" } ],
-  "relatedProfessional": [ { "ref": { "@type": "Identifier", "value": "PRF-001", "system": "https://example.org/Id/professional" } } ]
-  "relatedService": [ { "ref": { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } } ]
+  "relatedProfessional": [ { "@type": "Identifier", "value": "PRF-001", "system": "https://example.org/Id/professional" } ]
+  "relatedService": [ { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } ]
 }
 {% endhighlight %}
 </div>
@@ -116,7 +116,7 @@ An organisation involved in the safeguarding or wellbeing of a person — for ex
 
 ### Service
 
-A service involved in the safeguarding or wellbeing of a person — the specific intervention or package of support delivered by one or more organisations, such as local authority social care, an emergency department, a general practice, or a school. Corresponds to the [Service Data Standard](https://github.com/SocialCareData/service-episode-standard).
+A service involved in the safeguarding or wellbeing of a person — the specific intervention or package of support delivered by one or more organisations, such as local authority social care, an emergency department, a general practice, or a school.
 
 #### Properties
 
@@ -156,10 +156,10 @@ A service involved in the safeguarding or wellbeing of a person — the specific
   "@type": "Service",
   "identifier": [ { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } ],
   "name": "Children's Social Care - Referral & Assessment",
-  "type": ["childrens-social-care"],
+  "type": ["social-worker-support"],
   "status": "active",
   "contact": [ { "see Person Standard Contact" } ],
-  "relatedOrganisation": [ { "ref": { "@type": "Identifier", "value": "12345678", "system": "https://identifiers.company-information.service.gov.uk/company-number" } } ]
+  "relatedOrganisation": [ { "@type": "Identifier", "value": "12345678", "system": "https://example.org/Id/example-organisation" } ]
 }
 {% endhighlight %}
 </div>
