@@ -7,6 +7,7 @@ breadcrumbs:
 tags:
   - Interoperability
   - MAIS
+  - Publication
 ---
 
 ## Summary
