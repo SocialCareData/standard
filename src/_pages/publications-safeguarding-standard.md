@@ -248,7 +248,7 @@ A bounded period during which an individual receives a defined service, interven
 {
   "@type": "ServiceEpisode",
   "identifier": [ { "@type": "Identifier", "value": "EP-2026-0001", "system": "https://example.org/Id/episode" } ],
-  "type": ["child-in-need"],
+  "type": ["cin-plan"],
   "subjectPerson": [ { "see SubjectPerson example" } ],
   "relatedProfessional": [ { "see RelatedProfessional example" } ],
   "relatedService": [ { "ref": { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } } ],
@@ -295,7 +295,7 @@ A significant, time-bound occurrence in an individual's life that may have impli
 {
   "@type": "LifeEvent",
   "identifier": [ { "@type": "Identifier", "value": "LE-2026-0007", "system": "https://example.org/Id/life-event" } ],
-  "type": ["missing-episode"],
+  "type": ["missing-person"],
   "subjectPerson": [ { "see SubjectPerson example" } ],
   "relatedProfessional": [ { "see RelatedProfessional example" } ],
   "relatedService": [ { "ref": { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } } ],
@@ -472,7 +472,7 @@ A quantitative measurement of something related to the subject or their circumst
   "@type": "Measurement",
   "value": 12,
   "unit": "count",
-  "type": "authorised-absences"
+  "type": "Authorised Absences"
 }
 {% endhighlight %}
 </div>
@@ -493,7 +493,19 @@ Coded fields draw their values from the controlled vocabularies below. Each code
 
 ### Organisation Code Vocabulary
 
-Used by [`Organisation.type`](#organisation-type). Codes for the kind of organisation. _Vocabulary to be published._
+Used by [`Organisation.type`](#organisation-type). Codes to indicate the type of organisation.
+
+<details>
+<summary markdown="span">See vocabulary</summary>
+
+| Code | Description |
+| :--- | :--- |
+| `local-authority` | Local Authority |
+| `nhs-trust` | NHS Trust |
+| `police-force` | Police Force |
+{:.table-bordered}
+
+</details>
 
 ### Organisation Status Code Vocabulary
 
@@ -501,7 +513,50 @@ Used by [`Organisation.status`](#organisation-status). Codes for the status of a
 
 ### Service Code Vocabulary
 
-Used by [`Service.type`](#service-type). Codes for the kind of service. _Vocabulary to be published._
+Used by [`Service.type`](#service-type). Codes to indicate the type of service.
+
+<details>
+<summary markdown="span">See vocabulary</summary>
+
+| Code | Description |
+| :--- | :--- |
+| `youth-offending` | Youth Offending Team |
+| `primary-school` | Primary School |
+| `high-school` | Secondary or High School |
+| `SEN-primary-school` | Primary School with specialist SEN services |
+| `SEN-high-school` | Secondary or High School with specialist SEN services |
+| `alternative-provision-school` | Alternative provision school |
+| `social-care` | Social Care Department |
+| `family-court` | Family Court |
+| `CAMHS` | Children and Adolescent mental health services |
+| `reablement` | Reablement |
+| `short-term-nursing-care` | Short term nursing care |
+| `short-term-residential-care` | Short term residential care |
+| `long-term-nursing-care` | Long term nursing care |
+| `long-term-residential-care` | Long term residential care |
+| `home-support-domiciliary` | Home support or domiciliary care |
+| `day-support` | Day support |
+| `meals` | Meals |
+| `transport` | Transport |
+| `equipment` | Equipment |
+| `direct-payment` | Direct payment |
+| `shared-lives` | Shared Lives |
+| `community-supported-living` | Community supported living |
+| `extra-care-housing` | Extra care housing |
+| `social-worker-support` | Professional support: Social worker |
+| `other-professional-support` | Professional support: Other |
+| `learning-education-employment` | Learning, education or employment support |
+| `end-of-life-care` | End of life care |
+| `emergency-support` | Emergency support |
+| `other-short-term-support` | Other short term support |
+| `other-long-term-support` | Other long term support |
+| `carer-respite` | Unpaid carer respite |
+| `carer-sitting-service` | Unpaid carer sitting service |
+| `carer-universal-services` | Unpaid carer universal services |
+| `other-carer-support` | Other unpaid carer support |
+{:.table-bordered}
+
+</details>
 
 ### Active Code Vocabulary
 
@@ -509,11 +564,48 @@ Used by [`Service.status`](#service-status). Codes for the active status of a se
 
 ### Episode Code Vocabulary
 
-Used by [`ServiceEpisode.type`](#episode-type). Codes for the type of service episode. _Vocabulary to be published._
+Used by [`ServiceEpisode.type`](#episode-type). Codes to indicate the type of service episode.
+
+<details>
+<summary markdown="span">See vocabulary</summary>
+
+| Code | Description |
+| :--- | :--- |
+| `early-help` | Early Help Assessment / Intervention |
+| `ehcp` | Education, Health, and Care plan |
+| `family-court-order` | Any order made by family court |
+| `cin-plan` | Child in Need (CIN) Plan |
+| `cp-plan` | Child Protection (CP) Plan |
+| `CAMHS-plan` | Children and Adolescent mental health services care plan |
+| `section-47` | Section 47 Enquiry |
+| `care-leaver` | Care Leaver Support |
+| `child-looked-after` | Child in LA care |
+| `adult-safeguarding` | Adult Safeguarding Enquiry (Section 42) |
+{:.table-bordered}
+
+</details>
 
 ### Event Code Vocabulary
 
-Used by [`LifeEvent.type`](#event-type). Codes for the type of life event. _Vocabulary to be published._
+Used by [`LifeEvent.type`](#event-type). Codes to indicate the type of life event.
+
+<details>
+<summary markdown="span">See vocabulary</summary>
+
+| Code | Description |
+| :--- | :--- |
+| `birth` | Birth |
+| `death` | Death |
+| `ae-attendance` | A&E Attendance |
+| `school-exclusion` | School Exclusion |
+| `school-suspension` | School Suspension |
+| `missing-person` | Reported Missing |
+| `safeguarding-concern` | Safeguarding Concern Raised |
+| `referral` | Referral made to relevant authority |
+| `homeless` | Made homeless |
+{:.table-bordered}
+
+</details>
 
 ### Involvement Code Vocabulary
 
@@ -525,34 +617,141 @@ Used by [`TimeInformation.frequency`](#timeinformation-frequency). Codes for the
 
 ### Observation Type Vocabulary
 
-Used by [`Observation.type`](#observation-type). Codes for the type of observation. _Vocabulary to be published._
+Used by [`Observation.type`](#observation-type). Codes to indicate the type of qualitative observation.
+
+<details>
+<summary markdown="span">See vocabulary</summary>
+
+| Code | Description |
+| :--- | :--- |
+| **`SEND`** | Observed special educational needs and disabilities, via DfE codes |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.SpLD` | Specific learning Difficulty: difficulty that affect one or more specific aspects of learning. This encompasses a range of conditions including dyslexia, dyscalculia, dysgraphia, dyspraxia etc. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.MLD` | Moderate Learning Difficulty: well below expected levels of attainment in all or most areas of the curriculum, despite appropriate interventions. They will have much greater difficulty than their peers in acquiring basic literacy and numeracy skills and in understanding concepts. They may also have associated speech and language delay, low self-esteem, low levels of concentration and underdeveloped social skills. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.SLD` | Severe Learning Difficulty: significant intellectual or cognitive impairments and are likely to need support in all areas of the curriculum. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.PMLD` | Profound and Multiple Learning Difficulty: have severe and complex learning difficulties as well as a physical disability or sensory impairment. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.SLCN` | Speech, Language and Communication Needs: difficulty in communicating with others such as difficulty saying what they want to, understanding what is being said to them, difficulties understanding and applying social rules. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.ASC` | Autistic Spectrum Condition: including Asperger's Syndrome and Autism with associated difficulties such as difficulties with language, communication, imagination and social interactions. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.SEMH` | Social, Emotional and Mental Health difficulties: These may include becoming withdrawn or isolated, as well as displaying challenging, disruptive or disturbing behaviour. These behaviours may reflect underlying mental health difficulties such as anxiety or depression, self-harming, substance misuse, eating disorders or physical symptoms that are medically unexplained. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.VI` | Visual Impairment: Partial or complete loss of sight not correctable by usual means (e.g. prescribed glasses or contact lens). |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.HI` | Hearing Impairment: With a degree of hearing loss. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.MSI` | Multi Sensory Impairment: combined vision and hearing impairments. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.PD` | Physical Disability: limitation on a person's physical functioning, mobility, dexterity or stamina. |
+| **`EAL`** | English as an additional language |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `EAL.<ISO 639-1 code>` | Two-letter code for observed first language, using [ISO 639-1](https://www.iso.org/iso-639-language-code) |
+| **`free-school-meals`** | Recipient of free school meals (FSM) |
+| **`NEET`** | Not in Education, Employment, or Training |
+| **`non-accidental-injury`** | Observed non-accidental injury |
+| **`persistent-school-absences`** | Reported persistent absences from school |
+| **`pupil-premium`** | Eligible for Pupil Premium |
+| **`religion`** | Religious affiliation |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `religion.<HL7 code>` | Numeric code for [religious affiliations](https://terminology.hl7.org/7.2.0/en/CodeSystem-v3-ReligiousAffiliation.html) |
+| **`temp-accomodation`** | Living in temporary accomodation |
+| **`accommodation-status`** | Housing and living arrangements of the individual |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.owner-occupier` | Owner occupier or shared ownership scheme |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.tenant-social` | Tenant: Local authority or other social housing provider |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.tenant-private` | Tenant: Private landlord |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.settled-mainstream-family` | Settled mainstream housing with family or friends |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.supported-accommodation` | Supported accommodation, supported lodgings or supported group home |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.shared-lives` | Shared Lives scheme |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.approved-premises` | Approved premises for offenders released from prison or under probation supervision |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.sheltered-housing` | Sheltered housing, extra care housing or other sheltered housing |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.mobile-accommodation` | Mobile accommodation for Gypsy, Roma and Traveller communities |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.rough-sleeping` | Rough sleeper or squatting |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.night-shelter` | Night shelter, emergency hostel or direct access hostel |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.refuge` | Refuge |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.temp-accommodation-council` | Placed in temporary accommodation by the council (inc. homelessness resettlement) |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.staying-family-friends-short` | Staying with family or friends as a short term guest |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.healthcare-facility` | Acute hospital or long term healthcare residential facility |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.registered-care-home` | Registered care home |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.registered-nursing-home` | Registered nursing home |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.prison-detention` | Prison, young offenders institution or detention centre |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.other-temporary` | Other temporary accommodation |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.unknown` | Unknown |
+| **`asd-diagnosis`** | Observed Autism Spectrum Disorder (ASD) diagnosis |
+| **`client-funding-status`** | Funding status of the client for social care services |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `client-funding-status.fully-client-funded` | Fully client funded |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `client-funding-status.joint-funded` | Joint client and social care funded |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `client-funding-status.fully-social-care-funded` | Fully social care funded |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `client-funding-status.unknown` | Unknown |
+| **`dbs-check`** | Recorded Disclosure and Barring Service (DBS) check |
+| **`dementia-diagnosis`** | Observed dementia diagnosis |
+| **`employment-status`** | Employment status of the individual |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.paid-under-16h` | Paid: Less than 16 hours a week |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.paid-16h-plus` | Paid: 16 or more hours a week |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.paid-hours-unknown` | Paid: Hours per week unknown |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.seeking-work` | Not in paid employment: Seeking work |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.not-seeking-or-retired` | Not in paid employment: Not actively seeking work or retired |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.voluntary-only` | Not in paid employment: Voluntary work only |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.unknown` | Unknown |
+| **`has-unpaid-carer`** | Has an unpaid carer |
+| **`hearing-impairment`** | Observed hearing impairment status |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `hearing-impairment.deaf-with-speech` | Deaf with speech |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `hearing-impairment.deaf-without-speech` | Deaf without speech |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `hearing-impairment.hard-of-hearing` | Hard of hearing |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `hearing-impairment.no-impairment` | No hearing impairment |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `hearing-impairment.severity-unknown` | Hearing impairment: Severity unknown |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `hearing-impairment.unknown` | Unknown |
+| **`support-reason`** | Primary reason for requiring adult social care support |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.physical-access-mobility` | Physical support: Access and mobility only |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.physical-personal-care` | Physical Support: Personal care support |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.sensory-visual` | Sensory Support: Support for visual impairment |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.sensory-hearing` | Sensory Support: Support for hearing impairment |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.sensory-dual` | Sensory Support: Support for dual impairment |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.memory-cognition` | Support with memory and cognition |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.learning-disability` | Learning disability support |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.mental-health` | Mental health support |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.substance-misuse` | Social support: Substance misuse support |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.asylum-seeker` | Social Support: Asylum seeker support |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.social-isolation-other` | Social support: Support for social isolation or other reason |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.unpaid-carer` | Social support: Support to unpaid carer |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.unknown` | Unknown |
+| **`visual-impairment`** | Observed visual impairment status |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `visual-impairment.blind` | Blind/severely sight impaired |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `visual-impairment.partially-sighted` | Partial sight/sight impaired |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `visual-impairment.no-impairment` | No visual impairment |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `visual-impairment.severity-unknown` | Visual impairment - severity unknown |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `visual-impairment.unknown` | Unknown |
+{:.table-bordered}
+
+</details>
 
 ### Measurement Type Vocabulary
 
-Used by [`Measurement.type`](#measurement-type). Codes for the type of measurement. _Vocabulary to be published._
+Used by [`Measurement.type`](#measurement-type). Codes to indicate the type of measurement.
+
+<details>
+<summary markdown="span">See vocabulary</summary>
+
+| Code | Description |
+| :--- | :--- |
+| `Attendance` | _Definition to be confirmed._ |
+| `Authorised Absences` | _Definition to be confirmed._ |
+| `School average attendance` | _Definition to be confirmed._ |
+| `Unauthorised Absences` | _Definition to be confirmed._ |
+| `caring-hours-per-week` | Total hours spent caring per week |
+{:.table-bordered}
+
+</details>
 
 ### Measurement Unit Vocabulary
 
-Used by [`Measurement.unit`](#measurement-unit). Codes for the unit of a measurement. _Vocabulary to be published._
+Used by [`Measurement.unit`](#measurement-unit). Codes to indicate the unit of measurement.
 
+<details>
+<summary markdown="span">See vocabulary</summary>
 
-## Alignment with other specifications
+| Code | Description |
+| :--- | :--- |
+| `count` | Number of discrete items, entities, or events. Typically an integer. |
+| `pct` | Percentage (%) |
+{:.table-bordered}
 
-This standard is composed from, and stays aligned with, the following draft standards in the Data Standards for Social Care programme:
-
-- [Person Standard](/publications_person_standard) — the source of the shared `Identifier`, `Name`, `Address` and `Contact` objects.
-- [Organisation Data Standard](https://github.com/SocialCareData/service-episode-standard)
-- [Service Data Standard](https://github.com/SocialCareData/service-episode-standard)
-- [Professional Data Standard](https://github.com/SocialCareData/professional-standard)
-- [Service Episode Data Standard](https://github.com/SocialCareData/service-episode-standard)
-- [Life Event Data Standard](https://github.com/SocialCareData/life-event-standard)
-
-In creating this specification we also reviewed and aligned with HL7 FHIR (the [`Organization`](https://build.fhir.org/organization.html), [`PractitionerRole`](https://build.fhir.org/practitionerrole.html), [`HealthcareService`](https://build.fhir.org/healthcareservice.html) and [`EpisodeOfCare`](https://build.fhir.org/episodeofcare.html) resources) and the HL7 [`ParticipationType`](https://terminology.hl7.org/5.2.0/CodeSystem-v3-ParticipationType.html) code system.
+</details>
 
 
 ## Report an issue
 
-If you spot an issue with this standard, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Safeguarding+Standard%3A%20&page=https%3A%2F%2Fstandard.socialcaredata.io%2Fsafeguarding_standard&category=Safeguarding+Standard" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+If you spot an issue with this standard, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Safeguarding+Standard%3A%20&page={{ page.url | absolute_url | url_encode }}&category=Safeguarding+Standard" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
 
 
 ## Versions
