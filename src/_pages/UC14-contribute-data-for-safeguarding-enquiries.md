@@ -26,7 +26,7 @@ As the administrator of a social care CMS, I need to be able to contribute recor
 
 ## Description
 
-This use case is split out from [use case 9](/UC09_multi_agency_enquiries) and [Use Case 13](/UC13_provide_contact_details_for_safeguarding_enquiries) to summarise the requirements of organisations who hold information relevant for frontline professionals conducting safeguarding enquiries to be able to contribute data about which individuals they are working with to a single view system. This would enable frontline professionals to identify who else holds information about an individual. But to be useful, anyone querying it must have confidence that the responses they receive are based on:
+This use case is split out from [use case 9](/UC09_multi_agency_enquiries) and [use case 13](/UC13_provide_contact_details_for_safeguarding_enquiries) to summarise the requirements of organisations who hold information relevant for frontline professionals conducting safeguarding enquiries to be able to contribute data about which individuals they are working with to a single view system. This would enable frontline professionals to identify who else holds information about an individual. But to be useful, anyone querying it must have confidence that the responses they receive are based on:
 
 * Responses from relevant organisations
 * A comprehensive, reliable, and up to date picture of who each organisation has contact with
