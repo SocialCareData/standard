@@ -26,7 +26,7 @@ As a social worker conducting safeguarding enquiries, I need the contact details
 
 ## Description
 
-This use case (aligned to use case 10.B.i) is split out from [Use Case 9](/UC09_multi_agency_enquiries) to specify the support required for to enable services which would let frontline practitioners find a Single Unique Identifier for an individual they are working with, and use that identified to get the contact details of other professionals that individual is known to.
+This use case (aligned to use case 9.B.i) is split out from [Use Case 9](/UC09_multi_agency_enquiries) to specify the support required for to enable services which would let frontline practitioners find a Single Unique Identifier for an individual they are working with, and use that identified to get the contact details of other professionals that individual is known to.
 
 For wider context and details on the use case, please refer to [Use Case 9](/UC09_multi_agency_enquiries).
 
