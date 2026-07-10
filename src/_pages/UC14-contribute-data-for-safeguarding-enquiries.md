@@ -1,5 +1,5 @@
 ---
-title: "Contribute data for safeguarding enquiries"
+title: "Contribute Data for Safeguarding Enquiries"
 breadcrumbs:
   - title: Use Cases
     url: /use_cases
