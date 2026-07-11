@@ -2,7 +2,6 @@
 title: Transfer of Responsibility
 breadcrumbs:
   - title: Use Cases
-    url: /use_cases
 tags:
   - MAIS
   - Use Case

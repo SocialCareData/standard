@@ -2,7 +2,6 @@
 title: Finding and Synthesising Information from the CMS
 breadcrumbs:
   - title: Use Cases
-    url: /use_cases
 tags:
   - MAIS
   - Use Case

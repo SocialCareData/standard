@@ -2,7 +2,6 @@
 title: "Provide Contact Details for Safeguarding Enquiries"
 breadcrumbs:
   - title: Use Cases
-    url: /use_cases
 tags:
   - MAIS
   - Use Case

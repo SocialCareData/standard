@@ -2,7 +2,6 @@
 title: Sharing Care Summaries
 breadcrumbs:
   - title: Use Cases
-    url: /use_cases
 tags:
   - MAIS
   - Use Case

@@ -2,7 +2,6 @@
 title: Multiagency Input into a Person’s Record
 breadcrumbs:
   - title: Use Cases
-    url: /use_cases
 tags:
   - MAIS
   - Use Case
