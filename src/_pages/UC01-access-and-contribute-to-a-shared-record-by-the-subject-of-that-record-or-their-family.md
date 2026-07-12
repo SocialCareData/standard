@@ -1,7 +1,7 @@
 ---
 title: "Access and contribute to a shared record by the subject of that record or their family"
 breadcrumbs:
-  - title: Use Cases
+  - Use Cases
 tags:
   - MAIS
   - Use Case

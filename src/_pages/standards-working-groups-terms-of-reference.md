@@ -1,7 +1,7 @@
 ---
 title: Standards Working Groups Terms of Reference
 breadcrumbs:
-  - title: Standards Working Groups
+  - Standards Working Groups
 tags:
   - Programme
   - Working Group

@@ -3,7 +3,7 @@ require "set"
 module Jekyll
   # A page generated for a single breadcrumb.
   class BreadcrumbPage < Page
-    def initialize(site, base, breadcrumb_title, pages, breadcrumbs = [{ "title" => "Breadcrumbs" }])
+    def initialize(site, base, breadcrumb_title, pages, breadcrumbs = ["Breadcrumbs"])
       @site = site
       @base = base
       @dir = ""
@@ -12,11 +12,12 @@ module Jekyll
       process(@name)
 
       self.data = {
-        "layout" => "breadcrumb",
-        "title"  => breadcrumb_title,
-        "breadcrumbs" => breadcrumbs,
-        "pages"  => pages.sort_by { |p| p.data["title"].to_s },
-        "permalink" => "/#{BreadcrumbPage.slugify(breadcrumb_title)}"
+        "layout"          => "breadcrumb",
+        "title"           => breadcrumb_title,
+        "breadcrumbs"     => breadcrumbs,
+        "pages"           => pages.sort_by { |p| p.data["title"].to_s },
+        "permalink"       => "/#{BreadcrumbPage.slugify(breadcrumb_title)}",
+        "breadcrumb_page" => true
       }
     end
 
@@ -36,8 +37,7 @@ module Jekyll
       breadcrumbs = Hash.new { |hash, key| hash[key] = [] }
 
       site.pages.each do |page|
-        Array(page.data["breadcrumbs"]).each do |breadcrumb|
-          title = breadcrumb.is_a?(Hash) ? breadcrumb["title"] : breadcrumb
+        Array(page.data["breadcrumbs"]).each do |title|
           next if title.nil? || title.to_s.strip.empty?
 
           breadcrumbs[title.to_s] << page

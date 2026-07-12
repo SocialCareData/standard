@@ -1,7 +1,7 @@
 <nav class="breadcrumb" aria-label="breadcrumbs">
   <ol>
     <li><a href="/">Home</a></li>{% for breadcrumb in page.breadcrumbs %}
-    <li><a href="/{{ breadcrumb.title | slugify | replace: '-', '_' }}">{{ breadcrumb.title }}</a></li>{% endfor %}
+    <li><a href="/{{ breadcrumb | slugify | replace: '-', '_' }}">{{ breadcrumb }}</a></li>{% endfor %}
     <li><span aria-current="page">{{ page.title }}</span></li>
   </ol>
 </nav>

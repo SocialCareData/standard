@@ -1,7 +1,7 @@
 ---
 title: Social Worker Recording
 breadcrumbs:
-  - title: Use Cases
+  - Use Cases
 tags:
   - MAIS
   - Use Case

@@ -1,7 +1,7 @@
 ---
 title: Multi-Agency Information Sharing (MAIS) Standards Working Group
 breadcrumbs:
-  - title: Standards Working Groups
+  - Standards Working Groups
 tags:
   - Working Group
   - MAIS

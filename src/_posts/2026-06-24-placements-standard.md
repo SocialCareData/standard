@@ -6,8 +6,7 @@ description: The children's social care placements standard helps regions answer
 changelog:
   - Removed RiskAssessment.riskOther and RiskAssessment.riskToOthersOther text fields
 breadcrumbs:
-  - title: Publications
-    url: /publications
+  - Publications
 tags:
   - Placements
   - Publication

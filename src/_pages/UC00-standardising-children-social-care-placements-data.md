@@ -1,7 +1,7 @@
 ---
 title: "Standardising children's social care placements data"
 breadcrumbs:
-  - title: Use Cases
+  - Use Cases
 tags:
   - Placements
   - Use Case

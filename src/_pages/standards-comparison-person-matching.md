@@ -2,7 +2,7 @@
 layout: publication
 title: "Standards comparison: person matching"
 breadcrumbs:
-  - title: Publications
+  - Publications
 tags:
   - Interoperability
   - MAIS

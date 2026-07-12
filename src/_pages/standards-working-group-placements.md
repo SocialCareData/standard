@@ -1,7 +1,7 @@
 ---
 title: Children's Social Care Placements Standards Working Group
 breadcrumbs:
-  - title: Standards Working Groups
+  - Standards Working Groups
 tags:
   - Placements
   - Working Group

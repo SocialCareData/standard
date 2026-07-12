@@ -1,7 +1,7 @@
 ---
 title: Social Care Statutory Reporting
 breadcrumbs:
-  - title: Use Cases
+  - Use Cases
 tags:
   - MAIS
   - Use Case

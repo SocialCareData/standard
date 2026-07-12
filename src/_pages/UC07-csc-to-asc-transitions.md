@@ -1,7 +1,7 @@
 ---
 title: Transition from Children’s Social Care to Adult Social Care
 breadcrumbs:
-  - title: Use Cases
+  - Use Cases
 tags:
   - MAIS
   - Use Case
