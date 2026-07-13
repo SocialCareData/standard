@@ -4,8 +4,7 @@ current: /publications_interoperability_framework
 title: Interoperability Framework
 description: An interoperability framework for establishing common API standards across social care systems, designed to reduce integration risks and align vendor implementation practices.
 breadcrumbs:
-  - title: Publications
-    url: /publications
+  - Publications
 tags:
   - Interoperability
   - Publication
