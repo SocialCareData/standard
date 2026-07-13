@@ -103,12 +103,12 @@ Table 1 below describes suggested sample fields for a possible shared API regist
 | Product          | Acme HR Platform                                                   |
 | API Name         | Employee Data API                                                  |
 | Version          | v2.1                                                               |
-| Base URL         | [https://api.acme.com/v2](https://api.acme.com/v2)                 |
+| Base URL         | `https://api.acme.com/v2`                                          |
 | Auth Method      | OAuth 2.0 — Client Credentials                                     |
 | Scopes Available | employees:read, employees:write, org:read                          |
 | Rate Limit       | 1,000 requests / minute per client                                 |
-| Sandbox URL      | [https://sandbox.api.acme.com/v2](https://sandbox.api.acme.com/v2) |
-| Documentation    | [https://docs.acme.com/api/v2](https://docs.acme.com/api/v2)       |
+| Sandbox URL      | `https://sandbox.api.acme.com/v2`                                  |
+| Documentation    | `https://docs.acme.com/api/v2`                                     |
 | Status           | Stable — supported until Dec 2027                                  |
 | Contact          | api-support@acme.com                                               |
 {: .table-bordered}
