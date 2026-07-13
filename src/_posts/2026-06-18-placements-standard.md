@@ -9,8 +9,7 @@ changelog:
   - Updated reporting spreadsheet
   - Added CSV format
 breadcrumbs:
-  - title: Publications
-    url: /publications
+  - Publications
 tags:
   - Placements
   - Publication

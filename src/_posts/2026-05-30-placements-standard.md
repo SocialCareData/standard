@@ -6,8 +6,7 @@ description: The children's social care placements standard helps regions answer
 changelog:
   - Initial version
 breadcrumbs:
-  - title: Publications
-    url: /publications
+  - Publications
 tags:
   - Placements
   - Publication

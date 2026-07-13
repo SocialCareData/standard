@@ -6,8 +6,7 @@ author:
 tags:
   - Newsletter
 breadcrumbs:
-  - title: Updates
-    url: /updates
+  - Updates
 ---
 
 Social Finance, The Open Data Institute, and Coram are working alongside the Department for Education and Department of Health and Social Care to implement a first set of data and interoperability standards for **children’s and adult social care**. Over the next three years, we’ll implement these and create structures to keep this work sustained.

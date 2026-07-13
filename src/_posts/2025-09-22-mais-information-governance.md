@@ -6,8 +6,7 @@ author:
 tags:
   - MAIS
 breadcrumbs:
-  - title: Updates
-    url: /updates
+  - Updates
 ---
 
 ## Links
