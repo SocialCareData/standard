@@ -19,7 +19,7 @@ The children's social care placements standard helps regions to answer their suf
 
 The following diagram illustrates the elements of the Children's Social Care Placements Ontology.
 
-<p class="data-model-diagram"><img src="/assets/img/placements/placements-data-model-2026-06-24.svg" alt="Placements Data Model" title="Placements Data Model" /></p>
+<p class="data-model-diagram"><img src="/assets/img/placements/placements-data-model-2026-06-24.svg" alt="Placements Data Model" title="Placements Data Model" style="width: 80%; height: auto;" /></p>
 
 A `Placement` is the top-level record covering the full lifecycle of a placement instance. It aggregates six sub-components: the referral availability, the social-worker recommendation, the requirements describing the child's needs, the risk assessment, optionally the actual placement that was arranged, and quality-assurance metadata about who recorded each part and when.
 
@@ -36,22 +36,22 @@ The top-level record. Captures the unique child identifier and links the placeme
 <span id="placement-placementId">placementId</span>
 : Optional unique identifier of the placement record. _String_.
 
-<span id="placement-hasPlacementAvailability">hasPlacementAvailability</span>
+<span id="placement-placementAvailability">placementAvailability</span>
 : The placement availability / referral details. See [PlacementAvailability](#placementavailability).
 
-<span id="placement-hasPlacementRequirements">hasPlacementRequirements</span>
+<span id="placement-placementRequirements">placementRequirements</span>
 : The child's needs the placement must accommodate. See [PlacementRequirements](#placementrequirements).
 
-<span id="placement-hasPlacementRecommendation">hasPlacementRecommendation</span>
+<span id="placement-placementRecommendation">placementRecommendation</span>
 : The social worker's suitability judgement for each placement category. See [PlacementRecommendation](#placementrecommendation).
 
-<span id="placement-hasRiskAssessment">hasRiskAssessment</span>
+<span id="placement-riskAssessment">riskAssessment</span>
 : The risk assessment for the child. See [RiskAssessment](#riskassessment).
 
-<span id="placement-hasActualPlacement">hasActualPlacement</span>
+<span id="placement-actualPlacement">actualPlacement</span>
 : The actual placement arranged for the child (optional - a referral may exist without yet having an actual placement). See [ActualPlacement](#actualplacement).
 
-<span id="placement-hasQualityAssurance">hasQualityAssurance</span>
+<span id="placement-qualityAssurance">qualityAssurance</span>
 : Metadata about who recorded each part and when. See [QualityAssurance](#qualityassurance).
 
 #### Example
@@ -64,12 +64,12 @@ The top-level record. Captures the unique child identifier and links the placeme
   "@id": "ex:ABCD2012-001",
   "@type": "Placement",
   "childId": "ABCD2012",
-  "hasPlacementAvailability":   { "see PlacementAvailability example"   },
-  "hasPlacementRequirements":   { "see PlacementRequirements example"   },
-  "hasPlacementRecommendation": { "see PlacementRecommendation example"   },
-  "hasRiskAssessment":          { "see RiskAssessment example"   },
-  "hasActualPlacement":         { "see ActualPlacement example"   },
-  "hasQualityAssurance":        { "see QualityAssurance example"   }
+  "placementAvailability":   { "see PlacementAvailability example"   },
+  "placementRequirements":   { "see PlacementRequirements example"   },
+  "placementRecommendation": { "see PlacementRecommendation example"   },
+  "riskAssessment":          { "see RiskAssessment example"   },
+  "actualPlacement":         { "see ActualPlacement example"   },
+  "qualityAssurance":        { "see QualityAssurance example"   }
 }
 {% endhighlight %}
 </div>
