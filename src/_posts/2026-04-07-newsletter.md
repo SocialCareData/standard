@@ -6,8 +6,7 @@ author:
 tags:
   - Newsletter
 breadcrumbs:
-  - title: Updates
-    url: /updates
+  - Updates
 ---
 
 ## Welcome
@@ -22,7 +21,7 @@ In this edition, we cover:
 
 A huge thank you to everyone we have worked with, your insight and thought drives our work forward!
 
-## 1. Placements – After a successful phase 1 pilot, we are rapidly approaching 50% of all LAs nationally using the standard by the Autumn
+## Placements – After a successful phase 1 pilot, we are rapidly approaching 50% of all LAs nationally using the standard by the Autumn
 
 Having delivered a first release of the standard and a pilot in the South-West before Christmas, we are now rolling out the standard in Greater Manchester, the North East and South East.
 
@@ -37,9 +36,9 @@ Based on what we’ve learnt in North East and Greater Manchester so far, we’v
 - **Cost**: In response to an emerging consensus among Local Authorities, the total weekly fee has been split into four components, core, additional, education and other costs, to ensure placement costs are captured in a consistent way.
 - **Quality assurance**: We are working with the North East on quality assurance and are awaiting the region's first data return, due on 13th April.
 
-## 2. Standards Development
+## Standards Development
 
-### 2.1 MAIS – Moving from standards that support systems to find out, “who else knows about a person,” to, “what do they know about that person?”
+### MAIS – Moving from standards that support systems to find out, “who else knows about a person,” to, “what do they know about that person?”
 
 ![pixelated to sharp image of the Mona Lisa](/assets/img/newsletter-4-graphic-mona-lisa.png)
 
@@ -56,7 +55,7 @@ As a result, our list of standards has ballooned. You can see our full list, and
 We are also hosting monthly Standards Development working groups to work through these issues, with the next one taking place on the 30th April at 14.30. Get in touch if you’d like an invitation to this session.
 
 
-### 2.2 ASC – Setting our priorities to build standards that actually make a difference.
+### ASC – Setting our priorities to build standards that actually make a difference.
 
 Our research and engagement have sharpened our focus: supporting truly joined-up care at neighborhood level, where better information flows directly and improves outcomes for people. Over the past few months, we’ve been working closely in the ASC sector to answer a simple, yet critical question:
 
@@ -91,7 +90,7 @@ Our plans for this next phase are therefore to develop standards for the core el
 Across our DASS engagement, there has been strong backing for this direction, and a clear message that standards must lead to real implementation, not just good design. That insight feeds directly into our future implementation strategy. But it starts here – by prioritising standards that solve problems that LAs and practitioners are telling us about and doing so in partnership with the sector.
 
 
-## 3. What’s coming next?
+## What’s coming next?
 
 We’re heading into the next phase of the programme with a sharper focus on turning standards into everyday practice. Over the coming months, our work will centre on three things: deepening adoption, building the next set of priority standards, and making it easier for you to engage and influence what comes next.
 

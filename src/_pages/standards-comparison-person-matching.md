@@ -1,19 +1,13 @@
 ---
+layout: publication
 title: "Standards comparison: person matching"
+breadcrumbs:
+  - Publications
 tags:
   - Interoperability
   - MAIS
+  - Publication
 ---
-
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of Contents</h2>
-
-1. TOC
-{:toc}
-
-</nav>
-
-<article class="numbered-headings">
 
 ## Introduction
 
@@ -119,45 +113,22 @@ Taking into account the structure of UK postcodes with outward code denoting a l
 
 ## NHS Personal Demographics Service flow diagram
 
-<div style="width: 50%; max-width: 500px; margin: 0 auto;">
+<div>
 
 ```mermaid
 flowchart TD
     LEGEND[PDS: ]
 
-    Start([Compare query _postcode_
-    with PDS _postcodes_])
-    2[Consider current
-    _postcodes_]
-    3[Set score
-    =_n_/_length of PDS postcode_
-    _n_ characters match
-    perfectly the first _n_
-    characters of the
-    postcodes in the PDS.]
-    4{Is there at
-    least one
-    score > 0?}
-    5{Is there a
-    preceding
-    _historical_
-    _postcode_ in
-    PDS?}
-    6[Consider ALL _historical_
-    _postcodes_]
+    Start([Compare query _postcode_ with PDS _postcodes_])
+    2[Consider current _postcodes_]
+    3[Set score =_n_/_length of PDS postcode_ _n_ characters match perfectly the first _n_ characters of the postcodes in the PDS.]
+    4{Is there at least one score > 0?}
+    5{Is there a preceding _historical_ _postcode_ in PDS?}
+    6[Consider ALL _historical_ _postcodes_]
     7[Set postcode score = 0]
-    8[Set score
-    =_n_/_length of PDS postcode_
-    _n_ characters match
-    perfectly the first _n_
-    characters of the
-    postcodes in the PDS.]
-    9{Is there at
-    least one
-    score > 0?}
-    Stop([Take the highest
-    postcode score
-    Return postcode score])
+    8[Set score =_n_/_length of PDS postcode_ _n_ characters match perfectly the first _n_ characters of the postcodes in the PDS.]
+    9{Is there at least one score > 0?}
+    Stop([Take the highest postcode score Return postcode score])
 
     Start --> 2
     2 --> 3
@@ -177,7 +148,10 @@ flowchart TD
 
 </div>
 
+
 ## Related documents
 - [Patient Matching](https://hl7.org/fhir/us/identity-matching/patient-matching.html) (Interoperable Digital Identity and Patient Matching, Identity-focused FHIR implementation guide, HL7)
 - [The `Person_ID` Handbook](https://digital.nhs.uk/services/personal-demographics-service/master-person-service/the-person_id-handbook) (NHS England Digital)
 - [Patient EMPI Match](https://simplifier.net/guide/ca-on-pcr-r4-query-iguide-v2.0/patientempimatch?version=current) (Provincial Client Registry (PCR) HL7 FHIR® Implementation Guide v2.0.0)
+
+{% include mermaid.html %}

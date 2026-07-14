@@ -12,7 +12,7 @@
 
 {% unless _tf_sorted.size == 0 %}
 <nav class="tag-filter">
-  <ul class="flex-list">
+  <ul class="tag-list">
     <li><a class="tag" href="{{ page.permalink }}">All</a></li>{% for _tf_tag in _tf_sorted %}
     <li><a class="tag" href="{{ page.permalink }}?tag={{ _tf_tag | url_encode }}">{{ _tf_tag }}</a></li>{% endfor %}
   </ul>
@@ -24,7 +24,7 @@
     const params = new URLSearchParams(window.location.search);
     const tag = params.get('tag');
     if (tag) {
-      document.querySelectorAll('.content-list li').forEach(function (li) {
+      document.querySelectorAll('.tag-filtered-list > li').forEach(function (li) {
         const tags = li.getAttribute('data-tags').split(',');
         li.style.display = tags.includes(tag) ? '' : 'none';
       });

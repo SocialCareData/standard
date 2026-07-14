@@ -22,39 +22,39 @@ This references the content owners for each content category in the standards we
 
 <h2>Editors</h2>
 
-<ul class="content-list">
+<ul class="content-list tag-filtered-list">
 {% for editor_pair in site.data.editors %}
   {% assign editor_name = editor_pair[0] %}
   {% assign editor = editor_pair[1] %}
   {% unless editor.current %}{% continue %}{% endunless %}
   <li data-tags="{{ editor.tags | join: ',' }}">
     <strong>{% if editor.github and editor.github != "" %}<a href="https://github.com/{{ editor.github }}">{{ editor_name }}</a>{% else %}{{ editor_name }}{% endif %}</strong>
-    {% include tags.html item=editor %}
+    {% include tags.html tags=editor.tags %}
   </li>
 {% endfor %}
 </ul>
 
 <h2>Content</h2>
 
-<ul class="content-list">
+<ul class="content-list tag-filtered-list">
 {% for item in all_content %}{% if item.title %}
   <li data-tags="{{ item.tags | join: ',' }}">
     <strong><a href="{{ item.url }}">{{ item.title }}</a></strong>
-    {% include tags.html item=item %}
+    {% include tags.html tags=item.tags %}
   </li>
 {% endif %}{% endfor %}
 </ul>
 
 <h2>Past Editors</h2>
 
-<ul class="content-list">
+<ul class="content-list tag-filtered-list">
 {% for editor_pair in site.data.editors %}
   {% assign editor_name = editor_pair[0] %}
   {% assign editor = editor_pair[1] %}
   {% if editor.current %}{% continue %}{% endif %}
   <li data-tags="{{ editor.tags | join: ',' }}">
     <strong>{% if editor.github and editor.github != "" %}<a href="https://github.com/{{ editor.github }}">{{ editor_name }}</a>{% else %}{{ editor_name }}{% endif %}</strong>
-    {% include tags.html item=editor %}
+    {% include tags.html tags=editor.tags %}
   </li>
 {% endfor %}
 </ul>

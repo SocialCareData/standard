@@ -41,7 +41,7 @@ Alongside this, we are developing a set of foundational standards that define ho
 To ensure that everyone who may be able to benefit from data standardisation can contribute to the development of the standards we aim to work as openly as possible:
 
 1. We establish [open working groups](/standards_working_groups) to advise on the scope and content of each standard and ensure they address the needs of all stakeholders.
-1. We share [our standards](https://standard.socialcaredata.io/publications) openly as they are developed, enabling the widest audience to input to their development.
+1. We share [our standards](/publications) openly as they are developed, enabling the widest audience to input to their development.
 
 We publish [minutes of our working group meetings](/updates?tag=Working+Group) and a list of [upcoming meetings](/calendar) across the Programme to enable stakeholders to understand how we have made decisions.
 

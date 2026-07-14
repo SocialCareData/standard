@@ -6,24 +6,11 @@ description: The children's social care placements standard helps regions answer
 changelog:
   - Initial version
 breadcrumbs:
-  - title: Publications
-    url: /publications
+  - Publications
 tags:
   - Placements
   - Publication
 ---
-
-
-
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of Contents</h2>
-
-1. TOC
-{:toc}
-
-</nav>
-
-<article class="numbered-headings">
 
 ## Introduction
 
@@ -530,5 +517,3 @@ If you spot an issue with this standard, please <a href="https://github.com/Soci
 ## Versions
 
 {% include versions.html %}
-
-</article>

@@ -1,28 +1,16 @@
 ---
+layout: publication
 current: /publications_person_standard
 title: Person Standard
 canonical: /2026_06_18_person_standard
 description: A common data model for identifying and describing a person across social care systems, designed to unblock multi-agency information sharing and single-view use cases.
 breadcrumbs:
-  - title: Publications
-    url: /publications
+  - Publications
 tags:
   - Person
   - Publication
   - MAIS
 ---
-
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of Contents</h2>
-
-1. TOC
-{:toc}
-{::options toc_levels="2..3" /}
-
-</nav>
-
-<article class="numbered-headings">
-
 
 ## Introduction
 
@@ -48,7 +36,6 @@ The following diagram illustrates the elements of the Person Standard.
 <p class="data-model-diagram"><img src="/assets/img/person/person-data-model.svg" alt="Person Data Model" title="Person Data Model" width="80%"/></p>
 
 A `Person` is the top-level record. It aggregates zero or more `Identifier`s, one or more `Name`s, zero or more `Address`es, zero or more `Contact` entries, zero or more `PersonRelationship`s linking to other people, an optional `dateOfBirth` (with `PartialDate`), an optional `isDeceased` flag and optional `deceasedDate` (with `PartialDate`). Cross-system matches established with other agencies are recorded as `matchedPersonRef` — an array of `Identifier`s pointing to the same person as it is known in other systems. The person's gender, phenotypic sex, and ethnicity are captured via controlled vocabularies.
-
 
 ### Person
 
@@ -582,7 +569,6 @@ The Person Standard is a reduced subset of the FHIR `Patient` resource, extended
 
 ### See also
 
-- [Standard ways to describe a Person](/standards_comparison_ways_to_describe_a_person) — comparison of this standard with the Hippo GET API, NHS PDS, and the FHIR Patient resource.
 - [Person matching implementation](/standards_comparison_person_matching) — how `matchedPersonRef` is established via the FHIR `$match` operation.
 
 
@@ -594,5 +580,3 @@ If you spot an issue with this standard, please <a href="https://github.com/Soci
 ## Versions
 
 {% include versions.html %}
-
-</article>

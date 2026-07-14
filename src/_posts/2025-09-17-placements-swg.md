@@ -7,20 +7,8 @@ tags:
   - Working Group
   - Placements
 breadcrumbs:
-  - title: Updates
-    url: /updates
+  - Updates
 ---
-
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of contents</h2>
-
-1. TOC
-{:toc}
-{::options toc_levels="2..3" /}
-
-</nav>
-
-<article class="numbered-headings">
 
 ## Links
 
@@ -99,5 +87,3 @@ The group was invited to suggest additional topics for upcoming deep dives, with
 ## See also
 
 [Related Discussion on GitHub](https://github.com/orgs/SocialCareData/discussions/11)
-
-</article>

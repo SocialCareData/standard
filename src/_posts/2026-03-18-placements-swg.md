@@ -5,21 +5,8 @@ tags:
   - Working Group
   - Placements
 breadcrumbs:
-  - title: Updates
-    url: /updates
+  - Updates
 ---
-
-
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of contents</h2>
-
-1. TOC
-{:toc}
-{::options toc_levels="2..3" /}
-
-</nav>
-
-<article class="numbered-headings">
 
 ## Links
 
@@ -92,5 +79,3 @@ Ivjyot confirmed that a meeting summary and decision links would be circulated v
 ## See also
 
 [Related Discussion on GitHub](https://github.com/orgs/SocialCareData/discussions/14)
-
-</article>
