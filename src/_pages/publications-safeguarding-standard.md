@@ -60,7 +60,7 @@ Coded fields draw their values from the controlled vocabularies listed under [Co
 
 ### Organisation
 
-An organisation involved in the safeguarding or wellbeing of a person — for example a local authority social care department, an NHS trust, a school, or an education authority. Aligns with the [FHIR `Organization`](https://build.fhir.org/organization.html) resource.
+An organisation involved in the safeguarding or wellbeing of a person — for example a local authority, an NHS trust, a school, or an education authority. Aligns with the [FHIR `Organization`](https://build.fhir.org/organization.html) resource.
 
 #### Properties
 
