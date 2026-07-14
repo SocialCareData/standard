@@ -1,11 +1,11 @@
 {
-  "@context": "./context.jsonld",
+  "@context": "../context.jsonld",
   "@id": "ex:INVALID-001",
   "@type": "Placement",
 
   "childId": "INVALID001",
 
-  "hasPlacementAvailability": {
+  "placementAvailability": {
     "@id": "ex:INVALID-001/availability",
     "@type": "PlacementAvailability",
     "placementId": "PLC-INVALID-001",
@@ -14,7 +14,7 @@
     "outOfLAReason": "CourtOrder"
   },
 
-  "hasPlacementRequirements": {
+  "placementRequirements": {
     "@id": "ex:INVALID-001/requirements",
     "@type": "PlacementRequirements",
     "communicationNeeds": "No",
@@ -25,7 +25,7 @@
     "homeAdaptationRequired": false
   },
 
-  "hasPlacementRecommendation": {
+  "placementRecommendation": {
     "@id": "ex:INVALID-001/recommendation",
     "@type": "PlacementRecommendation",
     "fosterCareSuitability": "Preferred",
@@ -33,7 +33,7 @@
     "supportedAccommodationSuitability": "NotSpecified"
   },
 
-  "hasQualityAssurance": {
+  "qualityAssurance": {
     "@id": "ex:INVALID-001/qa",
     "@type": "QualityAssurance",
     "referralDate":  "2024-02-12",

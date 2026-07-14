@@ -1,12 +1,12 @@
 {
-  "@context": "./context.jsonld",
+  "@context": "../context.jsonld",
   "@id": "ex:INVALID-006",
   "@type": "Placement",
 
   "placementId": "PLC-INVALID-006",
   "childId": "INVALID006",
 
-  "hasPlacementAvailability": {
+  "placementAvailability": {
     "@id": "ex:INVALID-006/availability",
     "@type": "PlacementAvailability",
     "neededBy": "WithinFiveDays",
@@ -14,7 +14,7 @@
     "outOfLAReason": "OutOfLAReasonOther"
   },
 
-  "hasPlacementRequirements": {
+  "placementRequirements": {
     "@id": "ex:INVALID-006/requirements",
     "@type": "PlacementRequirements",
     "communicationNeeds": "Yes",
@@ -26,7 +26,7 @@
     "homeAdaptationRequired": false
   },
 
-  "hasPlacementRecommendation": {
+  "placementRecommendation": {
     "@id": "ex:INVALID-006/recommendation",
     "@type": "PlacementRecommendation",
     "fosterCareSuitability":             "NotSpecified",
@@ -34,7 +34,7 @@
     "supportedAccommodationSuitability": "NotSpecified"
   },
 
-  "hasRiskAssessment": {
+  "riskAssessment": {
     "@id": "ex:INVALID-006/risk",
     "@type": "RiskAssessment",
     "riskSelfHarm":             "NoKnownRisk",
@@ -50,7 +50,7 @@
     "riskToOthersCriminal":     "NoKnownRisk"
   },
 
-  "hasQualityAssurance": {
+  "qualityAssurance": {
     "@id": "ex:INVALID-006/qa",
     "@type": "QualityAssurance",
     "referralDate":  "2024-04-01",
