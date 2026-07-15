@@ -407,7 +407,9 @@ Details about the timing of a service episode or life event, including when it s
   "@type": "TimeInformation",
   "startDateTime": "2026-05-01T09:30:00Z",
   "endDateTime": "2026-05-01T11:00:00Z",
-  "frequency": "snomed:225761000"
+  "frequency": {
+    "repeat": { "dayOfWeek": ["tue"], "frequency": 1, "period": 1, "periodUnit": "wk" }
+  }
 }
 {% endhighlight %}
 </div>
@@ -654,17 +656,49 @@ This standard does **not** define its own involvement codes. Instead, use a code
 
 ### Frequency Code Vocabulary
 
-Used by [`TimeInformation.frequency`](#timeinformation-frequency) to record the frequency of an episode or life event, including whether it is spontaneous.
+Used by [`TimeInformation.frequency`](#timeinformation-frequency) to record how frequently an episode or life event recurs.
 
-This standard does **not** define its own frequency codes. Instead, use a SNOMED CT concept that is a descendant of [Frequencies (272123002)](https://snomedbrowser.org/?perspective=full&conceptId1=272123002&edition=MAIN/2026-07-01&release=&languages=en), taking the numeric SNOMED CT concept identifier as the `code` value with the `snomed` prefix. Look concepts up in the [SNOMED CT browser](https://snomedbrowser.org/?perspective=full&conceptId1=272123002&edition=MAIN/2026-07-01&release=&languages=en); some illustrative concepts from that hierarchy are shown below.
+This standard does **not** define its own frequency codes. Instead, express the frequency as a FHIR [`Timing`](https://build.fhir.org/datatypes.html#Timing) datatype. A `Timing` describes a recurring schedule through its nested `repeat` structure — combining fields such as `frequency` / `period` / `periodUnit` (how often, where `periodUnit` is one of `s`, `min`, `h`, `d`, `wk`, `mo`, `a`), `dayOfWeek` (`mon`…`sun`), `timeOfDay` (`hh:mm:ss`), and `when` (event-related timings such as `MORN` for the morning) — and/or a `code` giving a common shorthand (for example `BID` for twice a day or `TID` for three times a day). See the [FHIR Timing documentation](https://build.fhir.org/datatypes.html#Timing) for the full set of fields and value sets. Some illustrative examples are shown below.
 
-| Code | Display |
-| :--- | :--- |
-| snomed:229797004 | Once daily |
-| snomed:14497002 | Weekly |
-| snomed:255238004 | Continuous |
-| snomed:225761000 | As required |
-{:.table-bordered}
+<details>
+<summary markdown="span">See examples</summary>
+
+**Every Tuesday**
+
+{% highlight json %}
+{
+  "repeat": { "dayOfWeek": ["tue"], "frequency": 1, "period": 1, "periodUnit": "wk" }
+}
+{% endhighlight %}
+
+**Every morning**
+
+{% highlight json %}
+{
+  "repeat": { "frequency": 1, "period": 1, "periodUnit": "d", "when": ["MORN"] }
+}
+{% endhighlight %}
+
+**Every two weeks, Monday at 10am**
+
+{% highlight json %}
+{
+  "repeat": { "dayOfWeek": ["mon"], "timeOfDay": ["10:00:00"], "frequency": 1, "period": 2, "periodUnit": "wk" }
+}
+{% endhighlight %}
+
+**Three times a day**
+
+{% highlight json %}
+{
+  "repeat": { "frequency": 3, "period": 1, "periodUnit": "d" },
+  "code": {
+    "coding": [ { "system": "http://terminology.hl7.org/CodeSystem/v3-GTSAbbreviation", "code": "TID", "display": "three times a day" } ]
+  }
+}
+{% endhighlight %}
+
+</details>
 
 ### Observation Type Vocabulary
 
