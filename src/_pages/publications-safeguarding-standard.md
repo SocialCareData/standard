@@ -105,8 +105,17 @@ An organisation involved in the safeguarding or wellbeing of a person — for ex
   "alias": ["Anytown Council"],
   "type": ["local-authority"],
   "active": true,
-  "address": [ { "see Person Standard Address" } ],
-  "contact": [ { "see Person Standard Contact" } ],
+  "address": [ {
+    "@type": "Address",
+    "line1": "1 High Street",
+    "city": "Anytown",
+    "postcode": "AB1 2CD"
+  } ],
+  "contact": [ {
+    "@type": "Contact",
+    "email": ["contact@example.org"],
+    "telephone": ["+44 7946 0000"]
+  } ],
   "relatedProfessional": [ { "@type": "Identifier", "value": "PRF-001", "system": "https://example.org/Id/professional" } ]
   "relatedService": [ { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } ]
 }
@@ -158,7 +167,11 @@ A service involved in the safeguarding or wellbeing of a person — the specific
   "name": "Children's Social Care - Referral & Assessment",
   "type": ["social-worker-support"],
   "active": true,
-  "contact": [ { "see Person Standard Contact" } ],
+  "contact": [ {
+    "@type": "Contact",
+    "email": ["contact@example.org"],
+    "telephone": ["+44 7946 0000"]
+  } ],
   "relatedOrganisation": [ { "@type": "Identifier", "value": "12345678", "system": "https://example.org/Id/example-organisation" } ]
 }
 {% endhighlight %}
@@ -200,10 +213,20 @@ An individual acting in a formal role within an organisation who has responsibil
 {
   "@type": "Professional",
   "identifier": [ { "@type": "Identifier", "value": "SW1234567", "system": "https://example.org/Id/registration" } ],
-  "name": { "see Person Standard Name" },
+  "name": {
+    "@type": "Name",
+    "familyName": ["Doe"],
+    "givenName": ["Jane", "Elizabeth"],
+    "preferredName": "Janie",
+    "use": "official"
+  },
   "role": ["Social Worker", "Team Lead - Referral & Assessment"],
   "status": true,
-  "contact": { "see Person Standard Contact" },
+  "contact": {
+    "@type": "Contact",
+    "email": ["contact@example.org"],
+    "telephone": ["+44 7946 0000"]
+  },
   "relatedService": [ { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } ]
 }
 {% endhighlight %}
@@ -264,7 +287,10 @@ While a single service episode may reflect routine support, changes in the numbe
     "involvement": "PPRF"
   } ],
   "relatedService": [ { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } ],
-  "timeInformation": [ { "see TimeInformation example" } ],
+  "timeInformation": [ {
+    "@type": "TimeInformation",
+    "startDateTime": "2026-05-01T09:30:00Z"
+  } ],
   "location": ["Anytown Family Centre"],
   "finding": [ { "see Finding example" } ]
 }
