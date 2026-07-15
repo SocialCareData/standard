@@ -1,12 +1,12 @@
 {
-  "@context": "./context.jsonld",
+  "@context": "../context.jsonld",
   "@id": "ex:OTHER-001",
   "@type": "Placement",
 
   "placementId": "PLC-OTHER-001",
   "childId": "OTHER001",
 
-  "hasPlacementAvailability": {
+  "placementAvailability": {
     "@id": "ex:OTHER-001/availability",
     "@type": "PlacementAvailability",
     "neededBy": "< 5 days",
@@ -19,7 +19,7 @@
     ]
   },
 
-  "hasPlacementRequirements": {
+  "placementRequirements": {
     "@id": "ex:OTHER-001/requirements",
     "@type": "PlacementRequirements",
     "communicationNeeds": "Yes",
@@ -44,7 +44,7 @@
     "deprivationOfLiberty":   false
   },
 
-  "hasPlacementRecommendation": {
+  "placementRecommendation": {
     "@id": "ex:OTHER-001/recommendation",
     "@type": "PlacementRecommendation",
     "fosterCareSuitability":             "Not specified",
@@ -52,7 +52,7 @@
     "supportedAccommodationSuitability": "Not specified"
   },
 
-  "hasRiskAssessment": {
+  "riskAssessment": {
     "@id": "ex:OTHER-001/risk",
     "@type": "RiskAssessment",
     "riskSelfHarm":             "No known risk",
@@ -68,7 +68,7 @@
     "riskToOthersCriminal":     "No known risk"
   },
 
-  "hasQualityAssurance": {
+  "qualityAssurance": {
     "@id": "ex:OTHER-001/qa",
     "@type": "QualityAssurance",
     "referralOfficerName": "Dana Khan",

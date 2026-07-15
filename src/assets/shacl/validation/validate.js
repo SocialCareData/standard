@@ -10,7 +10,7 @@ const SHACLValidator = require('rdf-validate-shacl').default
 
 const SHAPE_FILE = path.resolve(__dirname, '..', 'shacl-shape.ttl')
 const EXAMPLES_DIR = path.resolve(__dirname, '..', 'examples')
-const SHACL_DIR = path.resolve(__dirname, '..')
+const SHACL_DIR = path.resolve(__dirname, '..', 'examples')
 const PL_CHILD_ID = rdf.namedNode('https://ns.socialcaredata.io/placements/childId')
 
 const COLOURS = {
@@ -32,7 +32,7 @@ function parseNQuads (text) {
 async function loadJsonLDFile (file) {
   const doc = JSON.parse(fs.readFileSync(file, 'utf8'))
   // Inline the relative @context so jsonld doesn't need a document loader.
-  if (typeof doc['@context'] === 'string' && doc['@context'].startsWith('./')) {
+  if (typeof doc['@context'] === 'string' && /^\.\.?\//.test(doc['@context'])) {
     const ctxPath = path.join(path.dirname(file), doc['@context'])
     const ctx = JSON.parse(fs.readFileSync(ctxPath, 'utf8'))
     doc['@context'] = ctx['@context']

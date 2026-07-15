@@ -7,8 +7,7 @@ tags:
   - Working Group
   - Placements
 breadcrumbs:
-  - title: Updates
-    url: /updates
+  - Updates
 ---
 
 ## Links

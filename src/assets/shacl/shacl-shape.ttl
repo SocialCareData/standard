@@ -47,42 +47,42 @@
         sh:message "childId is required (exactly one value)."
     ] ;
     sh:property [
-        sh:path pl:hasPlacementAvailability ;
+        sh:path pl:placementAvailability ;
         sh:class pl:PlacementAvailability ;
         sh:nodeKind sh:BlankNodeOrIRI ;
         sh:minCount 1 ; sh:maxCount 1 ;
         sh:message "Placement must have exactly one PlacementAvailability."
     ] ;
     sh:property [
-        sh:path pl:hasPlacementRequirements ;
+        sh:path pl:placementRequirements ;
         sh:class pl:PlacementRequirements ;
         sh:nodeKind sh:BlankNodeOrIRI ;
         sh:minCount 1 ; sh:maxCount 1 ;
         sh:message "Placement must have exactly one PlacementRequirements."
     ] ;
     sh:property [
-        sh:path pl:hasPlacementRecommendation ;
+        sh:path pl:placementRecommendation ;
         sh:class pl:PlacementRecommendation ;
         sh:nodeKind sh:BlankNodeOrIRI ;
         sh:minCount 1 ; sh:maxCount 1 ;
         sh:message "Placement must have exactly one PlacementRecommendation."
     ] ;
     sh:property [
-        sh:path pl:hasRiskAssessment ;
+        sh:path pl:riskAssessment ;
         sh:class pl:RiskAssessment ;
         sh:nodeKind sh:BlankNodeOrIRI ;
         sh:minCount 1 ; sh:maxCount 1 ;
         sh:message "Placement must have exactly one RiskAssessment (QA: all risk fields populated)."
     ] ;
     sh:property [
-        sh:path pl:hasQualityAssurance ;
+        sh:path pl:qualityAssurance ;
         sh:class pl:QualityAssurance ;
         sh:nodeKind sh:BlankNodeOrIRI ;
         sh:minCount 1 ; sh:maxCount 1 ;
         sh:message "Placement must have exactly one QualityAssurance (referralDate, placementDate, costDate)."
     ] ;
     sh:property [
-        sh:path pl:hasActualPlacement ;
+        sh:path pl:actualPlacement ;
         sh:class pl:ActualPlacement ;
         sh:nodeKind sh:BlankNodeOrIRI ;
         sh:maxCount 1 ;

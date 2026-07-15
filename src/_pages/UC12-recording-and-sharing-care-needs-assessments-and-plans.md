@@ -1,8 +1,7 @@
 ---
 title: Recording and Sharing Adult Social Care Needs Assessments and Care Plans
 breadcrumbs:
-  - title: Use Cases
-    url: /use_cases
+  - Use Cases
 tags:
   - MAIS
   - Use Case
