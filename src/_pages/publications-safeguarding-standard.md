@@ -4,8 +4,7 @@ current: /publications_safeguarding_standard
 title: Safeguarding Standard
 description: A common data model for recording the services, professionals, organisations, service episodes and life events involved in safeguarding and promoting the wellbeing of a person, to support multi-agency information sharing.
 breadcrumbs:
-  - title: Publications
-    url: /publications
+  - Publications
 tags:
   - Safeguarding
   - Publication
