@@ -129,7 +129,7 @@ Subscribed systems might be GPs, emergency departments, local authorities or som
 
 This integration can only be used where there is a legal basis to do so.
 
-For details of the legal basis for sharing NEMS events, see the [NEMS controller catalogue](https://developer.nhs.uk/apis/ems-beta/controller_catalogue.html).
+For details of the legal basis for sharing NEMS events, see the [NEMS controller catalogue](https://nhsconnect.github.io/Events-Management/controller_catalogue.html).
 
 [**Child Protection - Information Sharing - HL7 V3 API**](https://digital.nhs.uk/developer/api-catalogue/child-protection-information-sharing-hl7-v3)
 
