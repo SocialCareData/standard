@@ -2,7 +2,7 @@
 layout: publication
 current: /publications_data_exchange_standard
 title: Data Exchange Standard
-description: TODO
+description: A FHIR-based standard for multi-agency safeguarding data exchange with structured cross-system queries and responses.
 breadcrumbs:
   - Publications
 tags:
@@ -27,7 +27,7 @@ In this simplified view, there are three types of shareable information:
 * State: A status of an individual that would be of interest to a safeguarding professional ​e.g. Family receiving housing support, free school meals, persistent school absence. ​
 * ​Events: A specific incident that would be of interest to a safeguarding professional ​e.g. A+E attendance, missing person incident, DV incident, exclusions.
 
-For our intial development and testing of standards to support multiagency data exchange, we are focussing on involvements.
+For our initial development and testing of standards to support multiagency data exchange, we are focussing on involvements.
 
 The following visual illustrates how the various standards fit together:
 
@@ -71,9 +71,9 @@ It provides a profile of the [FHIR Parameters resource](https://hl7.org/fhir/par
 
 * Constrained variant of [`$match`](https://hl7.org/fhir/operation-patient-match.html) operation.
 * Extends query with "reason" code - with values from an agreed vocabulary / codelist.
-* Response indicates whether the person is known to the system, with basic details of sevice involvements, and with contact details for further information.
+* Response indicates whether the person is known to the system, with basic details of service involvements, and with contact details for further information.
 
-Around this technical specificiation, there are a set of conditions which are required to support trusted machine-to-machine data exchange that is proportionate and effective. These are being explored under [Information Governance](https://github.com/SocialCareData/information-governance).
+Around this technical specification, there are a set of conditions which are required to support trusted machine-to-machine data exchange that is proportionate and effective. These are being explored under [Information Governance](https://github.com/SocialCareData/information-governance).
 
 ## Roadmap
 
@@ -95,8 +95,8 @@ Subsequent releases will build on these capabilities to:
 ## How it works
 
 * Request includes person identifiers AND reason for request and relevant information governance assertions
-* Request issued by an autorised person using a recognised, validated system.
-* An agreed decision rules process defines if a response can be shared automatically or not, or if an escalation required.
+* Request issued by an authorised person using a recognised, validated system.
+* An agreed decision rules process defines if a response can be shared automatically or not, or if an escalation is required.
 * If person known or 'open' on the system, returns contact details for further enquiry.
 
 ## Assumptions
