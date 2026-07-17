@@ -1,8 +1,5 @@
 ---
 title: Use Cases
-tags:
-  - Programme
-  - Use Case
 regenerate: true
 ---
 

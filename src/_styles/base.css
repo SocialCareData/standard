@@ -161,6 +161,7 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
 .tag {
   border-radius: 1rem;
   font-size: .9rem;
+  min-width: max-content;
   padding: .1rem .7rem .2rem .6rem;
 }
 
@@ -210,20 +211,32 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
   padding: 0;
 }
 
-.content-list li {
-  margin-top: .4rem;
+.content-list > li {
+  margin-top: .6rem;
 }
 
 .content-list .heading, .event-list .heading {
   margin-bottom: .25rem;
 }
 
-.content-list li span, .event-list li span {
+.content-list > li span, .event-list li span {
   margin-right: .6rem;
 }
 
-.content-list li p {
+.content-list > li p {
   margin: .4rem 0;
+}
+
+.content-list-table {
+  display: table;
+}
+
+.content-list-table > li {
+  display: table-row;
+}
+
+.content-list-table > li > * {
+  display: table-cell;
 }
 
 .tag-list {

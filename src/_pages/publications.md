@@ -1,8 +1,5 @@
 ---
 title: Publications
-tags:
-  - Programme
-  - Publication
 regenerate: true
 ---
 
