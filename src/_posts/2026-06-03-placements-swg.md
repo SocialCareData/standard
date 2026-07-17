@@ -5,8 +5,7 @@ tags:
   - Working Group
   - Placements
 breadcrumbs:
-  - title: Updates
-    url: /updates
+  - Updates
 ---
 
 Session Slides: [20260603-WorkingGroup_2.pptx](https://github.com/user-attachments/files/29643571/20260603-WorkingGroup_2.pptx)

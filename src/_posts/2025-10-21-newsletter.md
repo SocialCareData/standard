@@ -6,8 +6,7 @@ author:
 tags:
   - Newsletter
 breadcrumbs:
-  - title: Updates
-    url: /updates
+  - Updates
 ---
 
 Hello from the Data Standards for Social Care team!

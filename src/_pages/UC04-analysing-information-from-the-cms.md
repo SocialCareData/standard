@@ -1,8 +1,7 @@
 ---
 title: Analysing Information from the CMS
 breadcrumbs:
-  - title: Use Cases
-    url: /use_cases
+  - Use Cases
 tags:
   - MAIS
   - Use Case

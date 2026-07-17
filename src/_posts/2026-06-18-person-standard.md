@@ -15,8 +15,7 @@ changelog:
   - Property names standardised for consistency (for example, ethnicCode > ethnicityCode - "ethnic" is an adjective; "ethnicity" is the correct noun form.)
   - Vocabulary names decoupled from entity context (for example, PersonEthnicity > EthnicityCode)
 breadcrumbs:
-  - title: Publications
-    url: /publications
+  - Publications
 tags:
   - Person
   - Publication

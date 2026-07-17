@@ -1,11 +1,11 @@
 {
-  "@context": "./context.jsonld",
+  "@context": "../context.jsonld",
   "@id": "ex:INVALID-003",
   "@type": "Placement",
 
   "childId": "INVALID003",
 
-  "hasPlacementAvailability": {
+  "placementAvailability": {
     "@id": "ex:INVALID-003/availability",
     "@type": "PlacementAvailability",
     "placementId": "PLC-INVALID-003",
@@ -14,7 +14,7 @@
     "outOfLAReason": "CourtOrder"
   },
 
-  "hasPlacementRequirements": {
+  "placementRequirements": {
     "@id": "ex:INVALID-003/requirements",
     "@type": "PlacementRequirements",
     "communicationNeeds": "No",
@@ -25,7 +25,7 @@
     "homeAdaptationRequired": false
   },
 
-  "hasPlacementRecommendation": {
+  "placementRecommendation": {
     "@id": "ex:INVALID-003/recommendation",
     "@type": "PlacementRecommendation",
     "fosterCareSuitability": "Preferred",
@@ -33,7 +33,7 @@
     "supportedAccommodationSuitability": "NotSpecified"
   },
 
-  "hasRiskAssessment": {
+  "riskAssessment": {
     "@id": "ex:INVALID-003/risk",
     "@type": "RiskAssessment",
     "riskSelfHarm":             "NoKnownRisk",
@@ -49,7 +49,7 @@
     "riskToOthersCriminal":     "NoKnownRisk"
   },
 
-  "hasActualPlacement": {
+  "actualPlacement": {
     "@id": "ex:INVALID-003/actual",
     "@type": "ActualPlacement",
     "placementType": "Foster",
@@ -61,7 +61,7 @@
     "totalWeeklyCost": 1500.00
   },
 
-  "hasQualityAssurance": {
+  "qualityAssurance": {
     "@id": "ex:INVALID-003/qa",
     "@type": "QualityAssurance",
     "referralDate":  "2024-02-12",
