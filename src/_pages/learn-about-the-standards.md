@@ -54,6 +54,11 @@ We have identified a range of use cases which our standards could support across
 * Multi-agency information sharing
 * Procurement and implementation
 
+You can read our detailed use case documentation [here](https://standard.socialcaredata.io/use_cases).
+
+## What standards are we developing?
+We are developing standards for data structure and content (e.g. a standard to describe a person or a service episode). We are also developing data sharing and security standards. To view the detail of our standards, please see our [Publications](https://standard.socialcaredata.io/publications) page.
+
 </article>
 For more detail, see our individual use case documentation (link to: Use Cases - Social Care Interoperability Standards)
  
