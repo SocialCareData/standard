@@ -80,9 +80,9 @@ An integration engineer who has connected to one of the vendor's API in this eco
 
 The following are the suggested next steps:
 
-1. Share this document with relevant stakeholders, with both DfE and DHSC and complete an initial review. This will validate a common understanding about the content, intention, and next steps.
-2. Share the documentation, authentication, and documentation and versioning standards with vendors
-3. Establish a working group to further expound the standard. Key questions and themes for engagement include:
+- [X] Share this document with relevant stakeholders, with both DfE and DHSC and complete an initial review. This will validate a common understanding about the content, intention, and next steps.
+- [X] Share the documentation, authentication, and documentation and versioning standards with vendors
+- [ ] Establish a working group to further expound the standard. Key questions and themes for engagement include:
   * Which of these principles do vendors already meet, and which would require meaningful work to adopt?
   * Are there standards or approaches you would recommend in place of those proposed here?
   * What would make participation in a shared API register feasible or valuable for vendors?
