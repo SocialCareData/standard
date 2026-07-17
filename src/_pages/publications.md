@@ -6,7 +6,7 @@ tags:
 regenerate: true
 ---
 
-{% assign publications = site.pages | where_exp: "p", "p.tags contains 'Publication' and p.url != page.url" | sort: "title" %}
+{% assign publications = site.pages | where_exp: "p", "p.breadcrumbs contains 'Publications'" | sort: "title" %}
 {% if publications.size > 0 %}
 <ul class="content-list">
 {% for p in publications %}
