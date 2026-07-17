@@ -1,6 +1,7 @@
 ---
 layout: publication
 title: "Standards comparison: person matching"
+description: "Technical details of a query operation in some database system containing person data, such as a FHIR Master Patient Index, based on some set of (demographic and other) details about a person"
 breadcrumbs:
   - Publications
 tags:
@@ -110,11 +111,6 @@ Dates should be normalized and compared in a probabilistic manner as examplified
 
 Taking into account the structure of UK postcodes with outward code denoting a large region and inward code denoting a specific smaller region, consider a algorithm like that of figure 6 on page 34 of the `Person_ID` Handbook:
 
-
-## NHS Personal Demographics Service flow diagram
-
-<div>
-
 ```mermaid
 flowchart TD
     LEGEND[PDS: ]
@@ -145,8 +141,6 @@ flowchart TD
 
     LEGEND[PDS:  Personal Demographics Service]
 ```
-
-</div>
 
 
 ## Related documents
