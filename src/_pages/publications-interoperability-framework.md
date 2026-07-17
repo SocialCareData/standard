@@ -80,9 +80,9 @@ An integration engineer who has connected to one of the vendor's API in this eco
 
 The following are the suggested next steps:
 
-1. Share this document with relevant stakeholders, with both DfE and DHSC 	and complete an initial review. This will validate a common understanding about the content, intention, and next steps.
-1. Share the documentation, authentication, and documentation and versioning standards with vendors and publish to the website.
-1. Establish a working group to further expound the standard. Key questions and themes for engagement include:
+1. Share this document with relevant stakeholders, with both DfE and DHSC and complete an initial review. This will validate a common understanding about the content, intention, and next steps.
+2. Share the documentation, authentication, and documentation and versioning standards with vendors
+3. Establish a working group to further expound the standard. Key questions and themes for engagement include:
   * Which of these principles do vendors already meet, and which would require meaningful work to adopt?
   * Are there standards or approaches you would recommend in place of those proposed here?
   * What would make participation in a shared API register feasible or valuable for vendors?
@@ -144,4 +144,4 @@ In this example, vendors would support the following:
 * Define granular scopes so that integrations can request least-privilege access rather than broad read/write permissions.
 * Support token introspection or JWT validation so we can verify token validity without vendor-specific libraries.
 
-The longer-term aspiration is to explore feasibility for a federated trust model (where a token issued by our identity provider is accepted directly by vendor APIs). This will reduce the number of separate credentials teams must manage. It is recognised that this is a non-trivial ask and therefore must be explored in collaboration with key stakeholders
+The longer-term aspiration is to explore feasibility for a federated trust model (where a token issued by our identity provider is accepted directly by vendor APIs). This will reduce the number of separate credentials teams must manage. It is recognised that this is a non-trivial ask and therefore must be explored in collaboration with key stakeholders.
