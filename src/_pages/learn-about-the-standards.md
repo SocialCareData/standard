@@ -57,5 +57,3 @@ When case management systems implement these standards, information can flow fro
 * Explore and contribute to our [draft data standards](https://standard.socialcaredata.io/publications).
 
 </article>
-For more detail, see our individual use case documentation (link to: Use Cases - Social Care Interoperability Standards)
- 
