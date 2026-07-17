@@ -30,8 +30,10 @@ a {
   color: var(--link-color);
 }
 
-a:hover {
-  color: var(--link-color-hover);
+a:hover,
+a:focus {
+  color: var(--link-hover-color);
+  text-decoration: underline;
   transition: var(--link-color-transition);
 }
 
@@ -41,7 +43,7 @@ table {
 }
 
 blockquote {
-  background-color: var(--main-highlight-3-background);
+  background-color: var(--highlight-3-background);
   border-radius: .3rem;
   margin: 0;
   padding: .7rem 2.4rem .8rem 2.1rem;
@@ -56,6 +58,10 @@ dd {
 }
 
 /* Layout */
+body > * {
+  overflow-x: auto;
+}
+
 header, footer {
   align-items: center;
   background: var(--background);
@@ -101,7 +107,7 @@ main article img {
 }
 
 main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-small {
-  max-width: var(--article-text-max-width);
+  max-width: var(--max-width-text);
 }
 
 
@@ -116,7 +122,7 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
 
 /* Classes */
 .data-model-diagram {
-  max-width: var(--article-main-image-max-width);
+  max-width: var(--max-width-image);
 }
 
 .data-model-diagram img {
@@ -236,21 +242,21 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
 }
 
 .example {
-  background: var(--main-highlight-1-background);
-  border-left: .5rem solid var(--main-highlight-1-border);
+  background: var(--highlight-1-background);
+  border-left: .5rem solid var(--highlight-1-border);
 }
 
 .example h5 {
-  color: var(--main-highlight-1-color);
+  color: var(--highlight-1-color);
 }
 
 .note {
-  background: var(--main-highlight-2-background);
-  border-left: .5rem solid var(--main-highlight-2-border);
+  background: var(--highlight-2-background);
+  border-left: .5rem solid var(--highlight-2-border);
 }
 
 .note h5 {
-  color: var(--main-highlight-2-color);
+  color: var(--highlight-2-color);
 }
 
 .example h5, .note h5 {
@@ -270,33 +276,6 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
   overflow-x: auto;
 }
 
-.numbered-headings {
-  counter-reset: h2;
-}
-
-.numbered-headings h2 {
-  counter-reset: h3;
-}
-
-.numbered-headings h3 {
-  counter-reset: h4;
-}
-
-.numbered-headings h2::before {
-  counter-increment: h2;
-  content: counter(h2) ". ";
-}
-
-.numbered-headings h3::before {
-  counter-increment: h3;
-  content: counter(h2) "." counter(h3) " ";
-}
-
-.numbered-headings h4::before {
-  counter-increment: h4;
-  content: counter(h2) "." counter(h3) "." counter(h4) " ";
-}
-
 .publish-dates {
   font-style: italic;
   margin: var(--main-margin-narrow);
@@ -309,13 +288,14 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
 
 .table-bordered th,
 .table-bordered td {
-  border: 1px solid var(--table-border-color);
-  padding: 10px;
+  border: 1px solid var(--highlight-3-border);
+  padding: 1rem;
   text-align: left;
 }
 
 .table-bordered th {
-  background-color: var(--table-head-background);
+  background-color: var(--highlight-3-background);
+  color: var(--highlight-3-color);
 }
 
 .version-tag {
