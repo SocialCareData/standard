@@ -37,19 +37,11 @@ The ODI’s research has shown that many aspects of data can be standardised usi
 * Exchange data in more consistent, streamlined ways.
 * Provide guidance for data users, including publishers and consumers.
 
-## What can be standardised?
-The ODI’s research has shown that many aspects of data can be standardised using open standards for data, as shown in the figure below. Broadly, we can define standards to help:
-
-* Share vocabulary to use language and codes in a consistent, clearly defined way, to 'speak the same language’.
-* Exchange data in more consistent, streamlined ways.
-* Provide guidance for data users, including publishers and consumers.
- 
-To find out more about open standards for data, please see the ODI’s resources:
-* [What are open standards for data?](https://standards.theodi.org/introduction/what-are-open-standards-for-data/)
-* [When to use open standards for data](https://standards.theodi.org/introduction/when-to-use-open-standards-for-data/)
-
 ## Why are we developing interoperability standards for social care?
-When case management systems implement these standards, information can flow from one system to another without technical and commercial barriers - the constraint is then “what’s appropriate” rather than “what do systems allow”. For example, staff in one LA should be able to look up information about a child’s previous engagement with services in another LA to support a safeguarding enquiry, and we want social workers supporting older adults to have timely information about hospital admissions and discharge.
+
+Social care professionals work across multiple organisations and systems. Important information may be spread across organisations, recorded in different ways, or trapped inside systems that cannot easily work together. The result is more administration, less time with people, and missed opportunities to provide joined-up support. In children's social care this can make safeguarding harder; in adult social care it can make coordinated, person-centred care harder to deliver.
+
+We're developing interoperability standards to create common foundations for social care technology, so that professionals are better able to access and use the information they need to support children, adults and families. When case management systems implement these standards, information can flow from one system to another without technical and commercial barriers - the constraint is then “what’s appropriate” rather than “what do systems allow”. For example, staff in one LA should be able to look up information about a child’s previous engagement with services in another LA to support a safeguarding enquiry, and we want social workers supporting older adults to have timely information about hospital admissions and discharge.
 
 ## Where can I learn more?
 
