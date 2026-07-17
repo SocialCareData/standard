@@ -1,0 +1,17 @@
+{% assign versions = site.pages | where: "reference", page.reference | where_exp: "p", "p.version" | sort: "version" | reverse %}
+{% if versions.size > 0 %}
+<ul class="content-list">
+{% for p in versions %}
+  <li>
+    <h3><a href="{{ p.url }}">Version {{ p.version }}</a></h3>
+    {% if p.changelog.size > 0 %}
+    <ul>
+    {% for c in p.changelog %}
+      <li>{{c}}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+  </li>
+{% endfor %}
+</ul>
+{% endif %}
