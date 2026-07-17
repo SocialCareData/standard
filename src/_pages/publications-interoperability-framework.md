@@ -76,19 +76,6 @@ The third standard concerns documentation and versioning. Good APIs with poor do
 
 An integration engineer who has connected to one of the vendor's API in this ecosystem can connect to another vendor's API within hours rather than days, because error handling and documentation structure are easy to find and recognisably similar.
 
-## Suggested next steps
-
-The following are the suggested next steps:
-
-- [X] Share this document with relevant stakeholders, with both DfE and DHSC and complete an initial review. This will validate a common understanding about the content, intention, and next steps.
-- [X] Share the documentation, authentication, and documentation and versioning standards with vendors
-- [ ] Establish a working group to further expound the standard. Key questions and themes for engagement include:
-  * Which of these principles do vendors already meet, and which would require meaningful work to adopt?
-  * Are there standards or approaches you would recommend in place of those proposed here?
-  * What would make participation in a shared API register feasible or valuable for vendors?
-  * What concerns do vendors have about an OAuth federation model, and what would they need to see before considering it?
-  * What support could we offer to make adoption of these principles easier?
-
 ## Appendices
 
 ### Appendix 1: Sample Shared API Register
