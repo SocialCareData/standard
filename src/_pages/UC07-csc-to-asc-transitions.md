@@ -4,6 +4,7 @@ title: Transition from Children’s Social Care to Adult Social Care
 breadcrumbs:
   - Use Cases
 tags:
+  - Joined Up Care
   - MAIS
   - Use Case
 reference: UC07

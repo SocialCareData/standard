@@ -4,6 +4,7 @@ title: Recording and Sharing Adult Social Care Needs Assessments and Care Plans
 breadcrumbs:
   - Use Cases
 tags:
+  - Joined Up Care
   - MAIS
   - Use Case
 reference: UC12
