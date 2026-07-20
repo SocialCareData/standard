@@ -1,0 +1,17 @@
+{
+  "name": "shacl-table",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generate Markdown tables describing the first-level properties of a SHACL entity (targetClass).",
+  "main": "index.js",
+  "bin": {
+    "shacl-table": "index.js"
+  },
+  "scripts": {
+    "generate": "node index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "n3": "^1.17.4"
+  }
+}

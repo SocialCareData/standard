@@ -103,7 +103,7 @@ pl:PlacementAvailability rdf:type owl:Class ;
                                          ] ,
                                          [ rdf:type owl:Restriction ;
                                            owl:onProperty pl:outOfLAReason ;
-                                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                           owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
                                            owl:allValuesFrom [ rdf:type owl:Restriction ;
                                                                owl:onProperty skos:inScheme ;
                                                                owl:hasValue <https://ns.socialcaredata.io/placements/outof-la-reason>

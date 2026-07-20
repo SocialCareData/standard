@@ -10,6 +10,8 @@ tags:
   - Publication
 ---
 
+[Table View](/publications_placements_standard_table){: style="float: right;"}
+
 ## Introduction
 
 The children's social care placements standard helps regions to answer their sufficiency questions by establishing a common data model to gather data about placements.

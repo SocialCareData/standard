@@ -318,6 +318,15 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
   background-color: var(--table-head-background);
 }
 
+.shacl-table {
+  font-size: 0.85em;
+}
+
+.shacl-table th,
+.shacl-table td {
+  padding: .3rem .5rem;
+}
+
 .version-tag {
     background-color: var(--main-tag-background);
     color: var(--main-tag-color);
