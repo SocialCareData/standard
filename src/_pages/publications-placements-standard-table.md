@@ -43,12 +43,24 @@ tags:
 
 ### Communication Need Taxonomy
 
+{% shacl_table src/assets/shacl/shacl-shape.ttl specificCommunicationRequirement %}
+
 ### Living Arrangement Taxonomy
+
+{% shacl_table src/assets/shacl/shacl-shape.ttl livingCompanions %}
 
 ### Out of LA Reason Taxonomy
 
+{% shacl_table src/assets/shacl/shacl-shape.ttl outOfLAReason %}
+
 ### Placement Type Taxonomy
+
+{% shacl_table src/assets/shacl/shacl-shape.ttl placementType %}
 
 ### Placement Urgency Taxonomy
 
+{% shacl_table src/assets/shacl/shacl-shape.ttl neededBy %}
+
 ### Support Type Taxonomy
+
+{% shacl_table src/assets/shacl/shacl-shape.ttl additionalSupport %}

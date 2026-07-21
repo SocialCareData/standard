@@ -5,7 +5,8 @@ const assert = require('node:assert/strict')
 
 const { slugify, cardinality, datatypeLabel } = require('../lib/format')
 const { localName, schemeOf } = require('../lib/rdf')
-const { renderMarkdown, dataTypeCell, escapeCell } = require('../lib/table')
+const { renderMarkdown, renderVocabularyTable, dataTypeCell, optionsCell, escapeCell } = require('../lib/table')
+const { storeFrom } = require('./helpers')
 
 test('slugify matches kramdown auto_id output', () => {
   assert.equal(slugify('Out of LA Reason Taxonomy'), 'out-of-la-reason-taxonomy')
@@ -66,4 +67,64 @@ test('renderMarkdown produces a header + separator + rows', () => {
   assert.equal(lines[0], '| Field name | Cardinality | Data Type | Description | Options |')
   assert.equal(lines[1], '| --- | --- | --- | --- | --- |')
   assert.equal(lines[2], '| `f` | 1..1 | String | desc |  |')
+})
+
+const VOCAB = `
+<https://example.org/urgency> a skos:ConceptScheme ; skos:prefLabel "Urgency" .
+urg:Today a skos:Concept ; skos:notation "today" ; skos:definition "Needed | today." .
+urg:Soon  a skos:Concept ; skos:notation "soon" ; skos:prefLabel "Soon" .
+`
+
+const OPTIONS_TAXONOMY = `
+<https://example.org/urgency> a skos:ConceptScheme ; skos:prefLabel "Urgency" .
+urg:Today a skos:Concept ; skos:prefLabel "Today" .
+urg:Soon  a skos:Concept ; skos:prefLabel "Soon" .
+urg:Later a skos:Concept ; skos:prefLabel "Later" .
+urg:Never a skos:Concept ; skos:prefLabel "Never" .
+`
+const URGENCY_ROW = {
+  inList: ['Today', 'Soon', 'Later', 'Never'].map(i => `https://example.org/urgency#${i}`)
+}
+
+test('optionsCell links + previews when the taxonomy section exists on the page', () => {
+  const { store } = storeFrom(OPTIONS_TAXONOMY)
+  const cell = optionsCell(store, URGENCY_ROW, new Set(['urgency-taxonomy']))
+  assert.equal(cell, '[Urgency Taxonomy](#urgency-taxonomy): Today, Soon, Later …')
+})
+
+test('optionsCell lists ALL values when the section is absent from the page', () => {
+  const { store } = storeFrom(OPTIONS_TAXONOMY)
+  const cell = optionsCell(store, URGENCY_ROW, new Set(['some-other-section']))
+  assert.equal(cell, 'Today, Soon, Later, Never')
+})
+
+test('optionsCell links when page context is unknown (no anchor set)', () => {
+  const { store } = storeFrom(OPTIONS_TAXONOMY)
+  assert.match(optionsCell(store, URGENCY_ROW), /^\[Urgency Taxonomy\]\(#urgency-taxonomy\):/)
+  assert.match(optionsCell(store, URGENCY_ROW, null), /^\[Urgency Taxonomy\]/)
+})
+
+test('optionsCell is empty for a non-vocabulary property', () => {
+  const { store } = storeFrom(OPTIONS_TAXONOMY)
+  assert.equal(optionsCell(store, { datatype: 'x' }, new Set()), '')
+})
+
+test('renderVocabularyTable wraps a Code/Description table in a details element', () => {
+  const { store } = storeFrom(VOCAB)
+  const md = renderVocabularyTable(store, [
+    'https://example.org/urgency#Today',
+    'https://example.org/urgency#Soon'
+  ])
+  assert.equal(md, [
+    '<details>',
+    '<summary markdown="span">See vocabulary</summary>',
+    '',
+    '| Code | Description |',
+    '| :--- | :--- |',
+    '| `today` | Needed \\| today. |', // pipe in a description is escaped
+    '| `soon` | Soon |', // falls back to prefLabel when no definition
+    '{: .table-bordered}',
+    '',
+    '</details>'
+  ].join('\n'))
 })

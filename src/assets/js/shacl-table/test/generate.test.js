@@ -39,10 +39,68 @@ test('integration: ActualPlacement merges the duplicated cost properties', () =>
   assert.match(rows[0], /\| 1\.\.1 \| Decimal \|/)
 })
 
-test('throws a helpful error for an unknown entity', () => {
+test('integration: a controlled-vocabulary property renders a vocabulary table', () => {
+  const md = generateTable({ shaclPath: SHACL, entity: 'communicationNeeds', rootDir: REPO_ROOT })
+
+  // Wrapped in a collapsible details/summary element.
+  assert.match(md, /^<details>\n<summary markdown="span">See vocabulary<\/summary>/)
+  assert.match(md, /<\/details>$/)
+  // Two-column Code / Description header.
+  assert.match(md, /\| Code \| Description \|/)
+  // Concepts come from the presence-status taxonomy, in sh:in order, with
+  // skos:notation as the code and skos:definition as the description.
+  const codes = md.split('\n').filter(l => /^\| `/.test(l))
+  assert.deepEqual(codes, [
+    '| `yes` | Affirmative. |',
+    '| `no` | Negative. |',
+    '| `not-specified` | Not specified. |'
+  ])
+  // Styled to match the other vocabulary tables on the site.
+  assert.match(md, /\{: \.table-bordered\}/)
+  // ...and NOT the property-table class.
+  assert.doesNotMatch(md, /\.shacl-table/)
+})
+
+test('integration: property table keeps its .shacl-table IAL', () => {
+  const md = generateTable({ shaclPath: SHACL, entity: 'PlacementRequirements', rootDir: REPO_ROOT })
+  assert.match(md, /\n\{: \.shacl-table\}$/)
+})
+
+test('integration: Options links present taxonomies and inlines absent ones', () => {
+  // The placements tabular page has a "Communication Need Taxonomy" section but
+  // no "Yes / No / Not Specified" one, so those two properties must differ.
+  const md = generateTable({
+    shaclPath: SHACL,
+    entity: 'PlacementRequirements',
+    rootDir: REPO_ROOT,
+    pageHeadings: ['Communication Need Taxonomy']
+  })
+  const row = name => md.split('\n').find(l => l.includes(`\`${name}\``))
+
+  // Section present -> linked preview (unchanged behaviour).
+  assert.match(row('specificCommunicationRequirement'), /\[Communication Need Taxonomy\]\(#communication-need-taxonomy\): ESOL, BSL, Makaton …/)
+  // Section absent -> every value listed inline, no link, no ellipsis.
+  assert.match(row('communicationNeeds'), /\| Yes, No, Not specified \|$/)
+  assert.doesNotMatch(row('communicationNeeds'), /\]\(#/)
+})
+
+test('integration: with no page headings every taxonomy is linked', () => {
+  const md = generateTable({
+    shaclPath: SHACL,
+    entity: 'PlacementRequirements',
+    rootDir: REPO_ROOT,
+    pageHeadings: []
+  })
+  const row = name => md.split('\n').find(l => l.includes(`\`${name}\``))
+  // Empty headings means "page context known, no sections" -> all inline.
+  assert.match(row('specificCommunicationRequirement'), /\| ESOL, BSL, Makaton, Other, None \|$/)
+  assert.doesNotMatch(row('communicationNeeds'), /\]\(#/)
+})
+
+test('throws a helpful error for an unknown entity or property', () => {
   assert.throws(
     () => generateTable({ shaclPath: SHACL, entity: 'Nope', rootDir: REPO_ROOT }),
-    /No sh:NodeShape with sh:targetClass matching "Nope"/
+    /no controlled-vocabulary property, matching "Nope"/
   )
 })
 

@@ -164,22 +164,91 @@ function conceptLabel (store, conceptIri) {
 }
 
 /**
- * Resolve a `sh:in` value list into the pieces the "Options" column needs: a
- * link to the taxonomy section and a few example labels.
+ * Resolve a `sh:in` value list into the pieces the "Options" column needs: the
+ * taxonomy title + anchor, the full list of concept labels, and a capped
+ * "examples" preview (plus a `more` flag when the list was truncated).
  *
- * @returns {{title,anchor,examples:string[],more:boolean}}
+ * @returns {{title,anchor,labels:string[],examples:string[],more:boolean}}
  */
 function resolveOptions (store, inList, { maxExamples = 3 } = {}) {
   const scheme = schemeOf(inList[0])
   const label = schemeLabel(store, scheme)
   const title = /taxonomy$/i.test(label) ? label : `${label} Taxonomy`
+  const labels = inList.map(iri => conceptLabel(store, iri))
 
   return {
     title,
     anchor: slugify(title),
-    examples: inList.slice(0, maxExamples).map(iri => conceptLabel(store, iri)),
-    more: inList.length > maxExamples
+    labels,
+    examples: labels.slice(0, maxExamples),
+    more: labels.length > maxExamples
   }
 }
 
-module.exports = { extractProperties, resolveOptions, readProperty, orderedPropertyNodes }
+/** Machine-readable code for a concept: its skos:notation, else local name. */
+function conceptCode (store, conceptIri) {
+  return objectValue(store, namedNode(conceptIri), namedNode(NS.skos + 'notation')) ||
+    localName(conceptIri)
+}
+
+/**
+ * Human description for a concept, for the vocabulary table's "Description"
+ * column: the full skos:definition, falling back to the skos:prefLabel.
+ */
+function conceptDescription (store, conceptIri) {
+  return objectValue(store, namedNode(conceptIri), namedNode(NS.skos + 'definition')) ||
+    objectValue(store, namedNode(conceptIri), namedNode(NS.skos + 'prefLabel')) ||
+    ''
+}
+
+/**
+ * Resolve a `sh:in` value list into the rows a vocabulary table needs: one
+ * `{ code, description }` per concept, in the order the concepts appear in the
+ * list.
+ *
+ * @returns {{title,anchor,concepts:{code:string,description:string}[]}}
+ */
+function resolveVocabulary (store, inList) {
+  const scheme = schemeOf(inList[0])
+  const label = schemeLabel(store, scheme)
+  const title = /(taxonomy|vocabulary)$/i.test(label) ? label : `${label} Taxonomy`
+
+  return {
+    title,
+    anchor: slugify(title),
+    concepts: inList.map(iri => ({
+      code: conceptCode(store, iri),
+      description: conceptDescription(store, iri)
+    }))
+  }
+}
+
+/**
+ * Find the controlled-vocabulary (`sh:in`) list for a property identified by
+ * its local name (or full path IRI), scanning every `sh:property` node in the
+ * SHACL document. Returns the first non-empty `sh:in` list found, or null when
+ * no such property (or no vocabulary on it) exists.
+ */
+function findVocabularyList (store, shaclQuads, property) {
+  const seen = new Set()
+  for (const q of shaclQuads) {
+    if (q.predicate.value !== P_PROPERTY || seen.has(q.object.value)) continue
+    seen.add(q.object.value)
+    const d = readProperty(store, q.object)
+    if (d && d.inList && (d.name === property || d.path === property)) {
+      return d.inList
+    }
+  }
+  return null
+}
+
+module.exports = {
+  extractProperties,
+  resolveOptions,
+  resolveVocabulary,
+  findVocabularyList,
+  conceptCode,
+  conceptDescription,
+  readProperty,
+  orderedPropertyNodes
+}

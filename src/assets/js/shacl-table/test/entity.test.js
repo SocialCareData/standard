@@ -4,7 +4,14 @@ const { test } = require('node:test')
 const assert = require('node:assert/strict')
 
 const { storeFrom } = require('./helpers')
-const { extractProperties, resolveOptions } = require('../lib/model')
+const {
+  extractProperties,
+  resolveOptions,
+  resolveVocabulary,
+  findVocabularyList,
+  conceptCode,
+  conceptDescription
+} = require('../lib/model')
 
 const SHAPES = `
 ex:ThingShape a sh:NodeShape ;
@@ -113,4 +120,62 @@ test('resolveOptions flags when there are more than three concepts', () => {
   assert.equal(opts.more, true)
   // Unknown concept still resolves via local name.
   assert.deepEqual(opts.examples, ['Today', 'Soon', 'Later'])
+})
+
+// A richer taxonomy carrying skos:notation and skos:definition, as the real
+// placements vocabularies do.
+const RICH_TAXONOMY = `
+<https://example.org/urgency> a skos:ConceptScheme ; skos:prefLabel "Urgency" .
+urg:Today a skos:Concept ; skos:prefLabel "Today" ;
+    skos:notation "today" ; skos:definition "Needed today." .
+urg:Soon  a skos:Concept ; skos:prefLabel "Soon" ;
+    skos:notation "soon" ; skos:definition "Needed soon." .
+urg:Later a skos:Concept ; skos:prefLabel "Later" .
+`
+
+const URGENCY = i => `https://example.org/urgency#${i}`
+
+test('conceptCode prefers skos:notation, falls back to the local name', () => {
+  const { store } = storeFrom(SHAPES + RICH_TAXONOMY)
+  assert.equal(conceptCode(store, URGENCY('Today')), 'today')
+  assert.equal(conceptCode(store, URGENCY('Later')), 'Later') // no notation
+})
+
+test('conceptDescription prefers skos:definition, falls back to prefLabel', () => {
+  const { store } = storeFrom(SHAPES + RICH_TAXONOMY)
+  assert.equal(conceptDescription(store, URGENCY('Today')), 'Needed today.')
+  assert.equal(conceptDescription(store, URGENCY('Later')), 'Later') // no definition
+})
+
+test('resolveVocabulary maps a sh:in list to ordered code/description rows', () => {
+  const { store } = storeFrom(SHAPES + RICH_TAXONOMY)
+  const vocab = resolveVocabulary(store, [URGENCY('Today'), URGENCY('Soon'), URGENCY('Later')])
+  assert.equal(vocab.title, 'Urgency Taxonomy')
+  assert.equal(vocab.anchor, 'urgency-taxonomy')
+  assert.deepEqual(vocab.concepts, [
+    { code: 'today', description: 'Needed today.' },
+    { code: 'soon', description: 'Needed soon.' },
+    { code: 'Later', description: 'Later' }
+  ])
+})
+
+test('findVocabularyList locates a property\'s sh:in list by local name', () => {
+  const { store, quads } = storeFrom(SHAPES)
+  assert.deepEqual(findVocabularyList(store, quads, 'urgency'), [
+    URGENCY('Today'), URGENCY('Soon'), URGENCY('Later')
+  ])
+})
+
+test('findVocabularyList matches by full path IRI as well', () => {
+  const { store, quads } = storeFrom(SHAPES)
+  assert.deepEqual(findVocabularyList(store, quads, 'https://example.org/urgency'), [
+    URGENCY('Today'), URGENCY('Soon'), URGENCY('Later')
+  ])
+})
+
+test('findVocabularyList returns null for non-vocabulary or missing properties', () => {
+  const { store, quads } = storeFrom(SHAPES)
+  assert.equal(findVocabularyList(store, quads, 'name'), null) // datatype, not sh:in
+  assert.equal(findVocabularyList(store, quads, 'child'), null) // sh:class, not sh:in
+  assert.equal(findVocabularyList(store, quads, 'nope'), null) // does not exist
 })
