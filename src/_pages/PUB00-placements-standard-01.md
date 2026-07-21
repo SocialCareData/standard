@@ -1,6 +1,5 @@
 ---
 layout: publication
-current: /publications_placements_standard
 title: Children's Social Care Placements Standard
 description: The children's social care placements standard helps regions answer their sufficiency questions by establishing a common data model to gather data about placements.
 breadcrumbs:
@@ -8,6 +7,15 @@ breadcrumbs:
 tags:
   - Placements
   - Publication
+reference: PUB00
+status: draft
+version: 01
+changelog:
+  - Removed unused quality assurance fields
+  - Added data validation rules
+  - Updated reporting spreadsheet
+  - Added CSV format
+  - Removed RiskAssessment.riskOther and RiskAssessment.riskToOthersOther text fields
 ---
 
 [Table View](/publications_placements_standard_table){: style="float: right;"}
@@ -503,9 +511,9 @@ Use the [National Placement Standard spreadsheet template (June 2026, v3)](/asse
 
 ## Report an issue
 
-If you spot an issue with this standard, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Placements+Standard%3A%20&page=https%3A%2F%2Fstandard.socialcaredata.io%2Fplacements_standard&category=Placements+Standard" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+{% include report-issue.html %}
 
 
-## Versions
+## Changelog
 
-{% include versions.html %}
+{% include changelog.html %}

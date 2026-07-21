@@ -1,24 +1,14 @@
 ---
+layout: use-case
 title: Transition from Children’s Social Care to Adult Social Care
 breadcrumbs:
   - Use Cases
 tags:
+  - Joined Up Care
   - MAIS
   - Use Case
 reference: UC07
 ---
-
-
-
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of Contents</h2>
-
-1. TOC
-{:toc}
-
-</nav>
-
-<article class="numbered-headings">
 
 ## Summary
 
