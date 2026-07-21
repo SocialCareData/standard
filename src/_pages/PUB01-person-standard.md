@@ -1,25 +1,15 @@
 ---
-layout: version
-current: /publications_person_standard
-title: Person Standard (2026-06-18)
+layout: publication
+title: Person Standard
 description: A common data model for identifying and describing a person across social care systems, designed to unblock multi-agency information sharing and single-view use cases.
-changelog:
-  - The Person and ConnectedPerson entities have been unified into a single Person entity. The two shared approximately 80% of their fields and differed mainly in cardinality requirements.
-  - Validation strictness is now handled through context-specific profiles (shape files) rather than separate entity types, aligning with how FHIR manages validation variance across use contexts.
-  - RelatedPerson references changed from URI to Identifier.
-  - matchedPersonRef references changed from URI to Identifier
-  - PartialDate extracted as a reusable datatype
-  - Deceased.date upgraded to PartialDate
-  - UPRN and USRN type corrected from Float16 to String
-  - Plural property names changed to singular (for example, givenNames > givenName)
-  - Property names standardised for consistency (for example, ethnicCode > ethnicityCode - "ethnic" is an adjective; "ethnicity" is the correct noun form.)
-  - Vocabulary names decoupled from entity context (for example, PersonEthnicity > EthnicityCode)
 breadcrumbs:
   - Publications
 tags:
+  - MAIS
   - Person
   - Publication
-  - MAIS
+reference: PUB01
+status: draft
 ---
 
 ## Introduction
@@ -46,7 +36,6 @@ The following diagram illustrates the elements of the Person Standard.
 <p class="data-model-diagram"><img src="/assets/img/person/person-data-model.svg" alt="Person Data Model" title="Person Data Model" width="80%"/></p>
 
 A `Person` is the top-level record. It aggregates zero or more `Identifier`s, one or more `Name`s, zero or more `Address`es, zero or more `Contact` entries, zero or more `PersonRelationship`s linking to other people, an optional `dateOfBirth` (with `PartialDate`), an optional `isDeceased` flag and optional `deceasedDate` (with `PartialDate`). Cross-system matches established with other agencies are recorded as `matchedPersonRef` — an array of `Identifier`s pointing to the same person as it is known in other systems. The person's gender, phenotypic sex, and ethnicity are captured via controlled vocabularies.
-
 
 ### Person
 
@@ -580,14 +569,9 @@ The Person Standard is a reduced subset of the FHIR `Patient` resource, extended
 
 ### See also
 
-- [Person matching implementation](/standards_comparison_person_matching) — how `matchedPersonRef` is established via the FHIR `$match` operation.
+- [Person matching implementation](/PUB03_standards_comparison_person_matching) — how `matchedPersonRef` is established via the FHIR `$match` operation.
 
 
 ## Report an issue
 
-If you spot an issue with this standard, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Person+Standard%3A%20&page=https%3A%2F%2Fstandard.socialcaredata.io%2Fperson_standard&category=Person+Standard" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
-
-
-## Versions
-
-{% include versions.html %}
+{% include report-issue.html %}

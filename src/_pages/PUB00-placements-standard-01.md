@@ -1,15 +1,21 @@
 ---
-layout: version
-current: /publications_placements_standard
-title: Children's Social Care Placements Standard (2026-05-30)
+layout: publication
+title: Children's Social Care Placements Standard
 description: The children's social care placements standard helps regions answer their sufficiency questions by establishing a common data model to gather data about placements.
-changelog:
-  - Initial version
 breadcrumbs:
   - Publications
 tags:
   - Placements
   - Publication
+reference: PUB00
+status: draft
+version: 01
+changelog:
+  - Removed unused quality assurance fields
+  - Added data validation rules
+  - Updated reporting spreadsheet
+  - Added CSV format
+  - Removed RiskAssessment.riskOther and RiskAssessment.riskToOthersOther text fields
 ---
 
 ## Introduction
@@ -21,7 +27,7 @@ The children's social care placements standard helps regions to answer their suf
 
 The following diagram illustrates the elements of the Children's Social Care Placements Ontology.
 
-<p class="data-model-diagram"><img src="/assets/img/placements/placements-data-model-2026-05-30.svg" alt="Placements Data Model" title="Placements Data Model" /></p>
+<p class="data-model-diagram"><img src="/assets/img/placements/placements-data-model-2026-06-24.svg" alt="Placements Data Model" title="Placements Data Model" style="width: 80%; height: auto;" /></p>
 
 A `Placement` is the top-level record covering the full lifecycle of a placement instance. It aggregates six sub-components: the referral availability, the social-worker recommendation, the requirements describing the child's needs, the risk assessment, optionally the actual placement that was arranged, and quality-assurance metadata about who recorded each part and when.
 
@@ -261,14 +267,6 @@ Records the risks the child is exposed to (six categories) and the risks the chi
 <span id="risk-riskToOthersCriminal">riskToOthersCriminal</span>
 : Risk of criminal exploitation for others in the home. Allowed values are: `'No known risk'`, `'Risk Present'`.
 
-##### Free-text catch-alls
-
-<span id="risk-riskOther">riskOther</span>
-: Free-text description of any other risks the child is exposed to that are not captured by the standard risk fields. Multi-valued. _String_.
-
-<span id="risk-riskToOthersOther">riskToOthersOther</span>
-: Free-text description of any other risks to others or property. Multi-valued. _String_.
-
 #### Example
 
 <div class="example">
@@ -286,10 +284,7 @@ Records the risks the child is exposed to (six categories) and the risks the chi
   "riskToOthersSexual":       "No known risk",
   "riskToOthersFire":         "No known risk",
   "riskToOthersAnimals":      "No known risk",
-  "riskToOthersCriminal":     "No known risk",
-  "riskToOthersOther": [
-    "Verbal aggression toward staff during transitions"
-  ]
+  "riskToOthersCriminal":     "No known risk"
 }
 {% endhighlight %}
 </div>
@@ -415,9 +410,11 @@ LA-internal metadata about who recorded each part of the placement record (refer
 {% endhighlight %}
 </div>
 
+
 ## Ontology
 
 The ontology for this specification is defined in Turtle format and is available at: [ontology.ttl](/assets/ttl/ontology.ttl).
+
 
 ## Taxonomies
 
@@ -491,6 +488,7 @@ Additional support provision required alongside a placement. Multi-valued: selec
 
 Source vocabulary: [taxonomy-support-type.ttl](/assets/ttl/taxonomy-support-type.ttl). Used by `additionalSupport` on [PlacementRequirements](#placementrequirements).
 
+
 ## Validation
 
 A [SHACL shape](/assets/shacl/shacl-shape.ttl) encodes:
@@ -503,17 +501,17 @@ A [SHACL shape](/assets/shacl/shacl-shape.ttl) encodes:
 
 A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, applies the [JSON-LD context file](/assets/shacl/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
 
+
 ## Standard Placement Reporting Spreadsheet
 
-Use the standard spreadsheet template for reporting placements data:
+Use the [National Placement Standard spreadsheet template (June 2026, v3)](/assets/spreadsheet/National-Placement-Standard-Excel-20260624.xlsx) for reporting placements data.
 
-[National Placement Standard spreadsheet (April 2026, v2)](/assets/spreadsheet/National-Placement-Standard-Excel-20260427.xlsx)
 
 ## Report an issue
 
-If you spot an issue with this standard, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Placements+Standard%3A%20&page=https%3A%2F%2Fstandard.socialcaredata.io%2Fplacements_standard&category=Placements+Standard" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+{% include report-issue.html %}
 
 
-## Versions
+## Changelog
 
-{% include versions.html %}
+{% include changelog.html %}

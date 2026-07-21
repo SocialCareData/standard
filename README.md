@@ -8,6 +8,15 @@
 This GitHub repository is the source for [standard.socialcaredata.io](https://standard.socialcaredata.io) where we document our standards and standardisation process of social care.
 
 
+## Documents data
+
+Pages and posts have additional properties for organising information that can be used in their Front Matter.
+
+- `reference`: The identifier of this piece of content, could be the same accross serveral versions.
+- `status`: Used to indicate the status of a publication, could be `draft`, `proposed`, `effective`, `obsolete`.
+- `version`: The version number of a document, for example: `00`, `01`, `02`.
+
+
 ## License
 
 Copyright and licensing

@@ -1,17 +1,14 @@
 ---
 title: Publications
-tags:
-  - Programme
-  - Publication
 regenerate: true
 ---
 
-{% assign publications = site.pages | where_exp: "p", "p.tags contains 'Publication' and p.url != page.url" | sort: "title" %}
+{% assign publications = site.pages | where_exp: "p", "p.breadcrumbs contains 'Publications'" | where_exp: "p", "p.version == nil" | sort: "reference" %}
 {% if publications.size > 0 %}
 <ul class="content-list">
 {% for p in publications %}
   <li>
-    <h2 class="heading"><a href="{{ p.url }}">{{ p.title }}</a></h2>
+    <h2 class="heading">[{{ p.reference }}] <a href="{{ p.url }}">{{ p.title }}</a></h2>
     {% if p.description %}<p>{{ p.description }}</p>{% endif %}
   </li>
 {% endfor %}

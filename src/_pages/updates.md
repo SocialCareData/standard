@@ -1,7 +1,5 @@
 ---
 title: Updates
-tags:
-  - Programme
 regenerate: true
 ---
 
