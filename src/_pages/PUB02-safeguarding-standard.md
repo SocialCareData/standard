@@ -151,6 +151,9 @@ A service involved in the safeguarding or wellbeing of a person — the specific
 <span id="service-contact">contact</span>
 : Contact information for the service. Multi-valued (`1..*`). See [Person Standard → Contact](/PUB01_person_standard#contact).
 
+<span id="service-costFrequency">contact</span>
+: The frequency at which the unit cost occurs. Required (`1..1`). See the [Service costFrequency Vocabulary](#service-costFrequency-vocabulary).
+
 <span id="service-relatedProfessional">relatedProfessional</span>
 : References to `Professional`s involved in the service. Multi-valued. Optional (`0..*`). See [Professional](#professional). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
@@ -615,6 +618,30 @@ Used by [`Service.type`](#service-type). Codes to indicate the type of service.
 | `carer-sitting-service` | Unpaid carer sitting service |
 | `carer-universal-services` | Unpaid carer universal services |
 | `other-carer-support` | Other unpaid carer support |
+{:.table-bordered}
+
+</details>
+
+### Service costFrequency Vocabulary
+
+Used by [`Service.costFrequency`](#service-costFrequency). Codes to indicate the payment schedule a service adheres to.
+
+<details>
+<summary markdown="span">See vocabulary</summary>
+
+| Code | Description |
+| :--- | :--- |
+| `none` | No charge to client |
+| `per-session` | Per session |
+| `hourly` | Hourly |
+| `daily` | Daily |
+| `weekly` | Weekly |
+| `fortnightly` | Fortnightly |
+| `four-weekly` | 4-weekly |
+| `monthly` | Monthly |
+| `quarterly` | Quarterly |
+| `annually` | Annually |
+| `one-off` | One-off |
 {:.table-bordered}
 
 </details>
