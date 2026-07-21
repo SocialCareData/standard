@@ -179,6 +179,7 @@ A service involved in the safeguarding or wellbeing of a person — the specific
     "email": ["contact@example.org"],
     "telephone": ["+44 7946 0000"]
   } ],
+  "costFrequency": "none",
   "relatedOrganisation": [ { "@type": "Identifier", "value": "12345678", "system": "https://example.org/Id/example-organisation" } ]
 }
 {% endhighlight %}
