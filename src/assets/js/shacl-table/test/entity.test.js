@@ -3,179 +3,79 @@
 const { test } = require('node:test')
 const assert = require('node:assert/strict')
 
-const { storeFrom } = require('./helpers')
+const { sampleModel } = require('./helpers')
 const {
   extractProperties,
   resolveOptions,
   resolveVocabulary,
-  findVocabularyList,
-  conceptCode,
-  conceptDescription
+  findVocabularyEnum
 } = require('../lib/model')
+const { XSD } = require('../lib/format')
 
-const SHAPES = `
-ex:ThingShape a sh:NodeShape ;
-    sh:targetClass ex:Thing ;
-    sh:property [ sh:path ex:name ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ;
-                  sh:message "name is required." ] ;
-    sh:property [ sh:path ex:tags ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path ex:child ; sh:class ex:Other ; sh:minCount 1 ; sh:maxCount 1 ] ;
-    sh:property [ sh:path ex:urgency ; sh:nodeKind sh:IRI ;
-                  sh:in ( urg:Today urg:Soon urg:Later ) ; sh:minCount 1 ; sh:maxCount 1 ] .
-
-# A second shape on the same class contributes a warning-only range check for
-# an already-declared property: it must MERGE, not create a duplicate row.
-ex:ThingRangeShape a sh:NodeShape ;
-    sh:targetClass ex:Thing ;
-    sh:property [ sh:path ex:name ; sh:minInclusive 1 ; sh:severity sh:Warning ] .
-
-# A constraint-only shape (properties nested under sh:not) must NOT add rows.
-ex:ThingCheck a sh:NodeShape ;
-    sh:targetClass ex:Thing ;
-    sh:not [ sh:property [ sh:path ex:hidden ; sh:maxCount 0 ] ] .
-`
-
-test('extractProperties returns rows in document order', () => {
-  const { store, quads } = storeFrom(SHAPES)
-  const rows = extractProperties(store, quads, 'Thing')
-  assert.deepEqual(rows.map(r => r.name), ['name', 'tags', 'child', 'urgency'])
+test('extractProperties returns rows in slot order', () => {
+  const rows = extractProperties(sampleModel(), 'Thing')
+  assert.deepEqual(rows.map(r => r.name), ['name', 'tags', 'child', 'urgency', 'count', 'amount'])
 })
 
-test('merges duplicate property declarations into one row', () => {
-  const { store, quads } = storeFrom(SHAPES)
-  const rows = extractProperties(store, quads, 'Thing')
-  const name = rows.filter(r => r.name === 'name')
-  assert.equal(name.length, 1, 'name declared twice should collapse to one row')
-  assert.deepEqual(name[0].cardinality, { min: 1, max: 1 })
+test('extractProperties classifies datatype, class and enum ranges', () => {
+  const rows = extractProperties(sampleModel(), 'Thing')
+  const by = Object.fromEntries(rows.map(r => [r.name, r]))
+
+  assert.equal(by.name.kind, 'type')
+  assert.equal(by.name.datatype, XSD + 'string')
+
+  assert.equal(by.child.kind, 'class')
+  assert.equal(by.child.classRef, 'Other')
+
+  assert.equal(by.urgency.kind, 'enum')
+  assert.equal(by.urgency.enumName, 'UrgencyEnum')
+  assert.ok(by.urgency.options, 'enum rows carry precomputed options')
+
+  // custom type resolves to its xsd uri
+  assert.equal(by.count.datatype, XSD + 'nonNegativeInteger')
+  assert.equal(by.amount.datatype, XSD + 'decimal')
 })
 
-test('does not pull in properties nested under sh:not', () => {
-  const { store, quads } = storeFrom(SHAPES)
-  const rows = extractProperties(store, quads, 'Thing')
-  assert.ok(!rows.some(r => r.name === 'hidden'))
+test('extractProperties maps required/multivalued to cardinality', () => {
+  const rows = extractProperties(sampleModel(), 'Thing')
+  const by = Object.fromEntries(rows.map(r => [r.name, r]))
+  assert.deepEqual(by.name.cardinality, { min: 1, max: 1 })   // required, single
+  assert.deepEqual(by.tags.cardinality, { min: 0, max: undefined }) // multivalued
+  assert.deepEqual(by.child.cardinality, { min: 1, max: 1 })
+  assert.deepEqual(by.count.cardinality, { min: 0, max: 1 })  // optional, single
 })
 
-test('classifies datatype, class and controlled-vocab properties', () => {
-  const { store, quads } = storeFrom(SHAPES)
-  const rows = extractProperties(store, quads, 'Thing')
-  const byName = Object.fromEntries(rows.map(r => [r.name, r]))
-
-  assert.equal(byName.name.datatype, 'http://www.w3.org/2001/XMLSchema#string')
-  assert.equal(byName.child.classRef, 'https://example.org/Other')
-  assert.deepEqual(byName.urgency.inList, [
-    'https://example.org/urgency#Today',
-    'https://example.org/urgency#Soon',
-    'https://example.org/urgency#Later'
-  ])
-  assert.deepEqual(byName.tags.cardinality, { min: undefined, max: undefined })
+test('extractProperties carries the slot description', () => {
+  const rows = extractProperties(sampleModel(), 'Thing')
+  assert.equal(rows.find(r => r.name === 'child').description, 'a child ref')
 })
 
-test('description falls back to sh:message when no ontology comment', () => {
-  const { store, quads } = storeFrom(SHAPES)
-  const rows = extractProperties(store, quads, 'Thing')
-  const name = rows.find(r => r.name === 'name')
-  assert.equal(name.description, 'name is required.')
+test('extractProperties throws for an unknown class', () => {
+  assert.throws(() => extractProperties(sampleModel(), 'Nope'), /No class matching "Nope"/)
 })
 
-test('throws for an unknown entity', () => {
-  const { store, quads } = storeFrom(SHAPES)
-  assert.throws(() => extractProperties(store, quads, 'DoesNotExist'), /No sh:NodeShape/)
-})
-
-test('matches targetClass by full IRI as well as local name', () => {
-  const { store, quads } = storeFrom(SHAPES)
-  const rows = extractProperties(store, quads, 'https://example.org/Thing')
-  assert.equal(rows.length, 4)
-})
-
-const TAXONOMY = `
-<https://example.org/urgency> a skos:ConceptScheme ; skos:prefLabel "Urgency" .
-urg:Today a skos:Concept ; skos:prefLabel "Today" .
-urg:Soon  a skos:Concept ; skos:prefLabel "Soon" .
-urg:Later a skos:Concept ; skos:prefLabel "Later" .
-`
-
-test('resolveOptions builds a taxonomy link with example labels', () => {
-  const { store } = storeFrom(SHAPES + TAXONOMY)
-  const opts = resolveOptions(store, [
-    'https://example.org/urgency#Today',
-    'https://example.org/urgency#Soon',
-    'https://example.org/urgency#Later'
-  ])
+test('resolveOptions builds a taxonomy link title, anchor and all labels', () => {
+  const opts = resolveOptions(sampleModel(), 'UrgencyEnum')
   assert.equal(opts.title, 'Urgency Taxonomy')
   assert.equal(opts.anchor, 'urgency-taxonomy')
-  assert.deepEqual(opts.examples, ['Today', 'Soon', 'Later'])
-  assert.equal(opts.more, false)
+  assert.deepEqual(opts.labels, ['Today', 'Soon', 'Later', 'Never'])
 })
 
-test('resolveOptions flags when there are more than three concepts', () => {
-  const { store } = storeFrom(SHAPES + TAXONOMY)
-  const opts = resolveOptions(store, [
-    'https://example.org/urgency#Today',
-    'https://example.org/urgency#Soon',
-    'https://example.org/urgency#Later',
-    'https://example.org/urgency#Never'
-  ])
-  assert.equal(opts.examples.length, 3)
-  assert.equal(opts.more, true)
-  // Unknown concept still resolves via local name.
-  assert.deepEqual(opts.examples, ['Today', 'Soon', 'Later'])
-})
-
-// A richer taxonomy carrying skos:notation and skos:definition, as the real
-// placements vocabularies do.
-const RICH_TAXONOMY = `
-<https://example.org/urgency> a skos:ConceptScheme ; skos:prefLabel "Urgency" .
-urg:Today a skos:Concept ; skos:prefLabel "Today" ;
-    skos:notation "today" ; skos:definition "Needed today." .
-urg:Soon  a skos:Concept ; skos:prefLabel "Soon" ;
-    skos:notation "soon" ; skos:definition "Needed soon." .
-urg:Later a skos:Concept ; skos:prefLabel "Later" .
-`
-
-const URGENCY = i => `https://example.org/urgency#${i}`
-
-test('conceptCode prefers skos:notation, falls back to the local name', () => {
-  const { store } = storeFrom(SHAPES + RICH_TAXONOMY)
-  assert.equal(conceptCode(store, URGENCY('Today')), 'today')
-  assert.equal(conceptCode(store, URGENCY('Later')), 'Later') // no notation
-})
-
-test('conceptDescription prefers skos:definition, falls back to prefLabel', () => {
-  const { store } = storeFrom(SHAPES + RICH_TAXONOMY)
-  assert.equal(conceptDescription(store, URGENCY('Today')), 'Needed today.')
-  assert.equal(conceptDescription(store, URGENCY('Later')), 'Later') // no definition
-})
-
-test('resolveVocabulary maps a sh:in list to ordered code/description rows', () => {
-  const { store } = storeFrom(SHAPES + RICH_TAXONOMY)
-  const vocab = resolveVocabulary(store, [URGENCY('Today'), URGENCY('Soon'), URGENCY('Later')])
-  assert.equal(vocab.title, 'Urgency Taxonomy')
-  assert.equal(vocab.anchor, 'urgency-taxonomy')
+test('resolveVocabulary uses the notation code, falling back to the value name', () => {
+  const vocab = resolveVocabulary(sampleModel(), 'UrgencyEnum')
   assert.deepEqual(vocab.concepts, [
-    { code: 'today', description: 'Needed today.' },
-    { code: 'soon', description: 'Needed soon.' },
-    { code: 'Later', description: 'Later' }
+    { code: 'today', description: 'Needed today.' }, // notation annotation used
+    { code: 'Soon', description: 'Soon' },   // no notation -> name; no description -> title
+    { code: 'Later', description: 'Later' },
+    { code: 'Never', description: 'Never' }
   ])
 })
 
-test('findVocabularyList locates a property\'s sh:in list by local name', () => {
-  const { store, quads } = storeFrom(SHAPES)
-  assert.deepEqual(findVocabularyList(store, quads, 'urgency'), [
-    URGENCY('Today'), URGENCY('Soon'), URGENCY('Later')
-  ])
-})
-
-test('findVocabularyList matches by full path IRI as well', () => {
-  const { store, quads } = storeFrom(SHAPES)
-  assert.deepEqual(findVocabularyList(store, quads, 'https://example.org/urgency'), [
-    URGENCY('Today'), URGENCY('Soon'), URGENCY('Later')
-  ])
-})
-
-test('findVocabularyList returns null for non-vocabulary or missing properties', () => {
-  const { store, quads } = storeFrom(SHAPES)
-  assert.equal(findVocabularyList(store, quads, 'name'), null) // datatype, not sh:in
-  assert.equal(findVocabularyList(store, quads, 'child'), null) // sh:class, not sh:in
-  assert.equal(findVocabularyList(store, quads, 'nope'), null) // does not exist
+test('findVocabularyEnum resolves a slot name, an enum name, else null', () => {
+  const m = sampleModel()
+  assert.equal(findVocabularyEnum(m, 'urgency'), 'UrgencyEnum')     // slot with enum range
+  assert.equal(findVocabularyEnum(m, 'UrgencyEnum'), 'UrgencyEnum') // enum name directly
+  assert.equal(findVocabularyEnum(m, 'name'), null)                 // datatype slot
+  assert.equal(findVocabularyEnum(m, 'child'), null)                // class-ranged slot
+  assert.equal(findVocabularyEnum(m, 'nope'), null)                 // does not exist
 })

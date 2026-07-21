@@ -3,23 +3,20 @@
 
 const { generateTable } = require('./lib/generate')
 
-const USAGE = `Usage: shacl-table <shacl-file> <entity> [--enrich-dir <dir>]
+const USAGE = `Usage: shacl-table <model-file> <entity> [--page-headings <s>]
 
-Generate a Markdown table for a SHACL entity. When <entity> is a targetClass,
-the table lists its first-level properties. When <entity> is a property whose
-values come from a controlled vocabulary (sh:in), a collapsible "Code" /
-"Description" vocabulary table is produced instead.
+Generate a Markdown table from a LinkML data model. When <entity> is a class,
+the table lists its properties. When <entity> is a property whose values come
+from a controlled vocabulary (an enum range) - or an enum directly - a
+collapsible "Code" / "Description" vocabulary table is produced instead.
 
 Arguments:
-  <shacl-file>   Path to the SHACL Turtle file, relative to the current dir.
-  <entity>       targetClass local name (e.g. PlacementAvailability), or the
-                 name of a controlled-vocabulary property (e.g.
-                 communicationNeeds), or a full IRI.
+  <model-file>   Path to the LinkML YAML model, relative to the current dir.
+  <entity>       Class name (e.g. PlacementRequirements), or the name of a
+                 controlled-vocabulary property (e.g. communicationNeeds) or
+                 enum.
 
 Options:
-  --enrich-dir <dir>   Directory of SKOS taxonomy / OWL ontology .ttl files
-                       used for the Options column and descriptions.
-                       Defaults to a sibling "ttl" directory.
   --page-headings <s>  Newline-separated heading texts present on the target
                        page. When given, a class table's Options column only
                        links to a taxonomy that has a matching section on the
@@ -27,16 +24,14 @@ Options:
                        Jekyll plugin; omit on the command line to always link.)
 
 Examples:
-  shacl-table src/assets/shacl/shacl-shape.ttl PlacementAvailability
-  shacl-table src/assets/shacl/shacl-shape.ttl communicationNeeds`
+  shacl-table src/assets/model/placements/placements.yaml PlacementRequirements
+  shacl-table src/assets/model/placements/placements.yaml communicationNeeds`
 
 function parseArgs (argv) {
   const positional = []
   const opts = {}
   for (let i = 0; i < argv.length; i++) {
-    if (argv[i] === '--enrich-dir') {
-      opts.enrichDir = argv[++i]
-    } else if (argv[i] === '--page-headings') {
+    if (argv[i] === '--page-headings') {
       opts.pageHeadings = (argv[++i] || '')
         .split('\n')
         .map(s => s.trim())
@@ -47,14 +42,14 @@ function parseArgs (argv) {
       positional.push(argv[i])
     }
   }
-  opts.shaclPath = positional[0]
+  opts.modelPath = positional[0]
   opts.entity = positional[1]
   return opts
 }
 
 function main () {
   const opts = parseArgs(process.argv.slice(2))
-  if (opts.help || !opts.shaclPath || !opts.entity) {
+  if (opts.help || !opts.modelPath || !opts.entity) {
     console.error(USAGE)
     process.exit(opts.help ? 0 : 1)
   }

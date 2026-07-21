@@ -1,11 +1,18 @@
 'use strict'
 
-const { NS, localName } = require('./rdf')
-
 /**
  * Pure string formatters for the table cells: heading slugs, cardinality
- * strings and datatype labels. None of these touch the RDF graph.
+ * strings and datatype labels. None of these touch the model.
  */
+
+const XSD = 'http://www.w3.org/2001/XMLSchema#'
+
+/** The local name of an IRI: everything after the last '#' or '/'. */
+function localName (iri) {
+  if (typeof iri !== 'string') return ''
+  const cut = Math.max(iri.lastIndexOf('#'), iri.lastIndexOf('/'))
+  return cut >= 0 ? iri.slice(cut + 1) : iri
+}
 
 /**
  * Turn heading text into the anchor id that kramdown's `auto_ids` would
@@ -25,8 +32,8 @@ function slugify (text) {
 }
 
 /**
- * Format a SHACL sh:minCount / sh:maxCount pair as a UML-style cardinality
- * string. Missing minCount means 0; missing maxCount means unbounded (*).
+ * Format a min / max pair as a UML-style cardinality string. Missing min means
+ * 0; missing max means unbounded (*).
  *   (1, 1) -> "1..1"   (0, 1) -> "0..1"   (1, undefined) -> "1..*"
  */
 function cardinality (minCount, maxCount) {
@@ -62,10 +69,10 @@ const XSD_LABELS = {
 
 function datatypeLabel (iri) {
   if (!iri) return ''
-  const name = iri.startsWith(NS.xsd) ? iri.slice(NS.xsd.length) : localName(iri)
+  const name = iri.startsWith(XSD) ? iri.slice(XSD.length) : localName(iri)
   if (XSD_LABELS[name]) return XSD_LABELS[name]
   // Capitalise the first letter of an unrecognised local name.
   return name.charAt(0).toUpperCase() + name.slice(1)
 }
 
-module.exports = { slugify, cardinality, datatypeLabel }
+module.exports = { slugify, cardinality, datatypeLabel, localName, XSD }

@@ -1,13 +1,13 @@
 # _plugins/shacl_table.rb
 #
-# Adds a {% shacl_table %} Liquid tag that renders a Markdown table for a SHACL
-# entity. If the second argument names a targetClass, the table describes its
-# first-level properties; if it names a controlled-vocabulary property (one
-# with an sh:in list), a collapsible "Code" / "Description" vocabulary table is
-# rendered instead.
+# Adds a {% shacl_table %} Liquid tag that renders a Markdown table from a
+# LinkML data model. If the second argument names a class, the table describes
+# its properties; if it names a controlled-vocabulary property (a slot whose
+# range is an enum) or an enum, a collapsible "Code" / "Description" vocabulary
+# table is rendered instead.
 #
 # The heavy lifting lives in src/assets/js/shacl-table/. This plugin is a thin shim that shells out to it
-# and caches the result per (file, entity) for the duration of a build.
+# and caches the result per (page, file, entity) for the duration of a build.
 #
 # Because Jekyll processes Liquid BEFORE the Markdown converter (kramdown),
 # the Markdown table this tag emits is converted to a real HTML <table> and
@@ -16,12 +16,12 @@
 #
 # Usage in a page (place the tag on its own line, at column 0):
 #
-#   {% shacl_table src/assets/shacl/shacl-shape.ttl PlacementAvailability %}
+#   {% shacl_table src/assets/model/placements/placements.yaml PlacementAvailability %}
 #
 # Arguments (whitespace separated, optional surrounding quotes):
-#   1. path to the SHACL Turtle file, relative to the project root
-#   2. the targetClass local name, or a controlled-vocabulary property name
-#      (e.g. communicationNeeds), or a full IRI
+#   1. path to the LinkML YAML model, relative to the project root
+#   2. a class name, or a controlled-vocabulary property name
+#      (e.g. communicationNeeds) or enum name
 
 require "open3"
 require "shellwords"

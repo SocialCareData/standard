@@ -2,7 +2,7 @@
   "name": "shacl-table",
   "version": "1.0.0",
   "private": true,
-  "description": "Generate Markdown tables describing the first-level properties of a SHACL entity (targetClass).",
+  "description": "Generate Markdown tables (class property tables and controlled-vocabulary tables) from a LinkML data model.",
   "main": "index.js",
   "bin": {
     "shacl-table": "index.js"
@@ -12,6 +12,6 @@
     "test": "node --test"
   },
   "dependencies": {
-    "n3": "^1.17.4"
+    "js-yaml": "^4.3.0"
   }
 }

@@ -13,54 +13,54 @@ tags:
 
 ### Placement
 
-{% shacl_table src/assets/shacl/shacl-shape.ttl Placement %}
+{% shacl_table src/assets/model/placements/placements.yaml Placement %}
 
 ### PlacementAvailability
 
-{% shacl_table src/assets/shacl/shacl-shape.ttl PlacementAvailability %}
+{% shacl_table src/assets/model/placements/placements.yaml PlacementAvailability %}
 
 ### PlacementRequirements
 
-{% shacl_table src/assets/shacl/shacl-shape.ttl PlacementRequirements %}
+{% shacl_table src/assets/model/placements/placements.yaml PlacementRequirements %}
 
 ### PlacementRecommendation
 
-{% shacl_table src/assets/shacl/shacl-shape.ttl PlacementRecommendation %}
+{% shacl_table src/assets/model/placements/placements.yaml PlacementRecommendation %}
 
 ### RiskAssessment
 
-{% shacl_table src/assets/shacl/shacl-shape.ttl RiskAssessment %}
+{% shacl_table src/assets/model/placements/placements.yaml RiskAssessment %}
 
 ### ActualPlacement
 
-{% shacl_table src/assets/shacl/shacl-shape.ttl ActualPlacement %}
+{% shacl_table src/assets/model/placements/placements.yaml ActualPlacement %}
 
 ### QualityAssurance
 
-{% shacl_table src/assets/shacl/shacl-shape.ttl QualityAssurance %}
+{% shacl_table src/assets/model/placements/placements.yaml QualityAssurance %}
 
 ## Taxonomies
 
 ### Communication Need Taxonomy
 
-{% shacl_table src/assets/shacl/shacl-shape.ttl specificCommunicationRequirement %}
+{% shacl_table src/assets/model/placements/placements.yaml specificCommunicationRequirement %}
 
 ### Living Arrangement Taxonomy
 
-{% shacl_table src/assets/shacl/shacl-shape.ttl livingCompanions %}
+{% shacl_table src/assets/model/placements/placements.yaml livingCompanions %}
 
 ### Out of LA Reason Taxonomy
 
-{% shacl_table src/assets/shacl/shacl-shape.ttl outOfLAReason %}
+{% shacl_table src/assets/model/placements/placements.yaml outOfLAReason %}
 
 ### Placement Type Taxonomy
 
-{% shacl_table src/assets/shacl/shacl-shape.ttl placementType %}
+{% shacl_table src/assets/model/placements/placements.yaml placementType %}
 
 ### Placement Urgency Taxonomy
 
-{% shacl_table src/assets/shacl/shacl-shape.ttl neededBy %}
+{% shacl_table src/assets/model/placements/placements.yaml neededBy %}
 
 ### Support Type Taxonomy
 
-{% shacl_table src/assets/shacl/shacl-shape.ttl additionalSupport %}
+{% shacl_table src/assets/model/placements/placements.yaml additionalSupport %}

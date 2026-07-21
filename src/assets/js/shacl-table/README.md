@@ -1,90 +1,82 @@
 # shacl-table
 
-Generate a Markdown table for a SHACL entity. The tool inspects the second
-argument and produces one of two tables:
+Generate a Markdown table from a [LinkML](https://linkml.io/) data model. The
+tool inspects the second argument and produces one of two tables:
 
-- **Class table** — when the argument names a `sh:targetClass`, a table of that
-  class's **first-level properties**.
-- **Vocabulary table** — when the argument names a **property** whose values come
-  from a controlled vocabulary (`sh:in`), a two-column **Code** / **Description**
-  table wrapped in a collapsible `<details>`/`<summary>` element.
+- **Class table** — when the argument names a **class**, a table of that class's
+  properties (slots).
+- **Vocabulary table** — when the argument names a **property** (a slot whose
+  range is an enum) or an **enum**, a two-column **Code** / **Description** table
+  wrapped in a collapsible `<details>`/`<summary>` element.
+
+> Despite the name, this tool no longer reads SHACL. It reads the LinkML model
+> at `src/assets/model/placements/placements.yaml`, which is the single source
+> of truth (the SHACL and OWL are generated from it). The Liquid tag and folder
+> keep the `shacl_table` / `shacl-table` names for continuity.
 
 ## Class table
 
-Describes the first-level properties of a SHACL entity (a `sh:NodeShape`'s
-`sh:targetClass`). It has five columns:
+Describes a class's slots, in declared order. Five columns:
 
-| Column | Source |
+| Column | Source (LinkML) |
 | --- | --- |
-| **Field name** | local name of the property's `sh:path` |
-| **Cardinality** | `sh:minCount` / `sh:maxCount` as `min..max` (`*` = unbounded) |
-| **Data Type** | `String` / `Date` / `Boolean` / `Integer` / `Decimal` from `sh:datatype`; `Categorical` when the values come from a controlled vocabulary (`sh:in`); or a link to another entity when typed with `sh:class` |
-| **Description** | the property's `rdfs:comment` (from a companion ontology), falling back to `sh:description` then `sh:message` |
-| **Options** | for a controlled vocabulary, a link to the taxonomy section plus up to three example labels — **but** if that section is not present on the page being rendered, every possible value is listed inline instead (no dangling link) |
+| **Field name** | the slot name |
+| **Cardinality** | `min..max` where min = `required ? 1 : 0`, max = `multivalued ? * : 1` |
+| **Data Type** | for a type-ranged slot, a friendly label (`String` / `Date` / `Boolean` / `Integer` / `Decimal`, resolved via the type's `xsd` uri); `Categorical` when the range is an enum; a link to another class when the range is a class |
+| **Description** | the slot's `description` |
+| **Options** | for an enum-ranged slot, a link to the taxonomy section plus up to three example labels — **but** if that section is not present on the page being rendered, every possible value is listed inline (no dangling link) |
 
 The Options column is page-aware: the Jekyll plugin passes the page's headings
 to the generator (`--page-headings`), and a taxonomy is only linked when the
-page actually has a matching section (e.g. `### Communication Need Taxonomy` →
-`#communication-need-taxonomy`). From the command line no headings are supplied,
-so every taxonomy is linked.
+page actually has a matching section (the enum's `title` + " Taxonomy" →
+e.g. `#communication-need-taxonomy`). From the command line no headings are
+supplied, so every taxonomy is linked.
 
 ## Vocabulary table
 
-Describes the concepts of the controlled vocabulary a property draws its values
-from (its `sh:in` list). It has two columns and lives inside a collapsible
-`<details>` element:
+Describes an enum's permissible values, in declared order. Two columns, inside a
+collapsible `<details>` element:
 
-| Column | Source |
+| Column | Source (LinkML) |
 | --- | --- |
-| **Code** | the concept's `skos:notation`, falling back to its local name |
-| **Description** | the concept's `skos:definition`, falling back to `skos:prefLabel` |
+| **Code** | the permissible value's `notation` annotation (the lowercase code, e.g. `with-other-children`), falling back to its name |
+| **Description** | the permissible value's `description`, falling back to its `title` |
 
-Concepts appear in the order they are listed in `sh:in`. The scheme is
-discovered from the companion taxonomy files (see [How enrichment
-works](#how-enrichment-works)).
+The taxonomy section title/anchor and the friendly value labels shown in the
+Options column come from the enum's `title` and each permissible value's
+`title` (the SKOS `prefLabel`s carried in the model).
 
 ## Usage in a page (Jekyll)
 
 The `{% shacl_table %}` Liquid tag (see `src/_plugins/shacl_table.rb`) renders
-the table at build time, so it ends up as a real `<table>` in the compiled
-site and is indexed by Pagefind. Place the tag on its own line:
+the table at build time, so it ends up as a real `<table>` in the compiled site
+and is indexed by Pagefind. Place the tag on its own line:
 
 ```liquid
-{% shacl_table src/assets/shacl/shacl-shape.ttl PlacementAvailability %}
-{% shacl_table src/assets/shacl/shacl-shape.ttl communicationNeeds %}
+{% shacl_table src/assets/model/placements/placements.yaml PlacementAvailability %}
+{% shacl_table src/assets/model/placements/placements.yaml communicationNeeds %}
 ```
 
-Arguments: the SHACL file path (relative to the project root) and either a
-`targetClass` local name (class table) or a controlled-vocabulary property name
-(vocabulary table) — a full IRI works for either. Call it as many times as you
-like.
+Arguments: the LinkML YAML path (relative to the project root) and either a
+class name (class table) or a controlled-vocabulary property/enum name
+(vocabulary table).
 
 ## Usage from the command line
 
 ```bash
-node src/assets/js/shacl-table/index.js src/assets/shacl/shacl-shape.ttl PlacementAvailability
-node src/assets/js/shacl-table/index.js src/assets/shacl/shacl-shape.ttl communicationNeeds
+node src/assets/js/shacl-table/index.js src/assets/model/placements/placements.yaml PlacementAvailability
+node src/assets/js/shacl-table/index.js src/assets/model/placements/placements.yaml communicationNeeds
 ```
-
-## How enrichment works
-
-Descriptions and controlled-vocabulary labels come from companion Turtle files.
-By convention these live in a sibling `ttl/` directory next to the SHACL file
-(e.g. `src/assets/ttl/`): SKOS taxonomies supply concept `skos:prefLabel`s and
-the scheme title for the Options column, and OWL ontologies supply property
-`rdfs:comment` descriptions. A companion file that fails to parse is skipped
-with a warning rather than breaking the build. Override the directory with
-`--enrich-dir <dir>`.
 
 ## Layout
 
 ```
 lib/
-  rdf.js       namespaces, IRI helpers, Turtle parsing, N3 store queries
+  linkml.js    load the YAML model; class/slot/enum lookups, range classification, type->xsd
   format.js    pure formatters: slugs, cardinality, datatype labels
-  model.js     graph -> property rows, Options + vocabulary (concept) resolution
-  table.js     property rows -> Markdown table; sh:in list -> vocabulary table
-  generate.js  orchestration (load files, classify entity, extract, render)
+  model.js     model -> property rows; Options + vocabulary (concept) resolution
+  table.js     rows -> Markdown property table; concepts -> vocabulary table
+  generate.js  orchestration (load model, classify entity, render)
 index.js       CLI entry point
 test/          node:test unit + integration suites
 ```
