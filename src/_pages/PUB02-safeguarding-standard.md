@@ -154,6 +154,9 @@ A service involved in the safeguarding or wellbeing of a person — the specific
 <span id="service-costFrequency">contact</span>
 : The frequency at which the unit cost occurs. Required (`1..1`). See the [Service Cost Frequency Vocabulary](#service-costFrequency-vocabulary).
 
+<span id="service-delivery">contact</span>
+: The way the service is delivered. Multi-valued. Optional. (`0..*`). See the [Service Delivery Vocabulary](#service-delivery-vocabulary).
+
 <span id="service-relatedProfessional">relatedProfessional</span>
 : References to `Professional`s involved in the service. Multi-valued. Optional (`0..*`). See [Professional](#professional). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
@@ -627,7 +630,7 @@ Used by [`Service.type`](#service-type). Codes to indicate the type of service.
 
 ### Service Cost Frequency Vocabulary
 
-Used by [`Service.costFrequency`](#service-costFrequency). Codes to indicate the payment schedule a service adheres to.
+Used by [`Service.costFrequency`](#service-costFrequency). Codes to indicate the payment schedule a service adheres to. From Adult Social Care Client Level Data specification.
 
 <details>
 <summary markdown="span">See vocabulary</summary>
@@ -645,6 +648,28 @@ Used by [`Service.costFrequency`](#service-costFrequency). Codes to indicate the
 | `quarterly` | Quarterly |
 | `annually` | Annually |
 | `one-off` | One-off |
+{:.table-bordered}
+
+</details>
+
+### Service Delivery Vocabulary
+
+Used by [`Service.delivery`](#service-delivery). Codes to indicate the way a service is delivered. From Adult Social Care Client Level Data specification.
+
+<details>
+<summary markdown="span">See vocabulary</summary>
+
+| Code | Description |
+| :--- | :--- |
+| `st-max` | Short term support: ST-Max |
+| `ongoing-low` | Short term support: Ongoing low level |
+| `other-short-term` | Short term support: Other short term |
+| `nursing` | Long term support: Nursing care|
+| `residential` | Long term support: Residential care |
+| `community` | Long term support: Community |
+| `prison` | Long term support: Prison |
+| `unpaid-carer-direct` | Unpaid carer support: Direct to unpaid carer |
+| `unpaid-carer-support` | Unpaid carer support: Support involving the person cared-for |
 {:.table-bordered}
 
 </details>
@@ -674,7 +699,7 @@ Used by [`ServiceEpisode.type`](#episode-type). Codes to indicate the type of se
 
 ### Episode Outcome Vocabulary
 
-Used by [`ServiceEpisode.outcome`](#episode-outcome). Codes to indicate the outcome of the episode for the subject.
+Used by [`ServiceEpisode.outcome`](#episode-outcome). Codes to indicate the outcome of the episode for the subject. From Adult Social Care Client Level Data specification.
 
 <details>
 <summary markdown="span">See vocabulary</summary>
