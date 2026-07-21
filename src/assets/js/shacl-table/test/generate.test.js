@@ -46,9 +46,9 @@ test('integration: a controlled-vocabulary property renders a vocabulary table',
   assert.match(md, /\| Code \| Description \|/)
   const codes = md.split('\n').filter(l => /^\| `/.test(l))
   assert.deepEqual(codes, [
-    '| `yes` | Affirmative. |',
-    '| `no` | Negative. |',
-    '| `not-specified` | Not specified. |'
+    '| `Yes` | Affirmative. |',
+    '| `No` | Negative. |',
+    '| `Not specified` | Not specified. |'
   ])
   assert.match(md, /\{: \.table-bordered\}/)
   assert.doesNotMatch(md, /\.shacl-table/)
@@ -57,7 +57,7 @@ test('integration: a controlled-vocabulary property renders a vocabulary table',
 test('integration: an enum name also renders a vocabulary table', () => {
   const md = generateTable({ modelPath: MODEL, entity: 'RiskLevel', rootDir: REPO_ROOT })
   assert.match(md, /^<details>/)
-  assert.match(md, /\| `no-known-risk` \| There is no known risk\. \|/)
+  assert.match(md, /\| `No known risk` \| There is no known risk\. \|/)
 })
 
 test('integration: Options links present taxonomies and inlines absent ones', () => {

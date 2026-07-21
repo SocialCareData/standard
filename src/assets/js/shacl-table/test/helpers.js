@@ -35,7 +35,7 @@ enums:
   UrgencyEnum:
     title: Urgency
     permissible_values:
-      Today: { title: Today, meaning: urg:Today, description: Needed today., annotations: { skos:notation: today } }
+      Today: { title: Today, meaning: urg:Today, description: Needed today. }
       Soon:  { title: Soon,  meaning: urg:Soon }
       Later: { title: Later, meaning: urg:Later }
       Never: { title: Never, meaning: urg:Never }

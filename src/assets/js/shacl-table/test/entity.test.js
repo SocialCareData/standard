@@ -61,11 +61,11 @@ test('resolveOptions builds a taxonomy link title, anchor and all labels', () =>
   assert.deepEqual(opts.labels, ['Today', 'Soon', 'Later', 'Never'])
 })
 
-test('resolveVocabulary uses the notation code, falling back to the value name', () => {
+test('resolveVocabulary uses the title as code and the description', () => {
   const vocab = resolveVocabulary(sampleModel(), 'UrgencyEnum')
   assert.deepEqual(vocab.concepts, [
-    { code: 'today', description: 'Needed today.' }, // notation annotation used
-    { code: 'Soon', description: 'Soon' },   // no notation -> name; no description -> title
+    { code: 'Today', description: 'Needed today.' },
+    { code: 'Soon', description: 'Soon' },   // no description -> falls back to title
     { code: 'Later', description: 'Later' },
     { code: 'Never', description: 'Never' }
   ])

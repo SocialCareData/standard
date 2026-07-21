@@ -607,17 +607,14 @@ enums:
         title: Today
         meaning: pu:Today
         description: Placement is needed today.
-        annotations: { skos:notation: today }
       WithinFiveDays:
         title: Within 5 days
         meaning: pu:WithinFiveDays
         description: Placement is needed within five days.
-        annotations: { skos:notation: lt-5-days }
       MoreThanFiveDays:
         title: More than 5 days
         meaning: pu:MoreThanFiveDays
         description: Placement is needed in more than five days.
-        annotations: { skos:notation: gt-5-days }
 
   OutOfLAReason:
     enum_uri: pl:outof-la-reason
@@ -628,22 +625,18 @@ enums:
         title: Safeguarding concerns
         meaning: olr:SafeguardingConcerns
         description: Placement is sought outside the placing LA due to safeguarding concerns.
-        annotations: { skos:notation: safeguarding }
       BailConditions:
         title: Bail conditions
         meaning: olr:BailConditions
         description: Placement is sought outside the placing LA because of bail conditions.
-        annotations: { skos:notation: bail }
       CourtOrder:
         title: Court order
         meaning: olr:CourtOrder
         description: Placement is sought outside the placing LA because of a court order.
-        annotations: { skos:notation: court-order }
       OutOfLAReasonOther:
         title: Other
         meaning: olr:OutOfLAReasonOther
         description: Another reason not listed. When this concept is selected, supply the details via the paired pl:outOfLAReasonOther free-text property on PlacementAvailability.
-        annotations: { skos:notation: other }
 
   PresenceStatus:
     enum_uri: pl:presence-status
@@ -654,17 +647,14 @@ enums:
         title: Yes
         meaning: yns:Yes
         description: Affirmative.
-        annotations: { skos:notation: 'yes' }
       No:
         title: 'No'
         meaning: yns:No
         description: Negative.
-        annotations: { skos:notation: 'no' }
       NotSpecified:
         title: Not specified
         meaning: yns:NotSpecified
         description: Not specified.
-        annotations: { skos:notation: not-specified }
 
   CommunicationNeed:
     enum_uri: pl:communication-need
@@ -675,27 +665,22 @@ enums:
         title: ESOL
         meaning: cn:ESOL
         description: English for Speakers of Other Languages support is required.
-        annotations: { skos:notation: esol }
       BSL:
         title: BSL
         meaning: cn:BSL
         description: British Sign Language is required.
-        annotations: { skos:notation: bsl }
       Makaton:
         title: Makaton
         meaning: cn:Makaton
         description: Makaton signing/symbol communication is required.
-        annotations: { skos:notation: makaton }
       Other:
         title: Other
         meaning: cn:Other
         description: Another communication or language requirement not listed. When this concept is selected, supply the details via the paired pl:specificCommunicationRequirementOther free-text property on PlacementRequirements.
-        annotations: { skos:notation: other }
       None:
         title: None
         meaning: cn:None
         description: No specific communication or language requirements.
-        annotations: { skos:notation: none }
 
   CulturalNeed:
     enum_uri: pl:cultural-need
@@ -706,22 +691,18 @@ enums:
         title: Required
         meaning: cln:Required
         description: Specific cultural accommodations are required.
-        annotations: { skos:notation: required }
       NotRequired:
         title: Not required
         meaning: cln:NotRequired
         description: No specific cultural accommodations are required.
-        annotations: { skos:notation: not-required }
       NotKnown:
         title: Not known
         meaning: cln:NotKnown
         description: Whether cultural accommodations are required is not known.
-        annotations: { skos:notation: not-known }
       Other:
         title: Other
         meaning: cln:Other
         description: Other cultural needs apply. When this concept is selected, supply the details via the paired pl:culturalNeedsOther free-text property on PlacementRequirements.
-        annotations: { skos:notation: other }
 
   LivingArrangement:
     enum_uri: pl:living-arrangement
@@ -732,27 +713,22 @@ enums:
         title: Solo placement recommended
         meaning: la:SoloPlacement
         description: A solo placement is recommended; the child should not live with other children.
-        annotations: { skos:notation: solo }
       WithOtherChildren:
         title: With other children recommended
         meaning: la:WithOtherChildren
         description: Living with other children is recommended.
-        annotations: { skos:notation: with-other-children }
       OnlyWithOlderChildren:
         title: Only with other older children
         meaning: la:OnlyWithOlderChildren
         description: The child should only live with other children who are older.
-        annotations: { skos:notation: only-older }
       OnlyWithYoungerChildren:
         title: Only with other younger children
         meaning: la:OnlyWithYoungerChildren
         description: The child should only live with other children who are younger.
-        annotations: { skos:notation: only-younger }
       NoPreference:
         title: No preference
         meaning: la:NoPreference
         description: No preference about who the child lives alongside.
-        annotations: { skos:notation: no-preference }
 
   PetsAllowance:
     enum_uri: pl:pets-allowance
@@ -763,22 +739,18 @@ enums:
         title: Yes - must
         meaning: pa:YesMust
         description: The child must live in a home with pets/animals.
-        annotations: { skos:notation: yes-must }
       YesCan:
         title: Yes - can
         meaning: pa:YesCan
         description: The child can live in a home with pets/animals.
-        annotations: { skos:notation: yes-can }
       No:
         title: 'No'
         meaning: pa:No
         description: The child cannot live in a home with pets/animals.
-        annotations: { skos:notation: 'no' }
       NotKnown:
         title: Not known
         meaning: pa:NotKnown
         description: Whether the child can live with pets/animals is not known.
-        annotations: { skos:notation: not-known }
 
   SupportType:
     enum_uri: pl:support-type
@@ -789,32 +761,26 @@ enums:
         title: Additional supervision
         meaning: st:AdditionalSupervision
         description: Additional supervision is required.
-        annotations: { skos:notation: additional-supervision }
       TherapeuticSupport:
         title: Therapeutic support
         meaning: st:TherapeuticSupport
         description: Therapeutic support is required.
-        annotations: { skos:notation: therapeutic-support }
       WorkerForRespite:
         title: A worker for respite
         meaning: st:WorkerForRespite
         description: A worker is required to provide respite.
-        annotations: { skos:notation: worker-respite }
       TaxisToSchool:
         title: Taxis to school
         meaning: st:TaxisToSchool
         description: Taxis to and from school are required.
-        annotations: { skos:notation: taxis-to-school }
       NotApplicable:
         title: Not applicable
         meaning: st:NotApplicable
         description: No additional support is required.
-        annotations: { skos:notation: na }
       Other:
         title: Other
         meaning: st:Other
         description: Other additional support is required. When this concept is selected, supply the details via the paired pl:additionalSupportOther free-text property on PlacementRequirements.
-        annotations: { skos:notation: other }
 
   SuitabilityLevel:
     enum_uri: pl:suitability-level
@@ -825,22 +791,18 @@ enums:
         title: Preferred
         meaning: sl:Preferred
         description: This category of placement is the preferred option for the child.
-        annotations: { skos:notation: preferred }
       SuitableButNotPreferred:
         title: Suitable but not preferred
         meaning: sl:SuitableButNotPreferred
         description: This category of placement would be suitable but is not the preferred option.
-        annotations: { skos:notation: suitable-not-preferred }
       Unsuitable:
         title: Unsuitable
         meaning: sl:Unsuitable
         description: This category of placement is unsuitable for the child.
-        annotations: { skos:notation: unsuitable }
       NotSpecified:
         title: Not specified
         meaning: sl:NotSpecified
         description: Suitability has not been specified.
-        annotations: { skos:notation: not-specified }
 
   RiskLevel:
     enum_uri: pl:risk-level
@@ -851,12 +813,10 @@ enums:
         title: No known risk
         meaning: rl:NoKnownRisk
         description: There is no known risk.
-        annotations: { skos:notation: no-known-risk }
       RiskPresent:
         title: Risk present
         meaning: rl:RiskPresent
         description: A risk is known to be present.
-        annotations: { skos:notation: risk-present }
 
   PlacementType:
     enum_uri: pl:placement-type
@@ -867,14 +827,11 @@ enums:
         title: Foster
         meaning: pt:Foster
         description: A placement with an approved foster carer.
-        annotations: { skos:notation: foster }
       Residential:
         title: Residential
         meaning: pt:Residential
         description: A placement in a residential children's home.
-        annotations: { skos:notation: residential }
       SupportedAccommodation:
         title: Supported Accommodation
         meaning: pt:SupportedAccommodation
         description: A supported accommodation placement (typically for older young people).
-        annotations: { skos:notation: supported-accommodation }

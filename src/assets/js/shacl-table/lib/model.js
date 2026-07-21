@@ -84,16 +84,15 @@ function resolveOptions (model, enumName) {
 /**
  * Resolve an enum into the rows a vocabulary table needs: one
  * `{ code, description }` per permissible value, in declaration order. The code
- * is the value's `notation` (the lowercase controlled-vocabulary code, e.g.
- * `with-other-children`), falling back to the value name when no notation is
- * present; the description its definition (falling back to its title).
+ * is the value's `title` (falling back to its name); the description its
+ * definition (falling back to its title).
  *
  * @returns {{concepts:{code:string,description:string}[]}}
  */
 function resolveVocabulary (model, enumName) {
   return {
     concepts: permissibleValues(model, enumName).map(pv => ({
-      code: pv.notation || pv.name,
+      code: pv.title,
       description: pv.description || pv.title
     }))
   }

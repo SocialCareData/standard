@@ -95,24 +95,9 @@ function typeXsd (model, typeName) {
 }
 
 /**
- * The value of a permissible value's SKOS notation annotation (the lowercase
- * code such as `with-other-children`). Reads the `skos:notation` tag (the
- * `notation` tag is also accepted for backwards compatibility) and tolerates
- * both the compact (`{ skos:notation: x }`) and expanded
- * (`{ skos:notation: { value: x } }`) LinkML forms. Returns undefined when absent.
- */
-function pvNotation (pv) {
-  const anns = pv.annotations || {}
-  const ann = anns['skos:notation'] != null ? anns['skos:notation'] : anns.notation
-  if (ann == null) return undefined
-  return typeof ann === 'object' ? ann.value : ann
-}
-
-/**
  * The permissible values of an enum, in declaration order, each normalized to
- * `{ name, title, description, meaning, notation }`. `title` falls back to the
- * value's name; `description` to an empty string; `notation` is undefined when
- * the value carries no `notation` annotation.
+ * `{ name, title, description, meaning }`. `title` falls back to the value's
+ * name; `description` to an empty string.
  */
 function permissibleValues (model, enumName) {
   const en = getEnum(model, enumName) || {}
@@ -123,8 +108,7 @@ function permissibleValues (model, enumName) {
       name,
       title: pv.title || name,
       description: pv.description || '',
-      meaning: pv.meaning,
-      notation: pvNotation(pv)
+      meaning: pv.meaning
     }
   })
 }

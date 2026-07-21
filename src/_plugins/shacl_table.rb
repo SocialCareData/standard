@@ -54,16 +54,48 @@ module Jekyll
         return error_note("expected two arguments: <shacl-file> <entity>, got #{@markup.inspect}")
       end
 
+      # Tell Jekyll's incremental regenerator that this page depends on the
+      # model file. Without this, editing the model never re-renders the page
+      # under `jekyll serve --watch --incremental` (Jekyll only tracks .md
+      # sources, layouts and includes — not files the tag reads out-of-band).
+      register_dependency(context, shacl_file)
+
       headings = page_headings(context)
 
       # A class table's Options column depends on which taxonomy sections exist
       # on THIS page, so the cache is keyed by page as well as (file, entity).
+      # The model file's mtime is part of the key too, so a long-running
+      # `--watch` process (which keeps this class — and its cache — in memory
+      # across rebuilds) regenerates the table when the model changes rather
+      # than serving a stale cached copy.
       page_id = (context.registers[:page] && context.registers[:page]["path"]).to_s
-      key = "#{page_id}\t#{shacl_file}\t#{entity}"
+      key = "#{page_id}\t#{shacl_file}\t#{entity}\t#{model_mtime(shacl_file)}"
       self.class.cache[key] ||= generate(shacl_file, entity, headings)
     end
 
     private
+
+    # Absolute-path mtime (as an integer) of the model file, or 0 if missing.
+    def model_mtime(shacl_file)
+      File.exist?(shacl_file) ? File.mtime(shacl_file).to_i : 0
+    rescue StandardError
+      0
+    end
+
+    # Register the model file as an incremental-build dependency of the current
+    # page, so a change to it forces the page to regenerate. Best-effort: guarded
+    # so a missing/renamed Jekyll API never breaks the build.
+    def register_dependency(context, shacl_file)
+      site = context.registers[:site]
+      page = context.registers[:page]
+      return unless site.respond_to?(:regenerator) && page && page["path"]
+
+      page_path = site.in_source_dir(page["path"])
+      dependency = File.expand_path(shacl_file)
+      site.regenerator.add_dependency(page_path, dependency)
+    rescue StandardError => e
+      Jekyll.logger.warn("ShaclTable:", "could not register dependency: #{e.message}")
+    end
 
     # Split "path Entity" into two tokens, tolerating surrounding quotes.
     def parse_args(markup)

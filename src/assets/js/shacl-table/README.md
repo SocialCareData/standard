@@ -39,12 +39,12 @@ collapsible `<details>` element:
 
 | Column | Source (LinkML) |
 | --- | --- |
-| **Code** | the permissible value's `notation` annotation (the lowercase code, e.g. `with-other-children`), falling back to its name |
+| **Code** | the permissible value's `title` (falling back to its name) |
 | **Description** | the permissible value's `description`, falling back to its `title` |
 
-The taxonomy section title/anchor and the friendly value labels shown in the
-Options column come from the enum's `title` and each permissible value's
-`title` (the SKOS `prefLabel`s carried in the model).
+The taxonomy section title/anchor comes from the enum's `title`; the value
+labels shown in the Options column and the vocabulary-table Code column come
+from each permissible value's `title`.
 
 ## Usage in a page (Jekyll)
 
