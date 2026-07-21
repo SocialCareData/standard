@@ -151,10 +151,10 @@ A service involved in the safeguarding or wellbeing of a person — the specific
 <span id="service-contact">contact</span>
 : Contact information for the service. Multi-valued (`1..*`). See [Person Standard → Contact](/PUB01_person_standard#contact).
 
-<span id="service-costFrequency">contact</span>
-: The frequency at which the unit cost occurs. Required (`1..1`). See the [Service Cost Frequency Vocabulary](#service-costFrequency-vocabulary).
+<span id="service-costFrequency">costFrequency</span>
+: The frequency at which the unit cost occurs. Required (`1..1`). See the [Service Cost Frequency Vocabulary](#service-cost-frequency-vocabulary).
 
-<span id="service-delivery">contact</span>
+<span id="service-delivery">delivery</span>
 : The way the service is delivered. Multi-valued. Optional. (`0..*`). See the [Service Delivery Vocabulary](#service-delivery-vocabulary).
 
 <span id="service-relatedProfessional">relatedProfessional</span>
@@ -274,8 +274,8 @@ While a single service episode may reflect routine support, changes in the numbe
 <span id="episode-finding">finding</span>
 : Observations or measurements made during the course of the episode about the subject and their circumstances. Multi-valued. Optional (`0..*`). See [Finding](#finding).
 
-<span id="episode-outcome">finding</span>
-: Outcome of the episode for the subject. Optional (`0..1`). See [Episode Outcomes vocabulary](#episode-outcome-vocabulary).
+<span id="episode-outcome">outcome</span>
+: Outcome of the episode for the subject. Optional (`0..1`). See [Episode Outcome vocabulary](#episode-outcome-vocabulary).
 
 #### Example
 
