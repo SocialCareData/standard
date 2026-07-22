@@ -73,3 +73,10 @@ Joined up care workstream lead
 
 Social care interoperability framework workstream lead
 : Matthieu Bosquet, [matthieu.bosquet@theodi.org](mailto:matthieu.bosquet@theodi.org)
+
+
+## Licensing and copyright
+
+- **Copyright and licensing:** Unless otherwise stated, the content on this website is © Crown copyright and is made available under the Open Government Licence v3.0. This means you can copy, publish, distribute, and adapt the content, as long as you follow the terms of the licence (including attribution).
+- **Software and source code:** Any software or source code published on this website is released under the MIT Licence, unless otherwise stated in the relevant repository or accompanying documentation.
+- **Third‑party content:** Where content is identified as being owned by a third party, it is subject to the copyright terms specified alongside that content and is not covered by the Open Government Licence.
