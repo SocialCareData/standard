@@ -21,7 +21,7 @@ test('integration: PlacementRequirements property table against the real model',
   // datatype slot
   assert.match(md, /\| `homeAdaptationRequired` \| 0\.\.1 \| Boolean \|/)
   // property table keeps its class IAL
-  assert.match(md, /\n\{: \.shacl-table\}$/)
+  assert.match(md, /\n\{: \.schema-table\}$/)
 })
 
 test('integration: Placement links sub-entities in the Data Type column', () => {
@@ -51,7 +51,7 @@ test('integration: a controlled-vocabulary property renders a vocabulary table',
     '| `Not specified` | Not specified. |'
   ])
   assert.match(md, /\{: \.table-bordered\}/)
-  assert.doesNotMatch(md, /\.shacl-table/)
+  assert.doesNotMatch(md, /\.schema-table/)
 })
 
 test('integration: an enum name also renders a vocabulary table', () => {

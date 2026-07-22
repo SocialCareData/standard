@@ -1,4 +1,4 @@
-# shacl-table
+# schema-table
 
 Generate a Markdown table from a [LinkML](https://linkml.io/) data model. The
 tool inspects the second argument and produces one of two tables:
@@ -8,11 +8,6 @@ tool inspects the second argument and produces one of two tables:
 - **Vocabulary table** — when the argument names a **property** (a slot whose
   range is an enum) or an **enum**, a two-column **Code** / **Description** table
   wrapped in a collapsible `<details>`/`<summary>` element.
-
-> Despite the name, this tool no longer reads SHACL. It reads the LinkML model
-> at `src/assets/model/placements/placements.yaml`, which is the single source
-> of truth (the SHACL and OWL are generated from it). The Liquid tag and folder
-> keep the `shacl_table` / `shacl-table` names for continuity.
 
 ## Class table
 
@@ -48,13 +43,13 @@ from each permissible value's `title`.
 
 ## Usage in a page (Jekyll)
 
-The `{% shacl_table %}` Liquid tag (see `src/_plugins/shacl_table.rb`) renders
+The `{% schema_table %}` Liquid tag (see `src/_plugins/schema_table.rb`) renders
 the table at build time, so it ends up as a real `<table>` in the compiled site
 and is indexed by Pagefind. Place the tag on its own line:
 
 ```liquid
-{% shacl_table src/assets/model/placements/placements.yaml PlacementAvailability %}
-{% shacl_table src/assets/model/placements/placements.yaml communicationNeeds %}
+{% schema_table src/assets/model/placements/placements.yaml PlacementAvailability %}
+{% schema_table src/assets/model/placements/placements.yaml communicationNeeds %}
 ```
 
 Arguments: the LinkML YAML path (relative to the project root) and either a
@@ -64,8 +59,8 @@ class name (class table) or a controlled-vocabulary property/enum name
 ## Usage from the command line
 
 ```bash
-node src/assets/js/shacl-table/index.js src/assets/model/placements/placements.yaml PlacementAvailability
-node src/assets/js/shacl-table/index.js src/assets/model/placements/placements.yaml communicationNeeds
+node src/assets/js/schema-table/index.js src/assets/model/placements/placements.yaml PlacementAvailability
+node src/assets/js/schema-table/index.js src/assets/model/placements/placements.yaml communicationNeeds
 ```
 
 ## Layout
@@ -84,7 +79,7 @@ test/          node:test unit + integration suites
 ## Tests
 
 ```bash
-cd src/assets/js/shacl-table
+cd src/assets/js/schema-table
 npm install
 npm test
 ```

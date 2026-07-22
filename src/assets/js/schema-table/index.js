@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 'use strict'
 
+const CLI_NAME = 'schema-table'
+
 const { generateTable } = require('./lib/generate')
 
-const USAGE = `Usage: shacl-table <model-file> <entity> [--page-headings <s>]
+const USAGE = `Usage: schema-table <model-file> <entity> [--page-headings <s>]
 
 Generate a Markdown table from a LinkML data model. When <entity> is a class,
 the table lists its properties. When <entity> is a property whose values come
@@ -24,8 +26,8 @@ Options:
                        Jekyll plugin; omit on the command line to always link.)
 
 Examples:
-  shacl-table src/assets/model/placements/placements.yaml PlacementRequirements
-  shacl-table src/assets/model/placements/placements.yaml communicationNeeds`
+  schema-table src/assets/model/placements/placements.yaml PlacementRequirements
+  schema-table src/assets/model/placements/placements.yaml communicationNeeds`
 
 function parseArgs (argv) {
   const positional = []
@@ -56,7 +58,7 @@ function main () {
   try {
     process.stdout.write(generateTable(opts) + '\n')
   } catch (err) {
-    console.error(`shacl-table: ${err.message}`)
+    console.error(`schema-table: ${err.message}`)
     process.exit(1)
   }
 }

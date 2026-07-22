@@ -47,9 +47,9 @@ function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadin
     const availableAnchors = pageHeadings === undefined
       ? null
       : new Set(pageHeadings.map(slugify))
-    // The `{: .shacl-table}` IAL tags the generated <table> with a class so it
+    // The `{: .schema-table}` IAL tags the generated <table> with a class so it
     // can be styled without affecting other tables on the site.
-    return `${renderTable(rows, availableAnchors)}\n{: .shacl-table}`
+    return `${renderTable(rows, availableAnchors)}\n{: .schema-table}`
   }
 
   const enumName = findVocabularyEnum(model, entity)

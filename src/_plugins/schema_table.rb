@@ -1,12 +1,12 @@
-# _plugins/shacl_table.rb
+# _plugins/schema_table.rb
 #
-# Adds a {% shacl_table %} Liquid tag that renders a Markdown table from a
+# Adds a {% schema_table %} Liquid tag that renders a Markdown table from a
 # LinkML data model. If the second argument names a class, the table describes
 # its properties; if it names a controlled-vocabulary property (a slot whose
 # range is an enum) or an enum, a collapsible "Code" / "Description" vocabulary
 # table is rendered instead.
 #
-# The heavy lifting lives in src/assets/js/shacl-table/. This plugin is a thin shim that shells out to it
+# The heavy lifting lives in src/assets/js/schema-table/. This plugin is a thin shim that shells out to it
 # and caches the result per (page, file, entity) for the duration of a build.
 #
 # Because Jekyll processes Liquid BEFORE the Markdown converter (kramdown),
@@ -16,7 +16,7 @@
 #
 # Usage in a page (place the tag on its own line, at column 0):
 #
-#   {% shacl_table src/assets/model/placements/placements.yaml PlacementAvailability %}
+#   {% schema_table src/assets/model/placements/placements.yaml PlacementAvailability %}
 #
 # Arguments (whitespace separated, optional surrounding quotes):
 #   1. path to the LinkML YAML model, relative to the project root
@@ -27,9 +27,9 @@ require "open3"
 require "shellwords"
 
 module Jekyll
-  class ShaclTableTag < Liquid::Tag
+  class SchemaTableTag < Liquid::Tag
     # CLI entry point, relative to the project root (Dir.pwd during a build).
-    CLI = File.join("src", "assets", "js", "shacl-table", "index.js").freeze
+    CLI = File.join("src", "assets", "js", "schema-table", "index.js").freeze
 
     # A Markdown heading line, capturing its text (ignoring any closing #s).
     HEADING_RE = /^\s{0,3}\#{1,6}\s+(.+?)\s*#*\s*$/.freeze
@@ -49,16 +49,19 @@ module Jekyll
     end
 
     def render(context)
-      shacl_file, entity = parse_args(@markup)
-      unless shacl_file && entity
-        return error_note("expected two arguments: <shacl-file> <entity>, got #{@markup.inspect}")
+      schema_file, entity = parse_args(@markup)
+      unless schema_file && entity
+        return error_note("expected two arguments: <schema-file> <entity>, got #{@markup.inspect}")
       end
+
+      schema_file = resolve_value(schema_file, context)
+      entity     = resolve_value(entity, context)
 
       # Tell Jekyll's incremental regenerator that this page depends on the
       # model file. Without this, editing the model never re-renders the page
       # under `jekyll serve --watch --incremental` (Jekyll only tracks .md
       # sources, layouts and includes — not files the tag reads out-of-band).
-      register_dependency(context, shacl_file)
+      register_dependency(context, schema_file)
 
       headings = page_headings(context)
 
@@ -69,15 +72,43 @@ module Jekyll
       # across rebuilds) regenerates the table when the model changes rather
       # than serving a stale cached copy.
       page_id = (context.registers[:page] && context.registers[:page]["path"]).to_s
-      key = "#{page_id}\t#{shacl_file}\t#{entity}\t#{model_mtime(shacl_file)}"
-      self.class.cache[key] ||= generate(shacl_file, entity, headings)
+      key = "#{page_id}\t#{schema_file}\t#{entity}\t#{model_mtime(schema_file)}"
+      self.class.cache[key] ||= generate(schema_file, entity, headings)
     end
 
     private
 
+    # Resolves arguments that can be either Liquid variables (e.g. page.data_model)
+    # or literal string paths / entity names (quoted or unquoted).
+    def resolve_value(arg, context)
+      return nil if arg.nil?
+
+      clean_arg = arg.strip
+
+      # 1. If wrapped in quotes, treat as a literal string and strip quotes
+      if (clean_arg.start_with?('"') && clean_arg.end_with?('"')) ||
+         (clean_arg.start_with?("'") && clean_arg.end_with?("'"))
+        return clean_arg[1..-2]
+      end
+
+      # 2. Look up the variable in Liquid's context
+      resolved = begin
+        context[clean_arg]
+      rescue StandardError
+        nil
+      end
+
+      # 3. Use the resolved variable if found; otherwise, fall back to the raw string
+      if resolved.nil? || (resolved.is_a?(String) && resolved.empty?)
+        clean_arg
+      else
+        resolved.to_s
+      end
+    end
+
     # Absolute-path mtime (as an integer) of the model file, or 0 if missing.
-    def model_mtime(shacl_file)
-      File.exist?(shacl_file) ? File.mtime(shacl_file).to_i : 0
+    def model_mtime(schema_file)
+      File.exist?(schema_file) ? File.mtime(schema_file).to_i : 0
     rescue StandardError
       0
     end
@@ -85,16 +116,16 @@ module Jekyll
     # Register the model file as an incremental-build dependency of the current
     # page, so a change to it forces the page to regenerate. Best-effort: guarded
     # so a missing/renamed Jekyll API never breaks the build.
-    def register_dependency(context, shacl_file)
+    def register_dependency(context, schema_file)
       site = context.registers[:site]
       page = context.registers[:page]
       return unless site.respond_to?(:regenerator) && page && page["path"]
 
       page_path = site.in_source_dir(page["path"])
-      dependency = File.expand_path(shacl_file)
+      dependency = File.expand_path(schema_file)
       site.regenerator.add_dependency(page_path, dependency)
     rescue StandardError => e
-      Jekyll.logger.warn("ShaclTable:", "could not register dependency: #{e.message}")
+      Jekyll.logger.warn("SchemaTable:", "could not register dependency: #{e.message}")
     end
 
     # Split "path Entity" into two tokens, tolerating surrounding quotes.
@@ -164,30 +195,30 @@ module Jekyll
       parts.join("\n")
     end
 
-    def generate(shacl_file, entity, headings)
+    def generate(schema_file, entity, headings)
       stdout, stderr, status =
-        Open3.capture3("node", CLI, shacl_file, entity, "--page-headings", headings.join("\n"))
+        Open3.capture3("node", CLI, schema_file, entity, "--page-headings", headings.join("\n"))
 
       unless status.success?
-        Jekyll.logger.error("ShaclTable:", "#{shacl_file} #{entity} -> #{stderr.strip}")
-        return error_note("could not generate table for #{entity} from #{shacl_file}: #{stderr.strip}")
+        Jekyll.logger.error("SchemaTable:", "#{schema_file} #{entity} -> #{stderr.strip}")
+        return error_note("could not generate table for #{entity} from #{schema_file}: #{stderr.strip}")
       end
 
       # Non-fatal warnings (e.g. a skipped companion file) go to stderr.
-      stderr.strip.split("\n").each { |line| Jekyll.logger.warn("ShaclTable:", line) }
+      stderr.strip.split("\n").each { |line| Jekyll.logger.warn("SchemaTable:", line) }
 
       # Surround with blank lines so kramdown treats it as a standalone block
       # regardless of where the tag sat in the source. The generator already
-      # emits any kramdown IAL it needs (e.g. `{: .shacl-table}` for a property
+      # emits any kramdown IAL it needs (e.g. `{: .schema-table}` for a property
       # table, `{: .table-bordered}` for a vocabulary table).
       "\n#{stdout.strip}\n"
     end
 
     def error_note(message)
-      Jekyll.logger.warn("ShaclTable:", message)
-      "\n> **SHACL table error:** #{message}\n"
+      Jekyll.logger.warn("SchemaTable:", message)
+      "\n> **Schema table error:** #{message}\n"
     end
   end
 end
 
-Liquid::Template.register_tag("shacl_table", Jekyll::ShaclTableTag)
+Liquid::Template.register_tag("schema_table", Jekyll::SchemaTableTag)

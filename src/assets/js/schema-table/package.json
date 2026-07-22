@@ -1,11 +1,11 @@
 {
-  "name": "shacl-table",
+  "name": "schema-table",
   "version": "1.0.0",
   "private": true,
   "description": "Generate Markdown tables (class property tables and controlled-vocabulary tables) from a LinkML data model.",
   "main": "index.js",
   "bin": {
-    "shacl-table": "index.js"
+    "schema-table": "index.js"
   },
   "scripts": {
     "generate": "node index.js",

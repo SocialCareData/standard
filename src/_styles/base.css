@@ -311,12 +311,12 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
   color: var(--highlight-3-color);
 }
 
-.shacl-table {
+.schema-table {
   font-size: 0.85em;
 }
 
-.shacl-table th,
-.shacl-table td {
+.schema-table th,
+.schema-table td {
   padding: .3rem .5rem;
 }
 

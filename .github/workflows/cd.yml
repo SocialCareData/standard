@@ -15,9 +15,9 @@ jobs:
       - name: Install Pagefind
         run: npm install -g pagefind
 
-      - name: Install shacl-table generator dependencies
+      - name: Install schema-table generator dependencies
         run: npm ci
-        working-directory: src/assets/js/shacl-table
+        working-directory: src/assets/js/schema-table
 
       - uses: ruby/setup-ruby@v1
         with:

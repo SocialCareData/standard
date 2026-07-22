@@ -14,10 +14,10 @@ COPY Gemfile .
 RUN bundle install
 RUN npm install -g pagefind
 
-# Install the shacl-table generator's Node dependencies
-COPY src/assets/js/shacl-table/package*.json /opt/shacl-table/
-RUN npm ci --prefix /opt/shacl-table --no-audit --no-fund
-ENV NODE_PATH=/opt/shacl-table/node_modules
+# Install the schema-table generator's Node dependencies
+COPY src/assets/js/schema-table/package*.json /opt/schema-table/
+RUN npm ci --prefix /opt/schema-table --no-audit --no-fund
+ENV NODE_PATH=/opt/schema-table/node_modules
 
 EXPOSE 4000
 
