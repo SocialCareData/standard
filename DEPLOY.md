@@ -6,7 +6,7 @@ A quick guide to running, validating, and deploying the standards website.
 
 ## 1. Local Development (Docker)
 
-To run the live-reloading dev server locally:
+To run the dev server locally:
 
 ```bash
 docker compose up

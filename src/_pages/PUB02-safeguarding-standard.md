@@ -151,6 +151,12 @@ A service involved in the safeguarding or wellbeing of a person — the specific
 <span id="service-contact">contact</span>
 : Contact information for the service. Multi-valued (`1..*`). See [Person Standard → Contact](/PUB01_person_standard#contact).
 
+<span id="service-costFrequency">costFrequency</span>
+: The frequency at which the unit cost occurs. Required (`1..1`). See the [Service Cost Frequency Vocabulary](#service-cost-frequency-vocabulary).
+
+<span id="service-delivery">delivery</span>
+: The way the service is delivered. Multi-valued. Optional. (`0..*`). See the [Service Delivery Vocabulary](#service-delivery-vocabulary).
+
 <span id="service-relatedProfessional">relatedProfessional</span>
 : References to `Professional`s involved in the service. Multi-valued. Optional (`0..*`). See [Professional](#professional). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
@@ -173,6 +179,7 @@ A service involved in the safeguarding or wellbeing of a person — the specific
     "email": ["contact@example.org"],
     "telephone": ["+44 7946 0000"]
   } ],
+  "costFrequency": "none",
   "relatedOrganisation": [ { "@type": "Identifier", "value": "12345678", "system": "https://example.org/Id/example-organisation" } ]
 }
 {% endhighlight %}
@@ -267,6 +274,9 @@ While a single service episode may reflect routine support, changes in the numbe
 
 <span id="episode-finding">finding</span>
 : Observations or measurements made during the course of the episode about the subject and their circumstances. Multi-valued. Optional (`0..*`). See [Finding](#finding).
+
+<span id="episode-outcome">outcome</span>
+: Outcome of the episode for the subject. Optional (`0..1`). See [Episode Outcome vocabulary](#episode-outcome-vocabulary).
 
 #### Example
 
@@ -619,6 +629,51 @@ Used by [`Service.type`](#service-type). Codes to indicate the type of service.
 
 </details>
 
+### Service Cost Frequency Vocabulary
+
+Used by [`Service.costFrequency`](#service-costFrequency). Codes to indicate the payment schedule a service adheres to. From Adult Social Care Client Level Data specification.
+
+<details>
+<summary markdown="span">See vocabulary</summary>
+
+| Code | Description |
+| :--- | :--- |
+| `none` | No charge to client |
+| `per-session` | Per session |
+| `hourly` | Hourly |
+| `daily` | Daily |
+| `weekly` | Weekly |
+| `fortnightly` | Fortnightly |
+| `four-weekly` | 4-weekly |
+| `monthly` | Monthly |
+| `quarterly` | Quarterly |
+| `annually` | Annually |
+| `one-off` | One-off |
+{:.table-bordered}
+
+</details>
+
+### Service Delivery Vocabulary
+
+Used by [`Service.delivery`](#service-delivery). Codes to indicate the way a service is delivered. From Adult Social Care Client Level Data specification.
+
+<details>
+<summary markdown="span">See vocabulary</summary>
+
+| Code | Description |
+| :--- | :--- |
+| `st-max` | Short term support: ST-Max |
+| `ongoing-low` | Short term support: Ongoing low level |
+| `other-short-term` | Short term support: Other short term |
+| `nursing` | Long term support: Nursing care|
+| `residential` | Long term support: Residential care |
+| `community` | Long term support: Community |
+| `prison` | Long term support: Prison |
+| `unpaid-carer-direct` | Unpaid carer support: Direct to unpaid carer |
+| `unpaid-carer-support` | Unpaid carer support: Support involving the person cared-for |
+{:.table-bordered}
+
+</details>
 
 ### Episode Code Vocabulary
 
@@ -639,6 +694,35 @@ Used by [`ServiceEpisode.type`](#episode-type). Codes to indicate the type of se
 | `care-leaver` | Care Leaver Support |
 | `child-looked-after` | Child in LA care |
 | `adult-safeguarding` | Adult Safeguarding Enquiry (Section 42) |
+{:.table-bordered}
+
+</details>
+
+### Episode Outcome Vocabulary
+
+Used by [`ServiceEpisode.outcome`](#episode-outcome). Codes to indicate the outcome of the episode for the subject. From Adult Social Care Client Level Data specification.
+
+<details>
+<summary markdown="span">See vocabulary</summary>
+
+| Code | Description |
+| :--- | :--- |
+| `reablement` | Progress to reablement/ST-Max |
+| `assessment` | Progress to assessment, review, or reassessment |
+| `hospital` | Admitted to hospital |
+| `continuation` | Continuation of support or services |
+| `planning` | Progress to support or service planning |
+| `NFA-planned` | No Further Action: Support ended as planned |
+| `NFA-moved` | No Further Action: Responsibility moved to another local authority |
+| `NFA-NHS-referral` | No Further Action: Referral to NHS services or NHS funded social care |
+| `NFA-disregard` | No Further Action: Self-funded client or under 12 week property disregard |
+| `NFA-local-referral` | No Further Action: Referral to other service within the local authority |
+| `NFA-declined` | No Further Action: Support declined |
+| `NFA-info` | No Further Action: Information and advice or signposting |
+| `NFA-deceased` | No Further Action: Client deceased |
+| `NFA-no-offer-other` | No Further Action: No services offered for other reason |
+| `NFA-ended-other` | No Further Action: Support ended for other reason |
+| `NFA-other` | No Further Action: Other |
 {:.table-bordered}
 
 </details>
