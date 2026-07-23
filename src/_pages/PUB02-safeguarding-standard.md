@@ -715,7 +715,7 @@ Used by [`ServiceEpisode.outcome`](#episode-outcome). Codes to indicate the outc
 | `NFA-planned` | No Further Action: Support ended as planned |
 | `NFA-moved` | No Further Action: Responsibility moved to another local authority |
 | `NFA-NHS-referral` | No Further Action: Referral to NHS services or NHS funded social care |
-| `NFA-disregard` | No Further Action: Self-funded client or under 12 week disregard |
+| `NFA-disregard` | No Further Action: Self-funded client or under 12 week property disregard |
 | `NFA-local-referral` | No Further Action: Referral to other service within the local authority |
 | `NFA-declined` | No Further Action: Support declined |
 | `NFA-info` | No Further Action: Information and advice or signposting |
