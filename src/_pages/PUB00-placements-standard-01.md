@@ -18,6 +18,8 @@ changelog:
   - Removed RiskAssessment.riskOther and RiskAssessment.riskToOthersOther text fields
 ---
 
+<a href="/PUB00_placements_standard_table_01" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
+
 ## Introduction
 
 The children's social care placements standard helps regions to answer their sufficiency questions by establishing a common data model to gather data about placements.
@@ -410,6 +412,7 @@ LA-internal metadata about who recorded each part of the placement record (refer
 {% endhighlight %}
 </div>
 
+<a href="/PUB00_placements_standard_table_01" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
 
 ## Ontology
 

@@ -1,0 +1,851 @@
+id: https://ns.socialcaredata.io/placements/schema
+name: placements
+title: Children's Social Care Placements Data Model
+description: >-
+  A single LinkML data model for Children's Social Care Placements Standard.
+license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+version: 1.0.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  pl: https://ns.socialcaredata.io/placements/
+  cln: https://ns.socialcaredata.io/placements/cultural-need#
+  cn: https://ns.socialcaredata.io/placements/communication-need#
+  la: https://ns.socialcaredata.io/placements/living-arrangement#
+  pa: https://ns.socialcaredata.io/placements/pets-allowance#
+  pt: https://ns.socialcaredata.io/placements/placement-type#
+  pu: https://ns.socialcaredata.io/placements/placement-urgency#
+  rl: https://ns.socialcaredata.io/placements/risk-level#
+  sl: https://ns.socialcaredata.io/placements/suitability-level#
+  st: https://ns.socialcaredata.io/placements/support-type#
+  yns: https://ns.socialcaredata.io/placements/presence-status#
+  olr: https://ns.socialcaredata.io/placements/outof-la-reason#
+  skos: http://www.w3.org/2004/02/skos/core#
+  dct: http://purl.org/dc/terms/
+  xsd: http://www.w3.org/2001/XMLSchema#
+default_prefix: pl
+default_range: string
+imports:
+  - linkml:types
+
+# ---------------------------------------------------------------------------
+# Types
+# ---------------------------------------------------------------------------
+types:
+  nonNegativeInteger:
+    uri: xsd:nonNegativeInteger
+    base: int
+    typeof: integer
+    minimum_value: 0
+    description: An integer that is zero or greater (xsd:nonNegativeInteger).
+
+# ---------------------------------------------------------------------------
+# Classes
+# ---------------------------------------------------------------------------
+classes:
+
+  Placement:
+    class_uri: pl:Placement
+    tree_root: true
+    description: >-
+      The top-level placement record for a looked-after child, linking together
+      the referral availability, the child's requirements, the social-worker
+      recommendation, the risk assessment, the quality-assurance metadata and
+      (optionally) the placement actually arranged.
+    slots:
+      - placementId
+      - childId
+      - placementAvailability
+      - placementRequirements
+      - placementRecommendation
+      - riskAssessment
+      - qualityAssurance
+      - actualPlacement
+
+  PlacementAvailability:
+    class_uri: pl:PlacementAvailability
+    description: >-
+      The referral request details: how urgently the child needs to be placed,
+      how many siblings should be placed together, whether the preferred
+      location is local, and (if out of area) why.
+    slots:
+      - neededBy
+      - siblingCount
+      - isPreferredLocationLocal
+      - outOfLAReason
+      - outOfLAReasonOther
+    rules:
+      - title: outOfLAReasonOther required when outOfLAReason is 'Other'
+        preconditions:
+          slot_conditions:
+            outOfLAReason:
+              equals_string: OutOfLAReasonOther
+        postconditions:
+          slot_conditions:
+            outOfLAReasonOther:
+              required: true
+
+  PlacementRequirements:
+    class_uri: pl:PlacementRequirements
+    description: >-
+      The child's needs that the placement must accommodate: communication,
+      cultural, living companions, pets, additional support, deprivation of
+      liberty and home adaptation.
+    slots:
+      - communicationNeeds
+      - specificCommunicationRequirement
+      - culturalNeeds
+      - livingCompanions
+      - pets
+      - additionalSupport
+      - additionalSupportOther
+      - culturalNeedsOther
+      - specificCommunicationRequirementOther
+      - homeAdaptationRequired
+      - deprivationOfLiberty
+    rules:
+      - title: culturalNeedsOther required when culturalNeeds is 'Other'
+        preconditions:
+          slot_conditions:
+            culturalNeeds:
+              equals_string: Other
+        postconditions:
+          slot_conditions:
+            culturalNeedsOther:
+              required: true
+      - title: specificCommunicationRequirementOther required when 'Other' is selected
+        preconditions:
+          slot_conditions:
+            specificCommunicationRequirement:
+              has_member:
+                equals_string: Other
+        postconditions:
+          slot_conditions:
+            specificCommunicationRequirementOther:
+              required: true
+      - title: additionalSupportOther required when additionalSupport includes 'Other'
+        preconditions:
+          slot_conditions:
+            additionalSupport:
+              has_member:
+                equals_string: Other
+        postconditions:
+          slot_conditions:
+            additionalSupportOther:
+              required: true
+
+  PlacementRecommendation:
+    class_uri: pl:PlacementRecommendation
+    description: >-
+      The social worker's recommendation of which categories of placement
+      (foster, residential, supported accommodation) are preferred, suitable but
+      not preferred, unsuitable, or unspecified.
+    slots:
+      - fosterCareSuitability
+      - residentialCareSuitability
+      - supportedAccommodationSuitability
+
+  RiskAssessment:
+    class_uri: pl:RiskAssessment
+    description: >-
+      Assessment of risks the child is exposed to and risks the child poses to
+      others or property. Each risk is recorded as 'no known risk' or 'risk
+      present'.
+    slots:
+      - riskSelfHarm
+      - riskCriminalExploitation
+      - riskDrugAlcohol
+      - riskEatingDisorder
+      - riskMissing
+      - riskSexualExploitation
+      - riskOther
+      - riskToOthersPhysical
+      - riskToOthersSexual
+      - riskToOthersFire
+      - riskToOthersAnimals
+      - riskToOthersCriminal
+      - riskToOthersOther
+
+  ActualPlacement:
+    class_uri: pl:ActualPlacement
+    description: >-
+      The placement actually arranged for the child, including weekly cost (with
+      optional breakdown), location, provider URN, sibling co-placement and
+      educational continuity. Optional - a Placement may not (yet) have one.
+    slots:
+      - placementType
+      - providerURN
+      - placementLocation
+      - isLocationPreferred
+      - isEducationContinuous
+      - siblingsPlacedTogether
+      - totalWeeklyCost
+      - coreWeeklyCost
+      - additionalSupportWeeklyCost
+      - educationWeeklyCost
+      - otherWeeklyCost
+
+  QualityAssurance:
+    class_uri: pl:QualityAssurance
+    description: >-
+      Metadata about who recorded each part of the placement record (referral,
+      placement, cost) and when. Supports LA-internal review of data-entry
+      practices; not intended to be shared beyond the recording LA.
+    slots:
+      - referralDate
+      - placementDate
+      - placementOfficerName
+      - costDate
+      - referralOfficerName
+      - costOfficerName
+
+# ---------------------------------------------------------------------------
+# Slots
+# ---------------------------------------------------------------------------
+slots:
+
+  # --- Placement ---
+  placementId:
+    slot_uri: pl:placementId
+    range: string
+    required: false
+    multivalued: false
+    description: The unique identifier of the placement record within the LA case management system.
+  childId:
+    slot_uri: pl:childId
+    range: string
+    required: true
+    multivalued: false
+    description: Identifier unique to each child within the LA, allowing linking between multiple referrals for the same child.
+  placementAvailability:
+    slot_uri: pl:placementAvailability
+    range: PlacementAvailability
+    required: true
+    multivalued: false
+    description: Links a Placement to its PlacementAvailability (referral) record.
+  placementRequirements:
+    slot_uri: pl:placementRequirements
+    range: PlacementRequirements
+    required: true
+    multivalued: false
+    description: Links a Placement to its PlacementRequirements.
+  placementRecommendation:
+    slot_uri: pl:placementRecommendation
+    range: PlacementRecommendation
+    required: true
+    multivalued: false
+    description: Links a Placement to its PlacementRecommendation.
+  riskAssessment:
+    slot_uri: pl:riskAssessment
+    range: RiskAssessment
+    required: true
+    multivalued: false
+    description: Links a Placement to its RiskAssessment.
+  qualityAssurance:
+    slot_uri: pl:qualityAssurance
+    range: QualityAssurance
+    required: true
+    multivalued: false
+    description: Links a Placement to its QualityAssurance metadata.
+  actualPlacement:
+    slot_uri: pl:actualPlacement
+    range: ActualPlacement
+    required: false
+    multivalued: false
+    description: >-
+      Links a Placement to the ActualPlacement that was arranged. Optional - a
+      referral may exist without (yet) having an actual placement.
+
+  # --- PlacementAvailability ---
+  neededBy:
+    slot_uri: pl:neededBy
+    range: PlacementUrgency
+    required: true
+    multivalued: false
+    description: >-
+      When the child needs to be placed by. Captures urgency rather than an
+      absolute date.
+  siblingCount:
+    slot_uri: pl:siblingCount
+    range: nonNegativeInteger
+    required: false
+    multivalued: false
+    description: >-
+      How many siblings the child should ideally be placed with according to the
+      care plan. 0 if the child has no siblings or is not to be placed with
+      siblings.
+  isPreferredLocationLocal:
+    slot_uri: pl:isPreferredLocationLocal
+    range: boolean
+    required: true
+    multivalued: false
+    description: Is the preferred placement location in the same LA as the placing LA?
+  outOfLAReason:
+    slot_uri: pl:outOfLAReason
+    range: OutOfLAReason
+    required: false
+    multivalued: false
+    description: If preferred placement location is in a different LA than the placing LA, why is this?
+  outOfLAReasonOther:
+    slot_uri: pl:outOfLAReasonOther
+    range: string
+    required: false
+    multivalued: true
+    description: >-
+      Free-text description of why the preferred placement location is in a
+      different LA when the standard outof-la-reason options do not apply. Used
+      when the 'Other' OutOfLAReason concept is selected.
+
+  # --- PlacementRequirements ---
+  communicationNeeds:
+    slot_uri: pl:communicationNeeds
+    range: PresenceStatus
+    required: true
+    multivalued: false
+    description: Whether the child has any communication, language or learning needs.
+  specificCommunicationRequirement:
+    slot_uri: pl:specificCommunicationRequirement
+    range: CommunicationNeed
+    required: true
+    multivalued: true
+    description: >-
+      Specific communication or language requirement (ESOL, BSL, Makaton, Other,
+      None). Multi-valued: a placement may have several.
+  culturalNeeds:
+    slot_uri: pl:culturalNeeds
+    range: CulturalNeed
+    required: true
+    multivalued: false
+    description: >-
+      Whether the placement must accommodate specific cultural needs (e.g.,
+      access to places of worship).
+  livingCompanions:
+    slot_uri: pl:livingCompanions
+    range: LivingArrangement
+    required: true
+    multivalued: false
+    description: >-
+      Recommendation as to who the child can be cared for alongside (e.g., solo
+      placement, with other children, only older children).
+  pets:
+    slot_uri: pl:pets
+    range: PetsAllowance
+    required: true
+    multivalued: false
+    description: Whether the child can or must live in a home with pets/animals.
+  additionalSupport:
+    slot_uri: pl:additionalSupport
+    range: SupportType
+    required: false
+    multivalued: true
+    description: >-
+      Additional support provision required (e.g., additional supervision,
+      therapeutic support, taxis to school). Multi-valued.
+  additionalSupportOther:
+    slot_uri: pl:additionalSupportOther
+    range: string
+    required: false
+    multivalued: true
+    description: >-
+      Free-text description of any additional support not captured by the
+      standard SupportType options. Used when the 'Other' SupportType concept is
+      selected.
+  culturalNeedsOther:
+    slot_uri: pl:culturalNeedsOther
+    range: string
+    required: false
+    multivalued: true
+    description: >-
+      Free-text description of cultural needs not captured by the standard
+      CulturalNeed options. Used when the 'Other' CulturalNeed concept is
+      selected.
+  specificCommunicationRequirementOther:
+    slot_uri: pl:specificCommunicationRequirementOther
+    range: string
+    required: false
+    multivalued: true
+    description: >-
+      Free-text description of communication or language requirements not
+      captured by the standard CommunicationNeed options. Used when the 'Other'
+      CommunicationNeed concept is among the selected values.
+  homeAdaptationRequired:
+    slot_uri: pl:homeAdaptationRequired
+    range: boolean
+    required: false
+    multivalued: false
+    description: Whether adaptations to the home are required to accommodate the child's needs.
+  deprivationOfLiberty:
+    slot_uri: pl:deprivationOfLiberty
+    range: boolean
+    required: false
+    multivalued: false
+    description: Whether the child has a Deprivation of Liberty Order (DOL).
+
+  # --- PlacementRecommendation ---
+  fosterCareSuitability:
+    slot_uri: pl:fosterCareSuitability
+    range: SuitabilityLevel
+    required: true
+    multivalued: false
+    description: Suitability of foster care for this child, as judged by the social worker.
+  residentialCareSuitability:
+    slot_uri: pl:residentialCareSuitability
+    range: SuitabilityLevel
+    required: true
+    multivalued: false
+    description: Suitability of residential care for this child.
+  supportedAccommodationSuitability:
+    slot_uri: pl:supportedAccommodationSuitability
+    range: SuitabilityLevel
+    required: true
+    multivalued: false
+    description: Suitability of supported accommodation for this child.
+
+  # --- RiskAssessment ---
+  riskSelfHarm:
+    slot_uri: pl:riskSelfHarm
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether the child is known to be at risk of self-harm.
+  riskCriminalExploitation:
+    slot_uri: pl:riskCriminalExploitation
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether the child is known to be at risk of criminal exploitation.
+  riskDrugAlcohol:
+    slot_uri: pl:riskDrugAlcohol
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether the child is known to be at risk of drug and alcohol use.
+  riskEatingDisorder:
+    slot_uri: pl:riskEatingDisorder
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether the child is known to be at risk of an eating disorder.
+  riskMissing:
+    slot_uri: pl:riskMissing
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether the child is known to be at risk of going missing.
+  riskSexualExploitation:
+    slot_uri: pl:riskSexualExploitation
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether the child is known to be at risk of sexual exploitation.
+  riskOther:
+    slot_uri: pl:riskOther
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether there is a known risk of other types of harm to the child not captured by the standard risk categories.
+  riskToOthersOther:
+    slot_uri: pl:riskToOthersOther
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether there is a known risk of other types of harm to others not captured by the standard risk categories.
+  riskToOthersPhysical:
+    slot_uri: pl:riskToOthersPhysical
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether there is a known risk of physical harm to others.
+  riskToOthersSexual:
+    slot_uri: pl:riskToOthersSexual
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether there is a known risk of sexual harm to others.
+  riskToOthersFire:
+    slot_uri: pl:riskToOthersFire
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether there is a known risk of fire-setting.
+  riskToOthersAnimals:
+    slot_uri: pl:riskToOthersAnimals
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether there is a known risk of harm to animals.
+  riskToOthersCriminal:
+    slot_uri: pl:riskToOthersCriminal
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether there is a known risk of criminal exploitation for others in the home.
+
+  # --- ActualPlacement ---
+  placementType:
+    slot_uri: pl:placementType
+    range: PlacementType
+    required: true
+    multivalued: false
+    description: The type of placement the child received.
+  providerURN:
+    slot_uri: pl:providerURN
+    range: string
+    required: true
+    multivalued: false
+    description: >-
+      Provider Unique Reference Number, linked to Ofsted registration. Allows the
+      placement to be linked to Ofsted data about the provider.
+  placementLocation:
+    slot_uri: pl:placementLocation
+    range: string
+    required: true
+    multivalued: false
+    pattern: "^[A-Z]{1,2}[0-9][0-9A-Z]?$"
+    description: >-
+      First 3-4 characters of the postcode (UK outward code) for the actual
+      placement location.
+  isLocationPreferred:
+    slot_uri: pl:isLocationPreferred
+    range: boolean
+    required: true
+    multivalued: false
+    description: Whether the actual placement location was a preferred location.
+  isEducationContinuous:
+    slot_uri: pl:isEducationContinuous
+    range: boolean
+    required: true
+    multivalued: false
+    description: >-
+      Whether the child's education was continuous (i.e., not disrupted) as a
+      result of this placement.
+  siblingsPlacedTogether:
+    slot_uri: pl:siblingsPlacedTogether
+    range: nonNegativeInteger
+    required: true
+    multivalued: false
+    description: How many siblings were actually placed together.
+  totalWeeklyCost:
+    slot_uri: pl:totalWeeklyCost
+    range: decimal
+    required: true
+    multivalued: false
+    description: Total weekly fee paid for the placement, excluding VAT.
+  coreWeeklyCost:
+    slot_uri: pl:coreWeeklyCost
+    range: decimal
+    required: false
+    multivalued: false
+    minimum_value: 0
+    description: >-
+      Total weekly core cost: the basic price quoted by a provider to deliver the
+      service outlined in their Statement of Purpose, excluding child-specific
+      additional costs.
+  additionalSupportWeeklyCost:
+    slot_uri: pl:additionalSupportWeeklyCost
+    range: decimal
+    required: false
+    multivalued: false
+    minimum_value: 0
+    description: >-
+      Total weekly additional-support cost: costs incurred over and above the
+      core cost to meet the specific needs of the child.
+  educationWeeklyCost:
+    slot_uri: pl:educationWeeklyCost
+    range: decimal
+    required: false
+    multivalued: false
+    minimum_value: 0
+    description: >-
+      Total weekly education cost: recorded when the placement includes both care
+      and registered education provision.
+  otherWeeklyCost:
+    slot_uri: pl:otherWeeklyCost
+    range: decimal
+    required: false
+    multivalued: false
+    minimum_value: 0
+    description: >-
+      Any weekly placement costs that do not clearly fall within the core,
+      additional-support or education categories.
+
+  # --- QualityAssurance ---
+  referralDate:
+    slot_uri: pl:referralDate
+    range: date
+    required: true
+    multivalued: false
+    description: Date the referral data was captured.
+  placementDate:
+    slot_uri: pl:placementDate
+    range: date
+    required: true
+    multivalued: false
+    description: Date the actual placement data was captured.
+  placementOfficerName:
+    slot_uri: pl:placementOfficerName
+    range: string
+    required: true
+    multivalued: false
+    description: Name of the officer who recorded the actual placement information.
+  costDate:
+    slot_uri: pl:costDate
+    range: date
+    required: true
+    multivalued: false
+    description: Date the placement cost data was captured.
+  referralOfficerName:
+    slot_uri: pl:referralOfficerName
+    range: string
+    required: false
+    multivalued: false
+    description: Name of the officer who recorded the referral information. LA-internal QA only.
+  costOfficerName:
+    slot_uri: pl:costOfficerName
+    range: string
+    required: false
+    multivalued: false
+    description: Name of the officer who recorded the placement cost data.
+
+# ---------------------------------------------------------------------------
+# Enums (controlled vocabularies / SKOS concept schemes)
+# ---------------------------------------------------------------------------
+enums:
+
+  PlacementUrgency:
+    enum_uri: pl:placement-urgency
+    title: Placement Urgency
+    description: Controlled vocabulary for the urgency of a placement request.
+    permissible_values:
+      Today:
+        title: Today
+        meaning: pu:Today
+        description: Placement is needed today.
+      WithinFiveDays:
+        title: Within 5 days
+        meaning: pu:WithinFiveDays
+        description: Placement is needed within five days.
+      MoreThanFiveDays:
+        title: More than 5 days
+        meaning: pu:MoreThanFiveDays
+        description: Placement is needed in more than five days.
+
+  OutOfLAReason:
+    enum_uri: pl:outof-la-reason
+    title: Out of LA Reason
+    description: Controlled vocabulary describing the reason the preferred placement location is in a different LA.
+    permissible_values:
+      SafeguardingConcerns:
+        title: Safeguarding concerns
+        meaning: olr:SafeguardingConcerns
+        description: Placement is sought outside the placing LA due to safeguarding concerns.
+      BailConditions:
+        title: Bail conditions
+        meaning: olr:BailConditions
+        description: Placement is sought outside the placing LA because of bail conditions.
+      CourtOrder:
+        title: Court order
+        meaning: olr:CourtOrder
+        description: Placement is sought outside the placing LA because of a court order.
+      OutOfLAReasonOther:
+        title: Other
+        meaning: olr:OutOfLAReasonOther
+        description: Another reason not listed. When this concept is selected, supply the details via the paired pl:outOfLAReasonOther free-text property on PlacementAvailability.
+
+  PresenceStatus:
+    enum_uri: pl:presence-status
+    title: Yes / No / Not Specified
+    description: Three-valued data presence status (affirmative, negative, unspecified).
+    permissible_values:
+      Yes:
+        title: Yes
+        meaning: yns:Yes
+        description: Affirmative.
+      No:
+        title: 'No'
+        meaning: yns:No
+        description: Negative.
+      NotSpecified:
+        title: Not specified
+        meaning: yns:NotSpecified
+        description: Not specified.
+
+  CommunicationNeed:
+    enum_uri: pl:communication-need
+    title: Communication Need
+    description: Controlled vocabulary for specific communication and language requirements.
+    permissible_values:
+      ESOL:
+        title: ESOL
+        meaning: cn:ESOL
+        description: English for Speakers of Other Languages support is required.
+      BSL:
+        title: BSL
+        meaning: cn:BSL
+        description: British Sign Language is required.
+      Makaton:
+        title: Makaton
+        meaning: cn:Makaton
+        description: Makaton signing/symbol communication is required.
+      Other:
+        title: Other
+        meaning: cn:Other
+        description: Another communication or language requirement not listed. When this concept is selected, supply the details via the paired pl:specificCommunicationRequirementOther free-text property on PlacementRequirements.
+      None:
+        title: None
+        meaning: cn:None
+        description: No specific communication or language requirements.
+
+  CulturalNeed:
+    enum_uri: pl:cultural-need
+    title: Cultural Need
+    description: Controlled vocabulary for whether a child has specific cultural needs.
+    permissible_values:
+      Required:
+        title: Required
+        meaning: cln:Required
+        description: Specific cultural accommodations are required.
+      NotRequired:
+        title: Not required
+        meaning: cln:NotRequired
+        description: No specific cultural accommodations are required.
+      NotKnown:
+        title: Not known
+        meaning: cln:NotKnown
+        description: Whether cultural accommodations are required is not known.
+      Other:
+        title: Other
+        meaning: cln:Other
+        description: Other cultural needs apply. When this concept is selected, supply the details via the paired pl:culturalNeedsOther free-text property on PlacementRequirements.
+
+  LivingArrangement:
+    enum_uri: pl:living-arrangement
+    title: Living Arrangement
+    description: Controlled vocabulary describing who the child can be cared for alongside.
+    permissible_values:
+      SoloPlacement:
+        title: Solo placement recommended
+        meaning: la:SoloPlacement
+        description: A solo placement is recommended; the child should not live with other children.
+      WithOtherChildren:
+        title: With other children recommended
+        meaning: la:WithOtherChildren
+        description: Living with other children is recommended.
+      OnlyWithOlderChildren:
+        title: Only with other older children
+        meaning: la:OnlyWithOlderChildren
+        description: The child should only live with other children who are older.
+      OnlyWithYoungerChildren:
+        title: Only with other younger children
+        meaning: la:OnlyWithYoungerChildren
+        description: The child should only live with other children who are younger.
+      NoPreference:
+        title: No preference
+        meaning: la:NoPreference
+        description: No preference about who the child lives alongside.
+
+  PetsAllowance:
+    enum_uri: pl:pets-allowance
+    title: Pets Allowance
+    description: Controlled vocabulary describing whether a child can or must live in a home with pets/animals.
+    permissible_values:
+      YesMust:
+        title: Yes - must
+        meaning: pa:YesMust
+        description: The child must live in a home with pets/animals.
+      YesCan:
+        title: Yes - can
+        meaning: pa:YesCan
+        description: The child can live in a home with pets/animals.
+      No:
+        title: 'No'
+        meaning: pa:No
+        description: The child cannot live in a home with pets/animals.
+      NotKnown:
+        title: Not known
+        meaning: pa:NotKnown
+        description: Whether the child can live with pets/animals is not known.
+
+  SupportType:
+    enum_uri: pl:support-type
+    title: Support Type
+    description: Controlled vocabulary for additional support provision required alongside a placement.
+    permissible_values:
+      AdditionalSupervision:
+        title: Additional supervision
+        meaning: st:AdditionalSupervision
+        description: Additional supervision is required.
+      TherapeuticSupport:
+        title: Therapeutic support
+        meaning: st:TherapeuticSupport
+        description: Therapeutic support is required.
+      WorkerForRespite:
+        title: A worker for respite
+        meaning: st:WorkerForRespite
+        description: A worker is required to provide respite.
+      TaxisToSchool:
+        title: Taxis to school
+        meaning: st:TaxisToSchool
+        description: Taxis to and from school are required.
+      NotApplicable:
+        title: Not applicable
+        meaning: st:NotApplicable
+        description: No additional support is required.
+      Other:
+        title: Other
+        meaning: st:Other
+        description: Other additional support is required. When this concept is selected, supply the details via the paired pl:additionalSupportOther free-text property on PlacementRequirements.
+
+  SuitabilityLevel:
+    enum_uri: pl:suitability-level
+    title: Suitability Level
+    description: Controlled vocabulary for how suitable a placement category is for a child.
+    permissible_values:
+      Preferred:
+        title: Preferred
+        meaning: sl:Preferred
+        description: This category of placement is the preferred option for the child.
+      SuitableButNotPreferred:
+        title: Suitable but not preferred
+        meaning: sl:SuitableButNotPreferred
+        description: This category of placement would be suitable but is not the preferred option.
+      Unsuitable:
+        title: Unsuitable
+        meaning: sl:Unsuitable
+        description: This category of placement is unsuitable for the child.
+      NotSpecified:
+        title: Not specified
+        meaning: sl:NotSpecified
+        description: Suitability has not been specified.
+
+  RiskLevel:
+    enum_uri: pl:risk-level
+    title: Risk Level
+    description: Binary controlled vocabulary recording whether a particular risk is present.
+    permissible_values:
+      NoKnownRisk:
+        title: No known risk
+        meaning: rl:NoKnownRisk
+        description: There is no known risk.
+      RiskPresent:
+        title: Risk present
+        meaning: rl:RiskPresent
+        description: A risk is known to be present.
+
+  PlacementType:
+    enum_uri: pl:placement-type
+    title: Placement Type
+    description: Controlled vocabulary for the type of placement a child receives.
+    permissible_values:
+      Foster:
+        title: Foster
+        meaning: pt:Foster
+        description: A placement with an approved foster carer.
+      Residential:
+        title: Residential
+        meaning: pt:Residential
+        description: A placement in a residential children's home.
+      SupportedAccommodation:
+        title: Supported Accommodation
+        meaning: pt:SupportedAccommodation
+        description: A supported accommodation placement (typically for older young people).
