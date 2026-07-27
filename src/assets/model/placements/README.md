@@ -6,6 +6,10 @@
 From one YAML file you can generate the SHACL, the OWL/RDF, JSON Schema,
 Pydantic, documentation, and more, using the standard LinkML generators.
 
+> ⚠️ **WARNING: DO NOT EDIT ONTOLOGY OR SHACL FILES DIRECTLY!**
+>
+> **Edit the LinkML schema instead.** Any changes made directly to this file will be overwritten. Refer to [Regenerating downstream artifacts](#regenerating-downstream-artifacts) for instructions on updating these files.
+
 ## What's in the model
 
 | Element | Count | Notes |
