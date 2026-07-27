@@ -10,6 +10,9 @@ tags:
 reference: PUB00
 status: draft
 version: 01
+data_model: src/assets/model/placements/placements-standard-01.yaml
+previous_data_model: src/assets/model/placements/placements-standard.yaml
+data_model_diff: /PUB00_placements_standard_diff_01
 changelog:
   - Removed unused quality assurance fields
   - Added data validation rules

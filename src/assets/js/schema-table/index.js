@@ -3,14 +3,19 @@
 
 const CLI_NAME = 'schema-table'
 
-const { generateTable } = require('./lib/generate')
+const { generateTable, generateDiffTable } = require('./lib/generate')
 
-const USAGE = `Usage: schema-table <model-file> <entity> [--page-headings <s>]
+const USAGE = `Usage: schema-table <model-file> <entity> [--previous <file>] [--page-headings <s>]
 
 Generate a Markdown table from a LinkML data model. When <entity> is a class,
 the table lists its properties. When <entity> is a property whose values come
 from a controlled vocabulary (an enum range) - or an enum directly - a
 collapsible "Code" / "Description" vocabulary table is produced instead.
+
+With --previous, an HTML diff table is produced instead of a Markdown table:
+the current model is compared against the previous one and each row/cell is
+tagged added (green), removed (red, struck through) or changed (yellow, old
+value struck through beside the new).
 
 Arguments:
   <model-file>   Path to the LinkML YAML model, relative to the current dir.
@@ -19,6 +24,8 @@ Arguments:
                  enum.
 
 Options:
+  --previous <file>    Path to a previous LinkML YAML model. When given, emit an
+                       HTML diff of <model-file> against it for <entity>.
   --page-headings <s>  Newline-separated heading texts present on the target
                        page. When given, a class table's Options column only
                        links to a taxonomy that has a matching section on the
@@ -27,7 +34,8 @@ Options:
 
 Examples:
   schema-table src/assets/model/placements/placements.yaml PlacementRequirements
-  schema-table src/assets/model/placements/placements.yaml communicationNeeds`
+  schema-table src/assets/model/placements/placements.yaml communicationNeeds
+  schema-table placements-standard-01.yaml RiskAssessment --previous placements-standard.yaml`
 
 function parseArgs (argv) {
   const positional = []
@@ -38,6 +46,8 @@ function parseArgs (argv) {
         .split('\n')
         .map(s => s.trim())
         .filter(Boolean)
+    } else if (argv[i] === '--previous') {
+      opts.previousPath = argv[++i]
     } else if (argv[i] === '-h' || argv[i] === '--help') {
       opts.help = true
     } else {
@@ -56,7 +66,8 @@ function main () {
     process.exit(opts.help ? 0 : 1)
   }
   try {
-    process.stdout.write(generateTable(opts) + '\n')
+    const output = opts.previousPath ? generateDiffTable(opts) : generateTable(opts)
+    process.stdout.write(output + '\n')
   } catch (err) {
     console.error(`schema-table: ${err.message}`)
     process.exit(1)

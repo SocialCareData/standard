@@ -7,7 +7,7 @@ const path = require('node:path')
 const { generateTable } = require('../lib/generate')
 
 const REPO_ROOT = path.resolve(__dirname, '..', '..', '..', '..', '..')
-const MODEL = 'src/assets/model/placements/placements.yaml'
+const MODEL = 'src/assets/model/placements/placements-standard-01.yaml'
 
 test('integration: PlacementRequirements property table against the real model', () => {
   const md = generateTable({ modelPath: MODEL, entity: 'PlacementRequirements', rootDir: REPO_ROOT })

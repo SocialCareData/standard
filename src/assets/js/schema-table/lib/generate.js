@@ -6,6 +6,18 @@ const { loadModel, isClass } = require('./linkml')
 const { slugify } = require('./format')
 const { extractProperties, resolveVocabulary, findVocabularyEnum } = require('./model')
 const { renderTable, renderVocabularyTable } = require('./table')
+const {
+  diffClassProperties, diffVocabulary, renderDiffTable, renderDiffVocabularyTable
+} = require('./diff')
+
+/** Read and parse a LinkML model, resolving its path against rootDir. */
+function readModel (modelPath, rootDir) {
+  const abs = path.resolve(rootDir, modelPath)
+  if (!fs.existsSync(abs)) {
+    throw new Error(`LinkML model file not found: ${modelPath} (resolved to ${abs})`)
+  }
+  return loadModel(fs.readFileSync(abs, 'utf8'))
+}
 
 /**
  * Generate a Markdown table for an entity in a LinkML model.
@@ -63,4 +75,44 @@ function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadin
   )
 }
 
-module.exports = { generateTable }
+/**
+ * Generate a diff table for an entity between two versions of a LinkML model.
+ * Like {@link generateTable}, but compares `previousPath` against `modelPath` and
+ * emits an HTML table whose rows/cells carry diff classes (added / removed /
+ * changed). The entity is resolved as a class (property table) in either version,
+ * else as a controlled-vocabulary property/enum (vocabulary table).
+ *
+ * @param {object} opts
+ * @param {string} opts.modelPath     Path to the current LinkML YAML file.
+ * @param {string} opts.previousPath  Path to the previous LinkML YAML file.
+ * @param {string} opts.entity        Class name, or a controlled-vocabulary property/enum name.
+ * @param {string} [opts.rootDir]     Base for resolving the paths (default cwd).
+ * @param {string[]} [opts.pageHeadings] See {@link generateTable}.
+ * @returns {string} An HTML diff table (a property table, or a vocabulary table
+ *   wrapped in a <details> element).
+ */
+function generateDiffTable ({ modelPath, previousPath, entity, rootDir = process.cwd(), pageHeadings } = {}) {
+  if (!modelPath) throw new Error('modelPath is required')
+  if (!previousPath) throw new Error('previousPath is required')
+  if (!entity) throw new Error('entity is required')
+
+  const current = readModel(modelPath, rootDir)
+  const previous = readModel(previousPath, rootDir)
+
+  const availableAnchors = pageHeadings === undefined ? null : new Set(pageHeadings.map(slugify))
+
+  if (isClass(current, entity) || isClass(previous, entity)) {
+    return renderDiffTable(diffClassProperties(current, previous, entity, availableAnchors))
+  }
+
+  const enumName = findVocabularyEnum(current, entity) || findVocabularyEnum(previous, entity)
+  if (enumName) {
+    return renderDiffVocabularyTable(diffVocabulary(current, previous, enumName))
+  }
+
+  throw new Error(
+    `No class, and no controlled-vocabulary property or enum, matching "${entity}" was found.`
+  )
+}
+
+module.exports = { generateTable, generateDiffTable }

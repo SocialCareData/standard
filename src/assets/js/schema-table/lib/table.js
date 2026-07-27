@@ -15,6 +15,22 @@ function escapeCell (text) {
 }
 
 /**
+ * Make a value safe to place inside raw HTML (used by the diff table, which is
+ * emitted as HTML rather than Markdown so it can carry per-row/-cell classes).
+ * Whitespace (including newlines) is collapsed so multi-line descriptions sit on
+ * one line, mirroring {@link escapeCell}.
+ */
+function escapeHtml (text) {
+  return String(text == null ? '' : text)
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
+
+/**
  * The "Data Type" cell. A property typed by another class becomes a link to
  * that class's section; a controlled vocabulary (enum range) is "Categorical";
  * otherwise the datatype label.
@@ -113,6 +129,7 @@ module.exports = {
   dataTypeCell,
   optionsCell,
   escapeCell,
+  escapeHtml,
   COLUMNS,
   VOCAB_COLUMNS
 }

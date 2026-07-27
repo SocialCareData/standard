@@ -11,6 +11,9 @@
   --highlight-3-background: rgb(248, 245, 245);
   --highlight-3-border: rgb(206, 203, 203);
   --highlight-3-color: rgb(21, 35, 54);
+  --highlight-4-background: rgb(251, 233, 233);
+  --highlight-4-border: rgb(224, 82, 82);
+  --highlight-4-color: rgb(130, 23, 23);
   --link-hover-color: rgb(56, 111, 196);
   --link-color: rgb(48, 86, 169);
   --link-transition: color 0.3s ease;

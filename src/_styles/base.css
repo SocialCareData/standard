@@ -320,6 +320,55 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
   padding: .3rem .5rem;
 }
 
+/* Data-model diff tables emitted by {% schema_table_diff %}. */
+.schema-diff tr.diff-added td {
+  background-color: var(--highlight-2-background);
+}
+
+.schema-diff tr.diff-removed td {
+  background-color: var(--highlight-4-background);
+  text-decoration: line-through;
+}
+
+.schema-diff td.diff-cell {
+  background-color: var(--highlight-1-background);
+}
+
+.schema-diff .diff-old,
+.schema-diff del {
+  text-decoration: line-through;
+  opacity: .7;
+}
+
+.schema-diff .diff-new,
+.schema-diff ins {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Inline legend swatches on the diff page. */
+span.diff-added,
+span.diff-removed,
+span.diff-changed {
+  padding: 0 .3rem;
+  border-radius: 2px;
+}
+
+span.diff-added {
+  background-color: var(--highlight-2-background);
+  color: var(--highlight-2-color);
+}
+
+span.diff-removed {
+  background-color: var(--highlight-4-background);
+  color: var(--highlight-4-color);
+}
+
+span.diff-changed {
+  background-color: var(--highlight-1-background);
+  color: var(--highlight-1-color);
+}
+
 .version-tag {
     background-color: var(--main-tag-background);
     color: var(--main-tag-color);

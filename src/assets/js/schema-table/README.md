@@ -41,6 +41,28 @@ The taxonomy section title/anchor comes from the enum's `title`; the value
 labels shown in the Options column and the vocabulary-table Code column come
 from each permissible value's `title`.
 
+## Diff table
+
+With `--previous <file>`, the tool compares the current model against a previous
+one and emits an **HTML** table (rather than Markdown) whose rows and cells carry
+diff classes the site stylesheet colours:
+
+- **added** — a property/enum value present only in the current model → green row.
+- **removed** — present only in the previous model → red row, struck through.
+- **changed** — a cell whose value differs → yellow cell, old value struck
+  through beside the new (`<del class="diff-old">…</del> <ins class="diff-new">…</ins>`).
+
+Properties are matched by name and enum values by code; ordering follows the
+current version, with removed entries slotted back in after their previous
+predecessor. Class and vocabulary entities are resolved exactly as for the plain
+tables. The table element carries `markdown="0"` so kramdown leaves the raw HTML
+untouched. In a page use the `{% schema_table_diff %}` tag (see
+`src/_plugins/schema_table_diff.rb`):
+
+```liquid
+{% schema_table_diff current.yaml previous.yaml PlacementAvailability %}
+```
+
 ## Usage in a page (Jekyll)
 
 The `{% schema_table %}` Liquid tag (see `src/_plugins/schema_table.rb`) renders
@@ -61,6 +83,9 @@ class name (class table) or a controlled-vocabulary property/enum name
 ```bash
 node src/assets/js/schema-table/index.js src/assets/model/placements/placements.yaml PlacementAvailability
 node src/assets/js/schema-table/index.js src/assets/model/placements/placements.yaml communicationNeeds
+# diff two versions:
+node src/assets/js/schema-table/index.js src/assets/model/placements/placements-standard-01.yaml RiskAssessment \
+  --previous src/assets/model/placements/placements-standard.yaml
 ```
 
 ## Layout
@@ -71,6 +96,7 @@ lib/
   format.js    pure formatters: slugs, cardinality, datatype labels
   model.js     model -> property rows; Options + vocabulary (concept) resolution
   table.js     rows -> Markdown property table; concepts -> vocabulary table
+  diff.js      diff two model versions -> HTML property/vocabulary diff table
   generate.js  orchestration (load model, classify entity, render)
 index.js       CLI entry point
 test/          node:test unit + integration suites
