@@ -61,7 +61,6 @@ classes:
       - riskAssessment
       - qualityAssurance
       - actualPlacement
-      - testProperty
 
   PlacementAvailability:
     class_uri: pl:PlacementAvailability
@@ -252,16 +251,8 @@ slots:
     required: false
     multivalued: false
     description: >-
-      ActualPlacement record. Optional - a
+      Links a Placement to the ActualPlacement that was arranged. Optional - a
       referral may exist without (yet) having an actual placement.
-  testProperty:
-    slot_uri: pl:testProperty
-    range: string
-    required: false
-    multivalued: false
-    description: >-
-      A test property to check that the schema-table generator is working as
-      expected.
 
   # --- PlacementAvailability ---
   neededBy:
@@ -685,11 +676,11 @@ enums:
       Other:
         title: Other
         meaning: cn:Other
-        description: Some other description.
-      Test:
-        title: Test
-        meaning: cn:Test
-        description: A test value for testing the schema-table generator.
+        description: Another communication or language requirement not listed. When this concept is selected, supply the details via the paired pl:specificCommunicationRequirementOther free-text property on PlacementRequirements.
+      None:
+        title: None
+        meaning: cn:None
+        description: No specific communication or language requirements.
 
   CulturalNeed:
     enum_uri: pl:cultural-need

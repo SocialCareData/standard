@@ -43,6 +43,8 @@ changed values as the <del class="diff-old">old value</del> <ins class="diff-new
 
 {% schema_table_diff current previous RiskAssessment %}
 
+* Removed the `riskOther` and `riskToOthersOther` free-text fields to mitigate Information Governance and data privacy risks. [Issue #19](https://github.com/SocialCareData/standard/issues/19)
+
 ### ActualPlacement
 
 {% schema_table_diff current previous ActualPlacement %}

@@ -29,7 +29,7 @@ Requires `pip install linkml` (Python ≥ 3.11 with the `_lzma` stdlib module).
 gen-shacl --non-closed --suffix Shape placements.yaml > shacl-shape.ttl
 
 # OWL / RDF, JSON Schema, docs, Pydantic, …
-gen-owl placements.yaml
+gen-owl --consolidate-cardinality-axioms --skip-vacuous-min-zero-cardinality-axioms --skip-vacuous-local-range-axioms placements.yaml > placements.ttl
 gen-json-schema placements.yaml
 gen-doc placements.yaml
 ```
