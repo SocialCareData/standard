@@ -15,10 +15,10 @@ function escapeCell (text) {
 }
 
 /**
- * Make a value safe to place inside raw HTML (used by the diff table, which is
- * emitted as HTML rather than Markdown so it can carry per-row/-cell classes).
- * Whitespace (including newlines) is collapsed so multi-line descriptions sit on
- * one line, mirroring {@link escapeCell}.
+ * Make a value safe to place inside inline HTML within a Markdown table cell
+ * (used by the diff table). Whitespace (including newlines) is collapsed so
+ * multi-line descriptions sit on one line, and `|` is encoded so cell text can
+ * never break the surrounding pipe table.
  */
 function escapeHtml (text) {
   return String(text == null ? '' : text)
@@ -28,6 +28,7 @@ function escapeHtml (text) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
+    .replace(/\|/g, '&#124;')
 }
 
 /**

@@ -6,10 +6,11 @@ const { cardinality, datatypeLabel } = require('./format')
 const { escapeHtml, COLUMNS, VOCAB_COLUMNS } = require('./table')
 
 /**
- * Diff two versions of a LinkML model and render the result as an HTML table
- * (not Markdown — HTML is needed so rows and cells can carry the diff classes
- * the stylesheet colours: added = green row, removed = red struck-through row,
- * changed = yellow cell showing the old value struck through beside the new).
+ * Diff two versions of a LinkML model and render the result as a Markdown table
+ * whose cell contents carry inline HTML for the diff colours: added = green
+ * text, removed = red struck-through text, changed = old value struck through
+ * beside the new. kramdown builds the <table> (so it is styled like the plain
+ * tables); only text is coloured, since Markdown cannot class a <td>/<tr>.
  *
  * Both the "current" and "previous" models are the plain parsed-YAML objects
  * produced by {@link module:linkml.loadModel}. Properties are matched by name
@@ -166,72 +167,61 @@ function diffVocabulary (currentModel, previousModel, enumName) {
 }
 
 // ---------------------------------------------------------------------------
-// Rendering — raw HTML tables carrying the diff classes.
+// Rendering — Markdown tables whose cell contents carry inline HTML so kramdown
+// builds a normal <table> (styled like the plain tables) while the diff shows
+// through as coloured text: added = green, removed = red struck-through, changed
+// = old value struck through beside the new. Markdown offers no way to class a
+// <td>/<tr>, so only the text is coloured, not the cell background.
 // ---------------------------------------------------------------------------
 
-const STATUS_CLASS = { added: 'diff-added', removed: 'diff-removed', changed: 'diff-changed' }
-
-/** Render one cell's inner HTML, wrapping changed/removed content for styling. */
-function cellHtml (cell, rowStatus) {
+/**
+ * Wrap a cell's inline HTML for display according to the row/cell status.
+ * `html` is already HTML (links, <code>, escaped text), so kramdown passes it
+ * through untouched inside the Markdown cell.
+ */
+function decorateCell (cell, rowStatus) {
   if (cell.changed) {
     return `<del class="diff-old">${cell.oldHtml}</del> <ins class="diff-new">${cell.html}</ins>`
   }
-  if (rowStatus === 'removed') return `<del>${cell.html}</del>`
+  if (!cell.html) return cell.html
+  if (rowStatus === 'added') return `<span class="diff-added">${cell.html}</span>`
+  if (rowStatus === 'removed') return `<del class="diff-removed">${cell.html}</del>`
   return cell.html
 }
 
-/** Render diffed rows as an HTML table body under the given column headers. */
-function renderRows (rows, columns) {
-  const head = `<tr>${columns.map(c => `<th>${escapeHtml(c)}</th>`).join('')}</tr>`
-  const body = rows.map(row => {
-    const cls = STATUS_CLASS[row.status]
-    const tr = cls ? `<tr class="${cls}">` : '<tr>'
-    const tds = row.cells.map(cell => {
-      const tdCls = cell.changed ? ' class="diff-cell"' : ''
-      return `<td${tdCls}>${cellHtml(cell, row.status)}</td>`
-    }).join('')
-    return `${tr}${tds}</tr>`
-  })
-  return { head, body }
+/** Render diffed rows as a kramdown pipe table (header + alignment + body). */
+function renderDiffMarkdown (rows, columns, align = '---') {
+  const lines = [
+    `| ${columns.join(' | ')} |`,
+    `| ${columns.map(() => align).join(' | ')} |`,
+    ...rows.map(row => `| ${row.cells.map(c => decorateCell(c, row.status)).join(' | ')} |`)
+  ]
+  return lines.join('\n')
 }
 
 /**
- * Render a class property diff as a raw HTML table. `markdown="0"` stops kramdown
- * (which has `parse_block_html: true`) from re-parsing the block, and is stripped
- * from the output. No blank lines inside, for the same reason.
+ * Render a class property diff as a Markdown table. The `{: .schema-table
+ * .schema-diff}` IAL tags the generated <table> so it is styled like the plain
+ * property table, plus the diff text colours.
  */
 function renderDiffTable ({ rows }) {
-  const { head, body } = renderRows(rows, COLUMNS)
-  return [
-    '<table markdown="0" class="schema-table schema-diff">',
-    `<thead>${head}</thead>`,
-    '<tbody>',
-    ...body,
-    '</tbody>',
-    '</table>'
-  ].join('\n')
+  return `${renderDiffMarkdown(rows, COLUMNS)}\n{: .schema-table .schema-diff}`
 }
 
 /**
- * Render an enum vocabulary diff as a raw HTML table inside a collapsible
- * <details> element. Unlike the plain vocabulary table (which lets kramdown
- * parse an inner Markdown table), the whole block is already HTML, so
- * `markdown="0"` on the <details> tells kramdown (parse_block_html: true) to
- * leave the entire subtree verbatim — otherwise it mangles the <summary>/table.
- * With the wrapper marked raw, inner tags must NOT carry `markdown` attributes
- * (kramdown won't descend to strip them).
+ * Render an enum vocabulary diff as a Markdown table inside the same collapsible
+ * <details>/<summary> wrapper the plain vocabulary tables use. The blank lines
+ * around the table are required so kramdown parses it into a real <table>.
  */
 function renderDiffVocabularyTable ({ rows }) {
-  const { head, body } = renderRows(rows, VOCAB_COLUMNS)
+  const body = renderDiffMarkdown(rows, VOCAB_COLUMNS, ':---')
   return [
-    '<details markdown="0">',
-    '<summary>See vocabulary</summary>',
-    '<table class="table-bordered schema-diff">',
-    `<thead>${head}</thead>`,
-    '<tbody>',
-    ...body,
-    '</tbody>',
-    '</table>',
+    '<details>',
+    '<summary markdown="span">See vocabulary</summary>',
+    '',
+    body,
+    '{: .table-bordered .schema-diff}',
+    '',
     '</details>'
   ].join('\n')
 }

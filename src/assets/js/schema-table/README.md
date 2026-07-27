@@ -44,20 +44,21 @@ from each permissible value's `title`.
 ## Diff table
 
 With `--previous <file>`, the tool compares the current model against a previous
-one and emits an **HTML** table (rather than Markdown) whose rows and cells carry
-diff classes the site stylesheet colours:
+one and emits a Markdown table whose cell contents carry inline HTML for the diff
+colours:
 
-- **added** — a property/enum value present only in the current model → green row.
-- **removed** — present only in the previous model → red row, struck through.
-- **changed** — a cell whose value differs → yellow cell, old value struck
-  through beside the new (`<del class="diff-old">…</del> <ins class="diff-new">…</ins>`).
+- **added** — a property/enum value present only in the current model → green text.
+- **removed** — present only in the previous model → red, struck-through text.
+- **changed** — a cell whose value differs → old value struck through beside the
+  new (`<del class="diff-old">…</del> <ins class="diff-new">…</ins>`).
 
 Properties are matched by name and enum values by code; ordering follows the
 current version, with removed entries slotted back in after their previous
 predecessor. Class and vocabulary entities are resolved exactly as for the plain
-tables. The table element carries `markdown="0"` so kramdown leaves the raw HTML
-untouched. In a page use the `{% schema_table_diff %}` tag (see
-`src/_plugins/schema_table_diff.rb`):
+tables. Because it is a Markdown table, kramdown builds the `<table>` (styled
+like the plain tables) — but Markdown cannot class a `<td>`/`<tr>`, so only the
+text is coloured, not the cell background. In a page use the
+`{% schema_table_diff %}` tag (see `src/_plugins/schema_table_diff.rb`):
 
 ```liquid
 {% schema_table_diff current.yaml previous.yaml PlacementAvailability %}

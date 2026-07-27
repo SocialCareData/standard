@@ -14,8 +14,8 @@ diff_reference: PUB00
 
 This page shows how the current data model differs from the previous version.
 <span class="diff-added">Added</span> rows are shown in green,
-<span class="diff-removed"><del>removed</del></span> rows in red with a strike-through, and
-<span class="diff-changed">changed</span> values in yellow with the old value struck through beside the new.
+<del class="diff-removed">removed</del> rows in red with a strike-through, and
+changed values as the <del class="diff-old">old value</del> <ins class="diff-new">new value</ins>.
 
 ## Data Model
 

@@ -4,17 +4,17 @@
 # LinkML data model changed between two versions. It is the diff counterpart of
 # {% schema_table %} (src/_plugins/schema_table.rb): same class / controlled-
 # vocabulary resolution, but it compares a "current" model against a "previous"
-# one and emits an HTML table whose rows and cells carry diff classes the
-# stylesheet colours — added (green), removed (red, struck through) and changed
-# (yellow, old value struck through beside the new).
+# one and marks up the differences — added (green text), removed (red, struck
+# through) and changed (old value struck through beside the new).
 #
 # The heavy lifting lives in src/assets/js/schema-table/ (invoked with
 # --previous). This plugin is a thin shim that shells out to it and caches the
 # result per (page, current, previous, entity) for the duration of a build.
 #
-# Unlike {% schema_table %}, the generator emits raw HTML (not Markdown), so the
-# table can carry per-row/-cell classes. The table element sets markdown="0" so
-# kramdown (which has parse_block_html: true) leaves it untouched.
+# Like {% schema_table %}, the generator emits a Markdown table (kramdown builds
+# the <table>); the diff colours ride along as inline HTML inside the cells.
+# Markdown cannot class a <td>/<tr>, so only the text is coloured, not the cell
+# background.
 #
 # Usage in a page (place the tag on its own line, at column 0):
 #
