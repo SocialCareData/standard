@@ -27,11 +27,22 @@
 
 require "open3"
 require "shellwords"
+require "cgi"
 
 module Jekyll
   class SchemaTableDiffTag < Liquid::Tag
     # CLI entry point, relative to the project root (Dir.pwd during a build).
     CLI = File.join("src", "assets", "js", "schema-table", "index.js").freeze
+
+    # New-issue URL (mirrors src/_includes/report-issue.html) used for the
+    # "raise an issue" button shown under a table that has changes.
+    ISSUE_NEW_URL =
+      "https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml".freeze
+
+    # The inline diff classes the generator emits ONLY when something changed
+    # (added / removed / a changed value's old part). Their presence is how we
+    # decide whether to show the "raise an issue" button.
+    CHANGE_MARKER_RE = /\bdiff-(?:added|removed|old)\b/.freeze
 
     # A Markdown heading line, capturing its text (ignoring any closing #s).
     HEADING_RE = /^\s{0,3}\#{1,6}\s+(.+?)\s*#*\s*$/.freeze
@@ -73,7 +84,7 @@ module Jekyll
       # either model changes rather than serving a stale cached copy.
       page_id = (context.registers[:page] && context.registers[:page]["path"]).to_s
       key = "#{page_id}\t#{current}\t#{previous}\t#{entity}\t#{model_mtime(current)}\t#{model_mtime(previous)}"
-      self.class.cache[key] ||= generate(current, previous, entity, headings)
+      self.class.cache[key] ||= generate(context, current, previous, entity, headings)
     end
 
     private
@@ -190,7 +201,7 @@ module Jekyll
       parts.join("\n")
     end
 
-    def generate(current, previous, entity, headings)
+    def generate(context, current, previous, entity, headings)
       stdout, stderr, status =
         Open3.capture3(
           "node", CLI, current, entity,
@@ -206,10 +217,35 @@ module Jekyll
       # Non-fatal warnings go to stderr.
       stderr.strip.split("\n").each { |line| Jekyll.logger.warn("SchemaTableDiff:", line) unless line.empty? }
 
-      # Surround with blank lines so kramdown treats the HTML block as standalone
-      # regardless of where the tag sat in the source. The block itself carries
-      # markdown="0" so its contents are not re-parsed.
-      "\n#{stdout.strip}\n"
+      table = stdout.strip
+
+      # Only offer a "raise an issue" button when the table actually shows a
+      # change (added / removed / changed cell). A no-diff table gets no button.
+      output = if table.match?(CHANGE_MARKER_RE)
+                 "#{table}\n\n#{issue_button(context, entity)}"
+               else
+                 table
+               end
+
+      # Surround with blank lines so kramdown treats each block (the Markdown
+      # table and the button <p>) as standalone regardless of where the tag sat.
+      "\n#{output}\n"
+    end
+
+    # A "raise an issue" button (paragraph) linking to the pre-filled GitHub
+    # issue form, with the entity/vocabulary name in the issue title.
+    def issue_button(context, entity)
+      site = context.registers[:site]
+      page = context.registers[:page]
+      site_url = site ? site.config["url"].to_s : ""
+      page_url = page ? page["url"].to_s : ""
+      full_url = "#{site_url}#{page_url}"
+      title = "Concern about data model change: #{entity}"
+      href = "#{ISSUE_NEW_URL}" \
+             "&title=#{CGI.escape(title)}" \
+             "&page=#{CGI.escape(full_url)}" \
+             "&category=Standards"
+      %(<p class="schema-diff-issue"><a href="#{href}">Raise an issue about this change</a></p>)
     end
 
     def error_note(message)

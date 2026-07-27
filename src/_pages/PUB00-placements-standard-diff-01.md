@@ -3,19 +3,23 @@ layout: publication
 title: Children's Social Care Placements Standard Data Model Changes
 tags:
   - Placements
-diff_reference: PUB00
+current_spec: /PUB00_placements_standard_01
+previous_spec: /PUB00_placements_standard
 ---
 
-{% assign pub = site.pages | where: "reference", page.diff_reference | where_exp: "p", "p.version" | sort: "version" | reverse | first %}
-{% assign current = pub.data_model %}
-{% assign previous = pub.previous_data_model %}
+{% assign current_page = site.pages | where: "url", page.current_spec | first %}
+{% assign previous_page = site.pages | where: "url", page.previous_spec | first %}
+{% assign current = current_page.data_model %}
+{% assign previous = previous_page.data_model %}
 
-<a href="{{ pub.url }}" style="float: right;"><img src="/assets/icon/data-model.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Standard View</a>
+<a href="{{ page.current_spec }}" style="float: right;"><img src="/assets/icon/data-model.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Standard View</a>
 
 This page shows how the current data model differs from the previous version.
 <span class="diff-added">Added</span> rows are shown in green,
 <del class="diff-removed">removed</del> rows in red with a strike-through, and
 changed values as the <del class="diff-old">old value</del> <ins class="diff-new">new value</ins>.
+
+<p>Comparing the <a href="{{ previous_page.url }}">previous specification</a> against the <a href="{{ current_page.url }}">current specification</a>.</p>
 
 ## Data Model
 
@@ -72,3 +76,7 @@ changed values as the <del class="diff-old">old value</del> <ins class="diff-new
 ### Support Type Taxonomy
 
 {% schema_table_diff current previous additionalSupport %}
+
+## Report an issue
+
+{% include report-issue.html %}

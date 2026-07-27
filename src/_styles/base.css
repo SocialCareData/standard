@@ -342,6 +342,21 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
   font-weight: 600;
 }
 
+/* "Raise an issue" button shown under a diff table that has changes. */
+.schema-diff-issue {
+  margin: 1.6rem 0;
+}
+
+.schema-diff-issue a {
+  background-color: var(--highlight-2-color);
+  border-radius: .3rem;
+  color: #fff;
+  display: inline-block;
+  font-size: .85em;
+  padding: .4rem .9rem;
+  text-decoration: none;
+}
+
 .version-tag {
     background-color: var(--main-tag-background);
     color: var(--main-tag-color);
