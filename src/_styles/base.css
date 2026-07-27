@@ -331,13 +331,13 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
 }
 
 .diff-old {
-  color: var(--highlight-4-color);
+  color: #B8860B;
   text-decoration: line-through;
   opacity: .8;
 }
 
 .diff-new {
-  color: var(--highlight-2-color);
+  color: #DAA520;
   text-decoration: none;
   font-weight: 600;
 }
