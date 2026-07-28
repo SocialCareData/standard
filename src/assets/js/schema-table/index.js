@@ -33,8 +33,8 @@ Options:
                        Jekyll plugin; omit on the command line to always link.)
 
 Examples:
-  schema-table src/assets/model/placements/placements.yaml PlacementRequirements
-  schema-table src/assets/model/placements/placements.yaml communicationNeeds
+  schema-table src/assets/model/placements/placements-standard.yaml PlacementRequirements
+  schema-table src/assets/model/placements/placements-standard.yaml communicationNeeds
   schema-table placements-standard-01.yaml RiskAssessment --previous placements-standard.yaml`
 
 function parseArgs (argv) {
