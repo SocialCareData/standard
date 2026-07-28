@@ -1,6 +1,6 @@
 # Placements LinkML data model
 
-`placements.yaml` is a single [LinkML](https://linkml.io/) schema that is the
+`placements-standard.yaml` is a single [LinkML](https://linkml.io/) schema that is the
 **authoritative source** for the Children's Social Care Placements data model.
 
 From one YAML file you can generate the SHACL, the OWL/RDF, JSON Schema,
