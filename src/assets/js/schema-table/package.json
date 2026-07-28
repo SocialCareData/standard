@@ -1,0 +1,17 @@
+{
+  "name": "schema-table",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generate Markdown tables (class property tables and controlled-vocabulary tables) from a LinkML data model.",
+  "main": "index.js",
+  "bin": {
+    "schema-table": "index.js"
+  },
+  "scripts": {
+    "generate": "node index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "js-yaml": "^4.3.0"
+  }
+}
