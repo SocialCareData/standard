@@ -78,9 +78,8 @@ function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadin
 /**
  * Generate a diff table for an entity between two versions of a LinkML model.
  * Like {@link generateTable}, but compares `previousPath` against `modelPath` and
- * emits an HTML table whose rows/cells carry diff classes (added / removed /
+ * emits a Markdown table whose rows/cells carry inline HTML diff markup (added / removed /
  * changed). The entity is resolved as a class (property table) in either version,
- * else as a controlled-vocabulary property/enum (vocabulary table).
  *
  * @param {object} opts
  * @param {string} opts.modelPath     Path to the current LinkML YAML file.
