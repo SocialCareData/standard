@@ -12,10 +12,10 @@ the table lists its properties. When <entity> is a property whose values come
 from a controlled vocabulary (an enum range) - or an enum directly - a
 collapsible "Code" / "Description" vocabulary table is produced instead.
 
-With --previous, an HTML diff table is produced instead of a Markdown table:
+With --previous, a Markdown diff table is produced instead of a plain table:
 the current model is compared against the previous one and each row/cell is
-tagged added (green), removed (red, struck through) or changed (yellow, old
-value struck through beside the new).
+tagged added (green), removed (red, struck through) or changed (old value struck
+through beside the new).
 
 Arguments:
   <model-file>   Path to the LinkML YAML model, relative to the current dir.
