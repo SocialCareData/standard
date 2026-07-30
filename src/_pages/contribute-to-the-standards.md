@@ -1,6 +1,5 @@
 ---
 title: Contribute to the Standards
-  - Contribute to the Standards
 tags:
   - Programme
 ---
