@@ -46,6 +46,6 @@ We're developing interoperability standards to create common foundations for soc
 ## Where can I learn more?
 
 * Find out more about our [use cases](https://standard.socialcaredata.io/use_cases).
-* Explore and contribute to our [draft data standards](https://standard.socialcaredata.io/publications).
+* Explore and contribute to our [draft data standards](/publications).
 
 </article>
