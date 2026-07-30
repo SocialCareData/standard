@@ -2,7 +2,6 @@
 title: Learn About the Standards
 tags:
   - Programme
-  - Use Case
 ---
 
 <article class="numbered-headings">
