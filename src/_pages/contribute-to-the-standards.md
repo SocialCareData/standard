@@ -20,7 +20,7 @@ Our standards are managed through our [GitHub](https://github.com/SocialCareData
 ## Join our Working Groups
 We run two regular Working Groups to support the development of standards for different use cases:
 
-* [Placements working group](https://standard.socialcaredata.io/standards_working_group_placements)
+* [Placements working group](/standards_working_group_placements)
 * [Multi-agency information sharing / joined-up care working group](https://standard.socialcaredata.io/standards_working_group_mais)
 
 The working groups are a forum for us to test our standards as they develop and seek sector input on key challenges. They are open to anyone with an interest in contributing to the programme. Email DataStandards-SocialCare@socialfinance.org.uk to join.
