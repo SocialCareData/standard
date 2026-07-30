@@ -25,7 +25,7 @@ We run two regular Working Groups to support the development of standards for di
 
 The working groups are a forum for us to test our standards as they develop and seek sector input on key challenges. They are open to anyone with an interest in contributing to the programme. Email [DataStandards-SocialCare@socialfinance.org.uk](mailto:DataStandards-SocialCare@socialfinance.org.uk) to join.
 
-You can find more information our Working Groups and their terms of reference [here](https://standard.socialcaredata.io/standards_working_groups). 
+You can find more information our Working Groups and their terms of reference [here](/standards_working_groups). 
 
 ## Become a contributor
 
