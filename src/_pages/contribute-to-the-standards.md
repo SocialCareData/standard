@@ -29,7 +29,7 @@ You can find more information our Working Groups and their terms of reference [h
 
 ## Become a contributor
 
-We are always looking for people to contribute their time and expertise to the programme beyond the Working Groups. If you would like to be more closely involved in developing the standards, please reach out to the team at DataStandards-SocialCare@socialfinance.org.uk.
+We are always looking for people to contribute their time and expertise to the programme beyond the Working Groups. If you would like to be more closely involved in developing the standards, please reach out to the team at [DataStandards-SocialCare@socialfinance.org.uk](mailto:DataStandards-SocialCare@socialfinance.org.uk).
 
 </article>
 
