@@ -15,7 +15,7 @@ You can sign up for our [newsletter](https://github.us15.list-manage.com/subscri
 
 ## Raise an issue
 
-Our standards are managed through our [GitHub](https://github.com/SocialCareData). If you have feedback on our standards or want to make a suggestion, you can raise an issue or add to an existing thread. 
+Our standards are managed through our [GitHub](https://github.com/SocialCareData). If you have feedback on our standards or want to make a suggestion, you can [raise an issue](https://github.com/SocialCareData/standard/issues/new) or add to an existing thread. 
 
 ## Join our Working Groups
 We run two regular Working Groups to support the development of standards for different use cases:
