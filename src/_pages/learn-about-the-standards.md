@@ -1,6 +1,5 @@
 ---
 title: Learn About the Standards
-breadcrumbs:
   - Learn About the Standards
 tags:
   - Programme
