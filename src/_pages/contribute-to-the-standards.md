@@ -3,7 +3,6 @@ title: Contribute to the Standards
   - Contribute to the Standards
 tags:
   - Programme
-  - Working Group
 ---
 
 <article class="numbered-headings">
