@@ -1,5 +1,5 @@
 ---
-title: Standards Working Groups Terms of Reference
+title: Contribute to the Standards
 breadcrumbs:
   - Contribute to the Standards
 tags:
