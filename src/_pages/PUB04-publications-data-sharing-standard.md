@@ -1,46 +1,43 @@
 ---
 layout: publication
-current: /publications_interoperability_framework
-title: Interoperability Framework
-description: An interoperability framework for establishing common API standards across social care systems, designed to reduce integration risks and align vendor implementation practices.
+title: Data Sharing Standard
+description: A technical standard defining baseline requirements for API discoverability, authentication, and documentation to reduce integration risk and streamline system-to-system data sharing.
 breadcrumbs:
   - Publications
 tags:
   - Interoperability
   - Publication
   - MAIS
+reference: PUB04
 ---
 
 ## Introduction
 
-This document outlines an interoperability framework, which is necessary because connecting the multiple systems in and around social care requires a common means to exchange information. By establishing these common standards, the framework is expected to reduce the cost, risk, and unpredictability that are typically associated with such system-to-system integrations.
+This document outlines technical standards that enable data to be shared. It compliments the ‘Data Standards and Structure’. Both are necessary to enable interoperability (a common means to exchange information); together they constitute the ‘Interoperability Framework’. By establishing interoperability, the framework is expected to reduce the cost, risk, and unpredictability that are typically associated with such system-to-system integrations.
 
-Its guidance is focused on the three areas that are considered most valuable: API discoverability; authentication; and documentation and versioning. It is anticipated that all three will be addressed through standards. A ‘target state’ description is included in each area to provide a quick overview of the intention of each.
-
-The purpose of this document to start a conversation with vendors. It is expected that a working group will be formed that develops a consensus of what can be achieved before implementing these in practice.
+The Data Sharing standards are focused on the three areas that are considered most valuable: API discoverability; authentication; and documentation and versioning.  It is anticipated that all three will be addressed through standards. A ‘target state’ description is included in each area to provide a quick overview of the intention of each.
 
 ## Interoperability Principles
 
-Much of what the standards programme aims to achieve relies on APIs. If the intention is to reduce the cost and risk of each new integration, there are three things worth asking vendors to standardise: discoverability, authentication, and documentation.
+Much of what the standards programme aims to achieve relies on APIs. If the intention is to reduce the cost and risk of each new integration, there are three things considered worth standardising: discoverability, authentication, and documentation.
 
 ### Discoverability Standard
 
-The first suggested standard concerns discoverability. The Standards Programme aims to create an environment in which any authorised team or system can quickly identify whether a given vendor offers an API for a particular capability, what that API covers, and how to gain access to it without relying on informal knowledge or lengthy procurement conversations.
+The first suggested standard concerns discoverability. The Standards Programme aims to create an environment in which any authorised stakeholder or system can quickly identify whether a given API exists for a particular capability, what that API covers, and how to gain access to it without relying on informal knowledge or lengthy procurement conversations.
 
 **Recommendations:**
 
-* The Department for Education (DfE) and/or the Department for Health and Social care (DHSC) should fund the provision of an API register to which parties and vendors must register their API (or use existing platforms that can be utilised)
-* Vendors should publish a machine-readable catalogue of all APIs they offer as part of their product, updated whenever new APIs are released or deprecated.
+* Products should include a machine-readable catalogue of all APIs offered as part of their product, updated whenever new APIs are released or deprecated.
 * Each API entry should include the following items: name, version, purpose, authentication mechanism, endpoint base URL, rate limits, and a link to full documentation.
-* APIs intended for integration should be documented as a first-class part of the product, not as an afterthought in an obfuscated developer portal.
-* Vendors should signal clearly which APIs are stable and supported versus experimental or deprecated, with a defined sunset timeline for deprecated versions.
-* APIs should be self-documented in a standard machine-readable format such as OpenAPI specification.
+* APIs intended for integration should be documented as a first-class part of the product.
+* It should be signal clearly by those who provision the relevant APIs, which ones are stable and supported versus experimental or deprecated, with a defined sunset timeline for deprecated versions.
+* APIs should be self-documented in a standard machine-readable format such as [OpenAPI specification](https://spec.openapis.org/oas/latest.html).
 * Sandbox or test environments should be available for all production APIs allowing for integration and testing without affecting live data.
 * APIs should conform to a common structural standard (REST with OpenAPI 3.x specification is proposed) unless there is a strong technical reason otherwise.
 
 **Target state:**
 
-A developer in an organisation opens a shared portal, types the name of a vendor product and within seconds sees a list of available APIs, their status, and a link to authenticate and start testing without needing to raise a support ticket or search through PDFs.
+A developer in an organisation opens a shared portal, types the name of a product and within seconds sees a list of available APIs, their status, and a link to authenticate and start testing without needing to raise a support ticket or search through PDFs.
 
 ### Authentication Standard
 
@@ -60,7 +57,6 @@ The third standard concerns documentation and versioning. Good APIs with poor do
 
 **Recommendations:**
 
-* The Department for Education (DfE) and/or the Department for Health and Social care (DHSC) should fund the provision of an API register to which parties and vendors must register and document their API (or use existing platforms that can be utilised).
 * Error codes and response envelopes should be fully documented and follow consistent conventions so that common integration tooling can handle errors generically.
 * Rate limits and quotas should be communicated in response headers in a standard way, enabling clients to back off gracefully.
 * An OpenAPI 3.x specification file, publicly accessible (or accessible with a valid API key).
@@ -71,6 +67,7 @@ The third standard concerns documentation and versioning. Good APIs with poor do
 * A minimum of 12 months' notice should be given before a version is deprecated, with a clear migration guide to the replacement version.
 * Non-breaking changes (adding optional fields, new endpoints) may be made within a version. Breaking changes require a new version.
 * Vendors should aim to support at least two major versions concurrently during transition periods.
+* APIs should be self-documented in a standard machine-readable format such as [OpenAPI specification](https://spec.openapis.org/oas/latest.html).
 
 **Target state:**
 
@@ -105,7 +102,7 @@ The following steps describe how a lightweight, shared API register could functi
 * Vendors to submit entries via a simple web form or a pull request to a shared repository (e.g. a YAML file in a Git repo).
 * Entries are validated automatically against a schema before publication.
 * The register is queryable via its own API, so internal tooling can surface it programmatically.
-* Vendors are responsible for keeping their entries current; stale entries (not updated in 12 months) are flagged for review.
+* VVendors are responsible for keeping their entries current; stale entries (not updated in 12 months) are flagged for review.
 
 ### Appendix 2: Sample Identity and Access Management (IAM) Standards
 
