@@ -13,7 +13,7 @@ jobs:
 
       - name: Install Pagefind
         run: npm install -g pagefind
-        
+
       - name: Install schema-table generator dependencies
         run: npm ci
         working-directory: src/assets/js/schema-table
