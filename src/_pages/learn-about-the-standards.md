@@ -6,43 +6,36 @@ tags:
 
 <article class="numbered-headings">
 
-Social Finance, the Open Data Institute and Coram are working with Local Authorities, DfE, DHSC and system vendors to develop interoperability standards for social care. Interoperability standards define data structures and content, the transmission of data between systems and enablers such as identify and information governance.
+## What standards are
 
-## Why are standards important?
+The standards we are creating exist to enable data to flow between systems, whilst retaining its meaning. To do this they define:
 
-The ODI has identified nine key data practices that all organisations managing and stewarding data should be able to demonstrate. Standardisation is a key data practice because it enables organisations to define how data is collected, used and shared.
+* Data structures and content - using language and codes in a consistent way so that systems 'speak the same language’
+* Ways we can expect data to be transmitted between systems – such as what APIs should exist and how they should work
+* Enablers such as identify and information governance.
 
-Standards are documented, reusable agreements. They help us build, design and use things in consistent, repeatable ways. We encounter standards all the time in our everyday lives. For example, there are standards for:
+We encounter standards all the time in our everyday lives. For example, there are standards for:
 
-* Measurements such as kilograms, metres, etc.
-* Components such as the size and shape of electrical sockets or bolts.
-* Products such as medicines, or vehicle safety.
-* Services such as financial services or medical practices.
+* **Measurements** such as kilograms and metres (the surprisingly interesting story of which can be read here)
+* **Components** such as the size and shape of electrical chargers.
+* **Information** such as the ‘.ical’ standard which means that distinct tools like outlook and google calendar can make sense of events created by one another.
 
-Some standards are agreed internationally, some nationally, and some are defined and used by specific communities or sectors. Standards can be either open or closed/proprietary; inline with government policy and industry best practice  the ODI recommends using open standards. There are two key benefits to open standards:
 
+## How standards get agreed
+Some standards are agreed internationally, some nationally, and some are defined and used by specific communities or sectors. Standards can be either open or proprietary. It is an important principle to our programme that the standards we create are open. The key differences from a proprietary standard are:
+
+* Open standards are developed using open processes that enable anyone to contribute to the development of the standard. In practice that means the meetings are open to anyone who wishes to join, and the discussion is published
 * Open standards are published under an open licence, which means that anyone can use the standard. They do not need to pay a licence fee to benefit from it.
-* Open standards are developed using open processes that enable anyone to contribute to the development of the standard. This can help to make better standards because more people can participate in designing a solution that will work in many different use cases.
 
-Open standards should not be confused with open data, which is data that anyone can access, use or share. Open standards can be used to define data that is shared in controlled ways or that is sensitive, as well as data that is open. For example, the Open Banking data standards that define how to share transaction data are open standards, but access to the data shared using the standard is highly controlled.
-
-## What can be standardised?
-
-The ODI’s research has shown that many aspects of data can be standardised using open standards for data, as shown in the figure below. Broadly, we can define standards to help:
-
-* Share vocabulary to use language and codes in a consistent, clearly defined way, to 'speak the same language’.
-* Exchange data in more consistent, streamlined ways.
-* Provide guidance for data users, including publishers and consumers.
+Open standards can be used to define sensitive data that is only shared in highly controlled ways. For example, the Open Banking data standards define how to share transaction data and these are open standards in the sense above but access to the data itself is highly controlled. In fact, standards are often an important enabler of that secure sharing setting rules on how data should be labelled  to that a system knows under what circumstances it should not share it.
 
 ## Why are we developing interoperability standards for social care?
 
-Social care professionals work across multiple organisations and systems. Important information may be spread across organisations, recorded in different ways, or trapped inside systems that cannot easily work together. The result is more administration, less time with people, and missed opportunities to provide joined-up support. In children's social care this can make safeguarding harder; in adult social care it can make coordinated, person-centred care harder to deliver.
-
-We're developing interoperability standards to create common foundations for social care technology, so that professionals are better able to access and use the information they need to support children, adults and families. When case management systems implement these standards, information can flow from one system to another without technical and commercial barriers - the constraint is then “what’s appropriate” rather than “what do systems allow”. For example, staff in one LA should be able to look up information about a child’s previous engagement with services in another LA to support a safeguarding enquiry, and we want social workers supporting older adults to have timely information about hospital admissions and discharge.
+When case management systems implement these [standards](https://standard.socialcaredata.io/publications), it will help information to flow from one system to another without technical and commercial barriers - the constraint is then “what’s appropriate” rather than “what do systems allow”. For example, staff in one LA should be able to look up information about a child’s previous engagement with services in another LA to support a safeguarding enquiry, and we want social workers supporting older adults to have timely information about hospital admissions and discharge.
 
 ## Where can I learn more?
 
-* Find out more about our [use cases](https://standard.socialcaredata.io/use_cases).
-* Explore and contribute to our [draft data standards](/publications).
+To find out more about which issues we are focussing on you can browse our [use cases](https://standard.socialcaredata.io/use_cases), which are best read along side the and to see the [draft data standards](https://standard.socialcaredata.io/publications) which we are proposing CMS vendors implement.
+
 
 </article>
