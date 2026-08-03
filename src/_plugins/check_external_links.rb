@@ -19,6 +19,15 @@ Jekyll::Hooks.register :site, :post_write do |site|
     req['Accept-Encoding'] = 'gzip, deflate, br'
   end
 
+  # Use a stable cache key so links that only differ by fragment are checked once.
+  normalize_href = lambda do |href|
+    uri = URI(href)
+    uri.fragment = nil
+    uri.to_s
+  rescue StandardError
+    href
+  end
+
   check = lambda do |href|
     uri  = URI(href)
     http = Net::HTTP.new(uri.host, uri.port)
@@ -34,15 +43,28 @@ Jekyll::Hooks.register :site, :post_write do |site|
       set_headers.call(req)
       res = http.request(req)
 
+      code = res.code.to_i
+
       # Some servers don't handle HEAD correctly (e.g. returning 404/405/501
-      # for URLs that are valid via GET), so fall back to GET on any error.
-      if res.code.to_i >= 400 && res.code.to_i != 403
+      # for URLs that are valid via GET), so fall back to GET only on codes
+      # that are commonly caused by unsupported HEAD requests.
+      if [404, 405, 501].include?(code)
         req = Net::HTTP::Get.new(uri.request_uri)
         set_headers.call(req)
         res = http.request(req)
+        code = res.code.to_i
       end
 
-      code = res.code.to_i
+      # If a host is rate-limiting us, do one short retry. Persistent 429 is
+      # treated as success to avoid flaky CI from third-party throttling.
+      if code == 429
+        if attempts < 2
+          sleep 0.35
+          retry
+        end
+        return nil
+      end
+
       return nil if (code >= 200 && code < 400) || code == 403
       "HTTP #{code}"
     rescue Net::OpenTimeout, Net::ReadTimeout, Errno::ECONNRESET, EOFError => e
@@ -62,7 +84,8 @@ Jekyll::Hooks.register :site, :post_write do |site|
       next if href.empty?
       next unless href.start_with?('http://', 'https://')
 
-      err = seen.fetch(href) { seen[href] = check.call(href) }
+      key = normalize_href.call(href)
+      err = seen.fetch(key) { seen[key] = check.call(key) }
       broken << "#{path}: #{href} (#{err})" if err
     end
   end
