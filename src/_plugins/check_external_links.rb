@@ -36,42 +36,44 @@ Jekyll::Hooks.register :site, :post_write do |site|
     http.read_timeout = 10
 
     attempts = 0
-    begin
-      attempts += 1
+    loop do
+      begin
+        attempts += 1
 
-      req = Net::HTTP::Head.new(uri.request_uri)
-      set_headers.call(req)
-      res = http.request(req)
-
-      code = res.code.to_i
-
-      # Some servers don't handle HEAD correctly (e.g. returning 404/405/501
-      # for URLs that are valid via GET), so fall back to GET only on codes
-      # that are commonly caused by unsupported HEAD requests.
-      if [404, 405, 501].include?(code)
-        req = Net::HTTP::Get.new(uri.request_uri)
+        req = Net::HTTP::Head.new(uri.request_uri)
         set_headers.call(req)
         res = http.request(req)
+
         code = res.code.to_i
-      end
 
-      # If a host is rate-limiting us, do one short retry. Persistent 429 is
-      # treated as success to avoid flaky CI from third-party throttling.
-      if code == 429
-        if attempts < 2
-          sleep 0.35
-          retry
+        # Some servers don't handle HEAD correctly (e.g. returning 404/405/501
+        # for URLs that are valid via GET), so fall back to GET only on codes
+        # that are commonly caused by unsupported HEAD requests.
+        if [404, 405, 501].include?(code)
+          req = Net::HTTP::Get.new(uri.request_uri)
+          set_headers.call(req)
+          res = http.request(req)
+          code = res.code.to_i
         end
-        return nil
-      end
 
-      return nil if (code >= 200 && code < 400) || code == 403
-      "HTTP #{code}"
-    rescue Net::OpenTimeout, Net::ReadTimeout, Errno::ECONNRESET, EOFError => e
-      retry if attempts < 3
-      "#{e.class}: #{e.message}"
-    rescue StandardError => e
-      "#{e.class}: #{e.message}"
+        # If a host is rate-limiting us, do one short retry. Persistent 429 is
+        # treated as success to avoid flaky CI from third-party throttling.
+        if code == 429
+          if attempts < 2
+            sleep 0.35
+            next
+          end
+          return nil
+        end
+
+        return nil if (code >= 200 && code < 400) || code == 403
+        return "HTTP #{code}"
+      rescue Net::OpenTimeout, Net::ReadTimeout, Errno::ECONNRESET, EOFError => e
+        next if attempts < 3
+        return "#{e.class}: #{e.message}"
+      rescue StandardError => e
+        return "#{e.class}: #{e.message}"
+      end
     end
   end
 
