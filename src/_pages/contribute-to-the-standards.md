@@ -17,6 +17,7 @@ You can sign up for our [newsletter](https://github.us15.list-manage.com/subscri
 Our standards are managed through our [GitHub](https://github.com/SocialCareData). If you have feedback on our standards or want to make a suggestion, you can [raise an issue](https://github.com/SocialCareData/standard/issues/new) or add to an existing thread. 
 
 ## Join our Working Groups
+
 We run two regular Working Groups to support the development of standards for different use cases:
 
 * [Placements working group](/standards_working_group_placements)
