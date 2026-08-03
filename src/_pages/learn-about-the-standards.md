@@ -31,11 +31,11 @@ Open standards can be used to define sensitive data that is only shared in highl
 
 ## Why are we developing interoperability standards for social care?
 
-When case management systems implement these [standards](https://standard.socialcaredata.io/publications), it will help information to flow from one system to another without technical and commercial barriers - the constraint is then “what’s appropriate” rather than “what do systems allow”. For example, staff in one LA should be able to look up information about a child’s previous engagement with services in another LA to support a safeguarding enquiry, and we want social workers supporting older adults to have timely information about hospital admissions and discharge.
+When case management systems implement these [standards](/publications), it will help information to flow from one system to another without technical and commercial barriers - the constraint is then “what’s appropriate” rather than “what do systems allow”. For example, staff in one LA should be able to look up information about a child’s previous engagement with services in another LA to support a safeguarding enquiry, and we want social workers supporting older adults to have timely information about hospital admissions and discharge.
 
 ## Where can I learn more?
 
-To find out more about which issues we are focussing on you can browse our [use cases](https://standard.socialcaredata.io/use_cases), which are best read along side the and to see the [draft data standards](https://standard.socialcaredata.io/publications) which we are proposing CMS vendors implement.
+To find out more about which issues we are focussing on you can browse our [use cases](use_cases), which are best read along side the and to see the [draft data standards](/publications) which we are proposing CMS vendors implement.
 
 
 </article>
