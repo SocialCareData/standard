@@ -6,16 +6,18 @@ description: A common data model for recording the services, professionals, orga
 breadcrumbs:
   - Publications
 tags:
-  - Safeguarding
-  - Publication
   - MAIS
+  - Publication
+  - Safeguarding
+reference: PUB02
+status: draft
 ---
 
 ## Introduction
 
 The Safeguarding Standard establishes a common data model for describing the professional activity that surrounds a person in children's and adults' social care: the **organisations** and **services** involved in their care, the **professionals** acting within those services, the **service episodes** during which support is delivered, and the **life events** that may signal changing risk, vulnerability or need.
 
-It builds directly on the [Person Standard](/publications_person_standard), reusing its shared objects — `Identifier`, `Name`, `Address` and `Contact` — so that the people, professionals and organisations described here can be identified and matched consistently across systems.
+It builds directly on the [Person Standard](/PUB01_person_standard), reusing its shared objects — `Identifier`, `Name`, `Address` and `Contact` — so that the people, professionals and organisations described here can be identified and matched consistently across systems.
 
 ### Purpose
 
@@ -31,7 +33,7 @@ This standard applies to the digital collection, storage, and exchange of inform
 - the **service episodes** — bounded periods during which a person receives a defined service, intervention, or package of support;
 - the **life events** — significant, time-bound occurrences in a person's life that may have implications for their safety, wellbeing or development.
 
-It does not redefine how a person is identified or described; that is the role of the [Person Standard](/publications_person_standard), which this standard references for all shared identity objects.
+It does not redefine how a person is identified or described; that is the role of the [Person Standard](/PUB01_person_standard), which this standard references for all shared identity objects.
 
 ### Audience
 
@@ -54,7 +56,7 @@ The model is organised around five top-level entities and the shared objects tha
 
 <p class="logical-model-diagram" style="text-align: center;"><img src="/assets/img/safeguarding/safeguarding-logical-model-2026-07-17.png" alt="Placements Logical Model" title="Placements Logical Model" style="width: 70%; height: auto;" /></p>
 
-Coded fields draw their values from the controlled vocabularies listed under [Controlled vocabularies](#controlled-vocabularies). The `Identifier`, `Name`, `Address` and `Contact` objects are defined once in the [Person Standard](/publications_person_standard) and referenced throughout this specification — see [Shared objects](#shared-objects).
+Coded fields draw their values from the controlled vocabularies listed under [Controlled vocabularies](#controlled-vocabularies). The `Identifier`, `Name`, `Address` and `Contact` objects are defined once in the [Person Standard](/PUB01_person_standard) and referenced throughout this specification — see [Shared objects](#shared-objects).
 
 
 ### Organisation
@@ -64,7 +66,7 @@ An organisation involved in the safeguarding or wellbeing of a person — for ex
 #### Properties
 
 <span id="organisation-identifier">identifier</span>
-: Unique identifiers associated with the organisation. Multi-valued (`1..*`). See [Person Standard → Identifier](/publications_person_standard#identifier).
+: Unique identifiers associated with the organisation. Multi-valued (`1..*`). See [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 <span id="organisation-name">name</span>
 : The official name of the organisation. Required (`1..1`). _String_.
@@ -79,16 +81,16 @@ An organisation involved in the safeguarding or wellbeing of a person — for ex
 : Code for the organisation's status. Optional (`0..1`). _Boolean_.
 
 <span id="organisation-address">address</span>
-: Physical location(s) of the organisation. Multi-valued. Optional (`0..*`). See [Person Standard → Address](/publications_person_standard#address).
+: Physical location(s) of the organisation. Multi-valued. Optional (`0..*`). See [Person Standard → Address](/PUB01_person_standard#address).
 
 <span id="organisation-contact">contact</span>
-: Contact information for the organisation. Multi-valued (`1..*`). See [Person Standard → Contact](/publications_person_standard#contact).
+: Contact information for the organisation. Multi-valued (`1..*`). See [Person Standard → Contact](/PUB01_person_standard#contact).
 
 <span id="organisation-relatedProfessional">relatedProfessional</span>
-: References to `Professional`s associated with the organisation. Multi-valued. Optional (`0..*`). See [Professional](#professional). Each reference is by [Person Standard → Identifier](/publications_person_standard#identifier).
+: References to `Professional`s associated with the organisation. Multi-valued. Optional (`0..*`). See [Professional](#professional). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 <span id="organisation-relatedService">relatedService</span>
-: References to `Service`s the organisation provides or contributes to the provision of. Multi-valued (`1..*`). See [Service](#service). Each reference is by [Person Standard → Identifier](/publications_person_standard#identifier).
+: References to `Service`s the organisation provides or contributes to the provision of. Multi-valued (`1..*`). See [Service](#service). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 #### Example
 
@@ -129,7 +131,7 @@ A service involved in the safeguarding or wellbeing of a person — the specific
 #### Properties
 
 <span id="service-identifier">identifier</span>
-: Unique identifiers associated with the service. Multi-valued (`1..*`). See [PersonStandard → Identifier](/publications_person_standard#identifier).
+: Unique identifiers associated with the service. Multi-valued (`1..*`). See [PersonStandard → Identifier](/PUB01_person_standard#identifier).
 
 <span id="service-name">name</span>
 : The official name of the service. Required (`1..1`). _String_.
@@ -144,16 +146,16 @@ A service involved in the safeguarding or wellbeing of a person — the specific
 : Code for the service's status. Optional (`0..1`). _Boolean_.
 
 <span id="service-address">address</span>
-: Physical location(s) of the service. Multi-valued. Optional (`0..*`). See [Person Standard → Address](/publications_person_standard#address).
+: Physical location(s) of the service. Multi-valued. Optional (`0..*`). See [Person Standard → Address](/PUB01_person_standard#address).
 
 <span id="service-contact">contact</span>
-: Contact information for the service. Multi-valued (`1..*`). See [Person Standard → Contact](/publications_person_standard#contact).
+: Contact information for the service. Multi-valued (`1..*`). See [Person Standard → Contact](/PUB01_person_standard#contact).
 
 <span id="service-relatedProfessional">relatedProfessional</span>
-: References to `Professional`s involved in the service. Multi-valued. Optional (`0..*`). See [Professional](#professional). Each reference is by [Person Standard → Identifier](/publications_person_standard#identifier).
+: References to `Professional`s involved in the service. Multi-valued. Optional (`0..*`). See [Professional](#professional). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 <span id="service-relatedOrganisation">relatedOrganisation</span>
-: References to `Organisation`s involved in the provision of the service. Multi-valued. Optional (`0..*`). See [Organisation](#organisation). Each reference is by [Person Standard → Identifier](/publications_person_standard#identifier).
+: References to `Organisation`s involved in the provision of the service. Multi-valued. Optional (`0..*`). See [Organisation](#organisation). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 #### Example
 
@@ -184,10 +186,10 @@ An individual acting in a formal role within an organisation who has responsibil
 #### Properties
 
 <span id="professional-identifier">identifier</span>
-: Unique identifiers associated with the professional. Multi-valued (`1..*`). See [Person Standard → Identifier](/publications_person_standard#identifier).
+: Unique identifiers associated with the professional. Multi-valued (`1..*`). See [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 <span id="professional-name">name</span>
-: The professional's name. Required (`1..1`). See [Person Standard → Name](/publications_person_standard#name).
+: The professional's name. Required (`1..1`). See [Person Standard → Name](/PUB01_person_standard#name).
 
 <span id="professional-role">role</span>
 : Text describing the professional's occupational role — for example their position in an organogram. Multi-valued (`1..*`). _String_.
@@ -196,13 +198,13 @@ An individual acting in a formal role within an organisation who has responsibil
 : The professional's current working status. Optional (`0..1`). _Boolean_.
 
 <span id="professional-contact">contact</span>
-: The professional's contact information. Required (`1..1`). See [Person Standard → Contact](/publications_person_standard#contact).
+: The professional's contact information. Required (`1..1`). See [Person Standard → Contact](/PUB01_person_standard#contact).
 
 <span id="professional-relatedService">relatedService</span>
-: References to `Service`s the professional is related to. Multi-valued. Optional (`0..*`). See [Service](#service). Each reference is by [Person Standard → Identifier](/publications_person_standard#identifier).
+: References to `Service`s the professional is related to. Multi-valued. Optional (`0..*`). See [Service](#service). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 <span id="professional-relatedOrganisation">relatedOrganisation</span>
-: References to `Organisation`s the professional is related to. Multi-valued. Optional (`0..*`). See [Organisation](#organisation). Each reference is by [Person Standard → Identifier](/publications_person_standard#identifier).
+: References to `Organisation`s the professional is related to. Multi-valued. Optional (`0..*`). See [Organisation](#organisation). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 #### Example
 
@@ -243,7 +245,7 @@ While a single service episode may reflect routine support, changes in the numbe
 #### Properties
 
 <span id="episode-identifier">identifier</span>
-: Unique identifiers associated with the episode. Multi-valued (`1..*`). See [Person Standard → Identifier](/publications_person_standard#identifier).
+: Unique identifiers associated with the episode. Multi-valued (`1..*`). See [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 <span id="episode-type">type</span>
 : Code for the type of episode. Multi-valued (`1..*`). See the [Episode Code Vocabulary](#episode-code-vocabulary).
@@ -255,7 +257,7 @@ While a single service episode may reflect routine support, changes in the numbe
 : References to the `Professional`(s) involved in the episode, each qualified by the nature of their involvement. Multi-valued. Optional (`0..*`). See [RelatedProfessional](#relatedprofessional).
 
 <span id="episode-relatedService">relatedService</span>
-: References to the `Service`(s) involved in the episode. Multi-valued (`1..*`). See [Service](#service). Each reference is by [Person Standard → Identifier](/publications_person_standard#identifier).
+: References to the `Service`(s) involved in the episode. Multi-valued (`1..*`). See [Service](#service). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 <span id="episode-timeInformation">timeInformation</span>
 : Details about the timing of the episode. Multi-valued (`1..*`). See [TimeInformation](#timeinformation).
@@ -306,7 +308,7 @@ Safeguarding professionals will be interested in the recency of events (when the
 #### Properties
 
 <span id="event-identifier">identifier</span>
-: Unique identifiers associated with the life event. Multi-valued (`1..*`). See [Person Standard → Identifier](/publications_person_standard#identifier).
+: Unique identifiers associated with the life event. Multi-valued (`1..*`). See [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 <span id="event-type">type</span>
 : Code for the type of the life event (e.g. birth, death, missing episode). Multi-valued (`1..*`). See the [Event Code Vocabulary](#event-code-vocabulary).
@@ -318,7 +320,7 @@ Safeguarding professionals will be interested in the recency of events (when the
 : References to the `Professional`(s) involved in the life event. Multi-valued. Optional (`0..*`). See [RelatedProfessional](#relatedprofessional).
 
 <span id="event-relatedService">relatedService</span>
-: References to the `Service`(s) involved in the life event. Multi-valued. Optional (`0..*`). See [Service](#service). Each reference is by [Person Standard → Identifier](/publications_person_standard#identifier).
+: References to the `Service`(s) involved in the life event. Multi-valued. Optional (`0..*`). See [Service](#service). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 <span id="event-timeInformation">timeInformation</span>
 : Details about the timing of the life event. Multi-valued. Optional (`0..*`). See [TimeInformation](#timeinformation).
@@ -363,7 +365,7 @@ A typed reference to a `Person` involved in a service episode or life event.
 #### Properties
 
 <span id="subjectperson-person">person</span>
-: A reference to a `Person` record involved in the episode or life event, by [Person Standard → Identifier](/publications_person_standard#identifier). Required (`1..1`).
+: A reference to a `Person` record involved in the episode or life event, by [Person Standard → Identifier](/PUB01_person_standard#identifier). Required (`1..1`).
 
 <span id="subjectperson-involvement">involvement</span>
 : Code for the nature of the person's involvement. Required (`1..1`). See the [Involvement Code Vocabulary](#involvement-code-vocabulary).
@@ -389,7 +391,7 @@ A typed reference to a `Professional` involved in a service episode or life even
 #### Properties
 
 <span id="relatedprofessional-professional">professional</span>
-: A reference to a `Professional` record involved in the episode or life event, by [Person Standard → Identifier](/publications_person_standard#identifier). Required (`1..1`).
+: A reference to a `Professional` record involved in the episode or life event, by [Person Standard → Identifier](/PUB01_person_standard#identifier). Required (`1..1`).
 
 <span id="relatedprofessional-involvement">involvement</span>
 : Code for the nature of the professional's involvement. Required (`1..1`). See the [Involvement Code Vocabulary](#involvement-code-vocabulary).
@@ -542,12 +544,12 @@ A quantitative measurement of something related to the subject or their circumst
 
 ## Shared objects
 
-The `Identifier`, `Name`, `Address` and `Contact` objects used throughout this standard are defined once in the [Person Standard](/publications_person_standard) and reused here unchanged, so that people, professionals and organisations are identified and described consistently across the whole data model. Refer to the Person Standard for the full property list, cardinalities and examples of each:
+The `Identifier`, `Name`, `Address` and `Contact` objects used throughout this standard are defined once in the [Person Standard](/PUB01_person_standard) and reused here unchanged, so that people, professionals and organisations are identified and described consistently across the whole data model. Refer to the Person Standard for the full property list, cardinalities and examples of each:
 
-- **Identifier** — a value plus the system in whose namespace it is unique. Used to identify, and to reference, every entity in this standard. See [Person Standard → Identifier](/publications_person_standard#identifier).
-- **Name** — a container for name parts (family name, given names, preferred name, use). See [Person Standard → Name](/publications_person_standard#name).
-- **Address** — a postal address, with optional UPRN/USRN. See [Person Standard → Address](/publications_person_standard#address).
-- **Contact** — a grouping of contact channels (email, telephone). See [Person Standard → Contact](/publications_person_standard#contact).
+- **Identifier** — a value plus the system in whose namespace it is unique. Used to identify, and to reference, every entity in this standard. See [Person Standard → Identifier](/PUB01_person_standard#identifier).
+- **Name** — a container for name parts (family name, given names, preferred name, use). See [Person Standard → Name](/PUB01_person_standard#name).
+- **Address** — a postal address, with optional UPRN/USRN. See [Person Standard → Address](/PUB01_person_standard#address).
+- **Contact** — a grouping of contact channels (email, telephone). See [Person Standard → Contact](/PUB01_person_standard#contact).
 
 ## Controlled vocabularies
 
@@ -860,9 +862,4 @@ Used by [`Measurement.unit`](#measurement-unit). Codes to indicate the unit of m
 
 ## Report an issue
 
-If you spot an issue with this standard, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Safeguarding+Standard%3A%20&page={{ page.url | absolute_url | url_encode }}&category=Safeguarding+Standard" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
-
-
-## Versions
-
-{% include versions.html %}
+{% include report-issue.html %}

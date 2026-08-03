@@ -1,19 +1,26 @@
 ---
-layout: version
-current: /publications_placements_standard
-title: Children's Social Care Placements Standard (2026-06-18)
+layout: publication
+title: Children's Social Care Placements Standard
 description: The children's social care placements standard helps regions answer their sufficiency questions by establishing a common data model to gather data about placements.
-changelog:
-  - Removed unused quality assurance fields
-  - Added data validation rules
-  - Updated reporting spreadsheet
-  - Added CSV format
 breadcrumbs:
   - Publications
 tags:
   - Placements
   - Publication
+reference: PUB00
+status: draft
+version: 01
+data_model: src/assets/model/placements/placements-standard-01.yaml
+changelog:
+  - Removed unused quality assurance fields
+  - Added data validation rules
+  - Updated reporting spreadsheet
+  - Added CSV format
+  - Removed RiskAssessment.riskOther and RiskAssessment.riskToOthersOther text fields
+data_model_diff: /PUB00_placements_standard_diff_01
 ---
+
+<a href="/PUB00_placements_standard_table_01" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
 
 ## Introduction
 
@@ -24,7 +31,7 @@ The children's social care placements standard helps regions to answer their suf
 
 The following diagram illustrates the elements of the Children's Social Care Placements Ontology.
 
-<p class="data-model-diagram"><img src="/assets/img/placements/placements-data-model-2026-05-30.svg" alt="Placements Data Model" title="Placements Data Model" /></p>
+<p class="data-model-diagram"><img src="/assets/img/placements/placements-data-model-2026-06-24.svg" alt="Placements Data Model" title="Placements Data Model" style="width: 80%; height: auto;" /></p>
 
 A `Placement` is the top-level record covering the full lifecycle of a placement instance. It aggregates six sub-components: the referral availability, the social-worker recommendation, the requirements describing the child's needs, the risk assessment, optionally the actual placement that was arranged, and quality-assurance metadata about who recorded each part and when.
 
@@ -113,7 +120,7 @@ The referral request: how urgently the child needs to be placed, how many siblin
 {% highlight json %}
 {
   "@type": "PlacementAvailability",
-  "neededBy": "< 5 days",
+  "neededBy": "Within 5 days",
   "siblingCount": 2,
   "isPreferredLocationLocal": false,
   "outOfLAReason": "Court order"
@@ -264,14 +271,6 @@ Records the risks the child is exposed to (six categories) and the risks the chi
 <span id="risk-riskToOthersCriminal">riskToOthersCriminal</span>
 : Risk of criminal exploitation for others in the home. Allowed values are: `'No known risk'`, `'Risk Present'`.
 
-##### Free-text catch-alls
-
-<span id="risk-riskOther">riskOther</span>
-: Free-text description of any other risks the child is exposed to that are not captured by the standard risk fields. Multi-valued. _String_.
-
-<span id="risk-riskToOthersOther">riskToOthersOther</span>
-: Free-text description of any other risks to others or property. Multi-valued. _String_.
-
 #### Example
 
 <div class="example">
@@ -289,10 +288,7 @@ Records the risks the child is exposed to (six categories) and the risks the chi
   "riskToOthersSexual":       "No known risk",
   "riskToOthersFire":         "No known risk",
   "riskToOthersAnimals":      "No known risk",
-  "riskToOthersCriminal":     "No known risk",
-  "riskToOthersOther": [
-    "Verbal aggression toward staff during transitions"
-  ]
+  "riskToOthersCriminal":     "No known risk"
 }
 {% endhighlight %}
 </div>
@@ -418,9 +414,12 @@ LA-internal metadata about who recorded each part of the placement record (refer
 {% endhighlight %}
 </div>
 
+<a href="/PUB00_placements_standard_table_01" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
+
 ## Ontology
 
-The ontology for this specification is defined in Turtle format and is available at: [ontology.ttl](/assets/ttl/ontology.ttl).
+The ontology for this specification is defined in Turtle format and is available at: [placements-standard.ttl](/assets/model/placements/placements-standard-01.ttl).
+
 
 ## Taxonomies
 
@@ -430,93 +429,74 @@ The model is parameterised by six SKOS controlled vocabularies. Selecting `Other
 
 Specific communication and language requirements a child may have. Multi-valued: enter all that apply, or `None` if not applicable. Selecting `Other` triggers the paired free-text property `specificCommunicationRequirementOther` on `PlacementRequirements`.
 
-* `ESOL`: English for Speakers of Other Languages. English-language support is required.
-* `BSL`: British Sign Language is required.
-* `Makaton`: Makaton signing or symbol communication is required.
-* `Other`: Another communication or language requirement not listed. Supply details via `specificCommunicationRequirementOther`.
-* `None`: No specific communication or language requirements.
+{% schema_table page.data_model specificCommunicationRequirement %}
 
-Source vocabulary: [taxonomy-communication-need.ttl](/assets/ttl/taxonomy-communication-need.ttl). Used by `specificCommunicationRequirement` on [PlacementRequirements](#placementrequirements).
+Used by `specificCommunicationRequirement` on [PlacementRequirements](#placementrequirements).
 
 ### Living Arrangement Taxonomy
 
 Recommendations for who the child can be cared for alongside in a placement.
 
-* `Solo placement recommended`: A solo placement is recommended; the child should not live with other children.
-* `With other children recommended`: Living with other children is recommended.
-* `Only with other older children`: The child should only live with other children who are older.
-* `Only with other younger children`: The child should only live with other children who are younger.
-* `No preference`: No preference about who the child lives alongside.
+{% schema_table page.data_model livingCompanions %}
 
-Source vocabulary: [taxonomy-living-arrangement.ttl](/assets/ttl/taxonomy-living-arrangement.ttl). Used by `livingCompanions` on [PlacementRequirements](#placementrequirements).
+Used by `livingCompanions` on [PlacementRequirements](#placementrequirements).
 
 ### Out of LA Reason Taxonomy
 
 The reason why the preferred placement location is in a different LA than the placing LA. Used on `PlacementAvailability` when `isPreferredLocationLocal` is `false`. Selecting `Other` triggers the paired free-text property `outOfLAReasonOther`.
 
-* `Safeguarding concerns`: Placement is sought outside the placing LA due to safeguarding concerns.
-* `Bail conditions`: Placement is sought outside the placing LA because of bail conditions.
-* `Court order`: Placement is sought outside the placing LA because of a court order.
-* `Other`: Another reason not listed. Supply details via `outOfLAReasonOther`.
+{% schema_table page.data_model outOfLAReason %}
 
-Source vocabulary: [taxonomy-outof-la-reason.ttl](/assets/ttl/taxonomy-outof-la-reason.ttl). Used by `outOfLAReason` on [PlacementAvailability](#placementavailability).
+Used by `outOfLAReason` on [PlacementAvailability](#placementavailability).
 
 ### Placement Type Taxonomy
 
 The type of placement the child receives.
 
-* `Foster`: A placement with an approved foster carer.
-* `Residential`: A placement in a residential children's home.
-* `Supported Accommodation`: A supported accommodation placement, typically for older young people.
+{% schema_table page.data_model placementType %}
 
-Source vocabulary: [taxonomy-placement-type.ttl](/assets/ttl/taxonomy-placement-type.ttl). Used by `placementType` on [ActualPlacement](#actualplacement).
+Used by `placementType` on [ActualPlacement](#actualplacement).
 
 ### Placement Urgency Taxonomy
 
-How urgently the child needs to be placed. Captures urgency rather than an absolute date, as deep-dive participants felt "date placement required by" was too subjective.
+How urgently the child needs to be placed. Captures urgency rather than an absolute date.
 
-* `Today`: Placement is needed today.
-* `< 5 days`: Placement is needed within five days.
-* `> 5 days`: Placement is needed in more than five days.
+{% schema_table page.data_model neededBy %}
 
-Source vocabulary: [taxonomy-placement-urgency.ttl](/assets/ttl/taxonomy-placement-urgency.ttl). Used by `neededBy` on [PlacementAvailability](#placementavailability).
+Used by `neededBy` on [PlacementAvailability](#placementavailability).
 
 ### Support Type Taxonomy
 
 Additional support provision required alongside a placement. Multi-valued: select all that apply. Selecting `Other` triggers the paired free-text property `additionalSupportOther` on `PlacementRequirements`.
 
-* `Additional supervision`: Additional supervision is required.
-* `Therapeutic support`: Therapeutic support is required.
-* `A worker for respite`: A worker is required to provide respite.
-* `Taxis to school`: Taxis to and from school are required.
-* `NA`: Not applicable; no additional support is required.
-* `Other`: Other additional support is required. Supply details via `additionalSupportOther`.
+{% schema_table page.data_model additionalSupport %}
 
-Source vocabulary: [taxonomy-support-type.ttl](/assets/ttl/taxonomy-support-type.ttl). Used by `additionalSupport` on [PlacementRequirements](#placementrequirements).
+Used by `additionalSupport` on [PlacementRequirements](#placementrequirements).
+
 
 ## Validation
 
-A [SHACL shape](/assets/shacl/shacl-shape.ttl) encodes:
+A [SHACL shape](/assets/model/placements/placements-standard-shape-01.ttl) encodes:
 
-- structural cardinality (mirroring the OWL restrictions in [ontology.ttl](/assets/ttl/ontology.ttl)),
+- structural cardinality (mirroring the OWL restrictions in [placements-standard.ttl](/assets/model/placements/placements-standard-01.ttl)),
 - controlled-vocabulary enforcement (`sh:in` over each SKOS scheme),
 - pattern checks (UK postcode prefix on `placementLocation`),
 - conditional checks for the `Other` vocab pairings,
 - and severity-`Warning` cost sense-checks.
 
-A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, applies the [JSON-LD context file](/assets/shacl/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
+A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, applies the [JSON-LD context file](/assets/model/placements/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
+
 
 ## Standard Placement Reporting Spreadsheet
 
-Use the standard spreadsheet template for reporting placements data:
+Use the [National Placement Standard spreadsheet template (June 2026, v3)](/assets/spreadsheet/National-Placement-Standard-Excel-20260624.xlsx) for reporting placements data.
 
-[National Placement Standard spreadsheet (April 2026, v2)](/assets/spreadsheet/National-Placement-Standard-Excel-20260427.xlsx)
 
 ## Report an issue
 
-If you spot an issue with this standard, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Placements+Standard%3A%20&page=https%3A%2F%2Fstandard.socialcaredata.io%2Fplacements_standard&category=Placements+Standard" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
+{% include report-issue.html %}
 
 
-## Versions
+## Changelog
 
-{% include versions.html %}
+{% include changelog.html %}

@@ -1,4 +1,5 @@
 ---
+layout: use-case
 title: Social Worker Recording
 breadcrumbs:
   - Use Cases
@@ -7,19 +8,6 @@ tags:
   - Use Case
 reference: UC02
 ---
-
-
-
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of Contents</h2>
-
-1. TOC
-{:toc}
-
-</nav>
-
-<article class="numbered-headings">
-
 
 ## Summary
 

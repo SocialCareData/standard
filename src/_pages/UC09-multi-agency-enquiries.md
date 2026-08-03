@@ -1,4 +1,5 @@
 ---
+layout: use-case
 title: Multi-agency Enquiries
 breadcrumbs:
   - Use Cases
@@ -7,18 +8,6 @@ tags:
   - Use Case
 reference: UC09
 ---
-
-
-
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of Contents</h2>
-
-1. TOC
-{:toc}
-
-</nav>
-
-<article class="numbered-headings">
 
 ## Summary
 

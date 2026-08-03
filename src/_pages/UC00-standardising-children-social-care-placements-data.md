@@ -1,4 +1,5 @@
 ---
+layout: use-case
 title: "Standardising children's social care placements data"
 breadcrumbs:
   - Use Cases
@@ -7,18 +8,6 @@ tags:
   - Use Case
 reference: UC00
 ---
-
-
-
-<nav class="toc numbered-toc">
-<h2 id="table-of-contents">Table of Contents</h2>
-
-1. TOC
-{:toc}
-
-</nav>
-
-<article class="numbered-headings">
 
 ## Summary
 
@@ -138,5 +127,3 @@ If you spot an issue with this use case, please <a href="https://github.com/Soci
 ## Future use cases
 
 If you would like to suggest a future use case, please <a href="https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&title=Suggesting+a+Placements+Use+Case&category=Placements+Standard&page={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener noreferrer">create a new issue on GitHub</a>.
-
-</article>

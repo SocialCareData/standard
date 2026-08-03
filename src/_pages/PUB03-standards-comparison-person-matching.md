@@ -1,12 +1,15 @@
 ---
 layout: publication
 title: "Standards comparison: person matching"
+description: "Technical details of a query operation in some database system containing person data, such as a FHIR Master Patient Index, based on some set of (demographic and other) details about a person"
 breadcrumbs:
   - Publications
 tags:
   - Interoperability
   - MAIS
   - Publication
+reference: PUB03
+status: draft
 ---
 
 ## Introduction
@@ -110,11 +113,6 @@ Dates should be normalized and compared in a probabilistic manner as examplified
 
 Taking into account the structure of UK postcodes with outward code denoting a large region and inward code denoting a specific smaller region, consider a algorithm like that of figure 6 on page 34 of the `Person_ID` Handbook:
 
-
-## NHS Personal Demographics Service flow diagram
-
-<div>
-
 ```mermaid
 flowchart TD
     LEGEND[PDS: ]
@@ -146,12 +144,15 @@ flowchart TD
     LEGEND[PDS:  Personal Demographics Service]
 ```
 
-</div>
-
 
 ## Related documents
 - [Patient Matching](https://hl7.org/fhir/us/identity-matching/patient-matching.html) (Interoperable Digital Identity and Patient Matching, Identity-focused FHIR implementation guide, HL7)
 - [The `Person_ID` Handbook](https://digital.nhs.uk/services/personal-demographics-service/master-person-service/the-person_id-handbook) (NHS England Digital)
 - [Patient EMPI Match](https://simplifier.net/guide/ca-on-pcr-r4-query-iguide-v2.0/patientempimatch?version=current) (Provincial Client Registry (PCR) HL7 FHIR® Implementation Guide v2.0.0)
+
+
+## Report an issue
+
+{% include report-issue.html %}
 
 {% include mermaid.html %}
