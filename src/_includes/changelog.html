@@ -11,6 +11,9 @@
     {% endfor %}
     </ul>
     {% endif %}
+    {% if forloop.first and p.changelog.size > 0 and p.data_model_diff %}
+    <p><a href="{{ p.data_model_diff }}">View data model changes</a></p>
+    {% endif %}
   </li>
 {% endfor %}
 </ul>

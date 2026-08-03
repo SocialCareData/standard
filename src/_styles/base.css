@@ -311,6 +311,52 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
   color: var(--highlight-3-color);
 }
 
+.schema-table {
+  font-size: 0.85em;
+}
+
+.schema-table th,
+.schema-table td {
+  padding: .3rem .5rem;
+}
+
+/* Data-model diff tables emitted by {% schema_table_diff %}. */
+.diff-added {
+  color: var(--highlight-2-color);
+}
+
+.diff-removed {
+  color: var(--highlight-4-color);
+  text-decoration: line-through;
+}
+
+.diff-old {
+  color: #B8860B;
+  text-decoration: line-through;
+  opacity: .8;
+}
+
+.diff-new {
+  color: #DAA520;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* "Raise an issue" button shown under a diff table that has changes. */
+.schema-diff-issue {
+  margin: 1.6rem 0;
+}
+
+.schema-diff-issue a {
+  background-color: var(--highlight-2-color);
+  border-radius: .3rem;
+  color: #fff;
+  display: inline-block;
+  font-size: .85em;
+  padding: .4rem .9rem;
+  text-decoration: none;
+}
+
 .version-tag {
     background-color: var(--main-tag-background);
     color: var(--main-tag-color);
