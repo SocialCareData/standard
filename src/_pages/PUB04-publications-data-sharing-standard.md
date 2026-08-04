@@ -9,6 +9,7 @@ tags:
   - Publication
   - MAIS
 reference: PUB04
+plain_english_summary: "This is a plain english summary. Lorem ipsum ..."
 ---
 
 ## Introduction

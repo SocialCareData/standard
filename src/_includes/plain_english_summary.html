@@ -1,0 +1,10 @@
+{% if page.plain_english_summary %}
+<details class="summary-card">
+  <summary class="summary-title">
+    <span><strong>Plain English Summary</strong></span>
+  </summary>
+  <div class="summary-content">
+    {{ page.plain_english_summary | markdownify }}
+  </div>
+</details>
+{% endif %}

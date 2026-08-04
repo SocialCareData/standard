@@ -10,6 +10,7 @@ tags:
 reference: PUB00
 status: draft
 data_model: src/assets/model/placements/placements-standard.yaml
+plain_english_summary: "This is a plain english summary. Lorem ipsum ..."
 ---
 
 <a href="/PUB00_placements_standard_table" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>

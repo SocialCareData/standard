@@ -10,6 +10,7 @@ tags:
   - Publication
 reference: PUB03
 status: draft
+plain_english_summary: "This is a plain english summary. Lorem ipsum ..."
 ---
 
 ## Introduction
