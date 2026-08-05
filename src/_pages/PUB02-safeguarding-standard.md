@@ -44,7 +44,7 @@ This document is for all personnel involved in collecting, storing and processin
 
 The following diagram illustrates the elements of the Safeguarding Standard.
 
-<p class="data-model-diagram"><img src="/assets/img/safeguarding/safeguarding-data-model-2026-07-17.svg" alt="Safeguarding Data Model" title="Safeguarding Data Model" /></p>
+<p class="data-model-diagram"><img src="/assets/img/safeguarding/safeguarding-data-model-2026-08-05.svg" alt="Safeguarding Data Model" title="Safeguarding Data Model" /></p>
 
 The model is organised around five top-level entities and the shared objects that link them together:
 
