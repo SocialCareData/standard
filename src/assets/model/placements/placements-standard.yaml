@@ -530,7 +530,9 @@ slots:
     range: decimal
     required: true
     multivalued: false
-    description: Total weekly fee paid for the placement, excluding VAT.
+    minimum_value: 100
+    maximum_value: 100000
+    description: Total weekly fee paid for the placement, excluding VAT. Expected to be between £100 and £100,000.
   coreWeeklyCost:
     slot_uri: pl:coreWeeklyCost
     range: decimal

@@ -29,15 +29,36 @@ permissible values carry the concept IRI as `meaning:`, which becomes the SHACL
 Requires `pip install linkml` (Python ≥ 3.11 with the `_lzma` stdlib module).
 
 ```bash
-# SHACL (matches src/assets/shacl/shacl-shape.ttl — see validation below)
-gen-shacl --non-closed --suffix Shape placements.yaml > shacl-shape.ttl
+# SHACL — one shape per class
+gen-shacl --non-closed --suffix Shape placements-standard-01.yaml > placements-standard-shape-01.ttl
 
 # OWL / RDF, JSON Schema, docs, Pydantic, …
-gen-owl --consolidate-cardinality-axioms --skip-vacuous-min-zero-cardinality-axioms --skip-vacuous-local-range-axioms placements.yaml > placements.ttl
-gen-json-schema placements.yaml
-gen-doc placements.yaml
+gen-owl --consolidate-cardinality-axioms --skip-vacuous-min-zero-cardinality-axioms --skip-vacuous-local-range-axioms placements-standard-01.yaml > placements-standard-01.ttl
+gen-json-schema placements-standard-01.yaml
+gen-doc placements-standard-01.yaml
 ```
 
 The `--suffix Shape` and `--non-closed` flags make the generated shapes line up
-with the existing hand-written ones (`pl:PlacementShape …`, open shapes).
+with the hand-written ones (`pl:PlacementShape …`, open shapes).
+
+### Conditional constraints are NOT generated
+
+The schema's `rules:` blocks (e.g. "when `outOfLAReason` is `Other`,
+`outOfLAReasonOther` free-text is required") express conditional logic that
+`gen-shacl` **does not** translate into SHACL — verified with LinkML 1.11.1,
+which also drops class-level boolean expressions (`none_of`/`any_of`). The
+`rules:` remain the semantic source of truth (honoured by `linkml-validate` and
+the Python/Pydantic artifacts).
+
+To enforce them in SHACL, the equivalent `sh:not[…]` shapes are maintained by
+hand in **`placements-base-rules-shape.ttl`** and loaded *alongside* the
+generated shape by the validator (see `src/assets/shacl/validation`, which
+accepts a list of shape files per profile). Keep that file in sync with the
+`rules:` blocks. It currently covers the four "Other ⇒ free-text" rules:
+`outOfLAReason`, `specificCommunicationRequirement`, `culturalNeeds`,
+`additionalSupport`.
+
+> Note: `outOfLAReason` in `context.jsonld` uses `@type: @vocab` (not `@type:
+> @id`) so its controlled-vocabulary values serialise to `olr:` concept IRIs and
+> can actually be validated.
 

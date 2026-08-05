@@ -1,5 +1,5 @@
 {
-  "@context": "../../person-context.jsonld",
+  "@context": "../../context.jsonld",
   "@id": "ex:person-9010123456",
   "@type": "Person",
 
