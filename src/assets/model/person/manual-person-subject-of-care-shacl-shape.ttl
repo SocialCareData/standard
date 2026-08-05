@@ -1,0 +1,358 @@
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix p:     <https://ns.socialcaredata.io/person/> .
+@prefix nuc:   <https://ns.socialcaredata.io/person/name-use-code#> .
+@prefix auc:   <https://ns.socialcaredata.io/person/address-use-code#> .
+@prefix gc:    <https://ns.socialcaredata.io/person/gender-code#> .
+@prefix psc:   <https://ns.socialcaredata.io/person/phenotypic-sex-code#> .
+@prefix ec:    <https://ns.socialcaredata.io/person/ethnicity-code#> .
+@prefix prc:   <https://ns.socialcaredata.io/person/person-relationship-code#> .
+@prefix :      <https://ns.socialcaredata.io/person/subject-of-care-shape#> .
+
+
+<https://ns.socialcaredata.io/person/subject-of-care-shape> a owl:Ontology ;
+    dct:title "Person Standard SHACL Shapes — Subject of Care profile" ;
+    rdfs:label "Person Standard Shapes (Subject of Care)" ;
+    dct:description "Profile shapes for a p:Person who is the subject of care. Tightens cardinalities on the base Person model so that core identity, demographic and contact data required to deliver and coordinate care are present. Sub-entity shapes (Identifier, Name, Address, Contact, PersonRelationship, PartialDate) are identical to the base profile." ;
+    owl:versionInfo "1.0.0" .
+
+
+#################################################################
+#    Person (Subject of Care)
+#
+#    identifier                  1..*
+#    name                        1..1
+#    dateOfBirth                 1..1
+#    isDeceased                  1..1
+#    deceasedDate                0..1
+#    address                     1..*
+#    contact                     0..*
+#    genderCode                  1..1
+#    sexCode                     0..1
+#    ethnicityCode               1..1
+#    relatedPerson               0..*
+#    primaryContactProfessional  0..*
+#    matchedPersonRef            0..*
+#################################################################
+
+:PersonShape a sh:NodeShape ;
+    sh:targetClass p:Person ;
+    rdfs:label "Person shape (Subject of Care)" ;
+    sh:property [
+        sh:path p:identifier ;
+        sh:class p:Identifier ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:minCount 1 ;
+        sh:message "Subject-of-care Person must have at least one Identifier."
+    ] ;
+    sh:property [
+        sh:path p:name ;
+        sh:class p:Name ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Subject-of-care Person must have exactly one Name."
+    ] ;
+    sh:property [
+        sh:path p:dateOfBirth ;
+        sh:class p:PartialDate ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Subject-of-care Person must have exactly one dateOfBirth."
+    ] ;
+    sh:property [
+        sh:path p:isDeceased ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Subject-of-care Person must have isDeceased (exactly one boolean)."
+    ] ;
+    sh:property [
+        sh:path p:deceasedDate ;
+        sh:class p:PartialDate ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:maxCount 1 ;
+        sh:message "Subject-of-care Person may have at most one deceasedDate."
+    ] ;
+    sh:property [
+        sh:path p:address ;
+        sh:class p:Address ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:minCount 1 ;
+        sh:message "Subject-of-care Person must have at least one Address."
+    ] ;
+    sh:property [
+        sh:path p:contact ;
+        sh:class p:Contact ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:message "contact must reference Contact nodes (multi-valued)."
+    ] ;
+    sh:property [
+        sh:path p:genderCode ;
+        sh:nodeKind sh:IRI ;
+        sh:in ( gc:Male gc:Female gc:Indeterminate gc:NotKnown ) ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Subject-of-care Person must have exactly one genderCode (Gender Code)."
+    ] ;
+    sh:property [
+        sh:path p:sexCode ;
+        sh:nodeKind sh:IRI ;
+        sh:in ( psc:Male psc:Female psc:Indeterminate psc:NotKnown ) ;
+        sh:maxCount 1 ;
+        sh:message "sexCode must be one of the four Phenotypic Sex Code concepts."
+    ] ;
+    sh:property [
+        sh:path p:ethnicityCode ;
+        sh:nodeKind sh:IRI ;
+        sh:in (
+            ec:AsianBangladeshi ec:AsianChinese ec:AsianIndian ec:AsianPakistani ec:AsianOther
+            ec:BlackAfrican ec:BlackCaribbean ec:BlackOther
+            ec:MixedWhiteAsian ec:MixedWhiteBlackAfrican ec:MixedWhiteBlackCaribbean ec:MixedOther
+            ec:WhiteBritish ec:WhiteIrish ec:WhiteGypsyOrIrishTraveller ec:WhiteRoma ec:WhiteOther
+            ec:OtherArab ec:OtherAny
+            ec:DoesNotApply
+        ) ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Subject-of-care Person must have exactly one ethnicityCode (ONS 2021 census 20b)."
+    ] ;
+    sh:property [
+        sh:path p:relatedPerson ;
+        sh:class p:PersonRelationship ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:message "relatedPerson must reference PersonRelationship nodes (multi-valued)."
+    ] ;
+    sh:property [
+        sh:path p:primaryContactProfessional ;
+        sh:class p:Identifier ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:message "primaryContactProfessional must reference Identifier nodes (multi-valued)."
+    ] ;
+    sh:property [
+        sh:path p:matchedPersonRef ;
+        sh:class p:Identifier ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:message "matchedPersonRef must reference Identifier nodes (multi-valued)."
+    ] .
+
+
+#################################################################
+#    Identifier
+#################################################################
+
+:IdentifierShape a sh:NodeShape ;
+    sh:targetClass p:Identifier ;
+    rdfs:label "Identifier shape" ;
+    sh:property [
+        sh:path p:value ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:minLength 1 ;
+        sh:message "Identifier.value is required (exactly one non-empty string)."
+    ] ;
+    sh:property [
+        sh:path p:system ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Identifier.system is required and must be a URI."
+    ] .
+
+
+#################################################################
+#    Name
+#################################################################
+
+:NameShape a sh:NodeShape ;
+    sh:targetClass p:Name ;
+    rdfs:label "Name shape" ;
+    sh:property [
+        sh:path p:familyName ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:minLength 1 ;
+        sh:message "Name.familyName is required (at least one non-empty string)."
+    ] ;
+    sh:property [
+        sh:path p:givenName ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:minLength 1 ;
+        sh:message "Name.givenName is required (at least one non-empty string)."
+    ] ;
+    sh:property [
+        sh:path p:preferredName ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:message "Name.preferredName must be a string when present (single-valued)."
+    ] ;
+    sh:property [
+        sh:path p:use ;
+        sh:nodeKind sh:IRI ;
+        sh:in ( nuc:Usual nuc:Official nuc:Temp nuc:Nickname nuc:Anonymous nuc:Old nuc:Maiden ) ;
+        sh:maxCount 1 ;
+        sh:message "Name.use must be a Name Use Code concept."
+    ] .
+
+
+#################################################################
+#    Address
+#################################################################
+
+:AddressShape a sh:NodeShape ;
+    sh:targetClass p:Address ;
+    rdfs:label "Address shape" ;
+    sh:property [
+        sh:path p:line1 ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:minLength 1 ;
+        sh:message "Address.line1 is required (exactly one non-empty string)."
+    ] ;
+    sh:property [
+        sh:path p:line2 ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:message "Address.line2 is optional."
+    ] ;
+    sh:property [
+        sh:path p:city ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:minLength 1 ;
+        sh:message "Address.city is required (exactly one non-empty string)."
+    ] ;
+    sh:property [
+        sh:path p:postcode ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:pattern "^[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}$" ;
+        sh:message "Address.postcode is required and must be a UK postcode (e.g. AB1 2CD)."
+    ] ;
+    sh:property [
+        sh:path p:UPRN ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:message "Address.UPRN is optional."
+    ] ;
+    sh:property [
+        sh:path p:USRN ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:message "Address.USRN is optional."
+    ] ;
+    sh:property [
+        sh:path p:use ;
+        sh:nodeKind sh:IRI ;
+        sh:in ( auc:Home auc:Work auc:Temp auc:Old auc:Billing ) ;
+        sh:maxCount 1 ;
+        sh:message "Address.use must be an Address Use Code concept."
+    ] .
+
+
+#################################################################
+#    Contact
+#################################################################
+
+:ContactShape a sh:NodeShape ;
+    sh:targetClass p:Contact ;
+    rdfs:label "Contact shape" ;
+    sh:property [
+        sh:path p:contactName ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:message "Contact.name is optional but recommended (at most one value)."
+    ] ;
+    sh:property [
+        sh:path p:email ;
+        sh:datatype xsd:string ;
+        sh:message "Contact.email must be string(s) when present (multi-valued)."
+    ] ;
+    sh:property [
+        sh:path p:telephone ;
+        sh:datatype xsd:string ;
+        sh:message "Contact.telephone must be string(s) when present (multi-valued)."
+    ] .
+
+
+#################################################################
+#    PersonRelationship
+#################################################################
+
+:PersonRelationshipShape a sh:NodeShape ;
+    sh:targetClass p:PersonRelationship ;
+    rdfs:label "PersonRelationship shape" ;
+    sh:property [
+        sh:path p:identifier ;
+        sh:class p:Identifier ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "PersonRelationship.identifier is required (exactly one Identifier)."
+    ] ;
+    sh:property [
+        sh:path p:relationship ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:in (
+            prc:FAMMEMB prc:CHILD prc:NCHILD prc:CHLDADOPT prc:DAUADOPT prc:SONADOPT
+            prc:CHLDFOST prc:DAUFOST prc:SONFOST prc:DAUC prc:DAU prc:STPDAU
+            prc:SON prc:SONC prc:STPSON prc:STPCHLD prc:EXT prc:AUNT
+            prc:MAUNT prc:PAUNT prc:UNCLE prc:MUNCLE prc:PUNCLE prc:COUSN
+            prc:MCOUSN prc:PCOUSN prc:NIENEPH prc:NEPHEW prc:NIECE prc:GGRPRN
+            prc:GGRFTH prc:MGGRFTH prc:PGGRFTH prc:GGRMTH prc:MGGRMTH prc:PGGRMTH
+            prc:MGGRPRN prc:PGGRPRN prc:GRPRN prc:GRFTH prc:MGRFTH prc:PGRFTH
+            prc:GRMTH prc:MGRMTH prc:PGRMTH prc:MGRPRN prc:PGRPRN prc:GRNDCHILD
+            prc:GRNDDAU prc:GRNDSON prc:INLAW prc:CHLDINLAW prc:DAUINLAW prc:SONINLAW
+            prc:PRNINLAW prc:FTHINLAW prc:MTHINLAW prc:SIBINLAW prc:BROINLAW prc:SISINLAW
+            prc:PRN prc:NPRN prc:ADOPTP prc:ADOPTF prc:ADOPTM prc:PRNFOST
+            prc:STPPRN prc:FTH prc:NFTH prc:FTHFOST prc:STPFTH prc:MTH
+            prc:NMTH prc:GESTM prc:MTHFOST prc:STPMTH prc:SIB prc:NSIB
+            prc:HSIB prc:STPSIB prc:BRO prc:NBRO prc:HBRO prc:STPBRO
+            prc:SIS prc:NSIS prc:HSIS prc:STPSIS prc:TWIN prc:TWINBRO
+            prc:TWINSIS prc:ITWIN prc:ITWINBRO prc:ITWINSIS prc:FTWIN prc:FTWINBRO
+            prc:FTWINSIS prc:SPS prc:HUSB prc:WIFE prc:FMRSPS prc:DOMPART
+            prc:SIGOTHR prc:FRND prc:NBOR prc:ROOM prc:ONESELF
+        ) ;
+        sh:message "PersonRelationship.relationship must be at least one HL7 v3 PersonalRelationshipRoleType concept (multi-valued)."
+    ] .
+
+
+#################################################################
+#    PartialDate
+#################################################################
+
+:PartialDateShape a sh:NodeShape ;
+    sh:targetClass p:PartialDate ;
+    rdfs:label "PartialDate shape" ;
+    sh:property [
+        sh:path p:date ;
+        sh:datatype xsd:date ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "PartialDate.date is required (exactly one xsd:date in YYYY-MM-DD)."
+    ] ;
+    sh:property [
+        sh:path p:accuracyIndicator ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:pattern "^[AEU]{3}$" ;
+        sh:message "PartialDate.accuracyIndicator must be a 3-character string drawn from {A,E,U} in day-month-year order (e.g. AAA, UUE, UAA)."
+    ] .
+
+
+#################################################################
+#    Conditional: isDeceased=true with no deceasedDate (Warning)
+#    Statutorily required in adult social care; warning elsewhere.
+#################################################################
+
+:DeceasedDatePresenceShape a sh:NodeShape ;
+    sh:targetClass p:Person ;
+    rdfs:label "Deceased date presence (warning)" ;
+    sh:severity sh:Warning ;
+    sh:message "When isDeceased is true, deceasedDate is statutorily required in adult social care; consider providing one." ;
+    sh:not [
+        sh:and (
+            [ sh:property [ sh:path p:isDeceased ; sh:hasValue true ] ]
+            [ sh:property [ sh:path p:deceasedDate ; sh:maxCount 0 ] ]
+        )
+    ] .
