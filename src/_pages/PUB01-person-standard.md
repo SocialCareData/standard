@@ -42,7 +42,7 @@ A `Person` is the top-level record. It aggregates zero or more `Identifier`s, on
 
 ### Person
 
-The top-level record describing an individual. Consolidates the core identity attributes required to distinguish one person from another and to record relationships between individuals. Corresponds to the [Person](https://build.fhir.org/person.html) entity in FHIR and root `Person` entity in the [GDS Person Domain Logical Model](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42) (Domain Expert Group on Person - DEGoP).
+The top-level record describing an individual. Consolidates the core identity attributes required to distinguish one person from another and to record relationships between individuals. Corresponds to the [Person](https://build.fhir.org/person.html) entity in FHIR and root `Person` entity in the [GDS Person Domain Logical Model](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42).
 
 #### Properties
 
@@ -80,9 +80,7 @@ The top-level record describing an individual. Consolidates the core identity at
 : References to other people related to this person, with the kind of relationship. Multi-valued. See [PersonRelationship](#personrelationship).
 
 <span id="person-primaryContactProfessional">primaryContactProfessional</span>
-: References to the primary professionals related to this person. For example, care coordinators or a GP. Multi-valued. Optional. See `Professional`.
-
-_The `Professional` entity will be defined in a forthcoming Professional Data Standard. Until that standard is published, implementers should record professional references using the `Identifier` structure (system + value)._
+: References to the primary professionals related to this person. For example, care coordinators or a GP. Implementers should record professional references using the [`Identifier`](#identifier) structure. Multi-valued. Optional. See also `Professional` in the [safeguarding standard](PUB02_safeguarding_standard#professional).
 
 <span id="person-matchedPersonRef">matchedPersonRef</span>
 : A reference to another Person record, if a match has been identified. Multi-valued. Optional. See [Identifier](#identifier) entity for the structure.
@@ -90,21 +88,47 @@ _The `Professional` entity will be defined in a forthcoming Professional Data St
 #### Example
 
 <div class="example">
-  <h5 id="example-person">Example - Person (top level)</h5>
+  <h5 id="example-person">Example - Person</h5>
 {% highlight json %}
 {
-  "@context": "https://socialcaredata.github.io/ontology/person/context.jsonld",
+  "@context": "https://socialcaredata.github.io/assets/model/person/context.jsonld",
   "@id": "ex:person-9434765919",
   "@type": "Person",
-  "identifier":      [ { "see Identifier example" } ],
-  "name":            [ { "see Name example" } ],
-  "dateOfBirth":      { "see PartialDate example" },
-  "isDeceased":       false
-  "address":        [ { "see Address example" } ],
-  "genderCode":           "2",
-  "sexCode":          "2",
-  "ethnicityCode":       "17",
-  "relatedPerson":    [ { "see PersonRelationship example" } ],
+  "identifier": [{
+      "@type": "Identifier",
+      "value": "LA-12345",
+      "system": "https://example.org/Id/local-authority-id"
+  }],
+  "name": [{
+      "@type": "Name",
+      "familyName": ["Doe"],
+      "givenName": ["Jane"],
+      "use": "official"
+  }],
+  "dateOfBirth": {
+    "@type": "PartialDate",
+    "date": "1972-01-15",
+    "accuracyIndicator": "UAA"
+  },
+  "isDeceased": false,
+  "address": [{
+      "@type": "Address",
+      "line1": "1 High Street",
+      "city": "Anytown",
+      "postcode": "AB1 2CD",
+      "use": "home"
+  }],
+  "genderCode": "2",
+  "sexCode": "2",
+  "ethnicityCode": "17",
+  "relatedPerson": [{
+      "@type": "PersonRelationship",
+      "identifier": { "@type": "Identifier", "value": "9009999991", "system": "https://fhir.nhs.uk/Id/nhs-number"},
+      "relationship": ["MTH"]
+  }],
+  "primaryContactProfessional": [
+    { "@type": "Identifier", "value": "GMC-1234567", "system": "https://example.org/Id/gmc-number" }
+  ],
   "matchedPersonRef": [
     { "@type": "Identifier", "value": "EDU-987654", "system": "https://example.org/Id/lea-code" }
   ]
@@ -252,7 +276,6 @@ Contact details for a person, such as a home, work, or other contact channel gro
 }
 {% endhighlight %}
 </div>
-
 
 
 ### PersonRelationship
@@ -413,6 +436,9 @@ The Person Standard is a reduced subset of the FHIR `Patient` resource, extended
 
 - [Person matching implementation](/PUB03_standards_comparison_person_matching) — how `matchedPersonRef` is established via the FHIR `$match` operation.
 
+## Ontology
+
+The ontology for this specification is defined in Turtle format and is available at: [person-standard.ttl](/assets/model/person/person-standard.ttl).
 
 ## Report an issue
 
