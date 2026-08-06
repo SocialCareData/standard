@@ -10,18 +10,15 @@ tags:
   - Publication
 reference: PUB01
 status: draft
-non_technical_summary: |
-  This is a non-technical summary. Lorem ipsum ...
-
-  This is a new paragraph
-  (but this is the same paragraph)
-
-  - And this is a list
-  - like this
-    - with sub items
-
-  And we can do [links](#) too. And images if we need.
 data_model: src/assets/model/person/person-standard.yaml
+non_technical_summary: |
+  The core objective of our work is to facilitate the sharing of information about a person in care (whether a child or an adult) between agencies and organisations across the country (multi-agency information sharing). To do so, each of these agencies and organisations must be speaking the same "language" talking about the person, communicating with each other in the same way. This requires a common data model for identifying and describing a person across data systems, which we have designed here in our **Person Standard**.
+
+  The Person Standard provides the common set of fields -- the person's name, their date of birth, their address, et cetera -- that can be used to describe a person and distinguish them from others within a database. By ensuring all social care databases store information about people in this standard schema, there will be conformity in social care data systems across the country, and therefore interoperability between them.
+
+  In turn, this enables search-and-response. The person standard can be used as a search pattern: "I want to know about John Doe, who was born on the 1st of January 2000 and currently lives in Kingston-upon-Thames" can be encoded in a machine-readable package that can be sent from my local authority to the 316 others in England to find out who else knows safeguarding information about the person of interest.
+
+  The person standard has grown out of the original search use case though. It also encompasses statutory information that must be recorded (especially for Adult Social Care) like ethnicity, as well as links from a person to their GP (or other primary contact professional) and to other people related to them like their family or friends.
 ---
 
 <a href="/PUB01_person_standard_table" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
