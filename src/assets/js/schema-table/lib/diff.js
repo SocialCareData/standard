@@ -216,8 +216,9 @@ function renderDiffTable ({ rows }) {
  * <details>/<summary> wrapper the plain vocabulary tables use. The blank lines
  * around the table are required so kramdown parses it into a real <table>.
  */
-function renderDiffVocabularyTable ({ rows }) {
+function renderDiffVocabularyTable ({ rows }, { collapsible = true } = {}) {
   const body = renderDiffMarkdown(rows, VOCAB_COLUMNS, ':---')
+  if (!collapsible) return `${body}\n{: .table-bordered .schema-diff}`
   return [
     '<details>',
     '<summary markdown="span">See vocabulary</summary>',

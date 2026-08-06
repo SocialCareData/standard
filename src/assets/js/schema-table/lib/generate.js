@@ -39,7 +39,7 @@ function readModel (modelPath, rootDir) {
  * @returns {string} Markdown table (a property table, or a vocabulary table
  *   wrapped in a <details> element).
  */
-function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit } = {}) {
+function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit, collapsible = true } = {}) {
   if (!modelPath) throw new Error('modelPath is required')
   if (!entity) throw new Error('entity is required')
 
@@ -67,7 +67,7 @@ function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadin
   const enumName = findVocabularyEnum(model, entity)
   if (enumName) {
     const { concepts } = resolveVocabulary(model, enumName)
-    return renderVocabularyTable(concepts)
+    return renderVocabularyTable(concepts, { collapsible })
   }
 
   throw new Error(
@@ -90,7 +90,7 @@ function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadin
  * @returns {string} An HTML diff table (a property table, or a vocabulary table
  *   wrapped in a <details> element).
  */
-function generateDiffTable ({ modelPath, previousPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit } = {}) {
+function generateDiffTable ({ modelPath, previousPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit, collapsible = true } = {}) {
   if (!modelPath) throw new Error('modelPath is required')
   if (!previousPath) throw new Error('previousPath is required')
   if (!entity) throw new Error('entity is required')
@@ -106,7 +106,7 @@ function generateDiffTable ({ modelPath, previousPath, entity, rootDir = process
 
   const enumName = findVocabularyEnum(current, entity) || findVocabularyEnum(previous, entity)
   if (enumName) {
-    return renderDiffVocabularyTable(diffVocabulary(current, previous, enumName))
+    return renderDiffVocabularyTable(diffVocabulary(current, previous, enumName), { collapsible })
   }
 
   throw new Error(

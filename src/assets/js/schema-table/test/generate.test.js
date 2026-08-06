@@ -60,6 +60,13 @@ test('integration: an enum name also renders a vocabulary table', () => {
   assert.match(md, /\| `No known risk` \| No known risk \| There is no known risk\. \|/)
 })
 
+test('integration: collapsible:false renders a vocabulary table without the details wrapper', () => {
+  const md = generateTable({ modelPath: MODEL, entity: 'RiskLevel', rootDir: REPO_ROOT, collapsible: false })
+  assert.doesNotMatch(md, /<details>|<summary/)
+  assert.match(md, /^\| Code \| Label \| Definition \|/)
+  assert.match(md, /\{: \.table-bordered\}/)
+})
+
 test('integration: Options links present taxonomies and inlines absent ones', () => {
   // A page with a "Communication Need Taxonomy" section but no "Yes / No /
   // Not Specified" one -> the two properties must differ.

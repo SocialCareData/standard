@@ -414,7 +414,6 @@ LA-internal metadata about who recorded each part of the placement record (refer
 {% endhighlight %}
 </div>
 
-<a href="/PUB00_placements_standard_table_01" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
 
 ## Ontology
 
@@ -429,7 +428,7 @@ The model is parameterised by six SKOS controlled vocabularies. Selecting `Other
 
 Specific communication and language requirements a child may have. Multi-valued: enter all that apply, or `None` if not applicable. Selecting `Other` triggers the paired free-text property `specificCommunicationRequirementOther` on `PlacementRequirements`.
 
-{% schema_table page.data_model specificCommunicationRequirement %}
+{% schema_table page.data_model specificCommunicationRequirement expanded %}
 
 Used by `specificCommunicationRequirement` on [PlacementRequirements](#placementrequirements).
 
@@ -437,7 +436,7 @@ Used by `specificCommunicationRequirement` on [PlacementRequirements](#placement
 
 Recommendations for who the child can be cared for alongside in a placement.
 
-{% schema_table page.data_model livingCompanions %}
+{% schema_table page.data_model livingCompanions expanded %}
 
 Used by `livingCompanions` on [PlacementRequirements](#placementrequirements).
 
@@ -445,7 +444,7 @@ Used by `livingCompanions` on [PlacementRequirements](#placementrequirements).
 
 The reason why the preferred placement location is in a different LA than the placing LA. Used on `PlacementAvailability` when `isPreferredLocationLocal` is `false`. Selecting `Other` triggers the paired free-text property `outOfLAReasonOther`.
 
-{% schema_table page.data_model outOfLAReason %}
+{% schema_table page.data_model outOfLAReason expanded %}
 
 Used by `outOfLAReason` on [PlacementAvailability](#placementavailability).
 
@@ -453,7 +452,7 @@ Used by `outOfLAReason` on [PlacementAvailability](#placementavailability).
 
 The type of placement the child receives.
 
-{% schema_table page.data_model placementType %}
+{% schema_table page.data_model placementType expanded %}
 
 Used by `placementType` on [ActualPlacement](#actualplacement).
 
@@ -461,7 +460,7 @@ Used by `placementType` on [ActualPlacement](#actualplacement).
 
 How urgently the child needs to be placed. Captures urgency rather than an absolute date.
 
-{% schema_table page.data_model neededBy %}
+{% schema_table page.data_model neededBy expanded %}
 
 Used by `neededBy` on [PlacementAvailability](#placementavailability).
 
@@ -469,7 +468,7 @@ Used by `neededBy` on [PlacementAvailability](#placementavailability).
 
 Additional support provision required alongside a placement. Multi-valued: select all that apply. Selecting `Other` triggers the paired free-text property `additionalSupportOther` on `PlacementRequirements`.
 
-{% schema_table page.data_model additionalSupport %}
+{% schema_table page.data_model additionalSupport expanded %}
 
 Used by `additionalSupport` on [PlacementRequirements](#placementrequirements).
 

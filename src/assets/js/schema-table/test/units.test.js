@@ -134,3 +134,16 @@ test('renderVocabularyTable wraps a Code/Label/Definition table in a details ele
     '</details>'
   ].join('\n'))
 })
+
+test('renderVocabularyTable can omit the collapsible wrapper', () => {
+  const md = renderVocabularyTable([
+    { code: 'today', label: 'Today', description: 'Needed today.' }
+  ], { collapsible: false })
+  assert.equal(md, [
+    '| Code | Label | Definition |',
+    '| :--- | :--- | :--- |',
+    '| `today` | Today | Needed today. |',
+    '{: .table-bordered}'
+  ].join('\n'))
+  assert.doesNotMatch(md, /<details>|<summary/)
+})

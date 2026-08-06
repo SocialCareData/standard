@@ -321,7 +321,7 @@ Used by [`Name.use`](#name-use).
 
 Indicates the intended purpose of a person's name, allowing applications to select the appropriate name for specific contexts. A name is assumed to be current unless it is marked as `temp` or `old`. Aligned with the [FHIR `name-use`](https://hl7.org/fhir/valueset-name-use.html) value set.
 
-{% schema_table page.data_model nameUse %}
+{% schema_table page.data_model nameUse expanded %}
 
 ### Address Use Code Vocabulary
 
@@ -329,7 +329,7 @@ Used by [`Address.use`](#address-use-code).
 
 Specifies how an address is used, allowing applications to prioritise addresses based on context. Aligned with the [FHIR `address-use`](https://build.fhir.org/valueset-address-use.html) value set. Plays a similar role to the [GDS](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42) `Residence > Residence Status > Residence Type` attribute.
 
-{% schema_table page.data_model addressUse %}
+{% schema_table page.data_model addressUse expanded %}
 
 ### Gender Code Vocabulary
 
@@ -337,7 +337,7 @@ Used by [`Person.genderCode`](#person-genderCode).
 
 Represents a person's stated gender identity, as distinct from biological sex. Aligned with the NHS Data Dictionary [`PERSON_STATED_GENDER_CODE`](https://www.datadictionary.nhs.uk/attributes/person_stated_gender_code.html).
 
-{% schema_table page.data_model genderCode %}
+{% schema_table page.data_model genderCode expanded %}
 
 ### Phenotypic Sex Code Vocabulary
 
@@ -345,7 +345,7 @@ Used by [`Person.sexCode`](#person-sexCode).
 
 Documents observed phenotypic sex where recorded, representing biological characteristics rather than gender identity. Aligned with NHS PDS `PERSON_PHENOTYPIC_SEX`.
 
-{% schema_table page.data_model sexCode %}
+{% schema_table page.data_model sexCode expanded %}
 
 ### Ethnicity Code Vocabulary
 
@@ -353,7 +353,7 @@ Used by [`Person.ethnicityCode`](#person-ethnicityCode).
 
 The person's stated ethnicity. Uses [ONS Census 2021 Ethnic group classification 20b](https://www.ons.gov.uk/census/census2021dictionary/variablesbytopic/ethnicgroupnationalidentitylanguageandreligionvariablescensus2021/ethnicgroup/classifications#:~:text=Ethnic%20group%20classification%2020b) codes.
 
-{% schema_table page.data_model ethnicityCode %}
+{% schema_table page.data_model ethnicityCode expanded %}
 
 ### Date Accuracy Indicator Vocabulary
 

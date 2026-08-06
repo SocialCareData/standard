@@ -34,6 +34,9 @@ Options:
   --options-limit <n>  How many example values the Options column previews
                        (default 3). Pass an integer, or "all" to show every
                        value with no ellipsis.
+  --no-collapse        For a vocabulary table, emit just the table instead of
+                       wrapping it in a collapsible <details>/<summary> element.
+                       (No effect on class property tables.)
 
 Examples:
   schema-table src/assets/model/placements/placements-standard.yaml PlacementRequirements
@@ -53,6 +56,8 @@ function parseArgs (argv) {
       opts.previousPath = argv[++i]
     } else if (argv[i] === '--options-limit') {
       opts.optionsLimit = argv[++i]
+    } else if (argv[i] === '--no-collapse' || argv[i] === '--expanded') {
+      opts.collapsible = false
     } else if (argv[i] === '-h' || argv[i] === '--help') {
       opts.help = true
     } else {

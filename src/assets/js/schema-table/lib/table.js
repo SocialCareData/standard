@@ -115,19 +115,22 @@ function renderTable (rows, availableAnchors, optionsLimit) {
 }
 
 /**
- * Render an enum's permissible values as a two-column "Code" / "Description"
- * Markdown table wrapped in a collapsible <details>/<summary> element.
+ * Render an enum's permissible values as a "Code" / "Label" / "Definition"
+ * Markdown table. By default it is wrapped in a collapsible <details>/<summary>
+ * element; pass `{ collapsible: false }` to emit just the table.
  *
  * The blank line after <summary> and before </details> is required so kramdown
  * parses the enclosed Markdown table into a real HTML <table>; the trailing
  * `{: .table-bordered}` IAL styles it to match the other vocabulary tables.
  */
-function renderVocabularyTable (concepts) {
+function renderVocabularyTable (concepts, { collapsible = true } = {}) {
   const body = [
     `| ${VOCAB_COLUMNS.join(' | ')} |`,
     '| :--- | :--- | :--- |',
     ...concepts.map(c => `| \`${escapeCell(c.code)}\` | ${escapeCell(c.label)} | ${escapeCell(c.description)} |`)
   ].join('\n')
+
+  if (!collapsible) return `${body}\n{: .table-bordered}`
 
   return [
     '<details>',

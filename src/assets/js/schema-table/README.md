@@ -66,6 +66,17 @@ concept IRI. The taxonomy section title/anchor comes from the enum's `title`; th
 value labels shown in the Options column come from each permissible value's
 `title`.
 
+**Collapsible wrapper:** by default the table is wrapped in a `<details>` /
+`<summary>` element. To render just the table instead:
+
+- CLI: `--no-collapse` (alias `--expanded`).
+- Jekyll tag: an `expanded` (or `no-collapse`) modifier, e.g.
+  `{% schema_table page.data_model genderCode expanded %}`.
+
+Tag modifiers after `<entity>` are order-independent: mix the options-limit and
+the collapse control freely, e.g.
+`{% schema_table page.data_model genderCode all expanded %}`.
+
 ## Diff table
 
 With `--previous <file>`, the tool compares the current model against a previous
