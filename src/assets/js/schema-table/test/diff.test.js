@@ -142,7 +142,7 @@ test('integration: a controlled-vocabulary property renders a diffed vocabulary 
   // kramdown build the <table>); tagged with the vocabulary + diff classes.
   assert.match(md, /^<details>/)
   assert.match(md, /<summary markdown="span">See vocabulary<\/summary>/)
-  assert.match(md, /\| Code \| Description \|/)
+  assert.match(md, /\| Code \| Label \| Definition \|/)
   assert.match(md, /\{: \.table-bordered \.schema-diff\}/)
   assert.match(md, /<\/details>$/)
 })
