@@ -336,7 +336,7 @@ Container for a date that may not be fully known or precise, extended with an ac
 
 ## Vocabularies
 
-The model is parameterised by seven controlled vocabularies, each held in its own include file under `src/_includes/vocabularies/`.
+The model is parameterised by seven controlled vocabularies.
 
 ### Name Use Code Vocabulary
 
