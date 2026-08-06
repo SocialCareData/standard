@@ -9,7 +9,7 @@ tags:
   - Publication
   - MAIS
 reference: PUB04
-plain_english_summary: |
+non_technical_summary: |
   This is a plain english summary. Lorem ipsum ...
 
   This is a new paragraph

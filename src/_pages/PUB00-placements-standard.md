@@ -10,7 +10,7 @@ tags:
 reference: PUB00
 status: draft
 data_model: src/assets/model/placements/placements-standard.yaml
-plain_english_summary: |
+non_technical_summary: |
   This is a plain english summary. Lorem ipsum ...
 
   This is a new paragraph
