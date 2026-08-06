@@ -1,14 +1,13 @@
-# Placements LinkML data model
+# Placements data model
 
-`placements-standard.yaml` is a single [LinkML](https://linkml.io/) schema that is the
-**authoritative source** for the Children's Social Care Placements data model.
+`placements-standard.yaml` is the [LinkML](https://linkml.io/) schema for the
+Children's Social Care Placements data model (the `…-01.yaml` file is the current
+working version). The SHACL, OWL/RDF, JSON Schema and docs are generated from it.
 
-From one YAML file you can generate the SHACL, the OWL/RDF, JSON Schema,
-Pydantic, documentation, and more, using the standard LinkML generators.
-
-> ⚠️ **WARNING: DO NOT EDIT ONTOLOGY OR SHACL FILES DIRECTLY!**
->
-> **Edit the LinkML schema instead.** Any changes made directly to this file will be overwritten. Refer to [Regenerating downstream artifacts](#regenerating-downstream-artifacts) for instructions on updating these files.
+> For the LinkML → SHACL workflow — regenerating artifacts, how enums/codes map,
+> conditional (`rules:`) constraints, and validating the examples — see
+> [`../model-management.md`](../model-management.md). **Don't edit the generated
+> `*-shape.ttl` / `*.ttl` files directly.**
 
 ## What's in the model
 
@@ -16,28 +15,20 @@ Pydantic, documentation, and more, using the standard LinkML generators.
 | --- | --- | --- |
 | Classes | 7 | `Placement` (root) → `PlacementAvailability`, `PlacementRequirements`, `PlacementRecommendation`, `RiskAssessment`, `ActualPlacement`, `QualityAssurance` |
 | Slots | 55 | datatypes, object references, controlled-vocabulary fields |
-| Enums | 11 | one per SKOS concept scheme in `src/assets/ttl/taxonomy-*.ttl`; each permissible value's `meaning:` is the concept IRI |
+| Enums | 11 | one per SKOS concept scheme; each permissible value's `meaning:` is the concept IRI |
 | Types | 1 custom | `nonNegativeInteger` → `xsd:nonNegativeInteger` |
 
-Object references (`placementAvailability`, `actualPlacement`, …) are modelled
-as class-ranged slots; controlled-vocabulary fields as enum-ranged slots whose
-permissible values carry the concept IRI as `meaning:`, which becomes the SHACL
-`sh:in` list.
+`Placement` is the root record; the other classes hang off it as object
+references (class-ranged slots). Controlled-vocabulary fields are enum-ranged
+slots.
 
-## Regenerating downstream artifacts
+## Model-specific notes
 
-Requires `pip install linkml` (Python ≥ 3.11 with the `_lzma` stdlib module).
-
-```bash
-# SHACL (matches src/assets/shacl/shacl-shape.ttl — see validation below)
-gen-shacl --non-closed --suffix Shape placements.yaml > shacl-shape.ttl
-
-# OWL / RDF, JSON Schema, docs, Pydantic, …
-gen-owl --consolidate-cardinality-axioms --skip-vacuous-min-zero-cardinality-axioms --skip-vacuous-local-range-axioms placements.yaml > placements.ttl
-gen-json-schema placements.yaml
-gen-doc placements.yaml
-```
-
-The `--suffix Shape` and `--non-closed` flags make the generated shapes line up
-with the existing hand-written ones (`pl:PlacementShape …`, open shapes).
-
+- **Conditional "Other ⇒ free-text" rules.** Four fields require a paired
+  free-text value when their `Other` concept is selected (`outOfLAReason`,
+  `specificCommunicationRequirement`, `culturalNeeds`, `additionalSupport`).
+  These are `rules:` in the schema and are enforced in SHACL via the
+  hand-maintained `placements-base-rules-shape.ttl` (see
+  [`../model-management.md`](../model-management.md#what-gen-shacl-does-not-generate)).
+- **`totalWeeklyCost`** is bounded to £100–£100,000 (`minimum_value` /
+  `maximum_value`).

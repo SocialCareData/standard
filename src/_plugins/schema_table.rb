@@ -22,6 +22,11 @@
 #   1. path to the LinkML YAML model, relative to the project root
 #   2. a class name, or a controlled-vocabulary property name
 #      (e.g. communicationNeeds) or enum name
+#   3+. (optional) order-independent modifiers:
+#       - an integer or "all": how many example values the Options column
+#         previews (default 3).
+#       - "expanded" / "no-collapse": render a vocabulary table without the
+#         collapsible <details>/<summary> wrapper (default is collapsible).
 
 require "open3"
 require "shellwords"
@@ -48,14 +53,37 @@ module Jekyll
       @markup = markup.to_s.strip
     end
 
+    # Trailing modifier tokens that turn the collapsible <details> wrapper off.
+    EXPANDED_TOKENS = %w[expanded no-collapse nocollapse open].freeze
+    # ...and ones that explicitly keep it on (the default).
+    COLLAPSED_TOKENS = %w[collapsible collapsed].freeze
+
     def render(context)
-      schema_file, entity = parse_args(@markup)
+      schema_file, entity, *modifiers = parse_args(@markup)
       unless schema_file && entity
-        return error_note("expected two arguments: <schema-file> <entity>, got #{@markup.inspect}")
+        return error_note("expected at least two arguments: <schema-file> <entity> [modifiers...], got #{@markup.inspect}")
       end
 
       schema_file = resolve_value(schema_file, context)
-      entity     = resolve_value(entity, context)
+      entity      = resolve_value(entity, context)
+
+      # Trailing modifiers are order-independent and self-describing: an integer
+      # or "all" sets the Options-column preview count; "expanded"/"no-collapse"
+      # renders a vocabulary table without the collapsible wrapper.
+      options_limit = nil
+      collapsible   = true
+      modifiers.each do |raw|
+        m = resolve_value(raw, context).to_s.strip
+        next if m.empty?
+        d = m.downcase
+        if d == "all" || m.match?(/\A-?\d+\z/)
+          options_limit = m
+        elsif EXPANDED_TOKENS.include?(d)
+          collapsible = false
+        elsif COLLAPSED_TOKENS.include?(d)
+          collapsible = true
+        end
+      end
 
       # Tell Jekyll's incremental regenerator that this page depends on the
       # model file. Without this, editing the model never re-renders the page
@@ -72,8 +100,8 @@ module Jekyll
       # across rebuilds) regenerates the table when the model changes rather
       # than serving a stale cached copy.
       page_id = (context.registers[:page] && context.registers[:page]["path"]).to_s
-      key = "#{page_id}\t#{schema_file}\t#{entity}\t#{model_mtime(schema_file)}"
-      self.class.cache[key] ||= generate(schema_file, entity, headings)
+      key = "#{page_id}\t#{schema_file}\t#{entity}\t#{options_limit}\t#{collapsible}\t#{model_mtime(schema_file)}"
+      self.class.cache[key] ||= generate(schema_file, entity, headings, options_limit, collapsible)
     end
 
     private
@@ -128,13 +156,12 @@ module Jekyll
       Jekyll.logger.warn("SchemaTable:", "could not register dependency: #{e.message}")
     end
 
-    # Split "path Entity" into two tokens, tolerating surrounding quotes.
+    # Split "path Entity [modifiers...]" into tokens, tolerating surrounding
+    # quotes. Returns [schema_file, entity, *modifiers].
     def parse_args(markup)
-      parts = Shellwords.split(markup)
-      [parts[0], parts[1]]
+      Shellwords.split(markup)
     rescue ArgumentError
-      parts = markup.split(/\s+/)
-      [parts[0], parts[1]]
+      markup.split(/\s+/)
     end
 
     # The heading texts on the page currently being rendered. The generator
@@ -195,9 +222,11 @@ module Jekyll
       parts.join("\n")
     end
 
-    def generate(schema_file, entity, headings)
-      stdout, stderr, status =
-        Open3.capture3("node", CLI, schema_file, entity, "--page-headings", headings.join("\n"))
+    def generate(schema_file, entity, headings, options_limit = nil, collapsible = true)
+      cmd = ["node", CLI, schema_file, entity, "--page-headings", headings.join("\n")]
+      cmd += ["--options-limit", options_limit.to_s] if options_limit && !options_limit.to_s.strip.empty?
+      cmd << "--no-collapse" unless collapsible
+      stdout, stderr, status = Open3.capture3(*cmd)
 
       unless status.success?
         Jekyll.logger.error("SchemaTable:", "#{schema_file} #{entity} -> #{stderr.strip}")

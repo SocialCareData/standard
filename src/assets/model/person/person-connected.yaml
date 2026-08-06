@@ -1,0 +1,81 @@
+id: https://ns.socialcaredata.io/person/connected
+name: person-connected
+title: Person Standard - Connected Person profile
+description: >-
+  Conformance profile for a p:Person who is recorded as *connected* to a subject
+  of care (e.g. a family member, friend, or other related individual). Imports
+  the shared core (person-standard.yaml) and redefines Person so that all
+  demographic data is optional and only a Name is mandatory. A connected person
+  carries at most one Contact and at most one relatedPerson reference.
+  Sub-entity shapes and controlled vocabularies are inherited unchanged from the
+  core.
+
+  SHACL generated from this file is the LinkML equivalent of the hand-written
+  manual-person-connected-shacl-shape.ttl.
+license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+version: 1.0.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  p: https://ns.socialcaredata.io/person/
+default_prefix: p
+imports:
+  - linkml:types
+  - person-standard
+
+# ---------------------------------------------------------------------------
+# Person (Connected)
+#
+#   identifier                  0..*
+#   name                        1..1
+#   dateOfBirth                 0..1
+#   isDeceased                  0..1
+#   deceasedDate                0..1
+#   address                     0..*
+#   contact                     0..1
+#   genderCode                  0..1
+#   sexCode                     0..1
+#   ethnicityCode               0..1
+#   relatedPerson               0..1
+#   primaryContactProfessional  0..*
+#   matchedPersonRef            0..*
+# ---------------------------------------------------------------------------
+classes:
+
+  Person:
+    class_uri: p:Person
+    tree_root: true
+    description: >-
+      A person recorded as connected to a subject of care. All demographic data
+      is optional; only a Name is mandatory.
+    slots:
+      - identifier
+      - name
+      - dateOfBirth
+      - isDeceased
+      - deceasedDate
+      - address
+      - contact
+      - genderCode
+      - sexCode
+      - ethnicityCode
+      - relatedPerson
+      - primaryContactProfessional
+      - matchedPersonRef
+    slot_usage:
+      identifier:
+        required: false
+        multivalued: true
+        description: Identifiers (multi-valued, optional).
+      name:
+        required: true
+        multivalued: false
+        description: Connected Person must have exactly one Name.
+      contact:
+        required: false
+        multivalued: false
+        description: Connected Person may have at most one Contact.
+      relatedPerson:
+        required: false
+        multivalued: false
+        description: Connected Person may have at most one relatedPerson reference.

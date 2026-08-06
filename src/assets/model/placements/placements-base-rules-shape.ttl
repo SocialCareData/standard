@@ -1,0 +1,54 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix pl:   <https://ns.socialcaredata.io/placements/> .
+@prefix cn:   <https://ns.socialcaredata.io/placements/communication-need#> .
+@prefix cln:  <https://ns.socialcaredata.io/placements/cultural-need#> .
+@prefix st:   <https://ns.socialcaredata.io/placements/support-type#> .
+@prefix olr:  <https://ns.socialcaredata.io/placements/outof-la-reason#> .
+
+#################################################################
+# Conditional "Other ⇒ free-text required" constraints.
+#
+# These mirror the `rules:` blocks in placements-standard-01.yaml. LinkML's
+# gen-shacl does NOT translate `rules:` (or class-level boolean expressions)
+# into SHACL, so these shapes are maintained by hand and loaded ALONGSIDE the
+# generated placements-standard-shape-01.ttl. Keep them in sync with the
+# schema's rules. Each says: it is a violation for the "Other" concept to be
+# selected while the paired free-text property is absent.
+#################################################################
+
+pl:OutOfLAReasonOtherCheckShape a sh:NodeShape ;
+    sh:targetClass pl:PlacementAvailability ;
+    rdfs:label "outOfLAReason 'Other' free-text check" ;
+    sh:message "When outOfLAReason is olr:OutOfLAReasonOther, outOfLAReasonOther (free text) must be provided." ;
+    sh:not [
+        sh:property [ sh:path pl:outOfLAReason ; sh:hasValue olr:OutOfLAReasonOther ] ;
+        sh:property [ sh:path pl:outOfLAReasonOther ; sh:maxCount 0 ]
+    ] .
+
+pl:SpecificCommunicationRequirementOtherCheckShape a sh:NodeShape ;
+    sh:targetClass pl:PlacementRequirements ;
+    rdfs:label "specificCommunicationRequirement 'Other' free-text check" ;
+    sh:message "When specificCommunicationRequirement contains cn:Other, specificCommunicationRequirementOther (free text) must be provided." ;
+    sh:not [
+        sh:property [ sh:path pl:specificCommunicationRequirement ; sh:hasValue cn:Other ] ;
+        sh:property [ sh:path pl:specificCommunicationRequirementOther ; sh:maxCount 0 ]
+    ] .
+
+pl:CulturalNeedsOtherCheckShape a sh:NodeShape ;
+    sh:targetClass pl:PlacementRequirements ;
+    rdfs:label "culturalNeeds 'Other' free-text check" ;
+    sh:message "When culturalNeeds is cln:Other, culturalNeedsOther (free text) must be provided." ;
+    sh:not [
+        sh:property [ sh:path pl:culturalNeeds ; sh:hasValue cln:Other ] ;
+        sh:property [ sh:path pl:culturalNeedsOther ; sh:maxCount 0 ]
+    ] .
+
+pl:AdditionalSupportOtherCheckShape a sh:NodeShape ;
+    sh:targetClass pl:PlacementRequirements ;
+    rdfs:label "additionalSupport 'Other' free-text check" ;
+    sh:message "When additionalSupport contains st:Other, additionalSupportOther (free text) must be provided." ;
+    sh:not [
+        sh:property [ sh:path pl:additionalSupport ; sh:hasValue st:Other ] ;
+        sh:property [ sh:path pl:additionalSupportOther ; sh:maxCount 0 ]
+    ] .

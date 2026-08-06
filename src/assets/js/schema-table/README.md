@@ -9,17 +9,27 @@ tool inspects the second argument and produces one of two tables:
   range is an enum) or an **enum**, a two-column **Code** / **Description** table
   wrapped in a collapsible `<details>`/`<summary>` element.
 
+## Imports
+
+A model's local `imports:` are resolved and merged before rendering, so a table
+can be generated from a schema that inherits its slots, enums and sub-entity
+classes from a shared core. Non-local imports (e.g. `linkml:types`) are ignored;
+the importing schema's own definitions override imported ones of the same name.
+This is what lets the Person profiles (e.g. `person-subject-of-care.yaml`, which
+imports `person-standard.yaml` and redefines only `Person`) render complete
+tables with the profile's cardinalities.
+
 ## Class table
 
 Describes a class's slots, in declared order. Five columns:
 
 | Column | Source (LinkML) |
 | --- | --- |
-| **Field name** | the slot name |
+| **Field name** | the slot's `title` when set, else the slot name (a `title` lets the displayed key differ from the internal slot name — e.g. two `use` slots that map to distinct enums) |
 | **Cardinality** | `min..max` where min = `required ? 1 : 0`, max = `multivalued ? * : 1` |
 | **Data Type** | for a type-ranged slot, a friendly label (`String` / `Date` / `Boolean` / `Integer` / `Decimal`, resolved via the type's `xsd` uri); `Categorical` when the range is an enum; a link to another class when the range is a class |
 | **Description** | the slot's `description` |
-| **Options** | for an enum-ranged slot, a link to the taxonomy section plus up to three example labels — **but** if that section is not present on the page being rendered, every possible value is listed inline (no dangling link) |
+| **Options** | for an enum-ranged slot, a link to the taxonomy section plus a preview of example labels (default 3) — **but** if that section is not present on the page being rendered, every possible value is listed inline (no dangling link) |
 
 The Options column is page-aware: the Jekyll plugin passes the page's headings
 to the generator (`--page-headings`), and a taxonomy is only linked when the
@@ -27,19 +37,45 @@ page actually has a matching section (the enum's `title` + " Taxonomy" →
 e.g. `#communication-need-taxonomy`). From the command line no headings are
 supplied, so every taxonomy is linked.
 
+**How many previews:** the number of example values shown in the Options column
+is configurable (default `3`). Pass an integer, or `all` to show every value
+with no trailing ellipsis:
+
+- CLI: `--options-limit <n|all>` (e.g. `--options-limit 5`, `--options-limit all`).
+- Jekyll tag: an optional third argument, e.g.
+  `{% schema_table page.data_model Person all %}` or
+  `{% schema_table page.data_model Person 5 %}`.
+
+An unlinked Options cell (no matching section on the page) always lists every
+value, regardless of this setting.
+
 ## Vocabulary table
 
-Describes an enum's permissible values, in declared order. Two columns, inside a
-collapsible `<details>` element:
+Describes an enum's permissible values, in declared order. Three columns, inside
+a collapsible `<details>` element:
 
 | Column | Source (LinkML) |
 | --- | --- |
-| **Code** | the permissible value's `title` (falling back to its name) |
-| **Description** | the permissible value's `description`, falling back to its `title` |
+| **Code** | the permissible value's **name** (its key) — the SKOS-style notation used as the value in data, e.g. `1`, `usual`, `MTH` |
+| **Label** | the permissible value's `title` |
+| **Definition** | the permissible value's `description` |
 
-The taxonomy section title/anchor comes from the enum's `title`; the value
-labels shown in the Options column and the vocabulary-table Code column come
-from each permissible value's `title`.
+So the code lives in the schema itself: set each permissible value's key to the
+data code, its `title` to the human label, and (optionally) its `meaning` to the
+concept IRI. The taxonomy section title/anchor comes from the enum's `title`; the
+value labels shown in the Options column come from each permissible value's
+`title`.
+
+**Collapsible wrapper:** by default the table is wrapped in a `<details>` /
+`<summary>` element. To render just the table instead:
+
+- CLI: `--no-collapse` (alias `--expanded`).
+- Jekyll tag: an `expanded` (or `no-collapse`) modifier, e.g.
+  `{% schema_table page.data_model genderCode expanded %}`.
+
+Tag modifiers after `<entity>` are order-independent: mix the options-limit and
+the collapse control freely, e.g.
+`{% schema_table page.data_model genderCode all expanded %}`.
 
 ## Diff table
 
