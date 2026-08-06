@@ -3,7 +3,7 @@
 const { getClass } = require('./linkml')
 const { extractProperties, resolveVocabulary } = require('./model')
 const { cardinality, datatypeLabel } = require('./format')
-const { escapeHtml, COLUMNS, VOCAB_COLUMNS } = require('./table')
+const { escapeHtml, normalizeOptionsLimit, COLUMNS, VOCAB_COLUMNS } = require('./table')
 
 /**
  * Diff two versions of a LinkML model and render the result as a Markdown table
@@ -46,35 +46,38 @@ function dataTypeCellDiff (row) {
  * mirrors the plain table (link + up to three examples when the taxonomy has a
  * section on the page, otherwise the full list inline).
  */
-function optionsCellDiff (row, availableAnchors) {
+function optionsCellDiff (row, availableAnchors, optionsLimit) {
   if (!row.options) return { text: '', html: '' }
   const { title, anchor, labels } = row.options
   const text = `${title}: ${labels.join(', ')}`
   const linked = !availableAnchors || availableAnchors.has(anchor)
   if (linked) {
-    const examples = labels.slice(0, 3).join(', ')
-    const tail = labels.length > 3 ? ' …' : ''
+    const limit = normalizeOptionsLimit(optionsLimit)
+    const shown = labels.slice(0, limit)
+    const examples = shown.join(', ')
+    const tail = labels.length > shown.length ? ' …' : ''
     return { text, html: `<a href="#${anchor}">${escapeHtml(title)}</a>: ${escapeHtml(examples + tail)}` }
   }
   return { text, html: escapeHtml(labels.join(', ')) }
 }
 
 /** The five `{ text, html }` cells of a property row, in {@link COLUMNS} order. */
-function propertyCells (row, availableAnchors) {
+function propertyCells (row, availableAnchors, optionsLimit) {
   const card = cardinality(row.cardinality.min, row.cardinality.max)
   return [
     { text: row.name, html: `<code>${escapeHtml(row.name)}</code>` },
     { text: card, html: escapeHtml(card) },
     dataTypeCellDiff(row),
     { text: (row.description || '').replace(/\s+/g, ' ').trim(), html: escapeHtml(row.description) },
-    optionsCellDiff(row, availableAnchors)
+    optionsCellDiff(row, availableAnchors, optionsLimit)
   ]
 }
 
-/** The two `{ text, html }` cells of a vocabulary row, in {@link VOCAB_COLUMNS} order. */
+/** The three `{ text, html }` cells of a vocabulary row, in {@link VOCAB_COLUMNS} order. */
 function vocabularyCells (concept) {
   return [
     { text: concept.code, html: `<code>${escapeHtml(concept.code)}</code>` },
+    { text: (concept.label || '').replace(/\s+/g, ' ').trim(), html: escapeHtml(concept.label) },
     { text: (concept.description || '').replace(/\s+/g, ' ').trim(), html: escapeHtml(concept.description) }
   ]
 }
@@ -141,7 +144,7 @@ function diffRows (curList, prevList, keyOf, cellsOf) {
  * Diff the property rows of one class between two model versions.
  * @returns {{classStatus:'present'|'added'|'removed', rows:object[]}}
  */
-function diffClassProperties (currentModel, previousModel, className, availableAnchors) {
+function diffClassProperties (currentModel, previousModel, className, availableAnchors, optionsLimit) {
   const inCurrent = !!getClass(currentModel, className)
   const inPrevious = !!getClass(previousModel, className)
   const curRows = inCurrent ? extractProperties(currentModel, className) : []
@@ -150,7 +153,7 @@ function diffClassProperties (currentModel, previousModel, className, availableA
   const rows = diffRows(
     curRows, prevRows,
     r => r.name,
-    r => propertyCells(r, availableAnchors)
+    r => propertyCells(r, availableAnchors, optionsLimit)
   )
   return { classStatus, rows }
 }

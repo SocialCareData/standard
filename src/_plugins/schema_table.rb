@@ -22,6 +22,8 @@
 #   1. path to the LinkML YAML model, relative to the project root
 #   2. a class name, or a controlled-vocabulary property name
 #      (e.g. communicationNeeds) or enum name
+#   3. (optional) how many example values the Options column previews - an
+#      integer, or "all" for every value. Defaults to 3.
 
 require "open3"
 require "shellwords"
@@ -49,13 +51,14 @@ module Jekyll
     end
 
     def render(context)
-      schema_file, entity = parse_args(@markup)
+      schema_file, entity, options_limit = parse_args(@markup)
       unless schema_file && entity
-        return error_note("expected two arguments: <schema-file> <entity>, got #{@markup.inspect}")
+        return error_note("expected two arguments: <schema-file> <entity> [options-limit], got #{@markup.inspect}")
       end
 
-      schema_file = resolve_value(schema_file, context)
-      entity     = resolve_value(entity, context)
+      schema_file   = resolve_value(schema_file, context)
+      entity        = resolve_value(entity, context)
+      options_limit = resolve_value(options_limit, context) if options_limit
 
       # Tell Jekyll's incremental regenerator that this page depends on the
       # model file. Without this, editing the model never re-renders the page
@@ -72,8 +75,8 @@ module Jekyll
       # across rebuilds) regenerates the table when the model changes rather
       # than serving a stale cached copy.
       page_id = (context.registers[:page] && context.registers[:page]["path"]).to_s
-      key = "#{page_id}\t#{schema_file}\t#{entity}\t#{model_mtime(schema_file)}"
-      self.class.cache[key] ||= generate(schema_file, entity, headings)
+      key = "#{page_id}\t#{schema_file}\t#{entity}\t#{options_limit}\t#{model_mtime(schema_file)}"
+      self.class.cache[key] ||= generate(schema_file, entity, headings, options_limit)
     end
 
     private
@@ -128,13 +131,14 @@ module Jekyll
       Jekyll.logger.warn("SchemaTable:", "could not register dependency: #{e.message}")
     end
 
-    # Split "path Entity" into two tokens, tolerating surrounding quotes.
+    # Split "path Entity [options-limit]" into up to three tokens, tolerating
+    # surrounding quotes.
     def parse_args(markup)
       parts = Shellwords.split(markup)
-      [parts[0], parts[1]]
+      [parts[0], parts[1], parts[2]]
     rescue ArgumentError
       parts = markup.split(/\s+/)
-      [parts[0], parts[1]]
+      [parts[0], parts[1], parts[2]]
     end
 
     # The heading texts on the page currently being rendered. The generator
@@ -195,9 +199,10 @@ module Jekyll
       parts.join("\n")
     end
 
-    def generate(schema_file, entity, headings)
-      stdout, stderr, status =
-        Open3.capture3("node", CLI, schema_file, entity, "--page-headings", headings.join("\n"))
+    def generate(schema_file, entity, headings, options_limit = nil)
+      cmd = ["node", CLI, schema_file, entity, "--page-headings", headings.join("\n")]
+      cmd += ["--options-limit", options_limit.to_s] if options_limit && !options_limit.to_s.strip.empty?
+      stdout, stderr, status = Open3.capture3(*cmd)
 
       unless status.success?
         Jekyll.logger.error("SchemaTable:", "#{schema_file} #{entity} -> #{stderr.strip}")

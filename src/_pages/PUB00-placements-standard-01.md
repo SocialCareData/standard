@@ -120,7 +120,7 @@ The referral request: how urgently the child needs to be placed, how many siblin
 {% highlight json %}
 {
   "@type": "PlacementAvailability",
-  "neededBy": "Within 5 days",
+  "neededBy": "< 5 days",
   "siblingCount": 2,
   "isPreferredLocationLocal": false,
   "outOfLAReason": "Court order"

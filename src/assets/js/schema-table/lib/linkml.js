@@ -1,5 +1,7 @@
 'use strict'
 
+const fs = require('fs')
+const path = require('path')
 const yaml = require('js-yaml')
 
 /**
@@ -33,6 +35,66 @@ const BUILTIN_TYPE_XSD = {
 /** Parse LinkML YAML text into a model object. */
 function loadModel (text) {
   return yaml.load(text) || {}
+}
+
+// Dictionary sections of a LinkML schema that are merged across imports, plus
+// `prefixes`. A definition in the importing schema overrides an imported one of
+// the same name.
+const MERGED_DICTS = ['classes', 'slots', 'enums', 'types', 'subsets']
+
+/** Merge `src`'s definitions into `target`; `src` wins on name clashes. */
+function mergeDefs (target, src) {
+  for (const key of MERGED_DICTS) {
+    if (src[key]) target[key] = Object.assign({}, target[key], src[key])
+  }
+  if (src.prefixes) target.prefixes = Object.assign({}, target.prefixes, src.prefixes)
+  // Carry over scalar / meta fields (id, name, default_prefix, default_range …);
+  // src is applied last so the importing schema's values win.
+  for (const k of Object.keys(src)) {
+    if (!MERGED_DICTS.includes(k) && k !== 'prefixes' && k !== 'imports') target[k] = src[k]
+  }
+  return target
+}
+
+/**
+ * Resolve a LinkML `imports:` entry to a local YAML file, or null when it is not
+ * a local file (e.g. `linkml:types`, a CURIE, or an absolute URL). Tries the
+ * entry as-is and with `.yaml` / `.yml` appended, relative to `dir`.
+ */
+function resolveImport (dir, entry) {
+  if (typeof entry !== 'string' || entry.includes(':')) return null
+  for (const ext of ['', '.yaml', '.yml']) {
+    const p = path.resolve(dir, entry + ext)
+    if (fs.existsSync(p) && fs.statSync(p).isFile()) return p
+  }
+  return null
+}
+
+/**
+ * Load a LinkML model from a file, resolving its local `imports:` so the
+ * returned model is self-contained (all imported classes, slots, enums, types
+ * and prefixes merged in). Non-local imports (e.g. `linkml:types`) are ignored.
+ * The importing schema's own definitions override imported ones — which is what
+ * lets a profile schema (e.g. person-subject-of-care.yaml) redefine `Person`
+ * while inheriting the shared sub-entities and vocabularies from its core.
+ *
+ * @param {string} absPath  Absolute path to the LinkML YAML file.
+ * @param {Set<string>} [visited]  Guards against import cycles.
+ */
+function loadModelFile (absPath, visited = new Set()) {
+  const abs = path.resolve(absPath)
+  if (visited.has(abs)) return {}
+  visited.add(abs)
+
+  const base = loadModel(fs.readFileSync(abs, 'utf8'))
+  const dir = path.dirname(abs)
+  const merged = {}
+  for (const entry of Array.isArray(base.imports) ? base.imports : []) {
+    const impAbs = resolveImport(dir, entry)
+    if (impAbs) mergeDefs(merged, loadModelFile(impAbs, visited))
+  }
+  // The importing schema is applied last so its definitions win.
+  return mergeDefs(merged, base)
 }
 
 /** Expand a CURIE (`xsd:nonNegativeInteger`) to a full IRI via model.prefixes. */
@@ -121,6 +183,7 @@ function enumTitle (model, enumName) {
 
 module.exports = {
   loadModel,
+  loadModelFile,
   expandCurie,
   getClass,
   getEnum,

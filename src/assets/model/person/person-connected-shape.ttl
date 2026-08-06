@@ -9,6 +9,14 @@ p:AddressShape a sh:NodeShape ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
+            sh:description "UK postcode in standard format (e.g. AB1 2CD)." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path p:postcode ;
+            sh:pattern "^[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}$" ],
+        [ sh:datatype xsd:string ;
             sh:description "Street address (e.g. \"1 High Street\") or care-of line." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
@@ -22,9 +30,22 @@ p:AddressShape a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 2 ;
             sh:path p:city ],
+        [ sh:datatype xsd:string ;
+            sh:description "Apartment, suite, unit, building, floor, etc." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path p:line2 ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique Property Reference Number of the address." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path p:UPRN ],
         [ sh:description "How this address is used - home, work, temp, etc." ;
             sh:in ( <https://ns.socialcaredata.io/person/address-use-code#Home> <https://ns.socialcaredata.io/person/address-use-code#Work> <https://ns.socialcaredata.io/person/address-use-code#Temp> <https://ns.socialcaredata.io/person/address-use-code#Old> <https://ns.socialcaredata.io/person/address-use-code#Billing> ) ;
             sh:maxCount 1 ;
+            sh:name "use" ;
             sh:order 6 ;
             sh:path p:use ],
         [ sh:datatype xsd:string ;
@@ -32,27 +53,7 @@ p:AddressShape a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 5 ;
-            sh:path p:USRN ],
-        [ sh:datatype xsd:string ;
-            sh:description "Unique Property Reference Number of the address." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path p:UPRN ],
-        [ sh:datatype xsd:string ;
-            sh:description "UK postcode in standard format (e.g. AB1 2CD)." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path p:postcode ;
-            sh:pattern "^[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}$" ],
-        [ sh:datatype xsd:string ;
-            sh:description "Apartment, suite, unit, building, floor, etc." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path p:line2 ] ;
+            sh:path p:USRN ] ;
     sh:targetClass p:Address .
 
 p:ContactShape a sh:NodeShape ;
@@ -60,21 +61,22 @@ p:ContactShape a sh:NodeShape ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "One or more telephone numbers." ;
+            sh:description "One or more email addresses." ;
             sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path p:telephone ],
+            sh:order 1 ;
+            sh:path p:email ],
         [ sh:datatype xsd:string ;
             sh:description "Name of the contact type (for example, \"Home\", \"Work\", \"Other\")." ;
             sh:maxCount 1 ;
+            sh:name "name" ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
             sh:path p:contactName ],
         [ sh:datatype xsd:string ;
-            sh:description "One or more email addresses." ;
+            sh:description "One or more telephone numbers." ;
             sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path p:email ] ;
+            sh:order 2 ;
+            sh:path p:telephone ] ;
     sh:targetClass p:Contact .
 
 p:IdentifierShape a sh:NodeShape ;
@@ -100,29 +102,30 @@ p:NameShape a sh:NodeShape ;
     rdfs:comment "Container for a person's name parts, aligned with FHIR HumanName. A person may have multiple names with different uses." ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "The purpose of this name instance - usual, official, former, etc." ;
-            sh:in ( <https://ns.socialcaredata.io/person/name-use-code#Usual> <https://ns.socialcaredata.io/person/name-use-code#Official> <https://ns.socialcaredata.io/person/name-use-code#Temp> <https://ns.socialcaredata.io/person/name-use-code#Nickname> <https://ns.socialcaredata.io/person/name-use-code#Anonymous> <https://ns.socialcaredata.io/person/name-use-code#Old> <https://ns.socialcaredata.io/person/name-use-code#Maiden> ) ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path p:use ],
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "The first name and any middle names." ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path p:givenName ],
         [ sh:datatype xsd:string ;
             sh:description "The surname or family name. Multi-valued to support compound or hyphenated family names recorded as separate parts." ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
             sh:path p:familyName ],
+        [ sh:description "The purpose of this name instance - usual, official, former, etc." ;
+            sh:in ( <https://ns.socialcaredata.io/person/name-use-code#Usual> <https://ns.socialcaredata.io/person/name-use-code#Official> <https://ns.socialcaredata.io/person/name-use-code#Temp> <https://ns.socialcaredata.io/person/name-use-code#Nickname> <https://ns.socialcaredata.io/person/name-use-code#Anonymous> <https://ns.socialcaredata.io/person/name-use-code#Old> <https://ns.socialcaredata.io/person/name-use-code#Maiden> ) ;
+            sh:maxCount 1 ;
+            sh:name "use" ;
+            sh:order 3 ;
+            sh:path p:use ],
         [ sh:datatype xsd:string ;
             sh:description "Any preferred given or middle name used by the person - for example, \"Joe\" where their legal first name is \"Joseph\"." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 2 ;
-            sh:path p:preferredName ],
-        [ sh:datatype xsd:string ;
-            sh:description "The first name and any middle names." ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path p:givenName ] ;
+            sh:path p:preferredName ] ;
     sh:targetClass p:Name .
 
 p:PartialDateShape a sh:NodeShape ;
@@ -149,41 +152,25 @@ p:PersonRelationshipShape a sh:NodeShape ;
     rdfs:comment "A typed reference from one person to another. The reference is by Identifier (so the related person may live in a different system) and is qualified by one or more relationship codes." ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class p:Identifier ;
+    sh:property [ sh:description "One or more codes describing the kind of relationship." ;
+            sh:in ( <https://ns.socialcaredata.io/person/person-relationship-code#FAMMEMB> <https://ns.socialcaredata.io/person/person-relationship-code#CHILD> <https://ns.socialcaredata.io/person/person-relationship-code#NCHILD> <https://ns.socialcaredata.io/person/person-relationship-code#CHLDADOPT> <https://ns.socialcaredata.io/person/person-relationship-code#DAUADOPT> <https://ns.socialcaredata.io/person/person-relationship-code#SONADOPT> <https://ns.socialcaredata.io/person/person-relationship-code#CHLDFOST> <https://ns.socialcaredata.io/person/person-relationship-code#DAUFOST> <https://ns.socialcaredata.io/person/person-relationship-code#SONFOST> <https://ns.socialcaredata.io/person/person-relationship-code#DAUC> <https://ns.socialcaredata.io/person/person-relationship-code#DAU> <https://ns.socialcaredata.io/person/person-relationship-code#STPDAU> <https://ns.socialcaredata.io/person/person-relationship-code#SON> <https://ns.socialcaredata.io/person/person-relationship-code#SONC> <https://ns.socialcaredata.io/person/person-relationship-code#STPSON> <https://ns.socialcaredata.io/person/person-relationship-code#STPCHLD> <https://ns.socialcaredata.io/person/person-relationship-code#EXT> <https://ns.socialcaredata.io/person/person-relationship-code#AUNT> <https://ns.socialcaredata.io/person/person-relationship-code#MAUNT> <https://ns.socialcaredata.io/person/person-relationship-code#PAUNT> <https://ns.socialcaredata.io/person/person-relationship-code#UNCLE> <https://ns.socialcaredata.io/person/person-relationship-code#MUNCLE> <https://ns.socialcaredata.io/person/person-relationship-code#PUNCLE> <https://ns.socialcaredata.io/person/person-relationship-code#COUSN> <https://ns.socialcaredata.io/person/person-relationship-code#MCOUSN> <https://ns.socialcaredata.io/person/person-relationship-code#PCOUSN> <https://ns.socialcaredata.io/person/person-relationship-code#NIENEPH> <https://ns.socialcaredata.io/person/person-relationship-code#NEPHEW> <https://ns.socialcaredata.io/person/person-relationship-code#NIECE> <https://ns.socialcaredata.io/person/person-relationship-code#GGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#GGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#PGGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#GGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#PGGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#PGGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#GRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#GRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#PGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#GRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#PGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#PGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#GRNDCHILD> <https://ns.socialcaredata.io/person/person-relationship-code#GRNDDAU> <https://ns.socialcaredata.io/person/person-relationship-code#GRNDSON> <https://ns.socialcaredata.io/person/person-relationship-code#INLAW> <https://ns.socialcaredata.io/person/person-relationship-code#CHLDINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#DAUINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#SONINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#PRNINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#FTHINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#MTHINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#SIBINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#BROINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#SISINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#PRN> <https://ns.socialcaredata.io/person/person-relationship-code#NPRN> <https://ns.socialcaredata.io/person/person-relationship-code#ADOPTP> <https://ns.socialcaredata.io/person/person-relationship-code#ADOPTF> <https://ns.socialcaredata.io/person/person-relationship-code#ADOPTM> <https://ns.socialcaredata.io/person/person-relationship-code#PRNFOST> <https://ns.socialcaredata.io/person/person-relationship-code#STPPRN> <https://ns.socialcaredata.io/person/person-relationship-code#FTH> <https://ns.socialcaredata.io/person/person-relationship-code#NFTH> <https://ns.socialcaredata.io/person/person-relationship-code#FTHFOST> <https://ns.socialcaredata.io/person/person-relationship-code#STPFTH> <https://ns.socialcaredata.io/person/person-relationship-code#MTH> <https://ns.socialcaredata.io/person/person-relationship-code#NMTH> <https://ns.socialcaredata.io/person/person-relationship-code#GESTM> <https://ns.socialcaredata.io/person/person-relationship-code#MTHFOST> <https://ns.socialcaredata.io/person/person-relationship-code#STPMTH> <https://ns.socialcaredata.io/person/person-relationship-code#SIB> <https://ns.socialcaredata.io/person/person-relationship-code#NSIB> <https://ns.socialcaredata.io/person/person-relationship-code#HSIB> <https://ns.socialcaredata.io/person/person-relationship-code#STPSIB> <https://ns.socialcaredata.io/person/person-relationship-code#BRO> <https://ns.socialcaredata.io/person/person-relationship-code#NBRO> <https://ns.socialcaredata.io/person/person-relationship-code#HBRO> <https://ns.socialcaredata.io/person/person-relationship-code#STPBRO> <https://ns.socialcaredata.io/person/person-relationship-code#SIS> <https://ns.socialcaredata.io/person/person-relationship-code#NSIS> <https://ns.socialcaredata.io/person/person-relationship-code#HSIS> <https://ns.socialcaredata.io/person/person-relationship-code#STPSIS> <https://ns.socialcaredata.io/person/person-relationship-code#TWIN> <https://ns.socialcaredata.io/person/person-relationship-code#TWINBRO> <https://ns.socialcaredata.io/person/person-relationship-code#TWINSIS> <https://ns.socialcaredata.io/person/person-relationship-code#ITWIN> <https://ns.socialcaredata.io/person/person-relationship-code#ITWINBRO> <https://ns.socialcaredata.io/person/person-relationship-code#ITWINSIS> <https://ns.socialcaredata.io/person/person-relationship-code#FTWIN> <https://ns.socialcaredata.io/person/person-relationship-code#FTWINBRO> <https://ns.socialcaredata.io/person/person-relationship-code#FTWINSIS> <https://ns.socialcaredata.io/person/person-relationship-code#SPS> <https://ns.socialcaredata.io/person/person-relationship-code#HUSB> <https://ns.socialcaredata.io/person/person-relationship-code#WIFE> <https://ns.socialcaredata.io/person/person-relationship-code#FMRSPS> <https://ns.socialcaredata.io/person/person-relationship-code#DOMPART> <https://ns.socialcaredata.io/person/person-relationship-code#SIGOTHR> <https://ns.socialcaredata.io/person/person-relationship-code#FRND> <https://ns.socialcaredata.io/person/person-relationship-code#NBOR> <https://ns.socialcaredata.io/person/person-relationship-code#ROOM> <https://ns.socialcaredata.io/person/person-relationship-code#ONESELF> ) ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path p:relationship ],
+        [ sh:class p:Identifier ;
             sh:description "Reference to the related person's Identifier (system + value)." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 0 ;
-            sh:path p:identifier ],
-        [ sh:description "One or more codes describing the kind of relationship." ;
-            sh:in ( <https://ns.socialcaredata.io/person/person-relationship-code#FAMMEMB> <https://ns.socialcaredata.io/person/person-relationship-code#CHILD> <https://ns.socialcaredata.io/person/person-relationship-code#NCHILD> <https://ns.socialcaredata.io/person/person-relationship-code#CHLDADOPT> <https://ns.socialcaredata.io/person/person-relationship-code#DAUADOPT> <https://ns.socialcaredata.io/person/person-relationship-code#SONADOPT> <https://ns.socialcaredata.io/person/person-relationship-code#CHLDFOST> <https://ns.socialcaredata.io/person/person-relationship-code#DAUFOST> <https://ns.socialcaredata.io/person/person-relationship-code#SONFOST> <https://ns.socialcaredata.io/person/person-relationship-code#DAUC> <https://ns.socialcaredata.io/person/person-relationship-code#DAU> <https://ns.socialcaredata.io/person/person-relationship-code#STPDAU> <https://ns.socialcaredata.io/person/person-relationship-code#SON> <https://ns.socialcaredata.io/person/person-relationship-code#SONC> <https://ns.socialcaredata.io/person/person-relationship-code#STPSON> <https://ns.socialcaredata.io/person/person-relationship-code#STPCHLD> <https://ns.socialcaredata.io/person/person-relationship-code#EXT> <https://ns.socialcaredata.io/person/person-relationship-code#AUNT> <https://ns.socialcaredata.io/person/person-relationship-code#MAUNT> <https://ns.socialcaredata.io/person/person-relationship-code#PAUNT> <https://ns.socialcaredata.io/person/person-relationship-code#UNCLE> <https://ns.socialcaredata.io/person/person-relationship-code#MUNCLE> <https://ns.socialcaredata.io/person/person-relationship-code#PUNCLE> <https://ns.socialcaredata.io/person/person-relationship-code#COUSN> <https://ns.socialcaredata.io/person/person-relationship-code#MCOUSN> <https://ns.socialcaredata.io/person/person-relationship-code#PCOUSN> <https://ns.socialcaredata.io/person/person-relationship-code#NIENEPH> <https://ns.socialcaredata.io/person/person-relationship-code#NEPHEW> <https://ns.socialcaredata.io/person/person-relationship-code#NIECE> <https://ns.socialcaredata.io/person/person-relationship-code#GGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#GGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#PGGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#GGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#PGGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#PGGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#GRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#GRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#PGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#GRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#PGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#PGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#GRNDCHILD> <https://ns.socialcaredata.io/person/person-relationship-code#GRNDDAU> <https://ns.socialcaredata.io/person/person-relationship-code#GRNDSON> <https://ns.socialcaredata.io/person/person-relationship-code#INLAW> <https://ns.socialcaredata.io/person/person-relationship-code#CHLDINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#DAUINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#SONINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#PRNINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#FTHINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#MTHINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#SIBINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#BROINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#SISINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#PRN> <https://ns.socialcaredata.io/person/person-relationship-code#NPRN> <https://ns.socialcaredata.io/person/person-relationship-code#ADOPTP> <https://ns.socialcaredata.io/person/person-relationship-code#ADOPTF> <https://ns.socialcaredata.io/person/person-relationship-code#ADOPTM> <https://ns.socialcaredata.io/person/person-relationship-code#PRNFOST> <https://ns.socialcaredata.io/person/person-relationship-code#STPPRN> <https://ns.socialcaredata.io/person/person-relationship-code#FTH> <https://ns.socialcaredata.io/person/person-relationship-code#NFTH> <https://ns.socialcaredata.io/person/person-relationship-code#FTHFOST> <https://ns.socialcaredata.io/person/person-relationship-code#STPFTH> <https://ns.socialcaredata.io/person/person-relationship-code#MTH> <https://ns.socialcaredata.io/person/person-relationship-code#NMTH> <https://ns.socialcaredata.io/person/person-relationship-code#GESTM> <https://ns.socialcaredata.io/person/person-relationship-code#MTHFOST> <https://ns.socialcaredata.io/person/person-relationship-code#STPMTH> <https://ns.socialcaredata.io/person/person-relationship-code#SIB> <https://ns.socialcaredata.io/person/person-relationship-code#NSIB> <https://ns.socialcaredata.io/person/person-relationship-code#HSIB> <https://ns.socialcaredata.io/person/person-relationship-code#STPSIB> <https://ns.socialcaredata.io/person/person-relationship-code#BRO> <https://ns.socialcaredata.io/person/person-relationship-code#NBRO> <https://ns.socialcaredata.io/person/person-relationship-code#HBRO> <https://ns.socialcaredata.io/person/person-relationship-code#STPBRO> <https://ns.socialcaredata.io/person/person-relationship-code#SIS> <https://ns.socialcaredata.io/person/person-relationship-code#NSIS> <https://ns.socialcaredata.io/person/person-relationship-code#HSIS> <https://ns.socialcaredata.io/person/person-relationship-code#STPSIS> <https://ns.socialcaredata.io/person/person-relationship-code#TWIN> <https://ns.socialcaredata.io/person/person-relationship-code#TWINBRO> <https://ns.socialcaredata.io/person/person-relationship-code#TWINSIS> <https://ns.socialcaredata.io/person/person-relationship-code#ITWIN> <https://ns.socialcaredata.io/person/person-relationship-code#ITWINBRO> <https://ns.socialcaredata.io/person/person-relationship-code#ITWINSIS> <https://ns.socialcaredata.io/person/person-relationship-code#FTWIN> <https://ns.socialcaredata.io/person/person-relationship-code#FTWINBRO> <https://ns.socialcaredata.io/person/person-relationship-code#FTWINSIS> <https://ns.socialcaredata.io/person/person-relationship-code#SPS> <https://ns.socialcaredata.io/person/person-relationship-code#HUSB> <https://ns.socialcaredata.io/person/person-relationship-code#WIFE> <https://ns.socialcaredata.io/person/person-relationship-code#FMRSPS> <https://ns.socialcaredata.io/person/person-relationship-code#DOMPART> <https://ns.socialcaredata.io/person/person-relationship-code#SIGOTHR> <https://ns.socialcaredata.io/person/person-relationship-code#FRND> <https://ns.socialcaredata.io/person/person-relationship-code#NBOR> <https://ns.socialcaredata.io/person/person-relationship-code#ROOM> <https://ns.socialcaredata.io/person/person-relationship-code#ONESELF> ) ;
-            sh:minCount 1 ;
-            sh:order 1 ;
-            sh:path p:relationship ] ;
+            sh:path p:identifier ] ;
     sh:targetClass p:PersonRelationship .
 
 p:PersonShape a sh:NodeShape ;
     rdfs:comment "A person recorded as connected to a subject of care. All demographic data is optional; only a Name is mandatory." ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class p:PartialDate ;
-            sh:description "The person's date of death, with an optional accuracy indicator. isDeceased may be true without a known date." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 4 ;
-            sh:path p:deceasedDate ],
-        [ sh:class p:Identifier ;
-            sh:description "References to other Person records where a cross-system match has been identified. Uses the Identifier structure." ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 12 ;
-            sh:path p:matchedPersonRef ],
-        [ sh:description "The person's stated gender." ;
-            sh:in ( <https://ns.socialcaredata.io/person/gender-code#Male> <https://ns.socialcaredata.io/person/gender-code#Female> <https://ns.socialcaredata.io/person/gender-code#Indeterminate> <https://ns.socialcaredata.io/person/gender-code#NotKnown> ) ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path p:genderCode ],
-        [ sh:description "The person's stated ethnicity, using the ONS 18+1 categories from the 2021 census. Statutorily required in adult social care; optional elsewhere." ;
+    sh:property [ sh:description "The person's stated ethnicity, using the ONS 18+1 categories from the 2021 census. Statutorily required in adult social care; optional elsewhere." ;
             sh:in ( <https://ns.socialcaredata.io/person/ethnicity-code#AsianBangladeshi> <https://ns.socialcaredata.io/person/ethnicity-code#AsianChinese> <https://ns.socialcaredata.io/person/ethnicity-code#AsianIndian> <https://ns.socialcaredata.io/person/ethnicity-code#AsianPakistani> <https://ns.socialcaredata.io/person/ethnicity-code#AsianOther> <https://ns.socialcaredata.io/person/ethnicity-code#BlackAfrican> <https://ns.socialcaredata.io/person/ethnicity-code#BlackCaribbean> <https://ns.socialcaredata.io/person/ethnicity-code#BlackOther> <https://ns.socialcaredata.io/person/ethnicity-code#MixedWhiteAsian> <https://ns.socialcaredata.io/person/ethnicity-code#MixedWhiteBlackAfrican> <https://ns.socialcaredata.io/person/ethnicity-code#MixedWhiteBlackCaribbean> <https://ns.socialcaredata.io/person/ethnicity-code#MixedOther> <https://ns.socialcaredata.io/person/ethnicity-code#WhiteBritish> <https://ns.socialcaredata.io/person/ethnicity-code#WhiteIrish> <https://ns.socialcaredata.io/person/ethnicity-code#WhiteGypsyOrIrishTraveller> <https://ns.socialcaredata.io/person/ethnicity-code#WhiteRoma> <https://ns.socialcaredata.io/person/ethnicity-code#WhiteOther> <https://ns.socialcaredata.io/person/ethnicity-code#OtherArab> <https://ns.socialcaredata.io/person/ethnicity-code#OtherAny> <https://ns.socialcaredata.io/person/ethnicity-code#DoesNotApply> ) ;
             sh:maxCount 1 ;
             sh:order 9 ;
@@ -194,11 +181,6 @@ p:PersonShape a sh:NodeShape ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 2 ;
             sh:path p:dateOfBirth ],
-        [ sh:class p:Identifier ;
-            sh:description "Identifiers (multi-valued, optional)." ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 0 ;
-            sh:path p:identifier ],
         [ sh:class p:Name ;
             sh:description "Connected Person must have exactly one Name." ;
             sh:maxCount 1 ;
@@ -206,39 +188,60 @@ p:PersonShape a sh:NodeShape ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 1 ;
             sh:path p:name ],
-        [ sh:description "Observed phenotypic sex, where recorded." ;
-            sh:in ( <https://ns.socialcaredata.io/person/phenotypic-sex-code#Male> <https://ns.socialcaredata.io/person/phenotypic-sex-code#Female> <https://ns.socialcaredata.io/person/phenotypic-sex-code#Indeterminate> <https://ns.socialcaredata.io/person/phenotypic-sex-code#NotKnown> ) ;
-            sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path p:sexCode ],
         [ sh:class p:Address ;
             sh:description "Physical addresses where the person can be contacted." ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 5 ;
             sh:path p:address ],
+        [ sh:description "The person's stated gender." ;
+            sh:in ( <https://ns.socialcaredata.io/person/gender-code#Male> <https://ns.socialcaredata.io/person/gender-code#Female> <https://ns.socialcaredata.io/person/gender-code#Indeterminate> <https://ns.socialcaredata.io/person/gender-code#NotKnown> ) ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path p:genderCode ],
+        [ sh:class p:Contact ;
+            sh:description "Connected Person may have at most one Contact." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path p:contact ],
+        [ sh:description "Observed phenotypic sex, where recorded." ;
+            sh:in ( <https://ns.socialcaredata.io/person/phenotypic-sex-code#Male> <https://ns.socialcaredata.io/person/phenotypic-sex-code#Female> <https://ns.socialcaredata.io/person/phenotypic-sex-code#Indeterminate> <https://ns.socialcaredata.io/person/phenotypic-sex-code#NotKnown> ) ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path p:sexCode ],
         [ sh:class p:Identifier ;
             sh:description "References to the primary professionals related to this person (e.g. care coordinators or a GP). Until the Professional standard is published, recorded using the Identifier structure (system + value)." ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 11 ;
             sh:path p:primaryContactProfessional ],
-        [ sh:datatype xsd:boolean ;
-            sh:description "Whether the person is deceased." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path p:isDeceased ],
         [ sh:class p:PersonRelationship ;
             sh:description "Connected Person may have at most one relatedPerson reference." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 10 ;
             sh:path p:relatedPerson ],
-        [ sh:class p:Contact ;
-            sh:description "Connected Person may have at most one Contact." ;
+        [ sh:class p:PartialDate ;
+            sh:description "The person's date of death, with an optional accuracy indicator. isDeceased may be true without a known date." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 6 ;
-            sh:path p:contact ] ;
+            sh:order 4 ;
+            sh:path p:deceasedDate ],
+        [ sh:class p:Identifier ;
+            sh:description "References to other Person records where a cross-system match has been identified. Uses the Identifier structure." ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 12 ;
+            sh:path p:matchedPersonRef ],
+        [ sh:class p:Identifier ;
+            sh:description "Identifiers (multi-valued, optional)." ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path p:identifier ],
+        [ sh:datatype xsd:boolean ;
+            sh:description "Whether the person is deceased." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path p:isDeceased ] ;
     sh:targetClass p:Person .
 
 

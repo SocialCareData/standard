@@ -3,7 +3,7 @@
 const { datatypeLabel, cardinality } = require('./format')
 
 const COLUMNS = ['Field name', 'Cardinality', 'Data Type', 'Description', 'Options']
-const VOCAB_COLUMNS = ['Code', 'Description']
+const VOCAB_COLUMNS = ['Code', 'Label', 'Definition']
 
 /** Make a value safe to place inside a Markdown table cell. */
 function escapeCell (text) {
@@ -43,35 +43,51 @@ function dataTypeCell (row) {
   return ''
 }
 
+// Default number of example values previewed in the Options column.
+const DEFAULT_OPTIONS_LIMIT = 3
+
+/**
+ * Normalise an options-preview limit to a positive integer or Infinity.
+ * Accepts a number, a numeric string, or the string `'all'` (→ Infinity).
+ * Anything invalid falls back to {@link DEFAULT_OPTIONS_LIMIT}.
+ */
+function normalizeOptionsLimit (limit) {
+  if (limit === 'all' || limit === Infinity) return Infinity
+  const n = typeof limit === 'number' ? limit : parseInt(String(limit), 10)
+  return Number.isInteger(n) && n > 0 ? n : DEFAULT_OPTIONS_LIMIT
+}
+
 /**
  * The "Options" cell for a controlled vocabulary. When the taxonomy has its own
  * section on the page (its anchor is in `availableAnchors`) the cell links to
- * that section and previews up to three example labels — otherwise there is
+ * that section and previews up to `optionsLimit` example labels (default 3;
+ * `'all'`/`Infinity` shows every value with no ellipsis) — otherwise there is
  * nothing to link to, so it lists every possible value instead.
  *
  * `availableAnchors` of `null`/`undefined` means "page context unknown" (e.g.
  * the CLI), in which case the link is always emitted.
  */
-function optionsCell (row, availableAnchors) {
+function optionsCell (row, availableAnchors, optionsLimit = DEFAULT_OPTIONS_LIMIT) {
   if (!row.options) return ''
   const { title, anchor, labels } = row.options
   const linked = !availableAnchors || availableAnchors.has(anchor)
   if (linked) {
-    const examples = labels.slice(0, 3)
-    const tail = labels.length > 3 ? ' …' : ''
+    const limit = normalizeOptionsLimit(optionsLimit)
+    const examples = labels.slice(0, limit)
+    const tail = labels.length > examples.length ? ' …' : ''
     return `[${title}](#${anchor}): ${examples.join(', ')}${tail}`
   }
   return labels.join(', ')
 }
 
 /** Convert a semantic property row into escaped display cells. */
-function toViewRow (row, availableAnchors) {
+function toViewRow (row, availableAnchors, optionsLimit) {
   return [
-    `\`${escapeCell(row.name)}\``,
+    `\`${escapeCell(row.label || row.name)}\``,
     escapeCell(cardinality(row.cardinality.min, row.cardinality.max)),
     escapeCell(dataTypeCell(row)),
     escapeCell(row.description),
-    escapeCell(optionsCell(row, availableAnchors))
+    escapeCell(optionsCell(row, availableAnchors, optionsLimit))
   ]
 }
 
@@ -91,9 +107,11 @@ function renderMarkdown (viewRows) {
  * @param {Set<string>} [availableAnchors] Section anchors present on the target
  *   page; controls whether the Options column links to a taxonomy section or
  *   lists its values inline. See {@link optionsCell}.
+ * @param {number|string} [optionsLimit] How many example values the Options
+ *   column previews (default 3; `'all'` shows every value). See {@link optionsCell}.
  */
-function renderTable (rows, availableAnchors) {
-  return renderMarkdown(rows.map(row => toViewRow(row, availableAnchors)))
+function renderTable (rows, availableAnchors, optionsLimit) {
+  return renderMarkdown(rows.map(row => toViewRow(row, availableAnchors, optionsLimit)))
 }
 
 /**
@@ -107,8 +125,8 @@ function renderTable (rows, availableAnchors) {
 function renderVocabularyTable (concepts) {
   const body = [
     `| ${VOCAB_COLUMNS.join(' | ')} |`,
-    '| :--- | :--- |',
-    ...concepts.map(c => `| \`${escapeCell(c.code)}\` | ${escapeCell(c.description)} |`)
+    '| :--- | :--- | :--- |',
+    ...concepts.map(c => `| \`${escapeCell(c.code)}\` | ${escapeCell(c.label)} | ${escapeCell(c.description)} |`)
   ].join('\n')
 
   return [
@@ -129,6 +147,8 @@ module.exports = {
   toViewRow,
   dataTypeCell,
   optionsCell,
+  normalizeOptionsLimit,
+  DEFAULT_OPTIONS_LIMIT,
   escapeCell,
   escapeHtml,
   COLUMNS,

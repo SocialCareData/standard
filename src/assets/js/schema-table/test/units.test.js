@@ -4,7 +4,7 @@ const { test } = require('node:test')
 const assert = require('node:assert/strict')
 
 const { slugify, cardinality, datatypeLabel, localName, XSD } = require('../lib/format')
-const { renderMarkdown, renderVocabularyTable, dataTypeCell, optionsCell, escapeCell } = require('../lib/table')
+const { renderMarkdown, renderVocabularyTable, dataTypeCell, optionsCell, normalizeOptionsLimit, escapeCell } = require('../lib/table')
 
 test('slugify matches kramdown auto_id output', () => {
   assert.equal(slugify('Out of LA Reason Taxonomy'), 'out-of-la-reason-taxonomy')
@@ -82,19 +82,53 @@ test('optionsCell is empty for a non-vocabulary property', () => {
   assert.equal(optionsCell({ datatype: 'x' }, new Set()), '')
 })
 
-test('renderVocabularyTable wraps a Code/Description table in a details element', () => {
+test('optionsCell previews a configurable number of values', () => {
+  const anchors = new Set(['urgency-taxonomy'])
+  // integer limit
+  assert.equal(
+    optionsCell({ options: OPTIONS }, anchors, 2),
+    '[Urgency Taxonomy](#urgency-taxonomy): Today, Soon …'
+  )
+  // limit >= value count drops the ellipsis
+  assert.equal(
+    optionsCell({ options: OPTIONS }, anchors, 4),
+    '[Urgency Taxonomy](#urgency-taxonomy): Today, Soon, Later, Never'
+  )
+  // "all" shows every value, no ellipsis
+  assert.equal(
+    optionsCell({ options: OPTIONS }, anchors, 'all'),
+    '[Urgency Taxonomy](#urgency-taxonomy): Today, Soon, Later, Never'
+  )
+  // numeric string is accepted
+  assert.equal(
+    optionsCell({ options: OPTIONS }, anchors, '1'),
+    '[Urgency Taxonomy](#urgency-taxonomy): Today …'
+  )
+})
+
+test('normalizeOptionsLimit coerces sensibly (default 3)', () => {
+  assert.equal(normalizeOptionsLimit(undefined), 3)
+  assert.equal(normalizeOptionsLimit('foo'), 3)
+  assert.equal(normalizeOptionsLimit(0), 3)
+  assert.equal(normalizeOptionsLimit(-2), 3)
+  assert.equal(normalizeOptionsLimit('5'), 5)
+  assert.equal(normalizeOptionsLimit(5), 5)
+  assert.equal(normalizeOptionsLimit('all'), Infinity)
+})
+
+test('renderVocabularyTable wraps a Code/Label/Definition table in a details element', () => {
   const md = renderVocabularyTable([
-    { code: 'today', description: 'Needed | today.' }, // pipe gets escaped
-    { code: 'soon', description: 'Soon' }
+    { code: 'today', label: 'Today', description: 'Needed | today.' }, // pipe gets escaped
+    { code: 'soon', label: 'Soon', description: 'Soon' }
   ])
   assert.equal(md, [
     '<details>',
     '<summary markdown="span">See vocabulary</summary>',
     '',
-    '| Code | Description |',
-    '| :--- | :--- |',
-    '| `today` | Needed \\| today. |',
-    '| `soon` | Soon |',
+    '| Code | Label | Definition |',
+    '| :--- | :--- | :--- |',
+    '| `today` | Today | Needed \\| today. |',
+    '| `soon` | Soon | Soon |',
     '{: .table-bordered}',
     '',
     '</details>'

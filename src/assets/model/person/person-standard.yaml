@@ -271,6 +271,7 @@ slots:
       where their legal first name is "Joseph".
   nameUse:
     slot_uri: p:use
+    title: use
     range: NameUseCode
     required: false
     multivalued: false
@@ -316,6 +317,7 @@ slots:
     description: Unique Street Reference Number of the address.
   addressUse:
     slot_uri: p:use
+    title: use
     range: AddressUseCode
     required: false
     multivalued: false
@@ -324,6 +326,7 @@ slots:
   # --- Contact ---
   contactName:
     slot_uri: p:contactName
+    title: name
     range: string
     required: false
     multivalued: false
@@ -378,31 +381,31 @@ enums:
       The intended purpose of a person's name. Aligned with the FHIR name-use
       value set.
     permissible_values:
-      Usual:
+      usual:
         title: Usual name
         meaning: nuc:Usual
         description: The name commonly used by the person - what they normally go by.
-      Official:
+      official:
         title: Official name
         meaning: nuc:Official
         description: The formal name registered in a government register.
-      Temp:
+      temp:
         title: Temporary name
         meaning: nuc:Temp
         description: A temporary name; assigned at birth, in emergencies, or where the full name is not yet known.
-      Nickname:
+      nickname:
         title: Nickname
         meaning: nuc:Nickname
         description: An informal name not part of the person's formal or usual name.
-      Anonymous:
+      anonymous:
         title: Anonymous
         meaning: nuc:Anonymous
         description: A pseudonym used to protect the person's privacy.
-      Old:
+      old:
         title: Old name
         meaning: nuc:Old
         description: A name no longer in use, retained for record-matching purposes.
-      Maiden:
+      maiden:
         title: Maiden name
         meaning: nuc:Maiden
         description: A name used prior to marriage. Applies regardless of gender.
@@ -413,23 +416,23 @@ enums:
     description: >-
       How an address is used. Aligned with the FHIR address-use value set.
     permissible_values:
-      Home:
+      home:
         title: Home
         meaning: auc:Home
         description: A communication address at a home.
-      Work:
+      work:
         title: Work
         meaning: auc:Work
         description: An office address. First choice for business-related contacts during business hours.
-      Temp:
+      temp:
         title: Temporary
         meaning: auc:Temp
         description: A temporary address.
-      Old:
+      old:
         title: Old / Incorrect
         meaning: auc:Old
         description: This address is no longer in use (or was never correct but retained for records).
-      Billing:
+      billing:
         title: Billing
         meaning: auc:Billing
         description: An address to be used to send bills, invoices, receipts etc.
@@ -441,19 +444,19 @@ enums:
       A person's stated gender identity, as distinct from biological sex. Aligned
       with NHS PERSON_STATED_GENDER_CODE.
     permissible_values:
-      Male:
+      "1":
         title: Male
         meaning: gc:Male
         description: The person identifies as male.
-      Female:
+      "2":
         title: Female
         meaning: gc:Female
         description: The person identifies as female.
-      Indeterminate:
+      "9":
         title: Indeterminate
         meaning: gc:Indeterminate
         description: Unable to be classified as either male or female.
-      NotKnown:
+      X:
         title: Not Known
         meaning: gc:NotKnown
         description: Not recorded, or information unavailable.
@@ -466,19 +469,19 @@ enums:
       characteristics rather than gender identity. Aligned with NHS PDS
       PERSON_PHENOTYPIC_SEX.
     permissible_values:
-      Male:
+      "1":
         title: Male
         meaning: psc:Male
         description: The person is phenotypically male.
-      Female:
+      "2":
         title: Female
         meaning: psc:Female
         description: The person is phenotypically female.
-      Indeterminate:
+      "9":
         title: Indeterminate
         meaning: psc:Indeterminate
         description: Unable to be classified phenotypically as either male or female.
-      NotKnown:
+      X:
         title: Not Known
         meaning: psc:NotKnown
         description: Not recorded, or information unavailable.
@@ -490,86 +493,66 @@ enums:
       The person's stated ethnicity. Uses ONS Census 2021 Ethnic group
       classification 20b codes.
     permissible_values:
-      AsianBangladeshi:
+      "1":
         title: "Asian, Asian British or Asian Welsh: Bangladeshi"
         meaning: ec:AsianBangladeshi
-        description: "Asian, Asian British or Asian Welsh: Bangladeshi"
-      AsianChinese:
+      "2":
         title: "Asian, Asian British or Asian Welsh: Chinese"
         meaning: ec:AsianChinese
-        description: "Asian, Asian British or Asian Welsh: Chinese"
-      AsianIndian:
+      "3":
         title: "Asian, Asian British or Asian Welsh: Indian"
         meaning: ec:AsianIndian
-        description: "Asian, Asian British or Asian Welsh: Indian"
-      AsianPakistani:
+      "4":
         title: "Asian, Asian British or Asian Welsh: Pakistani"
         meaning: ec:AsianPakistani
-        description: "Asian, Asian British or Asian Welsh: Pakistani"
-      AsianOther:
+      "5":
         title: "Asian, Asian British or Asian Welsh: Other Asian"
         meaning: ec:AsianOther
-        description: "Asian, Asian British or Asian Welsh: Other Asian"
-      BlackAfrican:
+      "6":
         title: "Black, Black British, Black Welsh, Caribbean or African: African"
         meaning: ec:BlackAfrican
-        description: "Black, Black British, Black Welsh, Caribbean or African: African"
-      BlackCaribbean:
+      "7":
         title: "Black, Black British, Black Welsh, Caribbean or African: Caribbean"
         meaning: ec:BlackCaribbean
-        description: "Black, Black British, Black Welsh, Caribbean or African: Caribbean"
-      BlackOther:
+      "8":
         title: "Black, Black British, Black Welsh, Caribbean or African: Other Black"
         meaning: ec:BlackOther
-        description: "Black, Black British, Black Welsh, Caribbean or African: Other Black"
-      MixedWhiteAsian:
+      "9":
         title: "Mixed or Multiple ethnic groups: White and Asian"
         meaning: ec:MixedWhiteAsian
-        description: "Mixed or Multiple ethnic groups: White and Asian"
-      MixedWhiteBlackAfrican:
+      "10":
         title: "Mixed or Multiple ethnic groups: White and Black African"
         meaning: ec:MixedWhiteBlackAfrican
-        description: "Mixed or Multiple ethnic groups: White and Black African"
-      MixedWhiteBlackCaribbean:
+      "11":
         title: "Mixed or Multiple ethnic groups: White and Black Caribbean"
         meaning: ec:MixedWhiteBlackCaribbean
-        description: "Mixed or Multiple ethnic groups: White and Black Caribbean"
-      MixedOther:
+      "12":
         title: "Mixed or Multiple ethnic groups: Other Mixed or Multiple ethnic groups"
         meaning: ec:MixedOther
-        description: "Mixed or Multiple ethnic groups: Other Mixed or Multiple ethnic groups"
-      WhiteBritish:
+      "13":
         title: "White: English, Welsh, Scottish, Northern Irish or British"
         meaning: ec:WhiteBritish
-        description: "White: English, Welsh, Scottish, Northern Irish or British"
-      WhiteIrish:
+      "14":
         title: "White: Irish"
         meaning: ec:WhiteIrish
-        description: "White: Irish"
-      WhiteGypsyOrIrishTraveller:
+      "15":
         title: "White: Gypsy or Irish Traveller"
         meaning: ec:WhiteGypsyOrIrishTraveller
-        description: "White: Gypsy or Irish Traveller"
-      WhiteRoma:
+      "16":
         title: "White: Roma"
         meaning: ec:WhiteRoma
-        description: "White: Roma"
-      WhiteOther:
+      "17":
         title: "White: Other White"
         meaning: ec:WhiteOther
-        description: "White: Other White"
-      OtherArab:
+      "18":
         title: "Other ethnic group: Arab"
         meaning: ec:OtherArab
-        description: "Other ethnic group: Arab"
-      OtherAny:
+      "19":
         title: "Other ethnic group: Any other ethnic group"
         meaning: ec:OtherAny
-        description: "Other ethnic group: Any other ethnic group"
-      DoesNotApply:
-        title: "Does not apply*"
+      "-8":
+        title: "Does not apply (Students and schoolchildren living away during term-time)"
         meaning: ec:DoesNotApply
-        description: "Does not apply*"
 
   PersonRelationshipCode:
     enum_uri: p:person-relationship-code

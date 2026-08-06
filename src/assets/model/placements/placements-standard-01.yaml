@@ -79,7 +79,7 @@ classes:
         preconditions:
           slot_conditions:
             outOfLAReason:
-              equals_string: OutOfLAReasonOther
+              equals_string: Other
         postconditions:
           slot_conditions:
             outOfLAReasonOther:
@@ -609,11 +609,11 @@ enums:
         title: Today
         meaning: pu:Today
         description: Placement is needed today.
-      WithinFiveDays:
+      "< 5 days":
         title: Within 5 days
         meaning: pu:WithinFiveDays
         description: Placement is needed within five days.
-      MoreThanFiveDays:
+      "> 5 days":
         title: More than 5 days
         meaning: pu:MoreThanFiveDays
         description: Placement is needed in more than five days.
@@ -623,19 +623,19 @@ enums:
     title: Out of LA Reason
     description: Controlled vocabulary describing the reason the preferred placement location is in a different LA.
     permissible_values:
-      SafeguardingConcerns:
+      "Safeguarding concerns":
         title: Safeguarding concerns
         meaning: olr:SafeguardingConcerns
         description: Placement is sought outside the placing LA due to safeguarding concerns.
-      BailConditions:
+      "Bail conditions":
         title: Bail conditions
         meaning: olr:BailConditions
         description: Placement is sought outside the placing LA because of bail conditions.
-      CourtOrder:
+      "Court order":
         title: Court order
         meaning: olr:CourtOrder
         description: Placement is sought outside the placing LA because of a court order.
-      OutOfLAReasonOther:
+      Other:
         title: Other
         meaning: olr:OutOfLAReasonOther
         description: Another reason not listed. When this concept is selected, supply the details via the paired pl:outOfLAReasonOther free-text property on PlacementAvailability.
@@ -653,7 +653,7 @@ enums:
         title: 'No'
         meaning: yns:No
         description: Negative.
-      NotSpecified:
+      "Not specified":
         title: Not specified
         meaning: yns:NotSpecified
         description: Not specified.
@@ -693,11 +693,11 @@ enums:
         title: Required
         meaning: cln:Required
         description: Specific cultural accommodations are required.
-      NotRequired:
+      "Not Required":
         title: Not required
         meaning: cln:NotRequired
         description: No specific cultural accommodations are required.
-      NotKnown:
+      "Not Known":
         title: Not known
         meaning: cln:NotKnown
         description: Whether cultural accommodations are required is not known.
@@ -711,23 +711,23 @@ enums:
     title: Living Arrangement
     description: Controlled vocabulary describing who the child can be cared for alongside.
     permissible_values:
-      SoloPlacement:
+      "Solo placement recommended":
         title: Solo placement recommended
         meaning: la:SoloPlacement
         description: A solo placement is recommended; the child should not live with other children.
-      WithOtherChildren:
+      "With other children recommended":
         title: With other children recommended
         meaning: la:WithOtherChildren
         description: Living with other children is recommended.
-      OnlyWithOlderChildren:
+      "Only with other older children":
         title: Only with other older children
         meaning: la:OnlyWithOlderChildren
         description: The child should only live with other children who are older.
-      OnlyWithYoungerChildren:
+      "Only with other younger children":
         title: Only with other younger children
         meaning: la:OnlyWithYoungerChildren
         description: The child should only live with other children who are younger.
-      NoPreference:
+      "No preference":
         title: No preference
         meaning: la:NoPreference
         description: No preference about who the child lives alongside.
@@ -737,11 +737,11 @@ enums:
     title: Pets Allowance
     description: Controlled vocabulary describing whether a child can or must live in a home with pets/animals.
     permissible_values:
-      YesMust:
+      "Yes-must":
         title: Yes - must
         meaning: pa:YesMust
         description: The child must live in a home with pets/animals.
-      YesCan:
+      "Yes-can":
         title: Yes - can
         meaning: pa:YesCan
         description: The child can live in a home with pets/animals.
@@ -749,7 +749,7 @@ enums:
         title: 'No'
         meaning: pa:No
         description: The child cannot live in a home with pets/animals.
-      NotKnown:
+      "Not known":
         title: Not known
         meaning: pa:NotKnown
         description: Whether the child can live with pets/animals is not known.
@@ -759,23 +759,23 @@ enums:
     title: Support Type
     description: Controlled vocabulary for additional support provision required alongside a placement.
     permissible_values:
-      AdditionalSupervision:
+      "Additional supervision":
         title: Additional supervision
         meaning: st:AdditionalSupervision
         description: Additional supervision is required.
-      TherapeuticSupport:
+      "Therapeutic support":
         title: Therapeutic support
         meaning: st:TherapeuticSupport
         description: Therapeutic support is required.
-      WorkerForRespite:
+      "A worker for respite":
         title: A worker for respite
         meaning: st:WorkerForRespite
         description: A worker is required to provide respite.
-      TaxisToSchool:
+      "Taxis to school":
         title: Taxis to school
         meaning: st:TaxisToSchool
         description: Taxis to and from school are required.
-      NotApplicable:
+      "NA":
         title: Not applicable
         meaning: st:NotApplicable
         description: No additional support is required.
@@ -793,7 +793,7 @@ enums:
         title: Preferred
         meaning: sl:Preferred
         description: This category of placement is the preferred option for the child.
-      SuitableButNotPreferred:
+      "Suitable but not preferred":
         title: Suitable but not preferred
         meaning: sl:SuitableButNotPreferred
         description: This category of placement would be suitable but is not the preferred option.
@@ -801,7 +801,7 @@ enums:
         title: Unsuitable
         meaning: sl:Unsuitable
         description: This category of placement is unsuitable for the child.
-      NotSpecified:
+      "Not specified":
         title: Not specified
         meaning: sl:NotSpecified
         description: Suitability has not been specified.
@@ -811,11 +811,11 @@ enums:
     title: Risk Level
     description: Binary controlled vocabulary recording whether a particular risk is present.
     permissible_values:
-      NoKnownRisk:
+      "No known risk":
         title: No known risk
         meaning: rl:NoKnownRisk
         description: There is no known risk.
-      RiskPresent:
+      "Risk present":
         title: Risk present
         meaning: rl:RiskPresent
         description: A risk is known to be present.
@@ -833,7 +833,7 @@ enums:
         title: Residential
         meaning: pt:Residential
         description: A placement in a residential children's home.
-      SupportedAccommodation:
+      "Supported Accommodation":
         title: Supported Accommodation
         meaning: pt:SupportedAccommodation
         description: A supported accommodation placement (typically for older young people).

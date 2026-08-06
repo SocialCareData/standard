@@ -16,27 +16,27 @@ data_model: src/assets/model/placements/placements-standard.yaml
 
 ### PlacementAvailability
 
-{% schema_table page.data_model PlacementAvailability %}
+{% schema_table page.data_model PlacementAvailability all %}
 
 ### PlacementRequirements
 
-{% schema_table page.data_model PlacementRequirements %}
+{% schema_table page.data_model PlacementRequirements all %}
 
 ### PlacementRecommendation
 
-{% schema_table page.data_model PlacementRecommendation %}
+{% schema_table page.data_model PlacementRecommendation all %}
 
 ### RiskAssessment
 
-{% schema_table page.data_model RiskAssessment %}
+{% schema_table page.data_model RiskAssessment all %}
 
 ### ActualPlacement
 
-{% schema_table page.data_model ActualPlacement %}
+{% schema_table page.data_model ActualPlacement all %}
 
 ### QualityAssurance
 
-{% schema_table page.data_model QualityAssurance %}
+{% schema_table page.data_model QualityAssurance all %}
 
 ## Taxonomies
 

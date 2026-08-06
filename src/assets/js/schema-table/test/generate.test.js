@@ -43,12 +43,12 @@ test('integration: a controlled-vocabulary property renders a vocabulary table',
 
   assert.match(md, /^<details>\n<summary markdown="span">See vocabulary<\/summary>/)
   assert.match(md, /<\/details>$/)
-  assert.match(md, /\| Code \| Description \|/)
+  assert.match(md, /\| Code \| Label \| Definition \|/)
   const codes = md.split('\n').filter(l => /^\| `/.test(l))
   assert.deepEqual(codes, [
-    '| `Yes` | Affirmative. |',
-    '| `No` | Negative. |',
-    '| `Not specified` | Not specified. |'
+    '| `Yes` | Yes | Affirmative. |',
+    '| `No` | No | Negative. |',
+    '| `Not specified` | Not specified | Not specified. |'
   ])
   assert.match(md, /\{: \.table-bordered\}/)
   assert.doesNotMatch(md, /\.schema-table/)
@@ -57,7 +57,7 @@ test('integration: a controlled-vocabulary property renders a vocabulary table',
 test('integration: an enum name also renders a vocabulary table', () => {
   const md = generateTable({ modelPath: MODEL, entity: 'RiskLevel', rootDir: REPO_ROOT })
   assert.match(md, /^<details>/)
-  assert.match(md, /\| `No known risk` \| There is no known risk\. \|/)
+  assert.match(md, /\| `No known risk` \| No known risk \| There is no known risk\. \|/)
 })
 
 test('integration: Options links present taxonomies and inlines absent ones', () => {

@@ -31,6 +31,9 @@ Options:
                        links to a taxonomy that has a matching section on the
                        page, listing its values inline otherwise. (Set by the
                        Jekyll plugin; omit on the command line to always link.)
+  --options-limit <n>  How many example values the Options column previews
+                       (default 3). Pass an integer, or "all" to show every
+                       value with no ellipsis.
 
 Examples:
   schema-table src/assets/model/placements/placements-standard.yaml PlacementRequirements
@@ -48,6 +51,8 @@ function parseArgs (argv) {
         .filter(Boolean)
     } else if (argv[i] === '--previous') {
       opts.previousPath = argv[++i]
+    } else if (argv[i] === '--options-limit') {
+      opts.optionsLimit = argv[++i]
     } else if (argv[i] === '-h' || argv[i] === '--help') {
       opts.help = true
     } else {
