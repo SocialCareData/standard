@@ -440,6 +440,8 @@ The Person Standard is a reduced subset of the FHIR `Patient` resource, extended
 
 The ontology for this specification is defined in Turtle format and is available at: [person-standard.ttl](/assets/model/person/person-standard.ttl).
 
+To validate a `Person` record against the constraints that apply in a given context, two SHACL shapes are provided. Use [person-subject-of-care-shape.ttl](/assets/model/person/person-subject-of-care-shape.ttl) where the person is the subject of care, and [person-connected-shape.ttl](/assets/model/person/person-connected-shape.ttl) where the person is a connected or related individual. Each shape applies the cardinality and content rules appropriate to that role.
+
 ## Report an issue
 
 {% include report-issue.html %}
