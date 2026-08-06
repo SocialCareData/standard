@@ -12,7 +12,7 @@ tags:
 reference: PUB02
 status: draft
 non_technical_summary: |
-  This is a plain english summary. Lorem ipsum ...
+  This is a non-technical summary. Lorem ipsum ...
 
   This is a new paragraph
   (but this is the same paragraph)
