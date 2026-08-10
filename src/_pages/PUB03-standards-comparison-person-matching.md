@@ -10,17 +10,6 @@ tags:
   - Publication
 reference: PUB03
 status: draft
-non_technical_summary: |
-  This is a non-technical summary. Lorem ipsum ...
-
-  This is a new paragraph
-  (but this is the same paragraph)
-
-  - And this is a list
-  - like this
-    - with sub items
-
-  And we can do [links](#) too. And images if we need.
 ---
 
 ## Introduction
