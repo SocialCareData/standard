@@ -12,16 +12,16 @@ tags:
 reference: PUB02
 status: draft
 non_technical_summary: |
-  This is a non-technical summary. Lorem ipsum ...
+  The Person Standard enables us to describe core attributes of a person in care, like their name or age, but not any safeguarding information about them. To that end we've built the Safeguarding Standard, a set of connected points of data that, together, can build a picture of a person's context and care history.
 
-  This is a new paragraph
-  (but this is the same paragraph)
+  The Safeguarding Standard has five main categories of data:
+  - `Organisation` objects, which describe data about overarching organisations that deliver services
+  - `Service` objects, which describe specific care and care-related services
+  - `Professional` objects, which describe individual care professionals like social workers, GPs, and anyone else that might be involved in the delivery of a service
+  - `ServiceEpisode` objects, which describe single, time-bound occurrences of service delivery.
+  - `LifeEvent` objects, which describe single, time-bound events in a person's life that, whether positive or negative, may have an effect on their day-to-day life and overall safeguarding circumstances, like an attendance at A&E or an exclusion from school.
 
-  - And this is a list
-  - like this
-    - with sub items
-
-  And we can do [links](#) too. And images if we need.
+  Linked together, these components help describe the professional activity that surrounds a person in social care.
 ---
 
 ## Introduction
