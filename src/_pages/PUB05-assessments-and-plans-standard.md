@@ -389,7 +389,7 @@ The nature of the service being performed.
 : Text description of the care activity and any custom instructions. *String*.
 
 <span id="activity-outcome">outcome</span>
-: The Care Act outcome this component is helping to achieve. *Enum*. [SUGGESTION: CareOutcomeType].
+: The Care Act outcome this component is helping to achieve. *Enum*. See [Care Act Outcome vocabulary](#care-act-outcome-taxonomy).
 
 <span id="activity-directPayment">directPayment</span>
 : Flag indicating whether this component is funded via direct payments. *Boolean*.
@@ -415,9 +415,9 @@ The model is parameterised by the following controlled vocabularies.
 
 {% schema_table page.data_model CareActorType expanded %}
 
-### Care Outcome Type Taxonomy
+### Care Act Outcome Taxonomy
 
-{% schema_table page.data_model CareOutcomeType expanded %}
+{% schema_table page.data_model CareActOutcome expanded %}
 
 ### Statutory Question ID Taxonomy
 

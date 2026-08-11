@@ -32,14 +32,14 @@ ap:schema.owl.ttl a owl:Ontology ;
 ap:CareNeedsAssessment a owl:Class ;
     rdfs:label "CareNeedsAssessment" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:status ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ap:planId ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty ap:assessmentQuestion ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:status ],
         ap:FoundationalInformation ;
     skos:definition "A Care Needs Assessment record, completed when an adult contacts or is referred to a local authority's social services team." ;
     skos:exactMatch ap:CareNeedsAssessment ;
@@ -183,7 +183,7 @@ ap:isReview a owl:DatatypeProperty ;
 
 ap:outcome a owl:ObjectProperty ;
     rdfs:label "outcome" ;
-    rdfs:range ap:care-outcome-type ;
+    rdfs:range ap:care-act-outcome ;
     skos:definition "Care Act outcome that this care component is aiming to help the subject person achieve." ;
     skos:inScheme ap:schema .
 
@@ -220,7 +220,7 @@ ap:questionText a owl:DatatypeProperty ;
 ap:required a owl:DatatypeProperty ;
     rdfs:label "required" ;
     rdfs:range xsd:boolean ;
-    skos:definition "Whether this question was mandatory on the local authorityï¿½s assessment. Should always be True for statutory fields." ;
+    skos:definition "Whether this question was mandatory on the local authority’s assessment. Should always be True for statutory fields." ;
     skos:inScheme ap:schema .
 
 ap:review a owl:ObjectProperty ;
@@ -256,23 +256,23 @@ ap:value a owl:DatatypeProperty ;
 ap:AssessmentQuestion a owl:Class ;
     rdfs:label "AssessmentQuestion" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ap:questionId ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:category ],
+            owl:minCardinality 1 ;
+            owl:onProperty ap:answer ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty ap:answerType ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ap:answer ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty ap:questionText ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:required ] ;
+            owl:onProperty ap:category ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:required ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ap:questionId ] ;
     skos:definition "A generic Question-and-Answer model used to represent both statutory Care Act questions and local, personalised fields." ;
     skos:exactMatch ap:AssessmentQuestion ;
     skos:inScheme ap:schema .
@@ -307,11 +307,11 @@ ap:CareActor a owl:Class ;
 ap:CareComponent a owl:Class ;
     rdfs:label "CareComponent" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ap:actor ],
-        [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty ap:time ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty ap:actor ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty ap:activity ] ;
@@ -326,10 +326,10 @@ ap:CareTime a owl:Class ;
             owl:onProperty ap:endDateTime ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:frequency ],
+            owl:onProperty ap:startDateTime ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:startDateTime ] ;
+            owl:onProperty ap:frequency ] ;
     skos:definition "The schedule and timing information of a care component." ;
     skos:exactMatch ap:CareTime ;
     skos:inScheme ap:schema .
@@ -337,11 +337,17 @@ ap:CareTime a owl:Class ;
 ap:FoundationalInformation a owl:Class ;
     rdfs:label "FoundationalInformation" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ap:review ],
+            owl:cardinality 1 ;
+            owl:onProperty ap:professionalId ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:personId ],
+            owl:onProperty ap:identifier ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:capacityToCompleteAssessment ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:consentToInformationSharing ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty ap:dateCompleted ],
@@ -349,17 +355,11 @@ ap:FoundationalInformation a owl:Class ;
             owl:cardinality 1 ;
             owl:onProperty ap:advocateRequired ],
         [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:identifier ],
+            owl:minCardinality 1 ;
+            owl:onProperty ap:review ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:consentToInformationSharing ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:professionalId ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:capacityToCompleteAssessment ] ;
+            owl:onProperty ap:personId ] ;
     skos:definition "Information that is relevant across both assessments and plans." ;
     skos:inScheme ap:schema .
 
@@ -489,52 +489,52 @@ cds:unknown a owl:Class ;
 apc:CAClothing a owl:Class ;
     rdfs:label "CA-CLOTHING" ;
     dct:title "Being appropriately clothed" ;
-    rdfs:subClassOf ap:care-outcome-type .
+    rdfs:subClassOf ap:care-act-outcome .
 
 apc:CACommunityServices a owl:Class ;
     rdfs:label "CA-COMMUNITY" ;
     dct:title "Making use of necessary facilities or services in the local community" ;
-    rdfs:subClassOf ap:care-outcome-type .
+    rdfs:subClassOf ap:care-act-outcome .
 
 apc:CAHabitableHome a owl:Class ;
     rdfs:label "CA-HABITABLEHOME" ;
     dct:title "Maintaining a habitable home environment" ;
-    rdfs:subClassOf ap:care-outcome-type .
+    rdfs:subClassOf ap:care-act-outcome .
 
 apc:CAHomeSafety a owl:Class ;
     rdfs:label "CA-HOMESAFETY" ;
     dct:title "Being able to make use of the home safely" ;
-    rdfs:subClassOf ap:care-outcome-type .
+    rdfs:subClassOf ap:care-act-outcome .
 
 apc:CAHygiene a owl:Class ;
     rdfs:label "CA-HYGIENE" ;
     dct:title "Maintaining personal hygiene" ;
-    rdfs:subClassOf ap:care-outcome-type .
+    rdfs:subClassOf ap:care-act-outcome .
 
 apc:CAMaintainingRelationships a owl:Class ;
     rdfs:label "CA-RELATIONSHIPS" ;
     dct:title "Developing and maintaining family or other personal relationships" ;
-    rdfs:subClassOf ap:care-outcome-type .
+    rdfs:subClassOf ap:care-act-outcome .
 
 apc:CANutrition a owl:Class ;
     rdfs:label "CA-NUTRITION" ;
     dct:title "Managing and maintaining nutrition" ;
-    rdfs:subClassOf ap:care-outcome-type .
+    rdfs:subClassOf ap:care-act-outcome .
 
 apc:CAResponsibilityForOthers a owl:Class ;
     rdfs:label "CA-CARINGOTHERS" ;
     dct:title "Carrying out any caring responsibilities for others" ;
-    rdfs:subClassOf ap:care-outcome-type .
+    rdfs:subClassOf ap:care-act-outcome .
 
 apc:CAToilet a owl:Class ;
     rdfs:label "CA-TOILET" ;
     dct:title "Managing toilet needs" ;
-    rdfs:subClassOf ap:care-outcome-type .
+    rdfs:subClassOf ap:care-act-outcome .
 
 apc:CAWTEV a owl:Class ;
     rdfs:label "CA-WTEV" ;
     dct:title "Accessing and engaging in work, training, education, or volunteering" ;
-    rdfs:subClassOf ap:care-outcome-type .
+    rdfs:subClassOf ap:care-act-outcome .
 
 es:eligible-needs-identified a owl:Class ;
     rdfs:label "Eligible needs identified" ;
@@ -744,7 +744,7 @@ sq:STAT-FINANCE-01 a owl:Class ;
     rdfs:label "STAT-FINANCE-01" ;
     dct:title "STAT-FINANCE-01" ;
     rdfs:subClassOf ap:statutory-question-id ;
-    skos:definition "What is the clientï¿½s (potential) funding status? (Expected answerType: Enum matching ClientFundingStatus)" .
+    skos:definition "What is the client’s (potential) funding status? (Expected answerType: Enum matching ClientFundingStatus)" .
 
 sq:STAT-HEALTH-01 a owl:Class ;
     rdfs:label "STAT-HEALTH-01" ;
@@ -818,7 +818,7 @@ ap:Identifier a owl:Class ;
 
 ap:care-document-status a owl:Class ;
     rdfs:label "DocumentStatus" ;
-    dct:title "Document Status" ;
+    dct:title "Care Document Status" ;
     owl:unionOf ( cds:draft cds:active cds:on-hold cds:entered-in-error cds:ended cds:completed cds:revoked cds:unknown ) ;
     skos:definition "Status of the care plan or care needs assessment document. Lifted from FHIR CarePlan status." ;
     skos:inScheme ap:schema ;
@@ -831,11 +831,11 @@ ap:care-document-status a owl:Class ;
         cds:revoked,
         cds:unknown .
 
-ap:care-outcome-type a owl:Class ;
-    rdfs:label "CareOutcomeType" ;
-    dct:title "Care Outcome Type" ;
+ap:care-act-outcome a owl:Class ;
+    rdfs:label "CareActOutcome" ;
+    dct:title "Care Act Outcome" ;
     owl:unionOf ( apc:CANutrition apc:CAHygiene apc:CAToilet apc:CAClothing apc:CAHomeSafety apc:CAHabitableHome apc:CAMaintainingRelationships apc:CAWTEV apc:CACommunityServices apc:CAResponsibilityForOthers ) ;
-    skos:definition "Care Act outcomes that a Care Plan component is aiming to help the person achieve." ;
+    skos:definition "The 10 outcomes defined under the Care Act 2014 that a Care Plan component can help a person to achieve." ;
     skos:inScheme ap:schema ;
     linkml:permissible_values apc:CAClothing,
         apc:CACommunityServices,
@@ -873,7 +873,7 @@ ap:question-category a owl:Class ;
     rdfs:label "QuestionCategory" ;
     dct:title "Question Category" ;
     owl:unionOf ( qc:PersonalContext qc:Health qc:Housing qc:Finance qc:CommunicationNeeds qc:CANutrition qc:CAHygiene qc:CAToilet qc:CAClothing qc:CAHomeSafety qc:CAHabitableHome qc:CAMaintainingRelationships qc:CAWTEV qc:CACommunityServices qc:CAResponsibilityForOthers qc:Eligibility qc:Emergencies qc:Other ) ;
-    skos:definition "Categories/domains that questions in Care Act Assessments usually conform to." ;
+    skos:definition "Categories/domains under which Care Act assessments and custom local authority questions sit." ;
     skos:inScheme ap:schema ;
     linkml:permissible_values qc:CAClothing,
         qc:CACommunityServices,

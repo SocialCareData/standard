@@ -69,9 +69,9 @@ data_model: src/assets/model/assessments-and-plans/assessments-and-plans-standar
 
 {% schema_table page.data_model CareActorType %}
 
-### Care Outcome Type Taxonomy
+### Care Act Outcome Taxonomy
 
-{% schema_table page.data_model CareOutcomeType %}
+{% schema_table page.data_model CareActOutcome %}
 
 ### Statutory Question ID Taxonomy
 

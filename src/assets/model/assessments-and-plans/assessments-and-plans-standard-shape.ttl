@@ -13,7 +13,14 @@ ap:AssessmentQuestionShape a sh:NodeShape ;
     rdfs:comment "A generic Question-and-Answer model used to represent both statutory Care Act questions and local, personalised fields." ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "The domain/category of the question." ;
+    sh:property [ sh:datatype xsd:boolean ;
+            sh:description "Whether this question was mandatory on the local authority’s assessment. Should always be True for statutory fields." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path ap:required ],
+        [ sh:description "The domain/category of the question." ;
             sh:in ( qc:PersonalContext qc:Health qc:Housing qc:Finance qc:CommunicationNeeds qc:CANutrition qc:CAHygiene qc:CAToilet qc:CAClothing qc:CAHomeSafety qc:CAHabitableHome qc:CAMaintainingRelationships qc:CAWTEV qc:CACommunityServices qc:CAResponsibilityForOthers qc:Eligibility qc:Emergencies qc:Other ) ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
@@ -25,19 +32,13 @@ ap:AssessmentQuestionShape a sh:NodeShape ;
             sh:minCount 1 ;
             sh:order 4 ;
             sh:path ap:answerType ],
-        [ sh:datatype xsd:boolean ;
-            sh:description "Whether this question was mandatory on the local authority’s assessment. Should always be True for statutory fields." ;
+        [ sh:datatype xsd:string ;
+            sh:description "The exact wording of the question as it appears on the local authority's form." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path ap:required ],
-        [ sh:datatype xsd:string ;
-            sh:description "The answer to the question as measured in the assessment." ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path ap:answer ],
+            sh:order 2 ;
+            sh:path ap:questionText ],
         [ sh:datatype xsd:string ;
             sh:description "An ID for the question. For statutory questions, this should conform to the dictionary of statutory question IDs; for personalised, non statutory questions, this can be anything or left blank." ;
             sh:maxCount 1 ;
@@ -45,12 +46,11 @@ ap:AssessmentQuestionShape a sh:NodeShape ;
             sh:order 0 ;
             sh:path ap:questionId ],
         [ sh:datatype xsd:string ;
-            sh:description "The exact wording of the question as it appears on the local authority's form." ;
-            sh:maxCount 1 ;
+            sh:description "The answer to the question as measured in the assessment." ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path ap:questionText ] ;
+            sh:order 3 ;
+            sh:path ap:answer ] ;
     sh:targetClass ap:AssessmentQuestion .
 
 ap:CareActivityShape a sh:NodeShape ;
@@ -64,17 +64,17 @@ ap:CareActivityShape a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
             sh:path ap:activityDescription ],
+        [ sh:description "Care Act outcome that this care component is aiming to help the subject person achieve." ;
+            sh:in ( apc:CANutrition apc:CAHygiene apc:CAToilet apc:CAClothing apc:CAHomeSafety apc:CAHabitableHome apc:CAMaintainingRelationships apc:CAWTEV apc:CACommunityServices apc:CAResponsibilityForOthers ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ap:outcome ],
         [ sh:datatype xsd:boolean ;
             sh:description "Flag whether this component is paid via direct payment." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 2 ;
-            sh:path ap:directPayment ],
-        [ sh:description "Care Act outcome that this care component is aiming to help the subject person achieve." ;
-            sh:in ( apc:CANutrition apc:CAHygiene apc:CAToilet apc:CAClothing apc:CAHomeSafety apc:CAHabitableHome apc:CAMaintainingRelationships apc:CAWTEV apc:CACommunityServices apc:CAResponsibilityForOthers ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ap:outcome ] ;
+            sh:path ap:directPayment ] ;
     sh:targetClass ap:CareActivity .
 
 ap:CareActorShape a sh:NodeShape ;
@@ -100,14 +100,7 @@ ap:CareComponentShape a sh:NodeShape ;
     rdfs:comment "A specific component of a Care Plan, capturing who does what, when, and to achieve which outcomes." ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class ap:CareActivity ;
-            sh:description "The activity details of this component of the plan." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 2 ;
-            sh:path ap:activity ],
-        [ sh:class ap:CareTime ;
+    sh:property [ sh:class ap:CareTime ;
             sh:description "The schedule and timing information of this component of the plan." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
@@ -119,7 +112,14 @@ ap:CareComponentShape a sh:NodeShape ;
             sh:minCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 0 ;
-            sh:path ap:actor ] ;
+            sh:path ap:actor ],
+        [ sh:class ap:CareActivity ;
+            sh:description "The activity details of this component of the plan." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path ap:activity ] ;
     sh:targetClass ap:CareComponent .
 
 ap:CareNeedsAssessmentShape a sh:NodeShape ;
@@ -127,19 +127,12 @@ ap:CareNeedsAssessmentShape a sh:NodeShape ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:boolean ;
-            sh:description "Does the person have the mental and physical capacity to complete this assessment / plan?" ;
+            sh:description "Does the person consent to information sharing?" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 7 ;
-            sh:path ap:capacityToCompleteAssessment ],
-        [ sh:datatype xsd:boolean ;
-            sh:description "Does the person require an advocate to complete this assessment / plan?" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 8 ;
-            sh:path ap:advocateRequired ],
+            sh:order 9 ;
+            sh:path ap:consentToInformationSharing ],
         [ sh:class ap:Identifier ;
             sh:description "Identifier for the professional that authored the assessment/plan. Note that we don't need a serviceID, because you can find the service through the professional." ;
             sh:maxCount 1 ;
@@ -147,6 +140,12 @@ ap:CareNeedsAssessmentShape a sh:NodeShape ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 5 ;
             sh:path ap:professionalId ],
+        [ sh:class ap:Review ;
+            sh:description "List of reviews." ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 10 ;
+            sh:path ap:review ],
         [ sh:datatype xsd:dateTime ;
             sh:description "Date and time that the assessment / plan was completed." ;
             sh:maxCount 1 ;
@@ -155,11 +154,38 @@ ap:CareNeedsAssessmentShape a sh:NodeShape ;
             sh:order 6 ;
             sh:path ap:dateCompleted ],
         [ sh:class ap:Identifier ;
+            sh:description "Identifier for this assessment / plan." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path ap:identifier ],
+        [ sh:datatype xsd:boolean ;
+            sh:description "Does the person require an advocate to complete this assessment / plan?" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path ap:advocateRequired ],
+        [ sh:datatype xsd:boolean ;
+            sh:description "Does the person have the mental and physical capacity to complete this assessment / plan?" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path ap:capacityToCompleteAssessment ],
+        [ sh:class ap:Identifier ;
             sh:description "Any care plan linked to this assessment. Quick signpost that a) a plan was made (ie the person was determined to be eligible) and b) where the plan is (so you don't need to search for it)." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 0 ;
             sh:path ap:planId ],
+        [ sh:description "Status of the document. Lifted from FHIR CarePlan status." ;
+            sh:in ( cds:draft cds:active cds:on-hold cds:entered-in-error cds:ended cds:completed cds:revoked cds:unknown ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path ap:status ],
         [ sh:class ap:Identifier ;
             sh:description "Identifier for the subject person." ;
             sh:maxCount 1 ;
@@ -167,32 +193,6 @@ ap:CareNeedsAssessmentShape a sh:NodeShape ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 4 ;
             sh:path ap:personId ],
-        [ sh:datatype xsd:boolean ;
-            sh:description "Does the person consent to information sharing?" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 9 ;
-            sh:path ap:consentToInformationSharing ],
-        [ sh:class ap:Identifier ;
-            sh:description "Identifier for this assessment / plan." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 3 ;
-            sh:path ap:identifier ],
-        [ sh:class ap:Review ;
-            sh:description "List of reviews." ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 10 ;
-            sh:path ap:review ],
-        [ sh:description "Status of the document. Lifted from FHIR CarePlan status." ;
-            sh:in ( cds:draft cds:active cds:on-hold cds:entered-in-error cds:ended cds:completed cds:revoked cds:unknown ) ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 1 ;
-            sh:path ap:status ],
         [ sh:class ap:AssessmentQuestion ;
             sh:description "The set of assessment questions and answers." ;
             sh:minCount 1 ;
@@ -206,26 +206,32 @@ ap:CarePlanShape a sh:NodeShape ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:class ap:Identifier ;
-            sh:description "Identifier for this assessment / plan." ;
+            sh:description "Assessment that led to this plan." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 3 ;
-            sh:path ap:identifier ],
-        [ sh:class ap:Identifier ;
-            sh:description "Identifier for the professional that authored the assessment/plan. Note that we don't need a serviceID, because you can find the service through the professional." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 5 ;
-            sh:path ap:professionalId ],
+            sh:order 0 ;
+            sh:path ap:assessmentId ],
         [ sh:datatype xsd:boolean ;
-            sh:description "Does the person consent to information sharing?" ;
+            sh:description "Does the person have the mental and physical capacity to complete this assessment / plan?" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 9 ;
-            sh:path ap:consentToInformationSharing ],
+            sh:order 7 ;
+            sh:path ap:capacityToCompleteAssessment ],
+        [ sh:description "Status of the document. Lifted from FHIR CarePlan status." ;
+            sh:in ( cds:draft cds:active cds:on-hold cds:entered-in-error cds:ended cds:completed cds:revoked cds:unknown ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path ap:status ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "Date and time that the assessment / plan was completed." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path ap:dateCompleted ],
         [ sh:datatype xsd:boolean ;
             sh:description "Does the person require an advocate to complete this assessment / plan?" ;
             sh:maxCount 1 ;
@@ -234,18 +240,18 @@ ap:CarePlanShape a sh:NodeShape ;
             sh:order 8 ;
             sh:path ap:advocateRequired ],
         [ sh:class ap:Identifier ;
-            sh:description "Assessment that led to this plan." ;
+            sh:description "Identifier for this assessment / plan." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 0 ;
-            sh:path ap:assessmentId ],
-        [ sh:description "Status of the document. Lifted from FHIR CarePlan status." ;
-            sh:in ( cds:draft cds:active cds:on-hold cds:entered-in-error cds:ended cds:completed cds:revoked cds:unknown ) ;
-            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path ap:identifier ],
+        [ sh:class ap:CareComponent ;
+            sh:description "Components of the care package." ;
             sh:minCount 1 ;
-            sh:order 1 ;
-            sh:path ap:status ],
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path ap:careComponent ],
         [ sh:class ap:Identifier ;
             sh:description "Identifier for the subject person." ;
             sh:maxCount 1 ;
@@ -253,52 +259,46 @@ ap:CarePlanShape a sh:NodeShape ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 4 ;
             sh:path ap:personId ],
-        [ sh:datatype xsd:dateTime ;
-            sh:description "Date and time that the assessment / plan was completed." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path ap:dateCompleted ],
-        [ sh:class ap:CareComponent ;
-            sh:description "Components of the care package." ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 2 ;
-            sh:path ap:careComponent ],
         [ sh:datatype xsd:boolean ;
-            sh:description "Does the person have the mental and physical capacity to complete this assessment / plan?" ;
+            sh:description "Does the person consent to information sharing?" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 7 ;
-            sh:path ap:capacityToCompleteAssessment ],
+            sh:order 9 ;
+            sh:path ap:consentToInformationSharing ],
         [ sh:class ap:Review ;
             sh:description "List of reviews." ;
             sh:minCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 10 ;
-            sh:path ap:review ] ;
+            sh:path ap:review ],
+        [ sh:class ap:Identifier ;
+            sh:description "Identifier for the professional that authored the assessment/plan. Note that we don't need a serviceID, because you can find the service through the professional." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path ap:professionalId ] ;
     sh:targetClass ap:CarePlan .
 
 ap:CareTimeShape a sh:NodeShape ;
     rdfs:comment "The schedule and timing information of a care component." ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "The frequency the component of the plan is performed, expressed using FHIR Timing or similar." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path ap:frequency ],
-        [ sh:datatype xsd:dateTime ;
+    sh:property [ sh:datatype xsd:dateTime ;
             sh:description "The first date the component of the plan was (scheduled to be) performed." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 1 ;
             sh:path ap:startDateTime ],
+        [ sh:datatype xsd:string ;
+            sh:description "The frequency the component of the plan is performed, expressed using FHIR Timing or similar." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path ap:frequency ],
         [ sh:datatype xsd:dateTime ;
             sh:description "The last date the component of the plan was performed before cancellation." ;
             sh:maxCount 1 ;
@@ -311,19 +311,13 @@ ap:FoundationalInformationShape a sh:NodeShape ;
     rdfs:comment "Information that is relevant across both assessments and plans." ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class ap:Identifier ;
-            sh:description "Identifier for this assessment / plan." ;
+    sh:property [ sh:datatype xsd:boolean ;
+            sh:description "Does the person consent to information sharing?" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 0 ;
-            sh:path ap:identifier ],
-        [ sh:class ap:Review ;
-            sh:description "List of reviews." ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 7 ;
-            sh:path ap:review ],
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path ap:consentToInformationSharing ],
         [ sh:datatype xsd:boolean ;
             sh:description "Does the person have the mental and physical capacity to complete this assessment / plan?" ;
             sh:maxCount 1 ;
@@ -331,6 +325,12 @@ ap:FoundationalInformationShape a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
             sh:path ap:capacityToCompleteAssessment ],
+        [ sh:class ap:Review ;
+            sh:description "List of reviews." ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path ap:review ],
         [ sh:datatype xsd:boolean ;
             sh:description "Does the person require an advocate to complete this assessment / plan?" ;
             sh:maxCount 1 ;
@@ -339,12 +339,12 @@ ap:FoundationalInformationShape a sh:NodeShape ;
             sh:order 5 ;
             sh:path ap:advocateRequired ],
         [ sh:class ap:Identifier ;
-            sh:description "Identifier for the professional that authored the assessment/plan. Note that we don't need a serviceID, because you can find the service through the professional." ;
+            sh:description "Identifier for this assessment / plan." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 2 ;
-            sh:path ap:professionalId ],
+            sh:order 0 ;
+            sh:path ap:identifier ],
         [ sh:class ap:Identifier ;
             sh:description "Identifier for the subject person." ;
             sh:maxCount 1 ;
@@ -359,32 +359,32 @@ ap:FoundationalInformationShape a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
             sh:path ap:dateCompleted ],
-        [ sh:datatype xsd:boolean ;
-            sh:description "Does the person consent to information sharing?" ;
+        [ sh:class ap:Identifier ;
+            sh:description "Identifier for the professional that authored the assessment/plan. Note that we don't need a serviceID, because you can find the service through the professional." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path ap:consentToInformationSharing ] ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path ap:professionalId ] ;
     sh:targetClass ap:FoundationalInformation .
 
 ap:IdentifierShape a sh:NodeShape ;
     rdfs:comment "A unique identifier comprising a value and the system namespace in which it is unique. Aligned with the Person standard's Identifier class." ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
+    sh:property [ sh:description "The URI of the system or namespace within which the identifier is unique." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path ap:system ],
+        [ sh:datatype xsd:string ;
             sh:description "The identifier value, unique within the issuing system." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
-            sh:path ap:value ],
-        [ sh:description "The URI of the system or namespace within which the identifier is unique." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path ap:system ] ;
+            sh:path ap:value ] ;
     sh:targetClass ap:Identifier .
 
 ap:ReviewShape a sh:NodeShape ;

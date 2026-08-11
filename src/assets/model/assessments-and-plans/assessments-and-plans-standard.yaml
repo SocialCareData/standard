@@ -336,7 +336,7 @@ slots:
     description: Text description of the care component.
   outcome:
     slot_uri: ap:outcome
-    range: CareOutcomeType
+    range: CareActOutcome
     required: false
     multivalued: false
     description: Care Act outcome that this care component is aiming to help the subject person achieve.
@@ -520,10 +520,10 @@ enums:
         meaning: act:ProfessionalServices
         description: A formal, paid professional or commissioned service provider.
 
-  CareOutcomeType:
-    enum_uri: ap:care-outcome-type
-    title: Care Outcome Type
-    description: Care Act outcomes that a Care Plan component is aiming to help the person achieve.
+  CareActOutcome:
+    enum_uri: ap:care-act-outcome
+    title: Care Act Outcome
+    description: The 10 outcomes defined under the Care Act 2014 that a Care Plan component can help a person to achieve.
     permissible_values:
       CA-NUTRITION:
         title: Managing and maintaining nutrition
