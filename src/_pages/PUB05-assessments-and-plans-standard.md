@@ -96,7 +96,7 @@ A Care Needs Assessment record. Captures foundational metadata, Care Act outcome
 : Direct link to any Care Plan resulting from this assessment. *Identifier object*. See [Identifier](#identifier).
 
 <span id="assessment-status">status</span>
-: Status of this assessment. *Enum*. [SUGGESTION: CareDocumentStatus (e.g. draft, active)].
+: Status of this assessment. *Enum*. See the [Document Status Vocabulary](#document-status-taxonomy).
 
 <span id="assessment-assessmentQuestion">assessmentQuestion</span>
 : The list of statutory and custom questions and answers comprising this assessment. *AssessmentQuestion object*. See [AssessmentQuestion](#assessmentquestion).
@@ -170,7 +170,7 @@ Generic question-answer pair. Handles mandatory Care Act statutory questions via
 : Unique national ID for statutory questions (e.g., `STAT-HOUSING-01`). Blank for custom questions. *String*.
 
 <span id="question-category">category</span>
-: The domain of the question (e.g. Health, Housing, Finance). *Enum*. [SUGGESTION: QuestionCategory].
+: The domain of the question. *Enum*. See [Question Category vocabulary](#question-category-taxonomy).
 
 <span id="question-questionText">questionText</span>
 : The exact wording as displayed on the local form. *String*.
@@ -179,7 +179,7 @@ Generic question-answer pair. Handles mandatory Care Act statutory questions via
 : The answer as measured in the assessment. *String / value*.
 
 <span id="question-answerType">answerType</span>
-: Indicates how the answer should be parsed (e.g. String, Boolean). *Enum*. [SUGGESTION: AnswerType].
+: Indicates how the answer should be parsed. *Enum*. See [Answer Type vocabulary](#answer-type-taxonomy).
 
 <span id="question-required">required</span>
 : Whether this question is mandatory. (Always `true` for statutory). *Boolean*.
@@ -261,7 +261,7 @@ A Care Plan record, constructed for adults found eligible for care. Follows a st
 : The assessment record that led to this plan. *Identifier object*. See [Identifier](#identifier).
 
 <span id="plan-status">status</span>
-: Status of this care plan. *Enum*. [SUGGESTION: CareDocumentStatus (e.g. draft, active)].
+: Status of this care plan. *Enum*. See [Document Status vocabulary](#document-status-taxonomy).
 
 <span id="plan-careComponent">careComponent</span>
 : The active care components (e.g., home care, meals) that make up the plan's support package. *CareComponent object*. See [CareComponent](#carecomponent).
@@ -359,7 +359,7 @@ Details on who is delivering a specific CareComponent.
 #### Properties
 
 <span id="actor-actorType">actorType</span>
-: Type of caregiver (e.g. Self, Family, Professional services). *Enum*. [SUGGESTION: CareActorType].
+: Type of caregiver (e.g. Self, Family, Professional services). *Enum*. See [Care Actor Type vocabulary](#care-actor-type-taxonomy).
 
 <span id="actor-actorId">actorId</span>
 : Unique identifier for the actor (Person ID, Professional ID, or Service ID). *Identifier object*. See [Identifier](#identifier).
@@ -399,9 +399,9 @@ The nature of the service being performed.
 
 The model is parameterised by the following controlled vocabularies.
 
-### Care Document Status Taxonomy
+### Document Status Taxonomy
 
-{% schema_table page.data_model CareDocumentStatus expanded %}
+{% schema_table page.data_model DocumentStatus expanded %}
 
 ### Question Category Taxonomy
 

@@ -210,7 +210,7 @@ slots:
     description: Any care plan linked to this assessment. Quick signpost that a) a plan was made (ie the person was determined to be eligible) and b) where the plan is (so you don't need to search for it).
   status:
     slot_uri: ap:status
-    range: CareDocumentStatus
+    range: DocumentStatus
     required: true
     multivalued: false
     description: Status of the document. Lifted from FHIR CarePlan status.
@@ -366,7 +366,7 @@ slots:
 # ---------------------------------------------------------------------------
 enums:
 
-  CareDocumentStatus:
+  DocumentStatus:
     enum_uri: ap:care-document-status
     title: Care Document Status
     description: Status of the care plan or care needs assessment document. Lifted from FHIR CarePlan status.
@@ -390,7 +390,7 @@ enums:
       ended:
         title: Ended
         meaning: cds:ended
-        description: "@@SUGGESTION@@: The plan was active but has now been completed or cancelled prior to normal end."
+        description: "The plan was active but has now been completed or cancelled prior to normal end."
       completed:
         title: Completed
         meaning: cds:completed
@@ -407,7 +407,7 @@ enums:
   QuestionCategory:
     enum_uri: ap:question-category
     title: Question Category
-    description: "@@SUGGESTION@@: Categories/domains under which Care Act assessments and custom local authority questions sit."
+    description: "Categories/domains under which Care Act assessments and custom local authority questions sit."
     permissible_values:
       PersonalContext:
         title: Personal Context
@@ -498,7 +498,7 @@ enums:
       Self:
         title: Self
         meaning: act:Self
-        description: "@@SUGGESTION@@: The subject person themselves performing the activity."
+        description: "The subject person themselves performing the activity."
       Family:
         title: Family
         meaning: act:Family

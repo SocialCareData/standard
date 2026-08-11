@@ -220,7 +220,7 @@ ap:questionText a owl:DatatypeProperty ;
 ap:required a owl:DatatypeProperty ;
     rdfs:label "required" ;
     rdfs:range xsd:boolean ;
-    skos:definition "Whether this question was mandatory on the local authority’s assessment. Should always be True for statutory fields." ;
+    skos:definition "Whether this question was mandatory on the local authorityï¿½s assessment. Should always be True for statutory fields." ;
     skos:inScheme ap:schema .
 
 ap:review a owl:ObjectProperty ;
@@ -436,7 +436,7 @@ act:Self a owl:Class ;
     rdfs:label "Self" ;
     dct:title "Self" ;
     rdfs:subClassOf ap:care-actor-type ;
-    skos:definition "@@SUGGESTION@@: The subject person themselves performing the activity." .
+    skos:definition "The subject person themselves performing the activity." .
 
 cds:active a owl:Class ;
     rdfs:label "active" ;
@@ -460,7 +460,7 @@ cds:ended a owl:Class ;
     rdfs:label "ended" ;
     dct:title "Ended" ;
     rdfs:subClassOf ap:care-document-status ;
-    skos:definition "@@SUGGESTION@@: The plan was active but has now been completed or cancelled prior to normal end." .
+    skos:definition "The plan was active but has now been completed or cancelled prior to normal end." .
 
 cds:entered-in-error a owl:Class ;
     rdfs:label "entered-in-error" ;
@@ -744,7 +744,7 @@ sq:STAT-FINANCE-01 a owl:Class ;
     rdfs:label "STAT-FINANCE-01" ;
     dct:title "STAT-FINANCE-01" ;
     rdfs:subClassOf ap:statutory-question-id ;
-    skos:definition "What is the client’s (potential) funding status? (Expected answerType: Enum matching ClientFundingStatus)" .
+    skos:definition "What is the clientï¿½s (potential) funding status? (Expected answerType: Enum matching ClientFundingStatus)" .
 
 sq:STAT-HEALTH-01 a owl:Class ;
     rdfs:label "STAT-HEALTH-01" ;
@@ -817,8 +817,8 @@ ap:Identifier a owl:Class ;
     skos:inScheme ap:schema .
 
 ap:care-document-status a owl:Class ;
-    rdfs:label "CareDocumentStatus" ;
-    dct:title "Care Document Status" ;
+    rdfs:label "DocumentStatus" ;
+    dct:title "Document Status" ;
     owl:unionOf ( cds:draft cds:active cds:on-hold cds:entered-in-error cds:ended cds:completed cds:revoked cds:unknown ) ;
     skos:definition "Status of the care plan or care needs assessment document. Lifted from FHIR CarePlan status." ;
     skos:inScheme ap:schema ;
@@ -873,7 +873,7 @@ ap:question-category a owl:Class ;
     rdfs:label "QuestionCategory" ;
     dct:title "Question Category" ;
     owl:unionOf ( qc:PersonalContext qc:Health qc:Housing qc:Finance qc:CommunicationNeeds qc:CANutrition qc:CAHygiene qc:CAToilet qc:CAClothing qc:CAHomeSafety qc:CAHabitableHome qc:CAMaintainingRelationships qc:CAWTEV qc:CACommunityServices qc:CAResponsibilityForOthers qc:Eligibility qc:Emergencies qc:Other ) ;
-    skos:definition "@@SUGGESTION@@: Categories/domains under which Care Act assessments and custom local authority questions sit." ;
+    skos:definition "Categories/domains that questions in Care Act Assessments usually conform to." ;
     skos:inScheme ap:schema ;
     linkml:permissible_values qc:CAClothing,
         qc:CACommunityServices,

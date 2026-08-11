@@ -55,7 +55,7 @@ data_model: src/assets/model/assessments-and-plans/assessments-and-plans-standar
 
 ### Care Document Status Taxonomy
 
-{% schema_table page.data_model CareDocumentStatus %}
+{% schema_table page.data_model DocumentStatus %}
 
 ### Question Category Taxonomy
 
