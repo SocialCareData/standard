@@ -11,7 +11,7 @@ tags:
 
 ## Introduction/Purpose
 
-This document outlines the Terms of Reference (ToR) for the Standards Working Group(s) established to develop Data Standards for Children’s Social Care Case Management Systems.
+This document outlines the Terms of Reference (ToR) for the Standards Working Group(s) established to develop Data Standards for children’s and adults’ social care case management systems.
 
 Standards Working Group(s) will be convened to ensure standards are developed that meet the needs of all stakeholders and directly address requirements identified by the reference group and within the guardrails (strategic vision and policies) set by the steering group.
 
@@ -20,7 +20,7 @@ The Standards Working Group(s) will be responsible for making technical recommen
 
 ## Initiative Overview
 
-The Data Standards for Children’s Social Care initiative has been established by the DfE to resolve long standing issues with the creation, use and accessibility of data about children in the English social care system. The initiative aims to develop and implement open standards for data to improve data quality and accessibility across child social care systems.
+The Data Standards for Social Care initiative has been established by the Department for Education (DfE) and the Department of Health and Social Care (DHSC) to resolve long standing issues with the creation, use and accessibility of data about children, young people and adults supported by social care in England. The initiative aims to develop and implement open standards for data to improve data quality and accessibility across children’s and adults’ social care systems.
 
 
 ## Standards Working Group Responsibilities
@@ -29,9 +29,11 @@ The Standards Working Group will:
 
 - Own the enterprise data architecture and technical roadmaps required to enable open data standards to be implemented and adopted by stakeholders.
 - Research, recommend or create data standards for CSC Case management systems that respond to the use cases and related user stories identified by the Reference Group and prioritised by the Steering Group.
+- Provide feedback on the piloting and implementation of standards, including on the technical, operational and governance requirements needed to move standards from development into use
 - Commission the technical infrastructure required to implement the standards.
 - Collaborate with the reference group to test the standards and infrastructure delivered by the standardisation initiative to ensure it is operable and performant.
 - Promote the adoption of the standards, supporting organisations in developing business cases for change.
+- Use learnings from pilot sites to refine standards, implementation guidance and supporting artefacts before wider adoption.
 
 
 ## Membership
@@ -39,13 +41,14 @@ The Standards Working Group will:
 The standards working group will include subject matter experts from the:
 
 1. CMS Vendors - organisations involved in developing CMSs and associated products
-1. Users - organisations who will be impacted by the standards
-1. Open Data Standards experts – From the CSC sector and associated sectors such as health and education. Including standards experts from within relevant government departments.
+2. Users - organisations who will be impacted by the standards
+3. Open Data Standards experts – From the CSC sector and associated sectors such as health and education. Including standards experts from within relevant government departments.
 
-The Standards Working Group will be a community of delivery. Membership will be by open, but members will be required to register and commit time to the work of the group. The group will work openly publishing minutes of meetings, drafts products and other artefacts.
+The Standards Working Group will be a community of delivery. Membership will be by open, but members will be required to register and commit time to the work of the group. Membership should include representation from children’s social care, adult social care, system suppliers, and pilot locations, where relevant. The group will work openly publishing minutes of meetings, drafts products and other artefacts.
 
 The Group will be chaired by a member of the project team.
 
+As we move into piloting, pilot locations will participate in the Working Group, supporting practical testing, providing feedback on implementation feasibility, where we may need to update implementation guidance, and how we can adapt standards to integrate learnings from the pilot sites. 
 
 ## Meeting Frequency and Format
 
@@ -92,6 +95,6 @@ Group members are to declare any direct or indirect interest (whether personal, 
 
 - The Reference Group will operate for the duration of the Initiative.
 - These Terms of Reference will be reviewed and updated at least annually.
-- These Terms of Reference should be reviewed before: 10 July 2026.
+- These Terms of Reference should be reviewed before: 11 February 2027.
 
 </article>
