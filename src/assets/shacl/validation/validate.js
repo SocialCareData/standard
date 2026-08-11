@@ -80,6 +80,17 @@ const STANDARDS = {
         examples: 'examples'
       }
     ]
+  },
+  "assessments-and-plans": {
+    label: "Care Needs Assessments and Care Plans",
+    dir: "assessments-and-plans",
+    profiles: [
+      {
+        name: "assessments-and-plans",
+        shape: "assessments-and-plans-standard-shape.ttl",
+        examples: "examples"
+      }
+    ]
   }
 }
 
