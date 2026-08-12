@@ -107,8 +107,8 @@ classes:
       - actorType
       - actorId
 
-  CareTime:
-    class_uri: ap:CareTime
+  CareTiming:
+    class_uri: ap:CareTiming
     description: >-
       The schedule and timing information of a care component.
     slots:
@@ -289,7 +289,7 @@ slots:
     description: The actors performing this component of the plan.
   time:
     slot_uri: ap:time
-    range: CareTime
+    range: CareTiming
     required: true
     multivalued: false
     description: The schedule and timing information of this component of the plan.
@@ -314,7 +314,7 @@ slots:
     multivalued: false
     description: The ID of the person performing the item of the plan (Person ID, professional ID, or service ID).
 
-  # --- CareTime ---
+  # --- CareTiming ---
   frequency:
     slot_uri: ap:frequency
     range: string

@@ -38,9 +38,9 @@ data_model: src/assets/model/assessments-and-plans/assessments-and-plans-standar
 
 {% schema_table page.data_model CareActor %}
 
-### CareTime
+### CareTiming
 
-{% schema_table page.data_model CareTime %}
+{% schema_table page.data_model CareTiming %}
 
 ### CareActivity
 

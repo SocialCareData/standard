@@ -1,7 +1,7 @@
 ---
 layout: publication
-title: Care Needs Assessments and Care Plans Standard
-description: A common data model for Care Needs Assessments and Care Plans, designed to standardise the back-end fields of information shared between agencies and services.
+title: Assessments and Plans Standards
+description: A common data model for Care Needs Assessments and Care Plans, designed to standardise the back-end fields of information shared between agencies and services without compromising front-end customisation by local authorities.
 breadcrumbs:
   - Publications
 tags:
@@ -10,36 +10,35 @@ tags:
 reference: PUB05
 status: draft
 data_model: src/assets/model/assessments-and-plans/assessments-and-plans-standard.yaml
+non_technical_summary: |
+  As part of the joined-up care workstream, we’re working on standardising care needs assessments and plans. Each are important components of an adult’s social care: an assessment is conducted when an adult contacts (or is referred to) a local authority’s social services team, and a social care plan is created immediately after if the person is assessed to be eligible.
+
+  This structure is based on the requirements of the [Care Act (2014)](https://www.legislation.gov.uk/ukpga/2014/23/contents), the primary legislation that governs adult social care in England. The Care Act enforces that all adults that may appear to have social care needs are assessed over 10 “outcomes”; if they are found to be unable to achieve some of these outcomes, the local authority has the duty to offer a personal budget and set out a care plan.
+
+  However, while this was national guidance, the actual structure of assessments and plans is not standardised. Local authorities across the country use different forms in different formats, some on CMS systems and others in simple word documents.
+
+  Of course, each has its own unique design for a reason. Social workers in one local authority may have different preferences to those in others, whether about the sort of information they collect or the way they record it. However, the limited standardisation makes interoperability and data sharing difficult. Instead of changing the front-end that social workers may like for its uniqueness, we therefore set out to standardise the back-end fields of information that might be shared between agencies and services.
 ---
 
 <a href="/PUB05_assessments_and_plans_standard_table" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
 
 ## Introduction
 
-As part of the joined-up care workstream, we’re working on standardising care needs assessments and plans. Each are important components of an adult’s social care: an assessment is conducted when an adult contacts (or is referred to) a local authority’s social services team, and a social care plan is created immediately after if the person is assessed to be eligible.
-
-This structure is based on the requirements of the [Care Act (2014)](https://www.legislation.gov.uk/ukpga/2014/23/contents), the primary legislation that governs adult social care in England. The Care Act enforces that all adults that may appear to have social care needs are assessed over 10 “outcomes”; if they are found to be unable to achieve some of these outcomes, the local authority has the duty to offer a personal budget and set out a care plan.
-
-However, while this was national guidance, the actual structure of assessments and plans is not standardised. Local authorities across the country use different forms in different formats, some on CMS systems and others in simple word documents.
-
-Of course, each has its own unique design for a reason. Social workers in one local authority may have different preferences to those in others, whether about the sort of information they collect or the way they record it. However, the limited standardisation makes interoperability and data sharing difficult. Instead of changing the front-end that social workers may like for its uniqueness, we therefore set out to standardise the back-end fields of information that might be shared between agencies and services.
-
-We examined five assessments and two plans from different local authorities to ascertain what the most common fields were, how they were filled out, and what was important to standardise for sharing. After a session with the working group, we refined our draft, then ratified it at a technical level.
+The Assessments and Plans Standards aim to standardise the structure of data collected in forms and questionnaires across social care, focusing specifically on Care Needs Assessments and Care Plans. The goal is to facilitate machine-readability and overall interoperability when information pertinent to an adult's social care is shared between organisations, while respecting that each organisation and local authority will have different custom designs for their assessments and plans.
 
 ### Purpose
 
-This standard aims to define a common, machine-readable format for assessments and plans, unblocking data exchange and coordination between local authorities, health services, and care providers.
+This standard aims to define a common, machine-readable format for assessments and plans, unblocking data exchange and coordination between local authorities, health services, and care providers. It also seeks to remain flexible in order to respect and adapt to diverse customisations and workflows across local authorities.
 
 ### Scope
 
-Standardising care needs assessments and care plans. It applies to adult social care needs assessments under the Care Act 2014, and subsequent care plans.
+This standard applies to care needs assessments and care plans under the guidance laid out by the Care Act 2014. It standardises the back-end data architecture behind assessments and plans, not the front-end that social workers see and interact with.
 
 ### Audience
 
-This standard is for developers of Case Management Systems, single-view portals, care providers, integration engineers, and local authority data teams.
+This document is for developers of Case Management Systems, single-view portals, care providers, integration engineers, and local authority data teams.
 
-
-## Data Model Overview
+## Data Model Overview TODO
 
 The following diagram illustrates the elements of the Care Needs Assessments and Plans Standard.
 
@@ -48,17 +47,15 @@ The following diagram illustrates the elements of the Care Needs Assessments and
   [SVG Diagram Placeholder]
 </p>
 
-Both Care Needs Assessments and Care Plans inherit from a shared `FoundationalInformation` mixin containing common metadata about the subject person, authoring professional, dates, and consent.
-
 
 ## Care Needs Assessments
 
-From what we’ve seen across Care Act assessments, there’s a mix of statutory questions that are asked by all local authorities (e.g., *Does the person live alone?*) and custom questions that some local authorities ask and some don’t. Because we are not standardising the specific form designs of individual councils but rather standardising the format in which they are stored, we have adopted a flexible, generic **Question-and-Answer** model that respects local customisation.
+Care Act assessments contain a mix of statutory questions that are asked by all local authorities (e.g., *Does the person live alone?*, as well as all Care Act outcome questions) and custom questions that some local authorities ask and some don’t. Additionally, local authorities may ask statutory questions in different forms, recording different kinds of answers. Because we are not standardising the specific form designs of individual councils but rather standardising the format in which they are stored, we have adopted a flexible, generic **Question-and-Answer** model that respects local customisation.
 
-This metadata-driven approach uses `questionId`: an official dictionary of codes we maintain and publish as a central standards authority to describe statutory questions.
+This metadata-driven approach uses `questionId`, which corresponds to a [dictionary of codes](#statutory-question-id-dictionary) we maintain and publish as a central standards authority to identify statutory questions:
 
 *   **For Statutory fields:** The assessment must include specific questions mandated by the Care Act. For these, the local authority uses their preferred local `questionText`, but they **must** attach the corresponding national `questionId` from our dictionary. This allows central systems to instantly locate the needed data, regardless of how the local authority phrased the question.
-*   **For Local, personalised fields:** If a local authority wants to ask a custom, non-statutory question (like a specific "Pen Picture" prompt), they simply leave the `questionId` blank or use their own local ID.
+*   **For Local, personalised fields:** If a local authority wants to ask a custom, non-statutory question (like a specific "Pen Picture" prompt), they can simply leave the `questionId` blank or use their own local ID.
 
 An assessment document is composed of a set of generic `AssessmentQuestion` items, along with foundational metadata about the person, professional, completion date, mental capacity, advocate requirements, and consent.
 
@@ -102,7 +99,7 @@ A Care Needs Assessment record. Captures foundational metadata, Care Act outcome
 : Status of this assessment. *Enum*. See the [Document Status Vocabulary](#document-status-taxonomy).
 
 <span id="assessment-assessmentQuestion">assessmentQuestion</span>
-: The list of statutory and custom questions and answers comprising this assessment. *AssessmentQuestion object*. See [AssessmentQuestion](#assessmentquestion).
+: The list of (statutory and custom) questions and answers comprising this assessment. *AssessmentQuestion object*. See [AssessmentQuestion](#assessmentquestion).
 
 #### Example
 
@@ -170,7 +167,7 @@ Generic question-answer pair. Handles mandatory Care Act statutory questions via
 #### Properties
 
 <span id="question-questionId">questionId</span>
-: Unique national ID for statutory questions (e.g., `STAT-HOUSING-01`). Blank for custom questions. *String*.
+: Unique national ID for statutory questions (e.g., `STAT-HOUSING-01`). Blank or custom for custom questions, otherwise adherent to the [Statutory Question ID vocabulary](#statutory-question-id-dictionary). *String*.
 
 <span id="question-category">category</span>
 : The domain of the question. *Enum*. See [Question Category vocabulary](#question-category-taxonomy).
@@ -197,7 +194,7 @@ Review details linking current records back to historical documents.
 : Whether this is a review of a previous assessment/plan or not. *Boolean*.
 
 <span id="review-previousId">previousId</span>
-: Link to the previous assessment/plan being reviewed. *Identifier object*. See [Identifier](#identifier).
+: Link to the previous assessment/plan being reviewed, if available. *Identifier object*. See [Identifier](#identifier).
 
 ### Identifier
 
@@ -214,7 +211,9 @@ A unique identifier, identical to the definition in the [Person Standard](/PUB01
 
 ## Statutory Question ID Dictionary
 
-To support the generic Question-and-Answer model, we maintain a central dictionary of statutory questions mandated by the Care Act 2014 or common assessment guidelines. Every statutory question has an expected `questionText` phrasing and a machine-readable `answerType`.
+To support the generic Question-and-Answer model, we maintain a central dictionary of `questionID`s for statutory questions mandated by the Care Act 2014 or common assessment guidelines. Every statutory question has an expected `questionText` phrasing and a machine-readable `answerType`.
+
+As above, the ID of a statutory question in an assessment must conform to this list of `questionID`s, but its `questionText` and `answerType` can be different to those expected here.
 
 {% schema_table page.data_model StatutoryQuestionId expanded %}
 
@@ -223,16 +222,16 @@ To support the generic Question-and-Answer model, we maintain a central dictiona
 
 For individuals assessed as eligible, a Care Plan is created to structure the care package details. The primary goal of standardising Care Plans is to structure how procedural information about the care package is shared behind the scenes between agencies, services, and care providers.
 
-The standard follows a rigid structure of **who** (actors), **what** (activities and desired Care Act outcomes), and **when** (timing and frequency):
+The standard follows a rigid structure of **who** (actors), **when** (timing and frequency), and **what** (activities and desired Care Act outcomes):
 
 *   **CareComponent:** Represents an itemised component of the care plan package.
-*   **CareActor:** Captures who is delivering the service (Self, Family, Professional services, etc.) and their unique ID.
-*   **CareTime:** Captures the scheduling, frequency, and start/end dates of the delivery.
-*   **CareActivity:** Captures the text description of the care activity, the specific Care Act outcome it targets, and direct payment flags.
+*   **CareComponent.CareActor:** Captures who is delivering the service (Self, Family, Professional services, etc.) and their unique ID.
+*   **CareComponent.CareTiming:** Captures the scheduling, frequency, and start/end dates of the delivery.
+*   **CareComponent.CareActivity:** Captures the text description of the care activity, the specific Care Act outcome it targets, and direct payment flags.
 
 ### CarePlan
 
-A Care Plan record, constructed for adults found eligible for care. Follows a structured model of who, what, when, and why.
+A Care Plan record, constructed for adults found eligible for care. Follows a structured, service-focused model.
 
 #### Properties
 
@@ -258,7 +257,7 @@ A Care Plan record, constructed for adults found eligible for care. Follows a st
 : Does the person consent to information sharing? *Boolean*.
 
 <span id="plan-review">review</span>
-: A record of whether this plan is a review of a previous plan. *Review object*. See [Review](#review).
+: A record of whether this plan has been made as part of a review of a previous plan. *Review object*. See [Review](#review).
 
 <span id="plan-serviceEpisodeId">serviceEpisodeId</span>
 : Unique identifier for the safeguarding or care service episode during which this plan was completed or active. Multi-valued. Optional (`0..*`). *Identifier object*. See [Safeguarding ServiceEpisode](/PUB02_safeguarding_standard#serviceepisode).
@@ -327,7 +326,7 @@ A Care Plan record, constructed for adults found eligible for care. Follows a st
         }
       ],
       "time": {
-        "@type": "CareTime",
+        "@type": "CareTiming",
         "frequency": "Daily",
         "startDateTime": "2026-08-12T12:00:00Z"
       },
@@ -352,8 +351,8 @@ An itemised component of a care plan outlining care delivery.
 <span id="component-actor">actor</span>
 : The actor performing this component of the care plan. *CareActor object*. See [CareActor](#careactor).
 
-<span id="component-time">time</span>
-: The scheduling information for this care component. *CareTime object*. See [CareTime](#caretime).
+<span id="component-timing">time</span>
+: The scheduling information for this care component. *CareTiming object*. See [CareTiming](#caretiming).
 
 <span id="component-activity">activity</span>
 : The activity detail and outcomes for this care component. *CareActivity object*. See [CareActivity](#careactivity).
@@ -370,7 +369,7 @@ Details on who is delivering a specific CareComponent.
 <span id="actor-actorId">actorId</span>
 : Unique identifier for the actor (Person ID, Professional ID, or Service ID). *Identifier object*. See [Identifier](#identifier).
 
-### CareTime
+### CareTiming
 
 Scheduling information for a CareComponent.
 
@@ -424,10 +423,6 @@ The model is parameterised by the following controlled vocabularies.
 ### Care Act Outcome Taxonomy
 
 {% schema_table page.data_model CareActOutcome expanded %}
-
-### Statutory Question ID Taxonomy
-
-{% schema_table page.data_model StatutoryQuestionId expanded %}
 
 ### Client Funding Status Taxonomy
 

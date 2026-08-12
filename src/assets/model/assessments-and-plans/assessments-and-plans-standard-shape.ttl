@@ -45,7 +45,7 @@ ap:AssessmentQuestionShape a sh:NodeShape ;
             sh:order 2 ;
             sh:path ap:questionText ],
         [ sh:datatype xsd:boolean ;
-            sh:description "Whether this question was mandatory on the local authority’s assessment. Should always be True for statutory fields." ;
+            sh:description "Whether this question was mandatory on the local authorityï¿½s assessment. Should always be True for statutory fields." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
@@ -106,7 +106,7 @@ ap:CareComponentShape a sh:NodeShape ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 0 ;
             sh:path ap:actor ],
-        [ sh:class ap:CareTime ;
+        [ sh:class ap:CareTiming ;
             sh:description "The schedule and timing information of this component of the plan." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
@@ -291,7 +291,7 @@ ap:CarePlanShape a sh:NodeShape ;
             sh:path ap:review ] ;
     sh:targetClass ap:CarePlan .
 
-ap:CareTimeShape a sh:NodeShape ;
+ap:CareTimingShape a sh:NodeShape ;
     rdfs:comment "The schedule and timing information of a care component." ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
@@ -315,7 +315,7 @@ ap:CareTimeShape a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 2 ;
             sh:path ap:endDateTime ] ;
-    sh:targetClass ap:CareTime .
+    sh:targetClass ap:CareTiming .
 
 ap:FoundationalInformationShape a sh:NodeShape ;
     rdfs:comment "Information that is relevant across both assessments and plans." ;

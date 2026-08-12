@@ -226,7 +226,7 @@ ap:questionText a owl:DatatypeProperty ;
 ap:required a owl:DatatypeProperty ;
     rdfs:label "required" ;
     rdfs:range xsd:boolean ;
-    skos:definition "Whether this question was mandatory on the local authority’s assessment. Should always be True for statutory fields." ;
+    skos:definition "Whether this question was mandatory on the local authorityï¿½s assessment. Should always be True for statutory fields." ;
     skos:inScheme ap:schema .
 
 ap:review a owl:ObjectProperty ;
@@ -249,7 +249,7 @@ ap:system a owl:DatatypeProperty ;
 
 ap:time a owl:ObjectProperty ;
     rdfs:label "time" ;
-    rdfs:range ap:CareTime ;
+    rdfs:range ap:CareTiming ;
     skos:definition "The schedule and timing information of this component of the plan." ;
     skos:inScheme ap:schema .
 
@@ -325,8 +325,8 @@ ap:CareComponent a owl:Class ;
     skos:exactMatch ap:CareComponent ;
     skos:inScheme ap:schema .
 
-ap:CareTime a owl:Class ;
-    rdfs:label "CareTime" ;
+ap:CareTiming a owl:Class ;
+    rdfs:label "CareTiming" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty ap:startDateTime ],
@@ -337,7 +337,7 @@ ap:CareTime a owl:Class ;
             owl:cardinality 1 ;
             owl:onProperty ap:frequency ] ;
     skos:definition "The schedule and timing information of a care component." ;
-    skos:exactMatch ap:CareTime ;
+    skos:exactMatch ap:CareTiming ;
     skos:inScheme ap:schema .
 
 ap:FoundationalInformation a owl:Class ;
@@ -750,7 +750,7 @@ sq:STAT-FINANCE-01 a owl:Class ;
     rdfs:label "STAT-FINANCE-01" ;
     dct:title "STAT-FINANCE-01" ;
     rdfs:subClassOf ap:statutory-question-id ;
-    skos:definition "What is the client’s (potential) funding status? (Expected answerType: Enum matching ClientFundingStatus)" .
+    skos:definition "What is the clientï¿½s (potential) funding status? (Expected answerType: Enum matching ClientFundingStatus)" .
 
 sq:STAT-HEALTH-01 a owl:Class ;
     rdfs:label "STAT-HEALTH-01" ;
