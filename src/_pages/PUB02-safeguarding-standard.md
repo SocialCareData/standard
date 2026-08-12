@@ -11,7 +11,10 @@ tags:
   - Safeguarding
 reference: PUB02
 status: draft
+data_model: src/assets/model/safeguarding/safeguarding-standard.yaml
 ---
+
+<a href="/PUB02_safeguarding_standard_table" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
 
 ## Introduction
 

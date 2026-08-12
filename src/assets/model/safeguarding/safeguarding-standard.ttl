@@ -1,0 +1,1195 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix eo: <https://ns.socialcaredata.io/safeguarding/episode-outcome#> .
+@prefix epc: <https://ns.socialcaredata.io/safeguarding/episode-code#> .
+@prefix evc: <https://ns.socialcaredata.io/safeguarding/event-code#> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix mt: <https://ns.socialcaredata.io/safeguarding/measurement-type#> .
+@prefix mu: <https://ns.socialcaredata.io/safeguarding/measurement-unit#> .
+@prefix oc: <https://ns.socialcaredata.io/safeguarding/organisation-code#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix p: <https://ns.socialcaredata.io/person/> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix scf: <https://ns.socialcaredata.io/safeguarding/service-cost-frequency#> .
+@prefix sd: <https://ns.socialcaredata.io/safeguarding/service-delivery#> .
+@prefix sg: <https://ns.socialcaredata.io/safeguarding/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix svc: <https://ns.socialcaredata.io/safeguarding/service-code#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+sg:alias a owl:DatatypeProperty ;
+    rdfs:label "alias" ;
+    rdfs:range xsd:string ;
+    skos:definition "Other names the entity is known by." ;
+    skos:inScheme sg:schema .
+
+sg:dayOfWeek a owl:DatatypeProperty ;
+    rdfs:label "dayOfWeek" ;
+    rdfs:range xsd:string ;
+    skos:definition "Days of the week the event recurs on (mon..sun)." ;
+    skos:inScheme sg:schema .
+
+sg:delivery a owl:ObjectProperty ;
+    rdfs:label "delivery" ;
+    rdfs:range sg:service-delivery ;
+    skos:definition "The way the service is delivered." ;
+    skos:inScheme sg:schema .
+
+sg:finding a owl:ObjectProperty ;
+    rdfs:label "finding" ;
+    rdfs:range sg:Finding ;
+    skos:definition "Observations or measurements made during the course of the episode." ;
+    skos:inScheme sg:schema .
+
+sg:measurement a owl:ObjectProperty ;
+    rdfs:label "measurement" ;
+    rdfs:range sg:Measurement ;
+    skos:definition "Quantitative measurement(s) about the subject or their circumstances." ;
+    skos:inScheme sg:schema .
+
+sg:observation a owl:ObjectProperty ;
+    rdfs:label "observation" ;
+    rdfs:range sg:Observation ;
+    skos:definition "Qualitative observation(s) about the subject or their circumstances." ;
+    skos:inScheme sg:schema .
+
+sg:relatedOrganisationRef a owl:ObjectProperty ;
+    rdfs:label "relatedOrganisationRef" ;
+    dct:title "relatedOrganisation" ;
+    rdfs:range p:Identifier ;
+    skos:definition "References (by Identifier) to Organisations associated with the entity." ;
+    skos:inScheme sg:schema .
+
+sg:relatedProfessionalObj a owl:ObjectProperty ;
+    rdfs:label "relatedProfessionalObj" ;
+    dct:title "relatedProfessional" ;
+    rdfs:range sg:RelatedProfessional ;
+    skos:definition "References to the Professional(s) involved, qualified by involvement." ;
+    skos:inScheme sg:schema .
+
+sg:relatedProfessionalRef a owl:ObjectProperty ;
+    rdfs:label "relatedProfessionalRef" ;
+    dct:title "relatedProfessional" ;
+    rdfs:range p:Identifier ;
+    skos:definition "References (by Identifier) to Professionals associated with the entity." ;
+    skos:inScheme sg:schema .
+
+sg:schema.owl.ttl a owl:Ontology ;
+    rdfs:label "safeguarding" ;
+    dct:license "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" ;
+    dct:title "Safeguarding Standard Data Model" ;
+    pav:version "1.0.0" ;
+    owl:imports p:schema ;
+    skos:definition """A LinkML data model for the Safeguarding Standard: a common data model for recording the services, professionals, organisations, service episodes and life events involved in safeguarding and promoting the wellbeing of a person, to support multi-agency information sharing (MAIS).
+The model is organised around five top-level entities - Organisation, Service, Professional, ServiceEpisode and LifeEvent - and the shared objects that link them together (Identifier, Name, Address, Contact). The shared objects are defined once by the Person Standard and imported from person-standard.yaml, so this schema reuses their p: ontology IRIs (p:Identifier, p:Name, p:Address, p:Contact) rather than redefining them. Coded fields draw their values from the controlled vocabularies (enums) declared below.""" .
+
+sg:sgAddress a owl:ObjectProperty ;
+    rdfs:label "sgAddress" ;
+    dct:title "address" ;
+    rdfs:range p:Address ;
+    skos:definition "Physical location(s) of the entity." ;
+    skos:inScheme sg:schema .
+
+sg:text a owl:DatatypeProperty ;
+    rdfs:label "text" ;
+    rdfs:range xsd:string ;
+    skos:definition "A finding that cannot be represented as an Observation or Measurement." ;
+    skos:inScheme sg:schema .
+
+sg:timeOfDay a owl:DatatypeProperty ;
+    rdfs:label "timeOfDay" ;
+    rdfs:range xsd:string ;
+    skos:definition "Time(s) of day the event occurs (hh:mm:ss)." ;
+    skos:inScheme sg:schema .
+
+sg:whenCode a owl:DatatypeProperty ;
+    rdfs:label "whenCode" ;
+    dct:title "when" ;
+    rdfs:range xsd:string ;
+    skos:definition "Event-related timing(s), e.g. MORN for the morning." ;
+    skos:inScheme sg:schema .
+
+sg:LifeEvent a owl:Class ;
+    rdfs:label "LifeEvent" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:subjectPerson ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:sgIdentifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:eventType ] ;
+    skos:definition "A significant, time-bound occurrence in an individual's life that may have implications for their safety, wellbeing or development - for example attendance at A&E, a child being reported as missing, or an exclusion from school. Life events are not inherently positive or negative but can signal levels of risk, vulnerability or changing need." ;
+    skos:exactMatch sg:LifeEvent ;
+    skos:inScheme sg:schema .
+
+sg:Organisation a owl:Class ;
+    rdfs:label "Organisation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:contactMulti ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:relatedServiceRef ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:sgIdentifier ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:entityName ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:active ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:organisationType ] ;
+    skos:definition "An organisation involved in the safeguarding or wellbeing of a person - for example a local authority, an NHS trust, a school, or an education authority. Aligns with the FHIR Organization resource." ;
+    skos:exactMatch sg:Organisation ;
+    skos:inScheme sg:schema .
+
+sg:Professional a owl:Class ;
+    rdfs:label "Professional" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:professionalName ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:status ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:contactSingle ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:role ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:sgIdentifier ] ;
+    skos:definition "An individual acting in a formal role within an organisation who has responsibilities relating to a person's safety, wellbeing, care or support - for example undertaking assessments, creating and monitoring plans, or sharing information in a multi-agency context." ;
+    skos:exactMatch sg:Professional ;
+    skos:inScheme sg:schema .
+
+sg:Service a owl:Class ;
+    rdfs:label "Service" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:entityName ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:serviceType ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:contactMulti ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:active ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:costFrequency ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:sgIdentifier ] ;
+    skos:definition "A service involved in the safeguarding or wellbeing of a person - the specific intervention or package of support delivered by one or more organisations (e.g. local authority social care, an emergency department, a general practice, or a school)." ;
+    skos:exactMatch sg:Service ;
+    skos:inScheme sg:schema .
+
+sg:ServiceEpisode a owl:Class ;
+    rdfs:label "ServiceEpisode" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:outcome ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:relatedServiceRef ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:sgIdentifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:episodeType ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:location ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:timeInformation ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:subjectPerson ] ;
+    skos:definition "A bounded period during which an individual receives a defined service, intervention, or package of support from a service or professional. It has a recognisable start and end point, though duration may vary from a single contact to sustained involvement over time." ;
+    skos:exactMatch sg:ServiceEpisode ;
+    skos:inScheme sg:schema .
+
+sg:contactSingle a owl:ObjectProperty ;
+    rdfs:label "contactSingle" ;
+    dct:title "contact" ;
+    rdfs:range p:Contact ;
+    skos:definition "The professional's contact information (exactly one)." ;
+    skos:inScheme sg:schema .
+
+sg:costFrequency a owl:ObjectProperty ;
+    rdfs:label "costFrequency" ;
+    rdfs:range sg:service-cost-frequency ;
+    skos:definition "The frequency at which the unit cost occurs." ;
+    skos:inScheme sg:schema .
+
+sg:endDateTime a owl:DatatypeProperty ;
+    rdfs:label "endDateTime" ;
+    rdfs:range xsd:dateTime ;
+    skos:definition "The end of the episode or life event, as an ISO 8601 date-time." ;
+    skos:inScheme sg:schema .
+
+sg:episodeType a owl:ObjectProperty ;
+    rdfs:label "episodeType" ;
+    dct:title "type" ;
+    rdfs:range sg:episode-code ;
+    skos:definition "Code(s) for the type of service episode." ;
+    skos:inScheme sg:schema .
+
+sg:eventType a owl:ObjectProperty ;
+    rdfs:label "eventType" ;
+    dct:title "type" ;
+    rdfs:range sg:event-code ;
+    skos:definition "Code(s) for the type of life event." ;
+    skos:inScheme sg:schema .
+
+sg:frequency a owl:ObjectProperty ;
+    rdfs:label "frequency" ;
+    rdfs:range sg:Timing ;
+    skos:definition "The frequency of the episode or life event, expressed as a FHIR Timing." ;
+    skos:inScheme sg:schema .
+
+sg:location a owl:DatatypeProperty ;
+    rdfs:label "location" ;
+    rdfs:range xsd:string ;
+    skos:definition "Details about the location of the episode or life event." ;
+    skos:inScheme sg:schema .
+
+sg:measurementType a owl:ObjectProperty ;
+    rdfs:label "measurementType" ;
+    dct:title "type" ;
+    rdfs:range sg:measurement-type ;
+    skos:definition "The type of measurement." ;
+    skos:inScheme sg:schema .
+
+sg:measurementUnit a owl:ObjectProperty ;
+    rdfs:label "measurementUnit" ;
+    dct:title "unit" ;
+    rdfs:range sg:measurement-unit ;
+    skos:definition "The unit of measurement." ;
+    skos:inScheme sg:schema .
+
+sg:measurementValue a owl:DatatypeProperty ;
+    rdfs:label "measurementValue" ;
+    dct:title "value" ;
+    rdfs:range xsd:decimal ;
+    skos:definition "A decimal number representing the value of the measurement." ;
+    skos:inScheme sg:schema .
+
+sg:observationEndDate a owl:DatatypeProperty ;
+    rdfs:label "observationEndDate" ;
+    dct:title "endDate" ;
+    rdfs:range xsd:dateTime ;
+    skos:definition "The date at which this observation was made false (if now outdated)." ;
+    skos:inScheme sg:schema .
+
+sg:observationStartDate a owl:DatatypeProperty ;
+    rdfs:label "observationStartDate" ;
+    dct:title "startDate" ;
+    rdfs:range xsd:dateTime ;
+    skos:definition "The date at which this observation was first true, as an ISO 8601 date-time." ;
+    skos:inScheme sg:schema .
+
+sg:observationType a owl:DatatypeProperty ;
+    rdfs:label "observationType" ;
+    dct:title "type" ;
+    rdfs:range xsd:string ;
+    skos:definition "The type of observation, drawn from the Observation Type Vocabulary (e.g. NEET, free-school-meals, SEND.SpLD). The vocabulary is extensible (some codes carry dynamic sub-parts such as EAL.<ISO 639-1>), so it is modelled as an open string rather than a closed enumeration." ;
+    skos:inScheme sg:schema .
+
+sg:organisationType a owl:ObjectProperty ;
+    rdfs:label "organisationType" ;
+    dct:title "type" ;
+    rdfs:range sg:organisation-code ;
+    skos:definition "Code(s) for the kind of organisation." ;
+    skos:inScheme sg:schema .
+
+sg:outcome a owl:ObjectProperty ;
+    rdfs:label "outcome" ;
+    rdfs:range sg:episode-outcome ;
+    skos:definition "Outcome of the episode for the subject." ;
+    skos:inScheme sg:schema .
+
+sg:period a owl:DatatypeProperty ;
+    rdfs:label "period" ;
+    rdfs:range xsd:integer ;
+    skos:definition "The length of the recurrence period." ;
+    skos:inScheme sg:schema .
+
+sg:periodUnit a owl:DatatypeProperty ;
+    rdfs:label "periodUnit" ;
+    rdfs:range xsd:string ;
+    skos:definition "The unit of the recurrence period (s, min, h, d, wk, mo, a)." ;
+    skos:inScheme sg:schema .
+
+sg:person a owl:ObjectProperty ;
+    rdfs:label "person" ;
+    rdfs:range p:Identifier ;
+    skos:definition "A reference (by Identifier) to a Person record involved in the episode or life event." ;
+    skos:inScheme sg:schema .
+
+sg:professional a owl:ObjectProperty ;
+    rdfs:label "professional" ;
+    rdfs:range p:Identifier ;
+    skos:definition "A reference (by Identifier) to a Professional record involved in the episode or life event." ;
+    skos:inScheme sg:schema .
+
+sg:professionalName a owl:ObjectProperty ;
+    rdfs:label "professionalName" ;
+    dct:title "name" ;
+    rdfs:range p:Name ;
+    skos:definition "The professional's name." ;
+    skos:inScheme sg:schema .
+
+sg:repeat a owl:ObjectProperty ;
+    rdfs:label "repeat" ;
+    rdfs:range sg:Repeat ;
+    skos:definition "The FHIR Timing repeat structure." ;
+    skos:inScheme sg:schema .
+
+sg:repeatFrequency a owl:DatatypeProperty ;
+    rdfs:label "repeatFrequency" ;
+    dct:title "frequency" ;
+    rdfs:range xsd:integer ;
+    skos:definition "The number of times the event occurs per period." ;
+    skos:inScheme sg:schema .
+
+sg:role a owl:DatatypeProperty ;
+    rdfs:label "role" ;
+    rdfs:range xsd:string ;
+    skos:definition "Text describing the professional's occupational role." ;
+    skos:inScheme sg:schema .
+
+sg:serviceType a owl:ObjectProperty ;
+    rdfs:label "serviceType" ;
+    dct:title "type" ;
+    rdfs:range sg:service-code ;
+    skos:definition "Code(s) for the kind of service." ;
+    skos:inScheme sg:schema .
+
+sg:startDateTime a owl:DatatypeProperty ;
+    rdfs:label "startDateTime" ;
+    rdfs:range xsd:dateTime ;
+    skos:definition "The start of the episode or life event, as an ISO 8601 date-time." ;
+    skos:inScheme sg:schema .
+
+sg:status a owl:DatatypeProperty ;
+    rdfs:label "status" ;
+    rdfs:range xsd:boolean ;
+    skos:definition "The professional's current working status." ;
+    skos:inScheme sg:schema .
+
+sg:timeInformation a owl:ObjectProperty ;
+    rdfs:label "timeInformation" ;
+    rdfs:range sg:TimeInformation ;
+    skos:definition "Details about the timing of the episode or life event." ;
+    skos:inScheme sg:schema .
+
+sg:Finding a owl:Class ;
+    rdfs:label "Finding" ;
+    skos:definition "An observation or measurement made during the course of a service episode about the subject and their circumstances. May be recorded as a structured Observation, a quantitative Measurement, and/or free text." ;
+    skos:exactMatch sg:Finding ;
+    skos:inScheme sg:schema .
+
+sg:Measurement a owl:Class ;
+    rdfs:label "Measurement" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:measurementType ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:measurementUnit ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:measurementValue ] ;
+    skos:definition "A quantitative measurement of something related to the subject or their circumstances (for example \"Authorised Absences\" or \"Referrals\")." ;
+    skos:exactMatch sg:Measurement ;
+    skos:inScheme sg:schema .
+
+sg:Observation a owl:Class ;
+    rdfs:label "Observation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:observationStartDate ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:observationType ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:observationEndDate ] ;
+    skos:definition "A qualitative observation that represents an attribute of the subject or their circumstances (for example \"NEET\" or \"free-school-meals\")." ;
+    skos:exactMatch sg:Observation ;
+    skos:inScheme sg:schema .
+
+sg:RelatedProfessional a owl:Class ;
+    rdfs:label "RelatedProfessional" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:involvement ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:professional ] ;
+    skos:definition "A typed reference to a Professional involved in a service episode or life event." ;
+    skos:exactMatch sg:RelatedProfessional ;
+    skos:inScheme sg:schema .
+
+sg:Repeat a owl:Class ;
+    rdfs:label "Repeat" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:period ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:periodUnit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:repeatFrequency ] ;
+    skos:definition "The nested repeat structure of a FHIR Timing, describing how often an event recurs. All fields are optional; the shape is non-closed so any additional FHIR repeat field is permitted." ;
+    skos:exactMatch sg:Repeat ;
+    skos:inScheme sg:schema .
+
+sg:SubjectPerson a owl:Class ;
+    rdfs:label "SubjectPerson" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:involvement ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:person ] ;
+    skos:definition "A typed reference to a Person involved in a service episode or life event." ;
+    skos:exactMatch sg:SubjectPerson ;
+    skos:inScheme sg:schema .
+
+sg:TimeInformation a owl:Class ;
+    rdfs:label "TimeInformation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:endDateTime ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:frequency ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:startDateTime ] ;
+    skos:definition "Details about the timing of a service episode or life event, including when it started and ended and how frequently it recurs." ;
+    skos:exactMatch sg:TimeInformation ;
+    skos:inScheme sg:schema .
+
+sg:Timing a owl:Class ;
+    rdfs:label "Timing" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:repeat ] ;
+    skos:definition "A recurring schedule, expressed as (a subset of) the FHIR Timing datatype. Not defined by this standard - see the FHIR Timing documentation for the full set of fields. Modelled openly (non-closed) here." ;
+    skos:exactMatch sg:Timing ;
+    skos:inScheme sg:schema .
+
+sg:active a owl:DatatypeProperty ;
+    rdfs:label "active" ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Code for the entity's status - whether it is currently active." ;
+    skos:inScheme sg:schema .
+
+sg:contactMulti a owl:ObjectProperty ;
+    rdfs:label "contactMulti" ;
+    dct:title "contact" ;
+    rdfs:range p:Contact ;
+    skos:definition "Contact information (multi-valued)." ;
+    skos:inScheme sg:schema .
+
+sg:entityName a owl:DatatypeProperty ;
+    rdfs:label "entityName" ;
+    dct:title "name" ;
+    rdfs:range xsd:string ;
+    skos:definition "The official name of the organisation or service." ;
+    skos:inScheme sg:schema .
+
+epc:AdultSafeguarding a owl:Class ;
+    rdfs:label "adult-safeguarding" ;
+    dct:title "Adult Safeguarding Enquiry (Section 42)" ;
+    rdfs:subClassOf sg:episode-code .
+
+epc:CamhsPlan a owl:Class ;
+    rdfs:label "CAMHS-plan" ;
+    dct:title "Children and Adolescent mental health services care plan" ;
+    rdfs:subClassOf sg:episode-code .
+
+epc:CareLeaver a owl:Class ;
+    rdfs:label "care-leaver" ;
+    dct:title "Care Leaver Support" ;
+    rdfs:subClassOf sg:episode-code .
+
+epc:ChildLookedAfter a owl:Class ;
+    rdfs:label "child-looked-after" ;
+    dct:title "Child in LA care" ;
+    rdfs:subClassOf sg:episode-code .
+
+epc:CinPlan a owl:Class ;
+    rdfs:label "cin-plan" ;
+    dct:title "Child in Need (CIN) Plan" ;
+    rdfs:subClassOf sg:episode-code .
+
+epc:CpPlan a owl:Class ;
+    rdfs:label "cp-plan" ;
+    dct:title "Child Protection (CP) Plan" ;
+    rdfs:subClassOf sg:episode-code .
+
+epc:EarlyHelp a owl:Class ;
+    rdfs:label "early-help" ;
+    dct:title "Early Help Assessment / Intervention" ;
+    rdfs:subClassOf sg:episode-code .
+
+epc:Ehcp a owl:Class ;
+    rdfs:label "ehcp" ;
+    dct:title "Education, Health, and Care plan" ;
+    rdfs:subClassOf sg:episode-code .
+
+epc:FamilyCourtOrder a owl:Class ;
+    rdfs:label "family-court-order" ;
+    dct:title "Any order made by family court" ;
+    rdfs:subClassOf sg:episode-code .
+
+epc:Section47 a owl:Class ;
+    rdfs:label "section-47" ;
+    dct:title "Section 47 Enquiry" ;
+    rdfs:subClassOf sg:episode-code .
+
+eo:Assessment a owl:Class ;
+    rdfs:label "assessment" ;
+    dct:title "Progress to assessment, review, or reassessment" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:Continuation a owl:Class ;
+    rdfs:label "continuation" ;
+    dct:title "Continuation of support or services" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:Hospital a owl:Class ;
+    rdfs:label "hospital" ;
+    dct:title "Admitted to hospital" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:NfaDeceased a owl:Class ;
+    rdfs:label "NFA-deceased" ;
+    dct:title "No Further Action: Client deceased" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:NfaDeclined a owl:Class ;
+    rdfs:label "NFA-declined" ;
+    dct:title "No Further Action: Support declined" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:NfaDisregard a owl:Class ;
+    rdfs:label "NFA-disregard" ;
+    dct:title "No Further Action: Self-funded client or under 12 week property disregard" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:NfaEndedOther a owl:Class ;
+    rdfs:label "NFA-ended-other" ;
+    dct:title "No Further Action: Support ended for other reason" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:NfaInfo a owl:Class ;
+    rdfs:label "NFA-info" ;
+    dct:title "No Further Action: Information and advice or signposting" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:NfaLocalReferral a owl:Class ;
+    rdfs:label "NFA-local-referral" ;
+    dct:title "No Further Action: Referral to other service within the local authority" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:NfaMoved a owl:Class ;
+    rdfs:label "NFA-moved" ;
+    dct:title "No Further Action: Responsibility moved to another local authority" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:NfaNhsReferral a owl:Class ;
+    rdfs:label "NFA-NHS-referral" ;
+    dct:title "No Further Action: Referral to NHS services or NHS funded social care" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:NfaNoOfferOther a owl:Class ;
+    rdfs:label "NFA-no-offer-other" ;
+    dct:title "No Further Action: No services offered for other reason" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:NfaOther a owl:Class ;
+    rdfs:label "NFA-other" ;
+    dct:title "No Further Action: Other" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:NfaPlanned a owl:Class ;
+    rdfs:label "NFA-planned" ;
+    dct:title "No Further Action: Support ended as planned" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:Planning a owl:Class ;
+    rdfs:label "planning" ;
+    dct:title "Progress to support or service planning" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+eo:Reablement a owl:Class ;
+    rdfs:label "reablement" ;
+    dct:title "Progress to reablement/ST-Max" ;
+    rdfs:subClassOf sg:episode-outcome .
+
+evc:AeAttendance a owl:Class ;
+    rdfs:label "ae-attendance" ;
+    dct:title "A&E Attendance" ;
+    rdfs:subClassOf sg:event-code .
+
+evc:Birth a owl:Class ;
+    rdfs:label "birth" ;
+    dct:title "Birth" ;
+    rdfs:subClassOf sg:event-code .
+
+evc:Death a owl:Class ;
+    rdfs:label "death" ;
+    dct:title "Death" ;
+    rdfs:subClassOf sg:event-code .
+
+evc:Homeless a owl:Class ;
+    rdfs:label "homeless" ;
+    dct:title "Made homeless" ;
+    rdfs:subClassOf sg:event-code .
+
+evc:MissingPerson a owl:Class ;
+    rdfs:label "missing-person" ;
+    dct:title "Reported Missing" ;
+    rdfs:subClassOf sg:event-code .
+
+evc:Referral a owl:Class ;
+    rdfs:label "referral" ;
+    dct:title "Referral made to relevant authority" ;
+    rdfs:subClassOf sg:event-code .
+
+evc:SafeguardingConcern a owl:Class ;
+    rdfs:label "safeguarding-concern" ;
+    dct:title "Safeguarding Concern Raised" ;
+    rdfs:subClassOf sg:event-code .
+
+evc:SchoolExclusion a owl:Class ;
+    rdfs:label "school-exclusion" ;
+    dct:title "School Exclusion" ;
+    rdfs:subClassOf sg:event-code .
+
+evc:SchoolSuspension a owl:Class ;
+    rdfs:label "school-suspension" ;
+    dct:title "School Suspension" ;
+    rdfs:subClassOf sg:event-code .
+
+sg:involvement a owl:DatatypeProperty ;
+    rdfs:label "involvement" ;
+    rdfs:range xsd:string ;
+    skos:definition "Code for the nature of the involvement. Uses an HL7 v3 ParticipationType code directly (e.g. SBJ, PPRF); not defined by this standard, so modelled as an open string." ;
+    skos:inScheme sg:schema .
+
+mt:Attendance a owl:Class ;
+    rdfs:label "Attendance" ;
+    dct:title "Pupil attendance % at school" ;
+    rdfs:subClassOf sg:measurement-type .
+
+mt:AuthorisedAbsences a owl:Class ;
+    rdfs:label "Authorised Absences" ;
+    dct:title "Pupil % absences from school that are authorised" ;
+    rdfs:subClassOf sg:measurement-type .
+
+mt:CaringHoursPerWeek a owl:Class ;
+    rdfs:label "caring-hours-per-week" ;
+    dct:title "Total hours spent caring per week" ;
+    rdfs:subClassOf sg:measurement-type .
+
+mt:UnauthorisedAbsences a owl:Class ;
+    rdfs:label "Unauthorised Absences" ;
+    dct:title "Pupil % absences from school that are unauthorised" ;
+    rdfs:subClassOf sg:measurement-type .
+
+mu:Count a owl:Class ;
+    rdfs:label "count" ;
+    dct:title "Number of discrete items, entities, or events" ;
+    rdfs:subClassOf sg:measurement-unit .
+
+mu:Pct a owl:Class ;
+    rdfs:label "pct" ;
+    dct:title "Percentage (%)" ;
+    rdfs:subClassOf sg:measurement-unit .
+
+oc:LocalAuthority a owl:Class ;
+    rdfs:label "local-authority" ;
+    dct:title "Local Authority" ;
+    rdfs:subClassOf sg:organisation-code .
+
+oc:NhsTrust a owl:Class ;
+    rdfs:label "nhs-trust" ;
+    dct:title "NHS Trust" ;
+    rdfs:subClassOf sg:organisation-code .
+
+oc:PoliceForce a owl:Class ;
+    rdfs:label "police-force" ;
+    dct:title "Police Force" ;
+    rdfs:subClassOf sg:organisation-code .
+
+sg:relatedServiceRef a owl:ObjectProperty ;
+    rdfs:label "relatedServiceRef" ;
+    dct:title "relatedService" ;
+    rdfs:range p:Identifier ;
+    skos:definition "References (by Identifier) to Services associated with the entity." ;
+    skos:inScheme sg:schema .
+
+svc:AlternativeProvisionSchool a owl:Class ;
+    rdfs:label "alternative-provision-school" ;
+    dct:title "Alternative provision school" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:Camhs a owl:Class ;
+    rdfs:label "CAMHS" ;
+    dct:title "Children and Adolescent mental health services" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:CarerRespite a owl:Class ;
+    rdfs:label "carer-respite" ;
+    dct:title "Unpaid carer respite" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:CarerSittingService a owl:Class ;
+    rdfs:label "carer-sitting-service" ;
+    dct:title "Unpaid carer sitting service" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:CarerUniversalServices a owl:Class ;
+    rdfs:label "carer-universal-services" ;
+    dct:title "Unpaid carer universal services" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:CommunitySupportedLiving a owl:Class ;
+    rdfs:label "community-supported-living" ;
+    dct:title "Community supported living" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:DaySupport a owl:Class ;
+    rdfs:label "day-support" ;
+    dct:title "Day support" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:DirectPayment a owl:Class ;
+    rdfs:label "direct-payment" ;
+    dct:title "Direct payment" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:EmergencySupport a owl:Class ;
+    rdfs:label "emergency-support" ;
+    dct:title "Emergency support" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:EndOfLifeCare a owl:Class ;
+    rdfs:label "end-of-life-care" ;
+    dct:title "End of life care" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:Equipment a owl:Class ;
+    rdfs:label "equipment" ;
+    dct:title "Equipment" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:ExtraCareHousing a owl:Class ;
+    rdfs:label "extra-care-housing" ;
+    dct:title "Extra care housing" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:FamilyCourt a owl:Class ;
+    rdfs:label "family-court" ;
+    dct:title "Family Court" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:HighSchool a owl:Class ;
+    rdfs:label "high-school" ;
+    dct:title "Secondary or High School" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:HomeSupportDomiciliary a owl:Class ;
+    rdfs:label "home-support-domiciliary" ;
+    dct:title "Home support or domiciliary care" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:LearningEducationEmployment a owl:Class ;
+    rdfs:label "learning-education-employment" ;
+    dct:title "Learning, education or employment support" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:LongTermNursingCare a owl:Class ;
+    rdfs:label "long-term-nursing-care" ;
+    dct:title "Long term nursing care" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:LongTermResidentialCare a owl:Class ;
+    rdfs:label "long-term-residential-care" ;
+    dct:title "Long term residential care" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:Meals a owl:Class ;
+    rdfs:label "meals" ;
+    dct:title "Meals" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:OtherCarerSupport a owl:Class ;
+    rdfs:label "other-carer-support" ;
+    dct:title "Other unpaid carer support" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:OtherLongTermSupport a owl:Class ;
+    rdfs:label "other-long-term-support" ;
+    dct:title "Other long term support" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:OtherProfessionalSupport a owl:Class ;
+    rdfs:label "other-professional-support" ;
+    dct:title "Professional support: Other" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:OtherShortTermSupport a owl:Class ;
+    rdfs:label "other-short-term-support" ;
+    dct:title "Other short term support" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:PrimarySchool a owl:Class ;
+    rdfs:label "primary-school" ;
+    dct:title "Primary School" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:Reablement a owl:Class ;
+    rdfs:label "reablement" ;
+    dct:title "Reablement" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:SenHighSchool a owl:Class ;
+    rdfs:label "SEN-high-school" ;
+    dct:title "Secondary or High School with specialist SEN services" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:SenPrimarySchool a owl:Class ;
+    rdfs:label "SEN-primary-school" ;
+    dct:title "Primary School with specialist SEN services" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:SharedLives a owl:Class ;
+    rdfs:label "shared-lives" ;
+    dct:title "Shared Lives" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:ShortTermNursingCare a owl:Class ;
+    rdfs:label "short-term-nursing-care" ;
+    dct:title "Short term nursing care" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:ShortTermResidentialCare a owl:Class ;
+    rdfs:label "short-term-residential-care" ;
+    dct:title "Short term residential care" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:SocialCare a owl:Class ;
+    rdfs:label "social-care" ;
+    dct:title "Social Care Department" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:SocialWorkerSupport a owl:Class ;
+    rdfs:label "social-worker-support" ;
+    dct:title "Professional support: Social worker" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:Transport a owl:Class ;
+    rdfs:label "transport" ;
+    dct:title "Transport" ;
+    rdfs:subClassOf sg:service-code .
+
+svc:YouthOffending a owl:Class ;
+    rdfs:label "youth-offending" ;
+    dct:title "Youth Offending Team" ;
+    rdfs:subClassOf sg:service-code .
+
+scf:Annually a owl:Class ;
+    rdfs:label "annually" ;
+    dct:title "Annually" ;
+    rdfs:subClassOf sg:service-cost-frequency .
+
+scf:Daily a owl:Class ;
+    rdfs:label "daily" ;
+    dct:title "Daily" ;
+    rdfs:subClassOf sg:service-cost-frequency .
+
+scf:Fortnightly a owl:Class ;
+    rdfs:label "fortnightly" ;
+    dct:title "Fortnightly" ;
+    rdfs:subClassOf sg:service-cost-frequency .
+
+scf:FourWeekly a owl:Class ;
+    rdfs:label "four-weekly" ;
+    dct:title "4-weekly" ;
+    rdfs:subClassOf sg:service-cost-frequency .
+
+scf:Hourly a owl:Class ;
+    rdfs:label "hourly" ;
+    dct:title "Hourly" ;
+    rdfs:subClassOf sg:service-cost-frequency .
+
+scf:Monthly a owl:Class ;
+    rdfs:label "monthly" ;
+    dct:title "Monthly" ;
+    rdfs:subClassOf sg:service-cost-frequency .
+
+scf:None a owl:Class ;
+    rdfs:label "none" ;
+    dct:title "No charge to client" ;
+    rdfs:subClassOf sg:service-cost-frequency .
+
+scf:OneOff a owl:Class ;
+    rdfs:label "one-off" ;
+    dct:title "One-off" ;
+    rdfs:subClassOf sg:service-cost-frequency .
+
+scf:PerSession a owl:Class ;
+    rdfs:label "per-session" ;
+    dct:title "Per session" ;
+    rdfs:subClassOf sg:service-cost-frequency .
+
+scf:Quarterly a owl:Class ;
+    rdfs:label "quarterly" ;
+    dct:title "Quarterly" ;
+    rdfs:subClassOf sg:service-cost-frequency .
+
+scf:Weekly a owl:Class ;
+    rdfs:label "weekly" ;
+    dct:title "Weekly" ;
+    rdfs:subClassOf sg:service-cost-frequency .
+
+sd:Community a owl:Class ;
+    rdfs:label "community" ;
+    dct:title "Long term support: Community" ;
+    rdfs:subClassOf sg:service-delivery .
+
+sd:Nursing a owl:Class ;
+    rdfs:label "nursing" ;
+    dct:title "Long term support: Nursing care" ;
+    rdfs:subClassOf sg:service-delivery .
+
+sd:OngoingLow a owl:Class ;
+    rdfs:label "ongoing-low" ;
+    dct:title "Short term support: Ongoing low level" ;
+    rdfs:subClassOf sg:service-delivery .
+
+sd:OtherShortTerm a owl:Class ;
+    rdfs:label "other-short-term" ;
+    dct:title "Short term support: Other short term" ;
+    rdfs:subClassOf sg:service-delivery .
+
+sd:Prison a owl:Class ;
+    rdfs:label "prison" ;
+    dct:title "Long term support: Prison" ;
+    rdfs:subClassOf sg:service-delivery .
+
+sd:Residential a owl:Class ;
+    rdfs:label "residential" ;
+    dct:title "Long term support: Residential care" ;
+    rdfs:subClassOf sg:service-delivery .
+
+sd:StMax a owl:Class ;
+    rdfs:label "st-max" ;
+    dct:title "Short term support: ST-Max" ;
+    rdfs:subClassOf sg:service-delivery .
+
+sd:UnpaidCarerDirect a owl:Class ;
+    rdfs:label "unpaid-carer-direct" ;
+    dct:title "Unpaid carer support: Direct to unpaid carer" ;
+    rdfs:subClassOf sg:service-delivery .
+
+sd:UnpaidCarerSupport a owl:Class ;
+    rdfs:label "unpaid-carer-support" ;
+    dct:title "Unpaid carer support: Support involving the person cared-for" ;
+    rdfs:subClassOf sg:service-delivery .
+
+sg:subjectPerson a owl:ObjectProperty ;
+    rdfs:label "subjectPerson" ;
+    rdfs:range sg:SubjectPerson ;
+    skos:definition "References to the Person(s) the episode or life event concerns." ;
+    skos:inScheme sg:schema .
+
+sg:measurement-unit a owl:Class ;
+    rdfs:label "MeasurementUnit" ;
+    dct:title "Measurement Unit" ;
+    owl:unionOf ( mu:Count mu:Pct ) ;
+    skos:definition "Codes to indicate the unit of measurement." ;
+    skos:inScheme sg:schema ;
+    linkml:permissible_values mu:Count,
+        mu:Pct .
+
+sg:organisation-code a owl:Class ;
+    rdfs:label "OrganisationCode" ;
+    dct:title "Organisation Code" ;
+    owl:unionOf ( oc:LocalAuthority oc:NhsTrust oc:PoliceForce ) ;
+    skos:definition "Codes to indicate the type of organisation." ;
+    skos:inScheme sg:schema ;
+    linkml:permissible_values oc:LocalAuthority,
+        oc:NhsTrust,
+        oc:PoliceForce .
+
+sg:measurement-type a owl:Class ;
+    rdfs:label "MeasurementType" ;
+    dct:title "Measurement Type" ;
+    owl:unionOf ( mt:Attendance mt:AuthorisedAbsences mt:UnauthorisedAbsences mt:CaringHoursPerWeek ) ;
+    skos:definition "Codes to indicate the type of measurement." ;
+    skos:inScheme sg:schema ;
+    linkml:permissible_values mt:Attendance,
+        mt:AuthorisedAbsences,
+        mt:CaringHoursPerWeek,
+        mt:UnauthorisedAbsences .
+
+sg:sgIdentifier a owl:ObjectProperty ;
+    rdfs:label "sgIdentifier" ;
+    dct:title "identifier" ;
+    rdfs:range p:Identifier ;
+    skos:definition "Unique identifiers associated with the entity." ;
+    skos:inScheme sg:schema .
+
+sg:event-code a owl:Class ;
+    rdfs:label "EventCode" ;
+    dct:title "Event Code" ;
+    owl:unionOf ( evc:Birth evc:Death evc:AeAttendance evc:SchoolExclusion evc:SchoolSuspension evc:MissingPerson evc:SafeguardingConcern evc:Referral evc:Homeless ) ;
+    skos:definition "Codes to indicate the type of life event." ;
+    skos:inScheme sg:schema ;
+    linkml:permissible_values evc:AeAttendance,
+        evc:Birth,
+        evc:Death,
+        evc:Homeless,
+        evc:MissingPerson,
+        evc:Referral,
+        evc:SafeguardingConcern,
+        evc:SchoolExclusion,
+        evc:SchoolSuspension .
+
+sg:service-delivery a owl:Class ;
+    rdfs:label "ServiceDelivery" ;
+    dct:title "Service Delivery" ;
+    owl:unionOf ( sd:StMax sd:OngoingLow sd:OtherShortTerm sd:Nursing sd:Residential sd:Community sd:Prison sd:UnpaidCarerDirect sd:UnpaidCarerSupport ) ;
+    skos:definition "Codes to indicate the way a service is delivered. From the Adult Social Care Client Level Data specification." ;
+    skos:inScheme sg:schema ;
+    linkml:permissible_values sd:Community,
+        sd:Nursing,
+        sd:OngoingLow,
+        sd:OtherShortTerm,
+        sd:Prison,
+        sd:Residential,
+        sd:StMax,
+        sd:UnpaidCarerDirect,
+        sd:UnpaidCarerSupport .
+
+sg:episode-code a owl:Class ;
+    rdfs:label "EpisodeCode" ;
+    dct:title "Episode Code" ;
+    owl:unionOf ( epc:EarlyHelp epc:Ehcp epc:FamilyCourtOrder epc:CinPlan epc:CpPlan epc:CamhsPlan epc:Section47 epc:CareLeaver epc:ChildLookedAfter epc:AdultSafeguarding ) ;
+    skos:definition "Codes to indicate the type of service episode." ;
+    skos:inScheme sg:schema ;
+    linkml:permissible_values epc:AdultSafeguarding,
+        epc:CamhsPlan,
+        epc:CareLeaver,
+        epc:ChildLookedAfter,
+        epc:CinPlan,
+        epc:CpPlan,
+        epc:EarlyHelp,
+        epc:Ehcp,
+        epc:FamilyCourtOrder,
+        epc:Section47 .
+
+sg:service-cost-frequency a owl:Class ;
+    rdfs:label "ServiceCostFrequency" ;
+    dct:title "Service Cost Frequency" ;
+    owl:unionOf ( scf:None scf:PerSession scf:Hourly scf:Daily scf:Weekly scf:Fortnightly scf:FourWeekly scf:Monthly scf:Quarterly scf:Annually scf:OneOff ) ;
+    skos:definition "Codes to indicate the payment schedule a service adheres to. From the Adult Social Care Client Level Data specification." ;
+    skos:inScheme sg:schema ;
+    linkml:permissible_values scf:Annually,
+        scf:Daily,
+        scf:Fortnightly,
+        scf:FourWeekly,
+        scf:Hourly,
+        scf:Monthly,
+        scf:None,
+        scf:OneOff,
+        scf:PerSession,
+        scf:Quarterly,
+        scf:Weekly .
+
+sg:episode-outcome a owl:Class ;
+    rdfs:label "EpisodeOutcome" ;
+    dct:title "Episode Outcome" ;
+    owl:unionOf ( eo:Reablement eo:Assessment eo:Hospital eo:Continuation eo:Planning eo:NfaPlanned eo:NfaMoved eo:NfaNhsReferral eo:NfaDisregard eo:NfaLocalReferral eo:NfaDeclined eo:NfaInfo eo:NfaDeceased eo:NfaNoOfferOther eo:NfaEndedOther eo:NfaOther ) ;
+    skos:definition "Codes to indicate the outcome of the episode for the subject. From the Adult Social Care Client Level Data specification." ;
+    skos:inScheme sg:schema ;
+    linkml:permissible_values eo:Assessment,
+        eo:Continuation,
+        eo:Hospital,
+        eo:NfaDeceased,
+        eo:NfaDeclined,
+        eo:NfaDisregard,
+        eo:NfaEndedOther,
+        eo:NfaInfo,
+        eo:NfaLocalReferral,
+        eo:NfaMoved,
+        eo:NfaNhsReferral,
+        eo:NfaNoOfferOther,
+        eo:NfaOther,
+        eo:NfaPlanned,
+        eo:Planning,
+        eo:Reablement .
+
+sg:service-code a owl:Class ;
+    rdfs:label "ServiceCode" ;
+    dct:title "Service Code" ;
+    owl:unionOf ( svc:YouthOffending svc:PrimarySchool svc:HighSchool svc:SenPrimarySchool svc:SenHighSchool svc:AlternativeProvisionSchool svc:SocialCare svc:FamilyCourt svc:Camhs svc:Reablement svc:ShortTermNursingCare svc:ShortTermResidentialCare svc:LongTermNursingCare svc:LongTermResidentialCare svc:HomeSupportDomiciliary svc:DaySupport svc:Meals svc:Transport svc:Equipment svc:DirectPayment svc:SharedLives svc:CommunitySupportedLiving svc:ExtraCareHousing svc:SocialWorkerSupport svc:OtherProfessionalSupport svc:LearningEducationEmployment svc:EndOfLifeCare svc:EmergencySupport svc:OtherShortTermSupport svc:OtherLongTermSupport svc:CarerRespite svc:CarerSittingService svc:CarerUniversalServices svc:OtherCarerSupport ) ;
+    skos:definition "Codes to indicate the type of service." ;
+    skos:inScheme sg:schema ;
+    linkml:permissible_values svc:AlternativeProvisionSchool,
+        svc:Camhs,
+        svc:CarerRespite,
+        svc:CarerSittingService,
+        svc:CarerUniversalServices,
+        svc:CommunitySupportedLiving,
+        svc:DaySupport,
+        svc:DirectPayment,
+        svc:EmergencySupport,
+        svc:EndOfLifeCare,
+        svc:Equipment,
+        svc:ExtraCareHousing,
+        svc:FamilyCourt,
+        svc:HighSchool,
+        svc:HomeSupportDomiciliary,
+        svc:LearningEducationEmployment,
+        svc:LongTermNursingCare,
+        svc:LongTermResidentialCare,
+        svc:Meals,
+        svc:OtherCarerSupport,
+        svc:OtherLongTermSupport,
+        svc:OtherProfessionalSupport,
+        svc:OtherShortTermSupport,
+        svc:PrimarySchool,
+        svc:Reablement,
+        svc:SenHighSchool,
+        svc:SenPrimarySchool,
+        svc:SharedLives,
+        svc:ShortTermNursingCare,
+        svc:ShortTermResidentialCare,
+        svc:SocialCare,
+        svc:SocialWorkerSupport,
+        svc:Transport,
+        svc:YouthOffending .
+
+
