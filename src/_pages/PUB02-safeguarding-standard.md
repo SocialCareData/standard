@@ -788,6 +788,12 @@ Used by [`Measurement.unit`](#measurement-unit). Codes to indicate the unit of m
 {% schema_table page.data_model MeasurementUnit %}
 
 
+## Ontology
+
+The ontology for this specification is defined in Turtle format and is available at: [safeguarding-standard.ttl](/assets/model/safeguarding/safeguarding-standard.ttl). It reuses the shared objects (`Identifier`, `Name`, `Address`, `Contact`) from the [Person Standard](/PUB01_person_standard).
+
+To validate a record against the constraints defined by this standard, a SHACL shape is provided: [safeguarding-standard-shape.ttl](/assets/model/safeguarding/safeguarding-standard-shape.ttl). It defines one shape per class, applying the cardinality and content rules for each.
+
 ## Report an issue
 
 {% include report-issue.html %}
