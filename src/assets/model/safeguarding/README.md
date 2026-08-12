@@ -13,7 +13,7 @@ JSON Schema and docs are generated from the YAML.
 
 | File | Role |
 | --- | --- |
-| `safeguarding-standard.yaml` | **Authoritative source.** Prefixes, the five top-level classes (`Organisation`, `Service`, `Professional`, `ServiceEpisode`, `LifeEvent`), the linking/supporting objects (`SubjectPerson`, `RelatedProfessional`, `TimeInformation`, `Timing`, `Repeat`, `Finding`, `Observation`, `Measurement`), every slot, and the controlled vocabularies (enums). The shared objects are **imported** from the Person Standard (see below). |
+| `safeguarding-standard.yaml` | **Authoritative source.** Prefixes, the five top-level classes (`Organisation`, `Service`, `Professional`, `ServiceEpisode`, `LifeEvent`), the linking/supporting objects (`SubjectPerson`, `RelatedProfessional`, `TimeInformation`, `Finding`, `Observation`, `Measurement`), every slot, and the controlled vocabularies (enums). The shared objects are **imported** from the Person Standard (see below). |
 | `imports.json` | Importmap: maps the Person schema id (`https://ns.socialcaredata.io/person/schema`) to the local `../person/person-standard.yaml`, so the import can be written as a clean IRI. |
 | `safeguarding-standard-shape.ttl` | *Generated* SHACL — one `NodeShape` per class, including the imported `p:Identifier` / `p:Name` / `p:Address` / `p:Contact` shapes. |
 | `safeguarding-standard.ttl` | *Generated* OWL/RDF ontology. Declares `owl:imports p:schema` and references the Person IRIs (`p:Identifier` …) for the shared objects rather than redefining them. |
@@ -60,8 +60,9 @@ the standard's prose:
 
 - `involvement` (on `SubjectPerson` / `RelatedProfessional`) takes an HL7 v3
   `ParticipationType` code directly — modelled as an open string.
-- `frequency` (on `TimeInformation`) is a FHIR `Timing`, modelled as the open,
-  non-closed `Timing` → `Repeat` structure.
+- `frequency` (on `TimeInformation`) is a FHIR `Timing`. This standard does not
+  define or validate its structure — the value is an arbitrary JSON object
+  (range `Any`) conforming to FHIR Timing.
 - `Observation.type` draws from the extensible Observation Type Vocabulary
   (which has dynamic sub-parts such as `EAL.<ISO 639-1>`), so it is an open
   string rather than an enum.

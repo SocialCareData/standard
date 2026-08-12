@@ -30,9 +30,7 @@
       "startDateTime": "2026-05-01T09:30:00Z",
       "endDateTime": "2026-05-01T11:00:00Z",
       "frequency": {
-        "@type": "Timing",
         "repeat": {
-          "@type": "Repeat",
           "dayOfWeek": ["tue"],
           "frequency": 1,
           "period": 1,

@@ -43,14 +43,6 @@ data_model: src/assets/model/safeguarding/safeguarding-standard.yaml
 
 {% schema_table page.data_model TimeInformation %}
 
-### Timing
-
-{% schema_table page.data_model Timing %}
-
-### Repeat
-
-{% schema_table page.data_model Repeat all %}
-
 ### Finding
 
 {% schema_table page.data_model Finding %}
@@ -111,6 +103,10 @@ See [Person.Contact](PUB01_person_standard_table#contact)
 
 {% schema_table page.data_model EventCode %}
 
+### Observation Type Taxonomy
+
+{% schema_table page.data_model ObservationType %}
+
 ### Measurement Type Taxonomy
 
 {% schema_table page.data_model MeasurementType %}
@@ -118,11 +114,3 @@ See [Person.Contact](PUB01_person_standard_table#contact)
 ### Measurement Unit Taxonomy
 
 {% schema_table page.data_model MeasurementUnit %}
-
-### Name Use Code Taxonomy
-
-{% schema_table page.data_model NameUseCode %}
-
-### Address Use Code Taxonomy
-
-{% schema_table page.data_model AddressUseCode %}

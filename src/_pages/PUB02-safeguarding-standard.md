@@ -572,185 +572,43 @@ Coded fields draw their values from the controlled vocabularies below. Each code
 
 Used by [`Organisation.type`](#organisation-type). Codes to indicate the type of organisation.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
-
-| Code | Description |
-| :--- | :--- |
-| `local-authority` | Local Authority |
-| `nhs-trust` | NHS Trust |
-| `police-force` | Police Force |
-{:.table-bordered}
-
-</details>
-
+{% schema_table page.data_model OrganisationCode %}
 
 ### Service Code Vocabulary
 
 Used by [`Service.type`](#service-type). Codes to indicate the type of service.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
-
-| Code | Description |
-| :--- | :--- |
-| `youth-offending` | Youth Offending Team |
-| `primary-school` | Primary School |
-| `high-school` | Secondary or High School |
-| `SEN-primary-school` | Primary School with specialist SEN services |
-| `SEN-high-school` | Secondary or High School with specialist SEN services |
-| `alternative-provision-school` | Alternative provision school |
-| `social-care` | Social Care Department |
-| `family-court` | Family Court |
-| `CAMHS` | Children and Adolescent mental health services |
-| `reablement` | Reablement |
-| `short-term-nursing-care` | Short term nursing care |
-| `short-term-residential-care` | Short term residential care |
-| `long-term-nursing-care` | Long term nursing care |
-| `long-term-residential-care` | Long term residential care |
-| `home-support-domiciliary` | Home support or domiciliary care |
-| `day-support` | Day support |
-| `meals` | Meals |
-| `transport` | Transport |
-| `equipment` | Equipment |
-| `direct-payment` | Direct payment |
-| `shared-lives` | Shared Lives |
-| `community-supported-living` | Community supported living |
-| `extra-care-housing` | Extra care housing |
-| `social-worker-support` | Professional support: Social worker |
-| `other-professional-support` | Professional support: Other |
-| `learning-education-employment` | Learning, education or employment support |
-| `end-of-life-care` | End of life care |
-| `emergency-support` | Emergency support |
-| `other-short-term-support` | Other short term support |
-| `other-long-term-support` | Other long term support |
-| `carer-respite` | Unpaid carer respite |
-| `carer-sitting-service` | Unpaid carer sitting service |
-| `carer-universal-services` | Unpaid carer universal services |
-| `other-carer-support` | Other unpaid carer support |
-{:.table-bordered}
-
-</details>
+{% schema_table page.data_model ServiceCode %}
 
 ### Service Cost Frequency Vocabulary
 
 Used by [`Service.costFrequency`](#service-costFrequency). Codes to indicate the payment schedule a service adheres to. From Adult Social Care Client Level Data specification.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
-
-| Code | Description |
-| :--- | :--- |
-| `none` | No charge to client |
-| `per-session` | Per session |
-| `hourly` | Hourly |
-| `daily` | Daily |
-| `weekly` | Weekly |
-| `fortnightly` | Fortnightly |
-| `four-weekly` | 4-weekly |
-| `monthly` | Monthly |
-| `quarterly` | Quarterly |
-| `annually` | Annually |
-| `one-off` | One-off |
-{:.table-bordered}
-
-</details>
+{% schema_table page.data_model ServiceCostFrequency %}
 
 ### Service Delivery Vocabulary
 
 Used by [`Service.delivery`](#service-delivery). Codes to indicate the way a service is delivered. From Adult Social Care Client Level Data specification.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
-
-| Code | Description |
-| :--- | :--- |
-| `st-max` | Short term support: ST-Max |
-| `ongoing-low` | Short term support: Ongoing low level |
-| `other-short-term` | Short term support: Other short term |
-| `nursing` | Long term support: Nursing care|
-| `residential` | Long term support: Residential care |
-| `community` | Long term support: Community |
-| `prison` | Long term support: Prison |
-| `unpaid-carer-direct` | Unpaid carer support: Direct to unpaid carer |
-| `unpaid-carer-support` | Unpaid carer support: Support involving the person cared-for |
-{:.table-bordered}
-
-</details>
+{% schema_table page.data_model ServiceDelivery %}
 
 ### Episode Code Vocabulary
 
 Used by [`ServiceEpisode.type`](#episode-type). Codes to indicate the type of service episode.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
-
-| Code | Description |
-| :--- | :--- |
-| `early-help` | Early Help Assessment / Intervention |
-| `ehcp` | Education, Health, and Care plan |
-| `family-court-order` | Any order made by family court |
-| `cin-plan` | Child in Need (CIN) Plan |
-| `cp-plan` | Child Protection (CP) Plan |
-| `CAMHS-plan` | Children and Adolescent mental health services care plan |
-| `section-47` | Section 47 Enquiry |
-| `care-leaver` | Care Leaver Support |
-| `child-looked-after` | Child in LA care |
-| `adult-safeguarding` | Adult Safeguarding Enquiry (Section 42) |
-{:.table-bordered}
-
-</details>
+{% schema_table page.data_model EpisodeCode %}
 
 ### Episode Outcome Vocabulary
 
 Used by [`ServiceEpisode.outcome`](#episode-outcome). Codes to indicate the outcome of the episode for the subject. From Adult Social Care Client Level Data specification.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
-
-| Code | Description |
-| :--- | :--- |
-| `reablement` | Progress to reablement/ST-Max |
-| `assessment` | Progress to assessment, review, or reassessment |
-| `hospital` | Admitted to hospital |
-| `continuation` | Continuation of support or services |
-| `planning` | Progress to support or service planning |
-| `NFA-planned` | No Further Action: Support ended as planned |
-| `NFA-moved` | No Further Action: Responsibility moved to another local authority |
-| `NFA-NHS-referral` | No Further Action: Referral to NHS services or NHS funded social care |
-| `NFA-disregard` | No Further Action: Self-funded client or under 12 week property disregard |
-| `NFA-local-referral` | No Further Action: Referral to other service within the local authority |
-| `NFA-declined` | No Further Action: Support declined |
-| `NFA-info` | No Further Action: Information and advice or signposting |
-| `NFA-deceased` | No Further Action: Client deceased |
-| `NFA-no-offer-other` | No Further Action: No services offered for other reason |
-| `NFA-ended-other` | No Further Action: Support ended for other reason |
-| `NFA-other` | No Further Action: Other |
-{:.table-bordered}
-
-</details>
+{% schema_table page.data_model EpisodeOutcome %}
 
 ### Event Code Vocabulary
 
 Used by [`LifeEvent.type`](#event-type). Codes to indicate the type of life event.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
-
-| Code | Description |
-| :--- | :--- |
-| `birth` | Birth |
-| `death` | Death |
-| `ae-attendance` | A&E Attendance |
-| `school-exclusion` | School Exclusion |
-| `school-suspension` | School Suspension |
-| `missing-person` | Reported Missing |
-| `safeguarding-concern` | Safeguarding Concern Raised |
-| `referral` | Referral made to relevant authority |
-| `homeless` | Made homeless |
-{:.table-bordered}
-
-</details>
+{% schema_table page.data_model EventCode %}
 
 ### Involvement Code Vocabulary
 
@@ -921,33 +779,13 @@ Used by [`Observation.type`](#observation-type). Codes to indicate the type of q
 
 Used by [`Measurement.type`](#measurement-type). Codes to indicate the type of measurement.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
-
-| Code | Description |
-| :--- | :--- |
-| `Attendance` | Pupil attendance % at school |
-| `Authorised Absences` | Pupil % absences from school that are authorised |
-| `Unauthorised Absences` | Pupil % absences from school that are unauthorised |
-| `caring-hours-per-week` | Total hours spent caring per week |
-{:.table-bordered}
-
-</details>
+{% schema_table page.data_model MeasurementType %}
 
 ### Measurement Unit Vocabulary
 
 Used by [`Measurement.unit`](#measurement-unit). Codes to indicate the unit of measurement.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
-
-| Code | Description |
-| :--- | :--- |
-| `count` | Number of discrete items, entities, or events. Typically an integer. |
-| `pct` | Percentage (%) |
-{:.table-bordered}
-
-</details>
+{% schema_table page.data_model MeasurementUnit %}
 
 
 ## Report an issue

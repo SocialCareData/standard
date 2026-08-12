@@ -194,28 +194,11 @@ classes:
       - endDateTime
       - frequency
 
-  Timing:
-    class_uri: sg:Timing
+  Any:
+    class_uri: linkml:Any
     description: >-
-      A recurring schedule, expressed as (a subset of) the FHIR Timing datatype.
-      Not defined by this standard - see the FHIR Timing documentation for the
-      full set of fields. Modelled openly (non-closed) here.
-    slots:
-      - repeat
-
-  Repeat:
-    class_uri: sg:Repeat
-    description: >-
-      The nested repeat structure of a FHIR Timing, describing how often an
-      event recurs. All fields are optional; the shape is non-closed so any
-      additional FHIR repeat field is permitted.
-    slots:
-      - dayOfWeek
-      - repeatFrequency
-      - period
-      - periodUnit
-      - timeOfDay
-      - whenCode
+      An open value whose structure is defined and validated elsewhere, not by
+      this standard. Serialised as an arbitrary JSON object.
 
   Finding:
     class_uri: sg:Finding
@@ -454,7 +437,7 @@ slots:
       code](https://terminology.hl7.org/5.2.0/CodeSystem-v3-ParticipationType.html) directly (e.g. SBJ, PPRF); not defined by this standard, so modelled
       as an open string.
 
-  # --- TimeInformation / Timing / Repeat ---
+  # --- TimeInformation ---
   startDateTime:
     slot_uri: sg:startDateTime
     range: datetime
@@ -469,55 +452,15 @@ slots:
     description: The end of the episode or life event, as an ISO 8601 date-time.
   frequency:
     slot_uri: sg:frequency
-    range: Timing
+    range: Any
     required: false
     multivalued: false
+    inlined: true
     description: >-
-      The frequency of the episode or life event, expressed as a FHIR Timing.
-  repeat:
-    slot_uri: sg:repeat
-    range: Repeat
-    required: false
-    multivalued: false
-    description: The [FHIR Timing](https://build.fhir.org/datatypes.html#Timing) repeat structure.
-  dayOfWeek:
-    slot_uri: sg:dayOfWeek
-    range: string
-    required: false
-    multivalued: true
-    description: Days of the week the event recurs on (mon..sun).
-  repeatFrequency:
-    slot_uri: sg:frequencyCount
-    title: frequency
-    range: integer
-    required: false
-    multivalued: false
-    description: The number of times the event occurs per period.
-  period:
-    slot_uri: sg:period
-    range: integer
-    required: false
-    multivalued: false
-    description: The length of the recurrence period.
-  periodUnit:
-    slot_uri: sg:periodUnit
-    range: string
-    required: false
-    multivalued: false
-    description: The unit of the recurrence period (s, min, h, d, wk, mo, a).
-  timeOfDay:
-    slot_uri: sg:timeOfDay
-    range: string
-    required: false
-    multivalued: true
-    description: Time(s) of day the event occurs (hh:mm:ss).
-  whenCode:
-    slot_uri: sg:when
-    title: when
-    range: string
-    required: false
-    multivalued: true
-    description: Event-related timing(s), e.g. MORN for the morning.
+      The frequency of the episode or life event, expressed as a
+      [FHIR Timing](https://build.fhir.org/datatypes.html#Timing) datatype. This
+      standard does not define or validate its structure; the value is an
+      arbitrary JSON object conforming to FHIR Timing.
 
   # --- Finding / Observation / Measurement ---
   observation:
