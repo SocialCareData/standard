@@ -602,12 +602,15 @@ enums:
     permissible_values:
       local-authority:
         title: Local Authority
+        description: Local Authority
         meaning: oc:LocalAuthority
       nhs-trust:
         title: NHS Trust
+        description: NHS Trust
         meaning: oc:NhsTrust
       police-force:
         title: Police Force
+        description: Police Force
         meaning: oc:PoliceForce
 
   ServiceCode:
@@ -616,106 +619,140 @@ enums:
     description: Codes to indicate the type of service.
     permissible_values:
       youth-offending:
-        title: Youth Offending Team
+        title: Youth Offending
+        description: Youth Offending Team
         meaning: svc:YouthOffending
       primary-school:
         title: Primary School
+        description: Primary School
         meaning: svc:PrimarySchool
       high-school:
-        title: Secondary or High School
+        title: High School
+        description: Secondary or High School
         meaning: svc:HighSchool
       SEN-primary-school:
-        title: Primary School with specialist SEN services
+        title: SEN Primary School
+        description: Primary School with specialist SEN services
         meaning: svc:SenPrimarySchool
       SEN-high-school:
-        title: Secondary or High School with specialist SEN services
+        title: SEN High School
+        description: Secondary or High School with specialist SEN services
         meaning: svc:SenHighSchool
       alternative-provision-school:
-        title: Alternative provision school
+        title: Alternative Provision School
+        description: Alternative provision school
         meaning: svc:AlternativeProvisionSchool
       social-care:
-        title: Social Care Department
+        title: Social Care
+        description: Social Care Department
         meaning: svc:SocialCare
       family-court:
         title: Family Court
+        description: Family Court
         meaning: svc:FamilyCourt
       CAMHS:
-        title: Children and Adolescent mental health services
+        title: CAMHS
+        description: Children and Adolescent mental health services
         meaning: svc:Camhs
       reablement:
         title: Reablement
+        description: Reablement
         meaning: svc:Reablement
       short-term-nursing-care:
-        title: Short term nursing care
+        title: Short Term Nursing Care
+        description: Short term nursing care
         meaning: svc:ShortTermNursingCare
       short-term-residential-care:
-        title: Short term residential care
+        title: Short Term Residential Care
+        description: Short term residential care
         meaning: svc:ShortTermResidentialCare
       long-term-nursing-care:
-        title: Long term nursing care
+        title: Long Term Nursing Care
+        description: Long term nursing care
         meaning: svc:LongTermNursingCare
       long-term-residential-care:
-        title: Long term residential care
+        title: Long Term Residential Care
+        description: Long term residential care
         meaning: svc:LongTermResidentialCare
       home-support-domiciliary:
-        title: Home support or domiciliary care
+        title: Home Support Domiciliary
+        description: Home support or domiciliary care
         meaning: svc:HomeSupportDomiciliary
       day-support:
-        title: Day support
+        title: Day Support
+        description: Day support
         meaning: svc:DaySupport
       meals:
         title: Meals
+        description: Meals
         meaning: svc:Meals
       transport:
         title: Transport
+        description: Transport
         meaning: svc:Transport
       equipment:
         title: Equipment
+        description: Equipment
         meaning: svc:Equipment
       direct-payment:
-        title: Direct payment
+        title: Direct Payment
+        description: Direct payment
         meaning: svc:DirectPayment
       shared-lives:
         title: Shared Lives
+        description: Shared Lives
         meaning: svc:SharedLives
       community-supported-living:
-        title: Community supported living
+        title: Community Supported Living
+        description: Community supported living
         meaning: svc:CommunitySupportedLiving
       extra-care-housing:
-        title: Extra care housing
+        title: Extra Care Housing
+        description: Extra care housing
         meaning: svc:ExtraCareHousing
       social-worker-support:
-        title: "Professional support: Social worker"
+        title: Social Worker Support
+        description: "Professional support: Social worker"
         meaning: svc:SocialWorkerSupport
       other-professional-support:
-        title: "Professional support: Other"
+        title: Other Professional Support
+        description: "Professional support: Other"
         meaning: svc:OtherProfessionalSupport
       learning-education-employment:
-        title: Learning, education or employment support
+        title: Learning Education Employment
+        description: Learning, education or employment support
         meaning: svc:LearningEducationEmployment
       end-of-life-care:
-        title: End of life care
+        title: End of Life Care
+        description: End of life care
         meaning: svc:EndOfLifeCare
       emergency-support:
-        title: Emergency support
+        title: Emergency Support
+        description: Emergency support
         meaning: svc:EmergencySupport
       other-short-term-support:
-        title: Other short term support
+        title: Other Short Term Support
+        description: Other short term support
         meaning: svc:OtherShortTermSupport
       other-long-term-support:
-        title: Other long term support
+        title: Other Long Term Support
+        description: Other long term support
         meaning: svc:OtherLongTermSupport
       carer-respite:
-        title: Unpaid carer respite
+        title: Carer Respite
+        description: Unpaid carer respite
         meaning: svc:CarerRespite
       carer-sitting-service:
-        title: Unpaid carer sitting service
+        title: Carer Sitting Service
+        description: Unpaid carer sitting service
         meaning: svc:CarerSittingService
       carer-universal-services:
-        title: Unpaid carer universal services
+        title: Carer Universal Services
+        description: Unpaid carer universal services
         meaning: svc:CarerUniversalServices
       other-carer-support:
-        title: Other unpaid carer support
+        title: Other Carer Support
+        description: Other unpaid carer support
         meaning: svc:OtherCarerSupport
 
   ServiceCostFrequency:
@@ -726,37 +763,48 @@ enums:
       Adult Social Care Client Level Data specification.
     permissible_values:
       none:
-        title: No charge to client
+        title: None
+        description: No charge to client
         meaning: scf:None
       per-session:
-        title: Per session
+        title: Per Session
+        description: Per session
         meaning: scf:PerSession
       hourly:
         title: Hourly
+        description: Hourly
         meaning: scf:Hourly
       daily:
         title: Daily
+        description: Daily
         meaning: scf:Daily
       weekly:
         title: Weekly
+        description: Weekly
         meaning: scf:Weekly
       fortnightly:
         title: Fortnightly
+        description: Fortnightly
         meaning: scf:Fortnightly
       four-weekly:
-        title: 4-weekly
+        title: Four Weekly
+        description: 4-weekly
         meaning: scf:FourWeekly
       monthly:
         title: Monthly
+        description: Monthly
         meaning: scf:Monthly
       quarterly:
         title: Quarterly
+        description: Quarterly
         meaning: scf:Quarterly
       annually:
         title: Annually
+        description: Annually
         meaning: scf:Annually
       one-off:
-        title: One-off
+        title: One Off
+        description: One-off
         meaning: scf:OneOff
 
   ServiceDelivery:
@@ -767,31 +815,40 @@ enums:
       Care Client Level Data specification.
     permissible_values:
       st-max:
-        title: "Short term support: ST-Max"
+        title: ST Max
+        description: "Short term support: ST-Max"
         meaning: sd:StMax
       ongoing-low:
-        title: "Short term support: Ongoing low level"
+        title: Ongoing Low
+        description: "Short term support: Ongoing low level"
         meaning: sd:OngoingLow
       other-short-term:
-        title: "Short term support: Other short term"
+        title: Other Short Term
+        description: "Short term support: Other short term"
         meaning: sd:OtherShortTerm
       nursing:
-        title: "Long term support: Nursing care"
+        title: Nursing
+        description: "Long term support: Nursing care"
         meaning: sd:Nursing
       residential:
-        title: "Long term support: Residential care"
+        title: Residential
+        description: "Long term support: Residential care"
         meaning: sd:Residential
       community:
-        title: "Long term support: Community"
+        title: Community
+        description: "Long term support: Community"
         meaning: sd:Community
       prison:
-        title: "Long term support: Prison"
+        title: Prison
+        description: "Long term support: Prison"
         meaning: sd:Prison
       unpaid-carer-direct:
-        title: "Unpaid carer support: Direct to unpaid carer"
+        title: Unpaid Carer Direct
+        description: "Unpaid carer support: Direct to unpaid carer"
         meaning: sd:UnpaidCarerDirect
       unpaid-carer-support:
-        title: "Unpaid carer support: Support involving the person cared-for"
+        title: Unpaid Carer Support
+        description: "Unpaid carer support: Support involving the person cared-for"
         meaning: sd:UnpaidCarerSupport
 
   EpisodeCode:
@@ -800,34 +857,44 @@ enums:
     description: Codes to indicate the type of service episode.
     permissible_values:
       early-help:
-        title: Early Help Assessment / Intervention
+        title: Early Help
+        description: Early Help Assessment / Intervention
         meaning: epc:EarlyHelp
       ehcp:
-        title: Education, Health, and Care plan
+        title: EHCP
+        description: Education, Health, and Care plan
         meaning: epc:Ehcp
       family-court-order:
-        title: Any order made by family court
+        title: Family Court Order
+        description: Any order made by family court
         meaning: epc:FamilyCourtOrder
       cin-plan:
-        title: Child in Need (CIN) Plan
+        title: CIN Plan
+        description: Child in Need (CIN) Plan
         meaning: epc:CinPlan
       cp-plan:
-        title: Child Protection (CP) Plan
+        title: CP Plan
+        description: Child Protection (CP) Plan
         meaning: epc:CpPlan
       CAMHS-plan:
-        title: Children and Adolescent mental health services care plan
+        title: CAMHS Plan
+        description: Children and Adolescent mental health services care plan
         meaning: epc:CamhsPlan
       section-47:
-        title: Section 47 Enquiry
+        title: Section 47
+        description: Section 47 Enquiry
         meaning: epc:Section47
       care-leaver:
-        title: Care Leaver Support
+        title: Care Leaver
+        description: Care Leaver Support
         meaning: epc:CareLeaver
       child-looked-after:
-        title: Child in LA care
+        title: Child Looked After
+        description: Child in LA care
         meaning: epc:ChildLookedAfter
       adult-safeguarding:
-        title: Adult Safeguarding Enquiry (Section 42)
+        title: Adult Safeguarding
+        description: Adult Safeguarding Enquiry (Section 42)
         meaning: epc:AdultSafeguarding
 
   EpisodeOutcome:
@@ -838,52 +905,68 @@ enums:
       Adult Social Care Client Level Data specification.
     permissible_values:
       reablement:
-        title: Progress to reablement/ST-Max
+        title: Reablement
+        description: Progress to reablement/ST-Max
         meaning: eo:Reablement
       assessment:
-        title: Progress to assessment, review, or reassessment
+        title: Assessment
+        description: Progress to assessment, review, or reassessment
         meaning: eo:Assessment
       hospital:
-        title: Admitted to hospital
+        title: Hospital
+        description: Admitted to hospital
         meaning: eo:Hospital
       continuation:
-        title: Continuation of support or services
+        title: Continuation
+        description: Continuation of support or services
         meaning: eo:Continuation
       planning:
-        title: Progress to support or service planning
+        title: Planning
+        description: Progress to support or service planning
         meaning: eo:Planning
       NFA-planned:
-        title: "No Further Action: Support ended as planned"
+        title: NFA Planned
+        description: "No Further Action: Support ended as planned"
         meaning: eo:NfaPlanned
       NFA-moved:
-        title: "No Further Action: Responsibility moved to another local authority"
+        title: NFA Moved
+        description: "No Further Action: Responsibility moved to another local authority"
         meaning: eo:NfaMoved
       NFA-NHS-referral:
-        title: "No Further Action: Referral to NHS services or NHS funded social care"
+        title: NFA NHS Referral
+        description: "No Further Action: Referral to NHS services or NHS funded social care"
         meaning: eo:NfaNhsReferral
       NFA-disregard:
-        title: "No Further Action: Self-funded client or under 12 week property disregard"
+        title: NFA Disregard
+        description: "No Further Action: Self-funded client or under 12 week property disregard"
         meaning: eo:NfaDisregard
       NFA-local-referral:
-        title: "No Further Action: Referral to other service within the local authority"
+        title: NFA Local Referral
+        description: "No Further Action: Referral to other service within the local authority"
         meaning: eo:NfaLocalReferral
       NFA-declined:
-        title: "No Further Action: Support declined"
+        title: NFA Declined
+        description: "No Further Action: Support declined"
         meaning: eo:NfaDeclined
       NFA-info:
-        title: "No Further Action: Information and advice or signposting"
+        title: NFA Info
+        description: "No Further Action: Information and advice or signposting"
         meaning: eo:NfaInfo
       NFA-deceased:
-        title: "No Further Action: Client deceased"
+        title: NFA Deceased
+        description: "No Further Action: Client deceased"
         meaning: eo:NfaDeceased
       NFA-no-offer-other:
-        title: "No Further Action: No services offered for other reason"
+        title: NFA No Offer Other
+        description: "No Further Action: No services offered for other reason"
         meaning: eo:NfaNoOfferOther
       NFA-ended-other:
-        title: "No Further Action: Support ended for other reason"
+        title: NFA Ended Other
+        description: "No Further Action: Support ended for other reason"
         meaning: eo:NfaEndedOther
       NFA-other:
-        title: "No Further Action: Other"
+        title: NFA Other
+        description: "No Further Action: Other"
         meaning: eo:NfaOther
 
   EventCode:
@@ -893,30 +976,39 @@ enums:
     permissible_values:
       birth:
         title: Birth
+        description: Birth
         meaning: evc:Birth
       death:
         title: Death
+        description: Death
         meaning: evc:Death
       ae-attendance:
-        title: A&E Attendance
+        title: AE Attendance
+        description: A&E Attendance
         meaning: evc:AeAttendance
       school-exclusion:
         title: School Exclusion
+        description: School Exclusion
         meaning: evc:SchoolExclusion
       school-suspension:
         title: School Suspension
+        description: School Suspension
         meaning: evc:SchoolSuspension
       missing-person:
-        title: Reported Missing
+        title: Missing Person
+        description: Reported Missing
         meaning: evc:MissingPerson
       safeguarding-concern:
-        title: Safeguarding Concern Raised
+        title: Safeguarding Concern
+        description: Safeguarding Concern Raised
         meaning: evc:SafeguardingConcern
       referral:
-        title: Referral made to relevant authority
+        title: Referral
+        description: Referral made to relevant authority
         meaning: evc:Referral
       homeless:
-        title: Made homeless
+        title: Homeless
+        description: Made homeless
         meaning: evc:Homeless
 
   MeasurementType:
@@ -925,16 +1017,20 @@ enums:
     description: Codes to indicate the type of measurement.
     permissible_values:
       Attendance:
-        title: Pupil attendance % at school
+        title: Attendance
+        description: Pupil attendance % at school
         meaning: mt:Attendance
       "Authorised Absences":
-        title: Pupil % absences from school that are authorised
+        title: Authorised Absences
+        description: Pupil % absences from school that are authorised
         meaning: mt:AuthorisedAbsences
       "Unauthorised Absences":
-        title: Pupil % absences from school that are unauthorised
+        title: Unauthorised Absences
+        description: Pupil % absences from school that are unauthorised
         meaning: mt:UnauthorisedAbsences
       caring-hours-per-week:
-        title: Total hours spent caring per week
+        title: Caring Hours Per Week
+        description: Total hours spent caring per week
         meaning: mt:CaringHoursPerWeek
 
   MeasurementUnit:
@@ -943,10 +1039,12 @@ enums:
     description: Codes to indicate the unit of measurement.
     permissible_values:
       count:
-        title: Number of discrete items, entities, or events
+        title: Count
+        description: Number of discrete items, entities, or events
         meaning: mu:Count
       pct:
-        title: Percentage (%)
+        title: PCT
+        description: Percentage (%)
         meaning: mu:Pct
 
   # NameUseCode and AddressUseCode are imported from the Person Standard
