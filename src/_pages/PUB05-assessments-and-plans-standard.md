@@ -92,6 +92,9 @@ A Care Needs Assessment record. Captures foundational metadata, Care Act outcome
 <span id="assessment-review">review</span>
 : A record of whether this assessment is a review of a previous assessment. *Review object*. See [Review](#review).
 
+<span id="assessment-serviceEpisodeId">serviceEpisodeId</span>
+: Unique identifier for the safeguarding or care service episode during which this assessment was completed. Multi-valued. Optional (`0..*`). *Identifier object*. See [Safeguarding ServiceEpisode](/PUB02_safeguarding_standard#serviceepisode).
+
 <span id="assessment-planId">planId</span>
 : Direct link to any Care Plan resulting from this assessment. *Identifier object*. See [Identifier](#identifier).
 
@@ -256,6 +259,9 @@ A Care Plan record, constructed for adults found eligible for care. Follows a st
 
 <span id="plan-review">review</span>
 : A record of whether this plan is a review of a previous plan. *Review object*. See [Review](#review).
+
+<span id="plan-serviceEpisodeId">serviceEpisodeId</span>
+: Unique identifier for the safeguarding or care service episode during which this plan was completed or active. Multi-valued. Optional (`0..*`). *Identifier object*. See [Safeguarding ServiceEpisode](/PUB02_safeguarding_standard#serviceepisode).
 
 <span id="plan-assessmentId">assessmentId</span>
 : The assessment record that led to this plan. *Identifier object*. See [Identifier](#identifier).

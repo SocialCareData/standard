@@ -27,6 +27,7 @@
     "advocateRequired":              { "@id": "ap:advocateRequired",              "@type": "xsd:boolean" },
     "consentToInformationSharing":   { "@id": "ap:consentToInformationSharing",   "@type": "xsd:boolean" },
     "review":                        { "@id": "ap:review",                        "@type": "@id", "@container": "@set" },
+    "serviceEpisodeId":              { "@id": "ap:serviceEpisodeId",              "@type": "@id", "@container": "@set" },
 
     "isReview":                      { "@id": "ap:isReview",                      "@type": "xsd:boolean" },
     "previousId":                    { "@id": "ap:previousId",                    "@type": "@id", "@container": "@set" },

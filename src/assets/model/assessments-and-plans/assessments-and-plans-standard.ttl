@@ -29,6 +29,12 @@ ap:schema.owl.ttl a owl:Ontology ;
     pav:version "1.0.0" ;
     skos:definition "A single LinkML data model for the Care Needs Assessments and Care Plans Standard (PUB05). This standard defines the shared, back-end fields of information for assessments and care plans." .
 
+ap:serviceEpisodeId a owl:ObjectProperty ;
+    rdfs:label "serviceEpisodeId" ;
+    rdfs:range ap:Identifier ;
+    skos:definition "Identifier for the safeguarding or care service episode during which this assessment / plan was completed." ;
+    skos:inScheme ap:schema .
+
 ap:CareNeedsAssessment a owl:Class ;
     rdfs:label "CareNeedsAssessment" ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -48,14 +54,14 @@ ap:CareNeedsAssessment a owl:Class ;
 ap:CarePlan a owl:Class ;
     rdfs:label "CarePlan" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:assessmentId ],
+        [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty ap:careComponent ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty ap:status ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:assessmentId ],
         ap:FoundationalInformation ;
     skos:definition "A Care Plan record, created immediately after an assessment if the person is found to be eligible." ;
     skos:exactMatch ap:CarePlan ;
@@ -262,17 +268,17 @@ ap:AssessmentQuestion a owl:Class ;
             owl:cardinality 1 ;
             owl:onProperty ap:answerType ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ap:questionId ],
+        [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:questionText ],
+            owl:onProperty ap:required ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty ap:category ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:required ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ap:questionId ] ;
+            owl:onProperty ap:questionText ] ;
     skos:definition "A generic Question-and-Answer model used to represent both statutory Care Act questions and local, personalised fields." ;
     skos:exactMatch ap:AssessmentQuestion ;
     skos:inScheme ap:schema .
@@ -280,14 +286,14 @@ ap:AssessmentQuestion a owl:Class ;
 ap:CareActivity a owl:Class ;
     rdfs:label "CareActivity" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:activityDescription ],
+            owl:maxCardinality 1 ;
+            owl:onProperty ap:directPayment ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ap:outcome ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ap:directPayment ] ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:activityDescription ] ;
     skos:definition "The description and details of the care component activity." ;
     skos:exactMatch ap:CareActivity ;
     skos:inScheme ap:schema .
@@ -308,13 +314,13 @@ ap:CareComponent a owl:Class ;
     rdfs:label "CareComponent" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
+            owl:onProperty ap:activity ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
             owl:onProperty ap:time ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty ap:actor ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:activity ] ;
+            owl:onProperty ap:actor ] ;
     skos:definition "A specific component of a Care Plan, capturing who does what, when, and to achieve which outcomes." ;
     skos:exactMatch ap:CareComponent ;
     skos:inScheme ap:schema .
@@ -322,11 +328,11 @@ ap:CareComponent a owl:Class ;
 ap:CareTime a owl:Class ;
     rdfs:label "CareTime" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ap:endDateTime ],
-        [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty ap:startDateTime ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ap:endDateTime ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty ap:frequency ] ;
@@ -338,28 +344,28 @@ ap:FoundationalInformation a owl:Class ;
     rdfs:label "FoundationalInformation" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:professionalId ],
+            owl:onProperty ap:capacityToCompleteAssessment ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty ap:identifier ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:capacityToCompleteAssessment ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:consentToInformationSharing ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:dateCompleted ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
             owl:onProperty ap:advocateRequired ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:personId ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty ap:review ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:personId ] ;
+            owl:onProperty ap:dateCompleted ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:professionalId ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:consentToInformationSharing ] ;
     skos:definition "Information that is relevant across both assessments and plans." ;
     skos:inScheme ap:schema .
 
@@ -808,10 +814,10 @@ ap:Identifier a owl:Class ;
     rdfs:label "Identifier" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:value ],
+            owl:onProperty ap:system ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:system ] ;
+            owl:onProperty ap:value ] ;
     skos:definition "A unique identifier comprising a value and the system namespace in which it is unique. Aligned with the Person standard's Identifier class." ;
     skos:exactMatch ap:Identifier ;
     skos:inScheme ap:schema .

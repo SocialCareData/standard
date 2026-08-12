@@ -21,6 +21,13 @@
   "capacityToCompleteAssessment": true,
   "advocateRequired": false,
   "consentToInformationSharing": true,
+  "serviceEpisodeId": [
+    {
+      "@type": "Identifier",
+      "value": "EP-2026-0001",
+      "system": "https://example.org/Id/episode"
+    }
+  ],
   "review": [
     {
       "@type": "Review",

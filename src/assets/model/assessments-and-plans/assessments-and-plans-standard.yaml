@@ -44,6 +44,7 @@ classes:
       - advocateRequired
       - consentToInformationSharing
       - review
+      - serviceEpisodeId
 
   CareNeedsAssessment:
     class_uri: ap:CareNeedsAssessment
@@ -150,6 +151,12 @@ slots:
     required: true
     multivalued: false
     description: Identifier for the subject person.
+  serviceEpisodeId:
+    slot_uri: ap:serviceEpisodeId
+    range: Identifier
+    required: false
+    multivalued: true
+    description: Identifier for the safeguarding or care service episode during which this assessment / plan was completed.
   professionalId:
     slot_uri: ap:professionalId
     range: Identifier
