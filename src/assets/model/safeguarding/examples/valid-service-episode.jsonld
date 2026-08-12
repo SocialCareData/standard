@@ -51,6 +51,11 @@
           "type": "NEET",
           "startDate": "2026-03-15T13:02:00",
           "endDate": "2026-06-30T10:20:00"
+        },
+        {
+          "@type": "Observation",
+          "type": "SEND.SpLD",
+          "startDate": "2026-03-15T13:02:00"
         }
       ],
       "measurement": [

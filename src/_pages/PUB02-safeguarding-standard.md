@@ -830,11 +830,14 @@ Used by [`Observation.type`](#observation-type). Codes to indicate the type of q
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.PMLD` | Profound and Multiple Learning Difficulty: have severe and complex learning difficulties as well as a physical disability or sensory impairment. |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.SLCN` | Speech, Language and Communication Needs: difficulty in communicating with others such as difficulty saying what they want to, understanding what is being said to them, difficulties understanding and applying social rules. |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.ASC` | Autistic Spectrum Condition: including Asperger's Syndrome and Autism with associated difficulties such as difficulties with language, communication, imagination and social interactions. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.DS` | Down Syndrome: a genetic disorder caused by the presence of all or part of a third copy of chromosome 21. |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.SEMH` | Social, Emotional and Mental Health difficulties: These may include becoming withdrawn or isolated, as well as displaying challenging, disruptive or disturbing behaviour. These behaviours may reflect underlying mental health difficulties such as anxiety or depression, self-harming, substance misuse, eating disorders or physical symptoms that are medically unexplained. |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.VI` | Visual Impairment: Partial or complete loss of sight not correctable by usual means (e.g. prescribed glasses or contact lens). |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.HI` | Hearing Impairment: With a degree of hearing loss. |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.MSI` | Multi Sensory Impairment: combined vision and hearing impairments. |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.PD` | Physical Disability: limitation on a person's physical functioning, mobility, dexterity or stamina. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.OTH` | Other SEND: any other special educational need or disability not covered by the other codes. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.NSA` | NSA SEN support but no specialist assessment of type of need. |
 | **`EAL`** | English as an additional language |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `EAL.<ISO 639-1 code>` | Two-letter code for observed first language, using [ISO 639-1](https://www.iso.org/iso-639-language-code) |
 | **`free-school-meals`** | Recipient of free school meals (FSM) |

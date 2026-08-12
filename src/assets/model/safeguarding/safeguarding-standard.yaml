@@ -29,6 +29,7 @@ prefixes:
   evc: https://ns.socialcaredata.io/safeguarding/event-code#
   mt: https://ns.socialcaredata.io/safeguarding/measurement-type#
   mu: https://ns.socialcaredata.io/safeguarding/measurement-unit#
+  ot: https://ns.socialcaredata.io/safeguarding/observation-type#
   p: https://ns.socialcaredata.io/person/
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
@@ -546,8 +547,9 @@ slots:
     description: >-
       The type of observation, drawn from the Observation Type Vocabulary (e.g.
       NEET, free-school-meals, SEND.SpLD). The vocabulary is extensible (some
-      codes carry dynamic sub-parts such as EAL.<ISO 639-1>), so it is modelled
-      as an open string rather than a closed enumeration.
+      codes carry dynamic sub-parts such as EAL.<ISO 639-1 code>), so it is
+      modelled as an open string rather than a closed enumeration. See the
+      ObservationType enum for the reference list of codes.
   observationStartDate:
     slot_uri: sg:startDate
     title: startDate
@@ -1010,6 +1012,372 @@ enums:
         title: Homeless
         description: Made homeless
         meaning: evc:Homeless
+
+  ObservationType:
+    enum_uri: sg:observation-type
+    title: Observation Type
+    description: Codes to indicate the type of qualitative observation.
+    permissible_values:
+      SEND:
+        title: SEND
+        description: Observed special educational needs and disabilities, via DfE codes
+        meaning: ot:Send
+      "SEND.SpLD":
+        title: SEND SpLD
+        description: "Specific learning Difficulty: difficulty that affect one or more specific aspects of learning. This encompasses a range of conditions including dyslexia, dyscalculia, dysgraphia, dyspraxia etc."
+        meaning: ot:SendSpld
+      "SEND.MLD":
+        title: SEND MLD
+        description: "Moderate Learning Difficulty: well below expected levels of attainment in all or most areas of the curriculum, despite appropriate interventions. They will have much greater difficulty than their peers in acquiring basic literacy and numeracy skills and in understanding concepts. They may also have associated speech and language delay, low self-esteem, low levels of concentration and underdeveloped social skills."
+        meaning: ot:SendMld
+      "SEND.SLD":
+        title: SEND SLD
+        description: "Severe Learning Difficulty: significant intellectual or cognitive impairments and are likely to need support in all areas of the curriculum."
+        meaning: ot:SendSld
+      "SEND.PMLD":
+        title: SEND PMLD
+        description: "Profound and Multiple Learning Difficulty: have severe and complex learning difficulties as well as a physical disability or sensory impairment."
+        meaning: ot:SendPmld
+      "SEND.SLCN":
+        title: SEND SLCN
+        description: "Speech, Language and Communication Needs: difficulty in communicating with others such as difficulty saying what they want to, understanding what is being said to them, difficulties understanding and applying social rules."
+        meaning: ot:SendSlcn
+      "SEND.ASC":
+        title: SEND ASC
+        description: "Autistic Spectrum Condition: including Asperger's Syndrome and Autism with associated difficulties such as difficulties with language, communication, imagination and social interactions."
+        meaning: ot:SendAsc
+      "SEND.SEMH":
+        title: SEND SEMH
+        description: "Social, Emotional and Mental Health difficulties: These may include becoming withdrawn or isolated, as well as displaying challenging, disruptive or disturbing behaviour. These behaviours may reflect underlying mental health difficulties such as anxiety or depression, self-harming, substance misuse, eating disorders or physical symptoms that are medically unexplained."
+        meaning: ot:SendSemh
+      "SEND.VI":
+        title: SEND VI
+        description: "Visual Impairment: Partial or complete loss of sight not correctable by usual means (e.g. prescribed glasses or contact lens)."
+        meaning: ot:SendVi
+      "SEND.HI":
+        title: SEND HI
+        description: "Hearing Impairment: With a degree of hearing loss."
+        meaning: ot:SendHi
+      "SEND.MSI":
+        title: SEND MSI
+        description: "Multi Sensory Impairment: combined vision and hearing impairments."
+        meaning: ot:SendMsi
+      "SEND.PD":
+        title: SEND PD
+        description: "Physical Disability: limitation on a person's physical functioning, mobility, dexterity or stamina."
+        meaning: ot:SendPd
+      "SEND.DS":
+        title: SEND DS
+        description: "Down Syndrome: a genetic disorder caused by the presence of all or part of a third copy of chromosome 21."
+        meaning: ot:SendDs
+      "SEND.OTH":
+        title: SEND OTH
+        description: "Other SEND: any other special educational need or disability not covered by the other codes."
+        meaning: ot:SendOth
+      "SEND.NSA":
+        title: SEND NSA
+        description: "NSA SEN support but no specialist assessment of type of need."
+        meaning: ot:SendNsa
+      EAL:
+        title: EAL
+        description: English as an additional language
+        meaning: ot:Eal
+      "EAL.<ISO 639-1 code>":
+        title: EAL ISO 639-1 Language Code
+        description: "Two-letter code for observed first language, using [ISO 639-1](https://www.iso.org/iso-639-language-code)"
+        meaning: ot:EalIso6391Code
+      free-school-meals:
+        title: Free School Meals
+        description: Recipient of free school meals (FSM)
+        meaning: ot:FreeSchoolMeals
+      NEET:
+        title: NEET
+        description: Not in Education, Employment, or Training
+        meaning: ot:Neet
+      non-accidental-injury:
+        title: Non Accidental Injury
+        description: Observed non-accidental injury
+        meaning: ot:NonAccidentalInjury
+      persistent-school-absences:
+        title: Persistent School Absences
+        description: Reported persistent absences from school
+        meaning: ot:PersistentSchoolAbsences
+      pupil-premium:
+        title: Pupil Premium
+        description: Eligible for Pupil Premium
+        meaning: ot:PupilPremium
+      religion:
+        title: Religion
+        description: Religious affiliation
+        meaning: ot:Religion
+      "religion.<HL7 code>":
+        title: Religion HL7 Code
+        description: "Numeric code for [religious affiliations](https://terminology.hl7.org/7.2.0/en/CodeSystem-v3-ReligiousAffiliation.html)"
+        meaning: ot:ReligionHl7Code
+      temp-accomodation:
+        title: Temp Accomodation
+        description: Living in temporary accomodation
+        meaning: ot:TempAccomodation
+      accommodation-status:
+        title: Accommodation Status
+        description: Housing and living arrangements of the individual
+        meaning: ot:AccommodationStatus
+      "accommodation-status.owner-occupier":
+        title: Accommodation Status Owner Occupier
+        description: Owner occupier or shared ownership scheme
+        meaning: ot:AccommodationStatusOwnerOccupier
+      "accommodation-status.tenant-social":
+        title: Accommodation Status Tenant Social
+        description: "Tenant: Local authority or other social housing provider"
+        meaning: ot:AccommodationStatusTenantSocial
+      "accommodation-status.tenant-private":
+        title: Accommodation Status Tenant Private
+        description: "Tenant: Private landlord"
+        meaning: ot:AccommodationStatusTenantPrivate
+      "accommodation-status.settled-mainstream-family":
+        title: Accommodation Status Settled Mainstream Family
+        description: Settled mainstream housing with family or friends
+        meaning: ot:AccommodationStatusSettledMainstreamFamily
+      "accommodation-status.supported-accommodation":
+        title: Accommodation Status Supported Accommodation
+        description: Supported accommodation, supported lodgings or supported group home
+        meaning: ot:AccommodationStatusSupportedAccommodation
+      "accommodation-status.shared-lives":
+        title: Accommodation Status Shared Lives
+        description: Shared Lives scheme
+        meaning: ot:AccommodationStatusSharedLives
+      "accommodation-status.approved-premises":
+        title: Accommodation Status Approved Premises
+        description: Approved premises for offenders released from prison or under probation supervision
+        meaning: ot:AccommodationStatusApprovedPremises
+      "accommodation-status.sheltered-housing":
+        title: Accommodation Status Sheltered Housing
+        description: Sheltered housing, extra care housing or other sheltered housing
+        meaning: ot:AccommodationStatusShelteredHousing
+      "accommodation-status.mobile-accommodation":
+        title: Accommodation Status Mobile Accommodation
+        description: Mobile accommodation for Gypsy, Roma and Traveller communities
+        meaning: ot:AccommodationStatusMobileAccommodation
+      "accommodation-status.rough-sleeping":
+        title: Accommodation Status Rough Sleeping
+        description: Rough sleeper or squatting
+        meaning: ot:AccommodationStatusRoughSleeping
+      "accommodation-status.night-shelter":
+        title: Accommodation Status Night Shelter
+        description: Night shelter, emergency hostel or direct access hostel
+        meaning: ot:AccommodationStatusNightShelter
+      "accommodation-status.refuge":
+        title: Accommodation Status Refuge
+        description: Refuge
+        meaning: ot:AccommodationStatusRefuge
+      "accommodation-status.temp-accommodation-council":
+        title: Accommodation Status Temp Accommodation Council
+        description: Placed in temporary accommodation by the council (inc. homelessness resettlement)
+        meaning: ot:AccommodationStatusTempAccommodationCouncil
+      "accommodation-status.staying-family-friends-short":
+        title: Accommodation Status Staying Family Friends Short
+        description: Staying with family or friends as a short term guest
+        meaning: ot:AccommodationStatusStayingFamilyFriendsShort
+      "accommodation-status.healthcare-facility":
+        title: Accommodation Status Healthcare Facility
+        description: Acute hospital or long term healthcare residential facility
+        meaning: ot:AccommodationStatusHealthcareFacility
+      "accommodation-status.registered-care-home":
+        title: Accommodation Status Registered Care Home
+        description: Registered care home
+        meaning: ot:AccommodationStatusRegisteredCareHome
+      "accommodation-status.registered-nursing-home":
+        title: Accommodation Status Registered Nursing Home
+        description: Registered nursing home
+        meaning: ot:AccommodationStatusRegisteredNursingHome
+      "accommodation-status.prison-detention":
+        title: Accommodation Status Prison Detention
+        description: Prison, young offenders institution or detention centre
+        meaning: ot:AccommodationStatusPrisonDetention
+      "accommodation-status.other-temporary":
+        title: Accommodation Status Other Temporary
+        description: Other temporary accommodation
+        meaning: ot:AccommodationStatusOtherTemporary
+      "accommodation-status.unknown":
+        title: Accommodation Status Unknown
+        description: Unknown
+        meaning: ot:AccommodationStatusUnknown
+      asd-diagnosis:
+        title: ASD Diagnosis
+        description: Observed Autism Spectrum Disorder (ASD) diagnosis
+        meaning: ot:AsdDiagnosis
+      client-funding-status:
+        title: Client Funding Status
+        description: Funding status of the client for social care services
+        meaning: ot:ClientFundingStatus
+      "client-funding-status.fully-client-funded":
+        title: Client Funding Status Fully Client Funded
+        description: Fully client funded
+        meaning: ot:ClientFundingStatusFullyClientFunded
+      "client-funding-status.joint-funded":
+        title: Client Funding Status Joint Funded
+        description: Joint client and social care funded
+        meaning: ot:ClientFundingStatusJointFunded
+      "client-funding-status.fully-social-care-funded":
+        title: Client Funding Status Fully Social Care Funded
+        description: Fully social care funded
+        meaning: ot:ClientFundingStatusFullySocialCareFunded
+      "client-funding-status.unknown":
+        title: Client Funding Status Unknown
+        description: Unknown
+        meaning: ot:ClientFundingStatusUnknown
+      dbs-check:
+        title: DBS Check
+        description: Recorded Disclosure and Barring Service (DBS) check
+        meaning: ot:DbsCheck
+      dementia-diagnosis:
+        title: Dementia Diagnosis
+        description: Observed dementia diagnosis
+        meaning: ot:DementiaDiagnosis
+      employment-status:
+        title: Employment Status
+        description: Employment status of the individual
+        meaning: ot:EmploymentStatus
+      "employment-status.paid-under-16h":
+        title: Employment Status Paid Under 16h
+        description: "Paid: Less than 16 hours a week"
+        meaning: ot:EmploymentStatusPaidUnder16h
+      "employment-status.paid-16h-plus":
+        title: Employment Status Paid 16h Plus
+        description: "Paid: 16 or more hours a week"
+        meaning: ot:EmploymentStatusPaid16hPlus
+      "employment-status.paid-hours-unknown":
+        title: Employment Status Paid Hours Unknown
+        description: "Paid: Hours per week unknown"
+        meaning: ot:EmploymentStatusPaidHoursUnknown
+      "employment-status.seeking-work":
+        title: Employment Status Seeking Work
+        description: "Not in paid employment: Seeking work"
+        meaning: ot:EmploymentStatusSeekingWork
+      "employment-status.not-seeking-or-retired":
+        title: Employment Status Not Seeking or Retired
+        description: "Not in paid employment: Not actively seeking work or retired"
+        meaning: ot:EmploymentStatusNotSeekingOrRetired
+      "employment-status.voluntary-only":
+        title: Employment Status Voluntary Only
+        description: "Not in paid employment: Voluntary work only"
+        meaning: ot:EmploymentStatusVoluntaryOnly
+      "employment-status.unknown":
+        title: Employment Status Unknown
+        description: Unknown
+        meaning: ot:EmploymentStatusUnknown
+      has-unpaid-carer:
+        title: Has Unpaid Carer
+        description: Has an unpaid carer
+        meaning: ot:HasUnpaidCarer
+      hearing-impairment:
+        title: Hearing Impairment
+        description: Observed hearing impairment status
+        meaning: ot:HearingImpairment
+      "hearing-impairment.deaf-with-speech":
+        title: Hearing Impairment Deaf With Speech
+        description: Deaf with speech
+        meaning: ot:HearingImpairmentDeafWithSpeech
+      "hearing-impairment.deaf-without-speech":
+        title: Hearing Impairment Deaf Without Speech
+        description: Deaf without speech
+        meaning: ot:HearingImpairmentDeafWithoutSpeech
+      "hearing-impairment.hard-of-hearing":
+        title: Hearing Impairment Hard of Hearing
+        description: Hard of hearing
+        meaning: ot:HearingImpairmentHardOfHearing
+      "hearing-impairment.no-impairment":
+        title: Hearing Impairment No Impairment
+        description: No hearing impairment
+        meaning: ot:HearingImpairmentNoImpairment
+      "hearing-impairment.severity-unknown":
+        title: Hearing Impairment Severity Unknown
+        description: "Hearing impairment: Severity unknown"
+        meaning: ot:HearingImpairmentSeverityUnknown
+      "hearing-impairment.unknown":
+        title: Hearing Impairment Unknown
+        description: Unknown
+        meaning: ot:HearingImpairmentUnknown
+      support-reason:
+        title: Support Reason
+        description: Primary reason for requiring adult social care support
+        meaning: ot:SupportReason
+      "support-reason.physical-access-mobility":
+        title: Support Reason Physical Access Mobility
+        description: "Physical support: Access and mobility only"
+        meaning: ot:SupportReasonPhysicalAccessMobility
+      "support-reason.physical-personal-care":
+        title: Support Reason Physical Personal Care
+        description: "Physical Support: Personal care support"
+        meaning: ot:SupportReasonPhysicalPersonalCare
+      "support-reason.sensory-visual":
+        title: Support Reason Sensory Visual
+        description: "Sensory Support: Support for visual impairment"
+        meaning: ot:SupportReasonSensoryVisual
+      "support-reason.sensory-hearing":
+        title: Support Reason Sensory Hearing
+        description: "Sensory Support: Support for hearing impairment"
+        meaning: ot:SupportReasonSensoryHearing
+      "support-reason.sensory-dual":
+        title: Support Reason Sensory Dual
+        description: "Sensory Support: Support for dual impairment"
+        meaning: ot:SupportReasonSensoryDual
+      "support-reason.memory-cognition":
+        title: Support Reason Memory Cognition
+        description: Support with memory and cognition
+        meaning: ot:SupportReasonMemoryCognition
+      "support-reason.learning-disability":
+        title: Support Reason Learning Disability
+        description: Learning disability support
+        meaning: ot:SupportReasonLearningDisability
+      "support-reason.mental-health":
+        title: Support Reason Mental Health
+        description: Mental health support
+        meaning: ot:SupportReasonMentalHealth
+      "support-reason.substance-misuse":
+        title: Support Reason Substance Misuse
+        description: "Social support: Substance misuse support"
+        meaning: ot:SupportReasonSubstanceMisuse
+      "support-reason.asylum-seeker":
+        title: Support Reason Asylum Seeker
+        description: "Social Support: Asylum seeker support"
+        meaning: ot:SupportReasonAsylumSeeker
+      "support-reason.social-isolation-other":
+        title: Support Reason Social Isolation Other
+        description: "Social support: Support for social isolation or other reason"
+        meaning: ot:SupportReasonSocialIsolationOther
+      "support-reason.unpaid-carer":
+        title: Support Reason Unpaid Carer
+        description: "Social support: Support to unpaid carer"
+        meaning: ot:SupportReasonUnpaidCarer
+      "support-reason.unknown":
+        title: Support Reason Unknown
+        description: Unknown
+        meaning: ot:SupportReasonUnknown
+      visual-impairment:
+        title: Visual Impairment
+        description: Observed visual impairment status
+        meaning: ot:VisualImpairment
+      "visual-impairment.blind":
+        title: Visual Impairment Blind
+        description: Blind/severely sight impaired
+        meaning: ot:VisualImpairmentBlind
+      "visual-impairment.partially-sighted":
+        title: Visual Impairment Partially Sighted
+        description: Partial sight/sight impaired
+        meaning: ot:VisualImpairmentPartiallySighted
+      "visual-impairment.no-impairment":
+        title: Visual Impairment No Impairment
+        description: No visual impairment
+        meaning: ot:VisualImpairmentNoImpairment
+      "visual-impairment.severity-unknown":
+        title: Visual Impairment Severity Unknown
+        description: Visual impairment - severity unknown
+        meaning: ot:VisualImpairmentSeverityUnknown
+      "visual-impairment.unknown":
+        title: Visual Impairment Unknown
+        description: Unknown
+        meaning: ot:VisualImpairmentUnknown
 
   MeasurementType:
     enum_uri: sg:measurement-type
