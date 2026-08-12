@@ -605,6 +605,26 @@ Used by [`Service.delivery`](#service-delivery). Codes to indicate the way a ser
 Used by [`ServiceEpisode.type`](#episode-type). Codes to indicate the type of service episode.
 
 {% schema_table page.data_model EpisodeCode %}
+<details>
+<summary markdown="span">See vocabulary</summary>
+
+| Code | Description |
+| :--- | :--- |
+| `early-help` | Early Help Assessment / Intervention |
+| `ehcp` | Education, Health, and Care plan |
+| `family-court-order` | Any order made by family court |
+| `cin-plan` | Child in Need (CIN) Plan |
+| `cp-plan` | Child Protection (CP) Plan |
+| `CAMHS-plan` | Children and Adolescent mental health services care plan |
+| `section-47` | Section 47 Enquiry |
+| `care-leaver` | Care Leaver Support |
+| `child-looked-after` | Child in LA care |
+| `adult-safeguarding` | Adult Safeguarding Enquiry (Section 42) |
+| `care-act-assessment` | Care Act Assessment |
+| `care-plan` | Care Plan (following Care Act Assessment) |
+{:.table-bordered}
+
+</details>
 
 ### Episode Outcome Vocabulary
 
