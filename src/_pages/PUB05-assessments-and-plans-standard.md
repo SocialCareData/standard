@@ -42,10 +42,7 @@ This document is for developers of Case Management Systems, single-view portals,
 
 The following diagram illustrates the elements of the Care Needs Assessments and Plans Standard.
 
-<p class="data-model-diagram">
-  <!-- [TODO: Generate and insert SVG diagram of assessments and plans standard, showing relationship between CareNeedsAssessment, CarePlan, and shared sub-entities] -->
-  [SVG Diagram Placeholder]
-</p>
+<p class="data-model-diagram"><img src="src\assets\img\assessments-and-plans\assessments-and-plans-data-model.svg" alt="Assessments and Plans Data Model" title="Assessments and Plans Data Model" width="80%"/></p>
 
 
 ## Care Needs Assessments
