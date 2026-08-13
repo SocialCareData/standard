@@ -15,7 +15,7 @@ non_technical_summary: |
 
   This structure is based on the requirements of the [Care Act (2014)](https://www.legislation.gov.uk/ukpga/2014/23/contents), the primary legislation that governs adult social care in England. The Care Act enforces that all adults that may appear to have social care needs are assessed over 10 “outcomes”; if they are found to be unable to achieve some of these outcomes, the local authority has the duty to offer a personal budget and set out a care plan.
 
-  However, while this was national guidance, the actual structure of assessments and plans is not standardised. Local authorities across the country use different forms in different formats, some on CMS systems and others in simple word documents.
+  However, the actual structure of assessments and plans is not standardised. Local authorities across the country use different forms in different formats, some on CMS systems and others in simple word documents.
 
   Of course, each has its own unique design for a reason. Social workers in one local authority may have different preferences to those in others, whether about the sort of information they collect or the way they record it. However, the limited standardisation makes interoperability and data sharing difficult. Instead of changing the front-end that social workers may like for its uniqueness, we therefore set out to standardise the back-end fields of information that might be shared between agencies and services.
 ---
