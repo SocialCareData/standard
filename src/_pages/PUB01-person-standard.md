@@ -76,6 +76,12 @@ The top-level record describing an individual. Consolidates the core identity at
 <span id="person-ethnicityCode">ethnicityCode</span>
 : The person's stated ethnicity, using the ONS 18+1 categories from the 2021 census. Statutorily required in adult social care; optional elsewhere. See the [Ethnicity Code Vocabulary](#ethnicity-code-vocabulary).
 
+<span id="person-aboutMe">aboutMe</span>
+: A reference pointing to the person's "About Me" profile (as per the [PRSB AboutMe Standard](https://theprsb.org/standards/aboutme/)). Optional. See [Identifier](#identifier) entity for the structure.
+
+<span id="person-communication">communication</span>
+: The person's communication requirements and language proficiencies. Multi-valued. Optional. See [Communication](#communication).
+
 <span id="person-relatedPerson">relatedPerson</span>
 : References to other people related to this person, with the kind of relationship. Multi-valued. See [PersonRelationship](#personrelationship).
 
@@ -84,12 +90,6 @@ The top-level record describing an individual. Consolidates the core identity at
 
 <span id="person-matchedPersonRef">matchedPersonRef</span>
 : A reference to another Person record, if a match has been identified. Multi-valued. Optional. See [Identifier](#identifier) entity for the structure.
-
-<span id="person-aboutMe">aboutMe</span>
-: A reference pointing to the person's "About Me" profile (as per the [PRSB AboutMe Standard](https://theprsb.org/standards/aboutme/)). Optional. See [Identifier](#identifier) entity for the structure.
-
-<span id="person-communication">communication</span>
-: The person's communication requirements and language proficiencies. Multi-valued. Optional. See [Communication](#communication).
 
 #### Example
 
