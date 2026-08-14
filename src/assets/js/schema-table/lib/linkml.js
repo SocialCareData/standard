@@ -57,14 +57,40 @@ function mergeDefs (target, src) {
 }
 
 /**
+ * Read an `imports.json` importmap sitting next to a schema, mapping a LinkML
+ * `imports:` entry (typically a schema `id` IRI) to a local file path, relative
+ * to `dir`. Mirrors LinkML's own `--importmap` mechanism so a schema that
+ * imports another standard by its canonical id (for a clean `owl:imports`) still
+ * resolves to the local YAML here. Returns {} when there is no importmap.
+ */
+function loadImportMap (dir) {
+  const p = path.join(dir, 'imports.json')
+  try {
+    if (fs.existsSync(p)) return JSON.parse(fs.readFileSync(p, 'utf8')) || {}
+  } catch (_) { /* malformed importmap → behave as if absent */ }
+  return {}
+}
+
+/**
  * Resolve a LinkML `imports:` entry to a local YAML file, or null when it is not
- * a local file (e.g. `linkml:types`, a CURIE, or an absolute URL). Tries the
- * entry as-is and with `.yaml` / `.yml` appended, relative to `dir`.
+ * a local file (e.g. `linkml:types`). A cross-standard import written as a
+ * schema id IRI is resolved via an `imports.json` importmap in `dir`. Otherwise
+ * the entry is treated as a path (as-is and with `.yaml` / `.yml` appended)
+ * relative to `dir`.
  */
 function resolveImport (dir, entry) {
-  if (typeof entry !== 'string' || entry.includes(':')) return null
+  if (typeof entry !== 'string') return null
+
+  // A CURIE / IRI import (contains ':') is only resolvable via the importmap.
+  let candidate = entry
+  if (entry.includes(':')) {
+    const mapped = loadImportMap(dir)[entry]
+    if (!mapped) return null
+    candidate = mapped
+  }
+
   for (const ext of ['', '.yaml', '.yml']) {
-    const p = path.resolve(dir, entry + ext)
+    const p = path.resolve(dir, candidate + ext)
     if (fs.existsSync(p) && fs.statSync(p).isFile()) return p
   }
   return null

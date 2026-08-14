@@ -76,6 +76,10 @@ gen-doc placements-standard-01.yaml
 
 `--non-closed` produces open shapes and `--suffix Shape` names them
 `…Shape` — both keep the output aligned with any hand-written shapes.
+`-im imports.json` resolves the Person import to the local file. `gen-shacl`
+keeps `--include-imports` (the default) so the shared-object shapes are emitted
+and validate the nested objects; `gen-owl` uses `--no-mergeimports` so the
+Person classes are referenced via `owl:imports` rather than copied in.
 
 ## What `gen-shacl` does NOT generate
 
