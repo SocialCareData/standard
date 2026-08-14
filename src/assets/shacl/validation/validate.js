@@ -69,6 +69,17 @@ const STANDARDS = {
         examples: 'examples/person-connected'
       }
     ]
+  },
+  safeguarding: {
+    label: 'Safeguarding',
+    dir: 'safeguarding',
+    profiles: [
+      {
+        name: 'safeguarding',
+        shape: 'safeguarding-standard-shape.ttl',
+        examples: 'examples'
+      }
+    ]
   }
 }
 
