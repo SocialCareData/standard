@@ -95,6 +95,6 @@ Group members are to declare any direct or indirect interest (whether personal, 
 
 - The Reference Group will operate for the duration of the Initiative.
 - These Terms of Reference will be reviewed and updated at least annually.
-- These Terms of Reference should be reviewed before: 11 February 2027.
+- These Terms of Reference should be reviewed before: 10 July 2027.
 
 </article>
