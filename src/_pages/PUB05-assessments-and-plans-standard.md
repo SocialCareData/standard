@@ -38,7 +38,7 @@ This standard applies to care needs assessments and care plans under the guidanc
 
 This document is for developers of Case Management Systems, single-view portals, care providers, integration engineers, and local authority data teams.
 
-## Data Model Overview TODO
+## Data Model Overview
 
 The following diagram illustrates the elements of the Care Needs Assessments and Plans Standard.
 
@@ -439,7 +439,3 @@ JSON-LD payloads are validated using our standard [validation suite](/assets/sha
 ## Report an issue
 
 {% include report-issue.html %}
-
-## Changelog
-
-{% include changelog.html %}

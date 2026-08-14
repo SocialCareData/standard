@@ -843,11 +843,11 @@ enums:
         meaning: epc:AdultSafeguarding
       care-act-assessment:
         title: Care Act Assessment
-        description: Care Act Assessment completed for the subject person
+        description: Care Act Assessment
         meaning: epc:CareActAssessment
       care-plan:
         title: Care Plan
-        description: Care Plan following Care Act Assessment
+        description: Care Plan
         meaning: epc:CarePlan
 
   EpisodeOutcome:
