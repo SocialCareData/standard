@@ -18,7 +18,7 @@
 
 ap:previousId a owl:ObjectProperty ;
     rdfs:label "previousId" ;
-    rdfs:range ap:Identifier ;
+    rdfs:range <https://ns.socialcaredata.io/person/Identifier> ;
     skos:definition "A link to the previous assessment / plan that is being reviewed." ;
     skos:inScheme ap:schema .
 
@@ -31,18 +31,72 @@ ap:schema.owl.ttl a owl:Ontology ;
 
 ap:serviceEpisodeId a owl:ObjectProperty ;
     rdfs:label "serviceEpisodeId" ;
-    rdfs:range ap:Identifier ;
+    rdfs:range <https://ns.socialcaredata.io/person/Identifier> ;
     skos:definition "Identifier for the safeguarding or care service episode during which this assessment / plan was completed." ;
     skos:inScheme ap:schema .
+
+<https://ns.socialcaredata.io/person/address> a owl:ObjectProperty ;
+    rdfs:label "address" ;
+    rdfs:range <https://ns.socialcaredata.io/person/Address> ;
+    skos:definition "Physical addresses where the person can be contacted." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/communication> a owl:ObjectProperty ;
+    rdfs:label "communication" ;
+    rdfs:range <https://ns.socialcaredata.io/person/Communication> ;
+    skos:definition "Professional recording of a person's communication requirements and language proficiencies." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/contact> a owl:ObjectProperty ;
+    rdfs:label "contact" ;
+    rdfs:range <https://ns.socialcaredata.io/person/Contact> ;
+    skos:definition "The person's contact information." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/email> a owl:DatatypeProperty ;
+    rdfs:label "email" ;
+    rdfs:range xsd:string ;
+    skos:definition "One or more email addresses." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/language> a owl:ObjectProperty ;
+    rdfs:label "language" ;
+    rdfs:range <https://ns.socialcaredata.io/person/Language> ;
+    skos:definition "Specific language(s) spoken or understood by the person, optionally annotated with proficiency." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/matchedPersonRef> a owl:ObjectProperty ;
+    rdfs:label "matchedPersonRef" ;
+    rdfs:range <https://ns.socialcaredata.io/person/Identifier> ;
+    skos:definition "References to other Person records where a cross-system match has been identified. Uses the Identifier structure." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/primaryContactProfessional> a owl:ObjectProperty ;
+    rdfs:label "primaryContactProfessional" ;
+    rdfs:range <https://ns.socialcaredata.io/person/Identifier> ;
+    skos:definition "References to the primary professionals related to this person (e.g. care coordinators or a GP). Until the Professional standard is published, recorded using the Identifier structure (system + value)." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/relatedPerson> a owl:ObjectProperty ;
+    rdfs:label "relatedPerson" ;
+    rdfs:range <https://ns.socialcaredata.io/person/PersonRelationship> ;
+    skos:definition "References to other people related to this person, with the kind of relationship." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/telephone> a owl:DatatypeProperty ;
+    rdfs:label "telephone" ;
+    rdfs:range xsd:string ;
+    skos:definition "One or more telephone numbers." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
 
 ap:CareNeedsAssessment a owl:Class ;
     rdfs:label "CareNeedsAssessment" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:status ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ap:planId ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:status ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty ap:assessmentQuestion ],
@@ -55,13 +109,13 @@ ap:CarePlan a owl:Class ;
     rdfs:label "CarePlan" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:assessmentId ],
+            owl:onProperty ap:status ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty ap:careComponent ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:status ],
+            owl:onProperty ap:assessmentId ],
         ap:FoundationalInformation ;
     skos:definition "A Care Plan record, created immediately after an assessment if the person is found to be eligible." ;
     skos:exactMatch ap:CarePlan ;
@@ -87,7 +141,7 @@ ap:actor a owl:ObjectProperty ;
 
 ap:actorId a owl:ObjectProperty ;
     rdfs:label "actorId" ;
-    rdfs:range ap:Identifier ;
+    rdfs:range <https://ns.socialcaredata.io/person/Identifier> ;
     skos:definition "The ID of the person performing the item of the plan (Person ID, professional ID, or service ID)." ;
     skos:inScheme ap:schema .
 
@@ -117,7 +171,7 @@ ap:answerType a owl:ObjectProperty ;
 
 ap:assessmentId a owl:ObjectProperty ;
     rdfs:label "assessmentId" ;
-    rdfs:range ap:Identifier ;
+    rdfs:range <https://ns.socialcaredata.io/person/Identifier> ;
     skos:definition "Assessment that led to this plan." ;
     skos:inScheme ap:schema .
 
@@ -175,12 +229,6 @@ ap:frequency a owl:DatatypeProperty ;
     skos:definition "The frequency the component of the plan is performed, expressed using FHIR Timing or similar." ;
     skos:inScheme ap:schema .
 
-ap:identifier a owl:ObjectProperty ;
-    rdfs:label "identifier" ;
-    rdfs:range ap:Identifier ;
-    skos:definition "Identifier for this assessment / plan." ;
-    skos:inScheme ap:schema .
-
 ap:isReview a owl:DatatypeProperty ;
     rdfs:label "isReview" ;
     rdfs:range xsd:boolean ;
@@ -195,19 +243,19 @@ ap:outcome a owl:ObjectProperty ;
 
 ap:personId a owl:ObjectProperty ;
     rdfs:label "personId" ;
-    rdfs:range ap:Identifier ;
+    rdfs:range <https://ns.socialcaredata.io/person/Identifier> ;
     skos:definition "Identifier for the subject person." ;
     skos:inScheme ap:schema .
 
 ap:planId a owl:ObjectProperty ;
     rdfs:label "planId" ;
-    rdfs:range ap:Identifier ;
+    rdfs:range <https://ns.socialcaredata.io/person/Identifier> ;
     skos:definition "Any care plan linked to this assessment. Quick signpost that a) a plan was made (ie the person was determined to be eligible) and b) where the plan is (so you don't need to search for it)." ;
     skos:inScheme ap:schema .
 
 ap:professionalId a owl:ObjectProperty ;
     rdfs:label "professionalId" ;
-    rdfs:range ap:Identifier ;
+    rdfs:range <https://ns.socialcaredata.io/person/Identifier> ;
     skos:definition "Identifier for the professional that authored the assessment/plan. Note that we don't need a serviceID, because you can find the service through the professional." ;
     skos:inScheme ap:schema .
 
@@ -226,7 +274,7 @@ ap:questionText a owl:DatatypeProperty ;
 ap:required a owl:DatatypeProperty ;
     rdfs:label "required" ;
     rdfs:range xsd:boolean ;
-    skos:definition "Whether this question was mandatory on the local authority�s assessment. Should always be True for statutory fields." ;
+    skos:definition "Whether this question was mandatory on the local authority’s assessment. Should always be True for statutory fields." ;
     skos:inScheme ap:schema .
 
 ap:review a owl:ObjectProperty ;
@@ -259,18 +307,189 @@ ap:value a owl:DatatypeProperty ;
     skos:definition "The identifier value, unique within the issuing system." ;
     skos:inScheme ap:schema .
 
+<https://ns.socialcaredata.io/person/Person> a owl:Class ;
+    rdfs:label "Person" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/aboutMe> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/isDeceased> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/sexCode> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/dateOfBirth> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/ethnicityCode> ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:identifier ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/name> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/genderCode> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/deceasedDate> ] ;
+    skos:definition "The top-level record describing an individual. Consolidates the core identity attributes required to distinguish one person from another and to record relationships between individuals. This is the canonical base Person; the two conformance profiles tighten the cardinalities below." ;
+    skos:exactMatch <https://ns.socialcaredata.io/person/Person> ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/UPRN> a owl:DatatypeProperty ;
+    rdfs:label "UPRN" ;
+    rdfs:range xsd:string ;
+    skos:definition "Unique Property Reference Number of the address." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/USRN> a owl:DatatypeProperty ;
+    rdfs:label "USRN" ;
+    rdfs:range xsd:string ;
+    skos:definition "Unique Street Reference Number of the address." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/aboutMe> a owl:ObjectProperty ;
+    rdfs:label "aboutMe" ;
+    rdfs:range <https://ns.socialcaredata.io/person/Identifier> ;
+    skos:definition "A reference pointing to the person's self-reported \"About Me\" profile (an in-use standard across health and care allowing individuals to record their wants and needs). Uses the Identifier structure." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/addressUse> a owl:ObjectProperty ;
+    rdfs:label "addressUse" ;
+    dct:title "use" ;
+    rdfs:range <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:definition "How this address is used - home, work, temp, etc." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/city> a owl:DatatypeProperty ;
+    rdfs:label "city" ;
+    rdfs:range xsd:string ;
+    skos:definition "City, town, or village." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/communicationNeeds> a owl:DatatypeProperty ;
+    rdfs:label "communicationNeeds" ;
+    rdfs:range xsd:string ;
+    skos:definition "Free-text describing professionally recorded communication needs or reasonable adjustments (e.g. BSL interpreter needed, uses communication board)." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/contactName> a owl:DatatypeProperty ;
+    rdfs:label "contactName" ;
+    dct:title "name" ;
+    rdfs:range xsd:string ;
+    skos:definition "Name of the contact type (for example, \"Home\", \"Work\", \"Other\")." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/date> a owl:DatatypeProperty ;
+    rdfs:label "date" ;
+    rdfs:range xsd:date ;
+    skos:definition "ISO 8601-formatted date (YYYY-MM-DD)." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/dateOfBirth> a owl:ObjectProperty ;
+    rdfs:label "dateOfBirth" ;
+    rdfs:range <https://ns.socialcaredata.io/person/PartialDate> ;
+    skos:definition "The person's date of birth, with an optional accuracy indicator." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/deceasedDate> a owl:ObjectProperty ;
+    rdfs:label "deceasedDate" ;
+    rdfs:range <https://ns.socialcaredata.io/person/PartialDate> ;
+    skos:definition "The person's date of death, with an optional accuracy indicator. isDeceased may be true without a known date." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/ethnicityCode> a owl:ObjectProperty ;
+    rdfs:label "ethnicityCode" ;
+    rdfs:range <https://ns.socialcaredata.io/person/ethnicity-code> ;
+    skos:definition "The person's stated ethnicity, using the ONS 18+1 categories from the 2021 census. Statutorily required in adult social care; optional elsewhere." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/familyName> a owl:DatatypeProperty ;
+    rdfs:label "familyName" ;
+    rdfs:range xsd:string ;
+    skos:definition "The surname or family name. Multi-valued to support compound or hyphenated family names recorded as separate parts." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/genderCode> a owl:ObjectProperty ;
+    rdfs:label "genderCode" ;
+    rdfs:range <https://ns.socialcaredata.io/person/gender-code> ;
+    skos:definition "The person's stated gender." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/givenName> a owl:DatatypeProperty ;
+    rdfs:label "givenName" ;
+    rdfs:range xsd:string ;
+    skos:definition "The first name and any middle names." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/isDeceased> a owl:DatatypeProperty ;
+    rdfs:label "isDeceased" ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Whether the person is deceased." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/languageCode> a owl:DatatypeProperty ;
+    rdfs:label "languageCode" ;
+    rdfs:range xsd:string ;
+    skos:definition "A code or name representing the language (e.g., 'en', 'eng', 'bsl', 'British Sign Language')." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/line1> a owl:DatatypeProperty ;
+    rdfs:label "line1" ;
+    rdfs:range xsd:string ;
+    skos:definition "Street address (e.g. \"1 High Street\") or care-of line." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/line2> a owl:DatatypeProperty ;
+    rdfs:label "line2" ;
+    rdfs:range xsd:string ;
+    skos:definition "Apartment, suite, unit, building, floor, etc." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/name> a owl:ObjectProperty ;
+    rdfs:label "name" ;
+    rdfs:range <https://ns.socialcaredata.io/person/Name> ;
+    skos:definition "A name for the person, with a usage indicating its purpose (usual, maiden, nickname, etc.)." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/nameUse> a owl:ObjectProperty ;
+    rdfs:label "nameUse" ;
+    dct:title "use" ;
+    rdfs:range <https://ns.socialcaredata.io/person/name-use-code> ;
+    skos:definition "The purpose of this name instance - usual, official, former, etc." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/preferredName> a owl:DatatypeProperty ;
+    rdfs:label "preferredName" ;
+    rdfs:range xsd:string ;
+    skos:definition "Any preferred given or middle name used by the person - for example, \"Joe\" where their legal first name is \"Joseph\"." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/proficiencyLevel> a owl:DatatypeProperty ;
+    rdfs:label "proficiencyLevel" ;
+    rdfs:range xsd:string ;
+    skos:definition "The level of proficiency or fluency in the language (e.g., 'fluent', 'native', 'basic')." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/relationship> a owl:ObjectProperty ;
+    rdfs:label "relationship" ;
+    rdfs:range <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "One or more codes describing the kind of relationship." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/sexCode> a owl:ObjectProperty ;
+    rdfs:label "sexCode" ;
+    rdfs:range <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    skos:definition "Observed phenotypic sex, where recorded." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
 ap:AssessmentQuestion a owl:Class ;
     rdfs:label "AssessmentQuestion" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ap:answer ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:answerType ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ap:questionId ],
-        [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty ap:required ],
         [ a owl:Restriction ;
@@ -278,7 +497,16 @@ ap:AssessmentQuestion a owl:Class ;
             owl:onProperty ap:category ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:questionText ] ;
+            owl:onProperty ap:questionText ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty ap:answer ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ap:questionId ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:answerType ] ;
     skos:definition "A generic Question-and-Answer model used to represent both statutory Care Act questions and local, personalised fields." ;
     skos:exactMatch ap:AssessmentQuestion ;
     skos:inScheme ap:schema .
@@ -286,14 +514,14 @@ ap:AssessmentQuestion a owl:Class ;
 ap:CareActivity a owl:Class ;
     rdfs:label "CareActivity" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ap:directPayment ],
+            owl:cardinality 1 ;
+            owl:onProperty ap:activityDescription ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ap:outcome ],
         [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:activityDescription ] ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ap:directPayment ] ;
     skos:definition "The description and details of the care component activity." ;
     skos:exactMatch ap:CareActivity ;
     skos:inScheme ap:schema .
@@ -314,13 +542,13 @@ ap:CareComponent a owl:Class ;
     rdfs:label "CareComponent" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:activity ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
             owl:onProperty ap:time ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty ap:actor ] ;
+            owl:onProperty ap:actor ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:activity ] ;
     skos:definition "A specific component of a Care Plan, capturing who does what, when, and to achieve which outcomes." ;
     skos:exactMatch ap:CareComponent ;
     skos:inScheme ap:schema .
@@ -329,13 +557,13 @@ ap:CareTiming a owl:Class ;
     rdfs:label "CareTiming" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:startDateTime ],
+            owl:onProperty ap:frequency ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ap:endDateTime ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:frequency ] ;
+            owl:onProperty ap:startDateTime ] ;
     skos:definition "The schedule and timing information of a care component." ;
     skos:exactMatch ap:CareTiming ;
     skos:inScheme ap:schema .
@@ -344,28 +572,28 @@ ap:FoundationalInformation a owl:Class ;
     rdfs:label "FoundationalInformation" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:capacityToCompleteAssessment ],
+            owl:onProperty ap:consentToInformationSharing ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:identifier ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:advocateRequired ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:personId ],
+            owl:onProperty ap:dateCompleted ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty ap:review ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:dateCompleted ],
+            owl:onProperty ap:personId ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:capacityToCompleteAssessment ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty ap:professionalId ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty ap:consentToInformationSharing ] ;
+            owl:onProperty ap:advocateRequired ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:identifier ] ;
     skos:definition "Information that is relevant across both assessments and plans." ;
     skos:inScheme ap:schema .
 
@@ -750,7 +978,7 @@ sq:STAT-FINANCE-01 a owl:Class ;
     rdfs:label "STAT-FINANCE-01" ;
     dct:title "STAT-FINANCE-01" ;
     rdfs:subClassOf ap:statutory-question-id ;
-    skos:definition "What is the client�s (potential) funding status? (Expected answerType: Enum matching ClientFundingStatus)" .
+    skos:definition "What is the client’s (potential) funding status? (Expected answerType: Enum matching ClientFundingStatus)" .
 
 sq:STAT-HEALTH-01 a owl:Class ;
     rdfs:label "STAT-HEALTH-01" ;
@@ -764,6 +992,979 @@ sq:STAT-HOUSING-01 a owl:Class ;
     rdfs:subClassOf ap:statutory-question-id ;
     skos:definition "Does the person live alone? (Expected answerType: Boolean)" .
 
+<https://ns.socialcaredata.io/person/Address> a owl:Class ;
+    rdfs:label "Address" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/UPRN> ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/postcode> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}$" ] ) ] ) ] ;
+            owl:onProperty <https://ns.socialcaredata.io/person/postcode> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/USRN> ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/line1> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/line2> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/addressUse> ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/city> ] ;
+    skos:definition "A postal address for the person. Aligned with FHIR Address. UPRN and USRN support property- and street-level disambiguation." ;
+    skos:exactMatch <https://ns.socialcaredata.io/person/Address> ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/Communication> a owl:Class ;
+    rdfs:label "Communication" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/communicationNeeds> ] ;
+    skos:definition "Professional recording of a person's communication requirements and language proficiencies." ;
+    skos:exactMatch <https://ns.socialcaredata.io/person/Communication> ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/Contact> a owl:Class ;
+    rdfs:label "Contact" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/contactName> ] ;
+    skos:definition "Contact details for a person, such as a home, work, or other contact channel grouping." ;
+    skos:exactMatch <https://ns.socialcaredata.io/person/Contact> ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/Language> a owl:Class ;
+    rdfs:label "Language" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/languageCode> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/proficiencyLevel> ] ;
+    skos:definition "A specific language the person is proficient in, including proficiency level." ;
+    skos:exactMatch <https://ns.socialcaredata.io/person/Language> ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/Name> a owl:Class ;
+    rdfs:label "Name" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/familyName> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/nameUse> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/givenName> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/preferredName> ] ;
+    skos:definition "Container for a person's name parts, aligned with FHIR HumanName. A person may have multiple names with different uses." ;
+    skos:exactMatch <https://ns.socialcaredata.io/person/Name> ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/PersonRelationship> a owl:Class ;
+    rdfs:label "PersonRelationship" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/relationship> ] ;
+    skos:definition "A typed reference from one person to another. The reference is by Identifier (so the related person may live in a different system) and is qualified by one or more relationship codes." ;
+    skos:exactMatch <https://ns.socialcaredata.io/person/PersonRelationship> ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/accuracyIndicator> a owl:DatatypeProperty ;
+    rdfs:label "accuracyIndicator" ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                        owl:onDatatype xsd:string ;
+                        owl:withRestrictions ( [ xsd:pattern "^[AEU]{3}$" ] ) ] ) ] ;
+    skos:definition "A three-character code in day-month-year order indicating which parts of the date are accurate (A), estimated (E), or unknown (U)." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
+<https://ns.socialcaredata.io/person/address-use-code#Billing> a owl:Class ;
+    rdfs:label "billing" ;
+    dct:title "Billing" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:definition "An address to be used to send bills, invoices, receipts etc." .
+
+<https://ns.socialcaredata.io/person/address-use-code#Home> a owl:Class ;
+    rdfs:label "home" ;
+    dct:title "Home" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:definition "A communication address at a home." .
+
+<https://ns.socialcaredata.io/person/address-use-code#Old> a owl:Class ;
+    rdfs:label "old" ;
+    dct:title "Old / Incorrect" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:definition "This address is no longer in use (or was never correct but retained for records)." .
+
+<https://ns.socialcaredata.io/person/address-use-code#Temp> a owl:Class ;
+    rdfs:label "temp" ;
+    dct:title "Temporary" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:definition "A temporary address." .
+
+<https://ns.socialcaredata.io/person/address-use-code#Work> a owl:Class ;
+    rdfs:label "work" ;
+    dct:title "Work" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/address-use-code> ;
+    skos:definition "An office address. First choice for business-related contacts during business hours." .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#AsianBangladeshi> a owl:Class ;
+    rdfs:label "1" ;
+    dct:title "Asian, Asian British or Asian Welsh: Bangladeshi" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#AsianChinese> a owl:Class ;
+    rdfs:label "2" ;
+    dct:title "Asian, Asian British or Asian Welsh: Chinese" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#AsianIndian> a owl:Class ;
+    rdfs:label "3" ;
+    dct:title "Asian, Asian British or Asian Welsh: Indian" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#AsianOther> a owl:Class ;
+    rdfs:label "5" ;
+    dct:title "Asian, Asian British or Asian Welsh: Other Asian" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#AsianPakistani> a owl:Class ;
+    rdfs:label "4" ;
+    dct:title "Asian, Asian British or Asian Welsh: Pakistani" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#BlackAfrican> a owl:Class ;
+    rdfs:label "6" ;
+    dct:title "Black, Black British, Black Welsh, Caribbean or African: African" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#BlackCaribbean> a owl:Class ;
+    rdfs:label "7" ;
+    dct:title "Black, Black British, Black Welsh, Caribbean or African: Caribbean" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#BlackOther> a owl:Class ;
+    rdfs:label "8" ;
+    dct:title "Black, Black British, Black Welsh, Caribbean or African: Other Black" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#DoesNotApply> a owl:Class ;
+    rdfs:label "-8" ;
+    dct:title "Does not apply (Students and schoolchildren living away during term-time)" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#MixedOther> a owl:Class ;
+    rdfs:label "12" ;
+    dct:title "Mixed or Multiple ethnic groups: Other Mixed or Multiple ethnic groups" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#MixedWhiteAsian> a owl:Class ;
+    rdfs:label "9" ;
+    dct:title "Mixed or Multiple ethnic groups: White and Asian" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#MixedWhiteBlackAfrican> a owl:Class ;
+    rdfs:label "10" ;
+    dct:title "Mixed or Multiple ethnic groups: White and Black African" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#MixedWhiteBlackCaribbean> a owl:Class ;
+    rdfs:label "11" ;
+    dct:title "Mixed or Multiple ethnic groups: White and Black Caribbean" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#OtherAny> a owl:Class ;
+    rdfs:label "19" ;
+    dct:title "Other ethnic group: Any other ethnic group" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#OtherArab> a owl:Class ;
+    rdfs:label "18" ;
+    dct:title "Other ethnic group: Arab" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#WhiteBritish> a owl:Class ;
+    rdfs:label "13" ;
+    dct:title "White: English, Welsh, Scottish, Northern Irish or British" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#WhiteGypsyOrIrishTraveller> a owl:Class ;
+    rdfs:label "15" ;
+    dct:title "White: Gypsy or Irish Traveller" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#WhiteIrish> a owl:Class ;
+    rdfs:label "14" ;
+    dct:title "White: Irish" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#WhiteOther> a owl:Class ;
+    rdfs:label "17" ;
+    dct:title "White: Other White" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/ethnicity-code#WhiteRoma> a owl:Class ;
+    rdfs:label "16" ;
+    dct:title "White: Roma" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/ethnicity-code> .
+
+<https://ns.socialcaredata.io/person/gender-code#Female> a owl:Class ;
+    rdfs:label "2" ;
+    dct:title "Female" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/gender-code> ;
+    skos:definition "The person identifies as female." .
+
+<https://ns.socialcaredata.io/person/gender-code#Indeterminate> a owl:Class ;
+    rdfs:label "9" ;
+    dct:title "Indeterminate" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/gender-code> ;
+    skos:definition "Unable to be classified as either male or female." .
+
+<https://ns.socialcaredata.io/person/gender-code#Male> a owl:Class ;
+    rdfs:label "1" ;
+    dct:title "Male" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/gender-code> ;
+    skos:definition "The person identifies as male." .
+
+<https://ns.socialcaredata.io/person/gender-code#NotKnown> a owl:Class ;
+    rdfs:label "X" ;
+    dct:title "Not Known" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/gender-code> ;
+    skos:definition "Not recorded, or information unavailable." .
+
+<https://ns.socialcaredata.io/person/name-use-code#Anonymous> a owl:Class ;
+    rdfs:label "anonymous" ;
+    dct:title "Anonymous" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/name-use-code> ;
+    skos:definition "A pseudonym used to protect the person's privacy." .
+
+<https://ns.socialcaredata.io/person/name-use-code#Maiden> a owl:Class ;
+    rdfs:label "maiden" ;
+    dct:title "Maiden name" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/name-use-code> ;
+    skos:definition "A name used prior to marriage. Applies regardless of gender." .
+
+<https://ns.socialcaredata.io/person/name-use-code#Nickname> a owl:Class ;
+    rdfs:label "nickname" ;
+    dct:title "Nickname" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/name-use-code> ;
+    skos:definition "An informal name not part of the person's formal or usual name." .
+
+<https://ns.socialcaredata.io/person/name-use-code#Official> a owl:Class ;
+    rdfs:label "official" ;
+    dct:title "Official name" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/name-use-code> ;
+    skos:definition "The formal name registered in a government register." .
+
+<https://ns.socialcaredata.io/person/name-use-code#Old> a owl:Class ;
+    rdfs:label "old" ;
+    dct:title "Old name" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/name-use-code> ;
+    skos:definition "A name no longer in use, retained for record-matching purposes." .
+
+<https://ns.socialcaredata.io/person/name-use-code#Temp> a owl:Class ;
+    rdfs:label "temp" ;
+    dct:title "Temporary name" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/name-use-code> ;
+    skos:definition "A temporary name; assigned at birth, in emergencies, or where the full name is not yet known." .
+
+<https://ns.socialcaredata.io/person/name-use-code#Usual> a owl:Class ;
+    rdfs:label "usual" ;
+    dct:title "Usual name" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/name-use-code> ;
+    skos:definition "The name commonly used by the person - what they normally go by." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#ADOPTF> a owl:Class ;
+    rdfs:label "ADOPTF" ;
+    dct:title "Adoptive father" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A male parent who legally adopted the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#ADOPTM> a owl:Class ;
+    rdfs:label "ADOPTM" ;
+    dct:title "Adoptive mother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A female parent who legally adopted the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#ADOPTP> a owl:Class ;
+    rdfs:label "ADOPTP" ;
+    dct:title "Adoptive parent" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A parent who legally adopted the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#AUNT> a owl:Class ;
+    rdfs:label "AUNT" ;
+    dct:title "Aunt" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Sister of the scoping person's parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#BRO> a owl:Class ;
+    rdfs:label "BRO" ;
+    dct:title "Brother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Male sibling." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#BROINLAW> a owl:Class ;
+    rdfs:label "BROINLAW" ;
+    dct:title "Brother-in-law" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "The spouse's brother, or the husband of the scoping person's sister." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#CHILD> a owl:Class ;
+    rdfs:label "CHILD" ;
+    dct:title "Child" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Offspring of the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#CHLDADOPT> a owl:Class ;
+    rdfs:label "CHLDADOPT" ;
+    dct:title "Adopted child" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A child legally adopted and raised by the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#CHLDFOST> a owl:Class ;
+    rdfs:label "CHLDFOST" ;
+    dct:title "Foster child" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A child receiving parental care without legal or blood ties." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#CHLDINLAW> a owl:Class ;
+    rdfs:label "CHLDINLAW" ;
+    dct:title "Child-in-law" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Spouse of the scoping person's child." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#COUSN> a owl:Class ;
+    rdfs:label "COUSN" ;
+    dct:title "Cousin" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A relative descended from a common ancestor by multiple steps." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#DAU> a owl:Class ;
+    rdfs:label "DAU" ;
+    dct:title "Natural daughter" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Female offspring of the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#DAUADOPT> a owl:Class ;
+    rdfs:label "DAUADOPT" ;
+    dct:title "Adopted daughter" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A female child legally adopted and raised by the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#DAUC> a owl:Class ;
+    rdfs:label "DAUC" ;
+    dct:title "Daughter" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A female child (of any type) of the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#DAUFOST> a owl:Class ;
+    rdfs:label "DAUFOST" ;
+    dct:title "Foster daughter" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A female child receiving foster parental care." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#DAUINLAW> a owl:Class ;
+    rdfs:label "DAUINLAW" ;
+    dct:title "Daughter-in-law" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Wife of the scoping person's son." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#DOMPART> a owl:Class ;
+    rdfs:label "DOMPART" ;
+    dct:title "Domestic partner" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A cohabiting partner who is not a spouse." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#EXT> a owl:Class ;
+    rdfs:label "EXT" ;
+    dct:title "Extended family member" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A non-immediate genetic or legal relative (e.g. aunt, cousin)." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#FAMMEMB> a owl:Class ;
+    rdfs:label "FAMMEMB" ;
+    dct:title "Family member" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A familial relationship between two people." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#FMRSPS> a owl:Class ;
+    rdfs:label "FMRSPS" ;
+    dct:title "Former spouse" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A previously married partner; the marriage has been dissolved." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#FRND> a owl:Class ;
+    rdfs:label "FRND" ;
+    dct:title "Friend" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A known, liked, and trusted person who is not a relative." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#FTH> a owl:Class ;
+    rdfs:label "FTH" ;
+    dct:title "Father" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Male parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#FTHFOST> a owl:Class ;
+    rdfs:label "FTHFOST" ;
+    dct:title "Foster father" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Male state-certified caregiver for the scoping person as a foster child." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#FTHINLAW> a owl:Class ;
+    rdfs:label "FTHINLAW" ;
+    dct:title "Father-in-law" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Father of the scoping person's spouse." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#FTWIN> a owl:Class ;
+    rdfs:label "FTWIN" ;
+    dct:title "Fraternal twin" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A twin from distinct egg/sperm pairs." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#FTWINBRO> a owl:Class ;
+    rdfs:label "FTWINBRO" ;
+    dct:title "Fraternal twin brother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Male fraternal twin." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#FTWINSIS> a owl:Class ;
+    rdfs:label "FTWINSIS" ;
+    dct:title "Fraternal twin sister" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Female fraternal twin." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#GESTM> a owl:Class ;
+    rdfs:label "GESTM" ;
+    dct:title "Gestational mother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A woman whose womb carried the foetus (distinct from biological mother where surrogacy is involved)." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#GGRFTH> a owl:Class ;
+    rdfs:label "GGRFTH" ;
+    dct:title "Great-grandfather" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Father of the scoping person's grandparent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#GGRMTH> a owl:Class ;
+    rdfs:label "GGRMTH" ;
+    dct:title "Great-grandmother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Mother of the scoping person's grandparent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#GGRPRN> a owl:Class ;
+    rdfs:label "GGRPRN" ;
+    dct:title "Great-grandparent" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Parent of the scoping person's grandparent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#GRFTH> a owl:Class ;
+    rdfs:label "GRFTH" ;
+    dct:title "Grandfather" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Father of the scoping person's parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#GRMTH> a owl:Class ;
+    rdfs:label "GRMTH" ;
+    dct:title "Grandmother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Mother of the scoping person's parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#GRNDCHILD> a owl:Class ;
+    rdfs:label "GRNDCHILD" ;
+    dct:title "Grandchild" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Child of the scoping person's son or daughter." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#GRNDDAU> a owl:Class ;
+    rdfs:label "GRNDDAU" ;
+    dct:title "Granddaughter" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Daughter of the scoping person's child." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#GRNDSON> a owl:Class ;
+    rdfs:label "GRNDSON" ;
+    dct:title "Grandson" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Son of the scoping person's child." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#GRPRN> a owl:Class ;
+    rdfs:label "GRPRN" ;
+    dct:title "Grandparent" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Parent of the scoping person's parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#HBRO> a owl:Class ;
+    rdfs:label "HBRO" ;
+    dct:title "Half-brother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Male sibling related by a single biological parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#HSIB> a owl:Class ;
+    rdfs:label "HSIB" ;
+    dct:title "Half-sibling" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Related to the scoping person by a single biological parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#HSIS> a owl:Class ;
+    rdfs:label "HSIS" ;
+    dct:title "Half-sister" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Female sibling related by a single biological parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#HUSB> a owl:Class ;
+    rdfs:label "HUSB" ;
+    dct:title "Husband" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A man joined in marriage." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#INLAW> a owl:Class ;
+    rdfs:label "INLAW" ;
+    dct:title "In-law" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A member of the scoping person's spouse's immediate family." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#ITWIN> a owl:Class ;
+    rdfs:label "ITWIN" ;
+    dct:title "Identical twin" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A twin from the same egg/sperm pair as the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#ITWINBRO> a owl:Class ;
+    rdfs:label "ITWINBRO" ;
+    dct:title "Identical twin brother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Male identical twin." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#ITWINSIS> a owl:Class ;
+    rdfs:label "ITWINSIS" ;
+    dct:title "Identical twin sister" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Female identical twin." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#MAUNT> a owl:Class ;
+    rdfs:label "MAUNT" ;
+    dct:title "Maternal aunt" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological sister of the scoping person's biological mother." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#MCOUSN> a owl:Class ;
+    rdfs:label "MCOUSN" ;
+    dct:title "Maternal cousin" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological relative via the scoping person's mother's line." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#MGGRFTH> a owl:Class ;
+    rdfs:label "MGGRFTH" ;
+    dct:title "Maternal great-grandfather" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological father of the scoping person's maternal grandparent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#MGGRMTH> a owl:Class ;
+    rdfs:label "MGGRMTH" ;
+    dct:title "Maternal great-grandmother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological mother of the scoping person's maternal grandparent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#MGGRPRN> a owl:Class ;
+    rdfs:label "MGGRPRN" ;
+    dct:title "Maternal great-grandparent" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological parent of the scoping person's maternal grandparent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#MGRFTH> a owl:Class ;
+    rdfs:label "MGRFTH" ;
+    dct:title "Maternal grandfather" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological father of the scoping person's biological mother." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#MGRMTH> a owl:Class ;
+    rdfs:label "MGRMTH" ;
+    dct:title "Maternal grandmother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological mother of the scoping person's biological mother." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#MGRPRN> a owl:Class ;
+    rdfs:label "MGRPRN" ;
+    dct:title "Maternal grandparent" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological parent of the scoping person's biological mother." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#MTH> a owl:Class ;
+    rdfs:label "MTH" ;
+    dct:title "Mother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Female parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#MTHFOST> a owl:Class ;
+    rdfs:label "MTHFOST" ;
+    dct:title "Foster mother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Female state-certified caregiver for the scoping person as a foster child." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#MTHINLAW> a owl:Class ;
+    rdfs:label "MTHINLAW" ;
+    dct:title "Mother-in-law" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Mother of the scoping person's spouse." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#MUNCLE> a owl:Class ;
+    rdfs:label "MUNCLE" ;
+    dct:title "Maternal uncle" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological brother of the scoping person's biological mother." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#NBOR> a owl:Class ;
+    rdfs:label "NBOR" ;
+    dct:title "Neighbour" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A person living nearby." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#NBRO> a owl:Class ;
+    rdfs:label "NBRO" ;
+    dct:title "Natural brother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Male sibling with the same biological parents as the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#NCHILD> a owl:Class ;
+    rdfs:label "NCHILD" ;
+    dct:title "Natural child" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Offspring determined by birth." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#NEPHEW> a owl:Class ;
+    rdfs:label "NEPHEW" ;
+    dct:title "Nephew" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Son of the scoping person's sibling." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#NFTH> a owl:Class ;
+    rdfs:label "NFTH" ;
+    dct:title "Natural father" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Male biological parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#NIECE> a owl:Class ;
+    rdfs:label "NIECE" ;
+    dct:title "Niece" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Daughter of the scoping person's sibling." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#NIENEPH> a owl:Class ;
+    rdfs:label "NIENEPH" ;
+    dct:title "Niece/nephew" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Child of the scoping person's sibling." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#NMTH> a owl:Class ;
+    rdfs:label "NMTH" ;
+    dct:title "Natural mother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Female biological parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#NPRN> a owl:Class ;
+    rdfs:label "NPRN" ;
+    dct:title "Natural parent" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#NSIB> a owl:Class ;
+    rdfs:label "NSIB" ;
+    dct:title "Natural sibling" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Both biological parents in common with the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#NSIS> a owl:Class ;
+    rdfs:label "NSIS" ;
+    dct:title "Natural sister" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Female sibling with the same biological parents as the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#ONESELF> a owl:Class ;
+    rdfs:label "ONESELF" ;
+    dct:title "Self" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A relationship of the person with themselves (used to express identity links)." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#PAUNT> a owl:Class ;
+    rdfs:label "PAUNT" ;
+    dct:title "Paternal aunt" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological sister of the scoping person's biological father." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#PCOUSN> a owl:Class ;
+    rdfs:label "PCOUSN" ;
+    dct:title "Paternal cousin" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological relative via the scoping person's father's line." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#PGGRFTH> a owl:Class ;
+    rdfs:label "PGGRFTH" ;
+    dct:title "Paternal great-grandfather" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological father of the scoping person's paternal grandparent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#PGGRMTH> a owl:Class ;
+    rdfs:label "PGGRMTH" ;
+    dct:title "Paternal great-grandmother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological mother of the scoping person's paternal grandparent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#PGGRPRN> a owl:Class ;
+    rdfs:label "PGGRPRN" ;
+    dct:title "Paternal great-grandparent" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological parent of the scoping person's paternal grandparent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#PGRFTH> a owl:Class ;
+    rdfs:label "PGRFTH" ;
+    dct:title "Paternal grandfather" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological father of the scoping person's biological father." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#PGRMTH> a owl:Class ;
+    rdfs:label "PGRMTH" ;
+    dct:title "Paternal grandmother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological mother of the scoping person's biological father." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#PGRPRN> a owl:Class ;
+    rdfs:label "PGRPRN" ;
+    dct:title "Paternal grandparent" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological parent of the scoping person's biological father." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#PRN> a owl:Class ;
+    rdfs:label "PRN" ;
+    dct:title "Parent" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "One who begets, gives birth to, or raises the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#PRNFOST> a owl:Class ;
+    rdfs:label "PRNFOST" ;
+    dct:title "Foster parent" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A state-certified caregiver for the scoping person as a foster child." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#PRNINLAW> a owl:Class ;
+    rdfs:label "PRNINLAW" ;
+    dct:title "Parent-in-law" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A parent of the scoping person's spouse." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#PUNCLE> a owl:Class ;
+    rdfs:label "PUNCLE" ;
+    dct:title "Paternal uncle" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Biological brother of the scoping person's biological father." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#ROOM> a owl:Class ;
+    rdfs:label "ROOM" ;
+    dct:title "Roommate" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A person sharing living quarters." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#SIB> a owl:Class ;
+    rdfs:label "SIB" ;
+    dct:title "Sibling" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Shares one or both parents with the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#SIBINLAW> a owl:Class ;
+    rdfs:label "SIBINLAW" ;
+    dct:title "Sibling-in-law" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "The spouse's sibling or the spouse of the scoping person's sibling." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#SIGOTHR> a owl:Class ;
+    rdfs:label "SIGOTHR" ;
+    dct:title "Significant other" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A person important to the scoping person's well-being (spouse or equivalent)." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#SIS> a owl:Class ;
+    rdfs:label "SIS" ;
+    dct:title "Sister" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Female sibling." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#SISINLAW> a owl:Class ;
+    rdfs:label "SISINLAW" ;
+    dct:title "Sister-in-law" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "The spouse's sister, or the wife of the scoping person's brother." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#SON> a owl:Class ;
+    rdfs:label "SON" ;
+    dct:title "Natural son" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Male offspring of the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#SONADOPT> a owl:Class ;
+    rdfs:label "SONADOPT" ;
+    dct:title "Adopted son" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A male child legally adopted and raised by the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#SONC> a owl:Class ;
+    rdfs:label "SONC" ;
+    dct:title "Son" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A male child (of any type) of the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#SONFOST> a owl:Class ;
+    rdfs:label "SONFOST" ;
+    dct:title "Foster son" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A male child receiving foster parental care." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#SONINLAW> a owl:Class ;
+    rdfs:label "SONINLAW" ;
+    dct:title "Son-in-law" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Husband of the scoping person's daughter." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#SPS> a owl:Class ;
+    rdfs:label "SPS" ;
+    dct:title "Spouse" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Marriage partner." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#STPBRO> a owl:Class ;
+    rdfs:label "STPBRO" ;
+    dct:title "Stepbrother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A son of the scoping person's stepparent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#STPCHLD> a owl:Class ;
+    rdfs:label "STPCHLD" ;
+    dct:title "Stepchild" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A child of the scoping person's spouse by a previous union." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#STPDAU> a owl:Class ;
+    rdfs:label "STPDAU" ;
+    dct:title "Stepdaughter" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A daughter of the scoping person's spouse by a previous union." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#STPFTH> a owl:Class ;
+    rdfs:label "STPFTH" ;
+    dct:title "Stepfather" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Husband of the scoping person's mother, where he is not the biological father." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#STPMTH> a owl:Class ;
+    rdfs:label "STPMTH" ;
+    dct:title "Stepmother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Wife of the scoping person's father, where she is not the biological mother." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#STPPRN> a owl:Class ;
+    rdfs:label "STPPRN" ;
+    dct:title "Stepparent" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Spouse of the scoping person's parent, where they are not the biological parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#STPSIB> a owl:Class ;
+    rdfs:label "STPSIB" ;
+    dct:title "Stepsibling" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A child of the scoping person's stepparent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#STPSIS> a owl:Class ;
+    rdfs:label "STPSIS" ;
+    dct:title "Stepsister" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A daughter of the scoping person's stepparent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#STPSON> a owl:Class ;
+    rdfs:label "STPSON" ;
+    dct:title "Stepson" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A son of the scoping person's spouse by a previous union." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#TWIN> a owl:Class ;
+    rdfs:label "TWIN" ;
+    dct:title "Twin" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A twin from the same womb or parental pairing as the scoping person." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#TWINBRO> a owl:Class ;
+    rdfs:label "TWINBRO" ;
+    dct:title "Twin brother" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Male twin." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#TWINSIS> a owl:Class ;
+    rdfs:label "TWINSIS" ;
+    dct:title "Twin sister" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Female twin." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#UNCLE> a owl:Class ;
+    rdfs:label "UNCLE" ;
+    dct:title "Uncle" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "Brother of the scoping person's parent." .
+
+<https://ns.socialcaredata.io/person/person-relationship-code#WIFE> a owl:Class ;
+    rdfs:label "WIFE" ;
+    dct:title "Wife" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/person-relationship-code> ;
+    skos:definition "A woman joined in marriage." .
+
+<https://ns.socialcaredata.io/person/phenotypic-sex-code#Female> a owl:Class ;
+    rdfs:label "2" ;
+    dct:title "Female" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    skos:definition "The person is phenotypically female." .
+
+<https://ns.socialcaredata.io/person/phenotypic-sex-code#Indeterminate> a owl:Class ;
+    rdfs:label "9" ;
+    dct:title "Indeterminate" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    skos:definition "Unable to be classified phenotypically as either male or female." .
+
+<https://ns.socialcaredata.io/person/phenotypic-sex-code#Male> a owl:Class ;
+    rdfs:label "1" ;
+    dct:title "Male" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    skos:definition "The person is phenotypically male." .
+
+<https://ns.socialcaredata.io/person/phenotypic-sex-code#NotKnown> a owl:Class ;
+    rdfs:label "X" ;
+    dct:title "Not Known" ;
+    rdfs:subClassOf <https://ns.socialcaredata.io/person/phenotypic-sex-code> ;
+    skos:definition "Not recorded, or information unavailable." .
+
+<https://ns.socialcaredata.io/person/postcode> a owl:DatatypeProperty ;
+    rdfs:label "postcode" ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                        owl:onDatatype xsd:string ;
+                        owl:withRestrictions ( [ xsd:pattern "^[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}$" ] ) ] ) ] ;
+    skos:definition "UK postcode in standard format (e.g. AB1 2CD)." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
+
 ap:care-act-eligibility-status a owl:Class ;
     rdfs:label "CareActEligibilityStatus" ;
     dct:title "Care Act Eligibility Status" ;
@@ -773,6 +1974,30 @@ ap:care-act-eligibility-status a owl:Class ;
     linkml:permissible_values es:eligible-needs-identified,
         es:no-needs-identified,
         es:non-eligible-needs-identified .
+
+ap:identifier a owl:ObjectProperty ;
+    rdfs:label "identifier" ;
+    rdfs:range <https://ns.socialcaredata.io/person/Identifier> ;
+    skos:definition "Identifier for this assessment / plan." ;
+    skos:inScheme ap:schema .
+
+<https://ns.socialcaredata.io/person/PartialDate> a owl:Class ;
+    rdfs:label "PartialDate" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[AEU]{3}$" ] ) ] ) ] ;
+            owl:onProperty <https://ns.socialcaredata.io/person/accuracyIndicator> ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/date> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://ns.socialcaredata.io/person/accuracyIndicator> ] ;
+    skos:definition "Container for a date that may not be fully known or precise, extended with an accuracy indicator. Used for dates of birth and dates of death." ;
+    skos:exactMatch <https://ns.socialcaredata.io/person/PartialDate> ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
 
 ap:client-funding-status a owl:Class ;
     rdfs:label "ClientFundingStatus" ;
@@ -785,6 +2010,28 @@ ap:client-funding-status a owl:Class ;
         fs:joint-client-and-social-care-funded,
         fs:unknown .
 
+<https://ns.socialcaredata.io/person/gender-code> a owl:Class ;
+    rdfs:label "GenderCode" ;
+    dct:title "Gender Code" ;
+    owl:unionOf ( <https://ns.socialcaredata.io/person/gender-code#Male> <https://ns.socialcaredata.io/person/gender-code#Female> <https://ns.socialcaredata.io/person/gender-code#Indeterminate> <https://ns.socialcaredata.io/person/gender-code#NotKnown> ) ;
+    skos:definition "A person's stated gender identity, as distinct from biological sex. Aligned with NHS PERSON_STATED_GENDER_CODE." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> ;
+    linkml:permissible_values <https://ns.socialcaredata.io/person/gender-code#Female>,
+        <https://ns.socialcaredata.io/person/gender-code#Indeterminate>,
+        <https://ns.socialcaredata.io/person/gender-code#Male>,
+        <https://ns.socialcaredata.io/person/gender-code#NotKnown> .
+
+<https://ns.socialcaredata.io/person/phenotypic-sex-code> a owl:Class ;
+    rdfs:label "PhenotypicSexCode" ;
+    dct:title "Phenotypic Sex Code" ;
+    owl:unionOf ( <https://ns.socialcaredata.io/person/phenotypic-sex-code#Male> <https://ns.socialcaredata.io/person/phenotypic-sex-code#Female> <https://ns.socialcaredata.io/person/phenotypic-sex-code#Indeterminate> <https://ns.socialcaredata.io/person/phenotypic-sex-code#NotKnown> ) ;
+    skos:definition "Observed phenotypic sex where recorded, representing biological characteristics rather than gender identity. Aligned with NHS PDS PERSON_PHENOTYPIC_SEX." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> ;
+    linkml:permissible_values <https://ns.socialcaredata.io/person/phenotypic-sex-code#Female>,
+        <https://ns.socialcaredata.io/person/phenotypic-sex-code#Indeterminate>,
+        <https://ns.socialcaredata.io/person/phenotypic-sex-code#Male>,
+        <https://ns.socialcaredata.io/person/phenotypic-sex-code#NotKnown> .
+
 ap:answer-type a owl:Class ;
     rdfs:label "AnswerType" ;
     dct:title "Answer Type" ;
@@ -796,6 +2043,18 @@ ap:answer-type a owl:Class ;
         at:Enum,
         at:Number,
         at:String .
+
+<https://ns.socialcaredata.io/person/address-use-code> a owl:Class ;
+    rdfs:label "AddressUseCode" ;
+    dct:title "Address Use Code" ;
+    owl:unionOf ( <https://ns.socialcaredata.io/person/address-use-code#Home> <https://ns.socialcaredata.io/person/address-use-code#Work> <https://ns.socialcaredata.io/person/address-use-code#Temp> <https://ns.socialcaredata.io/person/address-use-code#Old> <https://ns.socialcaredata.io/person/address-use-code#Billing> ) ;
+    skos:definition "How an address is used. Aligned with the FHIR address-use value set." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> ;
+    linkml:permissible_values <https://ns.socialcaredata.io/person/address-use-code#Billing>,
+        <https://ns.socialcaredata.io/person/address-use-code#Home>,
+        <https://ns.socialcaredata.io/person/address-use-code#Old>,
+        <https://ns.socialcaredata.io/person/address-use-code#Temp>,
+        <https://ns.socialcaredata.io/person/address-use-code#Work> .
 
 ap:care-actor-type a owl:Class ;
     rdfs:label "CareActorType" ;
@@ -810,17 +2069,19 @@ ap:care-actor-type a owl:Class ;
         act:ProfessionalServices,
         act:Self .
 
-ap:Identifier a owl:Class ;
-    rdfs:label "Identifier" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:system ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty ap:value ] ;
-    skos:definition "A unique identifier comprising a value and the system namespace in which it is unique. Aligned with the Person standard's Identifier class." ;
-    skos:exactMatch ap:Identifier ;
-    skos:inScheme ap:schema .
+<https://ns.socialcaredata.io/person/name-use-code> a owl:Class ;
+    rdfs:label "NameUseCode" ;
+    dct:title "Name Use Code" ;
+    owl:unionOf ( <https://ns.socialcaredata.io/person/name-use-code#Usual> <https://ns.socialcaredata.io/person/name-use-code#Official> <https://ns.socialcaredata.io/person/name-use-code#Temp> <https://ns.socialcaredata.io/person/name-use-code#Nickname> <https://ns.socialcaredata.io/person/name-use-code#Anonymous> <https://ns.socialcaredata.io/person/name-use-code#Old> <https://ns.socialcaredata.io/person/name-use-code#Maiden> ) ;
+    skos:definition "The intended purpose of a person's name. Aligned with the FHIR name-use value set." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> ;
+    linkml:permissible_values <https://ns.socialcaredata.io/person/name-use-code#Anonymous>,
+        <https://ns.socialcaredata.io/person/name-use-code#Maiden>,
+        <https://ns.socialcaredata.io/person/name-use-code#Nickname>,
+        <https://ns.socialcaredata.io/person/name-use-code#Official>,
+        <https://ns.socialcaredata.io/person/name-use-code#Old>,
+        <https://ns.socialcaredata.io/person/name-use-code#Temp>,
+        <https://ns.socialcaredata.io/person/name-use-code#Usual> .
 
 ap:care-document-status a owl:Class ;
     rdfs:label "DocumentStatus" ;
@@ -853,6 +2114,18 @@ ap:care-act-outcome a owl:Class ;
         apc:CAResponsibilityForOthers,
         apc:CAToilet,
         apc:CAWTEV .
+
+<https://ns.socialcaredata.io/person/Identifier> a owl:Class ;
+    rdfs:label "Identifier" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:value ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty ap:system ] ;
+    skos:definition "A single identifier for a person, comprising the value and the system in whose namespace the value is unique. Aligned with FHIR Identifier and the NHS PDS UNIQUE_REFERENCE definition." ;
+    skos:exactMatch <https://ns.socialcaredata.io/person/Identifier> ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> .
 
 ap:statutory-question-id a owl:Class ;
     rdfs:label "StatutoryQuestionId" ;
@@ -899,5 +2172,146 @@ ap:question-category a owl:Class ;
         qc:Housing,
         qc:Other,
         qc:PersonalContext .
+
+<https://ns.socialcaredata.io/person/ethnicity-code> a owl:Class ;
+    rdfs:label "EthnicityCode" ;
+    dct:title "Ethnicity Code" ;
+    owl:unionOf ( <https://ns.socialcaredata.io/person/ethnicity-code#AsianBangladeshi> <https://ns.socialcaredata.io/person/ethnicity-code#AsianChinese> <https://ns.socialcaredata.io/person/ethnicity-code#AsianIndian> <https://ns.socialcaredata.io/person/ethnicity-code#AsianPakistani> <https://ns.socialcaredata.io/person/ethnicity-code#AsianOther> <https://ns.socialcaredata.io/person/ethnicity-code#BlackAfrican> <https://ns.socialcaredata.io/person/ethnicity-code#BlackCaribbean> <https://ns.socialcaredata.io/person/ethnicity-code#BlackOther> <https://ns.socialcaredata.io/person/ethnicity-code#MixedWhiteAsian> <https://ns.socialcaredata.io/person/ethnicity-code#MixedWhiteBlackAfrican> <https://ns.socialcaredata.io/person/ethnicity-code#MixedWhiteBlackCaribbean> <https://ns.socialcaredata.io/person/ethnicity-code#MixedOther> <https://ns.socialcaredata.io/person/ethnicity-code#WhiteBritish> <https://ns.socialcaredata.io/person/ethnicity-code#WhiteIrish> <https://ns.socialcaredata.io/person/ethnicity-code#WhiteGypsyOrIrishTraveller> <https://ns.socialcaredata.io/person/ethnicity-code#WhiteRoma> <https://ns.socialcaredata.io/person/ethnicity-code#WhiteOther> <https://ns.socialcaredata.io/person/ethnicity-code#OtherArab> <https://ns.socialcaredata.io/person/ethnicity-code#OtherAny> <https://ns.socialcaredata.io/person/ethnicity-code#DoesNotApply> ) ;
+    skos:definition "The person's stated ethnicity. Uses ONS Census 2021 Ethnic group classification 20b codes." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> ;
+    linkml:permissible_values <https://ns.socialcaredata.io/person/ethnicity-code#AsianBangladeshi>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#AsianChinese>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#AsianIndian>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#AsianOther>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#AsianPakistani>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#BlackAfrican>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#BlackCaribbean>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#BlackOther>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#DoesNotApply>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#MixedOther>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#MixedWhiteAsian>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#MixedWhiteBlackAfrican>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#MixedWhiteBlackCaribbean>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#OtherAny>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#OtherArab>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#WhiteBritish>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#WhiteGypsyOrIrishTraveller>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#WhiteIrish>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#WhiteOther>,
+        <https://ns.socialcaredata.io/person/ethnicity-code#WhiteRoma> .
+
+<https://ns.socialcaredata.io/person/person-relationship-code> a owl:Class ;
+    rdfs:label "PersonRelationshipCode" ;
+    dct:title "Person Relationship Code" ;
+    owl:unionOf ( <https://ns.socialcaredata.io/person/person-relationship-code#FAMMEMB> <https://ns.socialcaredata.io/person/person-relationship-code#CHILD> <https://ns.socialcaredata.io/person/person-relationship-code#NCHILD> <https://ns.socialcaredata.io/person/person-relationship-code#CHLDADOPT> <https://ns.socialcaredata.io/person/person-relationship-code#DAUADOPT> <https://ns.socialcaredata.io/person/person-relationship-code#SONADOPT> <https://ns.socialcaredata.io/person/person-relationship-code#CHLDFOST> <https://ns.socialcaredata.io/person/person-relationship-code#DAUFOST> <https://ns.socialcaredata.io/person/person-relationship-code#SONFOST> <https://ns.socialcaredata.io/person/person-relationship-code#DAUC> <https://ns.socialcaredata.io/person/person-relationship-code#DAU> <https://ns.socialcaredata.io/person/person-relationship-code#STPDAU> <https://ns.socialcaredata.io/person/person-relationship-code#SON> <https://ns.socialcaredata.io/person/person-relationship-code#SONC> <https://ns.socialcaredata.io/person/person-relationship-code#STPSON> <https://ns.socialcaredata.io/person/person-relationship-code#STPCHLD> <https://ns.socialcaredata.io/person/person-relationship-code#EXT> <https://ns.socialcaredata.io/person/person-relationship-code#AUNT> <https://ns.socialcaredata.io/person/person-relationship-code#MAUNT> <https://ns.socialcaredata.io/person/person-relationship-code#PAUNT> <https://ns.socialcaredata.io/person/person-relationship-code#UNCLE> <https://ns.socialcaredata.io/person/person-relationship-code#MUNCLE> <https://ns.socialcaredata.io/person/person-relationship-code#PUNCLE> <https://ns.socialcaredata.io/person/person-relationship-code#COUSN> <https://ns.socialcaredata.io/person/person-relationship-code#MCOUSN> <https://ns.socialcaredata.io/person/person-relationship-code#PCOUSN> <https://ns.socialcaredata.io/person/person-relationship-code#NIENEPH> <https://ns.socialcaredata.io/person/person-relationship-code#NEPHEW> <https://ns.socialcaredata.io/person/person-relationship-code#NIECE> <https://ns.socialcaredata.io/person/person-relationship-code#GGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#GGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#PGGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#GGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#PGGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#PGGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#GRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#GRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#PGRFTH> <https://ns.socialcaredata.io/person/person-relationship-code#GRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#PGRMTH> <https://ns.socialcaredata.io/person/person-relationship-code#MGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#PGRPRN> <https://ns.socialcaredata.io/person/person-relationship-code#GRNDCHILD> <https://ns.socialcaredata.io/person/person-relationship-code#GRNDDAU> <https://ns.socialcaredata.io/person/person-relationship-code#GRNDSON> <https://ns.socialcaredata.io/person/person-relationship-code#INLAW> <https://ns.socialcaredata.io/person/person-relationship-code#CHLDINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#DAUINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#SONINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#PRNINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#FTHINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#MTHINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#SIBINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#BROINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#SISINLAW> <https://ns.socialcaredata.io/person/person-relationship-code#PRN> <https://ns.socialcaredata.io/person/person-relationship-code#NPRN> <https://ns.socialcaredata.io/person/person-relationship-code#ADOPTP> <https://ns.socialcaredata.io/person/person-relationship-code#ADOPTF> <https://ns.socialcaredata.io/person/person-relationship-code#ADOPTM> <https://ns.socialcaredata.io/person/person-relationship-code#PRNFOST> <https://ns.socialcaredata.io/person/person-relationship-code#STPPRN> <https://ns.socialcaredata.io/person/person-relationship-code#FTH> <https://ns.socialcaredata.io/person/person-relationship-code#NFTH> <https://ns.socialcaredata.io/person/person-relationship-code#FTHFOST> <https://ns.socialcaredata.io/person/person-relationship-code#STPFTH> <https://ns.socialcaredata.io/person/person-relationship-code#MTH> <https://ns.socialcaredata.io/person/person-relationship-code#NMTH> <https://ns.socialcaredata.io/person/person-relationship-code#GESTM> <https://ns.socialcaredata.io/person/person-relationship-code#MTHFOST> <https://ns.socialcaredata.io/person/person-relationship-code#STPMTH> <https://ns.socialcaredata.io/person/person-relationship-code#SIB> <https://ns.socialcaredata.io/person/person-relationship-code#NSIB> <https://ns.socialcaredata.io/person/person-relationship-code#HSIB> <https://ns.socialcaredata.io/person/person-relationship-code#STPSIB> <https://ns.socialcaredata.io/person/person-relationship-code#BRO> <https://ns.socialcaredata.io/person/person-relationship-code#NBRO> <https://ns.socialcaredata.io/person/person-relationship-code#HBRO> <https://ns.socialcaredata.io/person/person-relationship-code#STPBRO> <https://ns.socialcaredata.io/person/person-relationship-code#SIS> <https://ns.socialcaredata.io/person/person-relationship-code#NSIS> <https://ns.socialcaredata.io/person/person-relationship-code#HSIS> <https://ns.socialcaredata.io/person/person-relationship-code#STPSIS> <https://ns.socialcaredata.io/person/person-relationship-code#TWIN> <https://ns.socialcaredata.io/person/person-relationship-code#TWINBRO> <https://ns.socialcaredata.io/person/person-relationship-code#TWINSIS> <https://ns.socialcaredata.io/person/person-relationship-code#ITWIN> <https://ns.socialcaredata.io/person/person-relationship-code#ITWINBRO> <https://ns.socialcaredata.io/person/person-relationship-code#ITWINSIS> <https://ns.socialcaredata.io/person/person-relationship-code#FTWIN> <https://ns.socialcaredata.io/person/person-relationship-code#FTWINBRO> <https://ns.socialcaredata.io/person/person-relationship-code#FTWINSIS> <https://ns.socialcaredata.io/person/person-relationship-code#SPS> <https://ns.socialcaredata.io/person/person-relationship-code#HUSB> <https://ns.socialcaredata.io/person/person-relationship-code#WIFE> <https://ns.socialcaredata.io/person/person-relationship-code#FMRSPS> <https://ns.socialcaredata.io/person/person-relationship-code#DOMPART> <https://ns.socialcaredata.io/person/person-relationship-code#SIGOTHR> <https://ns.socialcaredata.io/person/person-relationship-code#FRND> <https://ns.socialcaredata.io/person/person-relationship-code#NBOR> <https://ns.socialcaredata.io/person/person-relationship-code#ROOM> <https://ns.socialcaredata.io/person/person-relationship-code#ONESELF> ) ;
+    skos:definition "HL7 v3 PersonalRelationshipRoleType concepts describing personal relationships between individuals (family, spousal, foster, adoptive, other)." ;
+    skos:inScheme <https://ns.socialcaredata.io/person/schema> ;
+    linkml:permissible_values <https://ns.socialcaredata.io/person/person-relationship-code#ADOPTF>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#ADOPTM>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#ADOPTP>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#AUNT>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#BRO>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#BROINLAW>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#CHILD>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#CHLDADOPT>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#CHLDFOST>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#CHLDINLAW>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#COUSN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#DAU>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#DAUADOPT>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#DAUC>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#DAUFOST>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#DAUINLAW>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#DOMPART>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#EXT>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#FAMMEMB>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#FMRSPS>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#FRND>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#FTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#FTHFOST>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#FTHINLAW>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#FTWIN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#FTWINBRO>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#FTWINSIS>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#GESTM>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#GGRFTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#GGRMTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#GGRPRN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#GRFTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#GRMTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#GRNDCHILD>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#GRNDDAU>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#GRNDSON>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#GRPRN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#HBRO>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#HSIB>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#HSIS>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#HUSB>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#INLAW>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#ITWIN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#ITWINBRO>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#ITWINSIS>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#MAUNT>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#MCOUSN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#MGGRFTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#MGGRMTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#MGGRPRN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#MGRFTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#MGRMTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#MGRPRN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#MTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#MTHFOST>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#MTHINLAW>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#MUNCLE>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#NBOR>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#NBRO>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#NCHILD>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#NEPHEW>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#NFTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#NIECE>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#NIENEPH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#NMTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#NPRN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#NSIB>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#NSIS>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#ONESELF>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#PAUNT>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#PCOUSN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#PGGRFTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#PGGRMTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#PGGRPRN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#PGRFTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#PGRMTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#PGRPRN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#PRN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#PRNFOST>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#PRNINLAW>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#PUNCLE>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#ROOM>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#SIB>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#SIBINLAW>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#SIGOTHR>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#SIS>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#SISINLAW>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#SON>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#SONADOPT>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#SONC>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#SONFOST>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#SONINLAW>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#SPS>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#STPBRO>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#STPCHLD>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#STPDAU>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#STPFTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#STPMTH>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#STPPRN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#STPSIB>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#STPSIS>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#STPSON>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#TWIN>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#TWINBRO>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#TWINSIS>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#UNCLE>,
+        <https://ns.socialcaredata.io/person/person-relationship-code#WIFE> .
 
 

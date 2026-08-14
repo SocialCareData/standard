@@ -25,6 +25,7 @@ default_prefix: ap
 default_range: string
 imports:
   - linkml:types
+  - https://ns.socialcaredata.io/person/schema
 
 # ---------------------------------------------------------------------------
 # Classes
@@ -125,13 +126,6 @@ classes:
       - outcome
       - directPayment
 
-  Identifier:
-    class_uri: ap:Identifier
-    description: >-
-      A unique identifier comprising a value and the system namespace in which it is unique. Aligned with the Person standard's Identifier class.
-    slots:
-      - value
-      - system
 
 # ---------------------------------------------------------------------------
 # Slots

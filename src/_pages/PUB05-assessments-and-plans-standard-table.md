@@ -46,10 +46,11 @@ data_model: src/assets/model/assessments-and-plans/assessments-and-plans-standar
 
 {% schema_table page.data_model CareActivity %}
 
+## Shared objects
+
 ### Identifier
 
-{% schema_table page.data_model Identifier %}
-
+See [Person.Identifier](PUB01_person_standard_table#identifier)
 
 ## Taxonomies
 

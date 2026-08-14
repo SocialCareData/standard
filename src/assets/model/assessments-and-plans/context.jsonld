@@ -8,6 +8,7 @@
     "cds":  "https://ns.socialcaredata.io/assessments-and-plans/care-document-status#",
     "xsd":  "http://www.w3.org/2001/XMLSchema#",
     "ex":   "https://example.org/assessments-and-plans/",
+    "p": "https://ns.socialcaredata.io/person/",
 
     "CareNeedsAssessment":       "ap:CareNeedsAssessment",
     "CarePlan":                  "ap:CarePlan",
@@ -17,7 +18,7 @@
     "CareActor":                 "ap:CareActor",
     "CareTiming":                  "ap:CareTiming",
     "CareActivity":              "ap:CareActivity",
-    "Identifier":                "ap:Identifier",
+    "Identifier":                "p:Identifier",
 
     "identifier":                    { "@id": "ap:identifier",                    "@type": "@id" },
     "personId":                      { "@id": "ap:personId",                      "@type": "@id" },
