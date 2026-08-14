@@ -11,7 +11,7 @@ reference: PUB00
 status: draft
 data_model: src/assets/model/placements/placements-standard.yaml
 non_technical_summary: |
-  The market for children’s social care placements -- that is, the accommodation and support provided to children when they are taken into the care of the local authority -- has been described by the https://www.local.gov.uk/about/news/childrens-social-care-placements-costing-ps10000-plus-rise-sharply-five-years-new-lga as 'broken'. There is evidence of residential care costs increasing by c. 70% on average over the last 5 years, with around half of children in residential care nationally placed more than 20 miles from home.
+  The market for children’s social care placements -- that is, the accommodation and support provided to children when they are taken into the care of the local authority -- has been described by the Local Government Association as '[broken](https://www.local.gov.uk/about/news/childrens-social-care-placements-costing-ps10000-plus-rise-sharply-five-years-new-lga)'. Many children in residential care nationally are currently placed more than 20 miles from home.
 
   Managing this market – essentially ensuring that the right provision is available in the right place and at the right notice – requires market intelligence. Local authorities must have a clear picture of supply and demand in order to be able to tell providers what new provision they would be likely to pay for, or to make decisions about where to invest their own funds, or to guarantee payments.
 
