@@ -10,6 +10,7 @@ version: 1.0.0
 prefixes:
   linkml: https://w3id.org/linkml/
   ap: https://ns.socialcaredata.io/assessments-and-plans/
+  p: https://ns.socialcaredata.io/person/
   apc: https://ns.socialcaredata.io/assessments-and-plans/care-outcome-type#
   act: https://ns.socialcaredata.io/assessments-and-plans/care-actor-type#
   at: https://ns.socialcaredata.io/assessments-and-plans/answer-type#
@@ -33,11 +34,12 @@ imports:
 classes:
 
   FoundationalInformation:
+    class_uri: ap:FoundationalInformation
     mixin: true
     description: >-
       Information that is relevant across both assessments and plans.
     slots:
-      - identifier
+      - apIdentifier
       - personId
       - professionalId
       - dateCompleted
@@ -49,7 +51,6 @@ classes:
 
   CareNeedsAssessment:
     class_uri: ap:CareNeedsAssessment
-    tree_root: true
     mixins:
       - FoundationalInformation
     description: >-
@@ -61,7 +62,6 @@ classes:
 
   CarePlan:
     class_uri: ap:CarePlan
-    tree_root: true
     mixins:
       - FoundationalInformation
     description: >-
@@ -133,8 +133,11 @@ classes:
 slots:
 
   # --- FoundationalInformation / Shared ---
-  identifier:
+  # Named apIdentifier rather than identifier so it does not override the
+  # Person Standard's imported `identifier` slot.
+  apIdentifier:
     slot_uri: ap:identifier
+    title: identifier
     range: Identifier
     required: true
     multivalued: false
@@ -348,19 +351,6 @@ slots:
     multivalued: false
     description: Flag whether this component is paid via direct payment.
 
-  # --- Identifier ---
-  value:
-    slot_uri: ap:value
-    range: string
-    required: true
-    multivalued: false
-    description: The identifier value, unique within the issuing system.
-  system:
-    slot_uri: ap:system
-    range: uri
-    required: true
-    multivalued: false
-    description: The URI of the system or namespace within which the identifier is unique.
 
 # ---------------------------------------------------------------------------
 # Enums (controlled vocabularies)

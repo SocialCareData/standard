@@ -56,8 +56,8 @@
     "activityDescription":           "ap:activityDescription",
     "directPayment":                 { "@id": "ap:directPayment",                 "@type": "xsd:boolean" },
 
-    "value":                         "ap:value",
-    "system":                        { "@id": "ap:system",                        "@type": "@id" },
+    "value":                         "p:value",
+    "system":                        { "@id": "p:system",                         "@type": "@id" },
 
     "status": {
       "@id": "ap:status",

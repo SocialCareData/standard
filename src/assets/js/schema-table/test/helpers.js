@@ -41,9 +41,56 @@ enums:
       Never: { title: Never, meaning: urg:Never }
 `
 
+// A model whose classes inherit slots from `mixins:` (as the assessments-and-
+// plans standard does with FoundationalInformation), including a mixin of a
+// mixin, a slot reached twice, per-class and per-mixin `slot_usage` overrides,
+// and a self-referencing mixin (cycle guard).
+const MIXIN_YAML = `
+id: https://example.org/mixin-test
+name: mixin-test
+prefixes:
+  linkml: https://w3id.org/linkml/
+  ex: https://example.org/
+default_prefix: ex
+default_range: string
+classes:
+  Timestamped:
+    mixin: true
+    slots: [created]
+  Base:
+    mixin: true
+    mixins: [Timestamped]
+    slots: [id]
+  Annotated:
+    mixin: true
+    slots: [note]
+    slot_usage:
+      note: { description: "a note, from the mixin" }
+  Doc:
+    mixins: [Base, Annotated]
+    slots: [title, id]
+    slot_usage:
+      created: { description: when this doc was created }
+      note: { description: "a note, from the class" }
+  Looper:
+    mixin: true
+    mixins: [Looper]
+    slots: [id]
+slots:
+  id: { range: string, required: true, description: the identifier }
+  created: { range: string, description: a timestamp }
+  note: { range: string }
+  title: { range: string, required: true }
+`
+
 /** Parse the sample model (fresh copy each call). */
 function sampleModel () {
   return loadModel(SAMPLE_YAML)
 }
 
-module.exports = { sampleModel, SAMPLE_YAML }
+/** Parse the mixin model (fresh copy each call). */
+function mixinModel () {
+  return loadModel(MIXIN_YAML)
+}
+
+module.exports = { sampleModel, SAMPLE_YAML, mixinModel, MIXIN_YAML }

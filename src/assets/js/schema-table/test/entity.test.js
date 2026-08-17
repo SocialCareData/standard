@@ -3,7 +3,7 @@
 const { test } = require('node:test')
 const assert = require('node:assert/strict')
 
-const { sampleModel } = require('./helpers')
+const { sampleModel, mixinModel } = require('./helpers')
 const {
   extractProperties,
   resolveOptions,
@@ -52,6 +52,39 @@ test('extractProperties carries the slot description', () => {
 
 test('extractProperties throws for an unknown class', () => {
   assert.throws(() => extractProperties(sampleModel(), 'Nope'), /No class matching "Nope"/)
+})
+
+test('extractProperties lists mixin slots before the class\'s own slots', () => {
+  const rows = extractProperties(mixinModel(), 'Doc')
+  // Base's own mixin (Timestamped) resolves first, then Base, then Annotated,
+  // then Doc's declared slots. `id` is reached twice and kept at its first spot.
+  assert.deepEqual(rows.map(r => r.name), ['created', 'id', 'note', 'title'])
+})
+
+test('extractProperties inherits a mixin slot with its cardinality and description', () => {
+  const rows = extractProperties(mixinModel(), 'Doc')
+  const id = rows.find(r => r.name === 'id')
+  assert.deepEqual(id.cardinality, { min: 1, max: 1 })
+  assert.equal(id.description, 'the identifier')
+})
+
+test('extractProperties lets a class narrow an inherited slot via slot_usage', () => {
+  const rows = extractProperties(mixinModel(), 'Doc')
+  const by = Object.fromEntries(rows.map(r => [r.name, r]))
+  // slot_usage on the class overrides the global slot ...
+  assert.equal(by.created.description, 'when this doc was created')
+  // ... and also the mixin's own slot_usage for the same slot.
+  assert.equal(by.note.description, 'a note, from the class')
+})
+
+test('extractProperties applies a mixin\'s slot_usage when the class has none', () => {
+  const rows = extractProperties(mixinModel(), 'Annotated')
+  assert.equal(rows.find(r => r.name === 'note').description, 'a note, from the mixin')
+})
+
+test('extractProperties survives a mixin cycle', () => {
+  const rows = extractProperties(mixinModel(), 'Looper')
+  assert.deepEqual(rows.map(r => r.name), ['id'])
 })
 
 test('resolveOptions builds a taxonomy link title, anchor and all labels', () => {

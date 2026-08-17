@@ -18,10 +18,6 @@ data_model: src/assets/model/assessments-and-plans/assessments-and-plans-standar
 
 {% schema_table page.data_model CarePlan %}
 
-### FoundationalInformation
-
-{% schema_table page.data_model FoundationalInformation %}
-
 ### Review
 
 {% schema_table page.data_model Review %}

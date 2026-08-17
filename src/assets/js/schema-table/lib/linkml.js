@@ -140,23 +140,65 @@ const isEnum = (model, name) => !!getEnum(model, name)
 
 /**
  * The effective definition of a slot as used by a class: the global slot merged
- * with any class-level `slot_usage` / `attributes` override. Our model does not
- * currently use overrides, but honouring them keeps the tool correct if it does.
+ * with the `slot_usage` / `attributes` overrides of the class's `mixins:` (in
+ * declaration order) and then of the class itself, so the most specific
+ * definition wins — the class overrides its mixins, which override the global
+ * slot. This is how a class narrows an inherited slot (e.g. the
+ * assessments-and-plans classes give the shared `status` and `review` slots
+ * wording specific to an assessment or to a plan).
  */
 function resolveSlot (model, className, slotName) {
-  const cls = getClass(model, className) || {}
   const base = getSlot(model, slotName) || {}
-  const attr = (cls.attributes || {})[slotName] || {}
-  const usage = (cls.slot_usage || {})[slotName] || {}
-  return Object.assign({ name: slotName }, base, attr, usage)
+  return Object.assign({ name: slotName }, base, ...classOverrides(model, className, slotName))
 }
 
-/** Ordered slot names of a class (declared `slots:` then inline `attributes:`). */
-function classSlotNames (model, className) {
+/**
+ * The `attributes` / `slot_usage` overrides for `slotName` contributed by a class
+ * and its mixins, ordered least- to most-specific (mixins first, the class last).
+ *
+ * @param {Set<string>} [seen]  Guards against a mixin cycle.
+ */
+function classOverrides (model, className, slotName, seen = new Set()) {
+  const cls = getClass(model, className)
+  if (!cls || seen.has(className)) return []
+  seen.add(className)
+
+  const overrides = []
+  for (const mixin of Array.isArray(cls.mixins) ? cls.mixins : []) {
+    overrides.push(...classOverrides(model, mixin, slotName, seen))
+  }
+  if ((cls.attributes || {})[slotName]) overrides.push(cls.attributes[slotName])
+  if ((cls.slot_usage || {})[slotName]) overrides.push(cls.slot_usage[slotName])
+  return overrides
+}
+
+/**
+ * Ordered slot names of a class: the slots it inherits from its `mixins:` first
+ * (in the order the mixins are declared, each mixin's own mixins resolved first),
+ * then the class's declared `slots:`, then its inline `attributes:`.
+ *
+ * A model may factor slots shared by several classes into a mixin (e.g. the
+ * assessments-and-plans `FoundationalInformation`) rather than repeating them on
+ * every class. `gen-shacl` / `gen-owl` resolve those inherited slots, so the
+ * tables must too — otherwise a documented property is simply missing from the
+ * class it belongs to. A slot reached more than once (via two mixins, or via a
+ * mixin and the class itself) is listed once, at its first position.
+ *
+ * @param {Set<string>} [seen]  Guards against a mixin cycle.
+ */
+function classSlotNames (model, className, seen = new Set()) {
   const cls = getClass(model, className) || {}
+  if (seen.has(className)) return []
+  seen.add(className)
+
   const names = []
-  if (Array.isArray(cls.slots)) names.push(...cls.slots)
-  if (cls.attributes) names.push(...Object.keys(cls.attributes))
+  const add = name => { if (!names.includes(name)) names.push(name) }
+
+  for (const mixin of Array.isArray(cls.mixins) ? cls.mixins : []) {
+    classSlotNames(model, mixin, seen).forEach(add)
+  }
+  if (Array.isArray(cls.slots)) cls.slots.forEach(add)
+  if (cls.attributes) Object.keys(cls.attributes).forEach(add)
   return names
 }
 
