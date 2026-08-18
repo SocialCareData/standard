@@ -10,6 +10,14 @@ tags:
 reference: PUB00
 status: draft
 data_model: src/assets/model/placements/placements-standard.yaml
+non_technical_summary: |
+  The market for children’s social care placements -- that is, the accommodation and support provided to children when they are taken into the care of the local authority -- has been described by the Local Government Association as '[broken](https://www.local.gov.uk/about/news/childrens-social-care-placements-costing-ps10000-plus-rise-sharply-five-years-new-lga)'. Many children in residential care nationally are currently placed more than 20 miles from home.
+
+  Managing this market – essentially ensuring that the right provision is available in the right place and at the right notice – requires market intelligence. Local authorities must have a clear picture of supply and demand in order to be able to tell providers what new provision they would be likely to pay for, or to make decisions about where to invest their own funds, or to guarantee payments.
+
+  But every local authority is different: key items like child needs, determinants of placement availability, services provided, and costs of placements tend to recorded in different ways, making it hard to answer fundamental questions about regional placement sufficiency. There is a lack of a shared data ‘language’ between neighbouring authorities that would enable 'like-for-like' comparison and analysis of regional -- and national -- placements.
+
+  This Placement Standard seeks to solve this issue by standardising some of the data collected about children in care at the point they are referred for placement and the point where a placement is agreed. The goal of this standard is to support better analysis of placement sufficiency at the local and regional level, tackle high costs in the care market and improve outcomes for children in care.
 ---
 
 <a href="/PUB00_placements_standard_table" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
