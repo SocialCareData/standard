@@ -58,7 +58,7 @@ This document is for all personnel involved in collecting, storing and processin
 
 The following diagram illustrates the elements of the Safeguarding Standard.
 
-<p class="data-model-diagram"><img src="/assets/img/safeguarding/safeguarding-data-model-2026-08-05.svg" alt="Safeguarding Data Model" title="Safeguarding Data Model" /></p>
+<p class="data-model-diagram"><img src="/assets/img/safeguarding/safeguarding-data-model-2026-08-17.svg" alt="Safeguarding Data Model" title="Safeguarding Data Model" /></p>
 
 The model is organised around five top-level entities and the shared objects that link them together:
 
@@ -292,6 +292,12 @@ While a single service episode may reflect routine support, changes in the numbe
 <span id="episode-outcome">outcome</span>
 : Outcome of the episode for the subject. Optional (`0..1`). See [Episode Outcome vocabulary](#episode-outcome-vocabulary).
 
+<span id="episode-assessmentId">assessmentId</span>
+: Unique identifiers for any care needs assessments completed during this episode. Multi-valued. Optional (`0..*`). See [Care Needs Assessment](/PUB05_assessments_and_plans_standard#careneedsassessment).
+
+<span id="episode-planId">planId</span>
+: Unique identifiers for any care plans created or active during this episode. Multi-valued. Optional (`0..*`). See [Care Plan](/PUB05_assessments_and_plans_standard#careplan).
+
 #### Example
 
 <div class="example">
@@ -317,7 +323,9 @@ While a single service episode may reflect routine support, changes in the numbe
     "startDateTime": "2026-05-01T09:30:00Z"
   } ],
   "location": ["Anytown Family Centre"],
-  "finding": [ { "see Finding example" } ]
+  "finding": [ { "see Finding example" } ],
+  "assessmentId": [ { "@type": "Identifier", "value": "ASS-2026-001", "system": "https://example.org/Id/assessment" } ],
+  "planId": [ { "@type": "Identifier", "value": "PLAN-2026-001", "system": "https://example.org/Id/plan" } ]
 }
 {% endhighlight %}
 </div>

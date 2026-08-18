@@ -61,6 +61,8 @@ classes:
       - relatedPerson
       - primaryContactProfessional
       - matchedPersonRef
+      - aboutMe
+      - communication
     slot_usage:
       identifier:
         required: true

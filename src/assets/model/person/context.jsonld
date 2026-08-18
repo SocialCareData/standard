@@ -57,6 +57,8 @@
     },
     "PersonRelationship": "p:PersonRelationship",
     "PartialDate":        "p:PartialDate",
+    "Communication":      "p:Communication",
+    "Language":           "p:Language",
 
     "identifier":                    { "@id": "p:identifier",                   "@type": "@id", "@container": "@set" },
     "name":                          { "@id": "p:name",                         "@type": "@id", "@container": "@set" },
@@ -68,6 +70,12 @@
     "relatedPerson":                 { "@id": "p:relatedPerson",                "@type": "@id", "@container": "@set" },
     "primaryContactProfessional":    { "@id": "p:primaryContactProfessional",   "@type": "@id", "@container": "@set" },
     "matchedPersonRef":              { "@id": "p:matchedPersonRef",             "@type": "@id", "@container": "@set" },
+    "aboutMe":                       { "@id": "p:aboutMe",                      "@type": "@id" },
+    "communication":                 { "@id": "p:communication",                "@type": "@id", "@container": "@set" },
+    "communicationNeeds":            "p:communicationNeeds",
+    "language":                      { "@id": "p:language",                     "@type": "@id", "@container": "@set" },
+    "languageCode":                  "p:languageCode",
+    "proficiencyLevel":              "p:proficiencyLevel",
 
     "value":             "p:value",
     "system":            { "@id": "p:system", "@type": "@id" },

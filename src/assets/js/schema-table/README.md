@@ -19,9 +19,25 @@ This is what lets the Person profiles (e.g. `person-subject-of-care.yaml`, which
 imports `person-standard.yaml` and redefines only `Person`) render complete
 tables with the profile's cardinalities.
 
+## Mixins
+
+A class's `mixins:` are resolved, so slots a class inherits appear in its table
+rather than going missing. Inherited slots are listed **first** — in the order
+the mixins are declared, each mixin's own mixins resolved first — followed by the
+class's declared `slots:` and inline `attributes:`. A slot reached more than once
+(via two mixins, or via a mixin and the class itself) is listed once, at its
+first position. This matches what `gen-shacl` / `gen-owl` do, and it means a
+model can factor shared slots into a mixin (e.g. the assessments-and-plans
+`FoundationalInformation`) instead of repeating them on every class.
+
+`slot_usage` / `attributes` overrides are applied most-specific-last: the global
+slot first, then each mixin's override, then the class's own — so a class can
+narrow a slot it inherits.
+
 ## Class table
 
-Describes a class's slots, in declared order. Five columns:
+Describes a class's slots, in declared order (inherited slots first — see
+[Mixins](#mixins)). Five columns:
 
 | Column | Source (LinkML) |
 | --- | --- |

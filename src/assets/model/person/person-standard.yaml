@@ -60,6 +60,8 @@ classes:
       - relatedPerson
       - primaryContactProfessional
       - matchedPersonRef
+      - aboutMe
+      - communication
 
   Identifier:
     class_uri: p:Identifier
@@ -129,6 +131,22 @@ classes:
     slots:
       - date
       - accuracyIndicator
+
+  Communication:
+    class_uri: p:Communication
+    description: >-
+      Professional recording of a person's communication requirements and language proficiencies.
+    slots:
+      - communicationNeeds
+      - language
+
+  Language:
+    class_uri: p:Language
+    description: >-
+      A specific language the person is proficient in, including proficiency level.
+    slots:
+      - languageCode
+      - proficiencyLevel
 
 # ---------------------------------------------------------------------------
 # Slots
@@ -368,6 +386,58 @@ slots:
     description: >-
       A three-character code in day-month-year order indicating which parts of
       the date are accurate (A), estimated (E), or unknown (U).
+
+  aboutMe:
+    slot_uri: p:aboutMe
+    range: Identifier
+    multivalued: false
+    required: false
+    description: >-
+      A reference pointing to the person's self-reported "About Me" profile (an in-use standard
+      across health and care allowing individuals to record their wants and needs).
+      Uses the Identifier structure.
+
+  communication:
+    slot_uri: p:communication
+    range: Communication
+    multivalued: true
+    required: false
+    description: >-
+      Professional recording of a person's communication requirements and language proficiencies.
+
+  communicationNeeds:
+    slot_uri: p:communicationNeeds
+    range: string
+    multivalued: false
+    required: false
+    description: >-
+      Free-text describing professionally recorded communication needs or reasonable
+      adjustments (e.g. BSL interpreter needed, uses communication board).
+
+  language:
+    slot_uri: p:language
+    range: Language
+    multivalued: true
+    required: false
+    description: >-
+      Specific language(s) spoken or understood by the person, optionally annotated
+      with proficiency.
+
+  languageCode:
+    slot_uri: p:languageCode
+    range: string
+    multivalued: false
+    required: true
+    description: >-
+      A code or name representing the language (e.g., 'en', 'eng', 'bsl', 'British Sign Language').
+
+  proficiencyLevel:
+    slot_uri: p:proficiencyLevel
+    range: string
+    multivalued: false
+    required: false
+    description: >-
+      The level of proficiency or fluency in the language (e.g., 'fluent', 'native', 'basic').
 
 # ---------------------------------------------------------------------------
 # Enums (controlled vocabularies / SKOS concept schemes)

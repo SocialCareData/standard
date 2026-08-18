@@ -841,6 +841,14 @@ enums:
         title: Adult Safeguarding
         description: Adult Safeguarding Enquiry (Section 42)
         meaning: epc:AdultSafeguarding
+      care-act-assessment:
+        title: Care Act Assessment
+        description: Care Act Assessment
+        meaning: epc:CareActAssessment
+      care-plan:
+        title: Care Plan
+        description: Care Plan
+        meaning: epc:CarePlan
 
   EpisodeOutcome:
     enum_uri: sg:episode-outcome

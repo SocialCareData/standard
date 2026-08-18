@@ -84,6 +84,12 @@ The top-level record describing an individual. Consolidates the core identity at
 <span id="person-ethnicityCode">ethnicityCode</span>
 : The person's stated ethnicity, using the ONS 18+1 categories from the 2021 census. Statutorily required in adult social care; optional elsewhere. See the [Ethnicity Code Vocabulary](#ethnicity-code-vocabulary).
 
+<span id="person-aboutMe">aboutMe</span>
+: A reference pointing to the person's "About Me" profile (as per the [PRSB AboutMe Standard](https://theprsb.org/standards/aboutme/)). Optional. See [Identifier](#identifier) entity for the structure.
+
+<span id="person-communication">communication</span>
+: The person's communication requirements and language proficiencies. Multi-valued. Optional. See [Communication](#communication).
+
 <span id="person-relatedPerson">relatedPerson</span>
 : References to other people related to this person, with the kind of relationship. Multi-valued. See [PersonRelationship](#personrelationship).
 
@@ -337,6 +343,60 @@ Container for a date that may not be fully known or precise, extended with an ac
   "@type": "PartialDate",
   "date": "2017-09-01",
   "accuracyIndicator": "AAA"
+}
+{% endhighlight %}
+</div>
+
+
+### Communication
+
+The record of a person's communication requirements and language proficiencies.
+
+#### Properties
+
+<span id="communication-communicationNeeds">communicationNeeds</span>
+: Free-text describing recorded communication needs or reasonable adjustments (e.g. BSL interpreter needed, uses communication board). Optional. _String_.
+
+<span id="communication-language">language</span>
+: Specific language(s) spoken or understood by the person, optionally annotated with proficiency. Multi-valued. Optional. See [Language](#language).
+
+#### Example
+
+<div class="example">
+  <h5 id="example-communication">Example - Communication</h5>
+{% highlight json %}
+{
+  "@type": "Communication",
+  "communicationNeeds": "Requires British Sign Language (BSL) interpreter for assessments.",
+  "language": [
+    { "@type": "Language", "languageCode": "bsl", "proficiencyLevel": "native" }
+  ]
+}
+{% endhighlight %}
+</div>
+
+
+### Language
+
+A specific language the person is proficient in, including proficiency level.
+
+#### Properties
+
+<span id="language-languageCode">languageCode</span>
+: A code or name representing the language (e.g., 'en', 'eng', 'bsl', 'British Sign Language'). _String_.
+
+<span id="language-proficiencyLevel">proficiencyLevel</span>
+: The level of proficiency or fluency in the language (e.g., 'fluent', 'native', 'basic'). Optional. _String_.
+
+#### Example
+
+<div class="example">
+  <h5 id="example-language">Example - Language</h5>
+{% highlight json %}
+{
+  "@type": "Language",
+  "languageCode": "en",
+  "proficiencyLevel": "fluent"
 }
 {% endhighlight %}
 </div>
