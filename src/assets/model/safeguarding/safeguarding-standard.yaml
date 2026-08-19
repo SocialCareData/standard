@@ -1065,6 +1065,10 @@ enums:
         title: Religion HL7 Code
         description: "Numeric code for [religious affiliations](https://terminology.hl7.org/7.2.0/en/CodeSystem-v3-ReligiousAffiliation.html)"
         meaning: ot:ReligionHl7Code
+      access-or-safety-issues:
+        title: Access or Safety Issues
+        description: Safeguarding professionals may have difficulty in reaching the person safely # NEED A CONFIRMED DEFINITION
+        meaning: ot:AccessOrSafety
       temp-accomodation:
         title: Temp Accomodation
         description: Living in temporary accomodation
@@ -1181,6 +1185,10 @@ enums:
         title: DBS Check
         description: Recorded Disclosure and Barring Service (DBS) check
         meaning: ot:DbsCheck
+      digital-keysafe:
+        title: Digital Key Safe
+        description: There is a secure key safe attached to the exterior of the individual's home to allow authorised professionals to gain entry
+        meaning: ot:DigitalKeySafe
       dementia-diagnosis:
         title: Dementia Diagnosis
         description: Observed dementia diagnosis
@@ -1249,6 +1257,70 @@ enums:
         title: Hearing Impairment Unknown
         description: Unknown
         meaning: ot:HearingImpairmentUnknown
+      known-to-be-abusive:
+        title: Known to be abusive
+        description: The individual is known to be abusive
+        meaning: ot:KnownToBeAbusive
+      known-to-MARAC:
+        title: Known to MARAC
+        description: The individual is known to a Multi-Agency Risk Assessment Conference (MARAC)
+        meaning: ot:KnownToMARAC
+      known-to-MAPPA:
+        title: Known to MAPPA
+        description: The individual is known to a Multi-Agency Public Protection Arrangement (MAPPA)
+        meaning: ot:KnownToMAPPA
+      legal-status:
+        title: Legal Status
+        description: The individual's legal status
+        meaning: ot:LegalStatus
+      "legal-status.lasting-power-of-attorney":
+        title: Legal Status Active Lasting Power of Attorney
+        description: A Lasting Power of Attorney document is active, meaning the individual has chosen others to make decisions on their behalf
+        meaning: ot:LegalStatusLastingPowerOfAttorney
+      "legal-status.court-appointed-health-welfare":
+        title: Legal Status Court of Protection -- Court Appointed Deputy for Health and Welfare
+        description: A Lasting Power of Attorney document is active, meaning the individual has chosen others to make decisions on their behalf
+        meaning: ot:LegalStatusCourtAppointedHealthWelfare
+      "legal-status.court-appointed-property-finances":
+        title: Legal Status Court of Protection -- Court Appointed Deputy for Property and Financial Affairs
+        description: A Lasting Power of Attorney document is active, meaning the individual has chosen others to make decisions on their behalf
+        meaning: ot:LegalStatusCourtAppointedPropertyFinances
+      "legal-status.deprivation-of-liberty-safeguards":
+        title: Deprivation of Liberty Safeguards (DoLS)
+        description: Legal Status A Deprivation of Liberty Safeguards (DoLS) authorisation has been made
+        meaning: ot:LegalStatusDoLS
+      "legal-status.section-117":
+        title: Legal Status Section 117
+        description: Legal Status The person has been detained in hospital under Sections 3, 37, 45A, 47, or 48 of the Mental Health Act 1983, or has been placed on a Community Treatment order (17A), and is now entitled to aftercare under Section 117.
+        meaning: ot:LegalStatusSection117
+      no-recourse-to-public-funds:
+        title: No Recourse to Public Funds (NRPF)
+        description: The individual cannot claim public funds for their social care (like benefits or housing assistance), as per Section 115(9) of the Immigration and Asylum Act 1999
+        meaning: ot:NRPF
+      pets:
+        title: Pets or Dangerous Pets
+        description: The individual lives with pets that may pose danger to others.
+        meaning: ot:Risk
+      risk:
+        title: Risk
+        description: Observed risk associated with the individual
+        meaning: ot:Risk
+      "risk.modern-day-slavery":
+        title: Risk Risk of Modern Day Slavery
+        description: Risk of falling victim to Modern Day Slavery
+        meaning: ot:RiskModernDaySlavery
+      "risk.exploitation":
+        title: Risk Risk of exploitation
+        description: Risk of falling victim to exploitation
+        meaning: ot:RiskExploitation
+      "risk.falling":
+        title: Risk Risk of falling
+        description: Risk of falling
+        meaning: ot:RiskFalling
+      slow-to-react:
+        title: Slow to React
+        description: The individual takes longer than expected to respond to verbal cues (eg. questions asked of them) or physical stimuli (eg. their doorbell)
+        meaning: ot:SlowToReact
       support-reason:
         title: Support Reason
         description: Primary reason for requiring adult social care support

@@ -102,13 +102,13 @@ sg:LifeEvent a owl:Class ;
     rdfs:label "LifeEvent" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty sg:sgIdentifier ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
             owl:onProperty sg:subjectPerson ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty sg:eventType ] ;
+            owl:onProperty sg:eventType ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:sgIdentifier ] ;
     skos:definition "A significant, time-bound occurrence in an individual's life that may have implications for their safety, wellbeing or development - for example attendance at A&E, a child being reported as missing, or an exclusion from school. Life events are not inherently positive or negative but can signal levels of risk, vulnerability or changing need." ;
     skos:exactMatch sg:LifeEvent ;
     skos:inScheme sg:schema .
@@ -120,19 +120,19 @@ sg:Organisation a owl:Class ;
             owl:onProperty sg:organisationType ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty sg:contactMulti ],
+            owl:onProperty sg:relatedServiceRef ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty sg:entityName ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty sg:sgIdentifier ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty sg:active ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty sg:relatedServiceRef ] ;
+            owl:onProperty sg:contactMulti ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:sgIdentifier ] ;
     skos:definition "An organisation involved in the safeguarding or wellbeing of a person - for example a local authority, an NHS trust, a school, or an education authority. Aligns with the FHIR Organization resource." ;
     skos:exactMatch sg:Organisation ;
     skos:inScheme sg:schema .
@@ -140,6 +140,12 @@ sg:Organisation a owl:Class ;
 sg:Professional a owl:Class ;
     rdfs:label "Professional" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:sgIdentifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:status ],
+        [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty sg:professionalName ],
         [ a owl:Restriction ;
@@ -147,13 +153,7 @@ sg:Professional a owl:Class ;
             owl:onProperty sg:role ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty sg:contactSingle ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty sg:status ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty sg:sgIdentifier ] ;
+            owl:onProperty sg:contactSingle ] ;
     skos:definition "An individual acting in a formal role within an organisation who has responsibilities relating to a person's safety, wellbeing, care or support - for example undertaking assessments, creating and monitoring plans, or sharing information in a multi-agency context." ;
     skos:exactMatch sg:Professional ;
     skos:inScheme sg:schema .
@@ -161,23 +161,23 @@ sg:Professional a owl:Class ;
 sg:Service a owl:Class ;
     rdfs:label "Service" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty sg:costFrequency ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty sg:contactMulti ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:active ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:sgIdentifier ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:costFrequency ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty sg:serviceType ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty sg:entityName ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty sg:sgIdentifier ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty sg:active ] ;
+            owl:onProperty sg:entityName ] ;
     skos:definition "A service involved in the safeguarding or wellbeing of a person - the specific intervention or package of support delivered by one or more organisations (e.g. local authority social care, an emergency department, a general practice, or a school)." ;
     skos:exactMatch sg:Service ;
     skos:inScheme sg:schema .
@@ -186,13 +186,16 @@ sg:ServiceEpisode a owl:Class ;
     rdfs:label "ServiceEpisode" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty sg:subjectPerson ],
+            owl:onProperty sg:timeInformation ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:relatedServiceRef ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty sg:location ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty sg:relatedServiceRef ],
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:outcome ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty sg:sgIdentifier ],
@@ -201,10 +204,7 @@ sg:ServiceEpisode a owl:Class ;
             owl:onProperty sg:episodeType ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty sg:timeInformation ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty sg:outcome ] ;
+            owl:onProperty sg:subjectPerson ] ;
     skos:definition "A bounded period during which an individual receives a defined service, intervention, or package of support from a service or professional. It has a recognisable start and end point, though duration may vary from a single contact to sustained involvement over time." ;
     skos:exactMatch sg:ServiceEpisode ;
     skos:inScheme sg:schema .
@@ -369,13 +369,13 @@ sg:Measurement a owl:Class ;
     rdfs:label "Measurement" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty sg:measurementValue ],
+            owl:onProperty sg:measurementUnit ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty sg:measurementType ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty sg:measurementUnit ] ;
+            owl:onProperty sg:measurementValue ] ;
     skos:definition "A quantitative measurement of something related to the subject or their circumstances (for example \"Authorised Absences\" or \"Referrals\")." ;
     skos:exactMatch sg:Measurement ;
     skos:inScheme sg:schema .
@@ -383,14 +383,14 @@ sg:Measurement a owl:Class ;
 sg:Observation a owl:Class ;
     rdfs:label "Observation" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty sg:observationEndDate ],
+            owl:cardinality 1 ;
+            owl:onProperty sg:observationType ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty sg:observationStartDate ],
         [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty sg:observationType ] ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:observationEndDate ] ;
     skos:definition "A qualitative observation that represents an attribute of the subject or their circumstances (for example \"NEET\" or \"free-school-meals\")." ;
     skos:exactMatch sg:Observation ;
     skos:inScheme sg:schema .
@@ -399,10 +399,10 @@ sg:RelatedProfessional a owl:Class ;
     rdfs:label "RelatedProfessional" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty sg:professional ],
+            owl:onProperty sg:involvement ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty sg:involvement ] ;
+            owl:onProperty sg:professional ] ;
     skos:definition "A typed reference to a Professional involved in a service episode or life event." ;
     skos:exactMatch sg:RelatedProfessional ;
     skos:inScheme sg:schema .
@@ -422,14 +422,14 @@ sg:SubjectPerson a owl:Class ;
 sg:TimeInformation a owl:Class ;
     rdfs:label "TimeInformation" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty sg:startDateTime ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty sg:endDateTime ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty sg:frequency ] ;
+            owl:onProperty sg:frequency ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:startDateTime ] ;
     skos:definition "Details about the timing of a service episode or life event, including when it started and ended and how frequently it recurs." ;
     skos:exactMatch sg:TimeInformation ;
     skos:inScheme sg:schema .
@@ -470,7 +470,7 @@ epc:CareActAssessment a owl:Class ;
     rdfs:label "care-act-assessment" ;
     dct:title "Care Act Assessment" ;
     rdfs:subClassOf sg:episode-code ;
-    skos:definition "Care Act Assessment completed for the subject person" .
+    skos:definition "Care Act Assessment" .
 
 epc:CareLeaver a owl:Class ;
     rdfs:label "care-leaver" ;
@@ -482,7 +482,7 @@ epc:CarePlan a owl:Class ;
     rdfs:label "care-plan" ;
     dct:title "Care Plan" ;
     rdfs:subClassOf sg:episode-code ;
-    skos:definition "Care Plan following Care Act Assessment" .
+    skos:definition "Care Plan" .
 
 epc:ChildLookedAfter a owl:Class ;
     rdfs:label "child-looked-after" ;
@@ -718,6 +718,12 @@ mu:Pct a owl:Class ;
     rdfs:subClassOf sg:measurement-unit ;
     skos:definition "Percentage (%)" .
 
+ot:AccessOrSafety a owl:Class ;
+    rdfs:label "access-or-safety-issues" ;
+    dct:title "Access or Safety Issues" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "Safeguarding professionals may have difficulty in reaching the person safely" .
+
 ot:AccommodationStatus a owl:Class ;
     rdfs:label "accommodation-status" ;
     dct:title "Accommodation Status" ;
@@ -892,6 +898,12 @@ ot:DementiaDiagnosis a owl:Class ;
     rdfs:subClassOf sg:observation-type ;
     skos:definition "Observed dementia diagnosis" .
 
+ot:DigitalKeySafe a owl:Class ;
+    rdfs:label "digital-keysafe" ;
+    dct:title "Digital Key Safe" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "There is a secure key safe attached to the exterior of the individual's home to allow authorised professionals to gain entry" .
+
 ot:Eal a owl:Class ;
     rdfs:label "EAL" ;
     dct:title "EAL" ;
@@ -1006,6 +1018,66 @@ ot:HearingImpairmentUnknown a owl:Class ;
     rdfs:subClassOf sg:observation-type ;
     skos:definition "Unknown" .
 
+ot:KnownToBeAbusive a owl:Class ;
+    rdfs:label "known-to-be-abusive" ;
+    dct:title "Known to be abusive" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "The individual is known to be abusive" .
+
+ot:KnownToMAPPA a owl:Class ;
+    rdfs:label "known-to-MAPPA" ;
+    dct:title "Known to MAPPA" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "The individual is known to a Multi-Agency Public Protection Arrangement (MAPPA)" .
+
+ot:KnownToMARAC a owl:Class ;
+    rdfs:label "known-to-MARAC" ;
+    dct:title "Known to MARAC" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "The individual is known to a Multi-Agency Risk Assessment Conference (MARAC)" .
+
+ot:LegalStatus a owl:Class ;
+    rdfs:label "legal-status" ;
+    dct:title "Legal Status" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "The individual's legal status" .
+
+ot:LegalStatusCourtAppointedHealthWelfare a owl:Class ;
+    rdfs:label "legal-status.court-appointed-health-welfare" ;
+    dct:title "Legal Status Court of Protection -- Court Appointed Deputy for Health and Welfare" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "A Lasting Power of Attorney document is active, meaning the individual has chosen others to make decisions on their behalf" .
+
+ot:LegalStatusCourtAppointedPropertyFinances a owl:Class ;
+    rdfs:label "legal-status.court-appointed-property-finances" ;
+    dct:title "Legal Status Court of Protection -- Court Appointed Deputy for Property and Financial Affairs" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "A Lasting Power of Attorney document is active, meaning the individual has chosen others to make decisions on their behalf" .
+
+ot:LegalStatusDoLS a owl:Class ;
+    rdfs:label "legal-status.deprivation-of-liberty-safeguards" ;
+    dct:title "Deprivation of Liberty Safeguards (DoLS)" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "Legal Status A Deprivation of Liberty Safeguards (DoLS) authorisation has been made" .
+
+ot:LegalStatusLastingPowerOfAttorney a owl:Class ;
+    rdfs:label "legal-status.lasting-power-of-attorney" ;
+    dct:title "Legal Status Active Lasting Power of Attorney" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "A Lasting Power of Attorney document is active, meaning the individual has chosen others to make decisions on their behalf" .
+
+ot:LegalStatusSection117 a owl:Class ;
+    rdfs:label "legal-status.section-117" ;
+    dct:title "Legal Status Section 117" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "Legal Status The person has been detained in hospital under Sections 3, 37, 45A, 47, or 48 of the Mental Health Act 1983, or has been placed on a Community Treatment order (17A), and is now entitled to aftercare under Section 117." .
+
+ot:NRPF a owl:Class ;
+    rdfs:label "no-recourse-to-public-funds" ;
+    dct:title "No Recourse to Public Funds (NRPF)" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "The individual cannot claim public funds for their social care (like benefits or housing assistance), as per Section 115(9) of the Immigration and Asylum Act 1999" .
+
 ot:Neet a owl:Class ;
     rdfs:label "NEET" ;
     dct:title "NEET" ;
@@ -1041,6 +1113,24 @@ ot:ReligionHl7Code a owl:Class ;
     dct:title "Religion HL7 Code" ;
     rdfs:subClassOf sg:observation-type ;
     skos:definition "Numeric code for [religious affiliations](https://terminology.hl7.org/7.2.0/en/CodeSystem-v3-ReligiousAffiliation.html)" .
+
+ot:RiskExploitation a owl:Class ;
+    rdfs:label "risk.exploitation" ;
+    dct:title "Risk Risk of exploitation" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "Risk of falling victim to exploitation" .
+
+ot:RiskFalling a owl:Class ;
+    rdfs:label "risk.falling" ;
+    dct:title "Risk Risk of falling" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "Risk of falling" .
+
+ot:RiskModernDaySlavery a owl:Class ;
+    rdfs:label "risk.modern-day-slavery" ;
+    dct:title "Risk Risk of Modern Day Slavery" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "Risk of falling victim to Modern Day Slavery" .
 
 ot:Send a owl:Class ;
     rdfs:label "SEND" ;
@@ -1131,6 +1221,12 @@ ot:SendVi a owl:Class ;
     dct:title "SEND VI" ;
     rdfs:subClassOf sg:observation-type ;
     skos:definition "Visual Impairment: Partial or complete loss of sight not correctable by usual means (e.g. prescribed glasses or contact lens)." .
+
+ot:SlowToReact a owl:Class ;
+    rdfs:label "slow-to-react" ;
+    dct:title "Slow to React" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "The individual takes longer than expected to respond to verbal cues (eg. questions asked of them) or physical stimuli (eg. their doorbell)" .
 
 ot:SupportReason a owl:Class ;
     rdfs:label "support-reason" ;
@@ -1622,6 +1718,15 @@ sg:measurement-unit a owl:Class ;
     linkml:permissible_values mu:Count,
         mu:Pct .
 
+ot:Risk a owl:Class ;
+    rdfs:label "pets",
+        "risk" ;
+    dct:title "Pets or Dangerous Pets",
+        "Risk" ;
+    rdfs:subClassOf sg:observation-type ;
+    skos:definition "Observed risk associated with the individual",
+        "The individual lives with pets that may pose danger to others." .
+
 sg:organisation-code a owl:Class ;
     rdfs:label "OrganisationCode" ;
     dct:title "Organisation Code" ;
@@ -1786,10 +1891,11 @@ sg:service-code a owl:Class ;
 sg:observation-type a owl:Class ;
     rdfs:label "ObservationType" ;
     dct:title "Observation Type" ;
-    owl:unionOf ( ot:Send ot:SendSpld ot:SendMld ot:SendSld ot:SendPmld ot:SendSlcn ot:SendAsc ot:SendSemh ot:SendVi ot:SendHi ot:SendMsi ot:SendPd ot:SendDs ot:SendOth ot:SendNsa ot:Eal ot:EalIso6391Code ot:FreeSchoolMeals ot:Neet ot:NonAccidentalInjury ot:PersistentSchoolAbsences ot:PupilPremium ot:Religion ot:ReligionHl7Code ot:TempAccomodation ot:AccommodationStatus ot:AccommodationStatusOwnerOccupier ot:AccommodationStatusTenantSocial ot:AccommodationStatusTenantPrivate ot:AccommodationStatusSettledMainstreamFamily ot:AccommodationStatusSupportedAccommodation ot:AccommodationStatusSharedLives ot:AccommodationStatusApprovedPremises ot:AccommodationStatusShelteredHousing ot:AccommodationStatusMobileAccommodation ot:AccommodationStatusRoughSleeping ot:AccommodationStatusNightShelter ot:AccommodationStatusRefuge ot:AccommodationStatusTempAccommodationCouncil ot:AccommodationStatusStayingFamilyFriendsShort ot:AccommodationStatusHealthcareFacility ot:AccommodationStatusRegisteredCareHome ot:AccommodationStatusRegisteredNursingHome ot:AccommodationStatusPrisonDetention ot:AccommodationStatusOtherTemporary ot:AccommodationStatusUnknown ot:AsdDiagnosis ot:ClientFundingStatus ot:ClientFundingStatusFullyClientFunded ot:ClientFundingStatusJointFunded ot:ClientFundingStatusFullySocialCareFunded ot:ClientFundingStatusUnknown ot:DbsCheck ot:DementiaDiagnosis ot:EmploymentStatus ot:EmploymentStatusPaidUnder16h ot:EmploymentStatusPaid16hPlus ot:EmploymentStatusPaidHoursUnknown ot:EmploymentStatusSeekingWork ot:EmploymentStatusNotSeekingOrRetired ot:EmploymentStatusVoluntaryOnly ot:EmploymentStatusUnknown ot:HasUnpaidCarer ot:HearingImpairment ot:HearingImpairmentDeafWithSpeech ot:HearingImpairmentDeafWithoutSpeech ot:HearingImpairmentHardOfHearing ot:HearingImpairmentNoImpairment ot:HearingImpairmentSeverityUnknown ot:HearingImpairmentUnknown ot:SupportReason ot:SupportReasonPhysicalAccessMobility ot:SupportReasonPhysicalPersonalCare ot:SupportReasonSensoryVisual ot:SupportReasonSensoryHearing ot:SupportReasonSensoryDual ot:SupportReasonMemoryCognition ot:SupportReasonLearningDisability ot:SupportReasonMentalHealth ot:SupportReasonSubstanceMisuse ot:SupportReasonAsylumSeeker ot:SupportReasonSocialIsolationOther ot:SupportReasonUnpaidCarer ot:SupportReasonUnknown ot:VisualImpairment ot:VisualImpairmentBlind ot:VisualImpairmentPartiallySighted ot:VisualImpairmentNoImpairment ot:VisualImpairmentSeverityUnknown ot:VisualImpairmentUnknown ) ;
+    owl:unionOf ( ot:Send ot:SendSpld ot:SendMld ot:SendSld ot:SendPmld ot:SendSlcn ot:SendAsc ot:SendSemh ot:SendVi ot:SendHi ot:SendMsi ot:SendPd ot:SendDs ot:SendOth ot:SendNsa ot:Eal ot:EalIso6391Code ot:FreeSchoolMeals ot:Neet ot:NonAccidentalInjury ot:PersistentSchoolAbsences ot:PupilPremium ot:Religion ot:ReligionHl7Code ot:AccessOrSafety ot:TempAccomodation ot:AccommodationStatus ot:AccommodationStatusOwnerOccupier ot:AccommodationStatusTenantSocial ot:AccommodationStatusTenantPrivate ot:AccommodationStatusSettledMainstreamFamily ot:AccommodationStatusSupportedAccommodation ot:AccommodationStatusSharedLives ot:AccommodationStatusApprovedPremises ot:AccommodationStatusShelteredHousing ot:AccommodationStatusMobileAccommodation ot:AccommodationStatusRoughSleeping ot:AccommodationStatusNightShelter ot:AccommodationStatusRefuge ot:AccommodationStatusTempAccommodationCouncil ot:AccommodationStatusStayingFamilyFriendsShort ot:AccommodationStatusHealthcareFacility ot:AccommodationStatusRegisteredCareHome ot:AccommodationStatusRegisteredNursingHome ot:AccommodationStatusPrisonDetention ot:AccommodationStatusOtherTemporary ot:AccommodationStatusUnknown ot:AsdDiagnosis ot:ClientFundingStatus ot:ClientFundingStatusFullyClientFunded ot:ClientFundingStatusJointFunded ot:ClientFundingStatusFullySocialCareFunded ot:ClientFundingStatusUnknown ot:DbsCheck ot:DigitalKeySafe ot:DementiaDiagnosis ot:EmploymentStatus ot:EmploymentStatusPaidUnder16h ot:EmploymentStatusPaid16hPlus ot:EmploymentStatusPaidHoursUnknown ot:EmploymentStatusSeekingWork ot:EmploymentStatusNotSeekingOrRetired ot:EmploymentStatusVoluntaryOnly ot:EmploymentStatusUnknown ot:HasUnpaidCarer ot:HearingImpairment ot:HearingImpairmentDeafWithSpeech ot:HearingImpairmentDeafWithoutSpeech ot:HearingImpairmentHardOfHearing ot:HearingImpairmentNoImpairment ot:HearingImpairmentSeverityUnknown ot:HearingImpairmentUnknown ot:KnownToBeAbusive ot:KnownToMARAC ot:KnownToMAPPA ot:LegalStatus ot:LegalStatusLastingPowerOfAttorney ot:LegalStatusCourtAppointedHealthWelfare ot:LegalStatusCourtAppointedPropertyFinances ot:LegalStatusDoLS ot:LegalStatusSection117 ot:NRPF ot:Risk ot:Risk ot:RiskModernDaySlavery ot:RiskExploitation ot:RiskFalling ot:SlowToReact ot:SupportReason ot:SupportReasonPhysicalAccessMobility ot:SupportReasonPhysicalPersonalCare ot:SupportReasonSensoryVisual ot:SupportReasonSensoryHearing ot:SupportReasonSensoryDual ot:SupportReasonMemoryCognition ot:SupportReasonLearningDisability ot:SupportReasonMentalHealth ot:SupportReasonSubstanceMisuse ot:SupportReasonAsylumSeeker ot:SupportReasonSocialIsolationOther ot:SupportReasonUnpaidCarer ot:SupportReasonUnknown ot:VisualImpairment ot:VisualImpairmentBlind ot:VisualImpairmentPartiallySighted ot:VisualImpairmentNoImpairment ot:VisualImpairmentSeverityUnknown ot:VisualImpairmentUnknown ) ;
     skos:definition "Codes to indicate the type of qualitative observation." ;
     skos:inScheme sg:schema ;
-    linkml:permissible_values ot:AccommodationStatus,
+    linkml:permissible_values ot:AccessOrSafety,
+        ot:AccommodationStatus,
         ot:AccommodationStatusApprovedPremises,
         ot:AccommodationStatusHealthcareFacility,
         ot:AccommodationStatusMobileAccommodation,
@@ -1818,6 +1924,7 @@ sg:observation-type a owl:Class ;
         ot:ClientFundingStatusUnknown,
         ot:DbsCheck,
         ot:DementiaDiagnosis,
+        ot:DigitalKeySafe,
         ot:Eal,
         ot:EalIso6391Code,
         ot:EmploymentStatus,
@@ -1837,12 +1944,26 @@ sg:observation-type a owl:Class ;
         ot:HearingImpairmentNoImpairment,
         ot:HearingImpairmentSeverityUnknown,
         ot:HearingImpairmentUnknown,
+        ot:KnownToBeAbusive,
+        ot:KnownToMAPPA,
+        ot:KnownToMARAC,
+        ot:LegalStatus,
+        ot:LegalStatusCourtAppointedHealthWelfare,
+        ot:LegalStatusCourtAppointedPropertyFinances,
+        ot:LegalStatusDoLS,
+        ot:LegalStatusLastingPowerOfAttorney,
+        ot:LegalStatusSection117,
+        ot:NRPF,
         ot:Neet,
         ot:NonAccidentalInjury,
         ot:PersistentSchoolAbsences,
         ot:PupilPremium,
         ot:Religion,
         ot:ReligionHl7Code,
+        ot:Risk,
+        ot:RiskExploitation,
+        ot:RiskFalling,
+        ot:RiskModernDaySlavery,
         ot:Send,
         ot:SendAsc,
         ot:SendDs,
@@ -1858,6 +1979,7 @@ sg:observation-type a owl:Class ;
         ot:SendSld,
         ot:SendSpld,
         ot:SendVi,
+        ot:SlowToReact,
         ot:SupportReason,
         ot:SupportReasonAsylumSeeker,
         ot:SupportReasonLearningDisability,
