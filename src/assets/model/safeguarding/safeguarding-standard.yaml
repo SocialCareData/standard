@@ -1279,11 +1279,11 @@ enums:
         meaning: ot:LegalStatusLastingPowerOfAttorney
       "legal-status.court-appointed-health-welfare":
         title: Legal Status Court of Protection -- Court Appointed Deputy for Health and Welfare
-        description: A Lasting Power of Attorney document is active, meaning the individual has chosen others to make decisions on their behalf
+        description: A court of protection has authorised someone else to make personal health and welfare decisions for the individual
         meaning: ot:LegalStatusCourtAppointedHealthWelfare
       "legal-status.court-appointed-property-finances":
         title: Legal Status Court of Protection -- Court Appointed Deputy for Property and Financial Affairs
-        description: A Lasting Power of Attorney document is active, meaning the individual has chosen others to make decisions on their behalf
+        description: A court of protection has authorised someone else to make personal property and financial decisions for the individual
         meaning: ot:LegalStatusCourtAppointedPropertyFinances
       "legal-status.deprivation-of-liberty-safeguards":
         title: Deprivation of Liberty Safeguards (DoLS)

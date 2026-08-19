@@ -102,13 +102,13 @@ sg:LifeEvent a owl:Class ;
     rdfs:label "LifeEvent" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 1 ;
+            owl:onProperty sg:sgIdentifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty sg:subjectPerson ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty sg:eventType ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty sg:sgIdentifier ] ;
+            owl:onProperty sg:eventType ] ;
     skos:definition "A significant, time-bound occurrence in an individual's life that may have implications for their safety, wellbeing or development - for example attendance at A&E, a child being reported as missing, or an exclusion from school. Life events are not inherently positive or negative but can signal levels of risk, vulnerability or changing need." ;
     skos:exactMatch sg:LifeEvent ;
     skos:inScheme sg:schema .
@@ -120,6 +120,9 @@ sg:Organisation a owl:Class ;
             owl:onProperty sg:organisationType ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
+            owl:onProperty sg:sgIdentifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty sg:relatedServiceRef ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
@@ -129,10 +132,7 @@ sg:Organisation a owl:Class ;
             owl:onProperty sg:active ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty sg:contactMulti ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty sg:sgIdentifier ] ;
+            owl:onProperty sg:contactMulti ] ;
     skos:definition "An organisation involved in the safeguarding or wellbeing of a person - for example a local authority, an NHS trust, a school, or an education authority. Aligns with the FHIR Organization resource." ;
     skos:exactMatch sg:Organisation ;
     skos:inScheme sg:schema .
@@ -140,20 +140,20 @@ sg:Organisation a owl:Class ;
 sg:Professional a owl:Class ;
     rdfs:label "Professional" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:status ],
+        [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty sg:sgIdentifier ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty sg:status ],
+            owl:cardinality 1 ;
+            owl:onProperty sg:contactSingle ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty sg:professionalName ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty sg:role ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty sg:contactSingle ] ;
+            owl:onProperty sg:role ] ;
     skos:definition "An individual acting in a formal role within an organisation who has responsibilities relating to a person's safety, wellbeing, care or support - for example undertaking assessments, creating and monitoring plans, or sharing information in a multi-agency context." ;
     skos:exactMatch sg:Professional ;
     skos:inScheme sg:schema .
@@ -170,14 +170,14 @@ sg:Service a owl:Class ;
             owl:minCardinality 1 ;
             owl:onProperty sg:sgIdentifier ],
         [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty sg:costFrequency ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty sg:serviceType ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty sg:entityName ] ;
+            owl:onProperty sg:entityName ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:costFrequency ] ;
     skos:definition "A service involved in the safeguarding or wellbeing of a person - the specific intervention or package of support delivered by one or more organisations (e.g. local authority social care, an emergency department, a general practice, or a school)." ;
     skos:exactMatch sg:Service ;
     skos:inScheme sg:schema .
@@ -186,25 +186,25 @@ sg:ServiceEpisode a owl:Class ;
     rdfs:label "ServiceEpisode" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty sg:timeInformation ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty sg:relatedServiceRef ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty sg:location ],
+            owl:onProperty sg:episodeType ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty sg:outcome ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
+            owl:onProperty sg:relatedServiceRef ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:subjectPerson ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty sg:timeInformation ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty sg:sgIdentifier ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty sg:episodeType ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty sg:subjectPerson ] ;
+            owl:onProperty sg:location ] ;
     skos:definition "A bounded period during which an individual receives a defined service, intervention, or package of support from a service or professional. It has a recognisable start and end point, though duration may vary from a single contact to sustained involvement over time." ;
     skos:exactMatch sg:ServiceEpisode ;
     skos:inScheme sg:schema .
@@ -372,10 +372,10 @@ sg:Measurement a owl:Class ;
             owl:onProperty sg:measurementUnit ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty sg:measurementType ],
+            owl:onProperty sg:measurementValue ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty sg:measurementValue ] ;
+            owl:onProperty sg:measurementType ] ;
     skos:definition "A quantitative measurement of something related to the subject or their circumstances (for example \"Authorised Absences\" or \"Referrals\")." ;
     skos:exactMatch sg:Measurement ;
     skos:inScheme sg:schema .
@@ -383,14 +383,14 @@ sg:Measurement a owl:Class ;
 sg:Observation a owl:Class ;
     rdfs:label "Observation" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty sg:observationEndDate ],
+        [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty sg:observationType ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty sg:observationStartDate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty sg:observationEndDate ] ;
+            owl:onProperty sg:observationStartDate ] ;
     skos:definition "A qualitative observation that represents an attribute of the subject or their circumstances (for example \"NEET\" or \"free-school-meals\")." ;
     skos:exactMatch sg:Observation ;
     skos:inScheme sg:schema .
@@ -411,10 +411,10 @@ sg:SubjectPerson a owl:Class ;
     rdfs:label "SubjectPerson" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty sg:involvement ],
+            owl:onProperty sg:person ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty sg:person ] ;
+            owl:onProperty sg:involvement ] ;
     skos:definition "A typed reference to a Person involved in a service episode or life event." ;
     skos:exactMatch sg:SubjectPerson ;
     skos:inScheme sg:schema .
@@ -422,14 +422,14 @@ sg:SubjectPerson a owl:Class ;
 sg:TimeInformation a owl:Class ;
     rdfs:label "TimeInformation" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty sg:startDateTime ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty sg:endDateTime ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty sg:frequency ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty sg:startDateTime ] ;
+            owl:onProperty sg:frequency ] ;
     skos:definition "Details about the timing of a service episode or life event, including when it started and ended and how frequently it recurs." ;
     skos:exactMatch sg:TimeInformation ;
     skos:inScheme sg:schema .
@@ -1046,13 +1046,13 @@ ot:LegalStatusCourtAppointedHealthWelfare a owl:Class ;
     rdfs:label "legal-status.court-appointed-health-welfare" ;
     dct:title "Legal Status Court of Protection -- Court Appointed Deputy for Health and Welfare" ;
     rdfs:subClassOf sg:observation-type ;
-    skos:definition "A Lasting Power of Attorney document is active, meaning the individual has chosen others to make decisions on their behalf" .
+    skos:definition "A court of protection has authorised someone else to make personal health and welfare decisions for the individual" .
 
 ot:LegalStatusCourtAppointedPropertyFinances a owl:Class ;
     rdfs:label "legal-status.court-appointed-property-finances" ;
     dct:title "Legal Status Court of Protection -- Court Appointed Deputy for Property and Financial Affairs" ;
     rdfs:subClassOf sg:observation-type ;
-    skos:definition "A Lasting Power of Attorney document is active, meaning the individual has chosen others to make decisions on their behalf" .
+    skos:definition "A court of protection has authorised someone else to make personal property and financial decisions for the individual" .
 
 ot:LegalStatusDoLS a owl:Class ;
     rdfs:label "legal-status.deprivation-of-liberty-safeguards" ;
