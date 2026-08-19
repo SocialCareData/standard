@@ -486,10 +486,20 @@ A [SHACL shape](/assets/model/placements/placements-standard-shape-01.ttl) encod
 A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, applies the [JSON-LD context file](/assets/model/placements/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
 
 
-## Standard Placement Reporting Spreadsheet
+## Data Submission
 
-Use the [National Placement Standard spreadsheet template (June 2026, v3)](/assets/spreadsheet/National-Placement-Standard-Excel-20260624.xlsx) for reporting placements data.
+Placements data is reported as a CSV file. Use the [National Placement Standard data collection CSV (June 2026, v3)](/assets/spreadsheet/National-Placement-Standard-20260624-Data-Collection.csv) as the template.
 
+### File format
+
+- UTF-8 encoded, comma-separated. A field containing a comma, a double quote or a line break is enclosed in double quotes.
+- Row 1 holds the section headings. It is informational and is not read.
+- Row 2 holds the column names. Columns are identified by name, and all columns are present in every file.
+- Row 3 onwards hold the records, one placement per row.
+
+### Before submission
+
+The [National Placement Standard spreadsheet template (June 2026, v3)](/assets/spreadsheet/National-Placement-Standard-Excel-20260624.xlsx) is the source for the column definitions, the permitted values of each column and the formats they are recorded in. It also carries the quality assurance checklist that each return should be checked against before submission.
 
 ## Report an issue
 
