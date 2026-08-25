@@ -1,0 +1,30 @@
+---
+title: Related Programmes
+tags:
+  - Programme
+---
+
+<article class="numbered-headings">
+
+Our work is relevant to several other programmes across government. We are monitoring or actively engaging with the following programmes to ensure alignment and keep them informed. We have a named individual from the programme responsible for engaging with each programme and identifying areas where we need to align. The programmes we anticipate most interlocks being required with and the relevant DRIs are listed below; please reach out to these individuals for any further questions or insights.
+
+| Programme     | Sponsor  | Standards Programme DRI | 
+| ----------- | ----------- | ----------- |
+| Dashboard   | DfE        | Matthieu Bosquet        |
+| Centre of Excellence   | DfE        | Tom Rintoul        |
+| Families First   | DfE        | Ferry Lichtenberg / Stephen Rice        |
+| Family Hubs   |         | Ferry Lichtenberg        |
+| Fostering Hubs   | DfE        | Kevin Yong        |
+| Local Government Re-Organisation   | MHCLG        | Alice Ainsworth        |
+| National Data Library   | GDS        | Andrew Newman        |
+| Scalable Approach to Vulnerability via Interoperability (SAVVI) and Open Referral UK (ORUK)   | MHCLG        | Andrew Newman        |
+| SUI   | DfE        | Ferry Lichtenberg / Matthieu Bosquet        |
+| Trailblazer   | DWP        | Tom Rintoul        |
+| DfE Schools Directorate   | DfE        | Ferry Lichtenberg        |
+| Placements Market Reform   | GDS        | Alice Ainsworth        |
+| XGov Person and Data Standards Authority   |         | Maddy Goldie        |
+| SCIP   | DHSC        | Ferry Lichtenberg        |
+| DISC   | DHSC        | Alice Ainsworth        |
+| Single Patient Record   | DHSC        | Ferry Lichtenberg        |
+
+</article>
