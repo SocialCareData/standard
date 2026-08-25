@@ -4,7 +4,11 @@ const { test } = require('node:test')
 const assert = require('node:assert/strict')
 
 const { slugify, cardinality, datatypeLabel, localName, XSD } = require('../lib/format')
-const { renderMarkdown, renderVocabularyTable, dataTypeCell, optionsCell, normalizeOptionsLimit, escapeCell } = require('../lib/table')
+const {
+  renderMarkdown, renderVocabularyTable, dataTypeCell, optionsCell,
+  normalizeOptionsLimit, escapeCell, hasHierarchy, vocabularyCodeCell,
+  vocabularyColumns
+} = require('../lib/table')
 
 test('slugify matches kramdown auto_id output', () => {
   assert.equal(slugify('Out of LA Reason Taxonomy'), 'out-of-la-reason-taxonomy')
@@ -146,4 +150,76 @@ test('renderVocabularyTable can omit the collapsible wrapper', () => {
     '{: .table-bordered}'
   ].join('\n'))
   assert.doesNotMatch(md, /<details>|<summary/)
+})
+
+const INDENT = '&nbsp;&nbsp;&nbsp;&nbsp;'
+
+test('hasHierarchy only reports true when a concept sits below a parent', () => {
+  assert.equal(hasHierarchy([{ code: 'a', depth: 0 }, { code: 'b', depth: 0 }]), false)
+  assert.equal(hasHierarchy([{ code: 'a', depth: 0 }, { code: 'a.b', depth: 1 }]), true)
+  assert.equal(hasHierarchy([{ code: 'a' }]), false) // un-annotated concepts stay flat
+})
+
+test('vocabularyCodeCell leaves a flat vocabulary alone', () => {
+  assert.equal(vocabularyCodeCell({ code: 'SEND', depth: 0 }, false), '`SEND`')
+  assert.equal(vocabularyCodeCell({ code: 'SEND.SpLD', depth: 1 }, false), '`SEND.SpLD`')
+})
+
+test('vocabularyCodeCell bolds broader terms and indents narrower ones', () => {
+  assert.equal(vocabularyCodeCell({ code: 'SEND', depth: 0 }, true), '**`SEND`**')
+  assert.equal(vocabularyCodeCell({ code: 'SEND.SpLD', depth: 1 }, true), `${INDENT}└─ \`SEND.SpLD\``)
+  assert.equal(vocabularyCodeCell({ code: 'a.b.c', depth: 2 }, true), `${INDENT}${INDENT}└─ \`a.b.c\``)
+  assert.equal(vocabularyCodeCell({ code: 'x' }, true), '**`x`**') // missing depth -> top level
+})
+
+test('renderVocabularyTable shows an inferred hierarchy in the Code column', () => {
+  const md = renderVocabularyTable([
+    { code: 'SEND', label: 'SEND', description: 'SEND codes', depth: 0, hasChildren: true },
+    { code: 'SEND.SpLD', label: 'SEND SpLD', description: 'Specific learning difficulty', depth: 1, hasChildren: false },
+    { code: 'NEET', label: 'NEET', description: 'Not in education', depth: 0, hasChildren: false }
+  ], { collapsible: false })
+  assert.equal(md, [
+    '| Code | Label | Definition |',
+    '| :--- | :--- | :--- |',
+    '| **`SEND`** | SEND | SEND codes |',
+    `| ${INDENT}└─ \`SEND.SpLD\` | SEND SpLD | Specific learning difficulty |`,
+    '| **`NEET`** | NEET | Not in education |',
+    '{: .table-bordered}'
+  ].join('\n'))
+})
+
+test('vocabularyColumns drops only the Label column', () => {
+  assert.deepEqual(vocabularyColumns(), ['Code', 'Label', 'Definition'])
+  assert.deepEqual(vocabularyColumns(true), ['Code', 'Label', 'Definition'])
+  assert.deepEqual(vocabularyColumns(false), ['Code', 'Definition'])
+})
+
+test('renderVocabularyTable can omit the Label column', () => {
+  const concepts = [
+    { code: 'today', label: 'Today', description: 'Needed | today.' }, // pipe gets escaped
+    { code: 'soon', label: 'Soon', description: 'Soon' }
+  ]
+  assert.equal(renderVocabularyTable(concepts, { collapsible: false, showLabel: false }), [
+    '| Code | Definition |',
+    '| :--- | :--- |',
+    '| `today` | Needed \\| today. |',
+    '| `soon` | Soon |',
+    '{: .table-bordered}'
+  ].join('\n'))
+  // ...and still wraps in <details> when asked to
+  assert.match(renderVocabularyTable(concepts, { showLabel: false }), /<details>/)
+})
+
+test('renderVocabularyTable keeps hierarchy markers when Label is dropped', () => {
+  const md = renderVocabularyTable([
+    { code: 'SEND', label: 'SEND', description: 'SEND codes', depth: 0, hasChildren: true },
+    { code: 'SEND.SpLD', label: 'SEND SpLD', description: 'Specific learning difficulty', depth: 1 }
+  ], { collapsible: false, showLabel: false })
+  assert.equal(md, [
+    '| Code | Definition |',
+    '| :--- | :--- |',
+    '| **`SEND`** | SEND codes |',
+    `| ${INDENT}└─ \`SEND.SpLD\` | Specific learning difficulty |`,
+    '{: .table-bordered}'
+  ].join('\n'))
 })

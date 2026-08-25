@@ -77,40 +77,40 @@ See [Person.Contact](PUB01_person_standard_table#contact)
 
 ### Organisation Code Taxonomy
 
-{% schema_table page.data_model OrganisationCode %}
+{% schema_table page.data_model OrganisationCode no-label %}
 
 ### Service Code Taxonomy
 
-{% schema_table page.data_model ServiceCode %}
+{% schema_table page.data_model ServiceCode no-label %}
 
 ### Service Cost Frequency Taxonomy
 
-{% schema_table page.data_model ServiceCostFrequency %}
+{% schema_table page.data_model ServiceCostFrequency no-label %}
 
 ### Service Delivery Taxonomy
 
-{% schema_table page.data_model ServiceDelivery %}
+{% schema_table page.data_model ServiceDelivery no-label %}
 
 ### Episode Code Taxonomy
 
-{% schema_table page.data_model EpisodeCode %}
+{% schema_table page.data_model EpisodeCode no-label %}
 
 ### Episode Outcome Taxonomy
 
-{% schema_table page.data_model EpisodeOutcome %}
+{% schema_table page.data_model EpisodeOutcome no-label %}
 
 ### Event Code Taxonomy
 
-{% schema_table page.data_model EventCode %}
+{% schema_table page.data_model EventCode no-label %}
 
 ### Observation Type Taxonomy
 
-{% schema_table page.data_model ObservationType %}
+{% schema_table page.data_model ObservationType no-label %}
 
 ### Measurement Type Taxonomy
 
-{% schema_table page.data_model MeasurementType %}
+{% schema_table page.data_model MeasurementType no-label %}
 
 ### Measurement Unit Taxonomy
 
-{% schema_table page.data_model MeasurementUnit %}
+{% schema_table page.data_model MeasurementUnit no-label %}

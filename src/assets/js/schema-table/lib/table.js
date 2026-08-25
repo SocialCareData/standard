@@ -4,6 +4,15 @@ const { datatypeLabel, cardinality } = require('./format')
 
 const COLUMNS = ['Field name', 'Cardinality', 'Data Type', 'Description', 'Options']
 const VOCAB_COLUMNS = ['Code', 'Label', 'Definition']
+// The one vocabulary column that can be dropped: where a permissible value's
+// `title` is mechanically derived from its key (`SEND.SpLD` -> "SEND SpLD") the
+// Label column is noise, so a table can be rendered without it.
+const VOCAB_LABEL_COLUMN = 'Label'
+
+/** The vocabulary columns to render; `showLabel: false` drops "Label". */
+function vocabularyColumns (showLabel = true) {
+  return showLabel ? VOCAB_COLUMNS : VOCAB_COLUMNS.filter(c => c !== VOCAB_LABEL_COLUMN)
+}
 
 /** Make a value safe to place inside a Markdown table cell. */
 function escapeCell (text) {
@@ -114,20 +123,58 @@ function renderTable (rows, availableAnchors, optionsLimit) {
   return renderMarkdown(rows.map(row => toViewRow(row, availableAnchors, optionsLimit)))
 }
 
+// A hierarchical vocabulary indents each level by four non-breaking spaces and
+// marks a narrower term with a branch glyph, so `SEND.SpLD` reads as sitting
+// under `SEND`. Entities (rather than plain spaces) are used because Markdown
+// collapses leading whitespace inside a table cell.
+const HIERARCHY_INDENT = '&nbsp;&nbsp;&nbsp;&nbsp;'
+const HIERARCHY_BRANCH = '└─'
+
+/** Whether any concept sits below a parent term (see model.addHierarchy). */
+function hasHierarchy (concepts) {
+  return concepts.some(c => c && c.depth > 0)
+}
+
+/**
+ * The "Code" cell of a vocabulary row. In a flat vocabulary it is just the code
+ * in a code span. In a hierarchical one, top-level terms are bolded and
+ * narrower terms are indented one level per {@link HIERARCHY_INDENT} and
+ * prefixed with {@link HIERARCHY_BRANCH}.
+ */
+function vocabularyCodeCell (concept, hierarchical) {
+  const code = `\`${escapeCell(concept.code)}\``
+  if (!hierarchical) return code
+  const depth = Number.isInteger(concept.depth) ? concept.depth : 0
+  if (depth === 0) return `**${code}**`
+  return `${HIERARCHY_INDENT.repeat(depth)}${HIERARCHY_BRANCH} ${code}`
+}
+
 /**
  * Render an enum's permissible values as a "Code" / "Label" / "Definition"
  * Markdown table. By default it is wrapped in a collapsible <details>/<summary>
- * element; pass `{ collapsible: false }` to emit just the table.
+ * element; pass `{ collapsible: false }` to emit just the table, and
+ * `{ showLabel: false }` to drop the Label column (Code / Definition only).
+ *
+ * When the codes imply a hierarchy (`SEND` / `SEND.SpLD`), the Code column
+ * shows it: broader terms in bold, narrower ones indented beneath their parent.
+ * A flat vocabulary renders exactly as before.
  *
  * The blank line after <summary> and before </details> is required so kramdown
  * parses the enclosed Markdown table into a real HTML <table>; the trailing
  * `{: .table-bordered}` IAL styles it to match the other vocabulary tables.
  */
-function renderVocabularyTable (concepts, { collapsible = true } = {}) {
+function renderVocabularyTable (concepts, { collapsible = true, showLabel = true } = {}) {
+  const hierarchical = hasHierarchy(concepts)
+  const columns = vocabularyColumns(showLabel)
   const body = [
-    `| ${VOCAB_COLUMNS.join(' | ')} |`,
-    '| :--- | :--- | :--- |',
-    ...concepts.map(c => `| \`${escapeCell(c.code)}\` | ${escapeCell(c.label)} | ${escapeCell(c.description)} |`)
+    `| ${columns.join(' | ')} |`,
+    `| ${columns.map(() => ':---').join(' | ')} |`,
+    ...concepts.map(c => {
+      const cells = [vocabularyCodeCell(c, hierarchical)]
+      if (showLabel) cells.push(escapeCell(c.label))
+      cells.push(escapeCell(c.description))
+      return `| ${cells.join(' | ')} |`
+    })
   ].join('\n')
 
   if (!collapsible) return `${body}\n{: .table-bordered}`
@@ -146,6 +193,10 @@ function renderVocabularyTable (concepts, { collapsible = true } = {}) {
 module.exports = {
   renderTable,
   renderVocabularyTable,
+  hasHierarchy,
+  vocabularyCodeCell,
+  HIERARCHY_INDENT,
+  HIERARCHY_BRANCH,
   renderMarkdown,
   toViewRow,
   dataTypeCell,
@@ -154,6 +205,8 @@ module.exports = {
   DEFAULT_OPTIONS_LIMIT,
   escapeCell,
   escapeHtml,
+  vocabularyColumns,
   COLUMNS,
-  VOCAB_COLUMNS
+  VOCAB_COLUMNS,
+  VOCAB_LABEL_COLUMN
 }

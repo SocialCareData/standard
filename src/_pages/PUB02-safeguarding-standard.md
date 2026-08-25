@@ -591,43 +591,43 @@ Coded fields draw their values from the controlled vocabularies below. Each code
 
 Used by [`Organisation.type`](#organisation-type). Codes to indicate the type of organisation.
 
-{% schema_table page.data_model OrganisationCode %}
+{% schema_table page.data_model OrganisationCode no-label %}
 
 ### Service Code Vocabulary
 
 Used by [`Service.type`](#service-type). Codes to indicate the type of service.
 
-{% schema_table page.data_model ServiceCode %}
+{% schema_table page.data_model ServiceCode no-label %}
 
 ### Service Cost Frequency Vocabulary
 
 Used by [`Service.costFrequency`](#service-costFrequency). Codes to indicate the payment schedule a service adheres to. From Adult Social Care Client Level Data specification.
 
-{% schema_table page.data_model ServiceCostFrequency %}
+{% schema_table page.data_model ServiceCostFrequency no-label %}
 
 ### Service Delivery Vocabulary
 
 Used by [`Service.delivery`](#service-delivery). Codes to indicate the way a service is delivered. From Adult Social Care Client Level Data specification.
 
-{% schema_table page.data_model ServiceDelivery %}
+{% schema_table page.data_model ServiceDelivery no-label %}
 
 ### Episode Code Vocabulary
 
 Used by [`ServiceEpisode.type`](#episode-type). Codes to indicate the type of service episode.
 
-{% schema_table page.data_model EpisodeCode %}
+{% schema_table page.data_model EpisodeCode no-label %}
 
 ### Episode Outcome Vocabulary
 
 Used by [`ServiceEpisode.outcome`](#episode-outcome). Codes to indicate the outcome of the episode for the subject. From Adult Social Care Client Level Data specification.
 
-{% schema_table page.data_model EpisodeOutcome %}
+{% schema_table page.data_model EpisodeOutcome no-label %}
 
 ### Event Code Vocabulary
 
 Used by [`LifeEvent.type`](#event-type). Codes to indicate the type of life event.
 
-{% schema_table page.data_model EventCode %}
+{% schema_table page.data_model EventCode no-label %}
 
 ### Involvement Code Vocabulary
 
@@ -695,116 +695,19 @@ This standard does **not** define its own frequency codes. Instead, express the 
 
 Used by [`Observation.type`](#observation-type). Codes to indicate the type of qualitative observation.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
-
-| Code | Description |
-| :--- | :--- |
-| **`SEND`** | Observed special educational needs and disabilities, via DfE codes |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.SpLD` | Specific learning Difficulty: difficulty that affect one or more specific aspects of learning. This encompasses a range of conditions including dyslexia, dyscalculia, dysgraphia, dyspraxia etc. |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.MLD` | Moderate Learning Difficulty: well below expected levels of attainment in all or most areas of the curriculum, despite appropriate interventions. They will have much greater difficulty than their peers in acquiring basic literacy and numeracy skills and in understanding concepts. They may also have associated speech and language delay, low self-esteem, low levels of concentration and underdeveloped social skills. |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.SLD` | Severe Learning Difficulty: significant intellectual or cognitive impairments and are likely to need support in all areas of the curriculum. |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.PMLD` | Profound and Multiple Learning Difficulty: have severe and complex learning difficulties as well as a physical disability or sensory impairment. |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.SLCN` | Speech, Language and Communication Needs: difficulty in communicating with others such as difficulty saying what they want to, understanding what is being said to them, difficulties understanding and applying social rules. |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.ASC` | Autistic Spectrum Condition: including Asperger's Syndrome and Autism with associated difficulties such as difficulties with language, communication, imagination and social interactions. |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.DS` | Down Syndrome: a genetic disorder caused by the presence of all or part of a third copy of chromosome 21. |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.SEMH` | Social, Emotional and Mental Health difficulties: These may include becoming withdrawn or isolated, as well as displaying challenging, disruptive or disturbing behaviour. These behaviours may reflect underlying mental health difficulties such as anxiety or depression, self-harming, substance misuse, eating disorders or physical symptoms that are medically unexplained. |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.VI` | Visual Impairment: Partial or complete loss of sight not correctable by usual means (e.g. prescribed glasses or contact lens). |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.HI` | Hearing Impairment: With a degree of hearing loss. |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.MSI` | Multi Sensory Impairment: combined vision and hearing impairments. |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.PD` | Physical Disability: limitation on a person's physical functioning, mobility, dexterity or stamina. |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.OTH` | Other SEND: any other special educational need or disability not covered by the other codes. |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.NSA` | NSA SEN support but no specialist assessment of type of need. |
-| **`EAL`** | English as an additional language |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `EAL.<ISO 639-1 code>` | Two-letter code for observed first language, using [ISO 639-1](https://www.iso.org/iso-639-language-code) |
-| **`free-school-meals`** | Recipient of free school meals (FSM) |
-| **`NEET`** | Not in Education, Employment, or Training |
-| **`non-accidental-injury`** | Observed non-accidental injury |
-| **`persistent-school-absences`** | Reported persistent absences from school |
-| **`pupil-premium`** | Eligible for Pupil Premium |
-| **`religion`** | Religious affiliation |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `religion.<HL7 code>` | Numeric code for [religious affiliations](https://terminology.hl7.org/7.2.0/en/CodeSystem-v3-ReligiousAffiliation.html) |
-| **`temp-accomodation`** | Living in temporary accomodation |
-| **`accommodation-status`** | Housing and living arrangements of the individual |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.owner-occupier` | Owner occupier or shared ownership scheme |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.tenant-social` | Tenant: Local authority or other social housing provider |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.tenant-private` | Tenant: Private landlord |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.settled-mainstream-family` | Settled mainstream housing with family or friends |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.supported-accommodation` | Supported accommodation, supported lodgings or supported group home |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.shared-lives` | Shared Lives scheme |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.approved-premises` | Approved premises for offenders released from prison or under probation supervision |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.sheltered-housing` | Sheltered housing, extra care housing or other sheltered housing |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.mobile-accommodation` | Mobile accommodation for Gypsy, Roma and Traveller communities |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.rough-sleeping` | Rough sleeper or squatting |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.night-shelter` | Night shelter, emergency hostel or direct access hostel |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.refuge` | Refuge |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.temp-accommodation-council` | Placed in temporary accommodation by the council (inc. homelessness resettlement) |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.staying-family-friends-short` | Staying with family or friends as a short term guest |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.healthcare-facility` | Acute hospital or long term healthcare residential facility |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.registered-care-home` | Registered care home |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.registered-nursing-home` | Registered nursing home |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.prison-detention` | Prison, young offenders institution or detention centre |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.other-temporary` | Other temporary accommodation |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `accommodation-status.unknown` | Unknown |
-| **`asd-diagnosis`** | Observed Autism Spectrum Disorder (ASD) diagnosis |
-| **`client-funding-status`** | Funding status of the client for social care services |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `client-funding-status.fully-client-funded` | Fully client funded |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `client-funding-status.joint-funded` | Joint client and social care funded |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `client-funding-status.fully-social-care-funded` | Fully social care funded |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `client-funding-status.unknown` | Unknown |
-| **`dbs-check`** | Recorded Disclosure and Barring Service (DBS) check |
-| **`dementia-diagnosis`** | Observed dementia diagnosis |
-| **`employment-status`** | Employment status of the individual |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.paid-under-16h` | Paid: Less than 16 hours a week |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.paid-16h-plus` | Paid: 16 or more hours a week |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.paid-hours-unknown` | Paid: Hours per week unknown |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.seeking-work` | Not in paid employment: Seeking work |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.not-seeking-or-retired` | Not in paid employment: Not actively seeking work or retired |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.voluntary-only` | Not in paid employment: Voluntary work only |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `employment-status.unknown` | Unknown |
-| **`has-unpaid-carer`** | Has an unpaid carer |
-| **`hearing-impairment`** | Observed hearing impairment status |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `hearing-impairment.deaf-with-speech` | Deaf with speech |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `hearing-impairment.deaf-without-speech` | Deaf without speech |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `hearing-impairment.hard-of-hearing` | Hard of hearing |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `hearing-impairment.no-impairment` | No hearing impairment |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `hearing-impairment.severity-unknown` | Hearing impairment: Severity unknown |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `hearing-impairment.unknown` | Unknown |
-| **`support-reason`** | Primary reason for requiring adult social care support |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.physical-access-mobility` | Physical support: Access and mobility only |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.physical-personal-care` | Physical Support: Personal care support |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.sensory-visual` | Sensory Support: Support for visual impairment |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.sensory-hearing` | Sensory Support: Support for hearing impairment |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.sensory-dual` | Sensory Support: Support for dual impairment |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.memory-cognition` | Support with memory and cognition |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.learning-disability` | Learning disability support |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.mental-health` | Mental health support |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.substance-misuse` | Social support: Substance misuse support |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.asylum-seeker` | Social Support: Asylum seeker support |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.social-isolation-other` | Social support: Support for social isolation or other reason |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.unpaid-carer` | Social support: Support to unpaid carer |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `support-reason.unknown` | Unknown |
-| **`visual-impairment`** | Observed visual impairment status |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `visual-impairment.blind` | Blind/severely sight impaired |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `visual-impairment.partially-sighted` | Partial sight/sight impaired |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `visual-impairment.no-impairment` | No visual impairment |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `visual-impairment.severity-unknown` | Visual impairment - severity unknown |
-| &nbsp;&nbsp;&nbsp;&nbsp;└─ `visual-impairment.unknown` | Unknown |
-{:.table-bordered}
-
-</details>
+{% schema_table page.data_model ObservationType no-label %}
 
 ### Measurement Type Vocabulary
 
 Used by [`Measurement.type`](#measurement-type). Codes to indicate the type of measurement.
 
-{% schema_table page.data_model MeasurementType %}
+{% schema_table page.data_model MeasurementType no-label %}
 
 ### Measurement Unit Vocabulary
 
 Used by [`Measurement.unit`](#measurement-unit). Codes to indicate the unit of measurement.
 
-{% schema_table page.data_model MeasurementUnit %}
+{% schema_table page.data_model MeasurementUnit no-label %}
 
 
 ## Ontology
