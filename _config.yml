@@ -50,10 +50,10 @@ nav:
     children:
       - title: Our standards working groups
         url: /standards_working_groups
-        description: Open groups shaping each standard.
+        description: Working groups shaping each standard.
       - title: Calendar
         url: /calendar
-        description: Upcoming meetings across the programme.
+        description: Upcoming events across the programme.
   - title: About
     description: About the programme
     url: /about
@@ -63,7 +63,7 @@ nav:
         description: Who does what, and how the workstreams fit together.
       - title: Related programmes
         url: /related_programmes
-        description: Adjacent standards work in health, justice and local government.
+        description: Adjacent standards work in health, education and local government.
   - title: Updates
     description: Updates
     url: /updates

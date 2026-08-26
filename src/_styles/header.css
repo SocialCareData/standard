@@ -116,6 +116,7 @@
 /* Panel */
 .header .nav-panel {
   background: var(--nav-panel-background);
+  box-shadow: var(--nav-panel-shadow);
   box-sizing: border-box;
   left: 50%;
   padding: 1.4rem max(3.1rem, calc((100vw - (1280px - 6.2rem)) / 2)) 2rem;
@@ -241,6 +242,7 @@
   /* The same panel markup, reflowed as an accordion below its parent row. */
   .header:not(.nojs) .nav-panel {
     background: transparent;
+    box-shadow: none;
     left: auto;
     order: 3;
     padding: 0 0 1.2rem;
