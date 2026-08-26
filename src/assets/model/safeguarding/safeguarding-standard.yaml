@@ -1067,7 +1067,7 @@ enums:
         meaning: ot:ReligionHl7Code
       access-or-safety-issues:
         title: Access or Safety Issues
-        description: Safeguarding professionals may have difficulty in reaching the person safely # NEED A CONFIRMED DEFINITION
+        description: Access or potential risk to the visiting professional.
         meaning: ot:AccessOrSafety
       temp-accomodation:
         title: Temp Accomodation
