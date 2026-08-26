@@ -28,8 +28,6 @@ homepage:
   url: /
 nav:
   - title: Learn
-    description: Learn about the standards
-    url: /learn_about_the_standards
     children:
       - title: Learn about the standards
         url: /learn_about_the_standards
@@ -41,13 +39,13 @@ nav:
         url: /use_case_standard_matrix
         description: Trace each use case through to the standards it drives.
   - title: Publications
-    description: Publications
     url: /publications
     children: []
   - title: Contribute
-    description: Contribute to the standards
-    url: /contribute_to_the_standards
     children:
+      - title: Contribute to the standards
+        url: /contribute_to_the_standards
+        description: Ways to get involved, from the mailing list to the working groups.
       - title: Our standards working groups
         url: /standards_working_groups
         description: Working groups shaping each standard.
@@ -55,8 +53,6 @@ nav:
         url: /calendar
         description: Upcoming events across the programme.
   - title: About
-    description: About the programme
-    url: /about
     children:
       - title: Programme structure and team
         url: /programme_structure
@@ -65,7 +61,6 @@ nav:
         url: /related_programmes
         description: Adjacent standards work in health, education and local government.
   - title: Updates
-    description: Updates
     url: /updates
     children: []
 pagefind: true

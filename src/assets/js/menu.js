@@ -35,24 +35,39 @@ document.addEventListener('DOMContentLoaded', function() {
     hamburgerButton.setAttribute('aria-expanded', open ? 'true' : 'false')
   }
 
-  /* Desktop: hovering or focusing anything in the bar opens that item's panel and
-     closes the rest, so childless items and the home link dismiss an open panel too.
-     Delegated, because mouseenter does not bubble. */
   /* Set while Escape hands focus back to a chevron, so that focusin does not
      reopen the panel Escape just closed. */
   let suppressReveal = false
 
+  /* Clicking a control focuses it, and that focusin would open the panel for the
+     few milliseconds before the link navigates away - a visible flash. Hover
+     already covers mouse users, so focus only needs to open panels for keyboard
+     users; mousedown marks the focus that follows as pointer-driven. */
+  /* A panel closed by a click must stay closed while the pointer is still resting
+     on that item, otherwise the next mousemove would hover it straight back open. */
+  let dismissed = null
+
+  let pointerFocus = false
+  header.addEventListener('mousedown', function() { pointerFocus = true })
+  window.addEventListener('mouseup', function() { pointerFocus = false })
+
+  /* Desktop: hovering or focusing anything in the bar opens that item's panel and
+     closes the rest, so childless items and the home link dismiss an open panel too.
+     Delegated, because mouseenter does not bubble. */
   function reveal(event) {
     /* Touch devices fire a synthetic mouseover before click; revealing here would
        let the click handler immediately toggle the panel back shut. */
     if (isNarrow() || isTouch() || suppressReveal) return
+    if (event.type === 'focusin' && pointerFocus) return
 
     /* A panel is a descendant of its own .nav-item, so pointing anywhere inside it
        counts as pointing at that item and keeps it open. */
     const item = event.target.closest('.nav-item')
+    if (item !== dismissed) dismissed = null
+
     if (item && item.classList.contains('has-panel')) {
       closeAllPanels(item)
-      setOpen(item, true)
+      if (item !== dismissed) setOpen(item, true)
       return
     }
 
@@ -73,19 +88,27 @@ document.addEventListener('DOMContentLoaded', function() {
       const open = !isOpen(item)
       if (!isNarrow()) closeAllPanels(item)
       setOpen(item, open)
+      dismissed = open ? null : item
     })
 
+    /* On desktop a parent with a panel is a disclosure control, not a link: it
+       toggles rather than navigating, so a click never flashes the panel open on
+       its way to a new page. Its own page is listed inside the panel. Narrow
+       screens (and no-JS) keep the plain link, with the chevron doing the toggling. */
     link.addEventListener('click', function(event) {
-      if (isNarrow() || !isTouch()) return
+      if (isNarrow()) return
       event.preventDefault()
       const open = !isOpen(item)
       closeAllPanels(item)
       setOpen(item, open)
+      dismissed = open ? null : item
     })
   })
 
   header.addEventListener('mouseleave', function() {
-    if (!isNarrow()) closeAllPanels()
+    if (isNarrow()) return
+    dismissed = null
+    closeAllPanels()
   })
 
   /* Focus leaving the header closes any open panel. */
