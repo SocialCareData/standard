@@ -83,25 +83,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const link = item.querySelector('.nav-link')
     const toggle = item.querySelector('.nav-toggle')
 
-    /* Chevron: single panel on desktop, independent accordions when narrow. */
-    toggle.addEventListener('click', function() {
+    /* A parent that has a panel is a disclosure control, not a link: the label and
+       the chevron both toggle it and neither navigates, so a click never flashes
+       the panel open on its way to another page. The parent's own page is listed
+       inside the panel instead. One panel at a time on desktop; narrow screens
+       allow several accordions open at once. Without JS the label stays a link. */
+    function toggleItem() {
       const open = !isOpen(item)
       if (!isNarrow()) closeAllPanels(item)
       setOpen(item, open)
       dismissed = open ? null : item
-    })
+    }
 
-    /* On desktop a parent with a panel is a disclosure control, not a link: it
-       toggles rather than navigating, so a click never flashes the panel open on
-       its way to a new page. Its own page is listed inside the panel. Narrow
-       screens (and no-JS) keep the plain link, with the chevron doing the toggling. */
+    toggle.addEventListener('click', toggleItem)
+
     link.addEventListener('click', function(event) {
-      if (isNarrow()) return
       event.preventDefault()
-      const open = !isOpen(item)
-      closeAllPanels(item)
-      setOpen(item, open)
-      dismissed = open ? null : item
+      toggleItem()
     })
   })
 
