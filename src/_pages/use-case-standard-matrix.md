@@ -8,7 +8,7 @@ tags:
 
 To support our [use cases](/use_cases), we have identified different standards. Many of our standards are required to support several use cases. The matrix below shows how our standards support our different use cases. Several of these are included within our wider [Safeguarding Standard](/PUB02_safeguarding_standard), whcich establishes a common data model for describing the professional activity that surrounds a person in children’s and adults’ social care: the organisations and services involved in their care, the professionals acting within those services, the service episodes during which support is delivered, and the life events that may signal changing risk, vulnerability or need.
 
-# Data Structure and Content Standards
+## Data Structure and Content Standards
 
 | Use Case Category | [Use Case](/use_cases) | [Person](/PUB01_person_standard) | [Professional](/PUB02_safeguarding_standard#professional) | [Organisation](/PUB02_safeguarding_standard#organisation) | [Service](/PUB02_safeguarding_standard#service) | [Service Episode](/PUB02_safeguarding_standard#serviceepisode) | [Life Event](/PUB02_safeguarding_standard#lifeevent) | [Assessments](/PUB05_assessments_and_plans_standard#care-needs-assessments) | [Plans](/PUB05_assessments_and_plans_standard#care-plans) | [Placements](/PUB00_placements_standard) |
 | :--- | :--- |  :--- | :--- | :--- | :--- |  :--- | :--- |  :--- | :--- | :--- |
@@ -29,7 +29,7 @@ To support our [use cases](/use_cases), we have identified different standards. 
 | **Business Intelligence and Analytics** | [Social care statutory reporting](/UC05_statutory_reporting) |  |  | Y | Y | Y |  | Y | Y |
 {:.table-bordered .table-compact .table-wide}
 
-# Data Sharing Standards
+## Data Sharing Standards
 
 | Use Case Category | [Use Case](/use_cases) | [API Discoverability](/PUB04_publications_data_sharing_standard#discoverability-standard) | [Authentication](/PUB04_publications_data_sharing_standard#authentication-standard) | [Documentation](/PUB04_publications_data_sharing_standard#documentation-and-versioning-standard) | API Standards (Data exchange) | [Information Governance](/PUB04_publications_data_sharing_standard#appendix-2-sample-identity-and-access-management-iam-standards) |
 | :--- | :--- |  :--- | :--- |  :--- | :--- |  :--- |
