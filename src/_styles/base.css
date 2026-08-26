@@ -306,6 +306,28 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
   text-align: left;
 }
 
+.table-compact {
+  font-size: 0.9rem;
+}
+
+.table-compact th,
+.table-compact td {
+  padding: 0.6rem;
+}
+
+.table-wide {
+  display: table;
+  max-width: none;
+  overflow-x: visible;
+  width: 100%;
+}
+
+.table-wide th,
+.table-wide td {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
 .table-bordered th {
   background-color: var(--highlight-3-background);
   color: var(--highlight-3-color);
