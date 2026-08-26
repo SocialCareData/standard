@@ -31,11 +31,20 @@ import `_lzma`).
 | **slots** | properties | `sh:property` blocks (`sh:minCount`/`sh:maxCount` from `required`/`multivalued`, `sh:pattern`, `sh:minInclusive`/`sh:maxInclusive` from `minimum_value`/`maximum_value`) |
 | **enums** | controlled vocabularies | `sh:in ( … )` of concept IRIs |
 | **types** | custom datatypes | `sh:datatype` (e.g. `nonNegativeInteger` → `xsd:nonNegativeInteger`) |
+| **mixins** | a block of slots shared by several classes | the inherited `sh:property` blocks, repeated in each class's own `NodeShape` |
 
 - **Object references** (e.g. `placementAvailability`, `actualPlacement`) are
   modelled as **class-ranged slots** → `sh:class` + `sh:nodeKind sh:BlankNodeOrIRI`.
 - **URI-valued** scalars use `range: uri` → `sh:nodeKind sh:IRI` (needed when the
   value is an `@id` node rather than a literal).
+- **Mixins** avoid repeating a shared block of slots on every class that carries
+  it (assessments-and-plans does this with `FoundationalInformation`). The
+  generators resolve them, and so does `{% schema_table %}`, which lists a class's
+  inherited slots before its own. One caveat: do **not** narrow an inherited slot
+  with `slot_usage` unless the class also declares that slot itself, or the
+  `slot_usage` block repeats `range:` — `gen-owl` otherwise derives an induced
+  slot that falls back to `default_range` and emits an `owl:allValuesFrom
+  xsd:string` axiom contradicting the slot's real range.
 
 ### Controlled vocabularies: code, label, meaning
 
@@ -76,6 +85,10 @@ gen-doc placements-standard-01.yaml
 
 `--non-closed` produces open shapes and `--suffix Shape` names them
 `…Shape` — both keep the output aligned with any hand-written shapes.
+`-im imports.json` resolves the Person import to the local file. `gen-shacl`
+keeps `--include-imports` (the default) so the shared-object shapes are emitted
+and validate the nested objects; `gen-owl` uses `--no-mergeimports` so the
+Person classes are referenced via `owl:imports` rather than copied in.
 
 ## What `gen-shacl` does NOT generate
 

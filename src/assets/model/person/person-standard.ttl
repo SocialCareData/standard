@@ -20,6 +20,12 @@ p:address a owl:ObjectProperty ;
     skos:definition "Physical addresses where the person can be contacted." ;
     skos:inScheme p:schema .
 
+p:communication a owl:ObjectProperty ;
+    rdfs:label "communication" ;
+    rdfs:range p:Communication ;
+    skos:definition "Professional recording of a person's communication requirements and language proficiencies." ;
+    skos:inScheme p:schema .
+
 p:contact a owl:ObjectProperty ;
     rdfs:label "contact" ;
     rdfs:range p:Contact ;
@@ -30,6 +36,12 @@ p:email a owl:DatatypeProperty ;
     rdfs:label "email" ;
     rdfs:range xsd:string ;
     skos:definition "One or more email addresses." ;
+    skos:inScheme p:schema .
+
+p:language a owl:ObjectProperty ;
+    rdfs:label "language" ;
+    rdfs:range p:Language ;
+    skos:definition "Specific language(s) spoken or understood by the person, optionally annotated with proficiency." ;
     skos:inScheme p:schema .
 
 p:matchedPersonRef a owl:ObjectProperty ;
@@ -67,14 +79,20 @@ p:telephone a owl:DatatypeProperty ;
 p:Person a owl:Class ;
     rdfs:label "Person" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty p:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty p:dateOfBirth ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty p:ethnicityCode ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty p:genderCode ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty p:deceasedDate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty p:dateOfBirth ],
+            owl:onProperty p:aboutMe ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty p:sexCode ],
@@ -83,10 +101,7 @@ p:Person a owl:Class ;
             owl:onProperty p:isDeceased ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty p:ethnicityCode ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty p:name ] ;
+            owl:onProperty p:deceasedDate ] ;
     skos:definition "The top-level record describing an individual. Consolidates the core identity attributes required to distinguish one person from another and to record relationships between individuals. This is the canonical base Person; the two conformance profiles tighten the cardinalities below." ;
     skos:exactMatch p:Person ;
     skos:inScheme p:schema .
@@ -103,6 +118,12 @@ p:USRN a owl:DatatypeProperty ;
     skos:definition "Unique Street Reference Number of the address." ;
     skos:inScheme p:schema .
 
+p:aboutMe a owl:DatatypeProperty ;
+    rdfs:label "aboutMe" ;
+    rdfs:range xsd:string ;
+    skos:definition "Self-reported information written or recorded by the individual (or by someone on their behalf) describing their wants, preferences, and important life details. Aligned with the PRSB \"About Me\" standard." ;
+    skos:inScheme p:schema .
+
 p:addressUse a owl:ObjectProperty ;
     rdfs:label "addressUse" ;
     dct:title "use" ;
@@ -114,6 +135,12 @@ p:city a owl:DatatypeProperty ;
     rdfs:label "city" ;
     rdfs:range xsd:string ;
     skos:definition "City, town, or village." ;
+    skos:inScheme p:schema .
+
+p:communicationNeeds a owl:DatatypeProperty ;
+    rdfs:label "communicationNeeds" ;
+    rdfs:range xsd:string ;
+    skos:definition "Free-text describing professionally recorded communication needs or reasonable adjustments (e.g. BSL interpreter needed, uses communication board)." ;
     skos:inScheme p:schema .
 
 p:contactName a owl:DatatypeProperty ;
@@ -177,6 +204,12 @@ p:isDeceased a owl:DatatypeProperty ;
     skos:definition "Whether the person is deceased." ;
     skos:inScheme p:schema .
 
+p:languageCode a owl:DatatypeProperty ;
+    rdfs:label "languageCode" ;
+    rdfs:range xsd:string ;
+    skos:definition "A code or name representing the language (e.g., 'en', 'eng', 'bsl', 'British Sign Language')." ;
+    skos:inScheme p:schema .
+
 p:line1 a owl:DatatypeProperty ;
     rdfs:label "line1" ;
     rdfs:range xsd:string ;
@@ -206,6 +239,12 @@ p:preferredName a owl:DatatypeProperty ;
     rdfs:label "preferredName" ;
     rdfs:range xsd:string ;
     skos:definition "Any preferred given or middle name used by the person - for example, \"Joe\" where their legal first name is \"Joseph\"." ;
+    skos:inScheme p:schema .
+
+p:proficiencyLevel a owl:DatatypeProperty ;
+    rdfs:label "proficiencyLevel" ;
+    rdfs:range xsd:string ;
+    skos:definition "The level of proficiency or fluency in the language (e.g., 'fluent', 'native', 'basic')." ;
     skos:inScheme p:schema .
 
 p:relationship a owl:ObjectProperty ;
@@ -239,19 +278,7 @@ p:Address a owl:Class ;
             owl:onProperty p:line2 ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty p:UPRN ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty p:city ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty p:USRN ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
-                                owl:onDatatype xsd:string ;
-                                owl:withRestrictions ( [ xsd:pattern "^[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}$" ] ) ] ) ] ;
-            owl:onProperty p:postcode ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty p:addressUse ],
@@ -260,9 +287,30 @@ p:Address a owl:Class ;
             owl:onProperty p:postcode ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty p:line1 ] ;
+            owl:onProperty p:city ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty p:UPRN ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty p:line1 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}$" ] ) ] ) ] ;
+            owl:onProperty p:postcode ] ;
     skos:definition "A postal address for the person. Aligned with FHIR Address. UPRN and USRN support property- and street-level disambiguation." ;
     skos:exactMatch p:Address ;
+    skos:inScheme p:schema .
+
+p:Communication a owl:Class ;
+    rdfs:label "Communication" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty p:communicationNeeds ] ;
+    skos:definition "Professional recording of a person's communication requirements and language proficiencies." ;
+    skos:exactMatch p:Communication ;
     skos:inScheme p:schema .
 
 p:Contact a owl:Class ;
@@ -274,20 +322,32 @@ p:Contact a owl:Class ;
     skos:exactMatch p:Contact ;
     skos:inScheme p:schema .
 
+p:Language a owl:Class ;
+    rdfs:label "Language" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty p:proficiencyLevel ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty p:languageCode ] ;
+    skos:definition "A specific language the person is proficient in, including proficiency level." ;
+    skos:exactMatch p:Language ;
+    skos:inScheme p:schema .
+
 p:Name a owl:Class ;
     rdfs:label "Name" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty p:givenName ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty p:preferredName ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty p:familyName ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty p:nameUse ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty p:givenName ] ;
+            owl:onProperty p:familyName ] ;
     skos:definition "Container for a person's name parts, aligned with FHIR HumanName. A person may have multiple names with different uses." ;
     skos:exactMatch p:Name ;
     skos:inScheme p:schema .
@@ -1187,6 +1247,9 @@ p:postcode a owl:DatatypeProperty ;
 p:PartialDate a owl:Class ;
     rdfs:label "PartialDate" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty p:date ],
+        [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
                                 owl:onDatatype xsd:string ;
@@ -1194,10 +1257,7 @@ p:PartialDate a owl:Class ;
             owl:onProperty p:accuracyIndicator ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty p:accuracyIndicator ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty p:date ] ;
+            owl:onProperty p:accuracyIndicator ] ;
     skos:definition "Container for a date that may not be fully known or precise, extended with an accuracy indicator. Used for dates of birth and dates of death." ;
     skos:exactMatch p:PartialDate ;
     skos:inScheme p:schema .
@@ -1206,10 +1266,10 @@ p:Identifier a owl:Class ;
     rdfs:label "Identifier" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty p:system ],
+            owl:onProperty p:value ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty p:value ] ;
+            owl:onProperty p:system ] ;
     skos:definition "A single identifier for a person, comprising the value and the system in whose namespace the value is unique. Aligned with FHIR Identifier and the NHS PDS UNIQUE_REFERENCE definition." ;
     skos:exactMatch p:Identifier ;
     skos:inScheme p:schema .

@@ -57,14 +57,40 @@ function mergeDefs (target, src) {
 }
 
 /**
+ * Read an `imports.json` importmap sitting next to a schema, mapping a LinkML
+ * `imports:` entry (typically a schema `id` IRI) to a local file path, relative
+ * to `dir`. Mirrors LinkML's own `--importmap` mechanism so a schema that
+ * imports another standard by its canonical id (for a clean `owl:imports`) still
+ * resolves to the local YAML here. Returns {} when there is no importmap.
+ */
+function loadImportMap (dir) {
+  const p = path.join(dir, 'imports.json')
+  try {
+    if (fs.existsSync(p)) return JSON.parse(fs.readFileSync(p, 'utf8')) || {}
+  } catch (_) { /* malformed importmap → behave as if absent */ }
+  return {}
+}
+
+/**
  * Resolve a LinkML `imports:` entry to a local YAML file, or null when it is not
- * a local file (e.g. `linkml:types`, a CURIE, or an absolute URL). Tries the
- * entry as-is and with `.yaml` / `.yml` appended, relative to `dir`.
+ * a local file (e.g. `linkml:types`). A cross-standard import written as a
+ * schema id IRI is resolved via an `imports.json` importmap in `dir`. Otherwise
+ * the entry is treated as a path (as-is and with `.yaml` / `.yml` appended)
+ * relative to `dir`.
  */
 function resolveImport (dir, entry) {
-  if (typeof entry !== 'string' || entry.includes(':')) return null
+  if (typeof entry !== 'string') return null
+
+  // A CURIE / IRI import (contains ':') is only resolvable via the importmap.
+  let candidate = entry
+  if (entry.includes(':')) {
+    const mapped = loadImportMap(dir)[entry]
+    if (!mapped) return null
+    candidate = mapped
+  }
+
   for (const ext of ['', '.yaml', '.yml']) {
-    const p = path.resolve(dir, entry + ext)
+    const p = path.resolve(dir, candidate + ext)
     if (fs.existsSync(p) && fs.statSync(p).isFile()) return p
   }
   return null
@@ -114,23 +140,65 @@ const isEnum = (model, name) => !!getEnum(model, name)
 
 /**
  * The effective definition of a slot as used by a class: the global slot merged
- * with any class-level `slot_usage` / `attributes` override. Our model does not
- * currently use overrides, but honouring them keeps the tool correct if it does.
+ * with the `slot_usage` / `attributes` overrides of the class's `mixins:` (in
+ * declaration order) and then of the class itself, so the most specific
+ * definition wins — the class overrides its mixins, which override the global
+ * slot. This is how a class narrows an inherited slot (e.g. the
+ * assessments-and-plans classes give the shared `status` and `review` slots
+ * wording specific to an assessment or to a plan).
  */
 function resolveSlot (model, className, slotName) {
-  const cls = getClass(model, className) || {}
   const base = getSlot(model, slotName) || {}
-  const attr = (cls.attributes || {})[slotName] || {}
-  const usage = (cls.slot_usage || {})[slotName] || {}
-  return Object.assign({ name: slotName }, base, attr, usage)
+  return Object.assign({ name: slotName }, base, ...classOverrides(model, className, slotName))
 }
 
-/** Ordered slot names of a class (declared `slots:` then inline `attributes:`). */
-function classSlotNames (model, className) {
+/**
+ * The `attributes` / `slot_usage` overrides for `slotName` contributed by a class
+ * and its mixins, ordered least- to most-specific (mixins first, the class last).
+ *
+ * @param {Set<string>} [seen]  Guards against a mixin cycle.
+ */
+function classOverrides (model, className, slotName, seen = new Set()) {
+  const cls = getClass(model, className)
+  if (!cls || seen.has(className)) return []
+  seen.add(className)
+
+  const overrides = []
+  for (const mixin of Array.isArray(cls.mixins) ? cls.mixins : []) {
+    overrides.push(...classOverrides(model, mixin, slotName, seen))
+  }
+  if ((cls.attributes || {})[slotName]) overrides.push(cls.attributes[slotName])
+  if ((cls.slot_usage || {})[slotName]) overrides.push(cls.slot_usage[slotName])
+  return overrides
+}
+
+/**
+ * Ordered slot names of a class: the slots it inherits from its `mixins:` first
+ * (in the order the mixins are declared, each mixin's own mixins resolved first),
+ * then the class's declared `slots:`, then its inline `attributes:`.
+ *
+ * A model may factor slots shared by several classes into a mixin (e.g. the
+ * assessments-and-plans `FoundationalInformation`) rather than repeating them on
+ * every class. `gen-shacl` / `gen-owl` resolve those inherited slots, so the
+ * tables must too — otherwise a documented property is simply missing from the
+ * class it belongs to. A slot reached more than once (via two mixins, or via a
+ * mixin and the class itself) is listed once, at its first position.
+ *
+ * @param {Set<string>} [seen]  Guards against a mixin cycle.
+ */
+function classSlotNames (model, className, seen = new Set()) {
   const cls = getClass(model, className) || {}
+  if (seen.has(className)) return []
+  seen.add(className)
+
   const names = []
-  if (Array.isArray(cls.slots)) names.push(...cls.slots)
-  if (cls.attributes) names.push(...Object.keys(cls.attributes))
+  const add = name => { if (!names.includes(name)) names.push(name) }
+
+  for (const mixin of Array.isArray(cls.mixins) ? cls.mixins : []) {
+    classSlotNames(model, mixin, seen).forEach(add)
+  }
+  if (Array.isArray(cls.slots)) cls.slots.forEach(add)
+  if (cls.attributes) Object.keys(cls.attributes).forEach(add)
   return names
 }
 

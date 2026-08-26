@@ -1,0 +1,650 @@
+id: https://ns.socialcaredata.io/assessments-and-plans/schema
+name: assessments-and-plans
+title: Standards for Care Needs Assessments and Care Plans Data Model
+description: >-
+  A single LinkML data model for the Care Needs Assessments and Care Plans Standard (PUB05).
+  This standard defines the shared, back-end fields of information for assessments and care plans.
+license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+version: 1.0.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  ap: https://ns.socialcaredata.io/assessments-and-plans/
+  p: https://ns.socialcaredata.io/person/
+  apc: https://ns.socialcaredata.io/assessments-and-plans/care-outcome-type#
+  act: https://ns.socialcaredata.io/assessments-and-plans/care-actor-type#
+  at: https://ns.socialcaredata.io/assessments-and-plans/answer-type#
+  qc: https://ns.socialcaredata.io/assessments-and-plans/question-category#
+  cds: https://ns.socialcaredata.io/assessments-and-plans/care-document-status#
+  sq: https://ns.socialcaredata.io/assessments-and-plans/statutory-question-id#
+  fs: https://ns.socialcaredata.io/assessments-and-plans/funding-status#
+  es: https://ns.socialcaredata.io/assessments-and-plans/eligibility-status#
+  skos: http://www.w3.org/2004/02/skos/core#
+  dct: http://purl.org/dc/terms/
+  xsd: http://www.w3.org/2001/XMLSchema#
+default_prefix: ap
+default_range: string
+imports:
+  - linkml:types
+  - https://ns.socialcaredata.io/person/schema
+
+# ---------------------------------------------------------------------------
+# Classes
+# ---------------------------------------------------------------------------
+classes:
+
+  FoundationalInformation:
+    class_uri: ap:FoundationalInformation
+    mixin: true
+    description: >-
+      Information that is relevant across both assessments and plans.
+    slots:
+      - apIdentifier
+      - personId
+      - professionalId
+      - dateCompleted
+      - capacityToCompleteAssessment
+      - advocateRequired
+      - consentToInformationSharing
+      - review
+      - serviceEpisodeId
+
+  CareNeedsAssessment:
+    class_uri: ap:CareNeedsAssessment
+    mixins:
+      - FoundationalInformation
+    description: >-
+      A Care Needs Assessment record, completed when an adult contacts or is referred to a local authority's social services team.
+    slots:
+      - planId
+      - status
+      - assessmentQuestion
+
+  CarePlan:
+    class_uri: ap:CarePlan
+    mixins:
+      - FoundationalInformation
+    description: >-
+      A Care Plan record, created immediately after an assessment if the person is found to be eligible.
+    slots:
+      - assessmentId
+      - status
+      - careComponent
+
+  Review:
+    class_uri: ap:Review
+    description: >-
+      Review information associated with an assessment or care plan.
+    slots:
+      - isReview
+      - previousId
+
+  AssessmentQuestion:
+    class_uri: ap:AssessmentQuestion
+    description: >-
+      A generic Question-and-Answer model used to represent both statutory Care Act questions and local, personalised fields.
+    slots:
+      - questionId
+      - category
+      - questionText
+      - answer
+      - answerType
+      - required
+
+  CareComponent:
+    class_uri: ap:CareComponent
+    description: >-
+      A specific component of a Care Plan, capturing who does what, when, and to achieve which outcomes.
+    slots:
+      - actor
+      - time
+      - activity
+
+  CareActor:
+    class_uri: ap:CareActor
+    description: >-
+      The actor performing a care component.
+    slots:
+      - actorType
+      - actorId
+
+  CareTiming:
+    class_uri: ap:CareTiming
+    description: >-
+      The schedule and timing information of a care component.
+    slots:
+      - frequency
+      - startDateTime
+      - endDateTime
+
+  CareActivity:
+    class_uri: ap:CareActivity
+    description: >-
+      The description and details of the care component activity.
+    slots:
+      - activityDescription
+      - outcome
+      - directPayment
+
+
+# ---------------------------------------------------------------------------
+# Slots
+# ---------------------------------------------------------------------------
+slots:
+
+  # --- FoundationalInformation / Shared ---
+  # Named apIdentifier rather than identifier so it does not override the
+  # Person Standard's imported `identifier` slot.
+  apIdentifier:
+    slot_uri: ap:identifier
+    title: identifier
+    range: Identifier
+    required: true
+    multivalued: false
+    description: Identifier for this assessment / plan.
+  personId:
+    slot_uri: ap:personId
+    range: Identifier
+    required: true
+    multivalued: false
+    description: Identifier for the subject person.
+  serviceEpisodeId:
+    slot_uri: ap:serviceEpisodeId
+    range: Identifier
+    required: false
+    multivalued: true
+    description: Identifier for the safeguarding or care service episode during which this assessment / plan was completed.
+  professionalId:
+    slot_uri: ap:professionalId
+    range: Identifier
+    required: true
+    multivalued: false
+    description: Identifier for the professional that authored the assessment/plan. Note that we don't need a serviceID, because you can find the service through the professional.
+  dateCompleted:
+    slot_uri: ap:dateCompleted
+    range: datetime
+    required: true
+    multivalued: false
+    description: Date and time that the assessment / plan was completed.
+  capacityToCompleteAssessment:
+    slot_uri: ap:capacityToCompleteAssessment
+    range: boolean
+    required: true
+    multivalued: false
+    description: Does the person have the mental and physical capacity to complete this assessment / plan?
+  advocateRequired:
+    slot_uri: ap:advocateRequired
+    range: boolean
+    required: true
+    multivalued: false
+    description: Does the person require an advocate to complete this assessment / plan?
+  consentToInformationSharing:
+    slot_uri: ap:consentToInformationSharing
+    range: boolean
+    required: true
+    multivalued: false
+    description: Does the person consent to information sharing?
+  review:
+    slot_uri: ap:review
+    range: Review
+    required: true
+    multivalued: true
+    description: List of reviews.
+
+  # --- Review ---
+  isReview:
+    slot_uri: ap:isReview
+    range: boolean
+    required: true
+    multivalued: false
+    description: Whether this is a review of a previous assessment / plan or not.
+  previousId:
+    slot_uri: ap:previousId
+    range: Identifier
+    required: false
+    multivalued: true
+    description: A link to the previous assessment / plan that is being reviewed.
+
+  # --- CareNeedsAssessment ---
+  planId:
+    slot_uri: ap:planId
+    range: Identifier
+    required: false
+    multivalued: false
+    description: Any care plan linked to this assessment. Quick signpost that a) a plan was made (ie the person was determined to be eligible) and b) where the plan is (so you don't need to search for it).
+  status:
+    slot_uri: ap:status
+    range: DocumentStatus
+    required: true
+    multivalued: false
+    description: Status of the document. Lifted from FHIR CarePlan status.
+  assessmentQuestion:
+    slot_uri: ap:assessmentQuestion
+    range: AssessmentQuestion
+    required: true
+    multivalued: true
+    description: The set of assessment questions and answers.
+
+  # --- AssessmentQuestion ---
+  questionId:
+    slot_uri: ap:questionId
+    range: string
+    required: false
+    multivalued: false
+    description: An ID for the question. For statutory questions, this should conform to the dictionary of statutory question IDs; for personalised, non statutory questions, this can be anything or left blank.
+  category:
+    slot_uri: ap:category
+    range: QuestionCategory
+    required: true
+    multivalued: false
+    description: The domain/category of the question.
+  questionText:
+    slot_uri: ap:questionText
+    range: string
+    required: true
+    multivalued: false
+    description: The exact wording of the question as it appears on the local authority's form.
+  answer:
+    slot_uri: ap:answer
+    range: string
+    required: true
+    multivalued: true
+    description: The answer to the question as measured in the assessment.
+  answerType:
+    slot_uri: ap:answerType
+    range: AnswerType
+    required: true
+    multivalued: false
+    description: Indicates how the answer should be parsed (e.g., String, Boolean, Date, Number, Enum). Ensures data like dates or booleans aren't trapped as unparsable text.
+  required:
+    slot_uri: ap:required
+    range: boolean
+    required: true
+    multivalued: false
+    description: Whether this question was mandatory on the local authority’s assessment. Should always be True for statutory fields.
+
+  # --- CarePlan ---
+  assessmentId:
+    slot_uri: ap:assessmentId
+    range: Identifier
+    required: true
+    multivalued: false
+    description: Assessment that led to this plan.
+  careComponent:
+    slot_uri: ap:careComponent
+    range: CareComponent
+    required: true
+    multivalued: true
+    description: Components of the care package.
+
+  # --- CareComponent ---
+  actor:
+    slot_uri: ap:actor
+    range: CareActor
+    required: true
+    multivalued: true
+    description: The actors performing this component of the plan.
+  time:
+    slot_uri: ap:time
+    range: CareTiming
+    required: true
+    multivalued: false
+    description: The schedule and timing information of this component of the plan.
+  activity:
+    slot_uri: ap:activity
+    range: CareActivity
+    required: true
+    multivalued: false
+    description: The activity details of this component of the plan.
+
+  # --- CareActor ---
+  actorType:
+    slot_uri: ap:actorType
+    range: CareActorType
+    required: true
+    multivalued: false
+    description: The type of person performing the component of the plan.
+  actorId:
+    slot_uri: ap:actorId
+    range: Identifier
+    required: true
+    multivalued: false
+    description: The ID of the person performing the item of the plan (Person ID, professional ID, or service ID).
+
+  # --- CareTiming ---
+  frequency:
+    slot_uri: ap:frequency
+    range: string
+    required: true
+    multivalued: false
+    description: The frequency the component of the plan is performed, expressed using FHIR Timing or similar.
+  startDateTime:
+    slot_uri: ap:startDateTime
+    range: datetime
+    required: true
+    multivalued: false
+    description: The first date the component of the plan was (scheduled to be) performed.
+  endDateTime:
+    slot_uri: ap:endDateTime
+    range: datetime
+    required: false
+    multivalued: false
+    description: The last date the component of the plan was performed before cancellation.
+
+  # --- CareActivity ---
+  activityDescription:
+    slot_uri: ap:activityDescription
+    range: string
+    required: true
+    multivalued: false
+    description: Text description of the care component.
+  outcome:
+    slot_uri: ap:outcome
+    range: CareActOutcome
+    required: false
+    multivalued: false
+    description: Care Act outcome that this care component is aiming to help the subject person achieve.
+  directPayment:
+    slot_uri: ap:directPayment
+    range: boolean
+    required: false
+    multivalued: false
+    description: Flag whether this component is paid via direct payment.
+
+
+# ---------------------------------------------------------------------------
+# Enums (controlled vocabularies)
+# ---------------------------------------------------------------------------
+enums:
+
+  DocumentStatus:
+    enum_uri: ap:care-document-status
+    title: Care Document Status
+    description: Status of the care plan or care needs assessment document. Lifted from FHIR CarePlan status.
+    permissible_values:
+      draft:
+        title: Draft
+        meaning: cds:draft
+        description: The plan is in development and not yet ready to be acted upon.
+      active:
+        title: Active
+        meaning: cds:active
+        description: The plan is complete, approved, and currently being acted upon.
+      "on-hold":
+        title: On-Hold
+        meaning: cds:on-hold
+        description: Actions on the plan are temporarily suspended.
+      "entered-in-error":
+        title: Entered in Error
+        meaning: cds:entered-in-error
+        description: The plan was created incorrectly and should be disregarded.
+      ended:
+        title: Ended
+        meaning: cds:ended
+        description: "The plan was active but has now been completed or cancelled prior to normal end."
+      completed:
+        title: Completed
+        meaning: cds:completed
+        description: The plan has been successfully executed and all actions are complete.
+      revoked:
+        title: Revoked
+        meaning: cds:revoked
+        description: The plan has been explicitly withdrawn and is no longer valid.
+      unknown:
+        title: Unknown
+        meaning: cds:unknown
+        description: The status of the plan cannot be determined.
+
+  QuestionCategory:
+    enum_uri: ap:question-category
+    title: Question Category
+    description: "Categories/domains under which Care Act assessments and custom local authority questions sit."
+    permissible_values:
+      PersonalContext:
+        title: Personal Context
+        meaning: qc:PersonalContext
+      Health:
+        title: Health
+        meaning: qc:Health
+      Housing:
+        title: Housing
+        meaning: qc:Housing
+      Finance:
+        title: Finance
+        meaning: qc:Finance
+      "Communication needs":
+        title: Communication Needs
+        meaning: qc:CommunicationNeeds
+      CA.nutrition:
+        title: "Care Act Outcome: Managing and maintaining nutrition"
+        meaning: qc:CANutrition
+      CA.hygiene:
+        title: "Care Act Outcome: Maintaining personal hygiene"
+        meaning: qc:CAHygiene
+      CA.toilet:
+        title: "Care Act Outcome: Managing toilet needs"
+        meaning: qc:CAToilet
+      CA.clothing:
+        title: "Care Act Outcome: Being appropriately clothed"
+        meaning: qc:CAClothing
+      CA.homeSafety:
+        title: "Care Act Outcome: Being able to make use of the home safely"
+        meaning: qc:CAHomeSafety
+      CA.habitableHome:
+        title: "Care Act Outcome: Maintaining a habitable home environment"
+        meaning: qc:CAHabitableHome
+      CA.maintainingRelationships:
+        title: "Care Act Outcome: Developing and maintaining family or other personal relationships"
+        meaning: qc:CAMaintainingRelationships
+      CA.WTEV:
+        title: "Care Act Outcome: Accessing and engaging in work, training, education, or volunteering"
+        meaning: qc:CAWTEV
+      CA.communityServices:
+        title: "Care Act Outcome: Making use of necessary facilities or services in the local community"
+        meaning: qc:CACommunityServices
+      CA.responsibilityForOthers:
+        title: "Care Act Outcome: Carrying out any caring responsibilities for others"
+        meaning: qc:CAResponsibilityForOthers
+      Eligibility:
+        title: Eligibility
+        meaning: qc:Eligibility
+      Emergencies:
+        title: Emergencies
+        meaning: qc:Emergencies
+      Other:
+        title: Other
+        meaning: qc:Other
+
+  AnswerType:
+    enum_uri: ap:answer-type
+    title: Answer Type
+    description: Indicates how the answer to a question should be parsed and represented.
+    permissible_values:
+      String:
+        title: String
+        meaning: at:String
+        description: Free-form text value.
+      Boolean:
+        title: Boolean
+        meaning: at:Boolean
+        description: True/False value.
+      Date:
+        title: Date
+        meaning: at:Date
+        description: ISO date-time or date value.
+      Number:
+        title: Number
+        meaning: at:Number
+        description: Numeric value.
+      Enum:
+        title: Enum
+        meaning: at:Enum
+        description: Value from a controlled vocabulary.
+
+  CareActorType:
+    enum_uri: ap:care-actor-type
+    title: Care Actor Type
+    description: The type of actor delivering a care component in a plan.
+    permissible_values:
+      Self:
+        title: Self
+        meaning: act:Self
+        description: "The subject person themselves performing the activity."
+      Family:
+        title: Family
+        meaning: act:Family
+        description: A family member providing informal care.
+      Friend:
+        title: Friend
+        meaning: act:Friend
+        description: A friend providing informal care.
+      Community:
+        title: Community
+        meaning: act:Community
+        description: Community-led or voluntary network support.
+      "Other unpaid carer":
+        title: Other Unpaid Carer
+        meaning: act:OtherUnpaidCarer
+        description: Any other informal, unpaid caregiver.
+      "Professional services":
+        title: Professional Services
+        meaning: act:ProfessionalServices
+        description: A formal, paid professional or commissioned service provider.
+
+  CareActOutcome:
+    enum_uri: ap:care-act-outcome
+    title: Care Act Outcome
+    description: The 10 outcomes defined under the Care Act 2014 that a Care Plan component can help a person to achieve.
+    permissible_values:
+      CA-NUTRITION:
+        title: Managing and maintaining nutrition
+        meaning: apc:CANutrition
+      CA-HYGIENE:
+        title: Maintaining personal hygiene
+        meaning: apc:CAHygiene
+      CA-TOILET:
+        title: Managing toilet needs
+        meaning: apc:CAToilet
+      CA-CLOTHING:
+        title: Being appropriately clothed
+        meaning: apc:CAClothing
+      CA-HOMESAFETY:
+        title: Being able to make use of the home safely
+        meaning: apc:CAHomeSafety
+      CA-HABITABLEHOME:
+        title: Maintaining a habitable home environment
+        meaning: apc:CAHabitableHome
+      CA-RELATIONSHIPS:
+        title: Developing and maintaining family or other personal relationships
+        meaning: apc:CAMaintainingRelationships
+      CA-WTEV:
+        title: Accessing and engaging in work, training, education, or volunteering
+        meaning: apc:CAWTEV
+      CA-COMMUNITY:
+        title: Making use of necessary facilities or services in the local community
+        meaning: apc:CACommunityServices
+      CA-CARINGOTHERS:
+        title: Carrying out any caring responsibilities for others
+        meaning: apc:CAResponsibilityForOthers
+
+  StatutoryQuestionId:
+    enum_uri: ap:statutory-question-id
+    title: Statutory Question ID
+    description: "The official dictionary/vocabulary of statutory question codes mandated by the Care Act 2014 or common assessment guidelines."
+    permissible_values:
+      STAT-HEALTH-01:
+        title: STAT-HEALTH-01
+        meaning: sq:STAT-HEALTH-01
+        description: "Does the person have previous or ongoing health conditions that may affect their day-to-day life? (Expected answerType: Boolean)"
+      STAT-HOUSING-01:
+        title: STAT-HOUSING-01
+        meaning: sq:STAT-HOUSING-01
+        description: "Does the person live alone? (Expected answerType: Boolean)"
+      STAT-FINANCE-01:
+        title: STAT-FINANCE-01
+        meaning: sq:STAT-FINANCE-01
+        description: "What is the client’s (potential) funding status? (Expected answerType: Enum matching ClientFundingStatus)"
+      CA-NUTRITION-01:
+        title: CA-NUTRITION-01
+        meaning: sq:CA-NUTRITION-01
+        description: "Care act: Managing and maintaining nutrition. Does the person currently achieve this outcome? (Expected answerType: any)"
+      CA-HYGIENE-01:
+        title: CA-HYGIENE-01
+        meaning: sq:CA-HYGIENE-01
+        description: "Care act: Maintaining personal hygiene. Does the person currently achieve this outcome? (Expected answerType: any)"
+      CA-TOILET-01:
+        title: CA-TOILET-01
+        meaning: sq:CA-TOILET-01
+        description: "Care act: Managing toilet needs Does the person currently achieve this outcome? (Expected answerType: any)"
+      CA-CLOTHING-01:
+        title: CA-CLOTHING-01
+        meaning: sq:CA-CLOTHING-01
+        description: "Care act: Being appropriately clothed. Does the person currently achieve this outcome? (Expected answerType: any)"
+      CA-HOMESAFETY-01:
+        title: CA-HOMESAFETY-01
+        meaning: sq:CA-HOMESAFETY-01
+        description: "Care act: Being able to make use of the home safely. Does the person currently achieve this outcome? (Expected answerType: any)"
+      CA-HABITABLEHOME-01:
+        title: CA-HABITABLEHOME-01
+        meaning: sq:CA-HABITABLEHOME-01
+        description: "Care act: Maintaining a habitable home environment. Does the person currently achieve this outcome? (Expected answerType: any)"
+      CA-RELATIONSHIPS-01:
+        title: CA-RELATIONSHIPS-01
+        meaning: sq:CA-RELATIONSHIPS-01
+        description: "Care act: Developing and maintaining family or other personal relationships. Does the person currently achieve this outcome? (Expected answerType: any)"
+      CA-WTEV-01:
+        title: CA-WTEV-01
+        meaning: sq:CA-WTEV-01
+        description: "Care act: Accessing and engaging in work, training, education, or volunteering. Does the person currently achieve this outcome? (Expected answerType: any)"
+      CA-COMMUNITY-01:
+        title: CA-COMMUNITY-01
+        meaning: sq:CA-COMMUNITY-01
+        description: "Care act: Making use of necessary facilities or services in the local community, including public transport, and recreational facilities or services. Does the person currently achieve this outcome? (Expected answerType: any)"
+      CA-CARINGOTHERS-01:
+        title: CA-CARINGOTHERS-01
+        meaning: sq:CA-CARINGOTHERS-01
+        description: "Care act: Carrying out any caring responsibilities for others. Does the person currently achieve this outcome? (Expected answerType: any)"
+      CA-ELIGIBILITY-01:
+        title: CA-ELIGIBILITY-01
+        meaning: sq:CA-ELIGIBILITY-01
+        description: "Have eligible needs been identified, according to the Care Act 2014? (Expected answerType: Enum matching CareActEligibilityStatus)"
+
+  ClientFundingStatus:
+    enum_uri: ap:client-funding-status
+    title: Client Funding Status
+    description: "Vocabulary for potential client funding status under STAT-FINANCE-01."
+    permissible_values:
+      Fully client funded:
+        title: "Fully client funded"
+        meaning: fs:fully-client-funded
+        description: "The client is responsible for paying the full cost of their care."
+      Joint client and social care funded:
+        title: "Joint client and social care funded"
+        meaning: fs:joint-client-and-social-care-funded
+        description: "The cost of care is shared between the client and social care services."
+      Fully social care funded:
+        title: "Fully social care funded"
+        meaning: fs:fully-social-care-funded
+        description: "The full cost of care is funded by social care services."
+      Unknown:
+        title: "Unknown"
+        meaning: fs:unknown
+        description: "The funding status of the client is currently unknown."
+
+  CareActEligibilityStatus:
+    enum_uri: ap:care-act-eligibility-status
+    title: Care Act Eligibility Status
+    description: "Vocabulary for Care Act 2014 eligibility assessment under CA-ELIGIBILITY-01."
+    permissible_values:
+      Eligible needs identified:
+        title: "Eligible needs identified"
+        meaning: es:eligible-needs-identified
+        description: "Eligible needs have been identified according to the Care Act 2014."
+      Non-eligible needs identified:
+        title: "Non-eligible needs identified"
+        meaning: es:non-eligible-needs-identified
+        description: "Needs have been identified, but they are not eligible for funding under the Care Act 2014."
+      No needs identified:
+        title: "No needs identified"
+        meaning: es:no-needs-identified
+        description: "No social care needs were identified during the assessment."

@@ -11,6 +11,14 @@ tags:
 reference: PUB01
 status: draft
 data_model: src/assets/model/person/person-standard.yaml
+non_technical_summary: |
+  The core objective of our work is to facilitate the sharing of information about a person in care (whether a child or an adult) between agencies and organisations across the country (multi-agency information sharing). To do so, each of these agencies and organisations must be speaking the same "language" talking about the person, communicating with each other in the same way. This requires a common data model for identifying and describing a person across data systems, which we have designed here in our **Person Standard**.
+
+  The Person Standard provides the common set of fields -- the person's name, their date of birth, their address, et cetera -- that can be used to describe a person and distinguish them from others within a database. If different social care databases store information about people in this standard schema, this will support interoperability between them.
+
+  In turn, this enables search-and-response. The person standard can be used as a search pattern: "I want to know about John Doe, who was born on the 1st of January 2000 and currently lives in Kingston-upon-Thames" can be encoded in a machine-readable package that can be sent from my local authority to the 316 others in England to find out who else knows safeguarding information about the person of interest.
+
+  The person standard has now grown beyond the original search use case. It also encompasses statutory information that must be recorded (especially for Adult Social Care) like ethnicity, as well as links from a person to their GP (or other primary contact professional) and to other people related to them like their family or friends.
 ---
 
 <a href="/PUB01_person_standard_table" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
@@ -75,6 +83,12 @@ The top-level record describing an individual. Consolidates the core identity at
 
 <span id="person-ethnicityCode">ethnicityCode</span>
 : The person's stated ethnicity, using the ONS 18+1 categories from the 2021 census. Statutorily required in adult social care; optional elsewhere. See the [Ethnicity Code Vocabulary](#ethnicity-code-vocabulary).
+
+<span id="person-aboutMe">aboutMe</span>
+: A reference pointing to the person's "About Me" profile (as per the [PRSB AboutMe Standard](https://theprsb.org/standards/aboutme/)). Optional. See [Identifier](#identifier) entity for the structure.
+
+<span id="person-communication">communication</span>
+: The person's communication requirements and language proficiencies. Multi-valued. Optional. See [Communication](#communication).
 
 <span id="person-relatedPerson">relatedPerson</span>
 : References to other people related to this person, with the kind of relationship. Multi-valued. See [PersonRelationship](#personrelationship).
@@ -329,6 +343,60 @@ Container for a date that may not be fully known or precise, extended with an ac
   "@type": "PartialDate",
   "date": "2017-09-01",
   "accuracyIndicator": "AAA"
+}
+{% endhighlight %}
+</div>
+
+
+### Communication
+
+The record of a person's communication requirements and language proficiencies.
+
+#### Properties
+
+<span id="communication-communicationNeeds">communicationNeeds</span>
+: Free-text describing recorded communication needs or reasonable adjustments (e.g. BSL interpreter needed, uses communication board). Optional. _String_.
+
+<span id="communication-language">language</span>
+: Specific language(s) spoken or understood by the person, optionally annotated with proficiency. Multi-valued. Optional. See [Language](#language).
+
+#### Example
+
+<div class="example">
+  <h5 id="example-communication">Example - Communication</h5>
+{% highlight json %}
+{
+  "@type": "Communication",
+  "communicationNeeds": "Requires British Sign Language (BSL) interpreter for assessments.",
+  "language": [
+    { "@type": "Language", "languageCode": "bsl", "proficiencyLevel": "native" }
+  ]
+}
+{% endhighlight %}
+</div>
+
+
+### Language
+
+A specific language the person is proficient in, including proficiency level.
+
+#### Properties
+
+<span id="language-languageCode">languageCode</span>
+: A code or name representing the language (e.g., 'en', 'eng', 'bsl', 'British Sign Language'). _String_.
+
+<span id="language-proficiencyLevel">proficiencyLevel</span>
+: The level of proficiency or fluency in the language (e.g., 'fluent', 'native', 'basic'). Optional. _String_.
+
+#### Example
+
+<div class="example">
+  <h5 id="example-language">Example - Language</h5>
+{% highlight json %}
+{
+  "@type": "Language",
+  "languageCode": "en",
+  "proficiencyLevel": "fluent"
 }
 {% endhighlight %}
 </div>

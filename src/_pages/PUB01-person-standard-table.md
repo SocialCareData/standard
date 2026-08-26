@@ -40,6 +40,14 @@ data_model: src/assets/model/person/person-subject-of-care.yaml
 
 {% schema_table page.data_model PartialDate %}
 
+### Communication
+
+{% schema_table page.data_model Communication %}
+
+### Language
+
+{% schema_table page.data_model Language %}
+
 ## Taxonomies
 
 ### Name Use Code Taxonomy
