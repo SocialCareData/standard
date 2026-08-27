@@ -63,6 +63,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (item !== dismissed) setOpen(item, true)
       return
     }
+
+    /* Only another nav control dismisses an open panel. */
+    if (item || event.target.closest('.home')) closeAllPanels()
   }
   header.addEventListener('mouseover', reveal)
   header.addEventListener('focusin', reveal)
