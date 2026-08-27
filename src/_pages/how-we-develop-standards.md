@@ -38,7 +38,7 @@ After implementation, we continue to maintain and improve each standard. We revi
 
 ## Get involved
 
-_Contribute to our standards_
+### Contribute to our standards
 Our standards are shaped by the people who use them. Practitioners, commissioners, suppliers, researchers and people with lived experience can contribute through working groups, consultations and open feedback opportunities. Find out more about how to [contribute to our standards](contribute_to_the_standards)
 
 _Become a pilot site_
