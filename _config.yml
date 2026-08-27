@@ -54,12 +54,12 @@ nav:
         description: Upcoming events across the programme.
   - title: About
     children:
+      - title: Updates
+        url: /updates
+        description: Latest news and updates from the programme.
       - title: Related programmes
         url: /related_programmes
         description: Adjacent standards work in health, education and local government.
-  - title: Updates
-    url: /updates
-    children: []
 pagefind: true
 check_internal_links: true
 check_external_links: true

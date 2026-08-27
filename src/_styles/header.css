@@ -101,16 +101,6 @@
   cursor: pointer;
 }
 
-.header .nav-search {
-  border-left: 1px solid var(--nav-panel-rule);
-  margin-left: .8rem;
-  padding-left: .8rem;
-}
-
-.header .nav-search:hover {
-  background-color: transparent;
-}
-
 /* Panel */
 .header .nav-panel {
   background: var(--nav-panel-background);
@@ -219,12 +209,6 @@
   .header:not(.nojs) .nav-toggle svg {
     height: 1rem;
     width: 1rem;
-  }
-
-  .header:not(.nojs) .nav-search {
-    border-left: 0;
-    margin-left: 0;
-    padding-left: 0;
   }
 
   .header:not(.nojs) .search-button {
