@@ -52,9 +52,10 @@ An independent steering group provides overall project governance, leadership an
 
 For more information about the programme overall, or to join one of our [standards working groups](/standards_working_groups), please contact the programme team by email at <a href="mailto:DataStandards-SocialCare@socialfinance.org.uk">DataStandards-SocialCare@socialfinance.org.uk</a>.
 
-We publish [updates about our standardisation activity](/updates).
-
-You can [also sign up for our newsletter]({{ site.newsletter }}).
+* You can [learn about our standards](/learn_about_the_standards).
+* Find out more about how to [contribute to the standards](/contribute_to_the_standards).
+* We publish [updates about our standardisation activity](/updates).
+* You can [also sign up for our newsletter]({{ site.newsletter }}).
 
 
 ## Leadership

@@ -1,41 +1,59 @@
-# Placement Spec validator
+# SHACL example validator
 
-Runs the SHACL shape in `../placement-spec-shape.ttl` against the JSON-LD examples
-in `../examples/` and prints a conformance report for each.
+Standard-agnostic validator. For each registered standard it runs the SHACL
+shapes generated from that standard's LinkML schema against the JSON-LD examples
+that ship with it, and prints a conformance report per example.
+
+Files named `valid-*.jsonld` are expected to **conform**; `invalid-*.jsonld` are
+expected **not** to. Exit code is `0` when every example behaves as expected,
+otherwise `1`.
 
 ## Usage
 
 ```bash
 npm install
-node validate.js                         # validates every example
-node validate.js ../examples/valid-placement.jsonld   # one file
+
+node validate.js                          # every standard, every profile
+node validate.js person                   # one standard, all its profiles
+node validate.js person subject-of-care   # one standard, one profile
+node validate.js person placements        # several standards
 ```
 
-Exit code is `0` if every example behaves as expected — i.e. files named
-`valid-*.jsonld` conform and `invalid-*.jsonld` don't — otherwise `1`.
+## Adding a standard
 
-## What is checked
+Standards are declared in the `STANDARDS` registry near the top of
+`validate.js`. Each standard points at a folder under `src/assets/model/<dir>`
+and lists one or more **profiles**, each pairing a generated SHACL shape file
+with an examples sub-folder:
 
-The shape encodes the cardinality, datatype and controlled-vocabulary
-restrictions from `ontology/placements/placements.ttl`, plus the data-shape
-rules from the **Checklist and QA** sheet of the National Placement
-Standard spreadsheet:
+```js
+person: {
+  label: 'Person',
+  dir: 'person',
+  profiles: [
+    { name: 'subject-of-care', shape: 'person-subject-of-care-shape.ttl', examples: 'examples/person-subject-of-care' },
+    { name: 'connected',       shape: 'person-connected-shape.ttl',       examples: 'examples/person-connected' }
+  ]
+}
+```
 
-- complete-record cardinality (every required field present)
-- dropdown values come from the controlled SKOS vocab
-- no free text in dropdown fields (`sh:nodeKind sh:IRI` + `sh:in`)
-- all 11 risk fields populated even when value is "No known risk"
-- `placementLocation` is a UK outward postcode prefix (3-4 chars)
-- `totalWeeklyCost` between £100 and £100,000 (Warning, not Violation)
-- duplicate `childId` across records (cross-record pre-pass in this script)
+A standard with a single shape (like Placements) just declares one profile.
 
-QA-sheet checks that aren't expressible as SHACL Core constraints
-(quarter-coverage, spreadsheet column order, semantic preference accuracy)
-are documented at the top of `placement-spec-shape.ttl`.
+### Cross-record checks
+
+Constraints SHACL Core can't express (e.g. duplicate `childId` across the whole
+record set) are implemented in the `CROSS_CHECKS` map and referenced by name from
+a standard's `crossChecks` array. They run once over all datasets in the
+standard.
+
+## Contexts
+
+Each example declares a relative `@context` (e.g. `../../context.jsonld`
+for Person, `../context.jsonld` for Placements). The validator inlines it before
+converting JSON-LD to RDF, so no network document loader is needed.
 
 ## Engine
 
 Uses [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl).
-The same shape file should validate identically under any conformant SHACL
-engine (e.g. `pyshacl`, Apache Jena `shacl`); see the verification section in
-the implementation plan.
+The same shape files validate identically under any conformant SHACL engine
+(e.g. `pyshacl`, Apache Jena `shacl`).

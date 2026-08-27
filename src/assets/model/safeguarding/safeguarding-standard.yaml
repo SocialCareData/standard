@@ -1,0 +1,1370 @@
+id: https://ns.socialcaredata.io/safeguarding/schema
+name: safeguarding
+title: Safeguarding Standard Data Model
+description: >-
+  A LinkML data model for the Safeguarding Standard: a common data model for
+  recording the services, professionals, organisations, service episodes and
+  life events involved in safeguarding and promoting the wellbeing of a person,
+  to support multi-agency information sharing (MAIS).
+
+  The model is organised around five top-level entities - Organisation, Service,
+  Professional, ServiceEpisode and LifeEvent - and the shared objects that link
+  them together (Identifier, Name, Address, Contact). The shared objects are
+  defined once by the Person Standard and imported from person-standard.yaml, so
+  this schema reuses their p: ontology IRIs (p:Identifier, p:Name, p:Address,
+  p:Contact) rather than redefining them. Coded fields draw their values from the
+  controlled vocabularies (enums) declared below.
+license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+version: 1.0.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  sg: https://ns.socialcaredata.io/safeguarding/
+  oc: https://ns.socialcaredata.io/safeguarding/organisation-code#
+  svc: https://ns.socialcaredata.io/safeguarding/service-code#
+  scf: https://ns.socialcaredata.io/safeguarding/service-cost-frequency#
+  sd: https://ns.socialcaredata.io/safeguarding/service-delivery#
+  epc: https://ns.socialcaredata.io/safeguarding/episode-code#
+  eo: https://ns.socialcaredata.io/safeguarding/episode-outcome#
+  evc: https://ns.socialcaredata.io/safeguarding/event-code#
+  mt: https://ns.socialcaredata.io/safeguarding/measurement-type#
+  mu: https://ns.socialcaredata.io/safeguarding/measurement-unit#
+  ot: https://ns.socialcaredata.io/safeguarding/observation-type#
+  p: https://ns.socialcaredata.io/person/
+  skos: http://www.w3.org/2004/02/skos/core#
+  dct: http://purl.org/dc/terms/
+  xsd: http://www.w3.org/2001/XMLSchema#
+default_prefix: sg
+default_range: string
+imports:
+  - linkml:types
+  # Shared objects (Identifier, Name, Address, Contact) and their controlled
+  # vocabularies (NameUseCode, AddressUseCode) are defined once by the Person
+  # Standard and imported here, so this schema reuses their p: ontology IRIs
+  # rather than redefining them. The import is by the Person schema's canonical
+  # id; imports.json maps that id to the local person-standard.yaml file so the
+  # generated ontology's owl:imports is a clean IRI.
+  - https://ns.socialcaredata.io/person/schema
+
+# ---------------------------------------------------------------------------
+# Classes
+# ---------------------------------------------------------------------------
+classes:
+
+  # --- Top-level entities ---------------------------------------------------
+
+  Organisation:
+    class_uri: sg:Organisation
+    description: >-
+      An organisation involved in the safeguarding or wellbeing of a person -
+      for example a local authority, an NHS trust, a school, or an education
+      authority. Aligns with the FHIR Organization resource.
+    slots:
+      - sgIdentifier
+      - entityName
+      - alias
+      - organisationType
+      - active
+      - sgAddress
+      - contactMulti
+      - relatedProfessionalRef
+      - relatedServiceRef
+    slot_usage:
+      contactMulti:
+        required: true
+        multivalued: true
+        description: Contact information for the organisation.
+      relatedServiceRef:
+        required: true
+        multivalued: true
+        description: References to Services the organisation provides or contributes to.
+
+  Service:
+    class_uri: sg:Service
+    description: >-
+      A service involved in the safeguarding or wellbeing of a person - the
+      specific intervention or package of support delivered by one or more
+      organisations (e.g. local authority social care, an emergency department,
+      a general practice, or a school).
+    slots:
+      - sgIdentifier
+      - entityName
+      - alias
+      - serviceType
+      - active
+      - sgAddress
+      - contactMulti
+      - costFrequency
+      - delivery
+      - relatedProfessionalRef
+      - relatedOrganisationRef
+    slot_usage:
+      contactMulti:
+        required: true
+        multivalued: true
+        description: Contact information for the service.
+
+  Professional:
+    class_uri: sg:Professional
+    description: >-
+      An individual acting in a formal role within an organisation who has
+      responsibilities relating to a person's safety, wellbeing, care or support
+      - for example undertaking assessments, creating and monitoring plans, or
+      sharing information in a multi-agency context.
+    slots:
+      - sgIdentifier
+      - professionalName
+      - role
+      - status
+      - contactSingle
+      - relatedServiceRef
+      - relatedOrganisationRef
+
+  ServiceEpisode:
+    class_uri: sg:ServiceEpisode
+    description: >-
+      A bounded period during which an individual receives a defined service,
+      intervention, or package of support from a service or professional. It has
+      a recognisable start and end point, though duration may vary from a single
+      contact to sustained involvement over time.
+    slots:
+      - sgIdentifier
+      - episodeType
+      - subjectPerson
+      - relatedProfessionalObj
+      - relatedServiceRef
+      - timeInformation
+      - location
+      - finding
+      - outcome
+    slot_usage:
+      relatedServiceRef:
+        required: true
+        multivalued: true
+        description: References to the Services involved in the episode.
+      timeInformation:
+        required: true
+        multivalued: true
+        description: Details about the timing of the episode.
+      location:
+        required: true
+        multivalued: true
+        description: Details about the location of the episode.
+
+  LifeEvent:
+    class_uri: sg:LifeEvent
+    description: >-
+      A significant, time-bound occurrence in an individual's life that may have
+      implications for their safety, wellbeing or development - for example
+      attendance at A&E, a child being reported as missing, or an exclusion from
+      school. Life events are not inherently positive or negative but can signal
+      levels of risk, vulnerability or changing need.
+    slots:
+      - sgIdentifier
+      - eventType
+      - subjectPerson
+      - relatedProfessionalObj
+      - relatedServiceRef
+      - timeInformation
+      - location
+
+  # --- Linking / supporting objects ----------------------------------------
+
+  SubjectPerson:
+    class_uri: sg:SubjectPerson
+    description: A typed reference to a Person involved in a service episode or life event.
+    slots:
+      - person
+      - involvement
+
+  RelatedProfessional:
+    class_uri: sg:RelatedProfessional
+    description: A typed reference to a Professional involved in a service episode or life event.
+    slots:
+      - professional
+      - involvement
+
+  TimeInformation:
+    class_uri: sg:TimeInformation
+    description: >-
+      Details about the timing of a service episode or life event, including
+      when it started and ended and how frequently it recurs.
+    slots:
+      - startDateTime
+      - endDateTime
+      - frequency
+
+  Any:
+    class_uri: linkml:Any
+    description: >-
+      An open value whose structure is defined and validated elsewhere, not by
+      this standard. Serialised as an arbitrary JSON object.
+
+  Finding:
+    class_uri: sg:Finding
+    description: >-
+      An observation or measurement made during the course of a service episode
+      about the subject and their circumstances. May be recorded as a structured
+      Observation, a quantitative Measurement, and/or free text.
+    slots:
+      - observation
+      - measurement
+      - text
+
+  Observation:
+    class_uri: sg:Observation
+    description: >-
+      A qualitative observation that represents an attribute of the subject or
+      their circumstances (for example "NEET" or "free-school-meals").
+    slots:
+      - observationType
+      - observationStartDate
+      - observationEndDate
+
+  Measurement:
+    class_uri: sg:Measurement
+    description: >-
+      A quantitative measurement of something related to the subject or their
+      circumstances (for example "Authorised Absences" or "Referrals").
+    slots:
+      - measurementValue
+      - measurementUnit
+      - measurementType
+
+  # --- Shared objects -------------------------------------------------------
+  # Identifier, Name, Address and Contact (and the NameUseCode / AddressUseCode
+  # vocabularies) are imported from the Person Standard (person-standard.yaml)
+  # and reused unchanged, so their p: ontology IRIs (p:Identifier, p:Name,
+  # p:Address, p:Contact) are referenced rather than redefined here.
+
+# ---------------------------------------------------------------------------
+# Slots
+# ---------------------------------------------------------------------------
+slots:
+
+  # --- shared / top-level ---
+  sgIdentifier:
+    slot_uri: sg:identifier
+    title: identifier
+    range: Identifier
+    multivalued: true
+    required: true
+    description: Unique identifiers associated with the entity.
+  entityName:
+    slot_uri: sg:name
+    title: name
+    range: string
+    required: true
+    multivalued: false
+    description: The official name of the organisation or service.
+  professionalName:
+    slot_uri: sg:name
+    title: name
+    range: Name
+    required: true
+    multivalued: false
+    description: The professional's name.
+  alias:
+    slot_uri: sg:alias
+    range: string
+    required: false
+    multivalued: true
+    description: Other names the entity is known by.
+  active:
+    slot_uri: sg:active
+    range: boolean
+    required: false
+    multivalued: false
+    description: Code for the entity's status - whether it is currently active.
+  sgAddress:
+    slot_uri: sg:address
+    title: address
+    range: Address
+    required: false
+    multivalued: true
+    description: Physical location(s) of the entity.
+  contactMulti:
+    slot_uri: sg:contact
+    title: contact
+    range: Contact
+    required: false
+    multivalued: true
+    description: Contact information (multi-valued).
+  contactSingle:
+    slot_uri: sg:contact
+    title: contact
+    range: Contact
+    required: true
+    multivalued: false
+    description: The professional's contact information (exactly one).
+  relatedProfessionalRef:
+    slot_uri: sg:relatedProfessional
+    title: relatedProfessional
+    range: Identifier
+    required: false
+    multivalued: true
+    description: References (by Identifier) to Professionals associated with the entity.
+  relatedServiceRef:
+    slot_uri: sg:relatedService
+    title: relatedService
+    range: Identifier
+    required: false
+    multivalued: true
+    description: References (by Identifier) to Services associated with the entity.
+  relatedOrganisationRef:
+    slot_uri: sg:relatedOrganisation
+    title: relatedOrganisation
+    range: Identifier
+    required: false
+    multivalued: true
+    description: References (by Identifier) to Organisations associated with the entity.
+
+  # --- Organisation / Service typing & service-specific ---
+  organisationType:
+    slot_uri: sg:organisationType
+    title: type
+    range: OrganisationCode
+    required: true
+    multivalued: true
+    description: Code(s) for the kind of organisation.
+  serviceType:
+    slot_uri: sg:serviceType
+    title: type
+    range: ServiceCode
+    required: true
+    multivalued: true
+    description: Code(s) for the kind of service.
+  costFrequency:
+    slot_uri: sg:costFrequency
+    range: ServiceCostFrequency
+    required: true
+    multivalued: false
+    description: The frequency at which the unit cost occurs.
+  delivery:
+    slot_uri: sg:delivery
+    range: ServiceDelivery
+    required: false
+    multivalued: true
+    description: The way the service is delivered.
+
+  # --- Professional ---
+  role:
+    slot_uri: sg:role
+    range: string
+    required: true
+    multivalued: true
+    description: Text describing the professional's occupational role.
+  status:
+    slot_uri: sg:status
+    range: boolean
+    required: false
+    multivalued: false
+    description: The professional's current working status.
+
+  # --- ServiceEpisode / LifeEvent ---
+  episodeType:
+    slot_uri: sg:episodeType
+    title: type
+    range: EpisodeCode
+    required: true
+    multivalued: true
+    description: Code(s) for the type of service episode.
+  eventType:
+    slot_uri: sg:eventType
+    title: type
+    range: EventCode
+    required: true
+    multivalued: true
+    description: Code(s) for the type of life event.
+  subjectPerson:
+    slot_uri: sg:subjectPerson
+    range: SubjectPerson
+    required: true
+    multivalued: true
+    description: References to the Person(s) the episode or life event concerns.
+  relatedProfessionalObj:
+    slot_uri: sg:relatedProfessional
+    title: relatedProfessional
+    range: RelatedProfessional
+    required: false
+    multivalued: true
+    description: References to the Professional(s) involved, qualified by involvement.
+  timeInformation:
+    slot_uri: sg:timeInformation
+    range: TimeInformation
+    required: false
+    multivalued: true
+    description: Details about the timing of the episode or life event.
+  location:
+    slot_uri: sg:location
+    range: string
+    required: false
+    multivalued: true
+    description: Details about the location of the episode or life event.
+  finding:
+    slot_uri: sg:finding
+    range: Finding
+    required: false
+    multivalued: true
+    description: Observations or measurements made during the course of the episode.
+  outcome:
+    slot_uri: sg:outcome
+    range: EpisodeOutcome
+    required: false
+    multivalued: false
+    description: Outcome of the episode for the subject.
+
+  # --- SubjectPerson / RelatedProfessional ---
+  person:
+    slot_uri: sg:person
+    range: Identifier
+    required: true
+    multivalued: false
+    description: A reference (by Identifier) to a Person record involved in the episode or life event.
+  professional:
+    slot_uri: sg:professional
+    range: Identifier
+    required: true
+    multivalued: false
+    description: A reference (by Identifier) to a Professional record involved in the episode or life event.
+  involvement:
+    slot_uri: sg:involvement
+    range: string
+    required: true
+    multivalued: false
+    description: >-
+      Code for the nature of the involvement. Uses an [HL7 v3 ParticipationType
+      code](https://terminology.hl7.org/5.2.0/CodeSystem-v3-ParticipationType.html) directly (e.g. SBJ, PPRF); not defined by this standard, so modelled
+      as an open string.
+
+  # --- TimeInformation ---
+  startDateTime:
+    slot_uri: sg:startDateTime
+    range: datetime
+    required: true
+    multivalued: false
+    description: The start of the episode or life event, as an ISO 8601 date-time.
+  endDateTime:
+    slot_uri: sg:endDateTime
+    range: datetime
+    required: false
+    multivalued: false
+    description: The end of the episode or life event, as an ISO 8601 date-time.
+  frequency:
+    slot_uri: sg:frequency
+    range: Any
+    required: false
+    multivalued: false
+    inlined: true
+    description: >-
+      The frequency of the episode or life event, expressed as a
+      [FHIR Timing](https://build.fhir.org/datatypes.html#Timing) datatype. This
+      standard does not define or validate its structure; the value is an
+      arbitrary JSON object conforming to FHIR Timing.
+
+  # --- Finding / Observation / Measurement ---
+  observation:
+    slot_uri: sg:observation
+    range: Observation
+    required: false
+    multivalued: true
+    description: Qualitative observation(s) about the subject or their circumstances.
+  measurement:
+    slot_uri: sg:measurement
+    range: Measurement
+    required: false
+    multivalued: true
+    description: Quantitative measurement(s) about the subject or their circumstances.
+  text:
+    slot_uri: sg:text
+    range: string
+    required: false
+    multivalued: true
+    description: A finding that cannot be represented as an Observation or Measurement.
+  observationType:
+    slot_uri: sg:observationType
+    title: type
+    range: string
+    required: true
+    multivalued: false
+    description: >-
+      The type of observation, drawn from the Observation Type Vocabulary (e.g.
+      NEET, free-school-meals, SEND.SpLD). The vocabulary is extensible (some
+      codes carry dynamic sub-parts such as EAL.<ISO 639-1 code>), so it is
+      modelled as an open string rather than a closed enumeration. See the
+      ObservationType enum for the reference list of codes.
+  observationStartDate:
+    slot_uri: sg:startDate
+    title: startDate
+    range: datetime
+    required: true
+    multivalued: false
+    description: The date at which this observation was first true, as an ISO 8601 date-time.
+  observationEndDate:
+    slot_uri: sg:endDate
+    title: endDate
+    range: datetime
+    required: false
+    multivalued: false
+    description: The date at which this observation was made false (if now outdated).
+  measurementValue:
+    slot_uri: sg:value
+    title: value
+    range: decimal
+    required: true
+    multivalued: false
+    description: A decimal number representing the value of the measurement.
+  measurementUnit:
+    slot_uri: sg:unit
+    title: unit
+    range: MeasurementUnit
+    required: true
+    multivalued: false
+    description: The unit of measurement.
+  measurementType:
+    slot_uri: sg:measurementType
+    title: type
+    range: MeasurementType
+    required: true
+    multivalued: false
+    description: The type of measurement.
+
+  # --- Identifier / Name / Address / Contact ---
+  # The slots of the shared objects (value, system, familyName, givenName,
+  # preferredName, use, line1, line2, city, postcode, UPRN, USRN, contactName,
+  # email, telephone) are imported from the Person Standard along with their
+  # classes, so they are not redefined here.
+
+# ---------------------------------------------------------------------------
+# Enums (controlled vocabularies / SKOS concept schemes)
+# ---------------------------------------------------------------------------
+enums:
+
+  OrganisationCode:
+    enum_uri: sg:organisation-code
+    title: Organisation Code
+    description: Codes to indicate the type of organisation.
+    permissible_values:
+      local-authority:
+        title: Local Authority
+        description: Local Authority
+        meaning: oc:LocalAuthority
+      nhs-trust:
+        title: NHS Trust
+        description: NHS Trust
+        meaning: oc:NhsTrust
+      police-force:
+        title: Police Force
+        description: Police Force
+        meaning: oc:PoliceForce
+
+  ServiceCode:
+    enum_uri: sg:service-code
+    title: Service Code
+    description: Codes to indicate the type of service.
+    permissible_values:
+      youth-offending:
+        title: Youth Offending
+        description: Youth Offending Team
+        meaning: svc:YouthOffending
+      primary-school:
+        title: Primary School
+        description: Primary School
+        meaning: svc:PrimarySchool
+      high-school:
+        title: High School
+        description: Secondary or High School
+        meaning: svc:HighSchool
+      SEN-primary-school:
+        title: SEN Primary School
+        description: Primary School with specialist SEN services
+        meaning: svc:SenPrimarySchool
+      SEN-high-school:
+        title: SEN High School
+        description: Secondary or High School with specialist SEN services
+        meaning: svc:SenHighSchool
+      alternative-provision-school:
+        title: Alternative Provision School
+        description: Alternative provision school
+        meaning: svc:AlternativeProvisionSchool
+      social-care:
+        title: Social Care
+        description: Social Care Department
+        meaning: svc:SocialCare
+      family-court:
+        title: Family Court
+        description: Family Court
+        meaning: svc:FamilyCourt
+      CAMHS:
+        title: CAMHS
+        description: Children and Adolescent mental health services
+        meaning: svc:Camhs
+      reablement:
+        title: Reablement
+        description: Reablement
+        meaning: svc:Reablement
+      short-term-nursing-care:
+        title: Short Term Nursing Care
+        description: Short term nursing care
+        meaning: svc:ShortTermNursingCare
+      short-term-residential-care:
+        title: Short Term Residential Care
+        description: Short term residential care
+        meaning: svc:ShortTermResidentialCare
+      long-term-nursing-care:
+        title: Long Term Nursing Care
+        description: Long term nursing care
+        meaning: svc:LongTermNursingCare
+      long-term-residential-care:
+        title: Long Term Residential Care
+        description: Long term residential care
+        meaning: svc:LongTermResidentialCare
+      home-support-domiciliary:
+        title: Home Support Domiciliary
+        description: Home support or domiciliary care
+        meaning: svc:HomeSupportDomiciliary
+      day-support:
+        title: Day Support
+        description: Day support
+        meaning: svc:DaySupport
+      meals:
+        title: Meals
+        description: Meals
+        meaning: svc:Meals
+      transport:
+        title: Transport
+        description: Transport
+        meaning: svc:Transport
+      equipment:
+        title: Equipment
+        description: Equipment
+        meaning: svc:Equipment
+      direct-payment:
+        title: Direct Payment
+        description: Direct payment
+        meaning: svc:DirectPayment
+      shared-lives:
+        title: Shared Lives
+        description: Shared Lives
+        meaning: svc:SharedLives
+      community-supported-living:
+        title: Community Supported Living
+        description: Community supported living
+        meaning: svc:CommunitySupportedLiving
+      extra-care-housing:
+        title: Extra Care Housing
+        description: Extra care housing
+        meaning: svc:ExtraCareHousing
+      social-worker-support:
+        title: Social Worker Support
+        description: "Professional support: Social worker"
+        meaning: svc:SocialWorkerSupport
+      other-professional-support:
+        title: Other Professional Support
+        description: "Professional support: Other"
+        meaning: svc:OtherProfessionalSupport
+      learning-education-employment:
+        title: Learning Education Employment
+        description: Learning, education or employment support
+        meaning: svc:LearningEducationEmployment
+      end-of-life-care:
+        title: End of Life Care
+        description: End of life care
+        meaning: svc:EndOfLifeCare
+      emergency-support:
+        title: Emergency Support
+        description: Emergency support
+        meaning: svc:EmergencySupport
+      other-short-term-support:
+        title: Other Short Term Support
+        description: Other short term support
+        meaning: svc:OtherShortTermSupport
+      other-long-term-support:
+        title: Other Long Term Support
+        description: Other long term support
+        meaning: svc:OtherLongTermSupport
+      carer-respite:
+        title: Carer Respite
+        description: Unpaid carer respite
+        meaning: svc:CarerRespite
+      carer-sitting-service:
+        title: Carer Sitting Service
+        description: Unpaid carer sitting service
+        meaning: svc:CarerSittingService
+      carer-universal-services:
+        title: Carer Universal Services
+        description: Unpaid carer universal services
+        meaning: svc:CarerUniversalServices
+      other-carer-support:
+        title: Other Carer Support
+        description: Other unpaid carer support
+        meaning: svc:OtherCarerSupport
+
+  ServiceCostFrequency:
+    enum_uri: sg:service-cost-frequency
+    title: Service Cost Frequency
+    description: >-
+      Codes to indicate the payment schedule a service adheres to. From the
+      Adult Social Care Client Level Data specification.
+    permissible_values:
+      none:
+        title: None
+        description: No charge to client
+        meaning: scf:None
+      per-session:
+        title: Per Session
+        description: Per session
+        meaning: scf:PerSession
+      hourly:
+        title: Hourly
+        description: Hourly
+        meaning: scf:Hourly
+      daily:
+        title: Daily
+        description: Daily
+        meaning: scf:Daily
+      weekly:
+        title: Weekly
+        description: Weekly
+        meaning: scf:Weekly
+      fortnightly:
+        title: Fortnightly
+        description: Fortnightly
+        meaning: scf:Fortnightly
+      four-weekly:
+        title: Four Weekly
+        description: 4-weekly
+        meaning: scf:FourWeekly
+      monthly:
+        title: Monthly
+        description: Monthly
+        meaning: scf:Monthly
+      quarterly:
+        title: Quarterly
+        description: Quarterly
+        meaning: scf:Quarterly
+      annually:
+        title: Annually
+        description: Annually
+        meaning: scf:Annually
+      one-off:
+        title: One Off
+        description: One-off
+        meaning: scf:OneOff
+
+  ServiceDelivery:
+    enum_uri: sg:service-delivery
+    title: Service Delivery
+    description: >-
+      Codes to indicate the way a service is delivered. From the Adult Social
+      Care Client Level Data specification.
+    permissible_values:
+      st-max:
+        title: ST Max
+        description: "Short term support: ST-Max"
+        meaning: sd:StMax
+      ongoing-low:
+        title: Ongoing Low
+        description: "Short term support: Ongoing low level"
+        meaning: sd:OngoingLow
+      other-short-term:
+        title: Other Short Term
+        description: "Short term support: Other short term"
+        meaning: sd:OtherShortTerm
+      nursing:
+        title: Nursing
+        description: "Long term support: Nursing care"
+        meaning: sd:Nursing
+      residential:
+        title: Residential
+        description: "Long term support: Residential care"
+        meaning: sd:Residential
+      community:
+        title: Community
+        description: "Long term support: Community"
+        meaning: sd:Community
+      prison:
+        title: Prison
+        description: "Long term support: Prison"
+        meaning: sd:Prison
+      unpaid-carer-direct:
+        title: Unpaid Carer Direct
+        description: "Unpaid carer support: Direct to unpaid carer"
+        meaning: sd:UnpaidCarerDirect
+      unpaid-carer-support:
+        title: Unpaid Carer Support
+        description: "Unpaid carer support: Support involving the person cared-for"
+        meaning: sd:UnpaidCarerSupport
+
+  EpisodeCode:
+    enum_uri: sg:episode-code
+    title: Episode Code
+    description: Codes to indicate the type of service episode.
+    permissible_values:
+      early-help:
+        title: Early Help
+        description: Early Help Assessment / Intervention
+        meaning: epc:EarlyHelp
+      ehcp:
+        title: EHCP
+        description: Education, Health, and Care plan
+        meaning: epc:Ehcp
+      family-court-order:
+        title: Family Court Order
+        description: Any order made by family court
+        meaning: epc:FamilyCourtOrder
+      cin-plan:
+        title: CIN Plan
+        description: Child in Need (CIN) Plan
+        meaning: epc:CinPlan
+      cp-plan:
+        title: CP Plan
+        description: Child Protection (CP) Plan
+        meaning: epc:CpPlan
+      CAMHS-plan:
+        title: CAMHS Plan
+        description: Children and Adolescent mental health services care plan
+        meaning: epc:CamhsPlan
+      section-47:
+        title: Section 47
+        description: Section 47 Enquiry
+        meaning: epc:Section47
+      care-leaver:
+        title: Care Leaver
+        description: Care Leaver Support
+        meaning: epc:CareLeaver
+      child-looked-after:
+        title: Child Looked After
+        description: Child in LA care
+        meaning: epc:ChildLookedAfter
+      adult-safeguarding:
+        title: Adult Safeguarding
+        description: Adult Safeguarding Enquiry (Section 42)
+        meaning: epc:AdultSafeguarding
+      care-act-assessment:
+        title: Care Act Assessment
+        description: Care Act Assessment
+        meaning: epc:CareActAssessment
+      care-plan:
+        title: Care Plan
+        description: Care Plan
+        meaning: epc:CarePlan
+
+  EpisodeOutcome:
+    enum_uri: sg:episode-outcome
+    title: Episode Outcome
+    description: >-
+      Codes to indicate the outcome of the episode for the subject. From the
+      Adult Social Care Client Level Data specification.
+    permissible_values:
+      reablement:
+        title: Reablement
+        description: Progress to reablement/ST-Max
+        meaning: eo:Reablement
+      assessment:
+        title: Assessment
+        description: Progress to assessment, review, or reassessment
+        meaning: eo:Assessment
+      hospital:
+        title: Hospital
+        description: Admitted to hospital
+        meaning: eo:Hospital
+      continuation:
+        title: Continuation
+        description: Continuation of support or services
+        meaning: eo:Continuation
+      planning:
+        title: Planning
+        description: Progress to support or service planning
+        meaning: eo:Planning
+      NFA-planned:
+        title: NFA Planned
+        description: "No Further Action: Support ended as planned"
+        meaning: eo:NfaPlanned
+      NFA-moved:
+        title: NFA Moved
+        description: "No Further Action: Responsibility moved to another local authority"
+        meaning: eo:NfaMoved
+      NFA-NHS-referral:
+        title: NFA NHS Referral
+        description: "No Further Action: Referral to NHS services or NHS funded social care"
+        meaning: eo:NfaNhsReferral
+      NFA-disregard:
+        title: NFA Disregard
+        description: "No Further Action: Self-funded client or under 12 week property disregard"
+        meaning: eo:NfaDisregard
+      NFA-local-referral:
+        title: NFA Local Referral
+        description: "No Further Action: Referral to other service within the local authority"
+        meaning: eo:NfaLocalReferral
+      NFA-declined:
+        title: NFA Declined
+        description: "No Further Action: Support declined"
+        meaning: eo:NfaDeclined
+      NFA-info:
+        title: NFA Info
+        description: "No Further Action: Information and advice or signposting"
+        meaning: eo:NfaInfo
+      NFA-deceased:
+        title: NFA Deceased
+        description: "No Further Action: Client deceased"
+        meaning: eo:NfaDeceased
+      NFA-no-offer-other:
+        title: NFA No Offer Other
+        description: "No Further Action: No services offered for other reason"
+        meaning: eo:NfaNoOfferOther
+      NFA-ended-other:
+        title: NFA Ended Other
+        description: "No Further Action: Support ended for other reason"
+        meaning: eo:NfaEndedOther
+      NFA-other:
+        title: NFA Other
+        description: "No Further Action: Other"
+        meaning: eo:NfaOther
+
+  EventCode:
+    enum_uri: sg:event-code
+    title: Event Code
+    description: Codes to indicate the type of life event.
+    permissible_values:
+      birth:
+        title: Birth
+        description: Birth
+        meaning: evc:Birth
+      death:
+        title: Death
+        description: Death
+        meaning: evc:Death
+      ae-attendance:
+        title: AE Attendance
+        description: A&E Attendance
+        meaning: evc:AeAttendance
+      school-exclusion:
+        title: School Exclusion
+        description: School Exclusion
+        meaning: evc:SchoolExclusion
+      school-suspension:
+        title: School Suspension
+        description: School Suspension
+        meaning: evc:SchoolSuspension
+      missing-person:
+        title: Missing Person
+        description: Reported Missing
+        meaning: evc:MissingPerson
+      safeguarding-concern:
+        title: Safeguarding Concern
+        description: Safeguarding Concern Raised
+        meaning: evc:SafeguardingConcern
+      referral:
+        title: Referral
+        description: Referral made to relevant authority
+        meaning: evc:Referral
+      homeless:
+        title: Homeless
+        description: Made homeless
+        meaning: evc:Homeless
+
+  ObservationType:
+    enum_uri: sg:observation-type
+    title: Observation Type
+    description: Codes to indicate the type of qualitative observation.
+    permissible_values:
+      SEND:
+        title: SEND
+        description: Observed special educational needs and disabilities, via DfE codes
+        meaning: ot:Send
+      "SEND.SpLD":
+        title: SEND SpLD
+        description: "Specific learning Difficulty: difficulty that affect one or more specific aspects of learning. This encompasses a range of conditions including dyslexia, dyscalculia, dysgraphia, dyspraxia etc."
+        meaning: ot:SendSpld
+      "SEND.MLD":
+        title: SEND MLD
+        description: "Moderate Learning Difficulty: well below expected levels of attainment in all or most areas of the curriculum, despite appropriate interventions. They will have much greater difficulty than their peers in acquiring basic literacy and numeracy skills and in understanding concepts. They may also have associated speech and language delay, low self-esteem, low levels of concentration and underdeveloped social skills."
+        meaning: ot:SendMld
+      "SEND.SLD":
+        title: SEND SLD
+        description: "Severe Learning Difficulty: significant intellectual or cognitive impairments and are likely to need support in all areas of the curriculum."
+        meaning: ot:SendSld
+      "SEND.PMLD":
+        title: SEND PMLD
+        description: "Profound and Multiple Learning Difficulty: have severe and complex learning difficulties as well as a physical disability or sensory impairment."
+        meaning: ot:SendPmld
+      "SEND.SLCN":
+        title: SEND SLCN
+        description: "Speech, Language and Communication Needs: difficulty in communicating with others such as difficulty saying what they want to, understanding what is being said to them, difficulties understanding and applying social rules."
+        meaning: ot:SendSlcn
+      "SEND.ASC":
+        title: SEND ASC
+        description: "Autistic Spectrum Condition: including Asperger's Syndrome and Autism with associated difficulties such as difficulties with language, communication, imagination and social interactions."
+        meaning: ot:SendAsc
+      "SEND.SEMH":
+        title: SEND SEMH
+        description: "Social, Emotional and Mental Health difficulties: These may include becoming withdrawn or isolated, as well as displaying challenging, disruptive or disturbing behaviour. These behaviours may reflect underlying mental health difficulties such as anxiety or depression, self-harming, substance misuse, eating disorders or physical symptoms that are medically unexplained."
+        meaning: ot:SendSemh
+      "SEND.VI":
+        title: SEND VI
+        description: "Visual Impairment: Partial or complete loss of sight not correctable by usual means (e.g. prescribed glasses or contact lens)."
+        meaning: ot:SendVi
+      "SEND.HI":
+        title: SEND HI
+        description: "Hearing Impairment: With a degree of hearing loss."
+        meaning: ot:SendHi
+      "SEND.MSI":
+        title: SEND MSI
+        description: "Multi Sensory Impairment: combined vision and hearing impairments."
+        meaning: ot:SendMsi
+      "SEND.PD":
+        title: SEND PD
+        description: "Physical Disability: limitation on a person's physical functioning, mobility, dexterity or stamina."
+        meaning: ot:SendPd
+      "SEND.DS":
+        title: SEND DS
+        description: "Down Syndrome: a genetic disorder caused by the presence of all or part of a third copy of chromosome 21."
+        meaning: ot:SendDs
+      "SEND.OTH":
+        title: SEND OTH
+        description: "Other SEND: any other special educational need or disability not covered by the other codes."
+        meaning: ot:SendOth
+      "SEND.NSA":
+        title: SEND NSA
+        description: "NSA SEN support but no specialist assessment of type of need."
+        meaning: ot:SendNsa
+      EAL:
+        title: EAL
+        description: English as an additional language
+        meaning: ot:Eal
+      "EAL.<ISO 639-1 code>":
+        title: EAL ISO 639-1 Language Code
+        description: "Two-letter code for observed first language, using [ISO 639-1](https://www.iso.org/iso-639-language-code)"
+        meaning: ot:EalIso6391Code
+      free-school-meals:
+        title: Free School Meals
+        description: Recipient of free school meals (FSM)
+        meaning: ot:FreeSchoolMeals
+      NEET:
+        title: NEET
+        description: Not in Education, Employment, or Training
+        meaning: ot:Neet
+      non-accidental-injury:
+        title: Non Accidental Injury
+        description: Observed non-accidental injury
+        meaning: ot:NonAccidentalInjury
+      persistent-school-absences:
+        title: Persistent School Absences
+        description: Reported persistent absences from school
+        meaning: ot:PersistentSchoolAbsences
+      pupil-premium:
+        title: Pupil Premium
+        description: Eligible for Pupil Premium
+        meaning: ot:PupilPremium
+      religion:
+        title: Religion
+        description: Religious affiliation
+        meaning: ot:Religion
+      "religion.<HL7 code>":
+        title: Religion HL7 Code
+        description: "Numeric code for [religious affiliations](https://terminology.hl7.org/7.2.0/en/CodeSystem-v3-ReligiousAffiliation.html)"
+        meaning: ot:ReligionHl7Code
+      temp-accomodation:
+        title: Temp Accomodation
+        description: Living in temporary accomodation
+        meaning: ot:TempAccomodation
+      accommodation-status:
+        title: Accommodation Status
+        description: Housing and living arrangements of the individual
+        meaning: ot:AccommodationStatus
+      "accommodation-status.owner-occupier":
+        title: Accommodation Status Owner Occupier
+        description: Owner occupier or shared ownership scheme
+        meaning: ot:AccommodationStatusOwnerOccupier
+      "accommodation-status.tenant-social":
+        title: Accommodation Status Tenant Social
+        description: "Tenant: Local authority or other social housing provider"
+        meaning: ot:AccommodationStatusTenantSocial
+      "accommodation-status.tenant-private":
+        title: Accommodation Status Tenant Private
+        description: "Tenant: Private landlord"
+        meaning: ot:AccommodationStatusTenantPrivate
+      "accommodation-status.settled-mainstream-family":
+        title: Accommodation Status Settled Mainstream Family
+        description: Settled mainstream housing with family or friends
+        meaning: ot:AccommodationStatusSettledMainstreamFamily
+      "accommodation-status.supported-accommodation":
+        title: Accommodation Status Supported Accommodation
+        description: Supported accommodation, supported lodgings or supported group home
+        meaning: ot:AccommodationStatusSupportedAccommodation
+      "accommodation-status.shared-lives":
+        title: Accommodation Status Shared Lives
+        description: Shared Lives scheme
+        meaning: ot:AccommodationStatusSharedLives
+      "accommodation-status.approved-premises":
+        title: Accommodation Status Approved Premises
+        description: Approved premises for offenders released from prison or under probation supervision
+        meaning: ot:AccommodationStatusApprovedPremises
+      "accommodation-status.sheltered-housing":
+        title: Accommodation Status Sheltered Housing
+        description: Sheltered housing, extra care housing or other sheltered housing
+        meaning: ot:AccommodationStatusShelteredHousing
+      "accommodation-status.mobile-accommodation":
+        title: Accommodation Status Mobile Accommodation
+        description: Mobile accommodation for Gypsy, Roma and Traveller communities
+        meaning: ot:AccommodationStatusMobileAccommodation
+      "accommodation-status.rough-sleeping":
+        title: Accommodation Status Rough Sleeping
+        description: Rough sleeper or squatting
+        meaning: ot:AccommodationStatusRoughSleeping
+      "accommodation-status.night-shelter":
+        title: Accommodation Status Night Shelter
+        description: Night shelter, emergency hostel or direct access hostel
+        meaning: ot:AccommodationStatusNightShelter
+      "accommodation-status.refuge":
+        title: Accommodation Status Refuge
+        description: Refuge
+        meaning: ot:AccommodationStatusRefuge
+      "accommodation-status.temp-accommodation-council":
+        title: Accommodation Status Temp Accommodation Council
+        description: Placed in temporary accommodation by the council (inc. homelessness resettlement)
+        meaning: ot:AccommodationStatusTempAccommodationCouncil
+      "accommodation-status.staying-family-friends-short":
+        title: Accommodation Status Staying Family Friends Short
+        description: Staying with family or friends as a short term guest
+        meaning: ot:AccommodationStatusStayingFamilyFriendsShort
+      "accommodation-status.healthcare-facility":
+        title: Accommodation Status Healthcare Facility
+        description: Acute hospital or long term healthcare residential facility
+        meaning: ot:AccommodationStatusHealthcareFacility
+      "accommodation-status.registered-care-home":
+        title: Accommodation Status Registered Care Home
+        description: Registered care home
+        meaning: ot:AccommodationStatusRegisteredCareHome
+      "accommodation-status.registered-nursing-home":
+        title: Accommodation Status Registered Nursing Home
+        description: Registered nursing home
+        meaning: ot:AccommodationStatusRegisteredNursingHome
+      "accommodation-status.prison-detention":
+        title: Accommodation Status Prison Detention
+        description: Prison, young offenders institution or detention centre
+        meaning: ot:AccommodationStatusPrisonDetention
+      "accommodation-status.other-temporary":
+        title: Accommodation Status Other Temporary
+        description: Other temporary accommodation
+        meaning: ot:AccommodationStatusOtherTemporary
+      "accommodation-status.unknown":
+        title: Accommodation Status Unknown
+        description: Unknown
+        meaning: ot:AccommodationStatusUnknown
+      asd-diagnosis:
+        title: ASD Diagnosis
+        description: Observed Autism Spectrum Disorder (ASD) diagnosis
+        meaning: ot:AsdDiagnosis
+      client-funding-status:
+        title: Client Funding Status
+        description: Funding status of the client for social care services
+        meaning: ot:ClientFundingStatus
+      "client-funding-status.fully-client-funded":
+        title: Client Funding Status Fully Client Funded
+        description: Fully client funded
+        meaning: ot:ClientFundingStatusFullyClientFunded
+      "client-funding-status.joint-funded":
+        title: Client Funding Status Joint Funded
+        description: Joint client and social care funded
+        meaning: ot:ClientFundingStatusJointFunded
+      "client-funding-status.fully-social-care-funded":
+        title: Client Funding Status Fully Social Care Funded
+        description: Fully social care funded
+        meaning: ot:ClientFundingStatusFullySocialCareFunded
+      "client-funding-status.unknown":
+        title: Client Funding Status Unknown
+        description: Unknown
+        meaning: ot:ClientFundingStatusUnknown
+      dbs-check:
+        title: DBS Check
+        description: Recorded Disclosure and Barring Service (DBS) check
+        meaning: ot:DbsCheck
+      dementia-diagnosis:
+        title: Dementia Diagnosis
+        description: Observed dementia diagnosis
+        meaning: ot:DementiaDiagnosis
+      employment-status:
+        title: Employment Status
+        description: Employment status of the individual
+        meaning: ot:EmploymentStatus
+      "employment-status.paid-under-16h":
+        title: Employment Status Paid Under 16h
+        description: "Paid: Less than 16 hours a week"
+        meaning: ot:EmploymentStatusPaidUnder16h
+      "employment-status.paid-16h-plus":
+        title: Employment Status Paid 16h Plus
+        description: "Paid: 16 or more hours a week"
+        meaning: ot:EmploymentStatusPaid16hPlus
+      "employment-status.paid-hours-unknown":
+        title: Employment Status Paid Hours Unknown
+        description: "Paid: Hours per week unknown"
+        meaning: ot:EmploymentStatusPaidHoursUnknown
+      "employment-status.seeking-work":
+        title: Employment Status Seeking Work
+        description: "Not in paid employment: Seeking work"
+        meaning: ot:EmploymentStatusSeekingWork
+      "employment-status.not-seeking-or-retired":
+        title: Employment Status Not Seeking or Retired
+        description: "Not in paid employment: Not actively seeking work or retired"
+        meaning: ot:EmploymentStatusNotSeekingOrRetired
+      "employment-status.voluntary-only":
+        title: Employment Status Voluntary Only
+        description: "Not in paid employment: Voluntary work only"
+        meaning: ot:EmploymentStatusVoluntaryOnly
+      "employment-status.unknown":
+        title: Employment Status Unknown
+        description: Unknown
+        meaning: ot:EmploymentStatusUnknown
+      has-unpaid-carer:
+        title: Has Unpaid Carer
+        description: Has an unpaid carer
+        meaning: ot:HasUnpaidCarer
+      hearing-impairment:
+        title: Hearing Impairment
+        description: Observed hearing impairment status
+        meaning: ot:HearingImpairment
+      "hearing-impairment.deaf-with-speech":
+        title: Hearing Impairment Deaf With Speech
+        description: Deaf with speech
+        meaning: ot:HearingImpairmentDeafWithSpeech
+      "hearing-impairment.deaf-without-speech":
+        title: Hearing Impairment Deaf Without Speech
+        description: Deaf without speech
+        meaning: ot:HearingImpairmentDeafWithoutSpeech
+      "hearing-impairment.hard-of-hearing":
+        title: Hearing Impairment Hard of Hearing
+        description: Hard of hearing
+        meaning: ot:HearingImpairmentHardOfHearing
+      "hearing-impairment.no-impairment":
+        title: Hearing Impairment No Impairment
+        description: No hearing impairment
+        meaning: ot:HearingImpairmentNoImpairment
+      "hearing-impairment.severity-unknown":
+        title: Hearing Impairment Severity Unknown
+        description: "Hearing impairment: Severity unknown"
+        meaning: ot:HearingImpairmentSeverityUnknown
+      "hearing-impairment.unknown":
+        title: Hearing Impairment Unknown
+        description: Unknown
+        meaning: ot:HearingImpairmentUnknown
+      support-reason:
+        title: Support Reason
+        description: Primary reason for requiring adult social care support
+        meaning: ot:SupportReason
+      "support-reason.physical-access-mobility":
+        title: Support Reason Physical Access Mobility
+        description: "Physical support: Access and mobility only"
+        meaning: ot:SupportReasonPhysicalAccessMobility
+      "support-reason.physical-personal-care":
+        title: Support Reason Physical Personal Care
+        description: "Physical Support: Personal care support"
+        meaning: ot:SupportReasonPhysicalPersonalCare
+      "support-reason.sensory-visual":
+        title: Support Reason Sensory Visual
+        description: "Sensory Support: Support for visual impairment"
+        meaning: ot:SupportReasonSensoryVisual
+      "support-reason.sensory-hearing":
+        title: Support Reason Sensory Hearing
+        description: "Sensory Support: Support for hearing impairment"
+        meaning: ot:SupportReasonSensoryHearing
+      "support-reason.sensory-dual":
+        title: Support Reason Sensory Dual
+        description: "Sensory Support: Support for dual impairment"
+        meaning: ot:SupportReasonSensoryDual
+      "support-reason.memory-cognition":
+        title: Support Reason Memory Cognition
+        description: Support with memory and cognition
+        meaning: ot:SupportReasonMemoryCognition
+      "support-reason.learning-disability":
+        title: Support Reason Learning Disability
+        description: Learning disability support
+        meaning: ot:SupportReasonLearningDisability
+      "support-reason.mental-health":
+        title: Support Reason Mental Health
+        description: Mental health support
+        meaning: ot:SupportReasonMentalHealth
+      "support-reason.substance-misuse":
+        title: Support Reason Substance Misuse
+        description: "Social support: Substance misuse support"
+        meaning: ot:SupportReasonSubstanceMisuse
+      "support-reason.asylum-seeker":
+        title: Support Reason Asylum Seeker
+        description: "Social Support: Asylum seeker support"
+        meaning: ot:SupportReasonAsylumSeeker
+      "support-reason.social-isolation-other":
+        title: Support Reason Social Isolation Other
+        description: "Social support: Support for social isolation or other reason"
+        meaning: ot:SupportReasonSocialIsolationOther
+      "support-reason.unpaid-carer":
+        title: Support Reason Unpaid Carer
+        description: "Social support: Support to unpaid carer"
+        meaning: ot:SupportReasonUnpaidCarer
+      "support-reason.unknown":
+        title: Support Reason Unknown
+        description: Unknown
+        meaning: ot:SupportReasonUnknown
+      visual-impairment:
+        title: Visual Impairment
+        description: Observed visual impairment status
+        meaning: ot:VisualImpairment
+      "visual-impairment.blind":
+        title: Visual Impairment Blind
+        description: Blind/severely sight impaired
+        meaning: ot:VisualImpairmentBlind
+      "visual-impairment.partially-sighted":
+        title: Visual Impairment Partially Sighted
+        description: Partial sight/sight impaired
+        meaning: ot:VisualImpairmentPartiallySighted
+      "visual-impairment.no-impairment":
+        title: Visual Impairment No Impairment
+        description: No visual impairment
+        meaning: ot:VisualImpairmentNoImpairment
+      "visual-impairment.severity-unknown":
+        title: Visual Impairment Severity Unknown
+        description: Visual impairment - severity unknown
+        meaning: ot:VisualImpairmentSeverityUnknown
+      "visual-impairment.unknown":
+        title: Visual Impairment Unknown
+        description: Unknown
+        meaning: ot:VisualImpairmentUnknown
+
+  MeasurementType:
+    enum_uri: sg:measurement-type
+    title: Measurement Type
+    description: Codes to indicate the type of measurement.
+    permissible_values:
+      Attendance:
+        title: Attendance
+        description: Pupil attendance % at school
+        meaning: mt:Attendance
+      "Authorised Absences":
+        title: Authorised Absences
+        description: Pupil % absences from school that are authorised
+        meaning: mt:AuthorisedAbsences
+      "Unauthorised Absences":
+        title: Unauthorised Absences
+        description: Pupil % absences from school that are unauthorised
+        meaning: mt:UnauthorisedAbsences
+      caring-hours-per-week:
+        title: Caring Hours Per Week
+        description: Total hours spent caring per week
+        meaning: mt:CaringHoursPerWeek
+
+  MeasurementUnit:
+    enum_uri: sg:measurement-unit
+    title: Measurement Unit
+    description: Codes to indicate the unit of measurement.
+    permissible_values:
+      count:
+        title: Count
+        description: Number of discrete items, entities, or events
+        meaning: mu:Count
+      pct:
+        title: PCT
+        description: Percentage (%)
+        meaning: mu:Pct
+
+  # NameUseCode and AddressUseCode are imported from the Person Standard
+  # (person-standard.yaml) and reused unchanged; they are not redefined here.

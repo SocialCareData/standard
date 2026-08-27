@@ -11,7 +11,21 @@ tags:
   - Safeguarding
 reference: PUB02
 status: draft
+data_model: src/assets/model/safeguarding/safeguarding-standard.yaml
+non_technical_summary: |
+  The Person Standard enables us to describe core attributes of a person in care, like their name or age, but not any safeguarding information about them. To that end we've built the Safeguarding Standard, a set of connected points of data that, together, can build a picture of a person's context and care history.
+
+  The Safeguarding Standard has five main categories of data:
+  - `Organisation` objects, which describe data about overarching organisations that deliver services
+  - `Service` objects, which describe specific care and care-related services
+  - `Professional` objects, which describe individual care professionals like social workers, GPs, and anyone else that might be involved in the delivery of a service
+  - `ServiceEpisode` objects, which describe single, time-bound occurrences of service delivery.
+  - `LifeEvent` objects, which describe single, time-bound events in a person's life that, whether positive or negative, may have an effect on their day-to-day life and overall safeguarding circumstances, like an attendance at A&E or an exclusion from school.
+
+  Linked together, these components help describe the professional activity that surrounds a person in social care.
 ---
+
+<a href="/PUB02_safeguarding_standard_table" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
 
 ## Introduction
 
@@ -44,7 +58,7 @@ This document is for all personnel involved in collecting, storing and processin
 
 The following diagram illustrates the elements of the Safeguarding Standard.
 
-<p class="data-model-diagram"><img src="/assets/img/safeguarding/safeguarding-data-model-2026-07-17.svg" alt="Safeguarding Data Model" title="Safeguarding Data Model" /></p>
+<p class="data-model-diagram"><img src="/assets/img/safeguarding/safeguarding-data-model-2026-08-17.svg" alt="Safeguarding Data Model" title="Safeguarding Data Model" /></p>
 
 The model is organised around five top-level entities and the shared objects that link them together:
 
@@ -151,6 +165,12 @@ A service involved in the safeguarding or wellbeing of a person — the specific
 <span id="service-contact">contact</span>
 : Contact information for the service. Multi-valued (`1..*`). See [Person Standard → Contact](/PUB01_person_standard#contact).
 
+<span id="service-costFrequency">costFrequency</span>
+: The frequency at which the unit cost occurs. Required (`1..1`). See the [Service Cost Frequency Vocabulary](#service-cost-frequency-vocabulary).
+
+<span id="service-delivery">delivery</span>
+: The way the service is delivered. Multi-valued. Optional. (`0..*`). See the [Service Delivery Vocabulary](#service-delivery-vocabulary).
+
 <span id="service-relatedProfessional">relatedProfessional</span>
 : References to `Professional`s involved in the service. Multi-valued. Optional (`0..*`). See [Professional](#professional). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
@@ -173,6 +193,7 @@ A service involved in the safeguarding or wellbeing of a person — the specific
     "email": ["contact@example.org"],
     "telephone": ["+44 7946 0000"]
   } ],
+  "costFrequency": "none",
   "relatedOrganisation": [ { "@type": "Identifier", "value": "12345678", "system": "https://example.org/Id/example-organisation" } ]
 }
 {% endhighlight %}
@@ -268,6 +289,15 @@ While a single service episode may reflect routine support, changes in the numbe
 <span id="episode-finding">finding</span>
 : Observations or measurements made during the course of the episode about the subject and their circumstances. Multi-valued. Optional (`0..*`). See [Finding](#finding).
 
+<span id="episode-outcome">outcome</span>
+: Outcome of the episode for the subject. Optional (`0..1`). See [Episode Outcome vocabulary](#episode-outcome-vocabulary).
+
+<span id="episode-assessmentId">assessmentId</span>
+: Unique identifiers for any care needs assessments completed during this episode. Multi-valued. Optional (`0..*`). See [Care Needs Assessment](/PUB05_assessments_and_plans_standard#careneedsassessment).
+
+<span id="episode-planId">planId</span>
+: Unique identifiers for any care plans created or active during this episode. Multi-valued. Optional (`0..*`). See [Care Plan](/PUB05_assessments_and_plans_standard#careplan).
+
 #### Example
 
 <div class="example">
@@ -293,7 +323,9 @@ While a single service episode may reflect routine support, changes in the numbe
     "startDateTime": "2026-05-01T09:30:00Z"
   } ],
   "location": ["Anytown Family Centre"],
-  "finding": [ { "see Finding example" } ]
+  "finding": [ { "see Finding example" } ],
+  "assessmentId": [ { "@type": "Identifier", "value": "ASS-2026-001", "system": "https://example.org/Id/assessment" } ],
+  "planId": [ { "@type": "Identifier", "value": "PLAN-2026-001", "system": "https://example.org/Id/plan" } ]
 }
 {% endhighlight %}
 </div>
@@ -559,111 +591,43 @@ Coded fields draw their values from the controlled vocabularies below. Each code
 
 Used by [`Organisation.type`](#organisation-type). Codes to indicate the type of organisation.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
-
-| Code | Description |
-| :--- | :--- |
-| `local-authority` | Local Authority |
-| `nhs-trust` | NHS Trust |
-| `police-force` | Police Force |
-{:.table-bordered}
-
-</details>
-
+{% schema_table page.data_model OrganisationCode %}
 
 ### Service Code Vocabulary
 
 Used by [`Service.type`](#service-type). Codes to indicate the type of service.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
+{% schema_table page.data_model ServiceCode %}
 
-| Code | Description |
-| :--- | :--- |
-| `youth-offending` | Youth Offending Team |
-| `primary-school` | Primary School |
-| `high-school` | Secondary or High School |
-| `SEN-primary-school` | Primary School with specialist SEN services |
-| `SEN-high-school` | Secondary or High School with specialist SEN services |
-| `alternative-provision-school` | Alternative provision school |
-| `social-care` | Social Care Department |
-| `family-court` | Family Court |
-| `CAMHS` | Children and Adolescent mental health services |
-| `reablement` | Reablement |
-| `short-term-nursing-care` | Short term nursing care |
-| `short-term-residential-care` | Short term residential care |
-| `long-term-nursing-care` | Long term nursing care |
-| `long-term-residential-care` | Long term residential care |
-| `home-support-domiciliary` | Home support or domiciliary care |
-| `day-support` | Day support |
-| `meals` | Meals |
-| `transport` | Transport |
-| `equipment` | Equipment |
-| `direct-payment` | Direct payment |
-| `shared-lives` | Shared Lives |
-| `community-supported-living` | Community supported living |
-| `extra-care-housing` | Extra care housing |
-| `social-worker-support` | Professional support: Social worker |
-| `other-professional-support` | Professional support: Other |
-| `learning-education-employment` | Learning, education or employment support |
-| `end-of-life-care` | End of life care |
-| `emergency-support` | Emergency support |
-| `other-short-term-support` | Other short term support |
-| `other-long-term-support` | Other long term support |
-| `carer-respite` | Unpaid carer respite |
-| `carer-sitting-service` | Unpaid carer sitting service |
-| `carer-universal-services` | Unpaid carer universal services |
-| `other-carer-support` | Other unpaid carer support |
-{:.table-bordered}
+### Service Cost Frequency Vocabulary
 
-</details>
+Used by [`Service.costFrequency`](#service-costFrequency). Codes to indicate the payment schedule a service adheres to. From Adult Social Care Client Level Data specification.
 
+{% schema_table page.data_model ServiceCostFrequency %}
+
+### Service Delivery Vocabulary
+
+Used by [`Service.delivery`](#service-delivery). Codes to indicate the way a service is delivered. From Adult Social Care Client Level Data specification.
+
+{% schema_table page.data_model ServiceDelivery %}
 
 ### Episode Code Vocabulary
 
 Used by [`ServiceEpisode.type`](#episode-type). Codes to indicate the type of service episode.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
+{% schema_table page.data_model EpisodeCode %}
 
-| Code | Description |
-| :--- | :--- |
-| `early-help` | Early Help Assessment / Intervention |
-| `ehcp` | Education, Health, and Care plan |
-| `family-court-order` | Any order made by family court |
-| `cin-plan` | Child in Need (CIN) Plan |
-| `cp-plan` | Child Protection (CP) Plan |
-| `CAMHS-plan` | Children and Adolescent mental health services care plan |
-| `section-47` | Section 47 Enquiry |
-| `care-leaver` | Care Leaver Support |
-| `child-looked-after` | Child in LA care |
-| `adult-safeguarding` | Adult Safeguarding Enquiry (Section 42) |
-{:.table-bordered}
+### Episode Outcome Vocabulary
 
-</details>
+Used by [`ServiceEpisode.outcome`](#episode-outcome). Codes to indicate the outcome of the episode for the subject. From Adult Social Care Client Level Data specification.
+
+{% schema_table page.data_model EpisodeOutcome %}
 
 ### Event Code Vocabulary
 
 Used by [`LifeEvent.type`](#event-type). Codes to indicate the type of life event.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
-
-| Code | Description |
-| :--- | :--- |
-| `birth` | Birth |
-| `death` | Death |
-| `ae-attendance` | A&E Attendance |
-| `school-exclusion` | School Exclusion |
-| `school-suspension` | School Suspension |
-| `missing-person` | Reported Missing |
-| `safeguarding-concern` | Safeguarding Concern Raised |
-| `referral` | Referral made to relevant authority |
-| `homeless` | Made homeless |
-{:.table-bordered}
-
-</details>
+{% schema_table page.data_model EventCode %}
 
 ### Involvement Code Vocabulary
 
@@ -743,11 +707,14 @@ Used by [`Observation.type`](#observation-type). Codes to indicate the type of q
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.PMLD` | Profound and Multiple Learning Difficulty: have severe and complex learning difficulties as well as a physical disability or sensory impairment. |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.SLCN` | Speech, Language and Communication Needs: difficulty in communicating with others such as difficulty saying what they want to, understanding what is being said to them, difficulties understanding and applying social rules. |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.ASC` | Autistic Spectrum Condition: including Asperger's Syndrome and Autism with associated difficulties such as difficulties with language, communication, imagination and social interactions. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.DS` | Down Syndrome: a genetic disorder caused by the presence of all or part of a third copy of chromosome 21. |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.SEMH` | Social, Emotional and Mental Health difficulties: These may include becoming withdrawn or isolated, as well as displaying challenging, disruptive or disturbing behaviour. These behaviours may reflect underlying mental health difficulties such as anxiety or depression, self-harming, substance misuse, eating disorders or physical symptoms that are medically unexplained. |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.VI` | Visual Impairment: Partial or complete loss of sight not correctable by usual means (e.g. prescribed glasses or contact lens). |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.HI` | Hearing Impairment: With a degree of hearing loss. |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.MSI` | Multi Sensory Impairment: combined vision and hearing impairments. |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.PD` | Physical Disability: limitation on a person's physical functioning, mobility, dexterity or stamina. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.OTH` | Other SEND: any other special educational need or disability not covered by the other codes. |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.NSA` | NSA SEN support but no specialist assessment of type of need. |
 | **`EAL`** | English as an additional language |
 | &nbsp;&nbsp;&nbsp;&nbsp;└─ `EAL.<ISO 639-1 code>` | Two-letter code for observed first language, using [ISO 639-1](https://www.iso.org/iso-639-language-code) |
 | **`free-school-meals`** | Recipient of free school meals (FSM) |
@@ -831,34 +798,20 @@ Used by [`Observation.type`](#observation-type). Codes to indicate the type of q
 
 Used by [`Measurement.type`](#measurement-type). Codes to indicate the type of measurement.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
-
-| Code | Description |
-| :--- | :--- |
-| `Attendance` | Pupil attendance % at school |
-| `Authorised Absences` | Pupil % absences from school that are authorised |
-| `Unauthorised Absences` | Pupil % absences from school that are unauthorised |
-| `caring-hours-per-week` | Total hours spent caring per week |
-{:.table-bordered}
-
-</details>
+{% schema_table page.data_model MeasurementType %}
 
 ### Measurement Unit Vocabulary
 
 Used by [`Measurement.unit`](#measurement-unit). Codes to indicate the unit of measurement.
 
-<details>
-<summary markdown="span">See vocabulary</summary>
+{% schema_table page.data_model MeasurementUnit %}
 
-| Code | Description |
-| :--- | :--- |
-| `count` | Number of discrete items, entities, or events. Typically an integer. |
-| `pct` | Percentage (%) |
-{:.table-bordered}
 
-</details>
+## Ontology
 
+The ontology for this specification is defined in Turtle format and is available at: [safeguarding-standard.ttl](/assets/model/safeguarding/safeguarding-standard.ttl). It reuses the shared objects (`Identifier`, `Name`, `Address`, `Contact`) from the [Person Standard](/PUB01_person_standard).
+
+To validate a record against the constraints defined by this standard, a SHACL shape is provided: [safeguarding-standard-shape.ttl](/assets/model/safeguarding/safeguarding-standard-shape.ttl). It defines one shape per class, applying the cardinality and content rules for each.
 
 ## Report an issue
 
