@@ -36,7 +36,7 @@ Once a standard has been piloted and refined, we publish an updated version on t
 
 After implementation, we continue to maintain and improve each standard. We review feedback and respond to changes in policy, practice, technology and sector needs so the standards remain useful and up to date.
 
-**Get involved**
+## Get involved
 
 _Contribute to our standards_
 Our standards are shaped by the people who use them. Practitioners, commissioners, suppliers, researchers and people with lived experience can contribute through working groups, consultations and open feedback opportunities. Find out more about how to [contribute to our standards](contribute_to_the_standards)
