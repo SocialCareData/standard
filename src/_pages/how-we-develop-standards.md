@@ -28,7 +28,7 @@ We design and refine standards with input from the Standards Development Working
 **Pilot and improve**
 We test draft standards with early adopters to understand how they work in practice. We use feedback from pilots to refine the standards before wider implementation. We are currently coordinating our first pilots.
 
-**Implement**
+## Implement
 
 Once a standard has been piloted and refined, we publish an updated version on the website with supporting guidance to help organisations adopt and implement it.
 
