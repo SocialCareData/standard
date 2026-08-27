@@ -1,4 +1,4 @@
-/* Header nojs (no hamburger menu, no panels) */
+/* Header nojs (no hamburger menu) */
 .header.nojs {
   overflow-x: auto;
 }
@@ -7,8 +7,6 @@
   display: none;
 }
 
-/* Panels are absolutely positioned, so the header must not clip them.
-   `body > *` sets overflow-x: auto, which would compute overflow-y to auto. */
 .header:not(.nojs) {
   overflow: visible;
 }
