@@ -10,7 +10,7 @@ tags:
 
 We develop standards through an iterative, collaborative process. At each stage, we work with people across the sector — including frontline practitioners, data managers, commissioners, suppliers and technology vendors — to make sure our standards are practical, relevant and grounded in real-world needs.
 
-**Use case and requirements definition**
+## Use case and requirements definition
   
 We begin by defining clear [use cases](/use_cases) and the requirements needed to support them. This helps us identify where standards can add most value, including core standards that can support multiple use cases.
 
