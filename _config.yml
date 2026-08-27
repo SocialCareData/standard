@@ -35,9 +35,12 @@ nav:
       - title: Our use cases
         url: /use_cases
         description: The real situations the standards have to serve.
-      - title: How our use cases relate to our standards
+      - title: How our standards support our use cases
         url: /use_case_standard_matrix
         description: Trace each use case through to the standards it drives.
+      - title: How we develop standards
+        url: /how_we_develop_standards
+        description: The guiding principles for developing data standards.
   - title: Publications
     url: /publications
     children: []
