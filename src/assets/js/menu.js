@@ -8,14 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const hamburgerButton = header.querySelector('.hamburger-menu')
   const items = Array.from(header.querySelectorAll('.nav-item.has-panel'))
 
-  /* Narrow viewports use the hamburger sheet; the breakpoint matches header.css. */
+  // Breakpoint matches header.css: narrow viewports use the hamburger sheet.
   const isNarrow = () => window.matchMedia('(max-width: 1024px)').matches
-
-  /* Devices that cannot hover (touch) toggle the panel instead of following the
-     parent link, since they have no way to reveal it by hovering. */
+  // Touch devices toggle panels on tap since they cannot hover to reveal them.
   const isTouch = () => window.matchMedia('(hover: none)').matches
 
   const isOpen = item => item.classList.contains('open')
+  const isSheetOpen = () => nav.classList.contains('open')
 
   function setOpen(item, open) {
     item.classList.toggle('open', open)
@@ -24,9 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function closeAllPanels(except) {
-    items.forEach(function(item) {
-      if (item !== except) setOpen(item, false)
-    })
+    items.forEach(item => { if (item !== except) setOpen(item, false) })
   }
 
   function setSheet(open) {
@@ -39,24 +36,20 @@ document.addEventListener('DOMContentLoaded', function() {
      reopen the panel Escape just closed. */
   let suppressReveal = false
 
-  /* Clicking a control focuses it, and that focusin would open the panel for the
-     few milliseconds before the link navigates away - a visible flash. Hover
-     already covers mouse users, so focus only needs to open panels for keyboard
-     users; mousedown marks the focus that follows as pointer-driven. */
-  /* A panel closed by a click must stay closed while the pointer is still resting
-     on that item, otherwise the next mousemove would hover it straight back open. */
+  // Item just closed by a click; stays closed while the pointer rests on it so a
+  // stray mousemove does not hover it back open.
   let dismissed = null
 
+  // Focus following a mousedown is pointer-driven; only keyboard focus should open
+  // a panel (a click would flash it open before navigating), so ignore focusin
+  // while the pointer is pressing.
   let pointerFocus = false
   header.addEventListener('mousedown', function() { pointerFocus = true })
   window.addEventListener('mouseup', function() { pointerFocus = false })
 
-  /* Desktop: hovering or focusing anything in the bar opens that item's panel and
-     closes the rest, so childless items and the home link dismiss an open panel too.
-     Delegated, because mouseenter does not bubble. */
+  // Desktop: hovering or keyboard-focusing an item opens its panel and closes the
+  // rest. Delegated because mouseenter does not bubble.
   function reveal(event) {
-    /* Touch devices fire a synthetic mouseover before click; revealing here would
-       let the click handler immediately toggle the panel back shut. */
     if (isNarrow() || isTouch() || suppressReveal) return
     if (event.type === 'focusin' && pointerFocus) return
 
@@ -70,36 +63,25 @@ document.addEventListener('DOMContentLoaded', function() {
       if (item !== dismissed) setOpen(item, true)
       return
     }
-
-    /* Only another nav control dismisses an open panel. The header's own padding
-       sits between the bar and the panel below it, and must stay neutral so the
-       pointer can travel down into the panel without closing it. */
-    if (item || event.target.closest('.home')) closeAllPanels()
   }
   header.addEventListener('mouseover', reveal)
   header.addEventListener('focusin', reveal)
 
+  // A parent with a panel is a disclosure control, not a link: clicking its label
+  // or chevron toggles the panel instead of navigating (its own page sits inside
+  // the panel). Desktop keeps one panel open; narrow screens allow several.
+  function toggleItem(item) {
+    const open = !isOpen(item)
+    if (!isNarrow()) closeAllPanels(item)
+    setOpen(item, open)
+    dismissed = open ? null : item
+  }
+
   items.forEach(function(item) {
-    const link = item.querySelector('.nav-link')
-    const toggle = item.querySelector('.nav-toggle')
-
-    /* A parent that has a panel is a disclosure control, not a link: the label and
-       the chevron both toggle it and neither navigates, so a click never flashes
-       the panel open on its way to another page. The parent's own page is listed
-       inside the panel instead. One panel at a time on desktop; narrow screens
-       allow several accordions open at once. Without JS the label stays a link. */
-    function toggleItem() {
-      const open = !isOpen(item)
-      if (!isNarrow()) closeAllPanels(item)
-      setOpen(item, open)
-      dismissed = open ? null : item
-    }
-
-    toggle.addEventListener('click', toggleItem)
-
-    link.addEventListener('click', function(event) {
+    item.querySelector('.nav-toggle').addEventListener('click', () => toggleItem(item))
+    item.querySelector('.nav-link').addEventListener('click', function(event) {
       event.preventDefault()
-      toggleItem()
+      toggleItem(item)
     })
   })
 
@@ -114,20 +96,23 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!isNarrow() && !header.contains(event.relatedTarget)) closeAllPanels()
   })
 
+  // Clicking outside the header closes any open panel.
   document.addEventListener('click', function(event) {
     if (!header.contains(event.target)) closeAllPanels()
   })
 
+  // Escape closes the sheet (narrow) or the open panel (desktop), returning focus
+  // to the control that owns it.
   document.addEventListener('keydown', function(event) {
     if (event.key !== 'Escape') return
 
-    if (isNarrow() && nav.classList.contains('open')) {
+    if (isNarrow() && isSheetOpen()) {
       setSheet(false)
       hamburgerButton.focus()
       return
     }
 
-    const open = items.filter(isOpen)[0]
+    const open = items.find(isOpen)
     if (open) {
       suppressReveal = true
       setOpen(open, false)
@@ -136,9 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   })
 
-  hamburgerButton.addEventListener('click', function() {
-    setSheet(!nav.classList.contains('open'))
-  })
+  hamburgerButton.addEventListener('click', () => setSheet(!isSheetOpen()))
 
   /* Open Pagefind search modal when the search button is clicked */
   const searchButton = header.querySelector('.search-button')
@@ -151,27 +134,20 @@ document.addEventListener('DOMContentLoaded', function() {
     })
   }
 
-  /* Handle viewport resize to prevent unwanted menu transitions */
-  let resizeTimeout;
+  // Disable transitions while resizing, and reset menu state only when the layout
+  // actually crosses the breakpoint (mobile URL-bar collapse also fires resize).
+  let resizeTimeout
   let wasNarrow = isNarrow()
   window.addEventListener('resize', function() {
-    /* Add resizing class to disable transitions */
     nav.classList.add('resizing')
 
-    /* Panel state does not carry across the breakpoint. Only reset on an actual
-       crossing: mobile browsers fire resize when the URL bar collapses. */
     if (isNarrow() !== wasNarrow) {
       wasNarrow = isNarrow()
       closeAllPanels()
       setSheet(false)
     }
 
-    /* Clear existing timeout */
     clearTimeout(resizeTimeout)
-
-    /* Remove resizing class after resize is complete */
-    resizeTimeout = setTimeout(function() {
-      nav.classList.remove('resizing')
-    }, 100)
+    resizeTimeout = setTimeout(() => nav.classList.remove('resizing'), 100)
   })
 })
