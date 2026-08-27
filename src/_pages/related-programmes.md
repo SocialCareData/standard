@@ -27,5 +27,5 @@ Our work is relevant to several other programmes across government. We are monit
 | SCIP   | DHSC        | Ferry Lichtenberg        |
 | DISC   | DHSC        | Alice Ainsworth        |
 | Single Patient Record   | DHSC        | Ferry Lichtenberg        |
-
+{:.table-bordered}
 </article>
