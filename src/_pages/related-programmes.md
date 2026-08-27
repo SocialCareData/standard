@@ -6,7 +6,7 @@ tags:
 
 <article class="numbered-headings">
 
-Our work is relevant to several other programmes across government. We are monitoring or actively engaging with the following programmes to ensure alignment and keep these programmes informed about our work. We have a named individual from the programme responsible for engaging with each programme and identifying areas where we need to align. The programmes we anticipate most interlocks being required with and the relevant DRIs are listed below; please reach out to these individuals for any further questions or insights. Contact details for our programme leadership can be found [here](/). Alternatively, you can email [DataStandards-SocialCare@socialfinance.org.uk](mailto:DataStandards-SocialCare@socialfinance.org.uk).
+Our work is relevant to several other programmes across government. We are monitoring or actively engaging with the following programmes to ensure alignment and keep these programmes informed about our work. We have a named individual from the programme responsible for engaging with each programme and identifying areas where we need to align. The programmes we anticipate most engagement with and the Direct Responsible Individuals (DRIs) from the Data Standards in Social Care Programme to build those engagements are listed below; please reach out to these individuals for any further questions or insights. Contact details for our programme leadership can be found [here](/). Alternatively, you can email [DataStandards-SocialCare@socialfinance.org.uk](mailto:DataStandards-SocialCare@socialfinance.org.uk).
 
 
 | Programme     | Sponsor  | Standards Programme DRI | 
