@@ -32,7 +32,7 @@ We test draft standards with early adopters to understand how they work in pract
 
 Once a standard has been piloted and refined, we publish an updated version on the website with supporting guidance to help organisations adopt and implement it.
 
-**Maintain and improve**
+## Maintain and improve
 
 After implementation, we continue to maintain and improve each standard. We review feedback and respond to changes in policy, practice, technology and sector needs so the standards remain useful and up to date.
 
