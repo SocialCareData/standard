@@ -22,7 +22,7 @@ We prioritise use cases and related standards based on factors such as the value
 
 Before developing a new standard, we review what’s out there already – like existing data models, legislation, and established practice. Where possible, we build on established approaches, standards and taxonomies rather than creating something new from scratch. Alongside this, we do further research on user needs to make sure our standards capture the right information while retaining flexibility for professional judgement. 
 
-**Co-design**
+## Co-design
 We design and refine standards with input from the Standards Development Working Group. The group helps resolve key questions, review early drafts and ensure each standard is relevant, workable and aligned with user needs. Once a full draft is ready, we publish it on the website for wider feedback.
 
 **Pilot and improve**
