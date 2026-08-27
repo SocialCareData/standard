@@ -25,7 +25,7 @@ Before developing a new standard, we review what’s out there already – like 
 ## Co-design
 We design and refine standards with input from the Standards Development Working Group. The group helps resolve key questions, review early drafts and ensure each standard is relevant, workable and aligned with user needs. Once a full draft is ready, we publish it on the website for wider feedback.
 
-**Pilot and improve**
+## Pilot and improve
 We test draft standards with early adopters to understand how they work in practice. We use feedback from pilots to refine the standards before wider implementation. We are currently coordinating our first pilots.
 
 ## Implement
