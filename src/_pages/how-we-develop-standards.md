@@ -42,7 +42,7 @@ _Contribute to our standards_
 Our standards are shaped by the people who use them. Practitioners, commissioners, suppliers, researchers and people with lived experience can contribute through working groups, consultations and open feedback opportunities. Find out more about how to [contribute to our standards](contribute_to_the_standards)
 
 _Become a pilot site_
-We are currently coordinating our first pilots. To find out more and get involved, please contact ferry.lichtenberg@socialfinance.org.uk.
+We are currently coordinating our first pilots. To find out more and get involved, please contact [DataStandards-SocialCare@socialfinance.org.uk](mailto:DataStandards-SocialCare@socialfinance.org.uk).
 
 
 </article>
