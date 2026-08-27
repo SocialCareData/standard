@@ -1,0 +1,62 @@
+/* Collapsible Non-technical Summary Card */
+.summary-card {
+  background-color: #f2f7fa;
+  border-left: 5px solid #0f4b69;
+  border-top: 1px solid #d4e3eb;
+  border-right: 1px solid #d4e3eb;
+  border-bottom: 1px solid #d4e3eb;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+  padding: 1rem 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.summary-card[open] {
+  background-color: #ffffff;
+  border-color: #0f4b69 #d4e3eb #d4e3eb #0f4b69;
+}
+
+.summary-card summary {
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #0f4b69;
+  list-style: none; /* Hide default arrow on some browsers */
+  outline: none;
+  display: flex;
+  align-items: center;
+}
+
+/* Custom indicator arrow */
+.summary-card summary::-webkit-details-marker {
+  display: none; /* Hide native arrow on webkit */
+}
+
+.summary-card summary::before {
+  content: "▶";
+  font-size: 0.8rem;
+  margin-right: 0.75rem;
+  color: #0f4b69;
+  transition: transform 0.2s ease-in-out;
+  display: inline-block;
+}
+
+.summary-card[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.summary-card summary:hover span {
+  text-decoration: underline;
+}
+
+.summary-card .summary-content {
+  margin-top: 0.5rem;
+  border-top: 1px dashed #d4e3eb;
+  padding-top: 0rem;
+  color: #333333;
+}
+
+.summary-card .summary-content p:last-child {
+  margin-bottom: 0;
+}

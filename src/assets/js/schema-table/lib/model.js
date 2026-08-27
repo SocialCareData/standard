@@ -45,6 +45,10 @@ function extractProperties (model, className) {
     const kind = rangeKind(model, range)
     const row = {
       name,
+      // Display label for the Field name cell: a slot's `title` when set (e.g.
+      // where the wire/JSON key differs from the LinkML slot name), else the
+      // slot name itself.
+      label: slot.title || name,
       cardinality: { min: slot.required ? 1 : 0, max: slot.multivalued ? undefined : 1 },
       kind,
       classRef: kind === 'class' ? range : undefined,
@@ -83,17 +87,19 @@ function resolveOptions (model, enumName) {
 
 /**
  * Resolve an enum into the rows a vocabulary table needs: one
- * `{ code, description }` per permissible value, in declaration order. The code
- * is the value's `title` (falling back to its name); the description its
- * definition (falling back to its title).
+ * `{ code, label, description }` per permissible value, in declaration order.
+ * The code is the value's name (its key — the SKOS-style notation used in data,
+ * e.g. `1`, `usual`, `MTH`); the label is its `title`; the description its
+ * definition.
  *
- * @returns {{concepts:{code:string,description:string}[]}}
+ * @returns {{concepts:{code:string,label:string,description:string}[]}}
  */
 function resolveVocabulary (model, enumName) {
   return {
     concepts: permissibleValues(model, enumName).map(pv => ({
-      code: pv.title,
-      description: pv.description || pv.title
+      code: pv.name,
+      label: pv.title,
+      description: pv.description || ''
     }))
   }
 }

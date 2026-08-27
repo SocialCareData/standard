@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const { loadModel, isClass } = require('./linkml')
+const { loadModelFile, isClass } = require('./linkml')
 const { slugify } = require('./format')
 const { extractProperties, resolveVocabulary, findVocabularyEnum } = require('./model')
 const { renderTable, renderVocabularyTable } = require('./table')
@@ -16,7 +16,7 @@ function readModel (modelPath, rootDir) {
   if (!fs.existsSync(abs)) {
     throw new Error(`LinkML model file not found: ${modelPath} (resolved to ${abs})`)
   }
-  return loadModel(fs.readFileSync(abs, 'utf8'))
+  return loadModelFile(abs)
 }
 
 /**
@@ -39,7 +39,7 @@ function readModel (modelPath, rootDir) {
  * @returns {string} Markdown table (a property table, or a vocabulary table
  *   wrapped in a <details> element).
  */
-function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadings } = {}) {
+function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit, collapsible = true } = {}) {
   if (!modelPath) throw new Error('modelPath is required')
   if (!entity) throw new Error('entity is required')
 
@@ -48,7 +48,7 @@ function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadin
     throw new Error(`LinkML model file not found: ${modelPath} (resolved to ${abs})`)
   }
 
-  const model = loadModel(fs.readFileSync(abs, 'utf8'))
+  const model = loadModelFile(abs)
 
   // Prefer a class match (property table); fall back to a controlled-vocabulary
   // property/enum name (vocabulary table).
@@ -61,13 +61,13 @@ function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadin
       : new Set(pageHeadings.map(slugify))
     // The `{: .schema-table}` IAL tags the generated <table> with a class so it
     // can be styled without affecting other tables on the site.
-    return `${renderTable(rows, availableAnchors)}\n{: .schema-table}`
+    return `${renderTable(rows, availableAnchors, optionsLimit)}\n{: .schema-table}`
   }
 
   const enumName = findVocabularyEnum(model, entity)
   if (enumName) {
     const { concepts } = resolveVocabulary(model, enumName)
-    return renderVocabularyTable(concepts)
+    return renderVocabularyTable(concepts, { collapsible })
   }
 
   throw new Error(
@@ -90,7 +90,7 @@ function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadin
  * @returns {string} An HTML diff table (a property table, or a vocabulary table
  *   wrapped in a <details> element).
  */
-function generateDiffTable ({ modelPath, previousPath, entity, rootDir = process.cwd(), pageHeadings } = {}) {
+function generateDiffTable ({ modelPath, previousPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit, collapsible = true } = {}) {
   if (!modelPath) throw new Error('modelPath is required')
   if (!previousPath) throw new Error('previousPath is required')
   if (!entity) throw new Error('entity is required')
@@ -101,12 +101,12 @@ function generateDiffTable ({ modelPath, previousPath, entity, rootDir = process
   const availableAnchors = pageHeadings === undefined ? null : new Set(pageHeadings.map(slugify))
 
   if (isClass(current, entity) || isClass(previous, entity)) {
-    return renderDiffTable(diffClassProperties(current, previous, entity, availableAnchors))
+    return renderDiffTable(diffClassProperties(current, previous, entity, availableAnchors, optionsLimit))
   }
 
   const enumName = findVocabularyEnum(current, entity) || findVocabularyEnum(previous, entity)
   if (enumName) {
-    return renderDiffVocabularyTable(diffVocabulary(current, previous, enumName))
+    return renderDiffVocabularyTable(diffVocabulary(current, previous, enumName), { collapsible })
   }
 
   throw new Error(

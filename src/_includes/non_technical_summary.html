@@ -1,0 +1,10 @@
+{% if page.non_technical_summary %}
+<details class="summary-card">
+  <summary class="summary-title">
+    <span>Non-technical Summary</span>
+  </summary>
+  <div class="summary-content">
+    {{ page.non_technical_summary | markdownify }}
+  </div>
+</details>
+{% endif %}

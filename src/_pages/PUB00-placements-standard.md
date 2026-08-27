@@ -10,6 +10,14 @@ tags:
 reference: PUB00
 status: draft
 data_model: src/assets/model/placements/placements-standard.yaml
+non_technical_summary: |
+  The market for children’s social care placements -- that is, the accommodation and support provided to children when they are taken into the care of the local authority -- has been described by the Local Government Association as '[broken](https://www.local.gov.uk/about/news/childrens-social-care-placements-costing-ps10000-plus-rise-sharply-five-years-new-lga)'. Many children in residential care nationally are currently placed more than 20 miles from home.
+
+  Managing this market – essentially ensuring that the right provision is available in the right place and at the right notice – requires market intelligence. Local authorities must have a clear picture of supply and demand in order to be able to tell providers what new provision they would be likely to pay for, or to make decisions about where to invest their own funds, or to guarantee payments.
+
+  But every local authority is different: key items like child needs, determinants of placement availability, services provided, and costs of placements tend to recorded in different ways, making it hard to answer fundamental questions about regional placement sufficiency. There is a lack of a shared data ‘language’ between neighbouring authorities that would enable 'like-for-like' comparison and analysis of regional -- and national -- placements.
+
+  This Placement Standard seeks to solve this issue by standardising some of the data collected about children in care at the point they are referred for placement and the point where a placement is agreed. The goal of this standard is to support better analysis of placement sufficiency at the local and regional level, tackle high costs in the care market and improve outcomes for children in care.
 ---
 
 <a href="/PUB00_placements_standard_table" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
@@ -64,7 +72,7 @@ The top-level record. Captures the unique child identifier and links the placeme
   <h5 id="example-placement">Example - Placement (top level)</h5>
 {% highlight json %}
 {
-  "@context": "https://socialcaredata.github.io/ontology/placements/context.jsonld",
+  "@context": "https://socialcaredata.github.io/assets/model/placements/context.jsonld",
   "@id": "ex:ABCD2012-001",
   "@type": "Placement",
   "childId": "ABCD2012",
@@ -80,7 +88,7 @@ The top-level record. Captures the unique child identifier and links the placeme
 
 <div class="note">
   <h5 id="note-placement">Note - full lifecycle</h5>
-  <p>The example above only sketches the top-level wiring. See <a href="/assets/shacl/examples/valid-placement.jsonld"><code>assets/shacl/examples/valid-placement.jsonld</code></a> for a full lifecycle example, and <a href="/assets/shacl/examples/valid-other-options.jsonld"><code>assets/shacl/examples/valid-other-options.jsonld</code></a> for an example exercising every "Other" controlled-vocab option with paired free-text values.</p>
+  <p>The example above only sketches the top-level wiring. See <a href="/assets/model/placements/examples/valid-placement.jsonld"><code>assets/model/placements/examples/valid-placement.jsonld</code></a> for a full lifecycle example, and <a href="/assets/model/placements/examples/valid-other-options.jsonld"><code>assets/model/placements/examples/valid-other-options.jsonld</code></a> for an example exercising every "Other" controlled-vocab option with paired free-text values.</p>
 </div>
 
 
@@ -122,7 +130,7 @@ The referral request: how urgently the child needs to be placed, how many siblin
 
 <div class="note">
   <h5 id="note-availability">Note</h5>
-  <p>See <a href="/assets/shacl/examples/valid-other-options.jsonld"><code>assets/shacl/examples/valid-other-options.jsonld</code></a> for a worked example using <code>olr:OutOfLAReasonOther</code> with multiple paired free-text reasons.</p>
+  <p>See <a href="/assets/model/placements/examples/valid-other-options.jsonld"><code>assets/model/placements/examples/valid-other-options.jsonld</code></a> for a worked example using <code>olr:OutOfLAReasonOther</code> with multiple paired free-text reasons.</p>
 </div>
 
 
@@ -186,7 +194,7 @@ The child's needs that the placement must accommodate: communication, cultural, 
 
 <div class="note">
   <h5 id="note-requirements">Note - "Other" pairings</h5>
-  <p>Each controlled-vocab field that exposes an "Other" option is paired with a multi-valued free-text property: <code>cn:Other</code> ↔ <code>specificCommunicationRequirementOther</code>, <code>cln:Other</code> ↔ <code>culturalNeedsOther</code>, <code>st:Other</code> ↔ <code>additionalSupportOther</code>. Whenever the "Other" concept is selected, the paired free-text property must be provided. See <a href="/assets/shacl/examples/valid-other-options.jsonld"><code>assets/shacl/examples/valid-other-options.jsonld</code></a>.</p>
+  <p>Each controlled-vocab field that exposes an "Other" option is paired with a multi-valued free-text property: <code>cn:Other</code> ↔ <code>specificCommunicationRequirementOther</code>, <code>cln:Other</code> ↔ <code>culturalNeedsOther</code>, <code>st:Other</code> ↔ <code>additionalSupportOther</code>. Whenever the "Other" concept is selected, the paired free-text property must be provided. See <a href="/assets/model/placements/examples/valid-other-options.jsonld"><code>assets/model/placements/examples/valid-other-options.jsonld</code></a>.</p>
 </div>
 
 
@@ -419,7 +427,7 @@ LA-internal metadata about who recorded each part of the placement record (refer
 
 ## Ontology
 
-The ontology for this specification is defined in Turtle format and is available at: [ontology.ttl](/assets/ttl/ontology.ttl).
+The ontology for this specification is defined in Turtle format and is available at: [placements-standard.ttl](/assets/model/placements/placements-standard.ttl).
 
 ## Taxonomies
 
@@ -435,7 +443,7 @@ Specific communication and language requirements a child may have. Multi-valued:
 * `Other`: Another communication or language requirement not listed. Supply details via `specificCommunicationRequirementOther`.
 * `None`: No specific communication or language requirements.
 
-Source vocabulary: [taxonomy-communication-need.ttl](/assets/ttl/taxonomy-communication-need.ttl). Used by `specificCommunicationRequirement` on [PlacementRequirements](#placementrequirements).
+Used by `specificCommunicationRequirement` on [PlacementRequirements](#placementrequirements).
 
 ### Living Arrangement Taxonomy
 
@@ -447,7 +455,7 @@ Recommendations for who the child can be cared for alongside in a placement.
 * `Only with other younger children`: The child should only live with other children who are younger.
 * `No preference`: No preference about who the child lives alongside.
 
-Source vocabulary: [taxonomy-living-arrangement.ttl](/assets/ttl/taxonomy-living-arrangement.ttl). Used by `livingCompanions` on [PlacementRequirements](#placementrequirements).
+Used by `livingCompanions` on [PlacementRequirements](#placementrequirements).
 
 ### Out of LA Reason Taxonomy
 
@@ -458,7 +466,7 @@ The reason why the preferred placement location is in a different LA than the pl
 * `Court order`: Placement is sought outside the placing LA because of a court order.
 * `Other`: Another reason not listed. Supply details via `outOfLAReasonOther`.
 
-Source vocabulary: [taxonomy-outof-la-reason.ttl](/assets/ttl/taxonomy-outof-la-reason.ttl). Used by `outOfLAReason` on [PlacementAvailability](#placementavailability).
+Used by `outOfLAReason` on [PlacementAvailability](#placementavailability).
 
 ### Placement Type Taxonomy
 
@@ -468,7 +476,7 @@ The type of placement the child receives.
 * `Residential`: A placement in a residential children's home.
 * `Supported Accommodation`: A supported accommodation placement, typically for older young people.
 
-Source vocabulary: [taxonomy-placement-type.ttl](/assets/ttl/taxonomy-placement-type.ttl). Used by `placementType` on [ActualPlacement](#actualplacement).
+Used by `placementType` on [ActualPlacement](#actualplacement).
 
 ### Placement Urgency Taxonomy
 
@@ -478,7 +486,7 @@ How urgently the child needs to be placed. Captures urgency rather than an absol
 * `< 5 days`: Placement is needed within five days.
 * `> 5 days`: Placement is needed in more than five days.
 
-Source vocabulary: [taxonomy-placement-urgency.ttl](/assets/ttl/taxonomy-placement-urgency.ttl). Used by `neededBy` on [PlacementAvailability](#placementavailability).
+Used by `neededBy` on [PlacementAvailability](#placementavailability).
 
 ### Support Type Taxonomy
 
@@ -491,19 +499,19 @@ Additional support provision required alongside a placement. Multi-valued: selec
 * `NA`: Not applicable; no additional support is required.
 * `Other`: Other additional support is required. Supply details via `additionalSupportOther`.
 
-Source vocabulary: [taxonomy-support-type.ttl](/assets/ttl/taxonomy-support-type.ttl). Used by `additionalSupport` on [PlacementRequirements](#placementrequirements).
+Used by `additionalSupport` on [PlacementRequirements](#placementrequirements).
 
 ## Validation
 
-A [SHACL shape](/assets/shacl/shacl-shape.ttl) encodes:
+A [SHACL shape](/assets/model/placements/placements-standard-shape.ttl) encodes:
 
-- structural cardinality (mirroring the OWL restrictions in [ontology.ttl](/assets/ttl/ontology.ttl)),
+- structural cardinality (mirroring the OWL restrictions in [placements-standard.ttl](/assets/model/placements/placements-standard.ttl)),
 - controlled-vocabulary enforcement (`sh:in` over each SKOS scheme),
 - pattern checks (UK postcode prefix on `placementLocation`),
 - conditional checks for the `Other` vocab pairings,
 - and severity-`Warning` cost sense-checks.
 
-A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, applies the [JSON-LD context file](/assets/shacl/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
+A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, applies the [JSON-LD context file](/assets/model/placements/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
 
 ## Standard Placement Reporting Spreadsheet
 
