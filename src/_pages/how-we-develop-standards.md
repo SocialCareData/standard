@@ -18,7 +18,7 @@ We begin by defining clear [use cases](/use_cases) and the requirements needed t
 
 We prioritise use cases and related standards based on factors such as the value they could deliver, the level of sector demand and the feasibility of implementation.
 
-**Research**
+## Research
 
 Before developing a new standard, we review what’s out there already – like existing data models, legislation, and established practice. Where possible, we build on established approaches, standards and taxonomies rather than creating something new from scratch. Alongside this, we do further research on user needs to make sure our standards capture the right information while retaining flexibility for professional judgement. 
 
