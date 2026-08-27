@@ -14,7 +14,7 @@ We develop standards through an iterative, collaborative process. At each stage,
   
 We begin by defining clear [use cases](/use_cases) and the requirements needed to support them. This helps us identify where standards can add most value, including core standards that can support multiple use cases.
 
-**Prioritisation**
+## Prioritisation
 
 We prioritise use cases and related standards based on factors such as the value they could deliver, the level of sector demand and the feasibility of implementation.
 
