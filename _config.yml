@@ -27,14 +27,42 @@ homepage:
   title: Social Care Data
   url: /
 nav:
-  - title: Use Cases
-    url: /use_cases
+  - title: Learn
+    children:
+      - title: Learn about the standards
+        url: /learn_about_the_standards
+        description: What the standards are and why they matter.
+      - title: Our use cases
+        url: /use_cases
+        description: The real situations the standards have to serve.
+      - title: How our standards support our use cases
+        url: /use_case_standard_matrix
+        description: Trace each use case through to the standards it drives.
+      - title: How we develop standards
+        url: /how_we_develop_standards
+        description: The guiding principles for developing data standards.
   - title: Publications
     url: /publications
-  - title: Updates
-    url: /updates
-  - title: Calendar
-    url: /calendar
+    children: []
+  - title: Contribute
+    children:
+      - title: Contribute to the standards
+        url: /contribute_to_the_standards
+        description: Ways to get involved, from the mailing list to the working groups.
+      - title: Our standards working groups
+        url: /standards_working_groups
+        description: Working groups shaping each standard.
+      - title: Calendar
+        url: /calendar
+        description: Upcoming events across the programme.
+  - title: About
+    children:
+      - title: Updates
+        url: /updates
+        description: Latest news and updates from the programme.
+      - title: Related programmes
+        url: /related_programmes
+        description: Adjacent standards work in health, education and local government.
 pagefind: true
 check_internal_links: true
 check_external_links: true
