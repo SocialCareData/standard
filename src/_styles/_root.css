@@ -32,6 +32,10 @@
   --main-text-color: rgb(21, 35, 54);
   --max-width-image: 70rem;
   --max-width-text: 56rem;
+  --nav-panel-background: rgb(11, 56, 79);
+  --nav-panel-muted: rgba(255, 255, 255, 0.72);
+  --nav-panel-rule: rgba(255, 255, 255, 0.28);
+  --nav-panel-shadow: 0 1rem 1.4rem -0.5rem rgba(0, 0, 0, 0.45);
 }
 
 /* Adaptive Layout */

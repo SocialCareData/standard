@@ -1,9 +1,22 @@
 <header class="header nojs">{% if site.homepage %}
   <a class="home" href="{{ site.homepage.url }}">{{ site.homepage.title }}</a>{% endif %}{% if site.nav %}
-  <nav class="nav" id="main-menu" aria-label="Main navigation menu">
-    <ul>{% for link in site.nav %}
-      <li><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}{% if site.pagefind %}
-      <li>
+  <nav class="site-nav" id="main-menu" aria-label="Main navigation menu">
+    <ul class="nav-bar">{% for item in site.nav %}{% assign children = item.children | where_exp: "child", "child.draft != true" %}
+      <li class="nav-item{% if children.size > 0 %} has-panel{% endif %}">
+        <a class="nav-link" href="{{ item.url }}">{{ item.title }}</a>{% if children.size > 0 %}
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel-{{ forloop.index }}" aria-label="Show {{ item.title }} submenu">
+          <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
+        <div class="nav-panel" id="nav-panel-{{ forloop.index }}" hidden>
+          <p class="nav-panel-title">{{ item.description | default: item.title }}</p>
+          <ul class="nav-panel-list">{% for child in children %}
+            <li>
+              <a href="{{ child.url }}"><span class="nav-child-title">{{ child.title }}</span>{% if child.description %}<span class="nav-child-description">{{ child.description }}</span>{% endif %}</a>
+            </li>{% endfor %}
+          </ul>
+        </div>{% endif %}
+      </li>{% endfor %}{% if site.pagefind %}
+      <li class="nav-item nav-search">
         <button type="button" class="search-button" aria-label="Search">
           <svg class="icon-text" aria-hidden="true">
             <use href="/assets/icon/search.svg#root"></use>
