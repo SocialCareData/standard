@@ -19,7 +19,8 @@ const { slugify } = require('./format')
  *   - {@link resolveOptions} — the taxonomy link + labels for an enum-ranged
  *     (controlled-vocabulary) property's "Options" column;
  *   - {@link resolveVocabulary} — the Code / Description rows for an enum's
- *     collapsible vocabulary table;
+ *     collapsible vocabulary table, with any parent/child hierarchy the codes
+ *     imply (see {@link addHierarchy});
  *   - {@link findVocabularyEnum} — resolve a property (or enum) name to the
  *     enum whose values a vocabulary table should list.
  */
@@ -85,6 +86,71 @@ function resolveOptions (model, enumName) {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Vocabulary hierarchy (inferred from dot-notation codes)
+// ---------------------------------------------------------------------------
+
+// LinkML has no way to declare that one permissible value is a narrower term of
+// another, but the codes themselves say so: `SEND.SpLD` is a sub-type of
+// `SEND`, `accommodation-status.refuge` of `accommodation-status`. So the
+// hierarchy is read back off the codes, treating `.` as the separator.
+const CODE_SEPARATOR = '.'
+
+/**
+ * The nearest ancestor of `code` that is itself a code in `codes`: the longest
+ * dot-separated prefix present in the vocabulary, or null when there is none.
+ *
+ * Only prefixes that really exist as permissible values count, so a dotted code
+ * whose parent was never declared (e.g. `CA.nutrition` with no `CA`) stays a
+ * top-level term rather than being nested under a phantom parent.
+ */
+function nearestAncestor (code, codes) {
+  const parts = String(code).split(CODE_SEPARATOR)
+  for (let i = parts.length - 1; i > 0; i--) {
+    const candidate = parts.slice(0, i).join(CODE_SEPARATOR)
+    if (codes.has(candidate)) return candidate
+  }
+  return null
+}
+
+/**
+ * Annotate concepts with the hierarchy their codes imply and order them as a
+ * tree: each concept gains `parent` (the code of its nearest declared ancestor,
+ * or null), `depth` (0 for a top-level term) and `hasChildren`.
+ *
+ * Ordering is depth-first and stable: top-level terms keep their declaration
+ * order, and every descendant follows its parent — so a child declared away
+ * from its parent still renders beneath it. A flat vocabulary (no code is a
+ * prefix of another) comes back annotated but otherwise untouched.
+ *
+ * @returns {{code,label,description,parent:?string,depth:number,hasChildren:boolean}[]}
+ */
+function addHierarchy (concepts) {
+  const codes = new Set(concepts.map(c => c.code))
+  // Children by parent code, in declaration order; null keys the roots.
+  const childrenOf = new Map()
+  concepts.forEach(concept => {
+    const parent = nearestAncestor(concept.code, codes)
+    const siblings = childrenOf.get(parent) || []
+    siblings.push({ ...concept, parent })
+    childrenOf.set(parent, siblings)
+  })
+
+  const ordered = []
+  const visit = (concept, depth) => {
+    const children = childrenOf.get(concept.code) || []
+    ordered.push({ ...concept, depth, hasChildren: children.length > 0 })
+    children.forEach(child => visit(child, depth + 1))
+  }
+  ;(childrenOf.get(null) || []).forEach(root => visit(root, 0))
+  return ordered
+}
+
+/** Whether any concept in a resolved vocabulary sits below a parent term. */
+function isHierarchical (concepts) {
+  return concepts.some(c => c.depth > 0)
+}
+
 /**
  * Resolve an enum into the rows a vocabulary table needs: one
  * `{ code, label, description }` per permissible value, in declaration order.
@@ -92,15 +158,19 @@ function resolveOptions (model, enumName) {
  * e.g. `1`, `usual`, `MTH`); the label is its `title`; the description its
  * definition.
  *
- * @returns {{concepts:{code:string,label:string,description:string}[]}}
+ * Each row also carries the hierarchy its code implies — `parent`, `depth` and
+ * `hasChildren` — so the renderer can indent narrower terms under broader ones.
+ * See {@link addHierarchy}.
+ *
+ * @returns {{concepts:{code,label,description,parent,depth,hasChildren}[]}}
  */
 function resolveVocabulary (model, enumName) {
   return {
-    concepts: permissibleValues(model, enumName).map(pv => ({
+    concepts: addHierarchy(permissibleValues(model, enumName).map(pv => ({
       code: pv.name,
       label: pv.title,
       description: pv.description || ''
-    }))
+    })))
   }
 }
 
@@ -120,5 +190,9 @@ module.exports = {
   extractProperties,
   resolveOptions,
   resolveVocabulary,
-  findVocabularyEnum
+  findVocabularyEnum,
+  addHierarchy,
+  isHierarchical,
+  nearestAncestor,
+  CODE_SEPARATOR
 }

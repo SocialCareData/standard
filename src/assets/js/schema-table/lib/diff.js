@@ -3,7 +3,10 @@
 const { getClass } = require('./linkml')
 const { extractProperties, resolveVocabulary } = require('./model')
 const { cardinality, datatypeLabel } = require('./format')
-const { escapeHtml, normalizeOptionsLimit, COLUMNS, VOCAB_COLUMNS } = require('./table')
+const {
+  escapeHtml, normalizeOptionsLimit, hasHierarchy, vocabularyColumns,
+  HIERARCHY_INDENT, HIERARCHY_BRANCH, COLUMNS
+} = require('./table')
 
 /**
  * Diff two versions of a LinkML model and render the result as a Markdown table
@@ -73,13 +76,38 @@ function propertyCells (row, availableAnchors, optionsLimit) {
   ]
 }
 
-/** The three `{ text, html }` cells of a vocabulary row, in {@link VOCAB_COLUMNS} order. */
-function vocabularyCells (concept) {
-  return [
-    { text: concept.code, html: `<code>${escapeHtml(concept.code)}</code>` },
-    { text: (concept.label || '').replace(/\s+/g, ' ').trim(), html: escapeHtml(concept.label) },
-    { text: (concept.description || '').replace(/\s+/g, ' ').trim(), html: escapeHtml(concept.description) }
-  ]
+/**
+ * The "Code" cell of a vocabulary row, mirroring the plain table: bold for a
+ * broader term and indented under its parent for a narrower one when the
+ * vocabulary is hierarchical. Only the `html` carries the decoration — the
+ * comparison `text` stays the bare code, so a term moving level (because its
+ * parent was added or removed) is not reported as a changed code.
+ */
+function vocabularyCodeCellDiff (concept, hierarchical) {
+  const code = `<code>${escapeHtml(concept.code)}</code>`
+  const depth = Number.isInteger(concept.depth) ? concept.depth : 0
+  let html = code
+  if (hierarchical) {
+    html = depth === 0
+      ? `<strong>${code}</strong>`
+      : `${HIERARCHY_INDENT.repeat(depth)}${HIERARCHY_BRANCH} ${code}`
+  }
+  return { text: concept.code, html }
+}
+
+/**
+ * The `{ text, html }` cells of a vocabulary row, in vocabularyColumns order.
+ * `hierarchical` says whether either version of the vocabulary nests its codes,
+ * so both sides of the diff are decorated the same way; `showLabel: false` drops
+ * the Label cell (and with it any label-only change, which is no longer shown).
+ */
+function vocabularyCells (concept, hierarchical, showLabel = true) {
+  const cells = [vocabularyCodeCellDiff(concept, hierarchical)]
+  if (showLabel) {
+    cells.push({ text: (concept.label || '').replace(/\s+/g, ' ').trim(), html: escapeHtml(concept.label) })
+  }
+  cells.push({ text: (concept.description || '').replace(/\s+/g, ' ').trim(), html: escapeHtml(concept.description) })
+  return cells
 }
 
 // ---------------------------------------------------------------------------
@@ -160,12 +188,14 @@ function diffClassProperties (currentModel, previousModel, className, availableA
 
 /**
  * Diff the permissible values of one enum between two model versions.
+ * `showLabel: false` omits the Label column, as for the plain table.
  * @returns {{rows:object[]}}
  */
-function diffVocabulary (currentModel, previousModel, enumName) {
+function diffVocabulary (currentModel, previousModel, enumName, { showLabel = true } = {}) {
   const curConcepts = (currentModel.enums || {})[enumName] ? resolveVocabulary(currentModel, enumName).concepts : []
   const prevConcepts = (previousModel.enums || {})[enumName] ? resolveVocabulary(previousModel, enumName).concepts : []
-  const rows = diffRows(curConcepts, prevConcepts, c => c.code, vocabularyCells)
+  const hierarchical = hasHierarchy(curConcepts) || hasHierarchy(prevConcepts)
+  const rows = diffRows(curConcepts, prevConcepts, c => c.code, c => vocabularyCells(c, hierarchical, showLabel))
   return { rows }
 }
 
@@ -216,8 +246,8 @@ function renderDiffTable ({ rows }) {
  * <details>/<summary> wrapper the plain vocabulary tables use. The blank lines
  * around the table are required so kramdown parses it into a real <table>.
  */
-function renderDiffVocabularyTable ({ rows }, { collapsible = true } = {}) {
-  const body = renderDiffMarkdown(rows, VOCAB_COLUMNS, ':---')
+function renderDiffVocabularyTable ({ rows }, { collapsible = true, showLabel = true } = {}) {
+  const body = renderDiffMarkdown(rows, vocabularyColumns(showLabel), ':---')
   if (!collapsible) return `${body}\n{: .table-bordered .schema-diff}`
   return [
     '<details>',

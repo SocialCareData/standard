@@ -5,7 +5,7 @@ const assert = require('node:assert/strict')
 const path = require('node:path')
 
 const { loadModel } = require('../lib/linkml')
-const { diffClassProperties, diffVocabulary, renderDiffTable } = require('../lib/diff')
+const { diffClassProperties, diffVocabulary, renderDiffTable, renderDiffVocabularyTable } = require('../lib/diff')
 const { generateDiffTable } = require('../lib/generate')
 
 const REPO_ROOT = path.resolve(__dirname, '..', '..', '..', '..', '..')
@@ -145,4 +145,58 @@ test('integration: a controlled-vocabulary property renders a diffed vocabulary 
   assert.match(md, /\| Code \| Label \| Definition \|/)
   assert.match(md, /\{: \.table-bordered \.schema-diff\}/)
   assert.match(md, /<\/details>$/)
+})
+
+// ---------------------------------------------------------------------------
+// Hierarchical vocabularies (dot-notation codes)
+// ---------------------------------------------------------------------------
+
+const H_CUR = loadModel(`
+name: h-cur
+enums:
+  Tree:
+    permissible_values:
+      SEND: { title: SEND }
+      "SEND.SpLD": { title: SEND SpLD }
+      "SEND.MLD": { title: SEND MLD }
+`)
+
+const H_PREV = loadModel(`
+name: h-prev
+enums:
+  Tree:
+    permissible_values:
+      SEND: { title: SEND }
+      "SEND.SpLD": { title: SEND SpLD }
+`)
+
+test('diffVocabulary decorates a hierarchy the same way the plain table does', () => {
+  const { rows } = diffVocabulary(H_CUR, H_PREV, 'Tree')
+  assert.deepEqual(rows.map(r => [r.key, r.status]), [
+    ['SEND', 'unchanged'], ['SEND.SpLD', 'unchanged'], ['SEND.MLD', 'added']
+  ])
+  assert.equal(rows[0].cells[0].html, '<strong><code>SEND</code></strong>')
+  assert.match(rows[1].cells[0].html, /^(&nbsp;){4}└─ <code>SEND\.SpLD<\/code>$/)
+  // The code cell of an unchanged row is not flagged as changed by indentation.
+  assert.equal(rows[1].cells[0].changed, false)
+  assert.match(renderDiffVocabularyTable({ rows }, { collapsible: false }), /└─/)
+})
+
+test('diffVocabulary leaves a flat vocabulary undecorated', () => {
+  const { rows } = diffVocabulary(CUR, PREV, 'Vocab')
+  assert.equal(rows[0].cells[0].html, '<code>Keep</code>')
+})
+
+test('diffVocabulary can omit the Label column', () => {
+  const { rows } = diffVocabulary(CUR, PREV, 'Vocab', { showLabel: false })
+  assert.equal(rows[0].cells.length, 2)
+  assert.equal(rows[0].cells[0].html, '<code>Keep</code>')
+  assert.equal(rows[0].cells[1].html, 'kept')
+  const md = renderDiffVocabularyTable({ rows }, { collapsible: false, showLabel: false })
+  assert.match(md, /^\| Code \| Definition \|\n\| :--- \| :--- \|\n/)
+  assert.doesNotMatch(md, /Label/)
+  // A changed definition is still reported against the right column.
+  const edit = rows.find(r => r.key === 'Edit')
+  assert.equal(edit.status, 'changed')
+  assert.match(edit.cells[1].html, /new text/)
 })

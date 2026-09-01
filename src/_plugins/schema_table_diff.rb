@@ -24,6 +24,9 @@
 #   1. path to the current LinkML YAML model (or a variable holding it)
 #   2. path to the previous LinkML YAML model (or a variable holding it)
 #   3. a class name, or a controlled-vocabulary property name / enum name
+#   4+. (optional) modifiers:
+#       - "no-label" / "no-labels": render a vocabulary diff without the Label
+#         column, leaving Code / Definition (default includes Label).
 
 require "open3"
 require "shellwords"
@@ -44,6 +47,12 @@ module Jekyll
     # decide whether to show the "raise an issue" button.
     CHANGE_MARKER_RE = /\bdiff-(?:added|removed|old)\b/.freeze
 
+    # Modifier tokens that drop the Label column from a vocabulary diff table,
+    # and ones that explicitly keep it (the default). Same spellings as
+    # {% schema_table %} accepts.
+    NO_LABEL_TOKENS = %w[no-label no-labels nolabel hide-label hide-labels].freeze
+    LABEL_TOKENS = %w[label labels].freeze
+
     # A Markdown heading line, capturing its text (ignoring any closing #s).
     HEADING_RE = /^\s{0,3}\#{1,6}\s+(.+?)\s*#*\s*$/.freeze
     # A fenced code-block delimiter (``` or ~~~), whose contents we skip.
@@ -62,7 +71,7 @@ module Jekyll
     end
 
     def render(context)
-      current, previous, entity = parse_args(@markup)
+      current, previous, entity, *modifiers = parse_args(@markup)
       unless current && previous && entity
         return error_note("expected three arguments: <current> <previous> <entity>, got #{@markup.inspect}")
       end
@@ -70,6 +79,14 @@ module Jekyll
       current  = resolve_value(current, context)
       previous = resolve_value(previous, context)
       entity   = resolve_value(entity, context)
+
+      show_label = true
+      modifiers.each do |raw|
+        d = resolve_value(raw, context).to_s.strip.downcase
+        next if d.empty?
+        show_label = false if NO_LABEL_TOKENS.include?(d)
+        show_label = true if LABEL_TOKENS.include?(d)
+      end
 
       # Tell Jekyll's incremental regenerator that this page depends on BOTH model
       # files, so editing either one re-renders the page under `--watch`.
@@ -83,8 +100,8 @@ module Jekyll
       # part of the key so a long-running `--watch` process regenerates when
       # either model changes rather than serving a stale cached copy.
       page_id = (context.registers[:page] && context.registers[:page]["path"]).to_s
-      key = "#{page_id}\t#{current}\t#{previous}\t#{entity}\t#{model_mtime(current)}\t#{model_mtime(previous)}"
-      self.class.cache[key] ||= generate(context, current, previous, entity, headings)
+      key = "#{page_id}\t#{current}\t#{previous}\t#{entity}\t#{show_label}\t#{model_mtime(current)}\t#{model_mtime(previous)}"
+      self.class.cache[key] ||= generate(context, current, previous, entity, headings, show_label)
     end
 
     private
@@ -139,13 +156,12 @@ module Jekyll
       Jekyll.logger.warn("SchemaTableDiff:", "could not register dependency: #{e.message}")
     end
 
-    # Split "current previous Entity" into three tokens, tolerating quotes.
+    # Split "current previous Entity [modifiers...]" into tokens, tolerating
+    # quotes. Returns [current, previous, entity, *modifiers].
     def parse_args(markup)
-      parts = Shellwords.split(markup)
-      [parts[0], parts[1], parts[2]]
+      Shellwords.split(markup)
     rescue ArgumentError
-      parts = markup.split(/\s+/)
-      [parts[0], parts[1], parts[2]]
+      markup.split(/\s+/)
     end
 
     # The heading texts on the page currently being rendered. The generator uses
@@ -201,13 +217,14 @@ module Jekyll
       parts.join("\n")
     end
 
-    def generate(context, current, previous, entity, headings)
-      stdout, stderr, status =
-        Open3.capture3(
-          "node", CLI, current, entity,
-          "--previous", previous,
-          "--page-headings", headings.join("\n")
-        )
+    def generate(context, current, previous, entity, headings, show_label = true)
+      cmd = [
+        "node", CLI, current, entity,
+        "--previous", previous,
+        "--page-headings", headings.join("\n")
+      ]
+      cmd << "--no-label" unless show_label
+      stdout, stderr, status = Open3.capture3(*cmd)
 
       unless status.success?
         Jekyll.logger.error("SchemaTableDiff:", "#{current} vs #{previous} #{entity} -> #{stderr.strip}")

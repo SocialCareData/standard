@@ -6,8 +6,10 @@ tool inspects the second argument and produces one of two tables:
 - **Class table** — when the argument names a **class**, a table of that class's
   properties (slots).
 - **Vocabulary table** — when the argument names a **property** (a slot whose
-  range is an enum) or an **enum**, a two-column **Code** / **Description** table
-  wrapped in a collapsible `<details>`/`<summary>` element.
+  range is an enum) or an **enum**, a **Code** / **Label** / **Definition** table
+  wrapped in a collapsible `<details>`/`<summary>` element. Where the codes use
+  dot notation (`SEND` / `SEND.SpLD`) the table shows the
+  [hierarchy](#hierarchy-inferred-from-the-codes) they imply.
 
 ## Imports
 
@@ -73,7 +75,7 @@ a collapsible `<details>` element:
 | Column | Source (LinkML) |
 | --- | --- |
 | **Code** | the permissible value's **name** (its key) — the SKOS-style notation used as the value in data, e.g. `1`, `usual`, `MTH` |
-| **Label** | the permissible value's `title` |
+| **Label** | the permissible value's `title` (omit this column with `no-label`) |
 | **Definition** | the permissible value's `description` |
 
 So the code lives in the schema itself: set each permissible value's key to the
@@ -82,6 +84,38 @@ concept IRI. The taxonomy section title/anchor comes from the enum's `title`; th
 value labels shown in the Options column come from each permissible value's
 `title`.
 
+### Hierarchy (inferred from the codes)
+
+LinkML has no way to say that one permissible enum value is a narrower term of
+another, so the hierarchy is read back off the codes themselves, using `.` as
+the separator: `SEND.SpLD` is a sub-type of `SEND`, `accommodation-status.refuge`
+of `accommodation-status`. When a vocabulary nests, the Code column shows it —
+broader terms in **bold**, narrower ones indented one level (four `&nbsp;`) and
+prefixed with `└─`:
+
+| Code | Label | Definition |
+| :--- | :--- | :--- |
+| **`SEND`** | SEND | Observed special educational needs and disabilities, via DfE codes |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ `SEND.SpLD` | SEND SpLD | Specific learning Difficulty: … |
+| **`NEET`** | NEET | Not in Education, Employment, or Training |
+
+Nesting to any depth works (`a` → `a.b` → `a.b.c`). Two rules keep it
+predictable:
+
+- A dotted code is only nested when its parent is **itself a permissible value**
+  of the same enum. A code such as `CA.nutrition` in an enum with no `CA` value
+  stays a top-level term rather than being nested under a parent that does not
+  exist — so a vocabulary that merely uses dots as a naming convention renders
+  flat, exactly as before.
+- Rows are ordered depth-first: top-level terms keep their declaration order and
+  every narrower term follows its parent, so a child declared away from its
+  parent still renders beneath it.
+
+Nothing extra is needed in the model — just name the permissible values
+accordingly. Vocabulary **diff** tables show the same hierarchy; the indentation
+is display-only, so a term moving level (because its parent was added or removed)
+is not reported as a changed code.
+
 **Collapsible wrapper:** by default the table is wrapped in a `<details>` /
 `<summary>` element. To render just the table instead:
 
@@ -89,9 +123,23 @@ value labels shown in the Options column come from each permissible value's
 - Jekyll tag: an `expanded` (or `no-collapse`) modifier, e.g.
   `{% schema_table page.data_model genderCode expanded %}`.
 
-Tag modifiers after `<entity>` are order-independent: mix the options-limit and
-the collapse control freely, e.g.
-`{% schema_table page.data_model genderCode all expanded %}`.
+**Dropping the Label column:** where each permissible value's `title` only
+restates its key (`SEND.SpLD` → "SEND SpLD"), the Label column is noise. Render
+**Code** / **Definition** only:
+
+- CLI: `--no-label` (alias `--no-labels`).
+- Jekyll tag: a `no-label` (or `no-labels`) modifier, e.g.
+  `{% schema_table page.data_model ObservationType no-label %}`.
+- Same modifier on the diff tag: `{% schema_table_diff current previous outOfLAReason no-label %}`.
+
+Only the Label column can be dropped — Code and Definition are always shown, and
+a class property table is unaffected. In a vocabulary **diff**, dropping Label
+also drops any label-only change from the comparison, since that column is no
+longer displayed.
+
+Tag modifiers after `<entity>` are order-independent: mix the options-limit, the
+collapse control and the label control freely, e.g.
+`{% schema_table page.data_model genderCode all expanded no-label %}`.
 
 ## Diff table
 
@@ -147,7 +195,8 @@ node src/assets/js/schema-table/index.js src/assets/model/placements/placements-
 lib/
   linkml.js    load the YAML model; class/slot/enum lookups, range classification, type->xsd
   format.js    pure formatters: slugs, cardinality, datatype labels
-  model.js     model -> property rows; Options + vocabulary (concept) resolution
+  model.js     model -> property rows; Options + vocabulary (concept) resolution,
+               incl. the hierarchy dot-notation codes imply
   table.js     rows -> Markdown property table; concepts -> vocabulary table
   diff.js      diff two model versions -> HTML property/vocabulary diff table
   generate.js  orchestration (load model, classify entity, render)

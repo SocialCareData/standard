@@ -4,7 +4,8 @@
 # LinkML data model. If the second argument names a class, the table describes
 # its properties; if it names a controlled-vocabulary property (a slot whose
 # range is an enum) or an enum, a collapsible "Code" / "Description" vocabulary
-# table is rendered instead.
+# table is rendered instead — showing any hierarchy the codes imply through dot
+# notation (`SEND.SpLD` under `SEND`).
 #
 # The heavy lifting lives in src/assets/js/schema-table/. This plugin is a thin shim that shells out to it
 # and caches the result per (page, file, entity) for the duration of a build.
@@ -27,6 +28,8 @@
 #         previews (default 3).
 #       - "expanded" / "no-collapse": render a vocabulary table without the
 #         collapsible <details>/<summary> wrapper (default is collapsible).
+#       - "no-label" / "no-labels": render a vocabulary table without the Label
+#         column, leaving Code / Definition (default includes Label).
 
 require "open3"
 require "shellwords"
@@ -57,6 +60,10 @@ module Jekyll
     EXPANDED_TOKENS = %w[expanded no-collapse nocollapse open].freeze
     # ...and ones that explicitly keep it on (the default).
     COLLAPSED_TOKENS = %w[collapsible collapsed].freeze
+    # Tokens that drop the Label column from a vocabulary table...
+    NO_LABEL_TOKENS = %w[no-label no-labels nolabel hide-label hide-labels].freeze
+    # ...and ones that explicitly keep it (the default).
+    LABEL_TOKENS = %w[label labels].freeze
 
     def render(context)
       schema_file, entity, *modifiers = parse_args(@markup)
@@ -69,9 +76,11 @@ module Jekyll
 
       # Trailing modifiers are order-independent and self-describing: an integer
       # or "all" sets the Options-column preview count; "expanded"/"no-collapse"
-      # renders a vocabulary table without the collapsible wrapper.
+      # renders a vocabulary table without the collapsible wrapper; "no-label"
+      # renders one without the Label column.
       options_limit = nil
       collapsible   = true
+      show_label    = true
       modifiers.each do |raw|
         m = resolve_value(raw, context).to_s.strip
         next if m.empty?
@@ -82,6 +91,10 @@ module Jekyll
           collapsible = false
         elsif COLLAPSED_TOKENS.include?(d)
           collapsible = true
+        elsif NO_LABEL_TOKENS.include?(d)
+          show_label = false
+        elsif LABEL_TOKENS.include?(d)
+          show_label = true
         end
       end
 
@@ -100,8 +113,8 @@ module Jekyll
       # across rebuilds) regenerates the table when the model changes rather
       # than serving a stale cached copy.
       page_id = (context.registers[:page] && context.registers[:page]["path"]).to_s
-      key = "#{page_id}\t#{schema_file}\t#{entity}\t#{options_limit}\t#{collapsible}\t#{model_mtime(schema_file)}"
-      self.class.cache[key] ||= generate(schema_file, entity, headings, options_limit, collapsible)
+      key = "#{page_id}\t#{schema_file}\t#{entity}\t#{options_limit}\t#{collapsible}\t#{show_label}\t#{model_mtime(schema_file)}"
+      self.class.cache[key] ||= generate(schema_file, entity, headings, options_limit, collapsible, show_label)
     end
 
     private
@@ -222,10 +235,11 @@ module Jekyll
       parts.join("\n")
     end
 
-    def generate(schema_file, entity, headings, options_limit = nil, collapsible = true)
+    def generate(schema_file, entity, headings, options_limit = nil, collapsible = true, show_label = true)
       cmd = ["node", CLI, schema_file, entity, "--page-headings", headings.join("\n")]
       cmd += ["--options-limit", options_limit.to_s] if options_limit && !options_limit.to_s.strip.empty?
       cmd << "--no-collapse" unless collapsible
+      cmd << "--no-label" unless show_label
       stdout, stderr, status = Open3.capture3(*cmd)
 
       unless status.success?

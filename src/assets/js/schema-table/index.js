@@ -37,6 +37,9 @@ Options:
   --no-collapse        For a vocabulary table, emit just the table instead of
                        wrapping it in a collapsible <details>/<summary> element.
                        (No effect on class property tables.)
+  --no-label           For a vocabulary table, omit the Label column, leaving
+                       Code / Definition. Useful where each permissible value's
+                       title just restates its key. (No effect on class tables.)
 
 Examples:
   schema-table src/assets/model/placements/placements-standard.yaml PlacementRequirements
@@ -58,6 +61,8 @@ function parseArgs (argv) {
       opts.optionsLimit = argv[++i]
     } else if (argv[i] === '--no-collapse' || argv[i] === '--expanded') {
       opts.collapsible = false
+    } else if (argv[i] === '--no-label' || argv[i] === '--no-labels') {
+      opts.showLabel = false
     } else if (argv[i] === '-h' || argv[i] === '--help') {
       opts.help = true
     } else {

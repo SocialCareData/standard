@@ -36,10 +36,13 @@ function readModel (modelPath, rootDir) {
  *   Options column links to a taxonomy section only if a matching heading
  *   exists, and otherwise lists the vocabulary's values inline. When omitted
  *   (e.g. the CLI), the link is always emitted.
+ * @param {boolean} [opts.showLabel=true] Whether a vocabulary table includes the
+ *   Label column. `false` renders Code / Definition only (no effect on a class
+ *   property table).
  * @returns {string} Markdown table (a property table, or a vocabulary table
  *   wrapped in a <details> element).
  */
-function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit, collapsible = true } = {}) {
+function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit, collapsible = true, showLabel = true } = {}) {
   if (!modelPath) throw new Error('modelPath is required')
   if (!entity) throw new Error('entity is required')
 
@@ -67,7 +70,7 @@ function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadin
   const enumName = findVocabularyEnum(model, entity)
   if (enumName) {
     const { concepts } = resolveVocabulary(model, enumName)
-    return renderVocabularyTable(concepts, { collapsible })
+    return renderVocabularyTable(concepts, { collapsible, showLabel })
   }
 
   throw new Error(
@@ -87,10 +90,11 @@ function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadin
  * @param {string} opts.entity        Class name, or a controlled-vocabulary property/enum name.
  * @param {string} [opts.rootDir]     Base for resolving the paths (default cwd).
  * @param {string[]} [opts.pageHeadings] See {@link generateTable}.
+ * @param {boolean} [opts.showLabel=true] See {@link generateTable}.
  * @returns {string} An HTML diff table (a property table, or a vocabulary table
  *   wrapped in a <details> element).
  */
-function generateDiffTable ({ modelPath, previousPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit, collapsible = true } = {}) {
+function generateDiffTable ({ modelPath, previousPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit, collapsible = true, showLabel = true } = {}) {
   if (!modelPath) throw new Error('modelPath is required')
   if (!previousPath) throw new Error('previousPath is required')
   if (!entity) throw new Error('entity is required')
@@ -106,7 +110,9 @@ function generateDiffTable ({ modelPath, previousPath, entity, rootDir = process
 
   const enumName = findVocabularyEnum(current, entity) || findVocabularyEnum(previous, entity)
   if (enumName) {
-    return renderDiffVocabularyTable(diffVocabulary(current, previous, enumName), { collapsible })
+    return renderDiffVocabularyTable(
+      diffVocabulary(current, previous, enumName, { showLabel }), { collapsible, showLabel }
+    )
   }
 
   throw new Error(

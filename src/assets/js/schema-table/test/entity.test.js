@@ -8,7 +8,10 @@ const {
   extractProperties,
   resolveOptions,
   resolveVocabulary,
-  findVocabularyEnum
+  findVocabularyEnum,
+  addHierarchy,
+  isHierarchical,
+  nearestAncestor
 } = require('../lib/model')
 const { XSD } = require('../lib/format')
 
@@ -96,11 +99,13 @@ test('resolveOptions builds a taxonomy link title, anchor and all labels', () =>
 
 test('resolveVocabulary uses the value name as code, its title as label, and the description', () => {
   const vocab = resolveVocabulary(sampleModel(), 'UrgencyEnum')
+  // A flat vocabulary: every value is a top-level term with no children.
+  const flat = { parent: null, depth: 0, hasChildren: false }
   assert.deepEqual(vocab.concepts, [
-    { code: 'Today', label: 'Today', description: 'Needed today.' },
-    { code: 'Soon', label: 'Soon', description: '' },   // no description -> empty (no fallback)
-    { code: 'Later', label: 'Later', description: '' },
-    { code: 'Never', label: 'Never', description: '' }
+    { code: 'Today', label: 'Today', description: 'Needed today.', ...flat },
+    { code: 'Soon', label: 'Soon', description: '', ...flat },   // no description -> empty (no fallback)
+    { code: 'Later', label: 'Later', description: '', ...flat },
+    { code: 'Never', label: 'Never', description: '', ...flat }
   ])
 })
 
@@ -111,4 +116,69 @@ test('findVocabularyEnum resolves a slot name, an enum name, else null', () => {
   assert.equal(findVocabularyEnum(m, 'name'), null)                 // datatype slot
   assert.equal(findVocabularyEnum(m, 'child'), null)                // class-ranged slot
   assert.equal(findVocabularyEnum(m, 'nope'), null)                 // does not exist
+})
+
+// ---------------------------------------------------------------------------
+// Vocabulary hierarchy inferred from dot-notation codes
+// ---------------------------------------------------------------------------
+
+const codes = list => list.map(code => ({ code, label: code, description: '' }))
+
+test('nearestAncestor finds the longest declared dotted prefix', () => {
+  const declared = new Set(['SEND', 'SEND.SpLD', 'a', 'a.b', 'a.b.c'])
+  assert.equal(nearestAncestor('SEND.SpLD', declared), 'SEND')
+  assert.equal(nearestAncestor('a.b.c', declared), 'a.b')
+  assert.equal(nearestAncestor('SEND', declared), null)      // no dot at all
+  assert.equal(nearestAncestor('CA.nutrition', declared), null) // parent not declared
+  // Skips undeclared intermediate levels rather than inventing them.
+  assert.equal(nearestAncestor('a.x.y', declared), 'a')
+})
+
+test('addHierarchy annotates depth, parent and hasChildren', () => {
+  const rows = addHierarchy(codes(['SEND', 'SEND.SpLD', 'SEND.MLD', 'EAL', 'NEET']))
+  assert.deepEqual(rows.map(r => [r.code, r.parent, r.depth, r.hasChildren]), [
+    ['SEND', null, 0, true],
+    ['SEND.SpLD', 'SEND', 1, false],
+    ['SEND.MLD', 'SEND', 1, false],
+    ['EAL', null, 0, false],
+    ['NEET', null, 0, false]
+  ])
+  assert.equal(isHierarchical(rows), true)
+})
+
+test('addHierarchy nests more than one level deep', () => {
+  const rows = addHierarchy(codes(['a', 'a.b', 'a.b.c']))
+  assert.deepEqual(rows.map(r => r.depth), [0, 1, 2])
+  assert.equal(rows[2].parent, 'a.b')
+})
+
+test('addHierarchy leaves a dotted code with no declared parent at the top level', () => {
+  // QuestionCategory does this: `CA.nutrition` with no `CA` value.
+  const rows = addHierarchy(codes(['Health', 'CA.nutrition', 'CA.hygiene']))
+  assert.deepEqual(rows.map(r => [r.code, r.depth]), [
+    ['Health', 0], ['CA.nutrition', 0], ['CA.hygiene', 0]
+  ])
+  assert.equal(isHierarchical(rows), false)
+})
+
+test('addHierarchy keeps declaration order and pulls stray children under their parent', () => {
+  const rows = addHierarchy(codes(['SEND.SpLD', 'EAL', 'SEND', 'EAL.fr']))
+  assert.deepEqual(rows.map(r => r.code), ['EAL', 'EAL.fr', 'SEND', 'SEND.SpLD'])
+})
+
+test('resolveVocabulary reads the hierarchy off the enum keys', () => {
+  const model = require('../lib/linkml').loadModel(`
+id: https://example.org/h
+name: h
+default_prefix: ex
+prefixes: { ex: https://example.org/ }
+enums:
+  Send:
+    permissible_values:
+      SEND: { title: SEND }
+      "SEND.SpLD": { title: SEND SpLD }
+      EAL: { title: EAL }
+`)
+  const { concepts } = resolveVocabulary(model, 'Send')
+  assert.deepEqual(concepts.map(c => [c.code, c.depth]), [['SEND', 0], ['SEND.SpLD', 1], ['EAL', 0]])
 })
