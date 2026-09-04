@@ -2,6 +2,12 @@
 
 Cloudflare pages is used to deploy Pull Request previews. See [.github/workflows/pr-preview.yml](.github/workflows/pr-preview.yml)
 
+## Access Pages Deployments
+
+Login to https://dash.cloudflare.com
+
+On the Left menu: `Build > Compute > Workers & Pages`
+
 ## Initial project creation
 
 Create a Cloudflare account.
@@ -24,7 +30,7 @@ wrangler pages deploy ./my_deployment
 
 The site should be ready at https://socialcaredata-standard-preview.pages.dev/
 
-## Create an API token
+### Create an API token
 
 Prefer an **account-owned** token — it survives the person who created it leaving the team.
 
@@ -40,7 +46,7 @@ Prefer an **account-owned** token — it survives the person who created it leav
 6. TTL: leave as-is, or set a 1-year expiry with a calendar reminder to rotate.
 7. **Continue to summary → Create Token**, then copy it. It is shown **once**.
 
-## Add the GitHub secrets and variable
+### Add the GitHub secrets and variable
 
 Repo → **Settings → Secrets and variables → Actions**:
 
@@ -51,7 +57,7 @@ Repo → **Settings → Secrets and variables → Actions**:
 | Variable | `CF_PAGES_PROJECT` | `socialcaredata-standard-preview` |
 
 
-## Test deployment (Optional)
+### Test deployment (Optional)
 
 ```sh
 npx wrangler pages deploy dist --project-name=socialcaredata-standard-preview --branch=pr-test --commit-dirty=true
