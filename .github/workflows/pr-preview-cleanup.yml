@@ -36,32 +36,50 @@ jobs:
 
           api="https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/pages/projects/${CF_PAGES_PROJECT}/deployments"
           auth=(-H "Authorization: Bearer ${CF_API_TOKEN}")
-          per_page=100
-          page=1
-          ids=""
+          seen="$RUNNER_TEMP/seen-ids"
+          matched="$RUNNER_TEMP/matched-ids"
+          : > "$seen"
+          : > "$matched"
 
-          # Page through the project's preview deployments, keeping those whose
-          # trigger metadata branch is this PR's alias.
-          while :; do
-            resp="$(curl -sS "${api}?env=preview&per_page=${per_page}&page=${page}" "${auth[@]}")"
-            if [ "$(jq -r '.success' <<<"$resp")" != "true" ]; then
-              jq -r '.errors' <<<"$resp" >&2
-              exit 1
+          page=1
+          while [ "$page" -le 50 ]; do
+            if [ "$page" -eq 1 ]; then
+              query="env=preview"
+            else
+              query="env=preview&page=${page}"
             fi
 
-            count="$(jq -r '.result | length' <<<"$resp")"
-            [ "$count" -eq 0 ] && break
+            resp="$(curl -sS "${api}?${query}" "${auth[@]}")"
 
-            match="$(jq -r --arg a "$ALIAS" \
-              '.result[] | select(.deployment_trigger.metadata.branch == $a) | .id' <<<"$resp")"
-            [ -n "$match" ] && ids="${ids}"$'\n'"${match}"
+            if [ "$(jq -r '.success' <<<"$resp")" != "true" ]; then
+              if [ "$page" -eq 1 ]; then
+                jq -r '.errors' <<<"$resp" >&2
+                exit 1
+              fi
+              echo "Page ${page} rejected; treating page 1 as the complete list."
+              break
+            fi
 
-            [ "$count" -lt "$per_page" ] && break
+            [ "$(jq -r '.result | length' <<<"$resp")" -eq 0 ] && break
+
+            before="$(wc -l < "$seen")"
+            jq -r '.result[].id' <<<"$resp" >> "$seen"
+            sort -u -o "$seen" "$seen"
+            if [ "$(wc -l < "$seen")" -eq "$before" ]; then
+              break
+            fi
+
+            jq -r --arg a "$ALIAS" \
+              '.result[] | select(.deployment_trigger.metadata.branch == $a) | .id' \
+              <<<"$resp" >> "$matched"
+
             page=$((page + 1))
           done
 
-          ids="$(printf '%s\n' "$ids" | sed '/^[[:space:]]*$/d' | sort -u)"
-          if [ -z "$ids" ]; then
+          sort -u -o "$matched" "$matched"
+          echo "Scanned $(wc -l < "$seen") preview deployment(s) across $((page > 1 ? page - 1 : 1)) page(s)."
+
+          if [ ! -s "$matched" ]; then
             echo "No preview deployments found for ${ALIAS}"
             exit 0
           fi
@@ -70,7 +88,7 @@ jobs:
           # branch alias. Once all of them are gone, the pr-N hostname 404s.
           # (wrangler pages deployment delete does the same but takes one ID.)
           rc=0
-          for id in $ids; do
+          while IFS= read -r id; do
             del="$(curl -sS -X DELETE "${api}/${id}?force=true" "${auth[@]}")"
             ok="$(jq -r '.success' <<<"$del")"
             echo "  ${id} -> deleted=${ok}"
@@ -78,7 +96,7 @@ jobs:
               jq -r '.errors' <<<"$del" >&2
               rc=1
             fi
-          done
+          done < "$matched"
           exit "$rc"
 
       - name: Update the PR comment

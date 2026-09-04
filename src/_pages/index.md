@@ -4,8 +4,6 @@ tags:
   - Programme
 ---
 
-TEST UPDATE
-
 [Social Finance](https://www.socialfinance.org.uk/), [the Open Data Institute](https://theodi.org/) and [Coram](https://www.coram.org.uk/) are working with Local Authorities, [DfE](https://www.gov.uk/government/organisations/department-for-education), [DHSC](https://www.gov.uk/government/organisations/department-of-health-and-social-care) and system vendors to develop interoperability standards for social care.
 
 When case management systems implement these [standards](/publications), information can flow from one system to another without technical and commercial barriers - the constraint is then "what's appropriate" rather than "what do systems allow". For example, staff in one LA should be able to look up information about a child's previous engagement with services in another LA to support a safeguarding enquiry, and we want social workers supporting older adults to have timely information about hospital admissions and discharge.
