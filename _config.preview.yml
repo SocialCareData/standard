@@ -1,0 +1,19 @@
+# Jekyll config overlay for pull request preview builds only.
+#
+# Layered on top of _config.yml by .github/workflows/pr-preview.yml:
+#   bundle exec jekyll build --config _config.yml,_config.preview.yml,_config.preview.url.yml
+#
+# `url` is deliberately not set here: it contains the PR number and is only
+# known at runtime, so pr-preview.yml generates _config.preview.url.yml
+# (gitignored).
+#
+# Jekyll merges these files per top-level key, right-most wins, so everything
+# else (source, destination, nav, defaults, plugins, styles, pagefind) is
+# inherited from _config.yml untouched.
+
+# External link checking hits every outbound host and exits 1 on failure, so an
+# unrelated third-party outage would break the preview. It still runs on every
+# push to main via cd.yml.
+check_external_links: false
+check_internal_links: true
+check_insecure_links: true

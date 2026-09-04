@@ -1,0 +1,101 @@
+# Tears down the temporary Cloudflare Pages site published by pr-preview.yml
+# once a pull request is closed or merged.
+name: PR preview cleanup
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions: {}
+
+# Never truncate a deletion sweep.
+concurrency:
+  group: pr-preview-cleanup-${{ github.event.number }}
+  cancel-in-progress: false
+
+jobs:
+  delete-preview:
+    runs-on: ubuntu-latest
+    # Fork PRs never got a preview, so there is nothing to delete.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    # Lets the Cloudflare secrets live in a scoped environment. Harmless if they
+    # are stored as plain repository secrets instead.
+    environment: preview
+    permissions:
+      pull-requests: write
+    steps:
+      # No checkout: this job holds the Cloudflare token and never needs repo code.
+      - name: Delete Cloudflare Pages preview deployments for this PR
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CF_PAGES_PROJECT: ${{ vars.CF_PAGES_PROJECT || 'socialcaredata-standard-preview' }}
+          ALIAS: pr-${{ github.event.number }}
+        run: |
+          set -euo pipefail
+
+          api="https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/pages/projects/${CF_PAGES_PROJECT}/deployments"
+          auth=(-H "Authorization: Bearer ${CF_API_TOKEN}")
+          per_page=100
+          page=1
+          ids=""
+
+          # Page through the project's preview deployments, keeping those whose
+          # trigger metadata branch is this PR's alias.
+          while :; do
+            resp="$(curl -sS "${api}?env=preview&per_page=${per_page}&page=${page}" "${auth[@]}")"
+            if [ "$(jq -r '.success' <<<"$resp")" != "true" ]; then
+              jq -r '.errors' <<<"$resp" >&2
+              exit 1
+            fi
+
+            count="$(jq -r '.result | length' <<<"$resp")"
+            [ "$count" -eq 0 ] && break
+
+            match="$(jq -r --arg a "$ALIAS" \
+              '.result[] | select(.deployment_trigger.metadata.branch == $a) | .id' <<<"$resp")"
+            [ -n "$match" ] && ids="${ids}"$'\n'"${match}"
+
+            [ "$count" -lt "$per_page" ] && break
+            page=$((page + 1))
+          done
+
+          ids="$(printf '%s\n' "$ids" | sed '/^[[:space:]]*$/d' | sort -u)"
+          if [ -z "$ids" ]; then
+            echo "No preview deployments found for ${ALIAS}"
+            exit 0
+          fi
+
+          # force=true is required for whichever deployment currently owns the
+          # branch alias. Once all of them are gone, the pr-N hostname 404s.
+          # (wrangler pages deployment delete does the same but takes one ID.)
+          rc=0
+          for id in $ids; do
+            del="$(curl -sS -X DELETE "${api}/${id}?force=true" "${auth[@]}")"
+            ok="$(jq -r '.success' <<<"$del")"
+            echo "  ${id} -> deleted=${ok}"
+            if [ "$ok" != "true" ]; then
+              jq -r '.errors' <<<"$del" >&2
+              rc=1
+            fi
+          done
+          exit "$rc"
+
+      - name: Update the PR comment
+        if: always()
+        # A PR that never had a preview has no comment to edit.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # This job has no checkout, so gh cannot infer the repo from a git remote.
+          GH_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.number }}
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/preview-comment.md" <<'EOF'
+          ### Preview site
+
+          Removed - this PR is closed.
+          EOF
+          gh pr comment "$PR_NUMBER" --edit-last \
+            --body-file "$RUNNER_TEMP/preview-comment.md"
