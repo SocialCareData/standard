@@ -1,0 +1,106 @@
+# Builds each pull request and publishes it to a temporary website on Cloudflare Pages, so changes can be reviewed in a browser.
+#
+# The preview is torn down by pr-preview-cleanup.yml when the PR closes.
+name: PR preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions: {}
+
+# One preview build per PR; a new push supersedes the previous run.
+concurrency:
+  group: pr-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+
+    if: github.event.pull_request.head.repo.full_name == github.repository
+
+    environment: preview
+    permissions:
+      contents: read
+      pull-requests: write
+      deployments: write
+    env:
+      CF_PAGES_PROJECT: ${{ vars.CF_PAGES_PROJECT || 'socialcaredata-standard-preview' }}
+      PREVIEW_ALIAS: pr-${{ github.event.pull_request.number }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+
+      - name: Install Pagefind
+        run: npm install -g pagefind
+
+      - name: Install schema-table generator dependencies
+        run: npm ci
+        working-directory: src/assets/js/schema-table
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      # The Cloudflare alias is derived from the PR number, so the preview URL is
+      # known before the build and can be baked into site.url.
+      - name: Generate preview URL overlay
+        run: |
+          set -euo pipefail
+          printf 'url: https://%s.%s.pages.dev\n' "$PREVIEW_ALIAS" "$CF_PAGES_PROJECT" \
+            > _config.preview.url.yml
+          cat _config.preview.url.yml
+
+      - name: Build Jekyll
+        timeout-minutes: 15
+        run: bundle exec jekyll build --config _config.yml,_config.preview.yml,_config.preview.url.yml
+
+      - name: Prepare dist for preview hosting
+        run: |
+          set -euo pipefail
+          # src/CNAME claims standard.socialcaredata.io. Cloudflare Pages ignores
+          # it (it is a GitHub Pages convention), but shipping it would serve the
+          # production hostname at /CNAME.
+          rm -f dist/CNAME
+          # Belt and braces on top of Cloudflare's own noindex on preview aliases.
+          # Written into dist, not src, so the production build is unaffected.
+          printf '/*\n  X-Robots-Tag: noindex\n' > dist/_headers
+          test -f dist/index.html
+          # src/_plugins/pagefind.rb only warns when indexing fails, so a preview
+          # can otherwise ship a dead search box on a green build.
+          test -d dist/pagefind || echo "::warning::no Pagefind index - site search will not work"
+
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          # --branch is what produces the stable pr-N.<project>.pages.dev alias.
+          # --commit-hash pins the PR head rather than the merge commit that
+          # actions/checkout produces for pull_request events.
+          command: >-
+            pages deploy dist
+            --project-name=${{ vars.CF_PAGES_PROJECT || 'socialcaredata-standard-preview' }}
+            --branch=pr-${{ github.event.pull_request.number }}
+            --commit-hash=${{ github.event.pull_request.head.sha }}
+            --commit-dirty=true
+
+      - name: Comment the preview URL on the PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          ALIAS_URL: ${{ steps.deploy.outputs.pages-deployment-alias-url }}
+          COMMIT_URL: ${{ steps.deploy.outputs.deployment-url }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/preview-comment.md" <<EOF
+          🚀 Preview site is ready: ${ALIAS_URL:-https://${PREVIEW_ALIAS}.${CF_PAGES_PROJECT}.pages.dev}
+          EOF
+          gh pr comment "$PR_NUMBER" --edit-last --create-if-none \
+            --body-file "$RUNNER_TEMP/preview-comment.md"
