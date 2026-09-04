@@ -24,7 +24,6 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      # No checkout: this job holds the Cloudflare token and never needs repo code.
       - name: Delete Cloudflare Pages preview deployments for this PR
         env:
           CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

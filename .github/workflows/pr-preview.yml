@@ -1,5 +1,4 @@
-# Builds each pull request and publishes it to a temporary website on Cloudflare
-# Pages, so changes can be reviewed in a browser.
+# Builds each pull request and publishes it to a temporary website on Cloudflare Pages, so changes can be reviewed in a browser.
 #
 # The preview is torn down by pr-preview-cleanup.yml when the PR closes.
 name: PR preview
@@ -18,17 +17,15 @@ concurrency:
 jobs:
   preview:
     runs-on: ubuntu-latest
-    # Fork PRs cannot read secrets; skip cleanly rather than fail.
+
     if: github.event.pull_request.head.repo.full_name == github.repository
-    # Lets the Cloudflare secrets live in a scoped environment. Harmless if they
-    # are stored as plain repository secrets instead.
+
     environment: preview
     permissions:
       contents: read
-      pull-requests: write # post/update the preview comment
-      deployments: write   # surface the preview in the PR's Deployments panel
+      pull-requests: write
+      deployments: write
     env:
-      # Override by setting a CF_PAGES_PROJECT repository variable.
       CF_PAGES_PROJECT: ${{ vars.CF_PAGES_PROJECT || 'socialcaredata-standard-preview' }}
       PREVIEW_ALIAS: pr-${{ github.event.pull_request.number }}
     steps:
