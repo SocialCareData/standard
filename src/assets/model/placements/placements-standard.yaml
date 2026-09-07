@@ -659,11 +659,11 @@ enums:
     title: Yes / No / Not Specified
     description: Three-valued data presence status (affirmative, negative, unspecified).
     permissible_values:
-      Yes:
-        title: Yes
+      "Yes":
+        title: 'Yes'
         meaning: yns:Yes
         description: Affirmative.
-      No:
+      "No":
         title: 'No'
         meaning: yns:No
         description: Negative.
@@ -759,7 +759,7 @@ enums:
         title: Yes - can
         meaning: pa:YesCan
         description: The child can live in a home with pets/animals.
-      No:
+      "No":
         title: 'No'
         meaning: pa:No
         description: The child cannot live in a home with pets/animals.
