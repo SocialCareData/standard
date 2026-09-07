@@ -60,6 +60,9 @@ nav:
       - title: Updates
         url: /updates
         description: Latest news and updates from the programme.
+      - title: Steering Group
+        url: /steering_group
+        description: The group providing strategic oversight for the programme.
       - title: Related programmes
         url: /related_programmes
         description: Adjacent standards work in health, education and local government.
