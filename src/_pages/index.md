@@ -63,6 +63,9 @@ For more information about the programme overall, or to join one of our [standar
 Programme director
 : Tom Rintoul, [tom.rintoul@socialfinance.org.uk](mailto:tom.rintoul@socialfinance.org.uk)
 
+Programme manager
+: Tara Lee, [tara.lee@theodi.org](mailto:tara.lee@theodi.org)
+
 Multi-agency information sharing workstream lead
 : Ferry Lichtenberg, [ferry.lichtenberg@socialfinance.org.uk](mailto:ferry.lichtenberg@socialfinance.org.uk)
 
