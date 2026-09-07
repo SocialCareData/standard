@@ -73,7 +73,7 @@ Children's social care placements workstream lead
 : Madeline Goldie, [madeline.goldie@socialfinance.org.uk](mailto:madeline.goldie@socialfinance.org.uk)
 
 Joined up care workstream lead
-: Juliette Clewlow, [juliette.clewlow@socialfinance.org.uk](mailto:juliette.clewlow@socialfinance.org.uk)
+: Ferry Lichtenberg, [ferry.lichtenberg@socialfinance.org.uk](mailto:ferry.lichtenberg@socialfinance.org.uk)
 
 Social care interoperability framework workstream lead
 : Matthieu Bosquet, [matthieu.bosquet@theodi.org](mailto:matthieu.bosquet@theodi.org)
