@@ -1,0 +1,3 @@
+# Jekyll config overlay for pull request preview builds only.
+
+check_external_links: false
