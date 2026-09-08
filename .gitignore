@@ -6,6 +6,3 @@ dist
 Gemfile.lock
 *.local
 node_modules/
-
-_config.preview.url.yml
-.wrangler
