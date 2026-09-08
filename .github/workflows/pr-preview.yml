@@ -56,7 +56,7 @@ jobs:
 
       - name: Build Jekyll
         timeout-minutes: 15
-        run: bundle exec jekyll build --config _config.yml,_config.preview.yml,_config.preview.url.yml
+        run: bundle exec jekyll build --config _config.yml,_config.preview.yml
 
       - name: Prepare dist for preview hosting
         run: |
