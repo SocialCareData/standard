@@ -101,7 +101,6 @@ A Care Record Component is a distinct unit of information that could be captured
 
 ### ASC
 
-* [Information sharing in social care](https://transform.england.nhs.uk/information-governance/guidance/information-sharing-in-social-care/)
 * [Safeguarding statutory guidance - adults](https://www.gov.uk/government/publications/care-act-statutory-guidance/care-and-support-statutory-guidance#safeguarding-1)
 * [Assessment Statutory guidance - adults](https://www.gov.uk/government/publications/care-act-statutory-guidance/care-and-support-statutory-guidance#first-contact-and-identifying-needs)
 * [Transitional safeguarding briefing](https://www.adass.org.uk/wp-content/uploads/2025/10/transitional-safeguarding-briefing-for-sector-leaders-sb-all-web.pdf)
