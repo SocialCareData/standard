@@ -9,18 +9,18 @@ tags:
   - Publication
 reference: PUB00
 status: draft
-version: 01
-data_model: src/assets/model/placements/placements-standard-01.yaml
+version: 2
+data_model: src/assets/model/placements/placements-standard-2.yaml
 changelog:
   - Removed unused quality assurance fields
   - Added data validation rules
   - Updated reporting spreadsheet
   - Added CSV format
   - Removed RiskAssessment.riskOther and RiskAssessment.riskToOthersOther text fields
-data_model_diff: /PUB00_placements_standard_diff_01
+data_model_diff: /PUB00_placements_standard_diff_2
 ---
 
-<a href="/PUB00_placements_standard_table_01" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
+<a href="/PUB00_placements_standard_table_2" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
 
 ## Introduction
 

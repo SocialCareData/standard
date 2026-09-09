@@ -73,17 +73,6 @@ classes:
       - siblingCount
       - isPreferredLocationLocal
       - outOfLAReason
-      - outOfLAReasonOther
-    rules:
-      - title: outOfLAReasonOther required when outOfLAReason is 'Other'
-        preconditions:
-          slot_conditions:
-            outOfLAReason:
-              equals_string: Other
-        postconditions:
-          slot_conditions:
-            outOfLAReasonOther:
-              required: true
 
   PlacementRequirements:
     class_uri: pl:PlacementRequirements
@@ -98,41 +87,8 @@ classes:
       - livingCompanions
       - pets
       - additionalSupport
-      - additionalSupportOther
-      - culturalNeedsOther
-      - specificCommunicationRequirementOther
       - homeAdaptationRequired
       - deprivationOfLiberty
-    rules:
-      - title: culturalNeedsOther required when culturalNeeds is 'Other'
-        preconditions:
-          slot_conditions:
-            culturalNeeds:
-              equals_string: Other
-        postconditions:
-          slot_conditions:
-            culturalNeedsOther:
-              required: true
-      - title: specificCommunicationRequirementOther required when 'Other' is selected
-        preconditions:
-          slot_conditions:
-            specificCommunicationRequirement:
-              has_member:
-                equals_string: Other
-        postconditions:
-          slot_conditions:
-            specificCommunicationRequirementOther:
-              required: true
-      - title: additionalSupportOther required when additionalSupport includes 'Other'
-        preconditions:
-          slot_conditions:
-            additionalSupport:
-              has_member:
-                equals_string: Other
-        postconditions:
-          slot_conditions:
-            additionalSupportOther:
-              required: true
 
   PlacementRecommendation:
     class_uri: pl:PlacementRecommendation
@@ -284,15 +240,6 @@ slots:
     required: false
     multivalued: false
     description: If preferred placement location is in a different LA than the placing LA, why is this?
-  outOfLAReasonOther:
-    slot_uri: pl:outOfLAReasonOther
-    range: string
-    required: false
-    multivalued: true
-    description: >-
-      Free-text description of why the preferred placement location is in a
-      different LA when the standard outof-la-reason options do not apply. Used
-      when the 'Other' OutOfLAReason concept is selected.
 
   # --- PlacementRequirements ---
   communicationNeeds:
@@ -339,33 +286,6 @@ slots:
     description: >-
       Additional support provision required (e.g., additional supervision,
       therapeutic support, taxis to school). Multi-valued.
-  additionalSupportOther:
-    slot_uri: pl:additionalSupportOther
-    range: string
-    required: false
-    multivalued: true
-    description: >-
-      Free-text description of any additional support not captured by the
-      standard SupportType options. Used when the 'Other' SupportType concept is
-      selected.
-  culturalNeedsOther:
-    slot_uri: pl:culturalNeedsOther
-    range: string
-    required: false
-    multivalued: true
-    description: >-
-      Free-text description of cultural needs not captured by the standard
-      CulturalNeed options. Used when the 'Other' CulturalNeed concept is
-      selected.
-  specificCommunicationRequirementOther:
-    slot_uri: pl:specificCommunicationRequirementOther
-    range: string
-    required: false
-    multivalued: true
-    description: >-
-      Free-text description of communication or language requirements not
-      captured by the standard CommunicationNeed options. Used when the 'Other'
-      CommunicationNeed concept is among the selected values.
   homeAdaptationRequired:
     slot_uri: pl:homeAdaptationRequired
     range: boolean
@@ -638,7 +558,7 @@ enums:
       Other:
         title: Other
         meaning: olr:OutOfLAReasonOther
-        description: Another reason not listed. When this concept is selected, supply the details via the paired pl:outOfLAReasonOther free-text property on PlacementAvailability.
+        description: Another reason not listed.
 
   PresenceStatus:
     enum_uri: pl:presence-status
@@ -678,7 +598,7 @@ enums:
       Other:
         title: Other
         meaning: cn:Other
-        description: Another communication or language requirement not listed. When this concept is selected, supply the details via the paired pl:specificCommunicationRequirementOther free-text property on PlacementRequirements.
+        description: Another communication or language requirement not listed.
       None:
         title: None
         meaning: cn:None
@@ -704,7 +624,7 @@ enums:
       Other:
         title: Other
         meaning: cln:Other
-        description: Other cultural needs apply. When this concept is selected, supply the details via the paired pl:culturalNeedsOther free-text property on PlacementRequirements.
+        description: Other cultural needs apply.
 
   LivingArrangement:
     enum_uri: pl:living-arrangement
@@ -782,7 +702,7 @@ enums:
       Other:
         title: Other
         meaning: st:Other
-        description: Other additional support is required. When this concept is selected, supply the details via the paired pl:additionalSupportOther free-text property on PlacementRequirements.
+        description: Other additional support is required.
 
   SuitabilityLevel:
     enum_uri: pl:suitability-level
