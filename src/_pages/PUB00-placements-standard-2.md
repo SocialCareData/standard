@@ -18,6 +18,7 @@ changelog:
   - Added CSV format
   - "Removed text fields: RiskAssessment.riskOther, RiskAssessment.riskToOthersOther, PlacementAvailability.outOfLAReasonOther, PlacementRequirements.additionalSupportOther, PlacementRequirements.culturalNeedsOther and PlacementRequirements.specificCommunicationRequirementOther"
   - Added needsAssessmentMethod, placementSource and uascStatus properties
+  - Placement.qualityAssurance is made optional
 data_model_diff: /PUB00_placements_standard_diff_2
 ---
 
@@ -65,7 +66,7 @@ The top-level record. Captures the unique child identifier and links the placeme
 : The actual placement arranged for the child (optional - a referral may exist without yet having an actual placement). See [ActualPlacement](#actualplacement).
 
 <span id="placement-qualityAssurance">qualityAssurance</span>
-: Metadata about who recorded each part and when. See [QualityAssurance](#qualityassurance).
+: Metadata about who recorded each part and when (optional). See [QualityAssurance](#qualityassurance).
 
 #### Example
 
@@ -388,7 +389,7 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
 
 ### QualityAssurance
 
-LA-internal metadata about who recorded each part of the placement record (referral, placement, cost) and when. Supports LA-internal review of data-entry practices; not intended to be shared beyond the recording LA.
+LA-internal metadata about who recorded each part of the placement record (referral, placement, cost) and when. LAs can choose whether to collect this information, so a `Placement` may not have a `QualityAssurance` record. Supports LA-internal review of data-entry practices; not intended to be shared beyond the recording LA.
 
 #### Properties
 

@@ -204,7 +204,7 @@ slots:
   qualityAssurance:
     slot_uri: pl:qualityAssurance
     range: QualityAssurance
-    required: true
+    required: false
     multivalued: false
     description: Links a Placement to its QualityAssurance metadata.
   actualPlacement:
