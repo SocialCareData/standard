@@ -43,7 +43,7 @@ changed values as the <del class="diff-old">old value</del> <ins class="diff-new
 
 {% schema_table_diff current previous RiskAssessment all %}
 
-* Removed the `riskOther` and `riskToOthersOther` free-text fields to mitigate Information Governance and data privacy risks. [Issue #19](https://github.com/SocialCareData/standard/issues/19)
+* Removed the free-text fields to mitigate Information Governance and data privacy risks. [Issue #19](https://github.com/SocialCareData/standard/issues/19)
 
 ### ActualPlacement
 
@@ -57,39 +57,35 @@ changed values as the <del class="diff-old">old value</del> <ins class="diff-new
 
 ### Communication Need Taxonomy
 
-{% schema_table_diff current previous specificCommunicationRequirement no-label %}
+{% schema_table_diff current previous specificCommunicationRequirement no-label expanded %}
 
 ### Living Arrangement Taxonomy
 
-{% schema_table_diff current previous livingCompanions no-label %}
+{% schema_table_diff current previous livingCompanions no-label expanded %}
 
 ### Needs Assessment Method Taxonomy
 
-{% schema_table_diff current previous needsAssessmentMethod no-label %}
+{% schema_table_diff current previous needsAssessmentMethod no-label expanded %}
 
 ### Out of LA Reason Taxonomy
 
-{% schema_table_diff current previous outOfLAReason no-label %}
+{% schema_table_diff current previous outOfLAReason no-label expanded %}
 
 ### Placement Source Taxonomy
 
-{% schema_table_diff current previous placementSource no-label %}
+{% schema_table_diff current previous placementSource no-label expanded %}
 
 ### Placement Type Taxonomy
 
-{% schema_table_diff current previous placementType no-label %}
+{% schema_table_diff current previous placementType no-label expanded %}
 
 ### Placement Urgency Taxonomy
 
-{% schema_table_diff current previous neededBy no-label %}
+{% schema_table_diff current previous neededBy no-label expanded %}
 
 ### Support Type Taxonomy
 
-{% schema_table_diff current previous additionalSupport no-label %}
-
-### UASC Status Taxonomy
-
-{% schema_table_diff current previous uascStatus no-label %}
+{% schema_table_diff current previous additionalSupport no-label expanded %}
 
 ## Report an issue
 

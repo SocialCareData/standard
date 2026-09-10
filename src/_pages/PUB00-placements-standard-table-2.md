@@ -71,7 +71,3 @@ data_model: src/assets/model/placements/placements-standard-2.yaml
 ### Support Type Taxonomy
 
 {% schema_table page.data_model additionalSupport no-label %}
-
-### UASC Status Taxonomy
-
-{% schema_table page.data_model uascStatus no-label %}

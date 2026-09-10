@@ -31,9 +31,9 @@ The children's social care placements standard helps regions to answer their suf
 
 ## Data Model
 
-The following diagram illustrates the elements of the Children's Social Care Placements Ontology.
+The following diagram illustrates the elements of the Children's Social Care Placements data model.
 
-<p class="data-model-diagram"><img src="/assets/img/placements/placements-data-model-2026-06-24.svg" alt="Placements Data Model" title="Placements Data Model" style="width: 80%; height: auto;" /></p>
+<p class="data-model-diagram"><img src="/assets/img/placements/placements-data-model-v2.svg" alt="Placements Data Model" title="Placements Data Model" style="width: 70%; height: auto;" /></p>
 
 A `Placement` is the top-level record covering the full lifecycle of a placement instance. It aggregates six sub-components: the referral availability, the social-worker recommendation, the requirements describing the child's needs, the risk assessment, optionally the actual placement that was arranged, and quality-assurance metadata about who recorded each part and when.
 
@@ -88,12 +88,6 @@ The top-level record. Captures the unique child identifier and links the placeme
 {% endhighlight %}
 </div>
 
-<div class="note">
-  <h5 id="note-placement">Note - full lifecycle</h5>
-  <p>The example above only sketches the top-level wiring. See <a href="/assets/model/placements/examples/valid-placement.jsonld"><code>assets/model/placements/examples/valid-placement.jsonld</code></a> for a full lifecycle example, and <a href="/assets/model/placements/examples/valid-other-options.jsonld"><code>assets/model/placements/examples/valid-other-options.jsonld</code></a> for an example exercising every "Other" controlled-vocab option with paired free-text values.</p>
-</div>
-
-
 ### PlacementAvailability
 
 The referral request: how urgently the child needs to be placed, how many siblings to be placed alongside, and whether the preferred location is in the same LA as the placing LA (and if not, why).
@@ -112,11 +106,8 @@ The referral request: how urgently the child needs to be placed, how many siblin
 <span id="availability-outOfLAReason">outOfLAReason</span>
 : If `isPreferredLocationLocal` is `false`, the reason the preferred placement is sought outside the placing LA. See the [Out of LA Reason Taxonomy](#out-of-la-reason-taxonomy).
 
-<span id="availability-outOfLAReasonOther">outOfLAReasonOther</span>
-: Free-text description when `outOfLAReason` is `'Other'`. Multi-valued. _String_.
-
 <span id="availability-uascStatus">uascStatus</span>
-: Is the child an unaccompanied asylum-seeking child (UASC)? Allowed values are: `'Yes'`, `'No'`, `'Not Applicable'`. See the [UASC Status Taxonomy](#uasc-status-taxonomy).
+: Is the child an unaccompanied asylum-seeking child (UASC)? Allowed values are: `'Yes'`, `'No'`, `'Not Applicable'`.
 
 #### Example
 
@@ -134,12 +125,6 @@ The referral request: how urgently the child needs to be placed, how many siblin
 {% endhighlight %}
 </div>
 
-<div class="note">
-  <h5 id="note-availability">Note</h5>
-  <p>See <a href="/assets/model/placements/examples/valid-other-options.jsonld"><code>assets/model/placements/examples/valid-other-options.jsonld</code></a> for a worked example using <code>olr:OutOfLAReasonOther</code> with multiple paired free-text reasons.</p>
-</div>
-
-
 ### PlacementRequirements
 
 The child's needs that the placement must accommodate: communication, cultural, living companions, pets, additional support, deprivation of liberty, and home adaptation.
@@ -152,17 +137,11 @@ The child's needs that the placement must accommodate: communication, cultural, 
 <span id="requirements-specificCommunicationRequirement">specificCommunicationRequirement</span>
 : Specific communication or language requirements such as `'ESOL'`, `'BSL'` etc. and use `'None'` if not applicable. Multi-valued. See the [Communication Need Taxonomy](#communication-need-taxonomy).
 
-<span id="requirements-specificCommunicationRequirementOther">specificCommunicationRequirementOther</span>
-: Free-text descriptions when `specificCommunicationRequirement` includes `'Other'`. Multi-valued. _String_.
-
 <span id="requirements-homeAdaptationRequired">homeAdaptationRequired</span>
 : Whether adaptations to the home are required to accommodate the child's needs. _Boolean_.
 
 <span id="requirements-culturalNeeds">culturalNeeds</span>
 : Whether the placement must accommodate specific cultural needs (e.g. access to places of worship, religious activities).  Allowed values are: `'Required'`, `'Not Required'`, `'Not Known'`, `'Other'`.
-
-<span id="requirements-culturalNeedsOther">culturalNeedsOther</span>
-: Free-text descriptions when `culturalNeeds` is `Other`. Multi-valued.  _String_.
 
 <span id="requirements-livingCompanions">livingCompanions</span>
 : Are there any restrictions on who else can live in the same home? Or, would it help to have them living with other young people? See the [Living Arrangement Taxonomy](#living-arrangement-taxonomy).
@@ -172,9 +151,6 @@ The child's needs that the placement must accommodate: communication, cultural, 
 
 <span id="requirements-additionalSupport">additionalSupport</span>
 : Additional support provision required. Multi-valued. Some allowed values are: `'Additional supervision'`, `'Therapeutic support'`, `'A worker for respite'`, `'Taxis to school'` etc.  See the [Support Type Taxonomy](#support-type-taxonomy).
-
-<span id="requirements-additionalSupportOther">additionalSupportOther</span>
-: Free-text descriptions when `additionalSupport` includes `'Other'`. Multi-valued. _String_.
 
 <span id="requirements-deprivationOfLiberty">deprivationOfLiberty</span>
 : Whether the child has a Deprivation of Liberty Order (DOL). _Boolean_.
@@ -201,12 +177,6 @@ The child's needs that the placement must accommodate: communication, cultural, 
 }
 {% endhighlight %}
 </div>
-
-<div class="note">
-  <h5 id="note-requirements">Note - "Other" pairings</h5>
-  <p>Each controlled-vocab field that exposes an "Other" option is paired with a multi-valued free-text property: <code>cn:Other</code> ↔ <code>specificCommunicationRequirementOther</code>, <code>cln:Other</code> ↔ <code>culturalNeedsOther</code>, <code>st:Other</code> ↔ <code>additionalSupportOther</code>. Whenever the "Other" concept is selected, the paired free-text property must be provided. See <a href="/assets/model/placements/examples/valid-other-options.jsonld"><code>assets/model/placements/examples/valid-other-options.jsonld</code></a>.</p>
-</div>
-
 
 ### PlacementRecommendation
 
@@ -436,11 +406,11 @@ The ontology for this specification is defined in Turtle format and is available
 
 ## Taxonomies
 
-The model is parameterised by six SKOS controlled vocabularies. Selecting `Other` from any vocabulary that exposes it triggers the matching free-text companion property on the parent entity.
+The model is parameterised by eight SKOS controlled vocabularies.
 
 ### Communication Need Taxonomy
 
-Specific communication and language requirements a child may have. Multi-valued: enter all that apply, or `None` if not applicable. Selecting `Other` triggers the paired free-text property `specificCommunicationRequirementOther` on `PlacementRequirements`.
+Specific communication and language requirements a child may have. Multi-valued: enter all that apply, or `None` if not applicable.
 
 {% schema_table page.data_model specificCommunicationRequirement expanded no-label %}
 
@@ -464,7 +434,7 @@ Used by `needsAssessmentMethod` on [PlacementRequirements](#placementrequirement
 
 ### Out of LA Reason Taxonomy
 
-The reason why the preferred placement location is in a different LA than the placing LA. Used on `PlacementAvailability` when `isPreferredLocationLocal` is `false`. Selecting `Other` triggers the paired free-text property `outOfLAReasonOther`.
+The reason why the preferred placement location is in a different LA than the placing LA. Used on `PlacementAvailability` when `isPreferredLocationLocal` is `false`.
 
 {% schema_table page.data_model outOfLAReason expanded no-label %}
 
@@ -496,19 +466,11 @@ Used by `neededBy` on [PlacementAvailability](#placementavailability).
 
 ### Support Type Taxonomy
 
-Additional support provision required alongside a placement. Multi-valued: select all that apply. Selecting `Other` triggers the paired free-text property `additionalSupportOther` on `PlacementRequirements`.
+Additional support provision required alongside a placement. Multi-valued: select all that apply.
 
 {% schema_table page.data_model additionalSupport expanded no-label %}
 
 Used by `additionalSupport` on [PlacementRequirements](#placementrequirements).
-
-### UASC Status Taxonomy
-
-Whether the child is an unaccompanied asylum-seeking child (UASC).
-
-{% schema_table page.data_model uascStatus expanded no-label %}
-
-Used by `uascStatus` on [PlacementAvailability](#placementavailability).
 
 
 ## Validation
@@ -518,7 +480,6 @@ A [SHACL shape](/assets/model/placements/placements-standard-shape-01.ttl) encod
 - structural cardinality (mirroring the OWL restrictions in [placements-standard.ttl](/assets/model/placements/placements-standard-01.ttl)),
 - controlled-vocabulary enforcement (`sh:in` over each SKOS scheme),
 - pattern checks (UK postcode prefix on `placementLocation`),
-- conditional checks for the `Other` vocab pairings,
 - and severity-`Warning` cost sense-checks.
 
 A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, applies the [JSON-LD context file](/assets/model/placements/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
