@@ -11,7 +11,8 @@
     "neededBy": "< 5 days",
     "siblingCount": 2,
     "isPreferredLocationLocal": false,
-    "outOfLAReason": "Court order"
+    "outOfLAReason": "Court order",
+    "uascStatus": "No"
   },
 
   "placementRequirements": {
@@ -23,7 +24,8 @@
     "livingCompanions": "Only With Other younger children",
     "pets": "No",
     "additionalSupport": ["TaxisToSchool"],
-    "deprivationOfLiberty": true
+    "deprivationOfLiberty": true,
+    "needsAssessmentMethod": "BERRI"
   },
 
   "placementRecommendation": {
@@ -63,7 +65,8 @@
     "isEducationContinuous": false,
     "providerURN": "ABCD10293002",
     "siblingsPlacedTogether": 1,
-    "placementType": "Residential"
+    "placementType": "Residential",
+    "placementSource": "Block contract"
   },
 
   "qualityAssurance": {

@@ -12,6 +12,9 @@
     "st":  "https://ns.socialcaredata.io/placements/support-type#",
     "yns": "https://ns.socialcaredata.io/placements/presence-status#",
     "olr": "https://ns.socialcaredata.io/placements/outof-la-reason#",
+    "nam": "https://ns.socialcaredata.io/placements/needs-assessment-method#",
+    "psr": "https://ns.socialcaredata.io/placements/placement-source#",
+    "uasc": "https://ns.socialcaredata.io/placements/uasc-status#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "ex":  "https://example.org/placement/",
 
@@ -56,6 +59,13 @@
       "Other": "olr:OutOfLAReasonOther"
     } },
     "outOfLAReasonOther":   { "@id": "pl:outOfLAReasonOther", "@container": "@set" },
+    "uascStatus":           { "@id": "pl:uascStatus",         "@type": "@vocab", "@context": {
+      "@vocab": "https://ns.socialcaredata.io/placements/uasc-status#",
+      "Yes": "uasc:Yes",
+      "No": "uasc:No",
+      "NotApplicable": "uasc:NotApplicable",
+      "Not Applicable": "uasc:NotApplicable"
+    } },
 
     "communicationNeeds":               { "@id": "pl:communicationNeeds",               "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/presence-status#", "Yes": "yns:Yes", "No": "yns:No", "NotSpecified": "yns:NotSpecified", "Not specified": "yns:NotSpecified", "Not Specified": "yns:NotSpecified" } },
     "specificCommunicationRequirement": { "@id": "pl:specificCommunicationRequirement", "@type": "@vocab", "@container": "@set", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/communication-need#", "ESOL": "cn:ESOL", "BSL": "cn:BSL", "Makaton": "cn:Makaton", "Other": "cn:Other", "None": "cn:None" } },
@@ -68,6 +78,7 @@
     "specificCommunicationRequirementOther": { "@id": "pl:specificCommunicationRequirementOther", "@container": "@set" },
     "homeAdaptationRequired":           "pl:homeAdaptationRequired",
     "deprivationOfLiberty":             "pl:deprivationOfLiberty",
+    "needsAssessmentMethod":            { "@id": "pl:needsAssessmentMethod",            "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/needs-assessment-method#", "BERRI": "nam:BERRI", "CANS": "nam:CANS", "OtherFormalisedTool": "nam:OtherFormalisedTool", "Other formalised tool": "nam:OtherFormalisedTool", "OtherSocialWorkerAssessment": "nam:OtherSocialWorkerAssessment", "Other social worker assessment": "nam:OtherSocialWorkerAssessment" } },
 
     "fosterCareSuitability":            { "@id": "pl:fosterCareSuitability",            "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/suitability-level#", "Suitable but not preferred": "sl:SuitableButNotPreferred", "Not specified": "sl:NotSpecified" } },
     "residentialCareSuitability":       { "@id": "pl:residentialCareSuitability",       "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/suitability-level#", "Suitable but not preferred": "sl:SuitableButNotPreferred", "Not specified": "sl:NotSpecified" } },
@@ -86,6 +97,7 @@
     "riskToOthersCriminal":      { "@id": "pl:riskToOthersCriminal",      "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/risk-level#", "RiskPresent": "rl:RiskPresent", "Risk Present": "rl:RiskPresent", "Risk present": "rl:RiskPresent", "NoKnownRisk": "rl:NoKnownRisk", "No known risk": "rl:NoKnownRisk" } },
 
     "placementType":           { "@id": "pl:placementType", "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/placement-type#", "Supported Accommodation": "pt:SupportedAccommodation" } },
+    "placementSource":         { "@id": "pl:placementSource", "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/placement-source#", "RCCContract": "psr:RCCContract", "RCC contract": "psr:RCCContract", "OtherRegionalContract": "psr:OtherRegionalContract", "Other regional contract": "psr:OtherRegionalContract", "DirectAwardOffFramework": "psr:DirectAwardOffFramework", "Direct award off framework": "psr:DirectAwardOffFramework", "LocalContractOrFramework": "psr:LocalContractOrFramework", "Local contract or framework": "psr:LocalContractOrFramework", "BlockContract": "psr:BlockContract", "Block contract": "psr:BlockContract", "Remand": "psr:Remand", "SecureWelfareHub": "psr:SecureWelfareHub", "Secure Welfare Hub": "psr:SecureWelfareHub" } },
     "providerURN":             "pl:providerURN",
     "placementLocation":       "pl:placementLocation",
     "isLocationPreferred":     "pl:isLocationPreferred",

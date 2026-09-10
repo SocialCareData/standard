@@ -3,7 +3,7 @@ layout: publication
 title: Children's Social Care Placements Standard Data Model Changes
 tags:
   - Placements
-current_spec: /PUB00_placements_standard_01
+current_spec: /PUB00_placements_standard_2
 previous_spec: /PUB00_placements_standard
 ---
 
@@ -29,55 +29,63 @@ changed values as the <del class="diff-old">old value</del> <ins class="diff-new
 
 ### PlacementAvailability
 
-{% schema_table_diff current previous PlacementAvailability %}
+{% schema_table_diff current previous PlacementAvailability all %}
 
 ### PlacementRequirements
 
-{% schema_table_diff current previous PlacementRequirements %}
+{% schema_table_diff current previous PlacementRequirements all %}
 
 ### PlacementRecommendation
 
-{% schema_table_diff current previous PlacementRecommendation %}
+{% schema_table_diff current previous PlacementRecommendation all %}
 
 ### RiskAssessment
 
-{% schema_table_diff current previous RiskAssessment %}
+{% schema_table_diff current previous RiskAssessment all %}
 
-* Removed the `riskOther` and `riskToOthersOther` free-text fields to mitigate Information Governance and data privacy risks. [Issue #19](https://github.com/SocialCareData/standard/issues/19)
+* Removed the free-text fields to mitigate Information Governance and data privacy risks. [Issue #19](https://github.com/SocialCareData/standard/issues/19)
 
 ### ActualPlacement
 
-{% schema_table_diff current previous ActualPlacement %}
+{% schema_table_diff current previous ActualPlacement all %}
 
 ### QualityAssurance
 
-{% schema_table_diff current previous QualityAssurance %}
+{% schema_table_diff current previous QualityAssurance all %}
 
 ## Taxonomies
 
 ### Communication Need Taxonomy
 
-{% schema_table_diff current previous specificCommunicationRequirement %}
+{% schema_table_diff current previous specificCommunicationRequirement no-label expanded %}
 
 ### Living Arrangement Taxonomy
 
-{% schema_table_diff current previous livingCompanions %}
+{% schema_table_diff current previous livingCompanions no-label expanded %}
+
+### Needs Assessment Method Taxonomy
+
+{% schema_table_diff current previous needsAssessmentMethod no-label expanded %}
 
 ### Out of LA Reason Taxonomy
 
-{% schema_table_diff current previous outOfLAReason %}
+{% schema_table_diff current previous outOfLAReason no-label expanded %}
+
+### Placement Source Taxonomy
+
+{% schema_table_diff current previous placementSource no-label expanded %}
 
 ### Placement Type Taxonomy
 
-{% schema_table_diff current previous placementType %}
+{% schema_table_diff current previous placementType no-label expanded %}
 
 ### Placement Urgency Taxonomy
 
-{% schema_table_diff current previous neededBy %}
+{% schema_table_diff current previous neededBy no-label expanded %}
 
 ### Support Type Taxonomy
 
-{% schema_table_diff current previous additionalSupport %}
+{% schema_table_diff current previous additionalSupport no-label expanded %}
 
 ## Report an issue
 
