@@ -10,7 +10,8 @@
     "@id": "ex:NEEDEDBY-001/availability",
     "@type": "PlacementAvailability",
     "neededBy": "> 5 days",
-    "isPreferredLocationLocal": true
+    "isPreferredLocationLocal": true,
+    "uascStatus": "NotApplicable"
   },
 
   "placementRequirements": {
@@ -22,7 +23,8 @@
     "livingCompanions": "NoPreference",
     "pets": "YesCan",
     "homeAdaptationRequired": false,
-    "deprivationOfLiberty": false
+    "deprivationOfLiberty": false,
+    "needsAssessmentMethod": "OtherFormalisedTool"
   },
 
   "placementRecommendation": {

@@ -16,7 +16,8 @@ changelog:
   - Added data validation rules
   - Updated reporting spreadsheet
   - Added CSV format
-  - Removed RiskAssessment.riskOther and RiskAssessment.riskToOthersOther text fields
+  - "Removed text fields: RiskAssessment.riskOther, RiskAssessment.riskToOthersOther, PlacementAvailability.outOfLAReasonOther, PlacementRequirements.additionalSupportOther, PlacementRequirements.culturalNeedsOther and PlacementRequirements.specificCommunicationRequirementOther"
+  - Added needsAssessmentMethod, placementSource and uascStatus properties
 data_model_diff: /PUB00_placements_standard_diff_2
 ---
 
@@ -113,6 +114,9 @@ The referral request: how urgently the child needs to be placed, how many siblin
 <span id="availability-outOfLAReasonOther">outOfLAReasonOther</span>
 : Free-text description when `outOfLAReason` is `'Other'`. Multi-valued. _String_.
 
+<span id="availability-uascStatus">uascStatus</span>
+: Is the child an unaccompanied asylum-seeking child (UASC)? Allowed values are: `'Yes'`, `'No'`, `'Not Applicable'`. See the [UASC Status Taxonomy](#uasc-status-taxonomy).
+
 #### Example
 
 <div class="example">
@@ -123,7 +127,8 @@ The referral request: how urgently the child needs to be placed, how many siblin
   "neededBy": "< 5 days",
   "siblingCount": 2,
   "isPreferredLocationLocal": false,
-  "outOfLAReason": "Court order"
+  "outOfLAReason": "Court order",
+  "uascStatus": "No"
 }
 {% endhighlight %}
 </div>
@@ -173,6 +178,9 @@ The child's needs that the placement must accommodate: communication, cultural, 
 <span id="requirements-deprivationOfLiberty">deprivationOfLiberty</span>
 : Whether the child has a Deprivation of Liberty Order (DOL). _Boolean_.
 
+<span id="requirements-needsAssessmentMethod">needsAssessmentMethod</span>
+: How were the child's needs assessed? Allowed values are: `'BERRI'`, `'CANS'`, `'Other formalised tool'`, `'Other social worker assessment'`. See the [Needs Assessment Method Taxonomy](#needs-assessment-method-taxonomy).
+
 #### Example
 
 <div class="example">
@@ -187,7 +195,8 @@ The child's needs that the placement must accommodate: communication, cultural, 
   "livingCompanions": "Only With Other younger children",
   "pets": "No",
   "additionalSupport": ["TaxisToSchool"],
-  "deprivationOfLiberty": true
+  "deprivationOfLiberty": true,
+  "needsAssessmentMethod": "BERRI"
 }
 {% endhighlight %}
 </div>
@@ -345,6 +354,9 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
 <span id="actual-placementType">placementType</span>
 : Record the type of placement the child received either foster, residential or supported accommodation. See the [Placement Type Taxonomy](#placement-type-taxonomy).
 
+<span id="actual-placementSource">placementSource</span>
+: How was the placement sourced? Allowed values are: `'RCC contract'`, `'Other regional contract'`, `'Direct award off framework'`, `'Local contract or framework'`, `'Block contract'`, `'Remand'`, `'Secure Welfare Hub'`. See the [Placement Source Taxonomy](#placement-source-taxonomy).
+
 #### Example
 
 <div class="example">
@@ -363,6 +375,7 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
   "providerURN": "ABCD10293002",
   "siblingsPlacedTogether": 1,
   "placementType": "Residential",
+  "placementSource": "Block contract",
 }
 {% endhighlight %}
 </div>
@@ -428,7 +441,7 @@ The model is parameterised by six SKOS controlled vocabularies. Selecting `Other
 
 Specific communication and language requirements a child may have. Multi-valued: enter all that apply, or `None` if not applicable. Selecting `Other` triggers the paired free-text property `specificCommunicationRequirementOther` on `PlacementRequirements`.
 
-{% schema_table page.data_model specificCommunicationRequirement expanded %}
+{% schema_table page.data_model specificCommunicationRequirement expanded no-label %}
 
 Used by `specificCommunicationRequirement` on [PlacementRequirements](#placementrequirements).
 
@@ -436,23 +449,39 @@ Used by `specificCommunicationRequirement` on [PlacementRequirements](#placement
 
 Recommendations for who the child can be cared for alongside in a placement.
 
-{% schema_table page.data_model livingCompanions expanded %}
+{% schema_table page.data_model livingCompanions expanded no-label %}
 
 Used by `livingCompanions` on [PlacementRequirements](#placementrequirements).
+
+### Needs Assessment Method Taxonomy
+
+How the child's needs were assessed.
+
+{% schema_table page.data_model needsAssessmentMethod expanded no-label %}
+
+Used by `needsAssessmentMethod` on [PlacementRequirements](#placementrequirements).
 
 ### Out of LA Reason Taxonomy
 
 The reason why the preferred placement location is in a different LA than the placing LA. Used on `PlacementAvailability` when `isPreferredLocationLocal` is `false`. Selecting `Other` triggers the paired free-text property `outOfLAReasonOther`.
 
-{% schema_table page.data_model outOfLAReason expanded %}
+{% schema_table page.data_model outOfLAReason expanded no-label %}
 
 Used by `outOfLAReason` on [PlacementAvailability](#placementavailability).
+
+### Placement Source Taxonomy
+
+How the placement was sourced.
+
+{% schema_table page.data_model placementSource expanded no-label %}
+
+Used by `placementSource` on [ActualPlacement](#actualplacement).
 
 ### Placement Type Taxonomy
 
 The type of placement the child receives.
 
-{% schema_table page.data_model placementType expanded %}
+{% schema_table page.data_model placementType expanded no-label %}
 
 Used by `placementType` on [ActualPlacement](#actualplacement).
 
@@ -460,7 +489,7 @@ Used by `placementType` on [ActualPlacement](#actualplacement).
 
 How urgently the child needs to be placed. Captures urgency rather than an absolute date.
 
-{% schema_table page.data_model neededBy expanded %}
+{% schema_table page.data_model neededBy expanded no-label %}
 
 Used by `neededBy` on [PlacementAvailability](#placementavailability).
 
@@ -468,9 +497,17 @@ Used by `neededBy` on [PlacementAvailability](#placementavailability).
 
 Additional support provision required alongside a placement. Multi-valued: select all that apply. Selecting `Other` triggers the paired free-text property `additionalSupportOther` on `PlacementRequirements`.
 
-{% schema_table page.data_model additionalSupport expanded %}
+{% schema_table page.data_model additionalSupport expanded no-label %}
 
 Used by `additionalSupport` on [PlacementRequirements](#placementrequirements).
+
+### UASC Status Taxonomy
+
+Whether the child is an unaccompanied asylum-seeking child (UASC).
+
+{% schema_table page.data_model uascStatus expanded no-label %}
+
+Used by `uascStatus` on [PlacementAvailability](#placementavailability).
 
 
 ## Validation

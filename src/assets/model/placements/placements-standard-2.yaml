@@ -20,6 +20,9 @@ prefixes:
   st: https://ns.socialcaredata.io/placements/support-type#
   yns: https://ns.socialcaredata.io/placements/presence-status#
   olr: https://ns.socialcaredata.io/placements/outof-la-reason#
+  nam: https://ns.socialcaredata.io/placements/needs-assessment-method#
+  psr: https://ns.socialcaredata.io/placements/placement-source#
+  uasc: https://ns.socialcaredata.io/placements/uasc-status#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -73,6 +76,7 @@ classes:
       - siblingCount
       - isPreferredLocationLocal
       - outOfLAReason
+      - uascStatus
 
   PlacementRequirements:
     class_uri: pl:PlacementRequirements
@@ -89,6 +93,7 @@ classes:
       - additionalSupport
       - homeAdaptationRequired
       - deprivationOfLiberty
+      - needsAssessmentMethod
 
   PlacementRecommendation:
     class_uri: pl:PlacementRecommendation
@@ -128,6 +133,7 @@ classes:
       educational continuity. Optional - a Placement may not (yet) have one.
     slots:
       - placementType
+      - placementSource
       - providerURN
       - placementLocation
       - isLocationPreferred
@@ -240,6 +246,12 @@ slots:
     required: false
     multivalued: false
     description: If preferred placement location is in a different LA than the placing LA, why is this?
+  uascStatus:
+    slot_uri: pl:uascStatus
+    range: UASCStatus
+    required: true
+    multivalued: false
+    description: Whether the child is an unaccompanied asylum-seeking child (UASC).
 
   # --- PlacementRequirements ---
   communicationNeeds:
@@ -298,6 +310,12 @@ slots:
     required: false
     multivalued: false
     description: Whether the child has a Deprivation of Liberty Order (DOL).
+  needsAssessmentMethod:
+    slot_uri: pl:needsAssessmentMethod
+    range: NeedsAssessmentMethod
+    required: true
+    multivalued: false
+    description: How the child's needs were assessed.
 
   # --- PlacementRecommendation ---
   fosterCareSuitability:
@@ -394,6 +412,12 @@ slots:
     required: true
     multivalued: false
     description: The type of placement the child received.
+  placementSource:
+    slot_uri: pl:placementSource
+    range: PlacementSource
+    required: true
+    multivalued: false
+    description: How the placement was sourced.
   providerURN:
     slot_uri: pl:providerURN
     range: string
@@ -757,3 +781,77 @@ enums:
         title: Supported Accommodation
         meaning: pt:SupportedAccommodation
         description: A supported accommodation placement (typically for older young people).
+
+  NeedsAssessmentMethod:
+    enum_uri: pl:needs-assessment-method
+    title: Needs Assessment Method
+    description: Controlled vocabulary for how the child's needs were assessed.
+    permissible_values:
+      BERRI:
+        title: BERRI
+        meaning: nam:BERRI
+        description: Needs assessed using the BERRI assessment tool.
+      CANS:
+        title: CANS
+        meaning: nam:CANS
+        description: Needs assessed using the CANS (Child and Adolescent Needs and Strengths) assessment tool.
+      "Other formalised tool":
+        title: Other formalised tool
+        meaning: nam:OtherFormalisedTool
+        description: Needs assessed using another formalised needs-assessment tool.
+      "Other social worker assessment":
+        title: Other social worker assessment
+        meaning: nam:OtherSocialWorkerAssessment
+        description: Needs assessed through another social worker assessment.
+
+  PlacementSource:
+    enum_uri: pl:placement-source
+    title: Placement Source
+    description: Controlled vocabulary for how the placement was sourced.
+    permissible_values:
+      "RCC contract":
+        title: RCC contract
+        meaning: psr:RCCContract
+        description: Placement sourced through a Regional Care Cooperative (RCC) contract.
+      "Other regional contract":
+        title: Other regional contract
+        meaning: psr:OtherRegionalContract
+        description: Placement sourced through another regional contract.
+      "Direct award off framework":
+        title: Direct award / Off framework
+        meaning: psr:DirectAwardOffFramework
+        description: Placement sourced via a direct award, outside of any framework.
+      "Local contract or framework":
+        title: Local contract or framework
+        meaning: psr:LocalContractOrFramework
+        description: Placement sourced through a local contract or framework.
+      "Block contract":
+        title: Block contract
+        meaning: psr:BlockContract
+        description: Placement sourced through a block contract.
+      Remand:
+        title: Remand
+        meaning: psr:Remand
+        description: Placement arranged as a result of a remand.
+      "Secure Welfare Hub":
+        title: Secure Welfare Hub
+        meaning: psr:SecureWelfareHub
+        description: Placement sourced through the Secure Welfare Hub.
+
+  UASCStatus:
+    enum_uri: pl:uasc-status
+    title: UASC Status
+    description: Whether the child is an unaccompanied asylum-seeking child (UASC).
+    permissible_values:
+      Yes:
+        title: Yes
+        meaning: uasc:Yes
+        description: The child is an unaccompanied asylum-seeking child.
+      No:
+        title: 'No'
+        meaning: uasc:No
+        description: The child is not an unaccompanied asylum-seeking child.
+      "Not Applicable":
+        title: Not Applicable
+        meaning: uasc:NotApplicable
+        description: UASC status is not applicable.

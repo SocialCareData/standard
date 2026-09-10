@@ -16,7 +16,8 @@
     "outOfLAReasonOther": [
       "Budget constraints in placing LA prevent in-area placement",
       "Specialist provider for the child's needs only available in neighbouring LA"
-    ]
+    ],
+    "uascStatus": "Yes"
   },
 
   "placementRequirements": {
@@ -41,7 +42,8 @@
       "Specialist transport for medical appointments"
     ],
     "homeAdaptationRequired": false,
-    "deprivationOfLiberty":   false
+    "deprivationOfLiberty":   false,
+    "needsAssessmentMethod":  "Other social worker assessment"
   },
 
   "placementRecommendation": {
