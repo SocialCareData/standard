@@ -14,7 +14,7 @@ You can sign up for our [newsletter](https://github.us15.list-manage.com/subscri
 
 ## Raise an issue
 
-Our standards are managed through our [GitHub](https://github.com/SocialCareData). If you have feedback on our standards or want to make a suggestion, you can [raise an issue](https://github.com/SocialCareData/standard/issues/new) or add to an existing thread. 
+Our standards are managed through our [GitHub](https://github.com/SocialCareData). If you have feedback on our standards or want to make a suggestion, you can [raise an issue](https://github.com/SocialCareData/standard/issues/new), add to an existing thread, or alternatively reach out to us at [DataStandards-SocialCare@socialfinance.org.uk](mailto:DataStandards-SocialCare@socialfinance.org.uk).
 
 ## Join our Working Groups
 
