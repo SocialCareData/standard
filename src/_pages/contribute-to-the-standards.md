@@ -8,9 +8,9 @@ tags:
 
 We are co-developing our standards with the sector to ensure they are fit for purpose. You can contribute to our standards in different ways depending on your time and level of interest in the programme and your role. We're particularly looking for support in the following ways:
 
-_Practitioners_:_ Take part in user research and working groups: describe the real problems in your current systems, and help us test draft standards against practice.
-_Local authorities:_ Join reference groups and advisory forums, help shape which use cases we prioritise, and volunteer for pilot projects and real-world testing.
-__Suppliers and partners:_ Work with us on exchange mechanisms, implementation and what adoption realistically needs to look like in live systems.
+* _Practitioners:_ Take part in user research and working groups: describe the real problems in your current systems, and help us test draft standards against practice.
+* _Local authorities:_ Join reference groups and advisory forums, help shape which use cases we prioritise, and volunteer for pilot projects and real-world testing.
+* _Suppliers and partners:_ Work with us on exchange mechanisms, implementation and what adoption realistically needs to look like in live systems.
 
 ## Keep informed - register with our mailing list
 
