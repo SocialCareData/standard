@@ -63,6 +63,9 @@ For more information about the programme overall, or to join one of our [standar
 Programme director
 : Tom Rintoul, [tom.rintoul@socialfinance.org.uk](mailto:tom.rintoul@socialfinance.org.uk)
 
+Programme manager
+: Tara Lee, [tara.lee@theodi.org](mailto:tara.lee@theodi.org)
+
 Multi-agency information sharing workstream lead
 : Ferry Lichtenberg, [ferry.lichtenberg@socialfinance.org.uk](mailto:ferry.lichtenberg@socialfinance.org.uk)
 
@@ -70,7 +73,7 @@ Children's social care placements workstream lead
 : Madeline Goldie, [madeline.goldie@socialfinance.org.uk](mailto:madeline.goldie@socialfinance.org.uk)
 
 Joined up care workstream lead
-: Juliette Clewlow, [juliette.clewlow@socialfinance.org.uk](mailto:juliette.clewlow@socialfinance.org.uk)
+: Ferry Lichtenberg, [ferry.lichtenberg@socialfinance.org.uk](mailto:ferry.lichtenberg@socialfinance.org.uk)
 
 Social care interoperability framework workstream lead
 : Matthieu Bosquet, [matthieu.bosquet@theodi.org](mailto:matthieu.bosquet@theodi.org)
