@@ -18,6 +18,7 @@ changelog:
   - Added CSV format
   - "Removed text fields: RiskAssessment.riskOther, RiskAssessment.riskToOthersOther, PlacementAvailability.outOfLAReasonOther, PlacementRequirements.additionalSupportOther, PlacementRequirements.culturalNeedsOther and PlacementRequirements.specificCommunicationRequirementOther"
   - Added needsAssessmentMethod, placementSource and uascStatus properties
+  - Removed properties PlacementAvailability.isPreferredLocationLocal and PlacementAvailability.outOfLAReason
   - Placement.qualityAssurance is made optional
 data_model_diff: /PUB00_placements_standard_diff
 ---
@@ -90,7 +91,7 @@ The top-level record. Captures the unique child identifier and links the placeme
 
 ### PlacementAvailability
 
-The referral request: how urgently the child needs to be placed, how many siblings to be placed alongside, and whether the preferred location is in the same LA as the placing LA (and if not, why).
+The referral request: how urgently the child needs to be placed and how many siblings to be placed alongside.
 
 #### Properties
 
@@ -99,12 +100,6 @@ The referral request: how urgently the child needs to be placed, how many siblin
 
 <span id="availability-siblingCount">siblingCount</span>
 : How many siblings should the child be placed together with? If child has no siblings/ does not need to be placed with siblings then input 0. _Integer_.
-
-<span id="availability-isPreferredLocationLocal">isPreferredLocationLocal</span>
-: Is the preferred placement location in the same LA as the placing LA? _Boolean_.
-
-<span id="availability-outOfLAReason">outOfLAReason</span>
-: If `isPreferredLocationLocal` is `false`, the reason the preferred placement is sought outside the placing LA. See the [Out of LA Reason Taxonomy](#out-of-la-reason-taxonomy).
 
 <span id="availability-uascStatus">uascStatus</span>
 : Is the child an unaccompanied asylum-seeking child (UASC)? Allowed values are: `'Yes'`, `'No'`, `'Not Applicable'`.
@@ -118,8 +113,6 @@ The referral request: how urgently the child needs to be placed, how many siblin
   "@type": "PlacementAvailability",
   "neededBy": "< 5 days",
   "siblingCount": 2,
-  "isPreferredLocationLocal": false,
-  "outOfLAReason": "Court order",
   "uascStatus": "No"
 }
 {% endhighlight %}
@@ -431,14 +424,6 @@ How the child's needs were assessed.
 {% schema_table page.data_model needsAssessmentMethod expanded no-label %}
 
 Used by `needsAssessmentMethod` on [PlacementRequirements](#placementrequirements).
-
-### Out of LA Reason Taxonomy
-
-The reason why the preferred placement location is in a different LA than the placing LA. Used on `PlacementAvailability` when `isPreferredLocationLocal` is `false`.
-
-{% schema_table page.data_model outOfLAReason expanded no-label %}
-
-Used by `outOfLAReason` on [PlacementAvailability](#placementavailability).
 
 ### Placement Source Taxonomy
 

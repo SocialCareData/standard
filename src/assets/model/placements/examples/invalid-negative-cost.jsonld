@@ -9,8 +9,7 @@
   "placementAvailability": {
     "@id": "ex:INVALID-005/availability",
     "@type": "PlacementAvailability",
-    "neededBy": "MoreThanFiveDays",
-    "isPreferredLocationLocal": true
+    "neededBy": "MoreThanFiveDays"
   },
 
   "placementRequirements": {

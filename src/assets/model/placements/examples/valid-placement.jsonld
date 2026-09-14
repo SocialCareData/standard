@@ -10,8 +10,6 @@
     "@type": "PlacementAvailability",
     "neededBy": "< 5 days",
     "siblingCount": 2,
-    "isPreferredLocationLocal": false,
-    "outOfLAReason": "Court order",
     "uascStatus": "No"
   },
 

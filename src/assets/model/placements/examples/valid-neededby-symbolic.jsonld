@@ -10,7 +10,6 @@
     "@id": "ex:NEEDEDBY-001/availability",
     "@type": "PlacementAvailability",
     "neededBy": "> 5 days",
-    "isPreferredLocationLocal": true,
     "uascStatus": "NotApplicable"
   },
 

@@ -9,9 +9,7 @@
     "@id": "ex:INVALID-002/availability",
     "@type": "PlacementAvailability",
     "placementId": "PLC-INVALID-002",
-    "neededBy": "Today",
-    "isPreferredLocationLocal": false,
-    "outOfLAReason": "CourtOrder"
+    "neededBy": "Today"
   },
 
   "placementRequirements": {

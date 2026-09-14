@@ -19,7 +19,6 @@ prefixes:
   sl: https://ns.socialcaredata.io/placements/suitability-level#
   st: https://ns.socialcaredata.io/placements/support-type#
   yns: https://ns.socialcaredata.io/placements/presence-status#
-  olr: https://ns.socialcaredata.io/placements/outof-la-reason#
   nam: https://ns.socialcaredata.io/placements/needs-assessment-method#
   psr: https://ns.socialcaredata.io/placements/placement-source#
   uasc: https://ns.socialcaredata.io/placements/uasc-status#
@@ -74,8 +73,6 @@ classes:
     slots:
       - neededBy
       - siblingCount
-      - isPreferredLocationLocal
-      - outOfLAReason
       - uascStatus
 
   PlacementRequirements:
@@ -234,18 +231,6 @@ slots:
       How many siblings the child should ideally be placed with according to the
       care plan. 0 if the child has no siblings or is not to be placed with
       siblings.
-  isPreferredLocationLocal:
-    slot_uri: pl:isPreferredLocationLocal
-    range: boolean
-    required: true
-    multivalued: false
-    description: Is the preferred placement location in the same LA as the placing LA?
-  outOfLAReason:
-    slot_uri: pl:outOfLAReason
-    range: OutOfLAReason
-    required: false
-    multivalued: false
-    description: If preferred placement location is in a different LA than the placing LA, why is this?
   uascStatus:
     slot_uri: pl:uascStatus
     range: UASCStatus
@@ -561,28 +546,6 @@ enums:
         title: More than 5 days
         meaning: pu:MoreThanFiveDays
         description: Placement is needed in more than five days.
-
-  OutOfLAReason:
-    enum_uri: pl:outof-la-reason
-    title: Out of LA Reason
-    description: Controlled vocabulary describing the reason the preferred placement location is in a different LA.
-    permissible_values:
-      "Safeguarding concerns":
-        title: Safeguarding concerns
-        meaning: olr:SafeguardingConcerns
-        description: Placement is sought outside the placing LA due to safeguarding concerns.
-      "Bail conditions":
-        title: Bail conditions
-        meaning: olr:BailConditions
-        description: Placement is sought outside the placing LA because of bail conditions.
-      "Court order":
-        title: Court order
-        meaning: olr:CourtOrder
-        description: Placement is sought outside the placing LA because of a court order.
-      Other:
-        title: Other
-        meaning: olr:OutOfLAReasonOther
-        description: Another reason not listed.
 
   PresenceStatus:
     enum_uri: pl:presence-status
