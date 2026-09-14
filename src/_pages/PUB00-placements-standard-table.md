@@ -52,10 +52,6 @@ data_model: src/assets/model/placements/placements-standard.yaml
 
 {% schema_table page.data_model needsAssessmentMethod no-label %}
 
-### Out of LA Reason Taxonomy
-
-{% schema_table page.data_model outOfLAReason no-label %}
-
 ### Placement Source Taxonomy
 
 {% schema_table page.data_model placementSource no-label %}
@@ -63,6 +59,10 @@ data_model: src/assets/model/placements/placements-standard.yaml
 ### Placement Type Taxonomy
 
 {% schema_table page.data_model placementType no-label %}
+
+### Non-Preferred Location Reason Taxonomy
+
+{% schema_table page.data_model nonPreferredLocationReason no-label %}
 
 ### Placement Urgency Taxonomy
 
