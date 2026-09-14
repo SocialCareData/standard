@@ -54,6 +54,7 @@
     "providerURN": "URN-9999",
     "placementLocation": "BS10",
     "isLocationPreferred": true,
+    "nonPreferredLocationReason": "Not applicable",
     "isEducationContinuous": true,
     "siblingsPlacedTogether": 0,
     "totalWeeklyCost": 50

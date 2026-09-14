@@ -15,6 +15,7 @@
     "nam": "https://ns.socialcaredata.io/placements/needs-assessment-method#",
     "psr": "https://ns.socialcaredata.io/placements/placement-source#",
     "uasc": "https://ns.socialcaredata.io/placements/uasc-status#",
+    "nplr": "https://ns.socialcaredata.io/placements/non-preferred-location-reason#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "ex":  "https://example.org/placement/",
 
@@ -101,6 +102,7 @@
     "providerURN":             "pl:providerURN",
     "placementLocation":       "pl:placementLocation",
     "isLocationPreferred":     "pl:isLocationPreferred",
+    "nonPreferredLocationReason": { "@id": "pl:nonPreferredLocationReason", "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/non-preferred-location-reason#", "CYPParentalPreference": "nplr:CYPParentalPreference", "CYP/parental preference": "nplr:CYPParentalPreference", "SafeguardingRequirement": "nplr:SafeguardingRequirement", "Safeguarding requirement": "nplr:SafeguardingRequirement", "ProvisionWithinDistanceNotAvailable": "nplr:ProvisionWithinDistanceNotAvailable", "Provision within distance exists but is not available": "nplr:ProvisionWithinDistanceNotAvailable", "ProvisionWithinDistanceDoesNotExist": "nplr:ProvisionWithinDistanceDoesNotExist", "Provision within distance does not exist": "nplr:ProvisionWithinDistanceDoesNotExist", "CarerMovingOutOfArea": "nplr:CarerMovingOutOfArea", "Carer moving out of area": "nplr:CarerMovingOutOfArea", "LegalReasons": "nplr:LegalReasons", "Legal reasons": "nplr:LegalReasons", "NotApplicable": "nplr:NotApplicable", "Not applicable": "nplr:NotApplicable" } },
     "isEducationContinuous":   "pl:isEducationContinuous",
     "siblingsPlacedTogether":  { "@id": "pl:siblingsPlacedTogether", "@type": "xsd:nonNegativeInteger" },
     "totalWeeklyCost":         { "@id": "pl:totalWeeklyCost",        "@type": "xsd:decimal" },

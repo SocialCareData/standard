@@ -54,6 +54,7 @@
     "providerURN": "URN-2030",
     "placementLocation": "NOT A POSTCODE",
     "isLocationPreferred": true,
+    "nonPreferredLocationReason": "Not applicable",
     "isEducationContinuous": true,
     "siblingsPlacedTogether": 0,
     "totalWeeklyCost": 1500.00

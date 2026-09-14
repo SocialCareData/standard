@@ -306,6 +306,9 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
 <span id="actual-isLocationPreferred">isLocationPreferred</span>
 : Whether the actual placement location was a preferred location. _Boolean_.
 
+<span id="actual-nonPreferredLocationReason">nonPreferredLocationReason</span>
+: If the placement was not found in the preferred location, the reason why. Use `'Not applicable'` when the placement was in the preferred location. See the [Non-Preferred Location Reason Taxonomy](#non-preferred-location-reason-taxonomy).
+
 <span id="actual-isEducationContinuous">isEducationContinuous</span>
 : Was child's education disrupted as a result of this placement? _Boolean_.
 
@@ -335,6 +338,7 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
   "totalWeeklyCost":             4500.00,
   "placementLocation": "N18",
   "isLocationPreferred": true,
+  "nonPreferredLocationReason": "Not applicable",
   "isEducationContinuous": false,
   "providerURN": "ABCD10293002",
   "siblingsPlacedTogether": 1,
@@ -440,6 +444,14 @@ The type of placement the child receives.
 {% schema_table page.data_model placementType expanded no-label %}
 
 Used by `placementType` on [ActualPlacement](#actualplacement).
+
+### Non-Preferred Location Reason Taxonomy
+
+The reason a placement was not found in the preferred location. Used on `ActualPlacement` by `nonPreferredLocationReason`.
+
+{% schema_table page.data_model nonPreferredLocationReason expanded no-label %}
+
+Used by `nonPreferredLocationReason` on [ActualPlacement](#actualplacement).
 
 ### Placement Urgency Taxonomy
 

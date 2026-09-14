@@ -60,6 +60,7 @@
     "totalWeeklyCost":              4500.00,
     "placementLocation": "N18",
     "isLocationPreferred": true,
+    "nonPreferredLocationReason": "Not applicable",
     "isEducationContinuous": false,
     "providerURN": "ABCD10293002",
     "siblingsPlacedTogether": 1,
