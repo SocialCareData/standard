@@ -19,7 +19,10 @@ prefixes:
   sl: https://ns.socialcaredata.io/placements/suitability-level#
   st: https://ns.socialcaredata.io/placements/support-type#
   yns: https://ns.socialcaredata.io/placements/presence-status#
-  olr: https://ns.socialcaredata.io/placements/outof-la-reason#
+  nam: https://ns.socialcaredata.io/placements/needs-assessment-method#
+  psr: https://ns.socialcaredata.io/placements/placement-source#
+  nplr: https://ns.socialcaredata.io/placements/non-preferred-location-reason#
+  uasc: https://ns.socialcaredata.io/placements/uasc-status#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -71,19 +74,7 @@ classes:
     slots:
       - neededBy
       - siblingCount
-      - isPreferredLocationLocal
-      - outOfLAReason
-      - outOfLAReasonOther
-    rules:
-      - title: outOfLAReasonOther required when outOfLAReason is 'Other'
-        preconditions:
-          slot_conditions:
-            outOfLAReason:
-              equals_string: Other
-        postconditions:
-          slot_conditions:
-            outOfLAReasonOther:
-              required: true
+      - uascStatus
 
   PlacementRequirements:
     class_uri: pl:PlacementRequirements
@@ -98,41 +89,9 @@ classes:
       - livingCompanions
       - pets
       - additionalSupport
-      - additionalSupportOther
-      - culturalNeedsOther
-      - specificCommunicationRequirementOther
       - homeAdaptationRequired
       - deprivationOfLiberty
-    rules:
-      - title: culturalNeedsOther required when culturalNeeds is 'Other'
-        preconditions:
-          slot_conditions:
-            culturalNeeds:
-              equals_string: Other
-        postconditions:
-          slot_conditions:
-            culturalNeedsOther:
-              required: true
-      - title: specificCommunicationRequirementOther required when 'Other' is selected
-        preconditions:
-          slot_conditions:
-            specificCommunicationRequirement:
-              has_member:
-                equals_string: Other
-        postconditions:
-          slot_conditions:
-            specificCommunicationRequirementOther:
-              required: true
-      - title: additionalSupportOther required when additionalSupport includes 'Other'
-        preconditions:
-          slot_conditions:
-            additionalSupport:
-              has_member:
-                equals_string: Other
-        postconditions:
-          slot_conditions:
-            additionalSupportOther:
-              required: true
+      - needsAssessmentMethod
 
   PlacementRecommendation:
     class_uri: pl:PlacementRecommendation
@@ -158,13 +117,11 @@ classes:
       - riskEatingDisorder
       - riskMissing
       - riskSexualExploitation
-      - riskOther
       - riskToOthersPhysical
       - riskToOthersSexual
       - riskToOthersFire
       - riskToOthersAnimals
       - riskToOthersCriminal
-      - riskToOthersOther
 
   ActualPlacement:
     class_uri: pl:ActualPlacement
@@ -174,9 +131,12 @@ classes:
       educational continuity. Optional - a Placement may not (yet) have one.
     slots:
       - placementType
+      - placementStartDate
+      - placementSource
       - providerURN
       - placementLocation
       - isLocationPreferred
+      - nonPreferredLocationReason
       - isEducationContinuous
       - siblingsPlacedTogether
       - totalWeeklyCost
@@ -193,7 +153,7 @@ classes:
       practices; not intended to be shared beyond the recording LA.
     slots:
       - referralDate
-      - placementDate
+      - placementDateAdmin
       - placementOfficerName
       - costDate
       - referralOfficerName
@@ -244,7 +204,7 @@ slots:
   qualityAssurance:
     slot_uri: pl:qualityAssurance
     range: QualityAssurance
-    required: true
+    required: false
     multivalued: false
     description: Links a Placement to its QualityAssurance metadata.
   actualPlacement:
@@ -274,27 +234,12 @@ slots:
       How many siblings the child should ideally be placed with according to the
       care plan. 0 if the child has no siblings or is not to be placed with
       siblings.
-  isPreferredLocationLocal:
-    slot_uri: pl:isPreferredLocationLocal
-    range: boolean
+  uascStatus:
+    slot_uri: pl:uascStatus
+    range: UASCStatus
     required: true
     multivalued: false
-    description: Is the preferred placement location in the same LA as the placing LA?
-  outOfLAReason:
-    slot_uri: pl:outOfLAReason
-    range: OutOfLAReason
-    required: false
-    multivalued: false
-    description: If preferred placement location is in a different LA than the placing LA, why is this?
-  outOfLAReasonOther:
-    slot_uri: pl:outOfLAReasonOther
-    range: string
-    required: false
-    multivalued: true
-    description: >-
-      Free-text description of why the preferred placement location is in a
-      different LA when the standard outof-la-reason options do not apply. Used
-      when the 'Other' OutOfLAReason concept is selected.
+    description: Whether the child is an unaccompanied asylum-seeking child (UASC).
 
   # --- PlacementRequirements ---
   communicationNeeds:
@@ -341,33 +286,6 @@ slots:
     description: >-
       Additional support provision required (e.g., additional supervision,
       therapeutic support, taxis to school). Multi-valued.
-  additionalSupportOther:
-    slot_uri: pl:additionalSupportOther
-    range: string
-    required: false
-    multivalued: true
-    description: >-
-      Free-text description of any additional support not captured by the
-      standard SupportType options. Used when the 'Other' SupportType concept is
-      selected.
-  culturalNeedsOther:
-    slot_uri: pl:culturalNeedsOther
-    range: string
-    required: false
-    multivalued: true
-    description: >-
-      Free-text description of cultural needs not captured by the standard
-      CulturalNeed options. Used when the 'Other' CulturalNeed concept is
-      selected.
-  specificCommunicationRequirementOther:
-    slot_uri: pl:specificCommunicationRequirementOther
-    range: string
-    required: false
-    multivalued: true
-    description: >-
-      Free-text description of communication or language requirements not
-      captured by the standard CommunicationNeed options. Used when the 'Other'
-      CommunicationNeed concept is among the selected values.
   homeAdaptationRequired:
     slot_uri: pl:homeAdaptationRequired
     range: boolean
@@ -380,6 +298,12 @@ slots:
     required: false
     multivalued: false
     description: Whether the child has a Deprivation of Liberty Order (DOL).
+  needsAssessmentMethod:
+    slot_uri: pl:needsAssessmentMethod
+    range: NeedsAssessmentMethod
+    required: true
+    multivalued: false
+    description: How the child's needs were assessed.
 
   # --- PlacementRecommendation ---
   fosterCareSuitability:
@@ -438,18 +362,6 @@ slots:
     required: true
     multivalued: false
     description: Whether the child is known to be at risk of sexual exploitation.
-  riskOther:
-    slot_uri: pl:riskOther
-    range: RiskLevel
-    required: true
-    multivalued: false
-    description: Whether there is a known risk of other types of harm to the child not captured by the standard risk categories.
-  riskToOthersOther:
-    slot_uri: pl:riskToOthersOther
-    range: RiskLevel
-    required: true
-    multivalued: false
-    description: Whether there is a known risk of other types of harm to others not captured by the standard risk categories.
   riskToOthersPhysical:
     slot_uri: pl:riskToOthersPhysical
     range: RiskLevel
@@ -488,6 +400,18 @@ slots:
     required: true
     multivalued: false
     description: The type of placement the child received.
+  placementStartDate:
+    slot_uri: pl:placementStartDate
+    range: date
+    required: true
+    multivalued: false
+    description: The date the placement started.
+  placementSource:
+    slot_uri: pl:placementSource
+    range: PlacementSource
+    required: true
+    multivalued: false
+    description: How the placement was sourced.
   providerURN:
     slot_uri: pl:providerURN
     range: string
@@ -511,6 +435,14 @@ slots:
     required: true
     multivalued: false
     description: Whether the actual placement location was a preferred location.
+  nonPreferredLocationReason:
+    slot_uri: pl:nonPreferredLocationReason
+    range: NonPreferredLocationReason
+    required: true
+    multivalued: false
+    description: >-
+      The reason the placement was not found in the preferred location. Use 'Not
+      applicable' when the placement was in the preferred location.
   isEducationContinuous:
     slot_uri: pl:isEducationContinuous
     range: boolean
@@ -577,13 +509,13 @@ slots:
     range: date
     required: true
     multivalued: false
-    description: Date the referral data was captured.
-  placementDate:
-    slot_uri: pl:placementDate
+    description: Date of when referral was captured on the Case Management System.
+  placementDateAdmin:
+    slot_uri: pl:placementDateAdmin
     range: date
     required: true
     multivalued: false
-    description: Date the actual placement data was captured.
+    description: Date of agreed placement start captured on the Case Management System.
   placementOfficerName:
     slot_uri: pl:placementOfficerName
     range: string
@@ -595,7 +527,7 @@ slots:
     range: date
     required: true
     multivalued: false
-    description: Date the placement cost data was captured.
+    description: Date when placement cost data was captured on the Case Management System.
   referralOfficerName:
     slot_uri: pl:referralOfficerName
     range: string
@@ -631,28 +563,6 @@ enums:
         title: More than 5 days
         meaning: pu:MoreThanFiveDays
         description: Placement is needed in more than five days.
-
-  OutOfLAReason:
-    enum_uri: pl:outof-la-reason
-    title: Out of LA Reason
-    description: Controlled vocabulary describing the reason the preferred placement location is in a different LA.
-    permissible_values:
-      "Safeguarding concerns":
-        title: Safeguarding concerns
-        meaning: olr:SafeguardingConcerns
-        description: Placement is sought outside the placing LA due to safeguarding concerns.
-      "Bail conditions":
-        title: Bail conditions
-        meaning: olr:BailConditions
-        description: Placement is sought outside the placing LA because of bail conditions.
-      "Court order":
-        title: Court order
-        meaning: olr:CourtOrder
-        description: Placement is sought outside the placing LA because of a court order.
-      Other:
-        title: Other
-        meaning: olr:OutOfLAReasonOther
-        description: Another reason not listed. When this concept is selected, supply the details via the paired pl:outOfLAReasonOther free-text property on PlacementAvailability.
 
   PresenceStatus:
     enum_uri: pl:presence-status
@@ -692,7 +602,7 @@ enums:
       Other:
         title: Other
         meaning: cn:Other
-        description: Another communication or language requirement not listed. When this concept is selected, supply the details via the paired pl:specificCommunicationRequirementOther free-text property on PlacementRequirements.
+        description: Another communication or language requirement not listed.
       None:
         title: None
         meaning: cn:None
@@ -718,7 +628,7 @@ enums:
       Other:
         title: Other
         meaning: cln:Other
-        description: Other cultural needs apply. When this concept is selected, supply the details via the paired pl:culturalNeedsOther free-text property on PlacementRequirements.
+        description: Other cultural needs apply.
 
   LivingArrangement:
     enum_uri: pl:living-arrangement
@@ -796,7 +706,7 @@ enums:
       Other:
         title: Other
         meaning: st:Other
-        description: Other additional support is required. When this concept is selected, supply the details via the paired pl:additionalSupportOther free-text property on PlacementRequirements.
+        description: Other additional support is required.
 
   SuitabilityLevel:
     enum_uri: pl:suitability-level
@@ -851,3 +761,111 @@ enums:
         title: Supported Accommodation
         meaning: pt:SupportedAccommodation
         description: A supported accommodation placement (typically for older young people).
+
+  NeedsAssessmentMethod:
+    enum_uri: pl:needs-assessment-method
+    title: Needs Assessment Method
+    description: Controlled vocabulary for how the child's needs were assessed.
+    permissible_values:
+      BERRI:
+        title: BERRI
+        meaning: nam:BERRI
+        description: Needs assessed using the BERRI assessment tool.
+      CANS:
+        title: CANS
+        meaning: nam:CANS
+        description: Needs assessed using the CANS (Child and Adolescent Needs and Strengths) assessment tool.
+      "Other formalised tool":
+        title: Other formalised tool
+        meaning: nam:OtherFormalisedTool
+        description: Needs assessed using another formalised needs-assessment tool.
+      "Other social worker assessment":
+        title: Other social worker assessment
+        meaning: nam:OtherSocialWorkerAssessment
+        description: Needs assessed through another social worker assessment.
+
+  PlacementSource:
+    enum_uri: pl:placement-source
+    title: Placement Source
+    description: Controlled vocabulary for how the placement was sourced.
+    permissible_values:
+      "RCC contract":
+        title: RCC contract
+        meaning: psr:RCCContract
+        description: Placement sourced through a Regional Care Cooperative (RCC) contract.
+      "Other regional contract":
+        title: Other regional contract
+        meaning: psr:OtherRegionalContract
+        description: Placement sourced through another regional contract.
+      "Direct award off framework":
+        title: Direct award / Off framework
+        meaning: psr:DirectAwardOffFramework
+        description: Placement sourced via a direct award, outside of any framework.
+      "Local contract or framework":
+        title: Local contract or framework
+        meaning: psr:LocalContractOrFramework
+        description: Placement sourced through a local contract or framework.
+      "Block contract":
+        title: Block contract
+        meaning: psr:BlockContract
+        description: Placement sourced through a block contract.
+      Remand:
+        title: Remand
+        meaning: psr:Remand
+        description: Placement arranged as a result of a remand.
+      "Secure Welfare Hub":
+        title: Secure Welfare Hub
+        meaning: psr:SecureWelfareHub
+        description: Placement sourced through the Secure Welfare Hub.
+
+  NonPreferredLocationReason:
+    enum_uri: pl:non-preferred-location-reason
+    title: Non-Preferred Location Reason
+    description: Controlled vocabulary for the reason a placement was not found in the preferred location.
+    permissible_values:
+      "CYP/parental preference":
+        title: CYP/parental preference
+        meaning: nplr:CYPParentalPreference
+        description: The placement was not in the preferred location because of the child/young person's or their parent's preference.
+      "Safeguarding requirement":
+        title: Safeguarding requirement
+        meaning: nplr:SafeguardingRequirement
+        description: The placement was not in the preferred location due to a safeguarding requirement.
+      "Provision within distance exists but is not available":
+        title: Provision within distance exists but is not available
+        meaning: nplr:ProvisionWithinDistanceNotAvailable
+        description: Suitable provision within the preferred distance exists but was not available.
+      "Provision within distance does not exist":
+        title: Provision within distance does not exist
+        meaning: nplr:ProvisionWithinDistanceDoesNotExist
+        description: No suitable provision exists within the preferred distance.
+      "Carer moving out of area":
+        title: Carer moving out of area
+        meaning: nplr:CarerMovingOutOfArea
+        description: The placement was not in the preferred location because the carer is moving out of the area.
+      "Legal reasons":
+        title: Legal reasons
+        meaning: nplr:LegalReasons
+        description: The placement was not in the preferred location for legal reasons.
+      "Not applicable":
+        title: Not applicable
+        meaning: nplr:NotApplicable
+        description: Not applicable; the placement was in the preferred location.
+
+  UASCStatus:
+    enum_uri: pl:uasc-status
+    title: UASC Status
+    description: Whether the child is an unaccompanied asylum-seeking child (UASC).
+    permissible_values:
+      Yes:
+        title: Yes
+        meaning: uasc:Yes
+        description: The child is an unaccompanied asylum-seeking child.
+      No:
+        title: 'No'
+        meaning: uasc:No
+        description: The child is not an unaccompanied asylum-seeking child.
+      "Not Applicable":
+        title: Not Applicable
+        meaning: uasc:NotApplicable
+        description: UASC status is not applicable.

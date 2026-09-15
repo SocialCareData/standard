@@ -11,12 +11,6 @@
     "@type": "PlacementAvailability",
     "neededBy": "< 5 days",
     "siblingCount": 0,
-    "isPreferredLocationLocal": false,
-    "outOfLAReason":      "Other",
-    "outOfLAReasonOther": [
-      "Budget constraints in placing LA prevent in-area placement",
-      "Specialist provider for the child's needs only available in neighbouring LA"
-    ],
     "uascStatus": "Yes"
   },
 
@@ -76,7 +70,7 @@
     "referralOfficerName": "Dana Khan",
     "referralDate":        "2024-04-01",
     "placementOfficerName":"Eli Rivera",
-    "placementDate":       "2024-04-08",
+    "placementDateAdmin":       "2024-04-08",
     "costOfficerName":     "Frances Morgan",
     "costDate":            "2024-04-12"
   }

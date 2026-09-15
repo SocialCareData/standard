@@ -42,24 +42,32 @@ data_model: src/assets/model/placements/placements-standard.yaml
 
 ### Communication Need Taxonomy
 
-{% schema_table page.data_model specificCommunicationRequirement %}
+{% schema_table page.data_model specificCommunicationRequirement no-label %}
 
 ### Living Arrangement Taxonomy
 
-{% schema_table page.data_model livingCompanions %}
+{% schema_table page.data_model livingCompanions no-label %}
 
-### Out of LA Reason Taxonomy
+### Needs Assessment Method Taxonomy
 
-{% schema_table page.data_model outOfLAReason %}
+{% schema_table page.data_model needsAssessmentMethod no-label %}
+
+### Placement Source Taxonomy
+
+{% schema_table page.data_model placementSource no-label %}
 
 ### Placement Type Taxonomy
 
-{% schema_table page.data_model placementType %}
+{% schema_table page.data_model placementType no-label %}
+
+### Non-Preferred Location Reason Taxonomy
+
+{% schema_table page.data_model nonPreferredLocationReason no-label %}
 
 ### Placement Urgency Taxonomy
 
-{% schema_table page.data_model neededBy %}
+{% schema_table page.data_model neededBy no-label %}
 
 ### Support Type Taxonomy
 
-{% schema_table page.data_model additionalSupport %}
+{% schema_table page.data_model additionalSupport no-label %}

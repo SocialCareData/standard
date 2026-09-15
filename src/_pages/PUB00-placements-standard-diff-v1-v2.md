@@ -1,10 +1,10 @@
 ---
 layout: publication
-title: Children's Social Care Placements Standard Data Model Changes
+title: Children's Social Care Placements Standard Data Model Changes Between v1 and v2
 tags:
   - Placements
-current_spec: /PUB00_placements_standard_2
-previous_spec: /PUB00_placements_standard
+current_spec: /PUB00_placements_standard
+previous_spec: /PUB00_placements_standard_v1
 ---
 
 {% assign current_page = site.pages | where: "url", page.current_spec | first %}
@@ -78,6 +78,10 @@ changed values as the <del class="diff-old">old value</del> <ins class="diff-new
 ### Placement Type Taxonomy
 
 {% schema_table_diff current previous placementType no-label expanded %}
+
+### Non-Preferred Location Reason Taxonomy
+
+{% schema_table_diff current previous nonPreferredLocationReason no-label expanded %}
 
 ### Placement Urgency Taxonomy
 
