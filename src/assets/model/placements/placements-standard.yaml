@@ -131,6 +131,7 @@ classes:
       educational continuity. Optional - a Placement may not (yet) have one.
     slots:
       - placementType
+      - placementStartDate
       - placementSource
       - providerURN
       - placementLocation
@@ -152,7 +153,7 @@ classes:
       practices; not intended to be shared beyond the recording LA.
     slots:
       - referralDate
-      - placementDate
+      - placementDateAdmin
       - placementOfficerName
       - costDate
       - referralOfficerName
@@ -399,6 +400,12 @@ slots:
     required: true
     multivalued: false
     description: The type of placement the child received.
+  placementStartDate:
+    slot_uri: pl:placementStartDate
+    range: date
+    required: true
+    multivalued: false
+    description: The date the placement started.
   placementSource:
     slot_uri: pl:placementSource
     range: PlacementSource
@@ -502,13 +509,13 @@ slots:
     range: date
     required: true
     multivalued: false
-    description: Date the referral data was captured.
-  placementDate:
-    slot_uri: pl:placementDate
+    description: Date of when referral was captured on the Case Management System.
+  placementDateAdmin:
+    slot_uri: pl:placementDateAdmin
     range: date
     required: true
     multivalued: false
-    description: Date the actual placement data was captured.
+    description: Date of agreed placement start captured on the Case Management System.
   placementOfficerName:
     slot_uri: pl:placementOfficerName
     range: string
@@ -520,7 +527,7 @@ slots:
     range: date
     required: true
     multivalued: false
-    description: Date the placement cost data was captured.
+    description: Date when placement cost data was captured on the Case Management System.
   referralOfficerName:
     slot_uri: pl:referralOfficerName
     range: string

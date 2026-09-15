@@ -1,6 +1,6 @@
 ---
 layout: publication
-title: Children's Social Care Placements Standard Data Model Changes
+title: Children's Social Care Placements Standard Data Model Changes Between v1 and v2
 tags:
   - Placements
 current_spec: /PUB00_placements_standard

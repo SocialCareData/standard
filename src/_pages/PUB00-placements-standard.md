@@ -17,10 +17,11 @@ changelog:
   - Updated reporting spreadsheet
   - Added CSV format
   - "Removed text fields: RiskAssessment.riskOther, RiskAssessment.riskToOthersOther, PlacementAvailability.outOfLAReasonOther, PlacementRequirements.additionalSupportOther, PlacementRequirements.culturalNeedsOther and PlacementRequirements.specificCommunicationRequirementOther"
-  - Added needsAssessmentMethod, placementSource and uascStatus properties
+  - Added needsAssessmentMethod, placementSource, uascStatus and placementStartDate properties
   - Removed properties PlacementAvailability.isPreferredLocationLocal and PlacementAvailability.outOfLAReason
+  - Renamed QualityAssurance.placementDate to placementDateAdmin
   - Placement.qualityAssurance is made optional
-data_model_diff: /PUB00_placements_standard_diff
+data_model_diff: /PUB00_placements_standard_diff_v1_v2
 ---
 
 <a href="/PUB00_placements_standard_table" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
@@ -321,6 +322,9 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
 <span id="actual-placementType">placementType</span>
 : Record the type of placement the child received either foster, residential or supported accommodation. See the [Placement Type Taxonomy](#placement-type-taxonomy).
 
+<span id="actual-placementStartDate">placementStartDate</span>
+: The date the placement started. _Date_.
+
 <span id="actual-placementSource">placementSource</span>
 : How was the placement sourced? Allowed values are: `'RCC contract'`, `'Other regional contract'`, `'Direct award off framework'`, `'Local contract or framework'`, `'Block contract'`, `'Remand'`, `'Secure Welfare Hub'`. See the [Placement Source Taxonomy](#placement-source-taxonomy).
 
@@ -343,6 +347,7 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
   "providerURN": "ABCD10293002",
   "siblingsPlacedTogether": 1,
   "placementType": "Residential",
+  "placementStartDate": "2024-03-21",
   "placementSource": "Block contract",
 }
 {% endhighlight %}
@@ -364,19 +369,19 @@ LA-internal metadata about who recorded each part of the placement record (refer
 : Name of officer recording information related to the referral. Optional. _String_.
 
 <span id="qa-referralDate">referralDate</span>
-: Date the referral data was captured. Optional. _Date_.
+: Date of when referral was captured on the Case Management System. Optional. _Date_.
 
 <span id="qa-placementOfficerName">placementOfficerName</span>
 : Name of the officer who recorded the actual placement information. Optional. _String_.
 
-<span id="qa-placementDate">placementDate</span>
-: Date the actual placement data was captured. Optional. _Date_.
+<span id="qa-placementDateAdmin">placementDateAdmin</span>
+: Date of agreed placement start captured on the Case Management System. Optional. _Date_.
 
 <span id="qa-costOfficerName">costOfficerName</span>
 : Name of the officer who recorded the placement cost data. Optional. _String_.
 
 <span id="qa-costDate">costDate</span>
-: Date the placement cost data was captured. Optional. _Date_.
+: Date when placement cost data was captured on the Case Management System. Optional. _Date_.
 
 #### Example
 
@@ -388,7 +393,7 @@ LA-internal metadata about who recorded each part of the placement record (refer
   "referralOfficerName":  "Alex Brown",
   "referralDate":         "2024-02-12",
   "placementOfficerName": "Beth Green",
-  "placementDate":        "2024-03-21",
+  "placementDateAdmin":        "2024-03-21",
   "costOfficerName":      "Casey White",
   "costDate":             "2024-03-25"
 }

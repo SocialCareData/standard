@@ -100,6 +100,7 @@
     "placementType":           { "@id": "pl:placementType", "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/placement-type#", "Supported Accommodation": "pt:SupportedAccommodation" } },
     "placementSource":         { "@id": "pl:placementSource", "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/placement-source#", "RCCContract": "psr:RCCContract", "RCC contract": "psr:RCCContract", "OtherRegionalContract": "psr:OtherRegionalContract", "Other regional contract": "psr:OtherRegionalContract", "DirectAwardOffFramework": "psr:DirectAwardOffFramework", "Direct award off framework": "psr:DirectAwardOffFramework", "LocalContractOrFramework": "psr:LocalContractOrFramework", "Local contract or framework": "psr:LocalContractOrFramework", "BlockContract": "psr:BlockContract", "Block contract": "psr:BlockContract", "Remand": "psr:Remand", "SecureWelfareHub": "psr:SecureWelfareHub", "Secure Welfare Hub": "psr:SecureWelfareHub" } },
     "providerURN":             "pl:providerURN",
+    "placementStartDate":      { "@id": "pl:placementStartDate", "@type": "xsd:date" },
     "placementLocation":       "pl:placementLocation",
     "isLocationPreferred":     "pl:isLocationPreferred",
     "nonPreferredLocationReason": { "@id": "pl:nonPreferredLocationReason", "@type": "@vocab", "@context": { "@vocab": "https://ns.socialcaredata.io/placements/non-preferred-location-reason#", "CYPParentalPreference": "nplr:CYPParentalPreference", "CYP/parental preference": "nplr:CYPParentalPreference", "SafeguardingRequirement": "nplr:SafeguardingRequirement", "Safeguarding requirement": "nplr:SafeguardingRequirement", "ProvisionWithinDistanceNotAvailable": "nplr:ProvisionWithinDistanceNotAvailable", "Provision within distance exists but is not available": "nplr:ProvisionWithinDistanceNotAvailable", "ProvisionWithinDistanceDoesNotExist": "nplr:ProvisionWithinDistanceDoesNotExist", "Provision within distance does not exist": "nplr:ProvisionWithinDistanceDoesNotExist", "CarerMovingOutOfArea": "nplr:CarerMovingOutOfArea", "Carer moving out of area": "nplr:CarerMovingOutOfArea", "LegalReasons": "nplr:LegalReasons", "Legal reasons": "nplr:LegalReasons", "NotApplicable": "nplr:NotApplicable", "Not applicable": "nplr:NotApplicable" } },
@@ -113,7 +114,7 @@
 
     "referralDate":          { "@id": "pl:referralDate",     "@type": "xsd:date" },
     "referralOfficerName":   "pl:referralOfficerName",
-    "placementDate":         { "@id": "pl:placementDate",    "@type": "xsd:date" },
+    "placementDateAdmin":    { "@id": "pl:placementDateAdmin",    "@type": "xsd:date" },
     "placementOfficerName":  "pl:placementOfficerName",
     "costDate":              { "@id": "pl:costDate",         "@type": "xsd:date" },
     "costOfficerName":       "pl:costOfficerName"
