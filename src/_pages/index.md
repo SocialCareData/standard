@@ -6,7 +6,7 @@ tags:
 
 [Social Finance](https://www.socialfinance.org.uk/), [the Open Data Institute](https://theodi.org/) and [Coram](https://www.coram.org.uk/) are working with Local Authorities, [DfE](https://www.gov.uk/government/organisations/department-for-education), [DHSC](https://www.gov.uk/government/organisations/department-of-health-and-social-care) and system vendors to develop interoperability standards for social care.
 
-We're developing interoperability standards to help deliver:
+If we’re successful, then interoperability standards in social care will help to deliver:
 
 - ### Earlier intervention
    Giving the right practitioners the right information at the right time to keep people safe and thriving – even when that information is fragmented across many systems. We might expect to see these benefits in child safeguarding and avoiding unnecessary hospital admissions.
