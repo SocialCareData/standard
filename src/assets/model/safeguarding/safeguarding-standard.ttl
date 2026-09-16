@@ -470,7 +470,7 @@ epc:Assessment a owl:Class ;
     rdfs:label "assessment" ;
     dct:title "Assessment and Enquiry" ;
     rdfs:subClassOf sg:episode-code ;
-    skos:definition "Initial phase of intervention focusing on discovery, assessment, and triage." .
+    skos:definition "Enquiry, discovery, assessment, evaluation, triage, or review." .
 
 epc:CamhsPlan a owl:Class ;
     rdfs:label "plan.CAMHS-plan" ;
@@ -554,13 +554,13 @@ epc:Plan a owl:Class ;
     rdfs:label "plan" ;
     dct:title "Plan and Order" ;
     rdfs:subClassOf sg:episode-code ;
-    skos:definition "Design of intervention defining statutory responsibilities, plan creation, and commission." .
+    skos:definition "Creation of a plan, definition of statutory responsibilities (via a court order), or commission of services." .
 
 epc:Provision a owl:Class ;
     rdfs:label "provision" ;
     dct:title "Provision and Contact" ;
     rdfs:subClassOf sg:episode-code ;
-    skos:definition "Action/operation phase of services being carried out." .
+    skos:definition "Operation and delivery of services." .
 
 epc:RemoteContact a owl:Class ;
     rdfs:label "provision.remote-contact" ;

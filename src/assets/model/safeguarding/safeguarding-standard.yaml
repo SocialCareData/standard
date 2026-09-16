@@ -803,7 +803,7 @@ enums:
     permissible_values:
       assessment:
         title: Assessment and Enquiry
-        description: Initial phase of intervention focusing on discovery, assessment, and triage.
+        description: Enquiry, discovery, assessment, evaluation, triage, or review.
         meaning: epc:Assessment
       "assessment.early-help":
         title: Early Help Assessment
@@ -823,7 +823,7 @@ enums:
         meaning: epc:CareActAssessment
       plan:
         title: Plan and Order
-        description: Design of intervention defining statutory responsibilities, plan creation, and commission.
+        description: Creation of a plan, definition of statutory responsibilities (via a court order), or commission of services.
         meaning: epc:Plan
       "plan.ehcp":
         title: EHCP
@@ -855,7 +855,7 @@ enums:
         meaning: epc:CarePlan
       provision:
         title: Provision and Contact
-        description: Action/operation phase of services being carried out.
+        description: Operation and delivery of services.
         meaning: epc:Provision
       "provision.face-to-face-contact":
         title: Face-to-Face Contact
