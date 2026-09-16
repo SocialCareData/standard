@@ -67,10 +67,6 @@ changed values as the <del class="diff-old">old value</del> <ins class="diff-new
 
 {% schema_table_diff current previous needsAssessmentMethod no-label expanded %}
 
-### Out of LA Reason Taxonomy
-
-{% schema_table_diff current previous outOfLAReason no-label expanded %}
-
 ### Placement Source Taxonomy
 
 {% schema_table_diff current previous placementSource no-label expanded %}

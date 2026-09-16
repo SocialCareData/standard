@@ -2,9 +2,9 @@ id: https://ns.socialcaredata.io/placements/schema
 name: placements
 title: Children's Social Care Placements Data Model
 description: >-
-  A single LinkML data model for Children's Social Care Placements Standard.
+  A single LinkML data model for Children's Social Care Placements Standard. Exactly matches with https://socialcaredata.github.io/spec/placements/?tab=specification and this is the initial version.
 license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
-version: 2.0.0
+version: 0.1.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
@@ -19,10 +19,6 @@ prefixes:
   sl: https://ns.socialcaredata.io/placements/suitability-level#
   st: https://ns.socialcaredata.io/placements/support-type#
   yns: https://ns.socialcaredata.io/placements/presence-status#
-  nam: https://ns.socialcaredata.io/placements/needs-assessment-method#
-  psr: https://ns.socialcaredata.io/placements/placement-source#
-  nplr: https://ns.socialcaredata.io/placements/non-preferred-location-reason#
-  uasc: https://ns.socialcaredata.io/placements/uasc-status#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -69,12 +65,12 @@ classes:
     class_uri: pl:PlacementAvailability
     description: >-
       The referral request details: how urgently the child needs to be placed,
-      how many siblings should be placed together, whether the preferred
-      location is local, and (if out of area) why.
+      how many siblings should be placed together, and the preferred location
+      for the home search.
     slots:
       - neededBy
       - siblingCount
-      - uascStatus
+      - preferredLocation
 
   PlacementRequirements:
     class_uri: pl:PlacementRequirements
@@ -91,7 +87,6 @@ classes:
       - additionalSupport
       - homeAdaptationRequired
       - deprivationOfLiberty
-      - needsAssessmentMethod
 
   PlacementRecommendation:
     class_uri: pl:PlacementRecommendation
@@ -117,33 +112,28 @@ classes:
       - riskEatingDisorder
       - riskMissing
       - riskSexualExploitation
+      - riskOther
       - riskToOthersPhysical
       - riskToOthersSexual
       - riskToOthersFire
       - riskToOthersAnimals
       - riskToOthersCriminal
+      - riskToOthersOther
 
   ActualPlacement:
     class_uri: pl:ActualPlacement
     description: >-
-      The placement actually arranged for the child, including weekly cost (with
-      optional breakdown), location, provider URN, sibling co-placement and
-      educational continuity. Optional - a Placement may not (yet) have one.
+      The placement actually arranged for the child, including total weekly
+      cost, location, provider URN, sibling co-placement and educational
+      continuity. Optional - a Placement may not (yet) have one.
     slots:
       - placementType
-      - placementStartDate
-      - placementSource
       - providerURN
       - placementLocation
       - isLocationPreferred
-      - nonPreferredLocationReason
       - isEducationContinuous
       - siblingsPlacedTogether
       - totalWeeklyCost
-      - coreWeeklyCost
-      - additionalSupportWeeklyCost
-      - educationWeeklyCost
-      - otherWeeklyCost
 
   QualityAssurance:
     class_uri: pl:QualityAssurance
@@ -153,7 +143,7 @@ classes:
       practices; not intended to be shared beyond the recording LA.
     slots:
       - referralDate
-      - placementDateAdmin
+      - placementDate
       - placementOfficerName
       - costDate
       - referralOfficerName
@@ -204,7 +194,7 @@ slots:
   qualityAssurance:
     slot_uri: pl:qualityAssurance
     range: QualityAssurance
-    required: false
+    required: true
     multivalued: false
     description: Links a Placement to its QualityAssurance metadata.
   actualPlacement:
@@ -220,7 +210,7 @@ slots:
   neededBy:
     slot_uri: pl:neededBy
     range: PlacementUrgency
-    required: true
+    required: false
     multivalued: false
     description: >-
       When the child needs to be placed by. Captures urgency rather than an
@@ -234,12 +224,12 @@ slots:
       How many siblings the child should ideally be placed with according to the
       care plan. 0 if the child has no siblings or is not to be placed with
       siblings.
-  uascStatus:
-    slot_uri: pl:uascStatus
-    range: UASCStatus
-    required: true
+  preferredLocation:
+    slot_uri: pl:preferredLocation
+    range: string
+    required: false
     multivalued: false
-    description: Whether the child is an unaccompanied asylum-seeking child (UASC).
+    description: Preferred location for the home search.
 
   # --- PlacementRequirements ---
   communicationNeeds:
@@ -282,14 +272,14 @@ slots:
     slot_uri: pl:additionalSupport
     range: SupportType
     required: false
-    multivalued: true
+    multivalued: false
     description: >-
       Additional support provision required (e.g., additional supervision,
       therapeutic support, taxis to school).
   homeAdaptationRequired:
     slot_uri: pl:homeAdaptationRequired
     range: boolean
-    required: false
+    required: true
     multivalued: false
     description: Whether adaptations to the home are required to accommodate the child's needs.
   deprivationOfLiberty:
@@ -298,12 +288,6 @@ slots:
     required: false
     multivalued: false
     description: Whether the child has a Deprivation of Liberty Order (DOL).
-  needsAssessmentMethod:
-    slot_uri: pl:needsAssessmentMethod
-    range: NeedsAssessmentMethod
-    required: true
-    multivalued: false
-    description: How the child's needs were assessed.
 
   # --- PlacementRecommendation ---
   fosterCareSuitability:
@@ -362,6 +346,18 @@ slots:
     required: true
     multivalued: false
     description: Whether the child is known to be at risk of sexual exploitation.
+  riskOther:
+    slot_uri: pl:riskOther
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether there is a known risk of other types of harm to the child not captured by the standard risk categories.
+  riskToOthersOther:
+    slot_uri: pl:riskToOthersOther
+    range: RiskLevel
+    required: true
+    multivalued: false
+    description: Whether there is a known risk of other types of harm to others not captured by the standard risk categories.
   riskToOthersPhysical:
     slot_uri: pl:riskToOthersPhysical
     range: RiskLevel
@@ -400,18 +396,6 @@ slots:
     required: true
     multivalued: false
     description: The type of placement the child received.
-  placementStartDate:
-    slot_uri: pl:placementStartDate
-    range: date
-    required: true
-    multivalued: false
-    description: The date the placement started.
-  placementSource:
-    slot_uri: pl:placementSource
-    range: PlacementSource
-    required: true
-    multivalued: false
-    description: How the placement was sourced.
   providerURN:
     slot_uri: pl:providerURN
     range: string
@@ -425,24 +409,13 @@ slots:
     range: string
     required: true
     multivalued: false
-    pattern: "^[A-Z]{1,2}[0-9][0-9A-Z]?$"
-    description: >-
-      First 3-4 characters of the postcode (UK outward code) for the actual
-      placement location.
+    description: The location of the actual placement.
   isLocationPreferred:
     slot_uri: pl:isLocationPreferred
     range: boolean
     required: true
     multivalued: false
     description: Whether the actual placement location was a preferred location.
-  nonPreferredLocationReason:
-    slot_uri: pl:nonPreferredLocationReason
-    range: NonPreferredLocationReason
-    required: true
-    multivalued: false
-    description: >-
-      The reason the placement was not found in the preferred location. Use 'Not
-      applicable' when the placement was in the preferred location.
   isEducationContinuous:
     slot_uri: pl:isEducationContinuous
     range: boolean
@@ -459,49 +432,10 @@ slots:
     description: How many siblings were actually placed together.
   totalWeeklyCost:
     slot_uri: pl:totalWeeklyCost
-    range: decimal
+    range: integer
     required: true
     multivalued: false
-    minimum_value: 100
-    maximum_value: 100000
-    description: Total weekly fee paid for the placement, excluding VAT. Expected to be between £100 and £100,000.
-  coreWeeklyCost:
-    slot_uri: pl:coreWeeklyCost
-    range: decimal
-    required: false
-    multivalued: false
-    minimum_value: 0
-    description: >-
-      Total weekly core cost: the basic price quoted by a provider to deliver the
-      service outlined in their Statement of Purpose, excluding child-specific
-      additional costs.
-  additionalSupportWeeklyCost:
-    slot_uri: pl:additionalSupportWeeklyCost
-    range: decimal
-    required: false
-    multivalued: false
-    minimum_value: 0
-    description: >-
-      Total weekly additional-support cost: costs incurred over and above the
-      core cost to meet the specific needs of the child.
-  educationWeeklyCost:
-    slot_uri: pl:educationWeeklyCost
-    range: decimal
-    required: false
-    multivalued: false
-    minimum_value: 0
-    description: >-
-      Total weekly education cost: recorded when the placement includes both care
-      and registered education provision.
-  otherWeeklyCost:
-    slot_uri: pl:otherWeeklyCost
-    range: decimal
-    required: false
-    multivalued: false
-    minimum_value: 0
-    description: >-
-      Any weekly placement costs that do not clearly fall within the core,
-      additional-support or education categories.
+    description: Total weekly fee paid for the placement (actual weekly fee paid).
 
   # --- QualityAssurance ---
   referralDate:
@@ -509,13 +443,13 @@ slots:
     range: date
     required: true
     multivalued: false
-    description: Date of when referral was captured on the Case Management System.
-  placementDateAdmin:
-    slot_uri: pl:placementDateAdmin
+    description: Date the referral data was captured.
+  placementDate:
+    slot_uri: pl:placementDate
     range: date
     required: true
     multivalued: false
-    description: Date of agreed placement start captured on the Case Management System.
+    description: Date the actual placement data was captured.
   placementOfficerName:
     slot_uri: pl:placementOfficerName
     range: string
@@ -527,7 +461,7 @@ slots:
     range: date
     required: true
     multivalued: false
-    description: Date when placement cost data was captured on the Case Management System.
+    description: Date the placement cost data was captured.
   referralOfficerName:
     slot_uri: pl:referralOfficerName
     range: string
@@ -706,7 +640,7 @@ enums:
       Other:
         title: Other
         meaning: st:Other
-        description: Other additional support is required.
+        description: Other additional support is required (please specify).
 
   SuitabilityLevel:
     enum_uri: pl:suitability-level
@@ -761,111 +695,3 @@ enums:
         title: Supported Accommodation
         meaning: pt:SupportedAccommodation
         description: A supported accommodation placement (typically for older young people).
-
-  NeedsAssessmentMethod:
-    enum_uri: pl:needs-assessment-method
-    title: Needs Assessment Method
-    description: Controlled vocabulary for how the child's needs were assessed.
-    permissible_values:
-      BERRI:
-        title: BERRI
-        meaning: nam:BERRI
-        description: Needs assessed using the BERRI assessment tool.
-      CANS:
-        title: CANS
-        meaning: nam:CANS
-        description: Needs assessed using the CANS (Child and Adolescent Needs and Strengths) assessment tool.
-      "Other formalised tool":
-        title: Other formalised tool
-        meaning: nam:OtherFormalisedTool
-        description: Needs assessed using another formalised needs-assessment tool.
-      "Other social worker assessment":
-        title: Other social worker assessment
-        meaning: nam:OtherSocialWorkerAssessment
-        description: Needs assessed through another social worker assessment.
-
-  PlacementSource:
-    enum_uri: pl:placement-source
-    title: Placement Source
-    description: Controlled vocabulary for how the placement was sourced.
-    permissible_values:
-      "RCC contract":
-        title: RCC contract
-        meaning: psr:RCCContract
-        description: Placement sourced through a Regional Care Cooperative (RCC) contract.
-      "Other regional contract":
-        title: Other regional contract
-        meaning: psr:OtherRegionalContract
-        description: Placement sourced through another regional contract.
-      "Direct award off framework":
-        title: Direct award / Off framework
-        meaning: psr:DirectAwardOffFramework
-        description: Placement sourced via a direct award, outside of any framework.
-      "Local contract or framework":
-        title: Local contract or framework
-        meaning: psr:LocalContractOrFramework
-        description: Placement sourced through a local contract or framework.
-      "Block contract":
-        title: Block contract
-        meaning: psr:BlockContract
-        description: Placement sourced through a block contract.
-      Remand:
-        title: Remand
-        meaning: psr:Remand
-        description: Placement arranged as a result of a remand.
-      "Secure Welfare Hub":
-        title: Secure Welfare Hub
-        meaning: psr:SecureWelfareHub
-        description: Placement sourced through the Secure Welfare Hub.
-
-  NonPreferredLocationReason:
-    enum_uri: pl:non-preferred-location-reason
-    title: Non-Preferred Location Reason
-    description: Controlled vocabulary for the reason a placement was not found in the preferred location.
-    permissible_values:
-      "CYP/parental preference":
-        title: CYP/parental preference
-        meaning: nplr:CYPParentalPreference
-        description: The placement was not in the preferred location because of the child/young person's or their parent's preference.
-      "Safeguarding requirement":
-        title: Safeguarding requirement
-        meaning: nplr:SafeguardingRequirement
-        description: The placement was not in the preferred location due to a safeguarding requirement.
-      "Provision within distance exists but is not available":
-        title: Provision within distance exists but is not available
-        meaning: nplr:ProvisionWithinDistanceNotAvailable
-        description: Suitable provision within the preferred distance exists but was not available.
-      "Provision within distance does not exist":
-        title: Provision within distance does not exist
-        meaning: nplr:ProvisionWithinDistanceDoesNotExist
-        description: No suitable provision exists within the preferred distance.
-      "Carer moving out of area":
-        title: Carer moving out of area
-        meaning: nplr:CarerMovingOutOfArea
-        description: The placement was not in the preferred location because the carer is moving out of the area.
-      "Legal reasons":
-        title: Legal reasons
-        meaning: nplr:LegalReasons
-        description: The placement was not in the preferred location for legal reasons.
-      "Not applicable":
-        title: Not applicable
-        meaning: nplr:NotApplicable
-        description: Not applicable; the placement was in the preferred location.
-
-  UASCStatus:
-    enum_uri: pl:uasc-status
-    title: UASC Status
-    description: Whether the child is an unaccompanied asylum-seeking child (UASC).
-    permissible_values:
-      Yes:
-        title: Yes
-        meaning: uasc:Yes
-        description: The child is an unaccompanied asylum-seeking child.
-      No:
-        title: 'No'
-        meaning: uasc:No
-        description: The child is not an unaccompanied asylum-seeking child.
-      "Not Applicable":
-        title: Not Applicable
-        meaning: uasc:NotApplicable
-        description: UASC status is not applicable.

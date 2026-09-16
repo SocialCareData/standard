@@ -8,7 +8,7 @@ tags:
 reference: PUB00
 version: 1
 status: draft
-data_model: src/assets/model/placements/placements-standard-v1.yaml
+data_model: src/assets/model/placements/placements-standard-v0_1.yaml
 non_technical_summary: |
   The market for children’s social care placements -- that is, the accommodation and support provided to children when they are taken into the care of the local authority -- has been described by the Local Government Association as '[broken](https://www.local.gov.uk/about/news/childrens-social-care-placements-costing-ps10000-plus-rise-sharply-five-years-new-lga)'. Many children in residential care nationally are currently placed more than 20 miles from home.
 
