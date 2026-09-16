@@ -3,7 +3,7 @@ title: Publications
 regenerate: true
 ---
 
-{% assign publications = site.pages | where_exp: "p", "p.breadcrumbs contains 'Publications'" | where_exp: "p", "p.version == nil" | sort: "reference" %}
+{% assign publications = site.pages | where_exp: "p", "p.breadcrumbs contains 'Publications'" | where_exp: "p", "p.version == nil or p.version == 'latest'" | sort: "reference" %}
 {% if publications.size > 0 %}
 <ul class="content-list">
 {% for p in publications %}

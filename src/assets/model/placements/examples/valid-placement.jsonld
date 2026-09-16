@@ -10,8 +10,6 @@
     "@type": "PlacementAvailability",
     "neededBy": "< 5 days",
     "siblingCount": 2,
-    "isPreferredLocationLocal": false,
-    "outOfLAReason": "Court order",
     "uascStatus": "No"
   },
 
@@ -62,10 +60,12 @@
     "totalWeeklyCost":              4500.00,
     "placementLocation": "N18",
     "isLocationPreferred": true,
+    "nonPreferredLocationReason": "Not applicable",
     "isEducationContinuous": false,
     "providerURN": "ABCD10293002",
     "siblingsPlacedTogether": 1,
     "placementType": "Residential",
+    "placementStartDate": "2024-03-21",
     "placementSource": "Block contract"
   },
 
@@ -75,7 +75,7 @@
     "referralOfficerName": "Alex Brown",
     "referralDate":  "2024-02-12",
     "placementOfficerName": "Beth Green",
-    "placementDate": "2024-03-21",
+    "placementDateAdmin": "2024-03-21",
     "costOfficerName": "Casey White",
     "costDate":      "2024-03-25"
   }
