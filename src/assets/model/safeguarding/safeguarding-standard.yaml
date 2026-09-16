@@ -831,7 +831,7 @@ enums:
         meaning: epc:Ehcp
       "plan.family-court-order":
         title: Family Court Order
-        description: Any order made by family court
+        description: An order made by family court (Care Order, Residence Order, or an interim Order).
         meaning: epc:FamilyCourtOrder
       "plan.cin-plan":
         title: CIN Plan
@@ -843,7 +843,7 @@ enums:
         meaning: epc:CpPlan
       "plan.CAMHS-plan":
         title: CAMHS Plan
-        description: Children and Adolescent mental health services care plan
+        description: Children and Adolescent Mental Health Services (CAMHS) care plan
         meaning: epc:CamhsPlan
       "plan.child-looked-after":
         title: Child Looked After
@@ -867,11 +867,11 @@ enums:
         meaning: epc:RemoteContact
       "provision.direct-provision":
         title: Direct Provision of Care
-        description: Hands-on clinical or social activities with the subject in the room.
+        description: Hands-on care activities with the subject in the room.
         meaning: epc:DirectProvision
       "provision.indirect-provision":
         title: Indirect Provision of Care
-        description: Hands-off clinical or social support without face-to-face contact.
+        description: Hands-off care support without face-to-face contact.
         meaning: epc:IndirectProvision
       "provision.admin":
         title: Admin

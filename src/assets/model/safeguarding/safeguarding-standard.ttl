@@ -476,7 +476,7 @@ epc:CamhsPlan a owl:Class ;
     rdfs:label "plan.CAMHS-plan" ;
     dct:title "CAMHS Plan" ;
     rdfs:subClassOf sg:episode-code ;
-    skos:definition "Children and Adolescent mental health services care plan" .
+    skos:definition "Children and Adolescent Mental Health Services (CAMHS) care plan" .
 
 epc:CareActAssessment a owl:Class ;
     rdfs:label "assessment.care-act-assessment" ;
@@ -512,7 +512,7 @@ epc:DirectProvision a owl:Class ;
     rdfs:label "provision.direct-provision" ;
     dct:title "Direct Provision of Care" ;
     rdfs:subClassOf sg:episode-code ;
-    skos:definition "Hands-on clinical or social activities with the subject in the room." .
+    skos:definition "Hands-on care activities with the subject in the room." .
 
 epc:EarlyHelp a owl:Class ;
     rdfs:label "assessment.early-help" ;
@@ -536,13 +536,13 @@ epc:FamilyCourtOrder a owl:Class ;
     rdfs:label "plan.family-court-order" ;
     dct:title "Family Court Order" ;
     rdfs:subClassOf sg:episode-code ;
-    skos:definition "Any order made by family court" .
+    skos:definition "An order made by family court (Care Order, Residence Order, or an interim Order)." .
 
 epc:IndirectProvision a owl:Class ;
     rdfs:label "provision.indirect-provision" ;
     dct:title "Indirect Provision of Care" ;
     rdfs:subClassOf sg:episode-code ;
-    skos:definition "Hands-off clinical or social support without face-to-face contact." .
+    skos:definition "Hands-off care support without face-to-face contact." .
 
 epc:Miscellaneous a owl:Class ;
     rdfs:label "provision.miscellaneous" ;
