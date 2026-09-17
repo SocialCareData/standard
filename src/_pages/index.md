@@ -19,7 +19,7 @@ If we’re successful, then interoperability standards in social care will help 
 
 ## How our standards can help deliver these benefits
 
-When case management systems implement these [standards](/publications), information can flow from one system to another without technical and commercial barriers - the constraint is then "what's appropriate" rather than "what do systems allow". For example, staff in one LA should be able to look up information about a child's previous engagement with services in another LA to support a safeguarding enquiry, and we want social workers supporting older adults to have timely information about hospital admissions and discharge.
+When case management systems implement these [standards](/publications), information can flow from one system to another without technical and commercial barriers - the constraint is then "what's appropriate" rather than "what do systems allow". For example, staff in one LA should be able to look up information about a child's previous engagement with services in another LA to support a safeguarding enquiry, and we want social workers supporting older adults to have timely information about hospital admissions and discharge. You can read more about what standards are and how they can help on our [Learn About the Standards](https://standard.socialcaredata.io/learn_about_the_standards) page.
 
 ## Timescales and initial priorities
 
