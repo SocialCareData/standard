@@ -6,19 +6,25 @@ tags:
 
 <article class="numbered-headings">
 
-We are co-developing our standards with the sector to ensure they are fit for purpose. You can contribute to our standards in different ways depending on your time and level of interest in the programme and your role. We're particularly looking for support in the following ways:
+We are co-developing our standards with the sector to ensure they work in practice for the people who will use them. You can contribute to our standards in different ways depending on your time, level of interest in the programme, and role. We're particularly looking for support with the following:
 
 * _Practitioners:_ Take part in user research and working groups: describe the real problems in your current systems, and help us test draft standards against practice.
 * _Local authorities:_ Join reference groups and advisory forums, help shape which use cases we prioritise, and volunteer for pilot projects and real-world testing.
 * _Suppliers and partners:_ Work with us on exchange mechanisms, implementation and what adoption realistically needs to look like in live systems.
 
+# Ways to get involved
+
 ## Keep informed - register with our mailing list
 
 You can sign up for our [newsletter](https://github.us15.list-manage.com/subscribe?u=cc2fe06b8de4efcacfb9a9e18&id=410af499ef), which covers key programme updates, new standards publications, and upcoming events.
 
-## Raise an issue
+## Give feedback on our standards
 
-Our standards are managed through our [GitHub](https://github.com/SocialCareData). If you have feedback on our standards or want to make a suggestion, you can [raise an issue](https://github.com/SocialCareData/standard/issues/new), add to an existing thread, or alternatively reach out to us at [DataStandards-SocialCare@socialfinance.org.uk](mailto:DataStandards-SocialCare@socialfinance.org.uk).
+We're always looking for feedback on our standards. You can view all of our standards [here](/publications). 
+
+If you're comfortable using GitHub, you can visit our [GitHub](https://github.com/SocialCareData), where you can [raise an issue](https://github.com/SocialCareData/standard/issues/new), or add to an existing thread. 
+
+Alternatively, you can reach out to us via [email](mailto:DataStandards-SocialCare@socialfinance.org.uk) with any feedback on our standards.
 
 ## Join our Working Groups
 
