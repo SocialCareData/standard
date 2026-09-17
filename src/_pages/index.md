@@ -8,7 +8,9 @@ tags:
 
 ## The challenge
 
-Social care data is often fragmented, held across multiple different systems and agencies which can't easily share information. This means that practitioners often have to spend substantial amounts of time tracking down the right information, and may not know if they have a complete picture, while also creating challenges in service planning and improvement. We're working to reduce barriers to information sharing and data analysis, to help give practitioners the right information at the right time to deliver better care. 
+Social care data is often fragmented, held across multiple different systems and agencies. Information about the same child or adult may sit across different local authority teams, case management systems, health services, community health, police systems, schools, voluntary sector partners and national datasets. These systems often use different definitions, identifiers, formats and workflows. As a result, information that could help people understand need, risk, strengths or change over time can be difficult to join up safely and meaningfully. Practitioners often have to spend substantial amounts of time tracking down the right information, and may not know if they have a complete picture. This lack of clear data can also create challenges in service planning and improvement.
+
+We're working to reduce these barriers to information sharing and data analysis, to help give practitioners the right information at the right time to deliver better care. 
 
 ## How standards can help
 
