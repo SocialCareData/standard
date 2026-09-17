@@ -6,6 +6,16 @@ tags:
 
 [Social Finance](https://www.socialfinance.org.uk/), [the Open Data Institute](https://theodi.org/) and [Coram](https://www.coram.org.uk/) are working with Local Authorities, [DfE](https://www.gov.uk/government/organisations/department-for-education), [DHSC](https://www.gov.uk/government/organisations/department-of-health-and-social-care) and system vendors to develop interoperability standards for social care.
 
+## The challenge
+
+Social care data is often fragmented, held across multiple different systems and agencies which can't easily share information. This means that practitioners often have to spend substantial amounts of time tracking down the right information, and may not know if they have a complete picture, while also creating challenges in service planning and improvement. We're working to reduce barriers to information sharing and data analysis, to help give practitioners the right information at the right time to deliver better care. 
+
+## How standards can help
+
+When case management systems implement these [standards](/publications), information can flow from one system to another without technical and commercial barriers - the constraint is then "what's appropriate" rather than "what do systems allow". For example, staff in one LA should be able to look up information about a child's previous engagement with services in another LA to support a safeguarding enquiry, and we want social workers supporting older adults to have timely information about hospital admissions and discharge. You can read more about what standards are and how they can help on our [Learn About the Standards](https://standard.socialcaredata.io/learn_about_the_standards) page.
+
+## Benefits
+
 If we’re successful, then interoperability standards in social care will help to deliver:
 
 - ### Earlier intervention
@@ -16,10 +26,6 @@ If we’re successful, then interoperability standards in social care will help 
    Today we spend a lot of time recording information, finding information, and coordinating multi-agency work. When information can flow more freely between systems, then some of this work can be automated by case management systems or by tools which connect to them.
 - ### Improved analytics
    Many of the analytical questions which matter most to those running services or managing policy require data from many organisations – most obviously where we’re looking at analysis of interactions between services. For example, to understand the impact of timely [children and adolescent mental health services (CAMHS)](https://www.nhs.uk/mental-health/children-and-young-adults/mental-health-support/mental-health-services/) provision (or its absence) on children’s journeys into care or to understand hospital admissions and discharge patterns in adult social care. Standards can help us to do this in ways which respect individual privacy and ensure that we’re comparing apples with apples.
-
-## How our standards can help deliver these benefits
-
-When case management systems implement these [standards](/publications), information can flow from one system to another without technical and commercial barriers - the constraint is then "what's appropriate" rather than "what do systems allow". For example, staff in one LA should be able to look up information about a child's previous engagement with services in another LA to support a safeguarding enquiry, and we want social workers supporting older adults to have timely information about hospital admissions and discharge. You can read more about what standards are and how they can help on our [Learn About the Standards](https://standard.socialcaredata.io/learn_about_the_standards) page.
 
 ## Timescales and initial priorities
 
