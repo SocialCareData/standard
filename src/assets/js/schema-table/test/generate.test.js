@@ -7,7 +7,7 @@ const path = require('node:path')
 const { generateTable } = require('../lib/generate')
 
 const REPO_ROOT = path.resolve(__dirname, '..', '..', '..', '..', '..')
-const MODEL = 'src/_data/model/placements/placements-standard-01.yaml'
+const MODEL = 'src/_data/model/placements/placements-standard.yaml'
 
 test('integration: PlacementRequirements property table against the real model', () => {
   const md = generateTable({ modelPath: MODEL, entity: 'PlacementRequirements', rootDir: REPO_ROOT })
@@ -101,4 +101,31 @@ test('throws a helpful error for an unknown entity', () => {
     () => generateTable({ modelPath: MODEL, entity: 'Nope', rootDir: REPO_ROOT }),
     /No class, and no controlled-vocabulary property or enum, matching "Nope"/
   )
+})
+
+// The two failure modes of a dropped cross-module import, against the real model:
+// a shared class that cannot be found at all, and — quieter, so worth pinning
+// down — a slot whose range resolves to nothing and renders a blank Data Type.
+
+test('integration: a Person profile reaches the common module through the top-level importmap', () => {
+  // person-subject-of-care -> person-standard -> https://…/common, resolved via
+  // src/_data/model/imports.json, which sits above the module directories.
+  const md = generateTable({
+    modelPath: 'src/_data/model/person/person-subject-of-care.yaml',
+    entity: 'Identifier',
+    rootDir: REPO_ROOT
+  })
+  assert.match(md, /\| Field name \| Cardinality \| Data Type \| Description \| Options \|/)
+  assert.match(md, /\| `value` \| 1\.\.1 \| String \|/)
+  assert.match(md, /\| `system` \| 1\.\.1 \| String \|/)
+})
+
+test('integration: a slot ranged on an imported class links it instead of rendering a blank type', () => {
+  const md = generateTable({
+    modelPath: 'src/_data/model/safeguarding/safeguarding-standard.yaml',
+    entity: 'Organisation',
+    rootDir: REPO_ROOT
+  })
+  assert.match(md, /\| `identifier` \| 1\.\.\* \| \[Identifier\]\(#identifier\) \|/)
+  assert.match(md, /\| `address` \| 0\.\.\* \| \[Address\]\(#address\) \|/)
 })

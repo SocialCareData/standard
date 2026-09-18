@@ -46,6 +46,14 @@ cd safeguarding && gen-owl --no-mergeimports -im ../imports.json safeguarding-st
 cd mais && gen-owl --mergeimports -im ../imports.json mais.yaml > social-care-mais.ttl
 ```
 
+The `{% schema_table %}` generator finds this map by walking up from the schema's
+own directory to the repository root, so a module never needs its own copy. A
+module *may* still place an `imports.json` beside its schemas to override
+individual ids — entries nearer the schema win, and the rest of the shared map
+still applies — but `gen-owl` / `gen-shacl` see only the one map passed to `-im`,
+so keep the top-level map authoritative. An import that resolves to no file is an
+error in both tools rather than a silent skip.
+
 ## Prerequisites
 
 ```bash
@@ -108,20 +116,23 @@ Run from the model's directory. Using placements as the example:
 
 ```bash
 # SHACL — one shape per class
-gen-shacl --non-closed --suffix Shape placements-standard-01.yaml > placements-standard-shape-01.ttl
+gen-shacl --non-closed --suffix Shape -im ../imports.json placements-standard.yaml > placements-standard-shape.ttl
 
 # OWL / RDF, JSON Schema, docs, Pydantic, …
-gen-owl --consolidate-cardinality-axioms --skip-vacuous-min-zero-cardinality-axioms --skip-vacuous-local-range-axioms placements-standard-01.yaml > placements-standard-01.ttl
-gen-json-schema placements-standard-01.yaml
-gen-doc placements-standard-01.yaml
+gen-owl --consolidate-cardinality-axioms --skip-vacuous-min-zero-cardinality-axioms --skip-vacuous-local-range-axioms -im ../imports.json placements-standard.yaml > placements-standard.ttl
+gen-json-schema -im ../imports.json placements-standard.yaml
+gen-doc -im ../imports.json placements-standard.yaml
 ```
 
 `--non-closed` produces open shapes and `--suffix Shape` names them
 `…Shape` — both keep the output aligned with any hand-written shapes.
-`-im imports.json` resolves the Person import to the local file. `gen-shacl`
-keeps `--include-imports` (the default) so the shared-object shapes are emitted
-and validate the nested objects; `gen-owl` uses `--no-mergeimports` so the
-Person classes are referenced via `owl:imports` rather than copied in.
+`-im ../imports.json` resolves each cross-module import (e.g.
+`https://ontology.socialcaredata.io/common`) to its local file; the path is
+`../` because the single importmap sits one level above the module directories.
+`gen-shacl` keeps `--include-imports` (the default) so the shared-object shapes
+are emitted and validate the nested objects; `gen-owl` uses `--no-mergeimports`
+so the imported module's classes are referenced via `owl:imports` rather than
+copied in.
 
 ## What `gen-shacl` does NOT generate
 
@@ -171,7 +182,9 @@ schemas that `import` it and redefine the root class:
 
 The Person model uses this (`person-standard.yaml` core +
 `person-subject-of-care.yaml` / `person-connected.yaml`); see
-[`person/README.md`](person/README.md).
+[`person/README.md`](person/README.md). The profiles import the core by its
+ontology id (`https://ontology.socialcaredata.io/person`), resolved through the
+same top-level `imports.json` as every other cross-module import.
 
 ## Validating the examples
 

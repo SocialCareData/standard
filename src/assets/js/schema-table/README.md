@@ -13,13 +13,62 @@ tool inspects the second argument and produces one of two tables:
 
 ## Imports
 
-A model's local `imports:` are resolved and merged before rendering, so a table
-can be generated from a schema that inherits its slots, enums and sub-entity
-classes from a shared core. Non-local imports (e.g. `linkml:types`) are ignored;
-the importing schema's own definitions override imported ones of the same name.
-This is what lets the Person profiles (e.g. `person-subject-of-care.yaml`, which
-imports `person-standard.yaml` and redefines only `Person`) render complete
-tables with the profile's cardinalities.
+A model's `imports:` are resolved and merged before rendering, so a table can be
+generated from a schema that inherits its slots, enums and sub-entity classes
+from a shared core. The importing schema's own definitions override imported ones
+of the same name — which is what lets the Person profiles (e.g.
+`person-subject-of-care.yaml`, which imports the Person core and redefines only
+`Person`) render complete tables with the profile's cardinalities. An import
+reached twice (a diamond: `mais.yaml` imports `common` directly *and* through
+`person`) is merged once, at its first occurrence, so a profile's override is
+never clobbered by a sibling branch re-importing the same base.
+
+### Resolving an import by its ontology id
+
+An import written as a schema id IRI (`https://ontology.socialcaredata.io/common`)
+is resolved to a local file through an `imports.json` importmap, mirroring
+LinkML's own `--importmap` / `-im`. The map is looked for **in the schema's own
+directory and in every ancestor up to the repository root**, because a modular
+model keeps one map beside the module folders rather than a copy per module:
+
+```
+src/_data/model/imports.json          <- one map for the whole tree
+src/_data/model/common/common.yaml
+src/_data/model/person/person-standard.yaml
+```
+
+Maps found nearer the schema override ones found further up, id by id, so a
+module can pin a single import without hiding the rest of the shared map.
+
+**Paths in the map are relative to the importing schema, not to the map itself.**
+This is what LinkML does, which is why the entries read `../<module>/<file>` and
+why the generators are run from the module's own directory (`cd person &&
+gen-owl -im ../imports.json person-standard.yaml`). It follows that every module
+directory must sit exactly one level below the map. Resolving map paths any other
+way would let this tool find an import that `gen-owl` cannot, so the rendered
+docs and the published OWL/SHACL would quietly disagree about what the model
+contains.
+
+LinkML's own modules (`linkml:types`, `linkml:mappings`, …) are not local files
+and are skipped silently.
+
+### When an import cannot be resolved
+
+Any other import that does not resolve to a file is an **error**. It is not
+skipped, because dropping one quietly removes every class, slot and enum that
+schema contributes: the entity is then reported as "not found", or — harder to
+notice — a slot ranged on one of its classes renders with a blank Data Type cell
+instead of a link.
+
+```
+schema-table: Unresolved import "https://ontology.socialcaredata.io/common" in
+…/person-standard.yaml: no "imports.json" entry for it was found in …/person or
+any directory up to …/standard.
+```
+
+The Jekyll plugin catches this per `{% schema_table %}` tag, so the build still
+completes: the affected table is replaced with an inline error note naming the
+cause (`src/_plugins/schema_table.rb`).
 
 ## Mixins
 
@@ -171,8 +220,8 @@ the table at build time, so it ends up as a real `<table>` in the compiled site
 and is indexed by Pagefind. Place the tag on its own line:
 
 ```liquid
-{% schema_table src/_data/model/placements/placements.yaml PlacementAvailability %}
-{% schema_table src/_data/model/placements/placements.yaml communicationNeeds %}
+{% schema_table src/_data/model/placements/placements-standard.yaml PlacementAvailability %}
+{% schema_table src/_data/model/placements/placements-standard.yaml communicationNeeds %}
 ```
 
 Arguments: the LinkML YAML path (relative to the project root) and either a
@@ -182,11 +231,11 @@ class name (class table) or a controlled-vocabulary property/enum name
 ## Usage from the command line
 
 ```bash
-node src/assets/js/schema-table/index.js src/_data/model/placements/placements.yaml PlacementAvailability
-node src/assets/js/schema-table/index.js src/_data/model/placements/placements.yaml communicationNeeds
+node src/assets/js/schema-table/index.js src/_data/model/placements/placements-standard.yaml PlacementAvailability
+node src/assets/js/schema-table/index.js src/_data/model/placements/placements-standard.yaml communicationNeeds
 # diff two versions:
-node src/assets/js/schema-table/index.js src/_data/model/placements/placements-standard-01.yaml RiskAssessment \
-  --previous src/_data/model/placements/placements-standard.yaml
+node src/assets/js/schema-table/index.js src/_data/model/placements/placements-standard.yaml RiskAssessment \
+  --previous src/_data/model/placements/placements-standard-v1.yaml
 ```
 
 ## Layout
@@ -211,3 +260,14 @@ cd src/assets/js/schema-table
 npm install
 npm test
 ```
+
+`node_modules` is not checked in. The project's Docker image already has the
+dependency installed (`NODE_PATH=/opt/schema-table/node_modules`), so the suite
+can also be run without a local install:
+
+```bash
+docker compose run --rm -w /dist/src/assets/js/schema-table build node --test
+```
+
+`test/imports.test.js` builds throwaway schema trees on disk to cover importmap
+discovery and multi-level resolution; the other suites parse inline YAML.

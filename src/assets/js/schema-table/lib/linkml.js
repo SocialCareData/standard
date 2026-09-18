@@ -56,42 +56,158 @@ function mergeDefs (target, src) {
   return target
 }
 
+// --- importmap discovery -----------------------------------------------------
+
 /**
- * Read an `imports.json` importmap sitting next to a schema, mapping a LinkML
- * `imports:` entry (typically a schema `id` IRI) to a local file path, relative
- * to `dir`. Mirrors LinkML's own `--importmap` mechanism so a schema that
- * imports another standard by its canonical id (for a clean `owl:imports`) still
- * resolves to the local YAML here. Returns {} when there is no importmap.
+ * Emit a non-fatal diagnostic on stderr. Kept to a single line: the Jekyll plugin
+ * splits stderr on newlines and logs one build warning per line
+ * (src/_plugins/schema_table.rb).
  */
-function loadImportMap (dir) {
+function warn (message) {
+  process.stderr.write(`schema-table: ${message}\n`)
+}
+
+// dir -> the `imports.json` parsed from that dir (null when absent/malformed).
+const importMapFileCache = new Map()
+// start dir -> the merged importmap that applies to a schema in that dir.
+const importMapCache = new Map()
+
+/**
+ * A directory that ends the upward search for an importmap: the root of the
+ * repository the schema lives in. Keeps the walk deterministic — without a
+ * boundary it would climb into $HOME or the system temp dir and could pick up an
+ * unrelated `imports.json`. Checked inclusively: a map in the repo root is read,
+ * and then the walk stops.
+ */
+function isSearchBoundary (dir) {
+  return fs.existsSync(path.join(dir, '.git'))
+}
+
+/** The `imports.json` in `dir`, parsed and memoised; null when there is none. */
+function readImportMapFile (dir) {
+  if (importMapFileCache.has(dir)) return importMapFileCache.get(dir)
+
+  let map = null
   const p = path.join(dir, 'imports.json')
   try {
-    if (fs.existsSync(p)) return JSON.parse(fs.readFileSync(p, 'utf8')) || {}
-  } catch (_) { /* malformed importmap → behave as if absent */ }
-  return {}
+    if (fs.existsSync(p)) {
+      const parsed = JSON.parse(fs.readFileSync(p, 'utf8'))
+      // Only a plain object is usable as a map; anything else is malformed.
+      map = parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : null
+      if (!map) warn(`ignoring malformed importmap ${p}: expected a JSON object`)
+    }
+  } catch (err) {
+    warn(`ignoring malformed importmap ${p}: ${err.message}`)
+    map = null
+  }
+  importMapFileCache.set(dir, map)
+  return map
 }
 
 /**
- * Resolve a LinkML `imports:` entry to a local YAML file, or null when it is not
- * a local file (e.g. `linkml:types`). A cross-standard import written as a
- * schema id IRI is resolved via an `imports.json` importmap in `dir`. Otherwise
- * the entry is treated as a path (as-is and with `.yaml` / `.yml` appended)
- * relative to `dir`.
+ * The importmap that applies to a schema in `dir`, mapping a LinkML `imports:`
+ * entry (typically a schema `id` IRI) to a local file path. Mirrors LinkML's own
+ * `--importmap` / `-im` mechanism so a schema that imports another standard by
+ * its canonical id (for a clean `owl:imports`) still resolves to the local YAML
+ * here.
+ *
+ * The map is looked for in `dir` and in every ancestor up to and including the
+ * repository root, because a modular model keeps ONE map beside the module
+ * folders (`src/_data/model/imports.json`) rather than a copy per module —
+ * matching how `gen-owl -im ../imports.json` is invoked from a module directory.
+ * Maps found nearer the schema override ones found further up, id by id, so a
+ * module can pin a single import without hiding the rest of the shared map.
+ *
+ * Paths in the map stay relative to the IMPORTING FILE's directory, not to the
+ * map's own directory — this is what LinkML does, and it is why the entries are
+ * written `../<module>/<file>`. It only holds while every module directory sits
+ * exactly one level below the map.
+ *
+ * Returns {} when no importmap is found.
  */
-function resolveImport (dir, entry) {
-  if (typeof entry !== 'string') return null
+function loadImportMap (dir) {
+  const start = path.resolve(dir)
+  if (importMapCache.has(start)) return importMapCache.get(start)
 
-  // A CURIE / IRI import (contains ':') is only resolvable via the importmap.
+  // Collect furthest-first so Object.assign lets the nearest map win.
+  const maps = []
+  let d = start
+  for (;;) {
+    const map = readImportMapFile(d)
+    if (map) maps.unshift(map)
+    if (isSearchBoundary(d)) break
+    const parent = path.dirname(d)
+    if (parent === d) break
+    d = parent
+  }
+
+  const merged = Object.assign({}, ...maps)
+  importMapCache.set(start, merged)
+  return merged
+}
+
+/** The directory the importmap search from `dir` stops at (for diagnostics). */
+function importMapSearchRoot (dir) {
+  let d = path.resolve(dir)
+  for (;;) {
+    if (isSearchBoundary(d)) return d
+    const parent = path.dirname(d)
+    if (parent === d) return d
+    d = parent
+  }
+}
+
+/** Test hook: drop the memoised importmaps. */
+function _resetImportCaches () {
+  importMapFileCache.clear()
+  importMapCache.clear()
+}
+
+/**
+ * LinkML's own metamodel modules (`linkml:types`, `linkml:mappings`, …). These
+ * are never local files, so they are skipped silently and an importmap is not
+ * expected to mention them.
+ */
+const LINKML_BUILTIN = /^linkml:/
+
+/**
+ * Resolve a LinkML `imports:` entry to a local YAML file, or null when it cannot
+ * be resolved. A cross-standard import written as a schema id IRI is resolved via
+ * the `imports.json` importmap found for `dir` (see {@link loadImportMap});
+ * otherwise the entry is treated as a path (as-is and with `.yaml` / `.yml`
+ * appended) relative to `dir`.
+ *
+ * `onUnresolved(entry, reason)` is called for an entry that should have resolved
+ * to a file but did not; LinkML's own `linkml:` modules never trigger it.
+ */
+function resolveImport (dir, entry, onUnresolved) {
+  if (typeof entry !== 'string' || entry === '') return null
+  // Checked before the map lookup: now that an ancestor map is always found,
+  // `linkml:types` would otherwise be reported on every schema in the tree.
+  if (LINKML_BUILTIN.test(entry)) return null
+
   let candidate = entry
+  let mapped = null
   if (entry.includes(':')) {
-    const mapped = loadImportMap(dir)[entry]
-    if (!mapped) return null
+    mapped = loadImportMap(dir)[entry]
+    if (!mapped) {
+      if (onUnresolved) {
+        onUnresolved(entry, `no "imports.json" entry for it was found in ${dir} or any directory up to ${importMapSearchRoot(dir)}`)
+      }
+      return null
+    }
     candidate = mapped
   }
 
   for (const ext of ['', '.yaml', '.yml']) {
     const p = path.resolve(dir, candidate + ext)
     if (fs.existsSync(p) && fs.statSync(p).isFile()) return p
+  }
+  if (onUnresolved) {
+    const tried = path.resolve(dir, candidate)
+    onUnresolved(entry, mapped
+      ? `the importmap maps it to "${mapped}", but no file exists at ${tried}[.yaml|.yml] (importmap paths are relative to the importing schema, not to imports.json)`
+      : `no file exists at ${tried}[.yaml|.yml]`)
   }
   return null
 }
@@ -103,6 +219,20 @@ function resolveImport (dir, entry) {
  * The importing schema's own definitions override imported ones — which is what
  * lets a profile schema (e.g. person-subject-of-care.yaml) redefine `Person`
  * while inheriting the shared sub-entities and vocabularies from its core.
+ *
+ * An import that cannot be resolved to a file is an error rather than a silent
+ * skip: dropping one quietly removes every class, slot and enum that schema
+ * contributes, so a class-ranged slot renders with an empty Data Type cell (or
+ * the entity is reported "not found") with nothing explaining why. LinkML's own
+ * `linkml:` modules are not local files and are skipped silently.
+ *
+ * `visited` makes each file contribute exactly once, on its first visit, to
+ * whichever branch reaches it first. No definition is lost — that contribution
+ * propagates up through every enclosing mergeDefs to the root — and a schema
+ * that narrows one it imports keeps its override even when a sibling branch
+ * imports the same base again. (Re-expanding per import site instead would let
+ * a shared base clobber a profile's narrowing, which is exactly what the profile
+ * schemas rely on not happening.)
  *
  * @param {string} absPath  Absolute path to the LinkML YAML file.
  * @param {Set<string>} [visited]  Guards against import cycles.
@@ -116,7 +246,9 @@ function loadModelFile (absPath, visited = new Set()) {
   const dir = path.dirname(abs)
   const merged = {}
   for (const entry of Array.isArray(base.imports) ? base.imports : []) {
-    const impAbs = resolveImport(dir, entry)
+    const impAbs = resolveImport(dir, entry, (e, reason) => {
+      throw new Error(`Unresolved import "${e}" in ${abs}: ${reason}.`)
+    })
     if (impAbs) mergeDefs(merged, loadModelFile(impAbs, visited))
   }
   // The importing schema is applied last so its definitions win.
@@ -252,6 +384,9 @@ function enumTitle (model, enumName) {
 module.exports = {
   loadModel,
   loadModelFile,
+  loadImportMap,
+  resolveImport,
+  _resetImportCaches,
   expandCurie,
   getClass,
   getEnum,

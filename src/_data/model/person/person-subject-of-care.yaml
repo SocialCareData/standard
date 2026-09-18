@@ -20,7 +20,10 @@ prefixes:
 default_prefix: p
 imports:
   - linkml:types
-  - person-standard
+  # The Person core, imported by its ontology id so the generated OWL carries a
+  # canonical `owl:imports` rather than a file-relative one. The top-level
+  # imports.json maps this id to the local person/person-standard.yaml file.
+  - https://ontology.socialcaredata.io/person
 
 # ---------------------------------------------------------------------------
 # Person (Subject of Care)

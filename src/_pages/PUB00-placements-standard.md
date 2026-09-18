@@ -484,7 +484,7 @@ A [SHACL shape](/assets/model/placements/placements-standard-shape.ttl) encodes:
 - pattern checks (UK postcode prefix on `placementLocation`),
 - and severity-`Warning` cost sense-checks.
 
-A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, applies the [JSON-LD context file](/_data/model/placements/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
+A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
 
 
 ## Standard Placement Reporting Spreadsheet

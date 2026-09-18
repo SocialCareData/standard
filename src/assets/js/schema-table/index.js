@@ -44,7 +44,7 @@ Options:
 Examples:
   schema-table src/_data/model/placements/placements-standard.yaml PlacementRequirements
   schema-table src/_data/model/placements/placements-standard.yaml communicationNeeds
-  schema-table placements-standard-01.yaml RiskAssessment --previous placements-standard.yaml`
+  schema-table placements-standard.yaml RiskAssessment --previous placements-standard-v1.yaml`
 
 function parseArgs (argv) {
   const positional = []
