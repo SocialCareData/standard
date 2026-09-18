@@ -823,7 +823,11 @@ enums:
     title: Non-Preferred Location Reason
     description: Controlled vocabulary for the reason a placement was not found in the preferred location.
     permissible_values:
-      "CYP/parental preference":
+      # Code deliberately avoids "/": a JSON-LD 1.1 term containing a slash is
+      # parsed as a compact IRI, which makes the scoped @context in
+      # context.jsonld invalid and breaks expansion of every placements example.
+      # The slash is preserved in `title` for display.
+      "CYP or parental preference":
         title: CYP/parental preference
         meaning: nplr:CYPParentalPreference
         description: The placement was not in the preferred location because of the child/young person's or their parent's preference.

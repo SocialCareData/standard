@@ -23,7 +23,13 @@ default_range: string
 imports:
   - linkml:types
   - https://ontology.socialcaredata.io/common
-  - https://ontology.socialcaredata.io/person
+  # The subject-of-care PROFILE, not the person core. The core's Person is
+  # deliberately permissive (every demographic optional), so merging it would
+  # make mais-shape.ttl accept a Person with no identifier, date of birth,
+  # address, gender or ethnicity. The profile pulls the core in transitively,
+  # so no terms are lost. person-connected is not imported: it redefines the
+  # same class and would collide on the single sc:PersonShape IRI.
+  - https://ontology.socialcaredata.io/person-subject-of-care
   - https://ontology.socialcaredata.io/placements
   - https://ontology.socialcaredata.io/safeguarding
   - https://ontology.socialcaredata.io/assessments-and-plans
