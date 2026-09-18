@@ -17,7 +17,7 @@
 #
 # Usage in a page (place the tag on its own line, at column 0):
 #
-#   {% schema_table src/assets/model/placements/placements.yaml PlacementAvailability %}
+#   {% schema_table src/_data/model/placements/placements.yaml PlacementAvailability %}
 #
 # Arguments (whitespace separated, optional surrounding quotes):
 #   1. path to the LinkML YAML model, relative to the project root

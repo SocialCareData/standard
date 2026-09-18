@@ -1,0 +1,10 @@
+{
+  "https://ontology.socialcaredata.io/common": "../common/common",
+  "https://ontology.socialcaredata.io/person": "../person/person-standard",
+  "https://ontology.socialcaredata.io/person-subject-of-care": "../person/person-subject-of-care",
+  "https://ontology.socialcaredata.io/person-connected": "../person/person-connected",
+  "https://ontology.socialcaredata.io/placements": "../placements/placements-standard",
+  "https://ontology.socialcaredata.io/safeguarding": "../safeguarding/safeguarding-standard",
+  "https://ontology.socialcaredata.io/assessments-and-plans": "../assessments-and-plans/assessments-and-plans-standard",
+  "https://ontology.socialcaredata.io/mais": "../mais/mais"
+}

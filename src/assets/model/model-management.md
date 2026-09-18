@@ -1,6 +1,6 @@
 # Managing the data models — LinkML & SHACL validation
 
-Every data standard under `src/assets/model/<standard>/` is defined as a
+Every data standard under `src/_data/model/<standard>/` is defined as a
 [LinkML](https://linkml.io/) schema, which is the **authoritative source** for
 that model. From one YAML file the SHACL shapes, OWL/RDF, JSON Schema, Pydantic
 classes and documentation are all *generated*.

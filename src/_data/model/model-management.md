@@ -1,6 +1,6 @@
 # Managing the data models — LinkML & SHACL validation
 
-Every data standard under `src/assets/model/<standard>/` is defined as a
+Every data standard under `src/_data/model/<standard>/` is defined as a
 [LinkML](https://linkml.io/) schema, which is the **authoritative source** for
 that model. From one YAML file the SHACL shapes, OWL/RDF, JSON Schema, Pydantic
 classes and documentation are all *generated*.
@@ -12,6 +12,39 @@ classes and documentation are all *generated*.
 This guide covers the LinkML → SHACL workflow that is common to **all** models.
 Each model's own `README.md` describes only what is specific to that model
 (its classes, profiles, cardinalities).
+
+## Module layout and the single MAIS ontology
+
+The models are authored as **independently-versioned modules** — one folder each
+under `src/_data/model/` — that compose into one **Social Care MAIS** ontology:
+
+- `common/` — shared building blocks (`Identifier`, `Name`, `Address`, `Contact`
+  and their vocabularies), depended on by the domain modules.
+- `person/`, `placements/`, `safeguarding/`, `assessments-and-plans/` — the
+  domain standards; each imports `common` for the shared objects.
+- `mais/mais.yaml` — the **umbrella** schema. It has no terms of its own; it
+  `imports` every module so the merged ontology can be generated from one file.
+  `mais/manifest.yml` pins the module versions that make up a release.
+
+Everything lives under a **single flat namespace**,
+`https://ontology.socialcaredata.io/`, so a term keeps the same IRI whether used
+in a module or in the merged ontology. Same-named slots across modules therefore
+share one IRI — keep genuinely different fields distinctly named (e.g.
+`specialCommunicationNeeds`, `serviceFrequency`, `measurementValue`).
+
+Cross-module imports use each module's ontology id (e.g.
+`https://ontology.socialcaredata.io/common`) and are resolved to local files by
+the single top-level `imports.json`. **Importmap paths are resolved relative to
+the importing file**, so they are written `../<module>/<file>` and generators
+are run from the module's own directory:
+
+```bash
+# a module (references common via the shared importmap)
+cd safeguarding && gen-owl --no-mergeimports -im ../imports.json safeguarding-standard.yaml
+
+# the whole merged MAIS ontology
+cd mais && gen-owl --mergeimports -im ../imports.json mais.yaml > social-care-mais.ttl
+```
 
 ## Prerequisites
 

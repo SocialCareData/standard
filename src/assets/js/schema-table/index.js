@@ -42,8 +42,8 @@ Options:
                        title just restates its key. (No effect on class tables.)
 
 Examples:
-  schema-table src/assets/model/placements/placements-standard.yaml PlacementRequirements
-  schema-table src/assets/model/placements/placements-standard.yaml communicationNeeds
+  schema-table src/_data/model/placements/placements-standard.yaml PlacementRequirements
+  schema-table src/_data/model/placements/placements-standard.yaml communicationNeeds
   schema-table placements-standard-01.yaml RiskAssessment --previous placements-standard.yaml`
 
 function parseArgs (argv) {

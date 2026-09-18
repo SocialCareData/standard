@@ -1,4 +1,4 @@
-id: https://ns.socialcaredata.io/assessments-and-plans/schema
+id: https://ontology.socialcaredata.io/assessments-and-plans
 name: assessments-and-plans
 title: Standards for Care Needs Assessments and Care Plans Data Model
 description: >-
@@ -9,16 +9,15 @@ version: 1.0.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
-  ap: https://ns.socialcaredata.io/assessments-and-plans/
-  p: https://ns.socialcaredata.io/person/
-  apc: https://ns.socialcaredata.io/assessments-and-plans/care-outcome-type#
-  act: https://ns.socialcaredata.io/assessments-and-plans/care-actor-type#
-  at: https://ns.socialcaredata.io/assessments-and-plans/answer-type#
-  qc: https://ns.socialcaredata.io/assessments-and-plans/question-category#
-  cds: https://ns.socialcaredata.io/assessments-and-plans/care-document-status#
-  sq: https://ns.socialcaredata.io/assessments-and-plans/statutory-question-id#
-  fs: https://ns.socialcaredata.io/assessments-and-plans/funding-status#
-  es: https://ns.socialcaredata.io/assessments-and-plans/eligibility-status#
+  ap: https://ontology.socialcaredata.io/
+  apc: https://ontology.socialcaredata.io/care-outcome-type#
+  act: https://ontology.socialcaredata.io/care-actor-type#
+  at: https://ontology.socialcaredata.io/answer-type#
+  qc: https://ontology.socialcaredata.io/question-category#
+  cds: https://ontology.socialcaredata.io/care-document-status#
+  sq: https://ontology.socialcaredata.io/statutory-question-id#
+  fs: https://ontology.socialcaredata.io/funding-status#
+  es: https://ontology.socialcaredata.io/eligibility-status#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -26,7 +25,7 @@ default_prefix: ap
 default_range: string
 imports:
   - linkml:types
-  - https://ns.socialcaredata.io/person/schema
+  - https://ontology.socialcaredata.io/common
 
 # ---------------------------------------------------------------------------
 # Classes

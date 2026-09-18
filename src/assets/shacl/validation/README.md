@@ -22,7 +22,7 @@ node validate.js person placements        # several standards
 ## Adding a standard
 
 Standards are declared in the `STANDARDS` registry near the top of
-`validate.js`. Each standard points at a folder under `src/assets/model/<dir>`
+`validate.js`. Each standard points at a folder under `src/_data/model/<dir>`
 and lists one or more **profiles**, each pairing a generated SHACL shape file
 with an examples sub-folder:
 

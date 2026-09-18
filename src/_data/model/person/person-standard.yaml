@@ -1,4 +1,4 @@
-id: https://ns.socialcaredata.io/person/schema
+id: https://ontology.socialcaredata.io/person
 name: person
 title: Person Standard Data Model
 description: >-
@@ -6,25 +6,26 @@ description: >-
   identifying and describing a person across social care systems, designed to
   unblock multi-agency information sharing (MAIS) and Single View use cases.
 
-  This schema is the authoritative *shared core*. It defines every sub-entity
-  (Identifier, Name, Address, Contact, PersonRelationship, PartialDate), every
-  slot, every controlled vocabulary, and a canonical base `Person`. The two
-  conformance profiles - `person-subject-of-care.yaml` and
-  `person-connected.yaml` - import this file and redefine `Person` with the
-  cardinalities appropriate to a person who is the subject of care versus a
-  related/connected person. SHACL is generated from the two profile files.
+  This schema is the authoritative *shared core* for person identity. It defines
+  the person-specific sub-entities (PersonRelationship, PartialDate,
+  Communication, Language), every person slot, the person controlled
+  vocabularies, and a canonical base `Person`. The cross-cutting building blocks
+  (Identifier, Name, Address, Contact and their vocabularies) live in the
+  `common` module and are imported. The two conformance profiles -
+  `person-subject-of-care.yaml` and `person-connected.yaml` - import this file
+  and redefine `Person` with the cardinalities appropriate to a person who is
+  the subject of care versus a related/connected person. SHACL is generated from
+  the two profile files.
 license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 version: 1.0.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
-  p: https://ns.socialcaredata.io/person/
-  nuc: https://ns.socialcaredata.io/person/name-use-code#
-  auc: https://ns.socialcaredata.io/person/address-use-code#
-  gc: https://ns.socialcaredata.io/person/gender-code#
-  psc: https://ns.socialcaredata.io/person/phenotypic-sex-code#
-  ec: https://ns.socialcaredata.io/person/ethnicity-code#
-  prc: https://ns.socialcaredata.io/person/person-relationship-code#
+  p: https://ontology.socialcaredata.io/
+  gc: https://ontology.socialcaredata.io/gender-code#
+  psc: https://ontology.socialcaredata.io/phenotypic-sex-code#
+  ec: https://ontology.socialcaredata.io/ethnicity-code#
+  prc: https://ontology.socialcaredata.io/person-relationship-code#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -32,6 +33,12 @@ default_prefix: p
 default_range: string
 imports:
   - linkml:types
+  # Shared objects (Identifier, Name, Address, Contact) and their controlled
+  # vocabularies (NameUseCode, AddressUseCode) are defined once by the common
+  # module and imported here, so this schema reuses their ontology IRIs rather
+  # than redefining them. The top-level imports.json maps this id to the local
+  # common/common.yaml file.
+  - https://ontology.socialcaredata.io/common
 
 # ---------------------------------------------------------------------------
 # Classes
@@ -63,51 +70,6 @@ classes:
       - aboutMe
       - communication
 
-  Identifier:
-    class_uri: p:Identifier
-    description: >-
-      A single identifier for a person, comprising the value and the system in
-      whose namespace the value is unique. Aligned with FHIR Identifier and the
-      NHS PDS UNIQUE_REFERENCE definition.
-    slots:
-      - value
-      - system
-
-  Name:
-    class_uri: p:Name
-    description: >-
-      Container for a person's name parts, aligned with FHIR HumanName. A person
-      may have multiple names with different uses.
-    slots:
-      - familyName
-      - givenName
-      - preferredName
-      - nameUse
-
-  Address:
-    class_uri: p:Address
-    description: >-
-      A postal address for the person. Aligned with FHIR Address. UPRN and USRN
-      support property- and street-level disambiguation.
-    slots:
-      - line1
-      - line2
-      - city
-      - postcode
-      - UPRN
-      - USRN
-      - addressUse
-
-  Contact:
-    class_uri: p:Contact
-    description: >-
-      Contact details for a person, such as a home, work, or other contact
-      channel grouping.
-    slots:
-      - contactName
-      - email
-      - telephone
-
   PersonRelationship:
     class_uri: p:PersonRelationship
     description: >-
@@ -137,7 +99,7 @@ classes:
     description: >-
       Professional recording of a person's communication requirements and language proficiencies.
     slots:
-      - communicationNeeds
+      - specialCommunicationNeeds
       - language
 
   Language:
@@ -248,120 +210,6 @@ slots:
       References to other Person records where a cross-system match has been
       identified. Uses the Identifier structure.
 
-  # --- Identifier ---
-  value:
-    slot_uri: p:value
-    range: string
-    required: true
-    multivalued: false
-    description: The identifier value, unique within the issuing system.
-  system:
-    slot_uri: p:system
-    range: uri
-    required: true
-    multivalued: false
-    description: >-
-      The URI of the system or namespace within which the identifier is unique
-      (e.g. https://fhir.nhs.uk/Id/nhs-number).
-
-  # --- Name ---
-  familyName:
-    slot_uri: p:familyName
-    range: string
-    required: true
-    multivalued: true
-    description: >-
-      The surname or family name. Multi-valued to support compound or hyphenated
-      family names recorded as separate parts.
-  givenName:
-    slot_uri: p:givenName
-    range: string
-    required: true
-    multivalued: true
-    description: The first name and any middle names.
-  preferredName:
-    slot_uri: p:preferredName
-    range: string
-    required: false
-    multivalued: false
-    description: >-
-      Any preferred given or middle name used by the person - for example, "Joe"
-      where their legal first name is "Joseph".
-  nameUse:
-    slot_uri: p:use
-    title: use
-    range: NameUseCode
-    required: false
-    multivalued: false
-    description: The purpose of this name instance - usual, official, former, etc.
-
-  # --- Address ---
-  line1:
-    slot_uri: p:line1
-    range: string
-    required: true
-    multivalued: false
-    description: Street address (e.g. "1 High Street") or care-of line.
-  line2:
-    slot_uri: p:line2
-    range: string
-    required: false
-    multivalued: false
-    description: Apartment, suite, unit, building, floor, etc.
-  city:
-    slot_uri: p:city
-    range: string
-    required: true
-    multivalued: false
-    description: City, town, or village.
-  postcode:
-    slot_uri: p:postcode
-    range: string
-    required: true
-    multivalued: false
-    pattern: "^[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}$"
-    description: UK postcode in standard format (e.g. AB1 2CD).
-  UPRN:
-    slot_uri: p:UPRN
-    range: string
-    required: false
-    multivalued: false
-    description: Unique Property Reference Number of the address.
-  USRN:
-    slot_uri: p:USRN
-    range: string
-    required: false
-    multivalued: false
-    description: Unique Street Reference Number of the address.
-  addressUse:
-    slot_uri: p:use
-    title: use
-    range: AddressUseCode
-    required: false
-    multivalued: false
-    description: How this address is used - home, work, temp, etc.
-
-  # --- Contact ---
-  contactName:
-    slot_uri: p:contactName
-    title: name
-    range: string
-    required: false
-    multivalued: false
-    description: Name of the contact type (for example, "Home", "Work", "Other").
-  email:
-    slot_uri: p:email
-    range: string
-    required: false
-    multivalued: true
-    description: One or more email addresses.
-  telephone:
-    slot_uri: p:telephone
-    range: string
-    required: false
-    multivalued: true
-    description: One or more telephone numbers.
-
   # --- PersonRelationship ---
   relationship:
     slot_uri: p:relationship
@@ -405,8 +253,8 @@ slots:
     description: >-
       Professional recording of a person's communication requirements and language proficiencies.
 
-  communicationNeeds:
-    slot_uri: p:communicationNeeds
+  specialCommunicationNeeds:
+    slot_uri: p:specialCommunicationNeeds
     range: string
     multivalued: false
     required: false
@@ -443,69 +291,6 @@ slots:
 # Enums (controlled vocabularies / SKOS concept schemes)
 # ---------------------------------------------------------------------------
 enums:
-
-  NameUseCode:
-    enum_uri: p:name-use-code
-    title: Name Use Code
-    description: >-
-      The intended purpose of a person's name. Aligned with the FHIR name-use
-      value set.
-    permissible_values:
-      usual:
-        title: Usual name
-        meaning: nuc:Usual
-        description: The name commonly used by the person - what they normally go by.
-      official:
-        title: Official name
-        meaning: nuc:Official
-        description: The formal name registered in a government register.
-      temp:
-        title: Temporary name
-        meaning: nuc:Temp
-        description: A temporary name; assigned at birth, in emergencies, or where the full name is not yet known.
-      nickname:
-        title: Nickname
-        meaning: nuc:Nickname
-        description: An informal name not part of the person's formal or usual name.
-      anonymous:
-        title: Anonymous
-        meaning: nuc:Anonymous
-        description: A pseudonym used to protect the person's privacy.
-      old:
-        title: Old name
-        meaning: nuc:Old
-        description: A name no longer in use, retained for record-matching purposes.
-      maiden:
-        title: Maiden name
-        meaning: nuc:Maiden
-        description: A name used prior to marriage. Applies regardless of gender.
-
-  AddressUseCode:
-    enum_uri: p:address-use-code
-    title: Address Use Code
-    description: >-
-      How an address is used. Aligned with the FHIR address-use value set.
-    permissible_values:
-      home:
-        title: Home
-        meaning: auc:Home
-        description: A communication address at a home.
-      work:
-        title: Work
-        meaning: auc:Work
-        description: An office address. First choice for business-related contacts during business hours.
-      temp:
-        title: Temporary
-        meaning: auc:Temp
-        description: A temporary address.
-      old:
-        title: Old / Incorrect
-        meaning: auc:Old
-        description: This address is no longer in use (or was never correct but retained for records).
-      billing:
-        title: Billing
-        meaning: auc:Billing
-        description: An address to be used to send bills, invoices, receipts etc.
 
   GenderCode:
     enum_uri: p:gender-code

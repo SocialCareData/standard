@@ -1,4 +1,4 @@
-id: https://ns.socialcaredata.io/person/connected
+id: https://ontology.socialcaredata.io/person-connected
 name: person-connected
 title: Person Standard - Connected Person profile
 description: >-
@@ -17,7 +17,7 @@ version: 1.0.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
-  p: https://ns.socialcaredata.io/person/
+  p: https://ontology.socialcaredata.io/
 default_prefix: p
 imports:
   - linkml:types

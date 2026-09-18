@@ -1,0 +1,29 @@
+id: https://ontology.socialcaredata.io/mais
+name: social-care-mais
+title: Social Care MAIS Ontology
+description: >-
+  The umbrella Social Care MAIS (Multi-Agency Information Sharing) ontology. It
+  has no classes or slots of its own; it composes the independently-versioned
+  modules - common, person, placements, safeguarding, and assessments-and-plans
+  - into a single ontology under one flat namespace
+  (https://ontology.socialcaredata.io/).
+
+  Each module is authored and versioned on its own cadence; a MAIS release pins a
+  compatible set of module versions (see manifest.yml) and is generated from this
+  file. Generate the merged ontology with `gen-owl --mergeimports mais.yaml`
+  resolved through the top-level imports.json.
+license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+version: 2026.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  sc: https://ontology.socialcaredata.io/
+default_prefix: sc
+default_range: string
+imports:
+  - linkml:types
+  - https://ontology.socialcaredata.io/common
+  - https://ontology.socialcaredata.io/person
+  - https://ontology.socialcaredata.io/placements
+  - https://ontology.socialcaredata.io/safeguarding
+  - https://ontology.socialcaredata.io/assessments-and-plans

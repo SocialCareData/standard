@@ -9,8 +9,8 @@ const { diffClassProperties, diffVocabulary, renderDiffTable, renderDiffVocabula
 const { generateDiffTable } = require('../lib/generate')
 
 const REPO_ROOT = path.resolve(__dirname, '..', '..', '..', '..', '..')
-const CURRENT = 'src/assets/model/placements/placements-standard-01.yaml'
-const PREVIOUS = 'src/assets/model/placements/placements-standard.yaml'
+const CURRENT = 'src/_data/model/placements/placements-standard-01.yaml'
+const PREVIOUS = 'src/_data/model/placements/placements-standard.yaml'
 
 // Two hand-built versions of one class exercising every row status.
 const CUR = loadModel(`

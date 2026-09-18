@@ -1,4 +1,4 @@
-id: https://ns.socialcaredata.io/safeguarding/schema
+id: https://ontology.socialcaredata.io/safeguarding
 name: safeguarding
 title: Safeguarding Standard Data Model
 description: >-
@@ -10,27 +10,26 @@ description: >-
   The model is organised around five top-level entities - Organisation, Service,
   Professional, ServiceEpisode and LifeEvent - and the shared objects that link
   them together (Identifier, Name, Address, Contact). The shared objects are
-  defined once by the Person Standard and imported from person-standard.yaml, so
-  this schema reuses their p: ontology IRIs (p:Identifier, p:Name, p:Address,
-  p:Contact) rather than redefining them. Coded fields draw their values from the
-  controlled vocabularies (enums) declared below.
+  defined once by the common module and imported from common.yaml, so this
+  schema reuses their ontology IRIs (Identifier, Name, Address, Contact) rather
+  than redefining them. Coded fields draw their values from the controlled
+  vocabularies (enums) declared below.
 license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 version: 1.0.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
-  sg: https://ns.socialcaredata.io/safeguarding/
-  oc: https://ns.socialcaredata.io/safeguarding/organisation-code#
-  svc: https://ns.socialcaredata.io/safeguarding/service-code#
-  scf: https://ns.socialcaredata.io/safeguarding/service-cost-frequency#
-  sd: https://ns.socialcaredata.io/safeguarding/service-delivery#
-  epc: https://ns.socialcaredata.io/safeguarding/episode-code#
-  eo: https://ns.socialcaredata.io/safeguarding/episode-outcome#
-  evc: https://ns.socialcaredata.io/safeguarding/event-code#
-  mt: https://ns.socialcaredata.io/safeguarding/measurement-type#
-  mu: https://ns.socialcaredata.io/safeguarding/measurement-unit#
-  ot: https://ns.socialcaredata.io/safeguarding/observation-type#
-  p: https://ns.socialcaredata.io/person/
+  sg: https://ontology.socialcaredata.io/
+  oc: https://ontology.socialcaredata.io/organisation-code#
+  svc: https://ontology.socialcaredata.io/service-code#
+  scf: https://ontology.socialcaredata.io/service-cost-frequency#
+  sd: https://ontology.socialcaredata.io/service-delivery#
+  epc: https://ontology.socialcaredata.io/episode-code#
+  eo: https://ontology.socialcaredata.io/episode-outcome#
+  evc: https://ontology.socialcaredata.io/event-code#
+  mt: https://ontology.socialcaredata.io/measurement-type#
+  mu: https://ontology.socialcaredata.io/measurement-unit#
+  ot: https://ontology.socialcaredata.io/observation-type#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -39,12 +38,11 @@ default_range: string
 imports:
   - linkml:types
   # Shared objects (Identifier, Name, Address, Contact) and their controlled
-  # vocabularies (NameUseCode, AddressUseCode) are defined once by the Person
-  # Standard and imported here, so this schema reuses their p: ontology IRIs
-  # rather than redefining them. The import is by the Person schema's canonical
-  # id; imports.json maps that id to the local person-standard.yaml file so the
-  # generated ontology's owl:imports is a clean IRI.
-  - https://ns.socialcaredata.io/person/schema
+  # vocabularies (NameUseCode, AddressUseCode) are defined once by the common
+  # module and imported here, so this schema reuses their ontology IRIs rather
+  # than redefining them. The top-level imports.json maps this id to the local
+  # common/common.yaml file.
+  - https://ontology.socialcaredata.io/common
 
 # ---------------------------------------------------------------------------
 # Classes
@@ -192,7 +190,7 @@ classes:
     slots:
       - startDateTime
       - endDateTime
-      - frequency
+      - serviceFrequency
 
   Any:
     class_uri: linkml:Any
@@ -233,9 +231,9 @@ classes:
 
   # --- Shared objects -------------------------------------------------------
   # Identifier, Name, Address and Contact (and the NameUseCode / AddressUseCode
-  # vocabularies) are imported from the Person Standard (person-standard.yaml)
-  # and reused unchanged, so their p: ontology IRIs (p:Identifier, p:Name,
-  # p:Address, p:Contact) are referenced rather than redefined here.
+  # vocabularies) are imported from the common module (common.yaml) and reused
+  # unchanged, so their ontology IRIs (Identifier, Name, Address, Contact) are
+  # referenced rather than redefined here.
 
 # ---------------------------------------------------------------------------
 # Slots
@@ -450,8 +448,9 @@ slots:
     required: false
     multivalued: false
     description: The end of the episode or life event, as an ISO 8601 date-time.
-  frequency:
-    slot_uri: sg:frequency
+  serviceFrequency:
+    slot_uri: sg:serviceFrequency
+    title: frequency
     range: Any
     required: false
     multivalued: false
@@ -508,7 +507,7 @@ slots:
     multivalued: false
     description: The date at which this observation was made false (if now outdated).
   measurementValue:
-    slot_uri: sg:value
+    slot_uri: sg:measurementValue
     title: value
     range: decimal
     required: true

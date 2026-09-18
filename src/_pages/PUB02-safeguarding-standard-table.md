@@ -4,7 +4,7 @@ title: Safeguarding Standard Tabular View
 tags:
   - MAIS
   - Safeguarding
-data_model: src/assets/model/safeguarding/safeguarding-standard.yaml
+data_model: src/_data/model/safeguarding/safeguarding-standard.yaml
 ---
 
 <a href="/PUB02_safeguarding_standard" style="float: right;"><img src="/assets/icon/data-model.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Standard View</a>

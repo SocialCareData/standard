@@ -13,11 +13,11 @@ JSON Schema and docs are generated from the YAML.
 
 | File | Role |
 | --- | --- |
-| `safeguarding-standard.yaml` | **Authoritative source.** Prefixes, the five top-level classes (`Organisation`, `Service`, `Professional`, `ServiceEpisode`, `LifeEvent`), the linking/supporting objects (`SubjectPerson`, `RelatedProfessional`, `TimeInformation`, `Finding`, `Observation`, `Measurement`), every slot, and the controlled vocabularies (enums). The shared objects are **imported** from the Person Standard (see below). |
-| `imports.json` | Importmap: maps the Person schema id (`https://ns.socialcaredata.io/person/schema`) to the local `../person/person-standard.yaml`, so the import can be written as a clean IRI. |
+| `safeguarding-standard.yaml` | **Authoritative source.** Prefixes, the five top-level classes (`Organisation`, `Service`, `Professional`, `ServiceEpisode`, `LifeEvent`), the linking/supporting objects (`SubjectPerson`, `RelatedProfessional`, `TimeInformation`, `Finding`, `Observation`, `Measurement`), every slot, and the controlled vocabularies (enums). The shared objects are **imported** from the common module (see below). |
+| `../imports.json` | Top-level importmap shared by all modules: maps each module id (e.g. `https://ontology.socialcaredata.io/common`) to its local `*.yaml` file, so imports can be written as clean IRIs. |
 | `safeguarding-standard-shape.ttl` | *Generated* SHACL — one `NodeShape` per class, including the imported `p:Identifier` / `p:Name` / `p:Address` / `p:Contact` shapes. |
-| `safeguarding-standard.ttl` | *Generated* OWL/RDF ontology. Declares `owl:imports p:schema` and references the Person IRIs (`p:Identifier` …) for the shared objects rather than redefining them. |
-| `context.jsonld` | JSON-LD context used by the examples. Maps friendly keys to the `sg:` predicates (and the shared objects' fields to their `p:` predicates), and each coded value to its concept IRI. |
+| `safeguarding-standard.ttl` | *Generated* OWL/RDF ontology. Declares `owl:imports` of the common module and references the shared-object IRIs (`Identifier` …) rather than redefining them. |
+| `context.jsonld` | JSON-LD context used by the examples. Maps friendly keys to the flat ontology predicates (including the shared objects' fields), and each coded value to its concept IRI. |
 | `examples/` | JSON-LD examples. `valid-*.jsonld` must conform; `invalid-*.jsonld` must not. |
 
 ## Model shape

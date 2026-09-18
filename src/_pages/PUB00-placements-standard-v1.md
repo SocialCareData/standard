@@ -8,7 +8,7 @@ tags:
 reference: PUB00
 version: 1
 status: draft
-data_model: src/assets/model/placements/placements-standard-v0_1.yaml
+data_model: src/_data/model/placements/placements-standard-v0_1.yaml
 non_technical_summary: |
   The market for children’s social care placements -- that is, the accommodation and support provided to children when they are taken into the care of the local authority -- has been described by the Local Government Association as '[broken](https://www.local.gov.uk/about/news/childrens-social-care-placements-costing-ps10000-plus-rise-sharply-five-years-new-lga)'. Many children in residential care nationally are currently placed more than 20 miles from home.
 
@@ -71,7 +71,7 @@ The top-level record. Captures the unique child identifier and links the placeme
   <h5 id="example-placement">Example - Placement (top level)</h5>
 {% highlight json %}
 {
-  "@context": "https://socialcaredata.github.io/assets/model/placements/context.jsonld",
+  "@context": "https://socialcaredata.github.io/_data/model/placements/context.jsonld",
   "@id": "ex:ABCD2012-001",
   "@type": "Placement",
   "childId": "ABCD2012",
@@ -510,7 +510,7 @@ A [SHACL shape](/assets/model/placements/placements-standard-shape-v1.ttl) encod
 - conditional checks for the `Other` vocab pairings,
 - and severity-`Warning` cost sense-checks.
 
-A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, applies the [JSON-LD context file](/assets/model/placements/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
+A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, applies the [JSON-LD context file](/_data/model/placements/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
 
 ## Standard Placement Reporting Spreadsheet
 

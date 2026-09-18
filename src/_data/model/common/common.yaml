@@ -1,0 +1,265 @@
+id: https://ontology.socialcaredata.io/common
+name: common
+title: Social Care MAIS - Common Objects
+description: >-
+  The shared, cross-cutting objects of the Social Care MAIS ontology: the
+  building blocks reused by every domain module. It defines the Identifier,
+  Name, Address and Contact structures and their controlled vocabularies
+  (NameUseCode, AddressUseCode) once, so that Person, Placements, Safeguarding
+  and Assessments-and-Plans all reference the same classes and IRIs rather than
+  redefining them.
+
+  This module has no dependency on any domain standard; the domain standards
+  depend on it. It is versioned on its own cadence and composed into the single
+  Social Care MAIS ontology alongside the domain modules.
+license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+version: 1.0.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  sc: https://ontology.socialcaredata.io/
+  nuc: https://ontology.socialcaredata.io/name-use-code#
+  auc: https://ontology.socialcaredata.io/address-use-code#
+  skos: http://www.w3.org/2004/02/skos/core#
+  dct: http://purl.org/dc/terms/
+  xsd: http://www.w3.org/2001/XMLSchema#
+default_prefix: sc
+default_range: string
+imports:
+  - linkml:types
+
+# ---------------------------------------------------------------------------
+# Classes
+# ---------------------------------------------------------------------------
+classes:
+
+  Identifier:
+    class_uri: sc:Identifier
+    description: >-
+      A single identifier for a person or entity, comprising the value and the
+      system in whose namespace the value is unique. Aligned with FHIR
+      Identifier and the NHS PDS UNIQUE_REFERENCE definition.
+    slots:
+      - value
+      - system
+
+  Name:
+    class_uri: sc:Name
+    description: >-
+      Container for a person's name parts, aligned with FHIR HumanName. A person
+      may have multiple names with different uses.
+    slots:
+      - familyName
+      - givenName
+      - preferredName
+      - nameUse
+
+  Address:
+    class_uri: sc:Address
+    description: >-
+      A postal address. Aligned with FHIR Address. UPRN and USRN support
+      property- and street-level disambiguation.
+    slots:
+      - line1
+      - line2
+      - city
+      - postcode
+      - UPRN
+      - USRN
+      - addressUse
+
+  Contact:
+    class_uri: sc:Contact
+    description: >-
+      Contact details, such as a home, work, or other contact channel grouping.
+    slots:
+      - contactName
+      - email
+      - telephone
+
+# ---------------------------------------------------------------------------
+# Slots
+# ---------------------------------------------------------------------------
+slots:
+
+  # --- Identifier ---
+  value:
+    slot_uri: sc:value
+    range: string
+    required: true
+    multivalued: false
+    description: The identifier value, unique within the issuing system.
+  system:
+    slot_uri: sc:system
+    range: uri
+    required: true
+    multivalued: false
+    description: >-
+      The URI of the system or namespace within which the identifier is unique
+      (e.g. https://fhir.nhs.uk/Id/nhs-number).
+
+  # --- Name ---
+  familyName:
+    slot_uri: sc:familyName
+    range: string
+    required: true
+    multivalued: true
+    description: >-
+      The surname or family name. Multi-valued to support compound or hyphenated
+      family names recorded as separate parts.
+  givenName:
+    slot_uri: sc:givenName
+    range: string
+    required: true
+    multivalued: true
+    description: The first name and any middle names.
+  preferredName:
+    slot_uri: sc:preferredName
+    range: string
+    required: false
+    multivalued: false
+    description: >-
+      Any preferred given or middle name used by the person - for example, "Joe"
+      where their legal first name is "Joseph".
+  nameUse:
+    slot_uri: sc:use
+    title: use
+    range: NameUseCode
+    required: false
+    multivalued: false
+    description: The purpose of this name instance - usual, official, former, etc.
+
+  # --- Address ---
+  line1:
+    slot_uri: sc:line1
+    range: string
+    required: true
+    multivalued: false
+    description: Street address (e.g. "1 High Street") or care-of line.
+  line2:
+    slot_uri: sc:line2
+    range: string
+    required: false
+    multivalued: false
+    description: Apartment, suite, unit, building, floor, etc.
+  city:
+    slot_uri: sc:city
+    range: string
+    required: true
+    multivalued: false
+    description: City, town, or village.
+  postcode:
+    slot_uri: sc:postcode
+    range: string
+    required: true
+    multivalued: false
+    pattern: "^[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}$"
+    description: UK postcode in standard format (e.g. AB1 2CD).
+  UPRN:
+    slot_uri: sc:UPRN
+    range: string
+    required: false
+    multivalued: false
+    description: Unique Property Reference Number of the address.
+  USRN:
+    slot_uri: sc:USRN
+    range: string
+    required: false
+    multivalued: false
+    description: Unique Street Reference Number of the address.
+  addressUse:
+    slot_uri: sc:use
+    title: use
+    range: AddressUseCode
+    required: false
+    multivalued: false
+    description: How this address is used - home, work, temp, etc.
+
+  # --- Contact ---
+  contactName:
+    slot_uri: sc:contactName
+    title: name
+    range: string
+    required: false
+    multivalued: false
+    description: Name of the contact type (for example, "Home", "Work", "Other").
+  email:
+    slot_uri: sc:email
+    range: string
+    required: false
+    multivalued: true
+    description: One or more email addresses.
+  telephone:
+    slot_uri: sc:telephone
+    range: string
+    required: false
+    multivalued: true
+    description: One or more telephone numbers.
+
+# ---------------------------------------------------------------------------
+# Enums (controlled vocabularies / SKOS concept schemes)
+# ---------------------------------------------------------------------------
+enums:
+
+  NameUseCode:
+    enum_uri: sc:name-use-code
+    title: Name Use Code
+    description: >-
+      The intended purpose of a person's name. Aligned with the FHIR name-use
+      value set.
+    permissible_values:
+      usual:
+        title: Usual name
+        meaning: nuc:Usual
+        description: The name commonly used by the person - what they normally go by.
+      official:
+        title: Official name
+        meaning: nuc:Official
+        description: The formal name registered in a government register.
+      temp:
+        title: Temporary name
+        meaning: nuc:Temp
+        description: A temporary name; assigned at birth, in emergencies, or where the full name is not yet known.
+      nickname:
+        title: Nickname
+        meaning: nuc:Nickname
+        description: An informal name not part of the person's formal or usual name.
+      anonymous:
+        title: Anonymous
+        meaning: nuc:Anonymous
+        description: A pseudonym used to protect the person's privacy.
+      old:
+        title: Old name
+        meaning: nuc:Old
+        description: A name no longer in use, retained for record-matching purposes.
+      maiden:
+        title: Maiden name
+        meaning: nuc:Maiden
+        description: A name used prior to marriage. Applies regardless of gender.
+
+  AddressUseCode:
+    enum_uri: sc:address-use-code
+    title: Address Use Code
+    description: >-
+      How an address is used. Aligned with the FHIR address-use value set.
+    permissible_values:
+      home:
+        title: Home
+        meaning: auc:Home
+        description: A communication address at a home.
+      work:
+        title: Work
+        meaning: auc:Work
+        description: An office address. First choice for business-related contacts during business hours.
+      temp:
+        title: Temporary
+        meaning: auc:Temp
+        description: A temporary address.
+      old:
+        title: Old / Incorrect
+        meaning: auc:Old
+        description: This address is no longer in use (or was never correct but retained for records).
+      billing:
+        title: Billing
+        meaning: auc:Billing
+        description: An address to be used to send bills, invoices, receipts etc.

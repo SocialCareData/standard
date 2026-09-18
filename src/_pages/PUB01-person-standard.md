@@ -10,7 +10,7 @@ tags:
   - Publication
 reference: PUB01
 status: draft
-data_model: src/assets/model/person/person-standard.yaml
+data_model: src/_data/model/person/person-standard.yaml
 non_technical_summary: |
   The core objective of our work is to facilitate the sharing of information about a person in care (whether a child or an adult) between agencies and organisations across the country (multi-agency information sharing). To do so, each of these agencies and organisations must be speaking the same "language" talking about the person, communicating with each other in the same way. This requires a common data model for identifying and describing a person across data systems, which we have designed here in our **Person Standard**.
 
@@ -105,7 +105,7 @@ The top-level record describing an individual. Consolidates the core identity at
   <h5 id="example-person">Example - Person</h5>
 {% highlight json %}
 {
-  "@context": "https://socialcaredata.github.io/assets/model/person/context.jsonld",
+  "@context": "https://socialcaredata.github.io/_data/model/person/context.jsonld",
   "@id": "ex:person-9434765919",
   "@type": "Person",
   "identifier": [{

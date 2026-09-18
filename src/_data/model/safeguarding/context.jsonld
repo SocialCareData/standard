@@ -1,18 +1,18 @@
 {
   "@context": {
-    "sg": "https://ns.socialcaredata.io/safeguarding/",
-    "oc": "https://ns.socialcaredata.io/safeguarding/organisation-code#",
-    "svc": "https://ns.socialcaredata.io/safeguarding/service-code#",
-    "scf": "https://ns.socialcaredata.io/safeguarding/service-cost-frequency#",
-    "sd": "https://ns.socialcaredata.io/safeguarding/service-delivery#",
-    "epc": "https://ns.socialcaredata.io/safeguarding/episode-code#",
-    "eo": "https://ns.socialcaredata.io/safeguarding/episode-outcome#",
-    "evc": "https://ns.socialcaredata.io/safeguarding/event-code#",
-    "mt": "https://ns.socialcaredata.io/safeguarding/measurement-type#",
-    "mu": "https://ns.socialcaredata.io/safeguarding/measurement-unit#",
-    "p": "https://ns.socialcaredata.io/person/",
-    "nuc": "https://ns.socialcaredata.io/person/name-use-code#",
-    "auc": "https://ns.socialcaredata.io/person/address-use-code#",
+    "sg": "https://ontology.socialcaredata.io/",
+    "oc": "https://ontology.socialcaredata.io/organisation-code#",
+    "svc": "https://ontology.socialcaredata.io/service-code#",
+    "scf": "https://ontology.socialcaredata.io/service-cost-frequency#",
+    "sd": "https://ontology.socialcaredata.io/service-delivery#",
+    "epc": "https://ontology.socialcaredata.io/episode-code#",
+    "eo": "https://ontology.socialcaredata.io/episode-outcome#",
+    "evc": "https://ontology.socialcaredata.io/event-code#",
+    "mt": "https://ontology.socialcaredata.io/measurement-type#",
+    "mu": "https://ontology.socialcaredata.io/measurement-unit#",
+    "p": "https://ontology.socialcaredata.io/",
+    "nuc": "https://ontology.socialcaredata.io/name-use-code#",
+    "auc": "https://ontology.socialcaredata.io/address-use-code#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "ex": "https://example.org/safeguarding/",
     "identifier": {
@@ -46,7 +46,7 @@
       "@type": "@vocab",
       "@container": "@set",
       "@context": {
-        "@vocab": "https://ns.socialcaredata.io/safeguarding/service-delivery#",
+        "@vocab": "https://ontology.socialcaredata.io/service-delivery#",
         "st-max": "sd:StMax",
         "ongoing-low": "sd:OngoingLow",
         "other-short-term": "sd:OtherShortTerm",
@@ -62,7 +62,7 @@
       "@id": "sg:costFrequency",
       "@type": "@vocab",
       "@context": {
-        "@vocab": "https://ns.socialcaredata.io/safeguarding/service-cost-frequency#",
+        "@vocab": "https://ontology.socialcaredata.io/service-cost-frequency#",
         "none": "scf:None",
         "per-session": "scf:PerSession",
         "hourly": "scf:Hourly",
@@ -119,7 +119,7 @@
       "@id": "sg:outcome",
       "@type": "@vocab",
       "@context": {
-        "@vocab": "https://ns.socialcaredata.io/safeguarding/episode-outcome#",
+        "@vocab": "https://ontology.socialcaredata.io/episode-outcome#",
         "reablement": "eo:Reablement",
         "assessment": "eo:Assessment",
         "hospital": "eo:Hospital",
@@ -206,7 +206,7 @@
           "@type": "@vocab",
           "@container": "@set",
           "@context": {
-            "@vocab": "https://ns.socialcaredata.io/safeguarding/organisation-code#",
+            "@vocab": "https://ontology.socialcaredata.io/organisation-code#",
             "local-authority": "oc:LocalAuthority",
             "nhs-trust": "oc:NhsTrust",
             "police-force": "oc:PoliceForce"
@@ -223,7 +223,7 @@
           "@type": "@vocab",
           "@container": "@set",
           "@context": {
-            "@vocab": "https://ns.socialcaredata.io/safeguarding/service-code#",
+            "@vocab": "https://ontology.socialcaredata.io/service-code#",
             "youth-offending": "svc:YouthOffending",
             "primary-school": "svc:PrimarySchool",
             "high-school": "svc:HighSchool",
@@ -279,7 +279,7 @@
           "@type": "@vocab",
           "@container": "@set",
           "@context": {
-            "@vocab": "https://ns.socialcaredata.io/safeguarding/episode-code#",
+            "@vocab": "https://ontology.socialcaredata.io/episode-code#",
             "early-help": "epc:EarlyHelp",
             "ehcp": "epc:Ehcp",
             "family-court-order": "epc:FamilyCourtOrder",
@@ -302,7 +302,7 @@
           "@type": "@vocab",
           "@container": "@set",
           "@context": {
-            "@vocab": "https://ns.socialcaredata.io/safeguarding/event-code#",
+            "@vocab": "https://ontology.socialcaredata.io/event-code#",
             "birth": "evc:Birth",
             "death": "evc:Death",
             "ae-attendance": "evc:AeAttendance",
@@ -322,7 +322,7 @@
       "@id": "sg:TimeInformation",
       "@context": {
         "frequency": {
-          "@id": "sg:frequency",
+          "@id": "sg:serviceFrequency",
           "@type": "@id"
         }
       }
@@ -377,14 +377,14 @@
       "@id": "sg:Measurement",
       "@context": {
         "value": {
-          "@id": "sg:value",
+          "@id": "sg:measurementValue",
           "@type": "xsd:decimal"
         },
         "unit": {
           "@id": "sg:unit",
           "@type": "@vocab",
           "@context": {
-            "@vocab": "https://ns.socialcaredata.io/safeguarding/measurement-unit#",
+            "@vocab": "https://ontology.socialcaredata.io/measurement-unit#",
             "count": "mu:Count",
             "pct": "mu:Pct"
           }
@@ -393,7 +393,7 @@
           "@id": "sg:measurementType",
           "@type": "@vocab",
           "@context": {
-            "@vocab": "https://ns.socialcaredata.io/safeguarding/measurement-type#",
+            "@vocab": "https://ontology.socialcaredata.io/measurement-type#",
             "Attendance": "mt:Attendance",
             "Authorised Absences": "mt:AuthorisedAbsences",
             "Unauthorised Absences": "mt:UnauthorisedAbsences",
@@ -410,7 +410,7 @@
           "@id": "p:use",
           "@type": "@vocab",
           "@context": {
-            "@vocab": "https://ns.socialcaredata.io/person/name-use-code#",
+            "@vocab": "https://ontology.socialcaredata.io/name-use-code#",
             "usual": "nuc:Usual",
             "official": "nuc:Official",
             "temp": "nuc:Temp",
@@ -429,7 +429,7 @@
           "@id": "p:use",
           "@type": "@vocab",
           "@context": {
-            "@vocab": "https://ns.socialcaredata.io/person/address-use-code#",
+            "@vocab": "https://ontology.socialcaredata.io/address-use-code#",
             "home": "auc:Home",
             "work": "auc:Work",
             "temp": "auc:Temp",

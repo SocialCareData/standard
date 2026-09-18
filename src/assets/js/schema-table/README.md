@@ -171,8 +171,8 @@ the table at build time, so it ends up as a real `<table>` in the compiled site
 and is indexed by Pagefind. Place the tag on its own line:
 
 ```liquid
-{% schema_table src/assets/model/placements/placements.yaml PlacementAvailability %}
-{% schema_table src/assets/model/placements/placements.yaml communicationNeeds %}
+{% schema_table src/_data/model/placements/placements.yaml PlacementAvailability %}
+{% schema_table src/_data/model/placements/placements.yaml communicationNeeds %}
 ```
 
 Arguments: the LinkML YAML path (relative to the project root) and either a
@@ -182,11 +182,11 @@ class name (class table) or a controlled-vocabulary property/enum name
 ## Usage from the command line
 
 ```bash
-node src/assets/js/schema-table/index.js src/assets/model/placements/placements.yaml PlacementAvailability
-node src/assets/js/schema-table/index.js src/assets/model/placements/placements.yaml communicationNeeds
+node src/assets/js/schema-table/index.js src/_data/model/placements/placements.yaml PlacementAvailability
+node src/assets/js/schema-table/index.js src/_data/model/placements/placements.yaml communicationNeeds
 # diff two versions:
-node src/assets/js/schema-table/index.js src/assets/model/placements/placements-standard-01.yaml RiskAssessment \
-  --previous src/assets/model/placements/placements-standard.yaml
+node src/assets/js/schema-table/index.js src/_data/model/placements/placements-standard-01.yaml RiskAssessment \
+  --previous src/_data/model/placements/placements-standard.yaml
 ```
 
 ## Layout

@@ -9,7 +9,7 @@ tags:
   - Publication
 reference: PUB05
 status: draft
-data_model: src/assets/model/assessments-and-plans/assessments-and-plans-standard.yaml
+data_model: src/_data/model/assessments-and-plans/assessments-and-plans-standard.yaml
 non_technical_summary: |
   As part of the joined-up care workstream, we’re working on standardising care needs assessments and plans. Each are important components of an adult’s social care: an assessment is conducted when an adult contacts (or is referred to) a local authority’s social services team, and a social care plan is created immediately after if the person is assessed to be eligible.
 
@@ -104,7 +104,7 @@ A Care Needs Assessment record. Captures foundational metadata, Care Act outcome
   <h5 id="example-assessment">Example - CareNeedsAssessment</h5>
 {% highlight json %}
 {
-  "@context": "https://socialcaredata.github.io/assets/model/assessments-and-plans/context.jsonld",
+  "@context": "https://socialcaredata.github.io/_data/model/assessments-and-plans/context.jsonld",
   "@id": "ex:assessment-001",
   "@type": "CareNeedsAssessment",
   "identifier": {
@@ -274,7 +274,7 @@ A Care Plan record, constructed for adults found eligible for care. Follows a st
   <h5 id="example-plan">Example - CarePlan</h5>
 {% highlight json %}
 {
-  "@context": "https://socialcaredata.github.io/assets/model/assessments-and-plans/context.jsonld",
+  "@context": "https://socialcaredata.github.io/_data/model/assessments-and-plans/context.jsonld",
   "@id": "ex:plan-001",
   "@type": "CarePlan",
   "identifier": {

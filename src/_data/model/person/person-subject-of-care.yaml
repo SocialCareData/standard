@@ -1,4 +1,4 @@
-id: https://ns.socialcaredata.io/person/subject-of-care
+id: https://ontology.socialcaredata.io/person-subject-of-care
 name: person-subject-of-care
 title: Person Standard - Subject of Care profile
 description: >-
@@ -16,7 +16,7 @@ version: 1.0.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
-  p: https://ns.socialcaredata.io/person/
+  p: https://ontology.socialcaredata.io/
 default_prefix: p
 imports:
   - linkml:types

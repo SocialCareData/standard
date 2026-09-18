@@ -11,7 +11,7 @@ tags:
   - Safeguarding
 reference: PUB02
 status: draft
-data_model: src/assets/model/safeguarding/safeguarding-standard.yaml
+data_model: src/_data/model/safeguarding/safeguarding-standard.yaml
 non_technical_summary: |
   The Person Standard enables us to describe core attributes of a person in care, like their name or age, but not any safeguarding information about them. To that end we've built the Safeguarding Standard, a set of connected points of data that, together, can build a picture of a person's context and care history.
 

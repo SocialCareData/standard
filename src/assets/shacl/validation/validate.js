@@ -5,7 +5,7 @@
  * Standard-agnostic SHACL example validator.
  *
  * Validates the JSON-LD examples that ship with each data standard under
- * src/assets/model/<standard>/ against the SHACL shapes generated from that
+ * src/_data/model/<standard>/ against the SHACL shapes generated from that
  * standard's LinkML schema. A standard may expose several conformance
  * *profiles* (e.g. the Person standard has "subject-of-care" and "connected"),
  * each with its own shape file and its own examples sub-folder.
