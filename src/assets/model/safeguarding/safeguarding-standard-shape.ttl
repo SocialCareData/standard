@@ -586,7 +586,7 @@ sg:ServiceEpisodeShape a sh:NodeShape ;
             sh:order 5 ;
             sh:path sg:timeInformation ],
         [ sh:description "Code(s) for the type of service episode." ;
-            sh:in ( epc:Assessment epc:EarlyHelp epc:Section47 epc:AdultSafeguarding epc:CareActAssessment epc:Plan epc:Ehcp epc:FamilyCourtOrder epc:CinPlan epc:CpPlan epc:CamhsPlan epc:ChildLookedAfter epc:CarePlan epc:Provision epc:FaceToFaceContact epc:RemoteContact epc:DirectProvision epc:IndirectProvision epc:Admin epc:Miscellaneous ) ;
+            sh:in ( epc:Assessment epc:EarlyHelp epc:Section47 epc:AdultSafeguarding epc:CareActAssessment epc:OtherAssessment epc:Plan epc:Ehcp epc:FamilyCourtOrder epc:CinPlan epc:CpPlan epc:CamhsPlan epc:ChildLookedAfter epc:CarePlan epc:OtherPlan epc:Provision epc:FaceToFaceContact epc:RemoteContact epc:DirectProvision epc:IndirectProvision epc:Admin epc:Miscellaneous ) ;
             sh:minCount 1 ;
             sh:name "type" ;
             sh:order 1 ;

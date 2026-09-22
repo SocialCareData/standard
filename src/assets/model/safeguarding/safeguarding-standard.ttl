@@ -550,6 +550,18 @@ epc:Miscellaneous a owl:Class ;
     rdfs:subClassOf sg:episode-code ;
     skos:definition "Other care provision activities not covered elsewhere." .
 
+epc:OtherAssessment a owl:Class ;
+    rdfs:label "assessment.other-assessment" ;
+    dct:title "Other Assessment" ;
+    rdfs:subClassOf sg:episode-code ;
+    skos:definition "Any other enquiry, discovery, assessment, evaluation, triage, or review." .
+
+epc:OtherPlan a owl:Class ;
+    rdfs:label "plan.other-plan" ;
+    dct:title "Other Plan" ;
+    rdfs:subClassOf sg:episode-code ;
+    skos:definition "Any other plan, order, or commission." .
+
 epc:Plan a owl:Class ;
     rdfs:label "plan" ;
     dct:title "Plan and Order" ;
@@ -1879,7 +1891,7 @@ sg:episode-outcome a owl:Class ;
 sg:episode-code a owl:Class ;
     rdfs:label "EpisodeCode" ;
     dct:title "Episode Code" ;
-    owl:unionOf ( epc:Assessment epc:EarlyHelp epc:Section47 epc:AdultSafeguarding epc:CareActAssessment epc:Plan epc:Ehcp epc:FamilyCourtOrder epc:CinPlan epc:CpPlan epc:CamhsPlan epc:ChildLookedAfter epc:CarePlan epc:Provision epc:FaceToFaceContact epc:RemoteContact epc:DirectProvision epc:IndirectProvision epc:Admin epc:Miscellaneous ) ;
+    owl:unionOf ( epc:Assessment epc:EarlyHelp epc:Section47 epc:AdultSafeguarding epc:CareActAssessment epc:OtherAssessment epc:Plan epc:Ehcp epc:FamilyCourtOrder epc:CinPlan epc:CpPlan epc:CamhsPlan epc:ChildLookedAfter epc:CarePlan epc:OtherPlan epc:Provision epc:FaceToFaceContact epc:RemoteContact epc:DirectProvision epc:IndirectProvision epc:Admin epc:Miscellaneous ) ;
     skos:definition "Codes to indicate the type of service episode." ;
     skos:inScheme sg:schema ;
     linkml:permissible_values epc:Admin,
@@ -1898,6 +1910,8 @@ sg:episode-code a owl:Class ;
         epc:FamilyCourtOrder,
         epc:IndirectProvision,
         epc:Miscellaneous,
+        epc:OtherAssessment,
+        epc:OtherPlan,
         epc:Plan,
         epc:Provision,
         epc:RemoteContact,

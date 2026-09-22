@@ -821,6 +821,10 @@ enums:
         title: Care Act Assessment
         description: Care Act Assessment
         meaning: epc:CareActAssessment
+      "assessment.other-assessment":
+        title: Other Assessment
+        description: Any other enquiry, discovery, assessment, evaluation, triage, or review.
+        meaning: epc:OtherAssessment
       plan:
         title: Plan and Order
         description: Creation of a plan, definition of statutory responsibilities (via a court order), or commission of services.
@@ -853,6 +857,10 @@ enums:
         title: Care Plan
         description: Care Plan
         meaning: epc:CarePlan
+      "plan.other-plan":
+        title: Other Plan
+        description: Any other plan, order, or commission
+        meaning: epc:OtherPlan
       provision:
         title: Provision and Contact
         description: Operation and delivery of services.
