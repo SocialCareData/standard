@@ -6,7 +6,7 @@ tags:
 
 <article class="numbered-headings">
 
-We're now moving beyond testing the standards in principle to piloting them in the real world, learning what it takes to embed them into real operational systems and workflows. This year we’ve started this process with our Placements Standard. 
+We're now moving beyond testing the standards in principle to piloting them in the real world, learning what it takes to embed them into real operational systems and workflows.
 
 These pilots enable us to:
 
@@ -15,6 +15,8 @@ These pilots enable us to:
 * Learn about standards implementation and what support / guidance is needed to support high quality implementation
 * Identify what enables sustainable governance
 * Build the profile of our standards
+
+This year we started our pilots with our Placements Standard. 
 
 ## Placements pilots: Our impact
 We’ve now completed implementation of our Placements standard in two regions, with work underway in two more, expected to finish in October 2026. 
