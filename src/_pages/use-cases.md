@@ -3,7 +3,7 @@ title: Use Cases
 regenerate: true
 ---
 
-We’re developing interoperability standards in social care to help deliver earlier intervention, better experiences for people who draw on care and support, more time for frontline professionals, and improved insight for planning, commissioning and service improvement. 
+We are developing interoperability standards in social care to save time for frontline professionals, help deliver earlier intervention, provide better experiences for people who need support, and enhance insight for planning, commissioning, and improving services.
 
 In 2025, through extensive research and engagement with the sector, we identified a series of use cases where standards could support solutions to some of the most important information-sharing and data challenges facing the sector. We have since refined them to reflect new learning, respond to evolving policy and practice, and incorporate adult social care.  
 
