@@ -38,24 +38,7 @@ jobs:
 
       - name: Generate ontology and shapes
         timeout-minutes: 15
-        run: |
-          python src/assets/scripts/build_ontology.py \
-            --out "$RUNNER_TEMP/ontology" \
-            --validation-out "$RUNNER_TEMP/validation"
-
-      - uses: actions/setup-node@v7
-
-      - name: Install validator dependencies
-        run: npm ci
-        working-directory: src/assets/shacl/validation
-
-      # Gate: the standards' own examples must behave as expected against the
-      # freshly generated shapes before anything is published.
-      - name: Validate examples against the generated shapes
-        env:
-          MODEL_ROOT: ${{ runner.temp }}/validation
-        run: node validate.js
-        working-directory: src/assets/shacl/validation
+        run: python src/assets/scripts/build_ontology.py --out "$RUNNER_TEMP/ontology"
 
       - name: Read release version
         id: manifest
@@ -104,8 +87,10 @@ jobs:
             - MAIS release: `${{ steps.manifest.outputs.mais_version }}`
             - Triggered by: `${{ github.event_name }}`
 
-            The standards' JSON-LD examples were validated against these shapes
-            before this pull request was opened.
+            The JSON-LD examples that exercise these shapes live in
+            [SocialCareData/validator](https://github.com/SocialCareData/validator),
+            whose conformance suite runs against this repository's published
+            shapes on every change and nightly.
 
             > Generated files — review the diff, but make corrections in the
             > LinkML YAML upstream rather than here.

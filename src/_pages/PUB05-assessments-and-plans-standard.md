@@ -434,7 +434,13 @@ The model is parameterised by the following controlled vocabularies.
 
 A [SHACL shape](/assets/model/assessments-and-plans/assessments-and-plans-standard-shape.ttl) is automatically generated from our LinkML model schema. It defines structure, cardinalities, and controlled vocabulary bindings.
 
-JSON-LD payloads are validated using our standard [validation suite](/assets/shacl/validation/README.md).
+JSON-LD payloads are validated with the [Social Care Data Validator](https://github.com/SocialCareData/validator).
+
+**[Validate your data in your browser](https://socialcaredata.github.io/validator/)**, or from a terminal:
+
+```bash
+npx @socialcaredata/validator -p assessments-and-plans yourdata.jsonld
+```
 
 ## Report an issue
 

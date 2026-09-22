@@ -312,6 +312,17 @@ def copy_aux(schemas: list[Schema], out_dir: Path) -> None:
             src = MODEL_ROOT / module / name
             if src.exists():  # common/ and mais/ have no README
                 shutil.copy2(src, out_dir / module / name)
+        # The hand-maintained *-rules-shape.ttl files carry the conditional
+        # constraints gen-shacl cannot produce, because it ignores LinkML
+        # `rules:`. They are published alongside the generated shapes so that
+        # SocialCareData/validator can fetch them by URL like anything else -
+        # without them, the "Other requires free text" rules are enforced
+        # nowhere. They must use the same flat namespace as the generated
+        # shapes or they match nothing.
+        target = out_dir / module
+        for rules in sorted((ASSETS_MODEL_ROOT / module).glob("*-rules-shape.ttl")):
+            target.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(rules, target / rules.name)
     shutil.copy2(MANIFEST, out_dir / "mais" / "manifest.yml")
     # The per-module READMEs link to ../model-management.md, so it has to come
     # along or every one of those links 404s in the published repo. Being
@@ -409,32 +420,6 @@ def build(out_dir: Path) -> list[Schema]:
     return schemas
 
 
-def build_validation_tree(out_dir: Path, validation_dir: Path) -> None:
-    """Assemble the tree ``src/assets/shacl/validation/validate.js`` expects.
-
-    That validator reads shapes, contexts and examples from one root. The
-    examples and the hand-maintained ``*-rules-shape.ttl`` files (which
-    gen-shacl cannot produce, because it ignores LinkML ``rules:``) live in
-    src/assets/model, so they are overlaid on top of the freshly generated
-    shapes. The rules shapes are needed to validate but are not published: they
-    are inputs to this repo's own gate, not release artifacts.
-    """
-    if validation_dir.exists():
-        shutil.rmtree(validation_dir)
-    shutil.copytree(out_dir, validation_dir)
-
-    for module_dir in sorted(ASSETS_MODEL_ROOT.iterdir()):
-        if not module_dir.is_dir():
-            continue
-        target = validation_dir / module_dir.name
-        target.mkdir(parents=True, exist_ok=True)
-        examples = module_dir / "examples"
-        if examples.is_dir():
-            shutil.copytree(examples, target / "examples", dirs_exist_ok=True)
-        for rules in module_dir.glob("*-rules-shape.ttl"):
-            shutil.copy2(rules, target / rules.name)
-
-
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -443,19 +428,11 @@ def main() -> int:
         required=True,
         help="directory to write the publishable ontology tree into",
     )
-    parser.add_argument(
-        "--validation-out",
-        type=Path,
-        help="also assemble a tree for validate.js (shapes + contexts + examples)",
-    )
     args = parser.parse_args()
 
     try:
         print(f"generating from {MODEL_ROOT.relative_to(REPO_ROOT)}")
         build(args.out.resolve())
-        if args.validation_out:
-            build_validation_tree(args.out.resolve(), args.validation_out.resolve())
-            print(f"validation tree -> {args.validation_out}")
     except BuildError as exc:
         print(f"\nerror: {exc}", file=sys.stderr)
         return 1

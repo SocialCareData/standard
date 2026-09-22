@@ -100,8 +100,13 @@ Person classes are referenced via `owl:imports` rather than copied in.
 
 ## Validating the examples
 
+The examples and the validator live in
+[SocialCareData/validator](https://github.com/SocialCareData/validator); the shapes below are published to
+[SocialCareData/ontology](https://github.com/SocialCareData/ontology) and fetched
+from there.
+
 ```bash
-cd ../../shacl/validation
-npm install
-node validate.js assessments-and-plans
+npx @socialcaredata/validator -p assessments-and-plans yourdata.jsonld
 ```
+
+Or in a browser: <https://socialcaredata.github.io/validator/>

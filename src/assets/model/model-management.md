@@ -142,20 +142,27 @@ The Person model uses this (`person-standard.yaml` core +
 
 ## Validating the examples
 
-Each model ships JSON-LD examples that are checked against its generated shapes
-by the standard-agnostic validator in
-[`src/assets/shacl/validation/`](../shacl/validation/README.md). Files named
-`valid-*.jsonld` must conform; `invalid-*.jsonld` must not.
+The JSON-LD examples, and the validator that checks them, live in
+[SocialCareData/validator](https://github.com/SocialCareData/validator). They moved out of this repository so
+that the tool could be released to npm and given a browser interface; this
+repository keeps the LinkML schemas the shapes are generated from.
 
 ```bash
-cd src/assets/shacl/validation
-npm install
-node validate.js                          # every standard, every profile
-node validate.js placements               # one standard
-node validate.js person subject-of-care   # one standard, one profile
+npx @socialcaredata/validator -p placements yourdata.jsonld
+npx @socialcaredata/validator profiles          # what it can check against
 ```
 
+There is also a browser version at <https://socialcaredata.github.io/validator/>.
+
+The validator fetches shapes and contexts by URL from
+[SocialCareData/ontology](https://github.com/SocialCareData/ontology) rather than
+bundling copies, so it always checks against the published artifacts. Files named
+`valid-*.jsonld` must conform and `invalid-*.jsonld` must not; that suite runs in
+the validator's own CI, on every change and nightly against the latest shapes.
+
 A profile may load **several** shape files (the generated shape plus any
-hand-maintained `*-rules-shape.ttl`); they are merged before validation.
-Register a new standard/profile in the `STANDARDS` map at the top of
-`validate.js`.
+hand-maintained `*-rules-shape.ttl`); they are merged before validation. The
+rules shapes are published to the ontology repository by `copy_aux` in
+`build_ontology.py` precisely so the validator can fetch them. To add a standard
+or profile, see the validator's
+[contributing guide](https://github.com/SocialCareData/validator/blob/main/docs/contributing.md).

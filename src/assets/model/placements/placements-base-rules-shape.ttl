@@ -1,20 +1,27 @@
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix pl:   <https://ns.socialcaredata.io/placements/> .
-@prefix cn:   <https://ns.socialcaredata.io/placements/communication-need#> .
-@prefix cln:  <https://ns.socialcaredata.io/placements/cultural-need#> .
-@prefix st:   <https://ns.socialcaredata.io/placements/support-type#> .
-@prefix olr:  <https://ns.socialcaredata.io/placements/outof-la-reason#> .
+@prefix pl:   <https://ontology.socialcaredata.io/> .
+@prefix cn:   <https://ontology.socialcaredata.io/communication-need#> .
+@prefix cln:  <https://ontology.socialcaredata.io/cultural-need#> .
+@prefix st:   <https://ontology.socialcaredata.io/support-type#> .
+@prefix olr:  <https://ontology.socialcaredata.io/outof-la-reason#> .
 
 #################################################################
 # Conditional "Other ⇒ free-text required" constraints.
 #
-# These mirror the `rules:` blocks in placements-standard-01.yaml. LinkML's
+# These mirror the `rules:` blocks in placements-standard.yaml. LinkML's
 # gen-shacl does NOT translate `rules:` (or class-level boolean expressions)
 # into SHACL, so these shapes are maintained by hand and loaded ALONGSIDE the
-# generated placements-standard-shape-01.ttl. Keep them in sync with the
+# generated placements-standard-shape.ttl. Keep them in sync with the
 # schema's rules. Each says: it is a violation for the "Other" concept to be
 # selected while the paired free-text property is absent.
+#
+# build_ontology.py copies this file into the published tree, so it reaches
+# SocialCareData/ontology alongside the generated shapes and the validator can
+# fetch it like any other. It must therefore use the same flat namespace
+# (https://ontology.socialcaredata.io/) as the contexts and generated shapes -
+# under the old per-module namespace every sh:targetClass here matched nothing
+# and all four checks passed vacuously.
 #################################################################
 
 pl:OutOfLAReasonOtherCheckShape a sh:NodeShape ;
