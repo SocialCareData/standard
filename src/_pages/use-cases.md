@@ -5,7 +5,7 @@ regenerate: true
 
 We are developing interoperability standards in social care to save time for frontline professionals, help deliver earlier intervention, provide better experiences for people who need support, and enhance insight for planning, commissioning, and improving services.
 
-In 2025, through extensive research and engagement with the sector, a series of use cases where standards could help resolve some of the most important and urgent challenges were identified. We have since refined these further to incorporate new learning and evolving policy and practice.
+In 2025, through extensive research and engagement with the sector, we identified a series of use cases where standards could help resolve some of the most important and urgent challenges facing the sector. We have since refined these further to incorporate new learning and evolving policy and practice.
 
 We undertook a prioritisation process to identify where standards could deliver the greatest impact and where common core standards could support multiple use cases. This has guided our standards development roadmap.
 
