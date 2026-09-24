@@ -126,9 +126,8 @@ classes:
   ActualPlacement:
     class_uri: pl:ActualPlacement
     description: >-
-      The placement actually arranged for the child, including weekly cost (with
-      optional breakdown), location, provider URN, sibling co-placement and
-      educational continuity. Optional - a Placement may not (yet) have one.
+      The placement actually arranged for the child, including weekly cost,
+      location, provider URN, sibling co-placement and educational continuity. Optional - a Placement may not (yet) have one.
     slots:
       - placementType
       - placementStartDate
@@ -140,10 +139,7 @@ classes:
       - isEducationContinuous
       - siblingsPlacedTogether
       - totalWeeklyCost
-      - coreWeeklyCost
-      - additionalSupportWeeklyCost
-      - educationWeeklyCost
-      - otherWeeklyCost
+      - costIncludesAdditionalPackages
 
   QualityAssurance:
     class_uri: pl:QualityAssurance
@@ -465,43 +461,16 @@ slots:
     minimum_value: 100
     maximum_value: 100000
     description: Total weekly fee paid for the placement, excluding VAT. Expected to be between £100 and £100,000.
-  coreWeeklyCost:
-    slot_uri: pl:coreWeeklyCost
-    range: decimal
-    required: false
+  costIncludesAdditionalPackages:
+    slot_uri: pl:costIncludesAdditionalPackages
+    range: boolean
+    required: true
     multivalued: false
-    minimum_value: 0
     description: >-
-      Total weekly core cost: the basic price quoted by a provider to deliver the
-      service outlined in their Statement of Purpose, excluding child-specific
-      additional costs.
-  additionalSupportWeeklyCost:
-    slot_uri: pl:additionalSupportWeeklyCost
-    range: decimal
-    required: false
-    multivalued: false
-    minimum_value: 0
-    description: >-
-      Total weekly additional-support cost: costs incurred over and above the
-      core cost to meet the specific needs of the child.
-  educationWeeklyCost:
-    slot_uri: pl:educationWeeklyCost
-    range: decimal
-    required: false
-    multivalued: false
-    minimum_value: 0
-    description: >-
-      Total weekly education cost: recorded when the placement includes both care
-      and registered education provision.
-  otherWeeklyCost:
-    slot_uri: pl:otherWeeklyCost
-    range: decimal
-    required: false
-    multivalued: false
-    minimum_value: 0
-    description: >-
-      Any weekly placement costs that do not clearly fall within the core,
-      additional-support or education categories.
+      Indicates whether the total weekly cost includes charges for support or
+      services beyond the core placement fee, such as additional staffing (e.g.
+      2:1 or waking night cover), therapeutic or clinical input, education
+      provision, or other bespoke support agreed for the child.
 
   # --- QualityAssurance ---
   referralDate:

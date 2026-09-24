@@ -270,36 +270,19 @@ Records the risks the child is exposed to (six categories) and the risks the chi
 
 ### ActualPlacement
 
-The placement that was actually arranged. Optional - a `Placement` may not (yet) have an `ActualPlacement`. Captures the type of placement, provider, location, sibling co-placement, education continuity and weekly cost (with an optional breakdown into core / additional-support / education / other components).
+The placement that was actually arranged. Optional - a `Placement` may not (yet) have an `ActualPlacement`. Captures the type of placement, provider, location, sibling co-placement, education continuity and weekly cost.
 
 #### Properties
-
-<span id="actual-coreWeeklyCost">coreWeeklyCost</span>
-: What is the total weekly core cost of the placement?
-
-The basic price quoted by a provider to deliver the service outlined within their Statement of Purpose.
-
-This should not include any additional costs incurred to meet the specific needs of an individual child or young person. Optional. _Integer_.
-
-<span id="actual-additionalSupportWeeklyCost">additionalSupportWeeklyCost</span>
-: What is the total weekly additional support cost of the placement?
-
-Costs incurred over and above the core cost to meet the specific and potentially changing needs of a child or young person.
-
-These may include: Increased staff ratios (e.g. 1:1 or 2:1 support) during the day or overnight; Additional staffing such as sleep-in staff or waking night staff; Bed blocking arrangements; Transport provision beyond what is included in the core contract; Therapy commissioned specifically for a child, which is not part of the standard provision within the home; Tutoring outside a formal education placement, often temporary until a registered school placement is secured; Any other cost not routinely covered within the core placement cost that the local authority agrees to fund to meet the child’s needs. Optional. _Integer_.
-
-<span id="actual-educationWeeklyCost">educationWeeklyCost</span>
-: What is the total weekly education cost of the placement?
-
-This should be recorded when the placement includes both care and registered education provision. Optional. _Integer_.
-
-<span id="actual-otherWeeklyCost">otherWeeklyCost</span>
-: Any weekly placement costs that do not clearly fall within the core, additional-support or education categories. Optional. _Integer_.
 
 <span id="actual-totalWeeklyCost">totalWeeklyCost</span>
 : Total weekly cost (actual weekly fee paid)
 
 What is the total weekly fee associated with the placement? (excluding VAT). _Integer_.
+
+<span id="actual-costIncludesAdditionalPackages">costIncludesAdditionalPackages</span>
+: Does this placement cost include additional packages?
+
+Indicates whether the total weekly cost includes charges for support or services beyond the core placement fee, such as additional staffing (e.g. 2:1 or waking night cover), therapeutic or clinical input, education provision, or other bespoke support agreed for the child. _Boolean_.
 
 <span id="actual-placementLocation">placementLocation</span>
 : First 3-4 characters of the postcode for the actual placement location (e.g. `TA3`, `BS10`). Captured in addition to the provider URN to ensure location is recorded for non-registered placements. _String_.
@@ -335,11 +318,8 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
 {% highlight json %}
 {
   "@type": "ActualPlacement",
-  "coreWeeklyCost":              2500.00,
-  "additionalSupportWeeklyCost": 1500.00,
-  "educationWeeklyCost":            0.00,
-  "otherWeeklyCost":              500.00,
   "totalWeeklyCost":             4500.00,
+  "costIncludesAdditionalPackages": true,
   "placementLocation": "N18",
   "isLocationPreferred": true,
   "nonPreferredLocationReason": "Not applicable",
@@ -355,7 +335,7 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
 
 <div class="note">
   <h5 id="note-actual">Note - cost sense-check</h5>
-  <p>The SHACL shape flags <code>totalWeeklyCost</code> outside the £100 - £100,000 range as a Warning (not a hard violation), per the QA sheet's "&lt;£100 or &gt;£100,000 likely incorrect" sense-check. Each cost-breakdown component must be non-negative when supplied.</p>
+  <p>The SHACL shape flags <code>totalWeeklyCost</code> outside the £100 - £100,000 range as a Warning (not a hard violation), per the QA sheet's "&lt;£100 or &gt;£100,000 likely incorrect" sense-check.</p>
 </div>
 
 
