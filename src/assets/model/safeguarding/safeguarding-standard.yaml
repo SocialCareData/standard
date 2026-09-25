@@ -801,54 +801,94 @@ enums:
     title: Episode Code
     description: Codes to indicate the type of service episode.
     permissible_values:
-      early-help:
-        title: Early Help
+      assessment:
+        title: Assessment and Enquiry
+        description: Enquiry, discovery, assessment, evaluation, triage, or review.
+        meaning: epc:Assessment
+      "assessment.early-help":
+        title: Early Help Assessment
         description: Early Help Assessment / Intervention
         meaning: epc:EarlyHelp
-      ehcp:
-        title: EHCP
-        description: Education, Health, and Care plan
-        meaning: epc:Ehcp
-      family-court-order:
-        title: Family Court Order
-        description: Any order made by family court
-        meaning: epc:FamilyCourtOrder
-      cin-plan:
-        title: CIN Plan
-        description: Child in Need (CIN) Plan
-        meaning: epc:CinPlan
-      cp-plan:
-        title: CP Plan
-        description: Child Protection (CP) Plan
-        meaning: epc:CpPlan
-      CAMHS-plan:
-        title: CAMHS Plan
-        description: Children and Adolescent mental health services care plan
-        meaning: epc:CamhsPlan
-      section-47:
-        title: Section 47
+      "assessment.section-47":
+        title: Section 47 Enquiry
         description: Section 47 Enquiry
         meaning: epc:Section47
-      care-leaver:
-        title: Care Leaver
-        description: Care Leaver Support
-        meaning: epc:CareLeaver
-      child-looked-after:
-        title: Child Looked After
-        description: Child in LA care
-        meaning: epc:ChildLookedAfter
-      adult-safeguarding:
-        title: Adult Safeguarding
+      "assessment.adult-safeguarding":
+        title: Adult Safeguarding Enquiry
         description: Adult Safeguarding Enquiry (Section 42)
         meaning: epc:AdultSafeguarding
-      care-act-assessment:
+      "assessment.care-act-assessment":
         title: Care Act Assessment
         description: Care Act Assessment
         meaning: epc:CareActAssessment
-      care-plan:
+      "assessment.other-assessment":
+        title: Other Assessment
+        description: Any other enquiry, discovery, assessment, evaluation, triage, or review.
+        meaning: epc:OtherAssessment
+      plan:
+        title: Plan and Order
+        description: Creation of a plan, definition of statutory responsibilities (via a court order), or commission of services.
+        meaning: epc:Plan
+      "plan.ehcp":
+        title: EHCP
+        description: Education, Health, and Care plan
+        meaning: epc:Ehcp
+      "plan.family-court-order":
+        title: Family Court Order
+        description: An order made by family court (Care Order, Residence Order, or an interim Order).
+        meaning: epc:FamilyCourtOrder
+      "plan.cin-plan":
+        title: CIN Plan
+        description: Child in Need (CIN) Plan
+        meaning: epc:CinPlan
+      "plan.cp-plan":
+        title: CP Plan
+        description: Child Protection (CP) Plan
+        meaning: epc:CpPlan
+      "plan.CAMHS-plan":
+        title: CAMHS Plan
+        description: Children and Adolescent Mental Health Services (CAMHS) care plan
+        meaning: epc:CamhsPlan
+      "plan.child-looked-after":
+        title: Child Looked After
+        description: Child in LA care
+        meaning: epc:ChildLookedAfter
+      "plan.care-plan":
         title: Care Plan
         description: Care Plan
         meaning: epc:CarePlan
+      "plan.other-plan":
+        title: Other Plan
+        description: Any other plan, order, or commission
+        meaning: epc:OtherPlan
+      provision:
+        title: Provision and Contact
+        description: Operation and delivery of services.
+        meaning: epc:Provision
+      "provision.face-to-face-contact":
+        title: Face-to-Face Contact
+        description: Meetings, home visits, or one-to-one professional sessions with the subject.
+        meaning: epc:FaceToFaceContact
+      "provision.remote-contact":
+        title: Remote Contact
+        description: Virtual or telephone-based contact with the subject.
+        meaning: epc:RemoteContact
+      "provision.direct-provision":
+        title: Direct Provision of Care
+        description: Hands-on care activities with the subject in the room.
+        meaning: epc:DirectProvision
+      "provision.indirect-provision":
+        title: Indirect Provision of Care
+        description: Hands-off care support without face-to-face contact.
+        meaning: epc:IndirectProvision
+      "provision.admin":
+        title: Admin
+        description: Case management, paperwork, coordination, and other administrative support.
+        meaning: epc:Admin
+      "provision.miscellaneous":
+        title: Miscellaneous
+        description: Other care provision activities not covered elsewhere.
+        meaning: epc:Miscellaneous
 
   EpisodeOutcome:
     enum_uri: sg:episode-outcome
