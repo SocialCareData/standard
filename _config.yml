@@ -33,8 +33,7 @@ nav:
         url: /learn_about_the_standards
         description: What the standards are and why they matter.
       - title: Pilots
-        url: /
-        # url: /placements_impact_story
+        url: /placements_impact_story
         description: Pilot projects testing the standards in real-world settings.
       - title: Governance
         url: /governance
