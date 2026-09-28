@@ -30,6 +30,9 @@
 #         collapsible <details>/<summary> wrapper (default is collapsible).
 #       - "no-label" / "no-labels": render a vocabulary table without the Label
 #         column, leaving Code / Definition (default includes Label).
+#       - "explain-boolean" / "yes-no": list "Yes, No" in a class table's
+#         Options column for boolean properties, for non-technical readers
+#         (default off).
 
 require "open3"
 require "shellwords"
@@ -64,6 +67,8 @@ module Jekyll
     NO_LABEL_TOKENS = %w[no-label no-labels nolabel hide-label hide-labels].freeze
     # ...and ones that explicitly keep it (the default).
     LABEL_TOKENS = %w[label labels].freeze
+    # Tokens that list "Yes, No" in the Options column of boolean properties.
+    EXPLAIN_BOOLEAN_TOKENS = %w[explain-boolean yes-no].freeze
 
     def render(context)
       schema_file, entity, *modifiers = parse_args(@markup)
@@ -77,10 +82,12 @@ module Jekyll
       # Trailing modifiers are order-independent and self-describing: an integer
       # or "all" sets the Options-column preview count; "expanded"/"no-collapse"
       # renders a vocabulary table without the collapsible wrapper; "no-label"
-      # renders one without the Label column.
-      options_limit = nil
-      collapsible   = true
-      show_label    = true
+      # renders one without the Label column; "explain-boolean" lists "Yes, No"
+      # as the options of a boolean property.
+      options_limit   = nil
+      collapsible     = true
+      show_label      = true
+      explain_boolean = false
       modifiers.each do |raw|
         m = resolve_value(raw, context).to_s.strip
         next if m.empty?
@@ -95,6 +102,8 @@ module Jekyll
           show_label = false
         elsif LABEL_TOKENS.include?(d)
           show_label = true
+        elsif EXPLAIN_BOOLEAN_TOKENS.include?(d)
+          explain_boolean = true
         end
       end
 
@@ -113,8 +122,8 @@ module Jekyll
       # across rebuilds) regenerates the table when the model changes rather
       # than serving a stale cached copy.
       page_id = (context.registers[:page] && context.registers[:page]["path"]).to_s
-      key = "#{page_id}\t#{schema_file}\t#{entity}\t#{options_limit}\t#{collapsible}\t#{show_label}\t#{model_mtime(schema_file)}"
-      self.class.cache[key] ||= generate(schema_file, entity, headings, options_limit, collapsible, show_label)
+      key = "#{page_id}\t#{schema_file}\t#{entity}\t#{options_limit}\t#{collapsible}\t#{show_label}\t#{explain_boolean}\t#{model_mtime(schema_file)}"
+      self.class.cache[key] ||= generate(schema_file, entity, headings, options_limit, collapsible, show_label, explain_boolean)
     end
 
     private
@@ -235,11 +244,12 @@ module Jekyll
       parts.join("\n")
     end
 
-    def generate(schema_file, entity, headings, options_limit = nil, collapsible = true, show_label = true)
+    def generate(schema_file, entity, headings, options_limit = nil, collapsible = true, show_label = true, explain_boolean = false)
       cmd = ["node", CLI, schema_file, entity, "--page-headings", headings.join("\n")]
       cmd += ["--options-limit", options_limit.to_s] if options_limit && !options_limit.to_s.strip.empty?
       cmd << "--no-collapse" unless collapsible
       cmd << "--no-label" unless show_label
+      cmd << "--explain-boolean" if explain_boolean
       stdout, stderr, status = Open3.capture3(*cmd)
 
       unless status.success?
