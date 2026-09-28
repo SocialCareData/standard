@@ -35,7 +35,7 @@ The Placements Data Standard will standardise some of the data collected about c
 
 We made several assumptions in the design of the proposed data standard:
 
-- Placement teams rather than social workers or finance teams will either directly enter or ‘own’ the data being proposed in the standard. In cases where they are not directly entering the data (e.g. because they are taking it from a referral form), the placement teams would be responsible for the data’s fidelity to the standard.
+- Placement teams rather than family first practitioners or finance teams will either directly enter or ‘own’ the data being proposed in the standard. In cases where they are not directly entering the data (e.g. because they are taking it from a referral form), the placement teams would be responsible for the data’s fidelity to the standard.
 - The additional work for a placement worker of entering this data is approximately 90 seconds (based on initial pilots of this data model).
 - While total cost agreed at IPA may sometimes be an inaccurate representation of true cost, it is ‘accurate enough’ to enable useful life-for-like cost comparisons and regional cost analysis.
 
@@ -100,7 +100,7 @@ Further, some regions are developing their own standardised placement cost data 
 
 *\* Determinants of placement availability refers to factors that are likely to dictate whether a foster carer or provider are able to accept a referral and at what price. This includes things like home adaptations required, additional support requirements, risks etc.*
 
-Although, as the table above shows, there are many models already gathering placement cost data, and some gathering other types of data necessary to meaningful regional sufficiency analysis, we are aware of none that gather all this data in a way that readily enables quantitative insight into where key sufficiency gaps are. The data models we are aware of (above) that capture rich insight on determinants of placement availability, preferred placement and child outcomes (BERRI, CANS and IMPOWER) are models designed to be used by social workers, rather than placement teams. While data of this sort gathered by social workers is invaluable for individual care planning, it is not designed primarily to support aggregate analysis or enable meaningful ‘apples for apples’ comparison with neighbours. This is because the data is largely qualitative and many key fields such as needs and risks are largely uncategorised.
+Although, as the table above shows, there are many models already gathering placement cost data, and some gathering other types of data necessary to meaningful regional sufficiency analysis, we are aware of none that gather all this data in a way that readily enables quantitative insight into where key sufficiency gaps are. The data models we are aware of (above) that capture rich insight on determinants of placement availability, preferred placement and child outcomes (BERRI, CANS and IMPOWER) are models designed to be used by family first practitioners, rather than placement teams. While data of this sort gathered by family first practitioners is invaluable for individual care planning, it is not designed primarily to support aggregate analysis or enable meaningful ‘apples for apples’ comparison with neighbours. This is because the data is largely qualitative and many key fields such as needs and risks are largely uncategorised.
 
 
 ## Out of Scope
