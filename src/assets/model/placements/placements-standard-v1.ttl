@@ -30,28 +30,28 @@ pl:Placement a owl:Class ;
     rdfs:label "Placement" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pl:placementId ],
+            owl:onProperty pl:actualPlacement ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty pl:qualityAssurance ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty pl:placementRecommendation ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty pl:childId ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pl:actualPlacement ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty pl:placementRequirements ],
+            owl:onProperty pl:riskAssessment ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty pl:placementAvailability ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty pl:riskAssessment ] ;
+            owl:onProperty pl:placementRecommendation ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty pl:placementRequirements ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pl:placementId ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty pl:childId ] ;
     skos:definition "The top-level placement record for a looked-after child, linking together the referral availability, the child's requirements, the social-worker recommendation, the risk assessment, the quality-assurance metadata and (optionally) the placement actually arranged." ;
     skos:exactMatch pl:Placement ;
     skos:inScheme pl:schema .
@@ -266,6 +266,12 @@ pl:riskMissing a owl:ObjectProperty ;
     skos:definition "Whether the child is known to be at risk of going missing." ;
     skos:inScheme pl:schema .
 
+pl:riskOther a owl:ObjectProperty ;
+    rdfs:label "riskOther" ;
+    rdfs:range pl:risk-level ;
+    skos:definition "Whether there is a known risk of other types of harm to the child not captured by the standard risk categories." ;
+    skos:inScheme pl:schema .
+
 pl:riskSelfHarm a owl:ObjectProperty ;
     rdfs:label "riskSelfHarm" ;
     rdfs:range pl:risk-level ;
@@ -294,6 +300,12 @@ pl:riskToOthersFire a owl:ObjectProperty ;
     rdfs:label "riskToOthersFire" ;
     rdfs:range pl:risk-level ;
     skos:definition "Whether there is a known risk of fire-setting." ;
+    skos:inScheme pl:schema .
+
+pl:riskToOthersOther a owl:ObjectProperty ;
+    rdfs:label "riskToOthersOther" ;
+    rdfs:range pl:risk-level ;
+    skos:definition "Whether there is a known risk of other types of harm to others not captured by the standard risk categories." ;
     skos:inScheme pl:schema .
 
 pl:riskToOthersPhysical a owl:ObjectProperty ;
@@ -347,46 +359,52 @@ pl:ActualPlacement a owl:Class ;
     rdfs:label "ActualPlacement" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty pl:isLocationPreferred ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pl:otherWeeklyCost ],
+            owl:onProperty pl:placementLocation ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:intersectionOf ( xsd:decimal [ a rdfs:Datatype ;
                                 owl:onDatatype xsd:integer ;
                                 owl:withRestrictions ( [ xsd:minInclusive 0 ] ) ] ) ] ;
             owl:onProperty pl:coreWeeklyCost ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty pl:placementType ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:decimal [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:integer ;
+                                owl:withRestrictions ( [ xsd:minInclusive 0 ] ) ] ) ] ;
+            owl:onProperty pl:additionalSupportWeeklyCost ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pl:otherWeeklyCost ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty pl:additionalSupportWeeklyCost ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:decimal [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:integer ;
+                                owl:withRestrictions ( [ xsd:minInclusive 0 ] ) ] ) ] ;
+            owl:onProperty pl:otherWeeklyCost ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pl:educationWeeklyCost ],
         [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:intersectionOf ( xsd:decimal [ a rdfs:Datatype ;
-                                owl:onDatatype xsd:integer ;
-                                owl:withRestrictions ( [ xsd:minInclusive 0 ] ) ] ) ] ;
-            owl:onProperty pl:otherWeeklyCost ],
+            owl:cardinality 1 ;
+            owl:onProperty pl:isLocationPreferred ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty pl:isEducationContinuous ],
         [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:intersectionOf ( xsd:decimal [ a rdfs:Datatype ;
-                                owl:onDatatype xsd:integer ;
-                                owl:withRestrictions ( [ xsd:minInclusive 0 ] ) ] ) ] ;
-            owl:onProperty pl:additionalSupportWeeklyCost ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty pl:coreWeeklyCost ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty pl:placementLocation ],
-        [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty pl:totalWeeklyCost ],
         [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty pl:providerURN ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pl:additionalSupportWeeklyCost ],
+            owl:onProperty pl:coreWeeklyCost ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty pl:siblingsPlacedTogether ],
@@ -397,17 +415,11 @@ pl:ActualPlacement a owl:Class ;
                                 owl:withRestrictions ( [ xsd:pattern "^[A-Z]{1,2}[0-9][0-9A-Z]?$" ] ) ] ) ] ;
             owl:onProperty pl:placementLocation ],
         [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty pl:placementType ],
-        [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:intersectionOf ( xsd:decimal [ a rdfs:Datatype ;
                                 owl:onDatatype xsd:integer ;
                                 owl:withRestrictions ( [ xsd:minInclusive 0 ] ) ] ) ] ;
-            owl:onProperty pl:educationWeeklyCost ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty pl:providerURN ] ;
+            owl:onProperty pl:educationWeeklyCost ] ;
     skos:definition "The placement actually arranged for the child, including weekly cost (with optional breakdown), location, provider URN, sibling co-placement and educational continuity. Optional - a Placement may not (yet) have one." ;
     skos:exactMatch pl:ActualPlacement ;
     skos:inScheme pl:schema .
@@ -416,13 +428,13 @@ pl:PlacementRecommendation a owl:Class ;
     rdfs:label "PlacementRecommendation" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
+            owl:onProperty pl:fosterCareSuitability ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
             owl:onProperty pl:supportedAccommodationSuitability ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty pl:residentialCareSuitability ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty pl:fosterCareSuitability ] ;
+            owl:onProperty pl:residentialCareSuitability ] ;
     skos:definition "The social worker's recommendation of which categories of placement (foster, residential, supported accommodation) are preferred, suitable but not preferred, unsuitable, or unspecified." ;
     skos:exactMatch pl:PlacementRecommendation ;
     skos:inScheme pl:schema .
@@ -434,7 +446,10 @@ pl:QualityAssurance a owl:Class ;
             owl:onProperty pl:referralOfficerName ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty pl:placementOfficerName ],
+            owl:onProperty pl:placementDate ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty pl:referralDate ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty pl:costOfficerName ],
@@ -443,10 +458,7 @@ pl:QualityAssurance a owl:Class ;
             owl:onProperty pl:costDate ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty pl:referralDate ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty pl:placementDate ] ;
+            owl:onProperty pl:placementOfficerName ] ;
     skos:definition "Metadata about who recorded each part of the placement record (referral, placement, cost) and when. Supports LA-internal review of data-entry practices; not intended to be shared beyond the recording LA." ;
     skos:exactMatch pl:QualityAssurance ;
     skos:inScheme pl:schema .
@@ -455,37 +467,43 @@ pl:RiskAssessment a owl:Class ;
     rdfs:label "RiskAssessment" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty pl:riskCriminalExploitation ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty pl:riskToOthersSexual ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty pl:riskEatingDisorder ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty pl:riskDrugAlcohol ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
             owl:onProperty pl:riskToOthersCriminal ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty pl:riskToOthersFire ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty pl:riskSelfHarm ],
+            owl:onProperty pl:riskDrugAlcohol ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty pl:riskCriminalExploitation ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty pl:riskOther ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty pl:riskToOthersPhysical ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
+            owl:onProperty pl:riskToOthersOther ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
             owl:onProperty pl:riskToOthersAnimals ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty pl:riskEatingDisorder ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty pl:riskSexualExploitation ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty pl:riskToOthersSexual ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty pl:riskMissing ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty pl:riskSexualExploitation ] ;
+            owl:onProperty pl:riskSelfHarm ] ;
     skos:definition "Assessment of risks the child is exposed to and risks the child poses to others or property. Each risk is recorded as 'no known risk' or 'risk present'." ;
     skos:exactMatch pl:RiskAssessment ;
     skos:inScheme pl:schema .
@@ -815,16 +833,16 @@ pl:PlacementAvailability a owl:Class ;
     rdfs:label "PlacementAvailability" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pl:siblingCount ],
+            owl:onProperty pl:outOfLAReason ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty pl:neededBy ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
             owl:onProperty pl:isPreferredLocationLocal ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pl:outOfLAReason ],
-        [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty pl:neededBy ] ;
+            owl:onProperty pl:siblingCount ] ;
     skos:definition "The referral request details: how urgently the child needs to be placed, how many siblings should be placed together, whether the preferred location is local, and (if out of area) why." ;
     skos:exactMatch pl:PlacementAvailability ;
     skos:inScheme pl:schema .
@@ -872,16 +890,16 @@ pl:PlacementRequirements a owl:Class ;
             owl:onProperty pl:pets ],
         [ a owl:Restriction ;
             owl:cardinality 1 ;
-            owl:onProperty pl:culturalNeeds ],
+            owl:onProperty pl:communicationNeeds ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty pl:specificCommunicationRequirement ],
         [ a owl:Restriction ;
-            owl:cardinality 1 ;
-            owl:onProperty pl:communicationNeeds ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty pl:deprivationOfLiberty ] ;
+            owl:onProperty pl:deprivationOfLiberty ],
+        [ a owl:Restriction ;
+            owl:cardinality 1 ;
+            owl:onProperty pl:culturalNeeds ] ;
     skos:definition "The child's needs that the placement must accommodate: communication, cultural, living companions, pets, additional support, deprivation of liberty and home adaptation." ;
     skos:exactMatch pl:PlacementRequirements ;
     skos:inScheme pl:schema .
@@ -977,13 +995,6 @@ pl:risk-level a owl:Class ;
         rl:RiskPresent .
 
 [] rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty pl:culturalNeedsOther ;
-            owl:someValuesFrom xsd:string ] ;
-    owl:intersectionOf ( [ a owl:Restriction ;
-                owl:onProperty pl:culturalNeeds ;
-                owl:someValuesFrom xsd:string ] pl:PlacementRequirements ) .
-
-[] rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty pl:additionalSupportOther ;
             owl:someValuesFrom xsd:string ] ;
     owl:intersectionOf ( [ a owl:Restriction ;
@@ -1002,6 +1013,13 @@ pl:risk-level a owl:Class ;
             owl:someValuesFrom xsd:string ] ;
     owl:intersectionOf ( [ a owl:Restriction ;
                 owl:onProperty pl:specificCommunicationRequirement ;
+                owl:someValuesFrom xsd:string ] pl:PlacementRequirements ) .
+
+[] rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty pl:culturalNeedsOther ;
+            owl:someValuesFrom xsd:string ] ;
+    owl:intersectionOf ( [ a owl:Restriction ;
+                owl:onProperty pl:culturalNeeds ;
                 owl:someValuesFrom xsd:string ] pl:PlacementRequirements ) .
 
 

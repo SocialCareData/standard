@@ -9,9 +9,7 @@
     "@id": "ex:INVALID-001/availability",
     "@type": "PlacementAvailability",
     "placementId": "PLC-INVALID-001",
-    "neededBy": "Today",
-    "isPreferredLocationLocal": false,
-    "outOfLAReason": "CourtOrder"
+    "neededBy": "Today"
   },
 
   "placementRequirements": {
@@ -38,7 +36,7 @@
     "@type": "QualityAssurance",
     "referralDate":  "2024-02-12",
     "placementOfficerName": "Beth Green",
-    "placementDate": "2024-03-21",
+    "placementDateAdmin": "2024-03-21",
     "costDate":      "2024-03-25"
   }
 }
