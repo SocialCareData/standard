@@ -10,8 +10,7 @@ description: >-
 
   Each module is authored and versioned on its own cadence; a MAIS release pins a
   compatible set of module versions (see manifest.yml) and is generated from this
-  file. Generate the merged ontology with `gen-owl --mergeimports mais.yaml`
-  resolved through the top-level imports.json.
+  file.
 license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 version: 2026.1.0
 
@@ -23,12 +22,6 @@ default_range: string
 imports:
   - linkml:types
   - https://ontology.socialcaredata.io/common
-  # The subject-of-care PROFILE, not the person core. The core's Person is
-  # deliberately permissive (every demographic optional), so merging it would
-  # make mais-shape.ttl accept a Person with no identifier, date of birth,
-  # address, gender or ethnicity. The profile pulls the core in transitively,
-  # so no terms are lost. person-connected is not imported: it redefines the
-  # same class and would collide on the single sc:PersonShape IRI.
   - https://ontology.socialcaredata.io/person-subject-of-care
   - https://ontology.socialcaredata.io/placements
   - https://ontology.socialcaredata.io/safeguarding

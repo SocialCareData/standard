@@ -39,9 +39,9 @@ data_model: src/_data/model/safeguarding/safeguarding-standard.yaml
 
 {% schema_table page.data_model RelatedProfessional %}
 
-### TimeInformation
+### Timing
 
-{% schema_table page.data_model TimeInformation %}
+{% schema_table page.data_model Timing %}
 
 ### Finding
 

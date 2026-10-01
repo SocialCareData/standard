@@ -6,14 +6,6 @@ description: >-
   recording the services, professionals, organisations, service episodes and
   life events involved in safeguarding and promoting the wellbeing of a person,
   to support multi-agency information sharing (MAIS).
-
-  The model is organised around five top-level entities - Organisation, Service,
-  Professional, ServiceEpisode and LifeEvent - and the shared objects that link
-  them together (Identifier, Name, Address, Contact). The shared objects are
-  defined once by the common module and imported from common.yaml, so this
-  schema reuses their ontology IRIs (Identifier, Name, Address, Contact) rather
-  than redefining them. Coded fields draw their values from the controlled
-  vocabularies (enums) declared below.
 license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 version: 1.0.0
 
@@ -181,22 +173,6 @@ classes:
     slots:
       - professional
       - involvement
-
-  TimeInformation:
-    class_uri: sg:TimeInformation
-    description: >-
-      Details about the timing of a service episode or life event, including
-      when it started and ended and how frequently it recurs.
-    slots:
-      - startDateTime
-      - endDateTime
-      - serviceFrequency
-
-  Any:
-    class_uri: linkml:Any
-    description: >-
-      An open value whose structure is defined and validated elsewhere, not by
-      this standard. Serialised as an arbitrary JSON object.
 
   Finding:
     class_uri: sg:Finding
@@ -389,7 +365,7 @@ slots:
     description: References to the Professional(s) involved, qualified by involvement.
   timeInformation:
     slot_uri: sg:timeInformation
-    range: TimeInformation
+    range: Timing
     required: false
     multivalued: true
     description: Details about the timing of the episode or life event.
@@ -434,32 +410,6 @@ slots:
       Code for the nature of the involvement. Uses an [HL7 v3 ParticipationType
       code](https://terminology.hl7.org/5.2.0/CodeSystem-v3-ParticipationType.html) directly (e.g. SBJ, PPRF); not defined by this standard, so modelled
       as an open string.
-
-  # --- TimeInformation ---
-  startDateTime:
-    slot_uri: sg:startDateTime
-    range: datetime
-    required: true
-    multivalued: false
-    description: The start of the episode or life event, as an ISO 8601 date-time.
-  endDateTime:
-    slot_uri: sg:endDateTime
-    range: datetime
-    required: false
-    multivalued: false
-    description: The end of the episode or life event, as an ISO 8601 date-time.
-  serviceFrequency:
-    slot_uri: sg:serviceFrequency
-    title: frequency
-    range: Any
-    required: false
-    multivalued: false
-    inlined: true
-    description: >-
-      The frequency of the episode or life event, expressed as a
-      [FHIR Timing](https://build.fhir.org/datatypes.html#Timing) datatype. This
-      standard does not define or validate its structure; the value is an
-      arbitrary JSON object conforming to FHIR Timing.
 
   # --- Finding / Observation / Measurement ---
   observation:

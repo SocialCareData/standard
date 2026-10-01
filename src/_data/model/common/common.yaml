@@ -3,15 +3,7 @@ name: common
 title: Social Care MAIS - Common Objects
 description: >-
   The shared, cross-cutting objects of the Social Care MAIS ontology: the
-  building blocks reused by every domain module. It defines the Identifier,
-  Name, Address and Contact structures and their controlled vocabularies
-  (NameUseCode, AddressUseCode) once, so that Person, Placements, Safeguarding
-  and Assessments-and-Plans all reference the same classes and IRIs rather than
-  redefining them.
-
-  This module has no dependency on any domain standard; the domain standards
-  depend on it. It is versioned on its own cadence and composed into the single
-  Social Care MAIS ontology alongside the domain modules.
+  building blocks reused by every domain module.
 license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 version: 1.0.0
 
@@ -20,6 +12,7 @@ prefixes:
   sc: https://ontology.socialcaredata.io/
   nuc: https://ontology.socialcaredata.io/name-use-code#
   auc: https://ontology.socialcaredata.io/address-use-code#
+  at: https://ontology.socialcaredata.io/answer-type#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -76,6 +69,35 @@ classes:
       - contactName
       - email
       - telephone
+
+  AssessmentQuestion:
+    class_uri: sc:AssessmentQuestion
+    description: >-
+      A generic Question-and-Answer model used to represent both statutory and
+      local, personalised questions.
+    slots:
+      - questionId
+      - category
+      - questionText
+      - answer
+      - answerType
+      - required
+
+  Timing:
+    class_uri: sc:Timing
+    description: >-
+      The schedule and timing information of an activity, episode or event:
+      when it started and ended and how frequently it recurs.
+    slots:
+      - frequency
+      - startDateTime
+      - endDateTime
+
+  Any:
+    class_uri: linkml:Any
+    description: >-
+      An open value whose structure is defined and validated elsewhere, not by
+      this model. Serialised as an arbitrary JSON object.
 
 # ---------------------------------------------------------------------------
 # Slots
@@ -196,6 +218,69 @@ slots:
     multivalued: true
     description: One or more telephone numbers.
 
+  # --- AssessmentQuestion ---
+  questionId:
+    slot_uri: sc:questionId
+    range: string
+    required: false
+    multivalued: false
+    description: An ID for the question. Standards may define a dictionary of IDs for statutory or well-known questions; for personalised, local questions, this can be anything or left blank.
+  category:
+    slot_uri: sc:category
+    range: string
+    required: true
+    multivalued: false
+    description: The domain/category of the question.
+  questionText:
+    slot_uri: sc:questionText
+    range: string
+    required: true
+    multivalued: false
+    description: The exact wording of the question as it appears on the form.
+  answer:
+    slot_uri: sc:answer
+    range: string
+    required: true
+    multivalued: true
+    description: The answer to the question.
+  answerType:
+    slot_uri: sc:answerType
+    range: AnswerType
+    required: true
+    multivalued: false
+    description: Indicates how the answer should be parsed (e.g., String, Boolean, Date, Number, Enum). Ensures data like dates or booleans aren't trapped as unparsable text.
+  required:
+    slot_uri: sc:required
+    range: boolean
+    required: true
+    multivalued: false
+    description: Whether this question was mandatory on the form.
+
+  # --- Timing ---
+  frequency:
+    slot_uri: sc:frequency
+    range: Any
+    required: false
+    multivalued: false
+    inlined: true
+    description: >-
+      How frequently the activity, episode or event recurs, expressed as a
+      [FHIR Timing](https://build.fhir.org/datatypes.html#Timing) datatype. This
+      model does not define or validate its structure; the value is an
+      arbitrary JSON object conforming to FHIR Timing.
+  startDateTime:
+    slot_uri: sc:startDateTime
+    range: datetime
+    required: true
+    multivalued: false
+    description: The start of the activity, episode or event (or the first date it was scheduled to be performed), as an ISO 8601 date-time.
+  endDateTime:
+    slot_uri: sc:endDateTime
+    range: datetime
+    required: false
+    multivalued: false
+    description: The end of the activity, episode or event (or the last date it was performed), as an ISO 8601 date-time.
+
 # ---------------------------------------------------------------------------
 # Enums (controlled vocabularies / SKOS concept schemes)
 # ---------------------------------------------------------------------------
@@ -263,3 +348,29 @@ enums:
         title: Billing
         meaning: auc:Billing
         description: An address to be used to send bills, invoices, receipts etc.
+
+  AnswerType:
+    enum_uri: sc:answer-type
+    title: Answer Type
+    description: Indicates how the answer to a question should be parsed and represented.
+    permissible_values:
+      String:
+        title: String
+        meaning: at:String
+        description: Free-form text value.
+      Boolean:
+        title: Boolean
+        meaning: at:Boolean
+        description: True/False value.
+      Date:
+        title: Date
+        meaning: at:Date
+        description: ISO date-time or date value.
+      Number:
+        title: Number
+        meaning: at:Number
+        description: Numeric value.
+      Enum:
+        title: Enum
+        meaning: at:Enum
+        description: Value from a controlled vocabulary.

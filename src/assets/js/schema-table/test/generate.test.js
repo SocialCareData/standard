@@ -129,3 +129,17 @@ test('integration: a slot ranged on an imported class links it instead of render
   assert.match(md, /\| `identifier` \| 1\.\.\* \| \[Identifier\]\(#identifier\) \|/)
   assert.match(md, /\| `address` \| 0\.\.\* \| \[Address\]\(#address\) \|/)
 })
+
+test('integration: an is_a subclass inherits the imported parent\'s slots and narrows them', () => {
+  // CareAssessmentQuestion is_a the common AssessmentQuestion and restricts its
+  // open-string category to the assessments-and-plans QuestionCategory enum.
+  const md = generateTable({
+    modelPath: 'src/_data/model/assessments-and-plans/assessments-and-plans-standard.yaml',
+    entity: 'CareAssessmentQuestion',
+    rootDir: REPO_ROOT
+  })
+  for (const slot of ['questionId', 'category', 'questionText', 'answer', 'answerType', 'required']) {
+    assert.match(md, new RegExp('\\| `' + slot + '` \\|'))
+  }
+  assert.match(md, /\| `category` \| 1\.\.1 \| Categorical \| .*\[Question Category Taxonomy\]/)
+})

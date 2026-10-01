@@ -12,14 +12,7 @@ Run it with::
 which produces a tree mirroring ``src/_data/model`` but carrying ``.ttl``
 ontologies and ``-shape.ttl`` SHACL shapes in place of the YAML.
 
-Three things here are load-bearing and easy to break:
-
-* **The generators are driven through their CLIs, not their Python APIs.** The
-  ``OwlSchemaGenerator`` dataclass defaults differ from the ``gen-owl`` defaults
-  (``metaclasses`` and ``type_objects`` are ``True`` in the class and ``False``
-  on the command line), so calling the API would silently produce different
-  artifacts from the commands in ``model-management.md`` that the modelling team
-  runs by hand. Paying ~20s of process spawning keeps the two identical.
+Here are things to keep in mind:
 
 * **LinkML output is not byte-reproducible.** Two identical invocations emit
   isomorphic but differently-ordered Turtle, because rdflib's blank-node
@@ -52,7 +45,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 MODEL_ROOT = REPO_ROOT / "src" / "_data" / "model"
 ASSETS_MODEL_ROOT = REPO_ROOT / "src" / "assets" / "model"
 IMPORTS_JSON = MODEL_ROOT / "imports.json"
-MANIFEST = MODEL_ROOT / "mais" / "manifest.yml"
+MANIFEST = MODEL_ROOT / "social-care" / "manifest.yml"
 
 # Flags copied verbatim from src/_data/model/model-management.md, plus
 # --ontology-uri-suffix. Without that flag LinkML appends its default
@@ -74,11 +67,11 @@ SHACL_FLAGS = ["--non-closed", "--suffix", "Shape"]
 # is still generated - it is the vocabulary the profiles build on.
 SHACL_SKIP = {"person/person-standard.yaml"}
 
-# mais.yaml is built separately: merged (--mergeimports) and against the
+# social-care.yaml is built separately: merged (--mergeimports) and against the
 # manifest-resolved import map. Generating it in the per-module loop as well
 # would write the same path twice, the second time with a stub containing
 # nothing but owl:imports.
-UMBRELLA = "mais/mais.yaml"
+UMBRELLA = "social-care/social-care.yaml"
 
 
 class BuildError(RuntimeError):
@@ -186,7 +179,7 @@ def load_schemas() -> list[Schema]:
 def resolve_pins(schemas: list[Schema], manifest: dict) -> dict[str, Schema]:
     """Resolve each manifest version pin to exactly one schema file.
 
-    A MAIS release is defined by the module versions recorded in manifest.yml,
+    A social-care MAIS release is defined by the module versions recorded in manifest.yml,
     so a pin that cannot be resolved to precisely one file means the release
     does not describe a buildable ontology. That is always fatal - falling back
     to "whatever imports.json points at" would publish a release whose contents
@@ -224,7 +217,7 @@ def resolve_pins(schemas: list[Schema], manifest: dict) -> dict[str, Schema]:
         raise BuildError(f"{UMBRELLA} not found")
     if umbrella.version != str(manifest["mais_version"]):
         raise BuildError(
-            f"mais.yaml declares version {umbrella.version} but manifest.yml "
+            f"social-care.yaml declares version {umbrella.version} but manifest.yml "
             f"pins mais_version {manifest['mais_version']}"
         )
     return resolved
@@ -310,7 +303,7 @@ def copy_aux(schemas: list[Schema], out_dir: Path) -> None:
     for module in modules:
         for name in ("context.jsonld", "README.md"):
             src = MODEL_ROOT / module / name
-            if src.exists():  # common/ and mais/ have no README
+            if src.exists():  # common/ and social-care/ have no README
                 shutil.copy2(src, out_dir / module / name)
         # The hand-maintained *-rules-shape.ttl files carry the conditional
         # constraints gen-shacl cannot produce, because it ignores LinkML
@@ -323,7 +316,7 @@ def copy_aux(schemas: list[Schema], out_dir: Path) -> None:
         for rules in sorted((ASSETS_MODEL_ROOT / module).glob("*-rules-shape.ttl")):
             target.mkdir(parents=True, exist_ok=True)
             shutil.copy2(rules, target / rules.name)
-    shutil.copy2(MANIFEST, out_dir / "mais" / "manifest.yml")
+    shutil.copy2(MANIFEST, out_dir / "social-care" / "manifest.yml")
     # The per-module READMEs link to ../model-management.md, so it has to come
     # along or every one of those links 404s in the published repo. Being
     # overwritten on each run, this copy cannot drift from the original.
@@ -385,9 +378,9 @@ def build(out_dir: Path) -> list[Schema]:
     with tempfile.TemporaryDirectory() as tmp:
         importmap_path = Path(tmp) / "resolved-imports.json"
         importmap_path.write_text(json.dumps(resolved_importmap(resolved), indent=2))
-        mais_dir = MODEL_ROOT / "mais"
+        social_care_dir = MODEL_ROOT / "social-care"
 
-        mais_ttl = out_dir / "mais" / "mais.ttl"
+        social_care_ttl = out_dir / "social-care" / "social-care.ttl"
         run(
             [
                 "gen-owl",
@@ -397,19 +390,19 @@ def build(out_dir: Path) -> list[Schema]:
                 *OWL_FLAGS,
                 "-im",
                 str(importmap_path),
-                "mais.yaml",
+                "social-care.yaml",
             ],
-            cwd=mais_dir,
-            dest=mais_ttl,
+            cwd=social_care_dir,
+            dest=social_care_ttl,
         )
-        mais_shape = out_dir / "mais" / "mais-shape.ttl"
+        social_care_shape = out_dir / "social-care" / "social-care-shape.ttl"
         run(
-            ["gen-shacl", *SHACL_FLAGS, "-im", str(importmap_path), "mais.yaml"],
-            cwd=mais_dir,
-            dest=mais_shape,
+            ["gen-shacl", *SHACL_FLAGS, "-im", str(importmap_path), "social-care.yaml"],
+            cwd=social_care_dir,
+            dest=social_care_shape,
         )
-        generated.extend([mais_ttl, mais_shape])
-        print("  mais/mais.yaml: merged OWL + SHACL")
+        generated.extend([social_care_ttl, social_care_shape])
+        print("  social-care/social-care.yaml: merged OWL + SHACL")
 
     print(f"canonicalising {len(generated)} files")
     for path in generated:

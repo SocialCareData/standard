@@ -22,15 +22,17 @@ under `src/_data/model/` — that compose into one **Social Care MAIS** ontology
   and their vocabularies), depended on by the domain modules.
 - `person/`, `placements/`, `safeguarding/`, `assessments-and-plans/` — the
   domain standards; each imports `common` for the shared objects.
-- `mais/mais.yaml` — the **umbrella** schema. It has no terms of its own; it
+- `social-care/social-care.yaml` — the **umbrella** schema. It has no terms of its own; it
   `imports` every module so the merged ontology can be generated from one file.
-  `mais/manifest.yml` pins the module versions that make up a release.
+  `social-care/manifest.yml` pins the module versions that make up a release.
 
 Everything lives under a **single flat namespace**,
 `https://ontology.socialcaredata.io/`, so a term keeps the same IRI whether used
 in a module or in the merged ontology. Same-named slots across modules therefore
 share one IRI — keep genuinely different fields distinctly named (e.g.
-`specialCommunicationNeeds`, `serviceFrequency`, `measurementValue`).
+`specialCommunicationNeeds`, `measurementValue`). A field that really is the
+same in several modules (e.g. `Timing`'s `startDateTime`) belongs in the common
+module rather than being defined in each.
 
 Cross-module imports use each module's ontology id (e.g.
 `https://ontology.socialcaredata.io/common`) and are resolved to local files by

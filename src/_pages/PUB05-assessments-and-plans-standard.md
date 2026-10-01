@@ -54,7 +54,7 @@ This metadata-driven approach uses `questionId`, which corresponds to a [diction
 *   **For Statutory fields:** The assessment must include specific questions mandated by the Care Act. For these, the local authority uses their preferred local `questionText`, but they **must** attach the corresponding national `questionId` from our dictionary. This allows central systems to instantly locate the needed data, regardless of how the local authority phrased the question.
 *   **For Local, personalised fields:** If a local authority wants to ask a custom, non-statutory question (like a specific "Pen Picture" prompt), they can simply leave the `questionId` blank or use their own local ID.
 
-An assessment document is composed of a set of generic `AssessmentQuestion` items, along with foundational metadata about the person, professional, completion date, mental capacity, advocate requirements, and consent.
+An assessment document is composed of a set of generic `CareAssessmentQuestion` items, along with foundational metadata about the person, professional, completion date, mental capacity, advocate requirements, and consent.
 
 ### CareNeedsAssessment
 
@@ -96,7 +96,7 @@ A Care Needs Assessment record. Captures foundational metadata, Care Act outcome
 : Status of this assessment. *Enum*. See the [Document Status Vocabulary](#document-status-taxonomy).
 
 <span id="assessment-assessmentQuestion">assessmentQuestion</span>
-: The list of (statutory and custom) questions and answers comprising this assessment. *AssessmentQuestion object*. See [AssessmentQuestion](#assessmentquestion).
+: The list of (statutory and custom) questions and answers comprising this assessment. *CareAssessmentQuestion object*. See [CareAssessmentQuestion](#careassessmentquestion).
 
 #### Example
 
@@ -135,7 +135,7 @@ A Care Needs Assessment record. Captures foundational metadata, Care Act outcome
   "status": "active",
   "assessmentQuestion": [
     {
-      "@type": "AssessmentQuestion",
+      "@type": "CareAssessmentQuestion",
       "questionId": "STAT-HOUSING-01",
       "category": "Housing",
       "questionText": "Does the person live alone?",
@@ -144,7 +144,7 @@ A Care Needs Assessment record. Captures foundational metadata, Care Act outcome
       "required": true
     },
     {
-      "@type": "AssessmentQuestion",
+      "@type": "CareAssessmentQuestion",
       "questionId": "CA-NUTRITION-01",
       "category": "CA.nutrition",
       "questionText": "Care act: Managing and maintaining nutrition. Does the person currently achieve this outcome?",
@@ -157,7 +157,7 @@ A Care Needs Assessment record. Captures foundational metadata, Care Act outcome
 {% endhighlight %}
 </div>
 
-### AssessmentQuestion
+### CareAssessmentQuestion
 
 Generic question-answer pair. Handles mandatory Care Act statutory questions via a global `questionId` dictionary, while permitting local authority custom questions.
 
@@ -223,7 +223,7 @@ The standard follows a rigid structure of **who** (actors), **when** (timing and
 
 *   **CareComponent:** Represents an itemised component of the care plan package.
 *   **CareComponent.CareActor:** Captures who is delivering the service (Self, Family, Professional services, etc.) and their unique ID.
-*   **CareComponent.CareTiming:** Captures the scheduling, frequency, and start/end dates of the delivery.
+*   **CareComponent.Timing:** Captures the scheduling, frequency, and start/end dates of the delivery.
 *   **CareComponent.CareActivity:** Captures the text description of the care activity, the specific Care Act outcome it targets, and direct payment flags.
 
 ### CarePlan
@@ -323,8 +323,10 @@ A Care Plan record, constructed for adults found eligible for care. Follows a st
         }
       ],
       "time": {
-        "@type": "CareTiming",
-        "frequency": "Daily",
+        "@type": "Timing",
+        "frequency": {
+          "repeat": { "frequency": 1, "period": 1, "periodUnit": "d", "timeOfDay": ["12:00:00"] }
+        },
         "startDateTime": "2026-08-12T12:00:00Z"
       },
       "activity": {
@@ -349,7 +351,7 @@ An itemised component of a care plan outlining care delivery.
 : The actor performing this component of the care plan. *CareActor object*. See [CareActor](#careactor).
 
 <span id="component-timing">time</span>
-: The scheduling information for this care component. *CareTiming object*. See [CareTiming](#caretiming).
+: The scheduling information for this care component. *Timing object*. See [Timing](#timing).
 
 <span id="component-activity">activity</span>
 : The activity detail and outcomes for this care component. *CareActivity object*. See [CareActivity](#careactivity).
@@ -366,14 +368,14 @@ Details on who is delivering a specific CareComponent.
 <span id="actor-actorId">actorId</span>
 : Unique identifier for the actor (Person ID, Professional ID, or Service ID). *Identifier object*. See [Identifier](#identifier).
 
-### CareTiming
+### Timing
 
-Scheduling information for a CareComponent.
+Scheduling information for a CareComponent. `Timing` is a common object shared with other standards (for example, the [Safeguarding Standard](/PUB02_safeguarding_standard#timing)).
 
 #### Properties
 
 <span id="time-frequency">frequency</span>
-: Frequency of performance (e.g. weekly, daily). Aligned with FHIR Timing. *String*.
+: How frequently the care component is performed (e.g. daily at lunchtime, weekly on Tuesdays), expressed as a [FHIR Timing](https://build.fhir.org/datatypes.html#Timing) datatype. Optional. *FHIR Timing object*. See the Safeguarding Standard's [Frequency Code Vocabulary](/PUB02_safeguarding_standard#frequency-code-vocabulary) for examples.
 
 <span id="time-startDateTime">startDateTime</span>
 : The scheduled start date/time. *DateTime*.
@@ -432,7 +434,7 @@ The model is parameterised by the following controlled vocabularies.
 
 ## Validation
 
-A [SHACL shape](/assets/model/assessments-and-plans/assessments-and-plans-standard-shape.ttl) is automatically generated from our LinkML model schema. It defines structure, cardinalities, and controlled vocabulary bindings.
+A SHACL shape ([assessments-and-plans-standard-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest)) is automatically generated from our LinkML model schema. It defines structure, cardinalities, and controlled vocabulary bindings.
 
 JSON-LD payloads are validated with the [Social Care Data Validator](https://github.com/SocialCareData/validator).
 

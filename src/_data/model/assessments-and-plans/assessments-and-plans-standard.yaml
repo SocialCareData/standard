@@ -12,7 +12,6 @@ prefixes:
   ap: https://ontology.socialcaredata.io/
   apc: https://ontology.socialcaredata.io/care-outcome-type#
   act: https://ontology.socialcaredata.io/care-actor-type#
-  at: https://ontology.socialcaredata.io/answer-type#
   qc: https://ontology.socialcaredata.io/question-category#
   cds: https://ontology.socialcaredata.io/care-document-status#
   sq: https://ontology.socialcaredata.io/statutory-question-id#
@@ -78,17 +77,17 @@ classes:
       - isReview
       - previousId
 
-  AssessmentQuestion:
-    class_uri: ap:AssessmentQuestion
+  CareAssessmentQuestion:
+    class_uri: ap:CareAssessmentQuestion
+    is_a: AssessmentQuestion
     description: >-
       A generic Question-and-Answer model used to represent both statutory Care Act questions and local, personalised fields.
-    slots:
-      - questionId
-      - category
-      - questionText
-      - answer
-      - answerType
-      - required
+    slot_usage:
+      category:
+        range: QuestionCategory
+        required: true
+        multivalued: false
+        description: The domain/category of the question.
 
   CareComponent:
     class_uri: ap:CareComponent
@@ -106,15 +105,6 @@ classes:
     slots:
       - actorType
       - actorId
-
-  CareTiming:
-    class_uri: ap:CareTiming
-    description: >-
-      The schedule and timing information of a care component.
-    slots:
-      - frequency
-      - startDateTime
-      - endDateTime
 
   CareActivity:
     class_uri: ap:CareActivity
@@ -219,48 +209,10 @@ slots:
     description: Status of the document. Lifted from FHIR CarePlan status.
   assessmentQuestion:
     slot_uri: ap:assessmentQuestion
-    range: AssessmentQuestion
+    range: CareAssessmentQuestion
     required: true
     multivalued: true
     description: The set of assessment questions and answers.
-
-  # --- AssessmentQuestion ---
-  questionId:
-    slot_uri: ap:questionId
-    range: string
-    required: false
-    multivalued: false
-    description: An ID for the question. For statutory questions, this should conform to the dictionary of statutory question IDs; for personalised, non statutory questions, this can be anything or left blank.
-  category:
-    slot_uri: ap:category
-    range: QuestionCategory
-    required: true
-    multivalued: false
-    description: The domain/category of the question.
-  questionText:
-    slot_uri: ap:questionText
-    range: string
-    required: true
-    multivalued: false
-    description: The exact wording of the question as it appears on the local authority's form.
-  answer:
-    slot_uri: ap:answer
-    range: string
-    required: true
-    multivalued: true
-    description: The answer to the question as measured in the assessment.
-  answerType:
-    slot_uri: ap:answerType
-    range: AnswerType
-    required: true
-    multivalued: false
-    description: Indicates how the answer should be parsed (e.g., String, Boolean, Date, Number, Enum). Ensures data like dates or booleans aren't trapped as unparsable text.
-  required:
-    slot_uri: ap:required
-    range: boolean
-    required: true
-    multivalued: false
-    description: Whether this question was mandatory on the local authority’s assessment. Should always be True for statutory fields.
 
   # --- CarePlan ---
   assessmentId:
@@ -285,7 +237,7 @@ slots:
     description: The actors performing this component of the plan.
   time:
     slot_uri: ap:time
-    range: CareTiming
+    range: Timing
     required: true
     multivalued: false
     description: The schedule and timing information of this component of the plan.
@@ -309,26 +261,6 @@ slots:
     required: true
     multivalued: false
     description: The ID of the person performing the item of the plan (Person ID, professional ID, or service ID).
-
-  # --- CareTiming ---
-  frequency:
-    slot_uri: ap:frequency
-    range: string
-    required: true
-    multivalued: false
-    description: The frequency the component of the plan is performed, expressed using FHIR Timing or similar.
-  startDateTime:
-    slot_uri: ap:startDateTime
-    range: datetime
-    required: true
-    multivalued: false
-    description: The first date the component of the plan was (scheduled to be) performed.
-  endDateTime:
-    slot_uri: ap:endDateTime
-    range: datetime
-    required: false
-    multivalued: false
-    description: The last date the component of the plan was performed before cancellation.
 
   # --- CareActivity ---
   activityDescription:
@@ -453,32 +385,6 @@ enums:
       Other:
         title: Other
         meaning: qc:Other
-
-  AnswerType:
-    enum_uri: ap:answer-type
-    title: Answer Type
-    description: Indicates how the answer to a question should be parsed and represented.
-    permissible_values:
-      String:
-        title: String
-        meaning: at:String
-        description: Free-form text value.
-      Boolean:
-        title: Boolean
-        meaning: at:Boolean
-        description: True/False value.
-      Date:
-        title: Date
-        meaning: at:Date
-        description: ISO date-time or date value.
-      Number:
-        title: Number
-        meaning: at:Number
-        description: Numeric value.
-      Enum:
-        title: Enum
-        meaning: at:Enum
-        description: Value from a controlled vocabulary.
 
   CareActorType:
     enum_uri: ap:care-actor-type

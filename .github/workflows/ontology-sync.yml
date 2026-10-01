@@ -43,7 +43,7 @@ jobs:
       - name: Read release version
         id: manifest
         run: |
-          version=$(python -c "import yaml;print(yaml.safe_load(open('src/_data/model/mais/manifest.yml'))['mais_version'])")
+          version=$(python -c "import yaml;print(yaml.safe_load(open('src/_data/model/social-care/manifest.yml'))['mais_version'])")
           echo "mais_version=$version" >> "$GITHUB_OUTPUT"
 
       - uses: actions/checkout@v7

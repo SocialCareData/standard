@@ -318,16 +318,15 @@
     },
     "SubjectPerson": "sg:SubjectPerson",
     "RelatedProfessional": "sg:RelatedProfessional",
-    "TimeInformation": {
-      "@id": "sg:TimeInformation",
+    "Timing": {
+      "@id": "sg:Timing",
       "@context": {
         "frequency": {
-          "@id": "sg:serviceFrequency",
+          "@id": "sg:frequency",
           "@type": "@id"
         }
       }
     },
-    "Timing": "sg:Timing",
     "Repeat": {
       "@id": "sg:Repeat",
       "@context": {

@@ -426,7 +426,7 @@ LA-internal metadata about who recorded each part of the placement record (refer
 
 ## Ontology
 
-The ontology for this specification is defined in Turtle format and is available at: [placements-standard.ttl](/assets/model/placements/placements-standard-v1.ttl).
+The ontology for this specification is defined in Turtle format and is available at: [placements-standard.ttl](https://github.com/SocialCareData/ontology/releases/latest).
 
 ## Taxonomies
 
@@ -502,9 +502,9 @@ Used by `additionalSupport` on [PlacementRequirements](#placementrequirements).
 
 ## Validation
 
-A [SHACL shape](/assets/model/placements/placements-standard-shape-v1.ttl) encodes:
+A SHACL shape ([placements-standard-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest)) encodes:
 
-- structural cardinality (mirroring the OWL restrictions in [placements-standard.ttl](/assets/model/placements/placements-standard-v1.ttl)),
+- structural cardinality (mirroring the OWL restrictions in [placements-standard.ttl](https://github.com/SocialCareData/ontology/releases/latest)),
 - controlled-vocabulary enforcement (`sh:in` over each SKOS scheme),
 - pattern checks (UK postcode prefix on `placementLocation`),
 - conditional checks for the `Other` vocab pairings,

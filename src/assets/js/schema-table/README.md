@@ -72,17 +72,20 @@ cause (`src/_plugins/schema_table.rb`).
 
 ## Mixins
 
-A class's `mixins:` are resolved, so slots a class inherits appear in its table
-rather than going missing. Inherited slots are listed **first** — in the order
-the mixins are declared, each mixin's own mixins resolved first — followed by the
-class's declared `slots:` and inline `attributes:`. A slot reached more than once
+A class's `is_a:` and `mixins:` are resolved, so slots a class inherits appear in
+its table rather than going missing. Inherited slots are listed **first** — the
+`is_a:` parent's, then each mixin's in the order they are declared, each parent's
+own parents resolved first — followed by the class's declared `slots:` and inline
+`attributes:`. A slot reached more than once
 (via two mixins, or via a mixin and the class itself) is listed once, at its
 first position. This matches what `gen-shacl` / `gen-owl` do, and it means a
 model can factor shared slots into a mixin (e.g. the assessments-and-plans
-`FoundationalInformation`) instead of repeating them on every class.
+`FoundationalInformation`) instead of repeating them on every class, or
+specialise an imported class with `is_a:` (e.g. the assessments-and-plans
+`CareAssessmentQuestion`, which narrows the common `AssessmentQuestion`).
 
 `slot_usage` / `attributes` overrides are applied most-specific-last: the global
-slot first, then each mixin's override, then the class's own — so a class can
+slot first, then each parent's override, then the class's own — so a class can
 narrow a slot it inherits.
 
 ## Class table

@@ -22,9 +22,9 @@ data_model: src/_data/model/assessments-and-plans/assessments-and-plans-standard
 
 {% schema_table page.data_model Review %}
 
-### AssessmentQuestion
+### CareAssessmentQuestion
 
-{% schema_table page.data_model AssessmentQuestion %}
+{% schema_table page.data_model CareAssessmentQuestion %}
 
 ### CareComponent
 
@@ -34,9 +34,9 @@ data_model: src/_data/model/assessments-and-plans/assessments-and-plans-standard
 
 {% schema_table page.data_model CareActor %}
 
-### CareTiming
+### Timing
 
-{% schema_table page.data_model CareTiming %}
+{% schema_table page.data_model Timing %}
 
 ### CareActivity
 

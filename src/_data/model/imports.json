@@ -6,5 +6,5 @@
   "https://ontology.socialcaredata.io/placements": "../placements/placements-standard",
   "https://ontology.socialcaredata.io/safeguarding": "../safeguarding/safeguarding-standard",
   "https://ontology.socialcaredata.io/assessments-and-plans": "../assessments-and-plans/assessments-and-plans-standard",
-  "https://ontology.socialcaredata.io/mais": "../mais/mais"
+  "https://ontology.socialcaredata.io/social-care": "../social-care/social-care"
 }

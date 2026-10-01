@@ -403,7 +403,7 @@ LA-internal metadata about who recorded each part of the placement record (refer
 
 ## Ontology
 
-The ontology for this specification is defined in Turtle format and is available at: [placements-standard.ttl](/assets/model/placements/placements-standard.ttl).
+The ontology for this specification is defined in Turtle format and is available at: [placements-standard.ttl](https://github.com/SocialCareData/ontology/releases/latest).
 
 
 ## Taxonomies
@@ -477,14 +477,12 @@ Used by `additionalSupport` on [PlacementRequirements](#placementrequirements).
 
 ## Validation
 
-A [SHACL shape](/assets/model/placements/placements-standard-shape.ttl) encodes:
+A SHACL shape ([placements-standard-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest)) encodes:
 
-- structural cardinality (mirroring the OWL restrictions in [placements-standard.ttl](/assets/model/placements/placements-standard.ttl)),
+- structural cardinality (mirroring the OWL restrictions in [placements-standard.ttl](https://github.com/SocialCareData/ontology/releases/latest)),
 - controlled-vocabulary enforcement (`sh:in` over each SKOS scheme),
 - pattern checks (UK postcode prefix on `placementLocation`),
 - and severity-`Warning` cost sense-checks.
-
-The [Social Care Data Validator](https://github.com/SocialCareData/validator) checks records against this shape, runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
 
 **[Validate your data in your browser](https://socialcaredata.github.io/validator/)** - paste a record, choose *Children's Social Care Placements*, and see what needs fixing. Or from a terminal:
 
