@@ -660,7 +660,7 @@ enums:
     description: Three-valued data presence status (affirmative, negative, unspecified).
     permissible_values:
       Yes:
-        title: Yes
+        title: 'Yes'
         meaning: yns:Yes
         description: Affirmative.
       No:

@@ -1,0 +1,58 @@
+# Checks the data standards under src/_data/model on every pull request that
+# touches them. Kept apart from ci.yml, which builds the site, so the two can
+# change independently.
+name: Validate standards
+
+on:
+  pull_request:
+    paths:
+      - 'src/_data/model/**'
+      - 'src/assets/scripts/lint_schemas.py'
+      - 'src/assets/scripts/check_slot_conflicts.py'
+      - '.github/workflows/validate-standards.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-standards-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: LinkML schemas lint cleanly
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Same pin as src/assets/scripts/requirements.txt.
+      - name: Install LinkML
+        run: pip install linkml==1.11.1
+
+      # Rules are configured in src/_data/model/.linkmllint.yaml.
+      - name: Lint schemas
+        run: python src/assets/scripts/lint_schemas.py
+
+  slots:
+    name: No conflicting LinkML slots
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Same pin as src/assets/scripts/requirements.txt.
+      - name: Install linkml-runtime
+        run: pip install linkml-runtime==1.11.1
+
+      # social-care.yaml merges every module into one flat namespace, where a
+      # repeated slot name silently replaces the earlier one.
+      - name: Check the slots merged by social-care.yaml
+        run: python src/assets/scripts/check_slot_conflicts.py

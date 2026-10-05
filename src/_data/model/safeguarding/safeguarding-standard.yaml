@@ -105,7 +105,7 @@ classes:
       - sgIdentifier
       - professionalName
       - role
-      - status
+      - workingStatus
       - contactSingle
       - relatedServiceRef
       - relatedOrganisationRef
@@ -126,7 +126,7 @@ classes:
       - timeInformation
       - location
       - finding
-      - outcome
+      - episodeOutcome
     slot_usage:
       relatedServiceRef:
         required: true
@@ -225,7 +225,7 @@ slots:
     required: true
     description: Unique identifiers associated with the entity.
   entityName:
-    slot_uri: sg:name
+    slot_uri: sg:entityName
     title: name
     range: string
     required: true
@@ -328,8 +328,9 @@ slots:
     required: true
     multivalued: true
     description: Text describing the professional's occupational role.
-  status:
-    slot_uri: sg:status
+  workingStatus:
+    slot_uri: sg:workingStatus
+    title: status
     range: boolean
     required: false
     multivalued: false
@@ -381,8 +382,9 @@ slots:
     required: false
     multivalued: true
     description: Observations or measurements made during the course of the episode.
-  outcome:
-    slot_uri: sg:outcome
+  episodeOutcome:
+    slot_uri: sg:episodeOutcome
+    title: outcome
     range: EpisodeOutcome
     required: false
     multivalued: false

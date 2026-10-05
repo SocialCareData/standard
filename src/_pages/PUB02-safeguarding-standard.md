@@ -243,7 +243,7 @@ An individual acting in a formal role within an organisation who has responsibil
     "use": "official"
   },
   "role": ["Social Worker", "Team Lead - Referral & Assessment"],
-  "status": true,
+  "workingStatus": true,
   "contact": {
     "@type": "Contact",
     "email": ["contact@example.org"],

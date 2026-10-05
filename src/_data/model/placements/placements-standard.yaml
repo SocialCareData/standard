@@ -570,7 +570,7 @@ enums:
     description: Three-valued data presence status (affirmative, negative, unspecified).
     permissible_values:
       Yes:
-        title: Yes
+        title: 'Yes'
         meaning: yns:Yes
         description: Affirmative.
       No:
@@ -862,7 +862,7 @@ enums:
     description: Whether the child is an unaccompanied asylum-seeking child (UASC).
     permissible_values:
       Yes:
-        title: Yes
+        title: 'Yes'
         meaning: uasc:Yes
         description: The child is an unaccompanied asylum-seeking child.
       No:
