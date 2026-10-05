@@ -39,10 +39,13 @@ function readModel (modelPath, rootDir) {
  * @param {boolean} [opts.showLabel=true] Whether a vocabulary table includes the
  *   Label column. `false` renders Code / Definition only (no effect on a class
  *   property table).
+ * @param {boolean} [opts.explainBoolean=false] Whether a class table's Options
+ *   column lists "Yes, No" for boolean properties (no effect on a vocabulary
+ *   table).
  * @returns {string} Markdown table (a property table, or a vocabulary table
  *   wrapped in a <details> element).
  */
-function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit, collapsible = true, showLabel = true } = {}) {
+function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit, collapsible = true, showLabel = true, explainBoolean = false } = {}) {
   if (!modelPath) throw new Error('modelPath is required')
   if (!entity) throw new Error('entity is required')
 
@@ -64,7 +67,7 @@ function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadin
       : new Set(pageHeadings.map(slugify))
     // The `{: .schema-table}` IAL tags the generated <table> with a class so it
     // can be styled without affecting other tables on the site.
-    return `${renderTable(rows, availableAnchors, optionsLimit)}\n{: .schema-table}`
+    return `${renderTable(rows, availableAnchors, optionsLimit, explainBoolean)}\n{: .schema-table}`
   }
 
   const enumName = findVocabularyEnum(model, entity)
@@ -91,10 +94,11 @@ function generateTable ({ modelPath, entity, rootDir = process.cwd(), pageHeadin
  * @param {string} [opts.rootDir]     Base for resolving the paths (default cwd).
  * @param {string[]} [opts.pageHeadings] See {@link generateTable}.
  * @param {boolean} [opts.showLabel=true] See {@link generateTable}.
+ * @param {boolean} [opts.explainBoolean=false] See {@link generateTable}.
  * @returns {string} An HTML diff table (a property table, or a vocabulary table
  *   wrapped in a <details> element).
  */
-function generateDiffTable ({ modelPath, previousPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit, collapsible = true, showLabel = true } = {}) {
+function generateDiffTable ({ modelPath, previousPath, entity, rootDir = process.cwd(), pageHeadings, optionsLimit, collapsible = true, showLabel = true, explainBoolean = false } = {}) {
   if (!modelPath) throw new Error('modelPath is required')
   if (!previousPath) throw new Error('previousPath is required')
   if (!entity) throw new Error('entity is required')
@@ -105,7 +109,7 @@ function generateDiffTable ({ modelPath, previousPath, entity, rootDir = process
   const availableAnchors = pageHeadings === undefined ? null : new Set(pageHeadings.map(slugify))
 
   if (isClass(current, entity) || isClass(previous, entity)) {
-    return renderDiffTable(diffClassProperties(current, previous, entity, availableAnchors, optionsLimit))
+    return renderDiffTable(diffClassProperties(current, previous, entity, availableAnchors, optionsLimit, explainBoolean))
   }
 
   const enumName = findVocabularyEnum(current, entity) || findVocabularyEnum(previous, entity)
