@@ -1,5 +1,6 @@
 ---
 title: Governance
+description: This section explains how the programme is governed and how we work with related programmes across government.
 tags:
   - Programme
 breadcrumbs:
