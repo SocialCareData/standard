@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: "Contribute Data for Safeguarding Enquiries"
+description: Standards could support contributing records to show which individuals an organisation has been working with to a single view system.
 breadcrumbs:
   - Use Cases
 tags:
