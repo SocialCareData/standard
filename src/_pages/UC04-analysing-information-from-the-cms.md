@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: Analysing Information from the CMS
+description: This use case outlines how standards could support timely, accurate and comprehensive analysis of data from across case management systems.
 breadcrumbs:
   - Use Cases
 tags:
