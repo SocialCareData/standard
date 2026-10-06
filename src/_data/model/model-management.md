@@ -225,9 +225,11 @@ same top-level `imports.json` as every other cross-module import.
 
 ## Validating the examples
 
-The JSON-LD examples, and the validator that checks them, live in
-[SocialCareData/validator](https://github.com/SocialCareData/validator). They moved out of this repository so
-that the tool could be released to npm and given a browser interface; this
+The JSON-LD examples live in `examples/` of
+[SocialCareData/ontology](https://github.com/SocialCareData/ontology), beside the
+shapes they exercise; the sync from this repository leaves that folder alone.
+The validator that checks them lives in
+[SocialCareData/validator](https://github.com/SocialCareData/validator). This
 repository keeps the LinkML schemas the shapes are generated from.
 
 ```bash

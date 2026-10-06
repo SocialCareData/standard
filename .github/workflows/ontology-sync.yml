@@ -59,11 +59,14 @@ jobs:
           # --delete so a schema removed upstream also disappears downstream;
           # without it the two repositories silently diverge. The ontology
           # repo's own hand-written root files are anchored out with a leading
-          # slash so they are never touched.
+          # slash so they are never touched, as are its hand-written examples
+          # and workflows.
           rsync -a --delete \
             --exclude '.git/' \
+            --exclude '/.github/' \
             --exclude '/README.md' \
             --exclude '/LICENSE' \
+            --exclude '/examples/' \
             "$RUNNER_TEMP/ontology/" ontology/
 
       - name: Open pull request
@@ -87,10 +90,10 @@ jobs:
             - MAIS release: `${{ steps.manifest.outputs.mais_version }}`
             - Triggered by: `${{ github.event_name }}`
 
-            The JSON-LD examples that exercise these shapes live in
-            [SocialCareData/validator](https://github.com/SocialCareData/validator),
-            whose conformance suite runs against this repository's published
-            shapes on every change and nightly.
+            The JSON-LD examples that exercise these shapes live in this
+            repository's `examples/`, which the sync leaves alone.
+            [SocialCareData/validator](https://github.com/SocialCareData/validator)
+            runs them against the published shapes as its conformance suite.
 
             > Generated files — review the diff, but make corrections in the
             > LinkML YAML upstream rather than here.

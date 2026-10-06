@@ -87,7 +87,7 @@ The top-level record. Captures the unique child identifier and links the placeme
 
 <div class="note">
   <h5 id="note-placement">Note - full lifecycle</h5>
-  <p>The example above only sketches the top-level wiring. See <a href="https://github.com/SocialCareData/validator/blob/main/examples/placements/valid-placement.jsonld"><code>examples/placements/valid-placement.jsonld</code></a> for a full lifecycle example, and <a href="https://github.com/SocialCareData/validator/blob/main/examples/placements/valid-other-options.jsonld"><code>examples/placements/valid-other-options.jsonld</code></a> for an example exercising every "Other" controlled-vocab option with paired free-text values.</p>
+  <p>The example above only sketches the top-level wiring. See <a href="https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-placement.jsonld"><code>examples/placements/valid-placement.jsonld</code></a> for a full lifecycle example, and <a href="https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-other-options.jsonld"><code>examples/placements/valid-other-options.jsonld</code></a> for an example exercising every "Other" controlled-vocab option with paired free-text values.</p>
 </div>
 
 
@@ -129,7 +129,7 @@ The referral request: how urgently the child needs to be placed, how many siblin
 
 <div class="note">
   <h5 id="note-availability">Note</h5>
-  <p>See <a href="https://github.com/SocialCareData/validator/blob/main/examples/placements/valid-other-options.jsonld"><code>examples/placements/valid-other-options.jsonld</code></a> for a worked example using <code>olr:OutOfLAReasonOther</code> with multiple paired free-text reasons.</p>
+  <p>See <a href="https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-other-options.jsonld"><code>examples/placements/valid-other-options.jsonld</code></a> for a worked example using <code>olr:OutOfLAReasonOther</code> with multiple paired free-text reasons.</p>
 </div>
 
 
@@ -193,7 +193,7 @@ The child's needs that the placement must accommodate: communication, cultural, 
 
 <div class="note">
   <h5 id="note-requirements">Note - "Other" pairings</h5>
-  <p>Each controlled-vocab field that exposes an "Other" option is paired with a multi-valued free-text property: <code>cn:Other</code> ↔ <code>specificCommunicationRequirementOther</code>, <code>cln:Other</code> ↔ <code>culturalNeedsOther</code>, <code>st:Other</code> ↔ <code>additionalSupportOther</code>. Whenever the "Other" concept is selected, the paired free-text property must be provided. See <a href="https://github.com/SocialCareData/validator/blob/main/examples/placements/valid-other-options.jsonld"><code>examples/placements/valid-other-options.jsonld</code></a>.</p>
+  <p>Each controlled-vocab field that exposes an "Other" option is paired with a multi-valued free-text property: <code>cn:Other</code> ↔ <code>specificCommunicationRequirementOther</code>, <code>cln:Other</code> ↔ <code>culturalNeedsOther</code>, <code>st:Other</code> ↔ <code>additionalSupportOther</code>. Whenever the "Other" concept is selected, the paired free-text property must be provided. See <a href="https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-other-options.jsonld"><code>examples/placements/valid-other-options.jsonld</code></a>.</p>
 </div>
 
 
