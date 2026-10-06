@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: "Access and contribute to a shared record by the subject of that record or their family"
+description: This use case outlines how standards can support access and contribution to a shared care record (from the data subject and family networks) in a way that accurately represents the person's voice, experience and preferences.
 breadcrumbs:
   - Use Cases
 tags:
