@@ -9,9 +9,7 @@
   "placementAvailability": {
     "@id": "ex:INVALID-006/availability",
     "@type": "PlacementAvailability",
-    "neededBy": "WithinFiveDays",
-    "isPreferredLocationLocal": false,
-    "outOfLAReason": "OutOfLAReasonOther"
+    "neededBy": "WithinFiveDays"
   },
 
   "placementRequirements": {
@@ -55,7 +53,7 @@
     "@type": "QualityAssurance",
     "referralDate":  "2024-04-01",
     "placementOfficerName": "Eli Rivera",
-    "placementDate": "2024-04-08",
+    "placementDateAdmin": "2024-04-08",
     "costDate":      "2024-04-12"
   }
 }

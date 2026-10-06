@@ -1,10 +1,10 @@
 ---
 layout: publication
-title: Children's Social Care Placements Standard Data Model Changes
+title: Children's Social Care Placements Standard Data Model Changes Between v1 and v2
 tags:
   - Placements
-current_spec: /PUB00_placements_standard_2
-previous_spec: /PUB00_placements_standard
+current_spec: /PUB00_placements_standard
+previous_spec: /PUB00_placements_standard_v1
 ---
 
 {% assign current_page = site.pages | where: "url", page.current_spec | first %}
@@ -25,33 +25,33 @@ changed values as the <del class="diff-old">old value</del> <ins class="diff-new
 
 ### Placement
 
-{% schema_table_diff current previous Placement %}
+{% schema_table_diff current previous Placement explain-boolean %}
 
 ### PlacementAvailability
 
-{% schema_table_diff current previous PlacementAvailability all %}
+{% schema_table_diff current previous PlacementAvailability all explain-boolean %}
 
 ### PlacementRequirements
 
-{% schema_table_diff current previous PlacementRequirements all %}
+{% schema_table_diff current previous PlacementRequirements all explain-boolean %}
 
 ### PlacementRecommendation
 
-{% schema_table_diff current previous PlacementRecommendation all %}
+{% schema_table_diff current previous PlacementRecommendation all explain-boolean %}
 
 ### RiskAssessment
 
-{% schema_table_diff current previous RiskAssessment all %}
+{% schema_table_diff current previous RiskAssessment all explain-boolean %}
 
 * Removed the free-text fields to mitigate Information Governance and data privacy risks. [Issue #19](https://github.com/SocialCareData/standard/issues/19)
 
 ### ActualPlacement
 
-{% schema_table_diff current previous ActualPlacement all %}
+{% schema_table_diff current previous ActualPlacement all explain-boolean %}
 
 ### QualityAssurance
 
-{% schema_table_diff current previous QualityAssurance all %}
+{% schema_table_diff current previous QualityAssurance all explain-boolean %}
 
 ## Taxonomies
 
@@ -67,10 +67,6 @@ changed values as the <del class="diff-old">old value</del> <ins class="diff-new
 
 {% schema_table_diff current previous needsAssessmentMethod no-label expanded %}
 
-### Out of LA Reason Taxonomy
-
-{% schema_table_diff current previous outOfLAReason no-label expanded %}
-
 ### Placement Source Taxonomy
 
 {% schema_table_diff current previous placementSource no-label expanded %}
@@ -78,6 +74,10 @@ changed values as the <del class="diff-old">old value</del> <ins class="diff-new
 ### Placement Type Taxonomy
 
 {% schema_table_diff current previous placementType no-label expanded %}
+
+### Non-Preferred Location Reason Taxonomy
+
+{% schema_table_diff current previous nonPreferredLocationReason no-label expanded %}
 
 ### Placement Urgency Taxonomy
 

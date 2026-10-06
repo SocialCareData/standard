@@ -40,6 +40,9 @@ Options:
   --no-label           For a vocabulary table, omit the Label column, leaving
                        Code / Definition. Useful where each permissible value's
                        title just restates its key. (No effect on class tables.)
+  --explain-boolean    For a class table, list "Yes, No" in the Options column
+                       of boolean properties, for readers who may not know what
+                       "Boolean" means. (No effect on vocabulary tables.)
 
 Examples:
   schema-table src/assets/model/placements/placements-standard.yaml PlacementRequirements
@@ -63,6 +66,8 @@ function parseArgs (argv) {
       opts.collapsible = false
     } else if (argv[i] === '--no-label' || argv[i] === '--no-labels') {
       opts.showLabel = false
+    } else if (argv[i] === '--explain-boolean') {
+      opts.explainBoolean = true
     } else if (argv[i] === '-h' || argv[i] === '--help') {
       opts.help = true
     } else {
