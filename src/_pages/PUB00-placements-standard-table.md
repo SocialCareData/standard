@@ -12,31 +12,31 @@ data_model: src/_data/model/placements/placements-standard.yaml
 
 ### Placement
 
-{% schema_table page.data_model Placement %}
+{% schema_table page.data_model Placement explain-boolean %}
 
 ### PlacementAvailability
 
-{% schema_table page.data_model PlacementAvailability all %}
+{% schema_table page.data_model PlacementAvailability all explain-boolean %}
 
 ### PlacementRequirements
 
-{% schema_table page.data_model PlacementRequirements all %}
+{% schema_table page.data_model PlacementRequirements all explain-boolean %}
 
 ### PlacementRecommendation
 
-{% schema_table page.data_model PlacementRecommendation all %}
+{% schema_table page.data_model PlacementRecommendation all explain-boolean %}
 
 ### RiskAssessment
 
-{% schema_table page.data_model RiskAssessment all %}
+{% schema_table page.data_model RiskAssessment all explain-boolean %}
 
 ### ActualPlacement
 
-{% schema_table page.data_model ActualPlacement all %}
+{% schema_table page.data_model ActualPlacement all explain-boolean %}
 
 ### QualityAssurance
 
-{% schema_table page.data_model QualityAssurance all %}
+{% schema_table page.data_model QualityAssurance all explain-boolean %}
 
 ## Taxonomies
 

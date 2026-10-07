@@ -189,8 +189,19 @@ a class property table is unaffected. In a vocabulary **diff**, dropping Label
 also drops any label-only change from the comparison, since that column is no
 longer displayed.
 
+**Explaining booleans:** for audiences who may not know what "Boolean" means, a
+class property table can list **Yes, No** in the Options column of every boolean
+property (off by default):
+
+- CLI: `--explain-boolean`.
+- Jekyll tag: an `explain-boolean` (or `yes-no`) modifier, e.g.
+  `{% schema_table page.data_model Placement explain-boolean %}`.
+- Same modifier on the diff tag: `{% schema_table_diff current previous Placement explain-boolean %}`.
+
+Vocabulary tables are unaffected.
+
 Tag modifiers after `<entity>` are order-independent: mix the options-limit, the
-collapse control and the label control freely, e.g.
+collapse control, the label control and `explain-boolean` freely, e.g.
 `{% schema_table page.data_model genderCode all expanded no-label %}`.
 
 ## Diff table

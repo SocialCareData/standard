@@ -27,24 +27,32 @@ homepage:
   title: Social Care Data
   url: /
 nav:
-  - title: Learn
+  - title: About
     children:
-      - title: Learn about the standards
+      - title: Standards Development
         url: /learn_about_the_standards
         description: What the standards are and why they matter.
-      - title: Our use cases
+      - title: Pilots
+        url: /placements_impact_story
+        description: Pilot projects testing the standards in real-world settings.
+      - title: Governance
+        url: /governance
+        description: How the programme is governed and managed.
+      - title: Programme Updates
+        url: /updates
+        description: Latest news and updates from the programme.
+  - title: Use Cases
+    children:
+      - title: Social care use cases
         url: /use_cases
         description: The real situations the standards have to serve.
-      - title: How our standards support our use cases
+      - title: How standards support the use cases
         url: /use_case_standard_matrix
         description: Trace each use case through to the standards it drives.
-      - title: How we develop standards
-        url: /how_we_develop_standards
-        description: The guiding principles for developing data standards.
-  - title: Publications
+  - title: Standards
     url: /publications
     children: []
-  - title: Contribute
+  - title: Get Involved
     children:
       - title: Contribute to the standards
         url: /contribute_to_the_standards
@@ -55,17 +63,6 @@ nav:
       - title: Calendar
         url: /calendar
         description: Upcoming events across the programme.
-  - title: About
-    children:
-      - title: Updates
-        url: /updates
-        description: Latest news and updates from the programme.
-      - title: Steering Group
-        url: /steering_group
-        description: The group providing strategic oversight for the programme.
-      - title: Related programmes
-        url: /related_programmes
-        description: Adjacent standards work in health, education and local government.
 pagefind: true
 check_internal_links: true
 check_external_links: true
