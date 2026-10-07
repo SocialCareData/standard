@@ -504,7 +504,7 @@ An observation or measurement made during the course of a service episode about 
   } ],
   "measurement": [ {
     "@type": "Measurement",
-    "value": 12,
+    "value": "12",
     "unit": "count",
     "type": "Authorised Absences"
   } ],

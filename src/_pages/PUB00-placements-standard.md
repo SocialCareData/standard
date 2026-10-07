@@ -335,11 +335,11 @@ What is the total weekly fee associated with the placement? (excluding VAT). _In
 {% highlight json %}
 {
   "@type": "ActualPlacement",
-  "coreWeeklyCost":              2500.00,
-  "additionalSupportWeeklyCost": 1500.00,
-  "educationWeeklyCost":            0.00,
-  "otherWeeklyCost":              500.00,
-  "totalWeeklyCost":             4500.00,
+  "coreWeeklyCost":              "2500.00",
+  "additionalSupportWeeklyCost": "1500.00",
+  "educationWeeklyCost":            "0.00",
+  "otherWeeklyCost":              "500.00",
+  "totalWeeklyCost":             "4500.00",
   "placementLocation": "N18",
   "isLocationPreferred": true,
   "nonPreferredLocationReason": "Not applicable",
