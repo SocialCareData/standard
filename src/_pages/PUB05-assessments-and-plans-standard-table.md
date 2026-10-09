@@ -1,6 +1,7 @@
 ---
 layout: publication
 title: Care Needs Assessments and Care Plans Tabular View
+description: A tabular view of the Assessments and Plans standard, a common data model for Care Needs Assessments and Care Plans, designed to standardise the back-end fields of information shared between agencies and services without compromising front-end customisation by local authorities.
 tags:
   - Joined Up Care
 data_model: src/assets/model/assessments-and-plans/assessments-and-plans-standard.yaml

@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: Transfer of Responsibility
+description: This use case outlines how standards can support the transfer of records between local authorities when a child or young person receiving care moves to a new local authority.
 breadcrumbs:
   - Use Cases
 tags:

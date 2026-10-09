@@ -1,5 +1,6 @@
 ---
 title: Standards Working Groups Terms of Reference
+description: Our Standards Working Group are governed by the following Terms of Reference.
 breadcrumbs:
   - Standards Working Groups
 tags:

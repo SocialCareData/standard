@@ -1,5 +1,6 @@
 ---
 title: Social Care Interoperability Standards Editors
+description: This references the content owners for each content category in the standards website.
 regenerate: true
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: "Standardising children's social care placements data"
+description: This use case outlines how standards can support better analysis of placement sufficiency at the local and regional level, tackle high costs in the care market and improve outcomes for children in care.
 breadcrumbs:
   - Use Cases
 tags:
