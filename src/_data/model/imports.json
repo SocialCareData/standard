@@ -1,0 +1,10 @@
+{
+  "https://ns.socialcaredata.io/common": "../common/common",
+  "https://ns.socialcaredata.io/person": "../person/person-standard",
+  "https://ns.socialcaredata.io/person-subject-of-care": "../person/person-subject-of-care",
+  "https://ns.socialcaredata.io/person-connected": "../person/person-connected",
+  "https://ns.socialcaredata.io/placements": "../placements/placements-standard",
+  "https://ns.socialcaredata.io/safeguarding": "../safeguarding/safeguarding-standard",
+  "https://ns.socialcaredata.io/assessments-and-plans": "../assessments-and-plans/assessments-and-plans-standard",
+  "https://ns.socialcaredata.io/social-care": "../social-care/social-care"
+}

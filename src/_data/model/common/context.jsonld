@@ -1,0 +1,94 @@
+{
+  "@context": {
+    "sc":  "https://ns.socialcaredata.io/",
+    "nuc": "https://ns.socialcaredata.io/name-use-code#",
+    "auc": "https://ns.socialcaredata.io/address-use-code#",
+    "at":  "https://ns.socialcaredata.io/answer-type#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Identifier": "sc:Identifier",
+    "AssessmentQuestion": "sc:AssessmentQuestion",
+    "Timing": "sc:Timing",
+    "Name": {
+      "@id": "sc:Name",
+      "@context": {
+        "use": {
+          "@id": "sc:use",
+          "@type": "@vocab",
+          "@context": {
+            "@vocab": "https://ns.socialcaredata.io/name-use-code#",
+            "usual":     "nuc:Usual",
+            "official":  "nuc:Official",
+            "temp":      "nuc:Temp",
+            "nickname":  "nuc:Nickname",
+            "anonymous": "nuc:Anonymous",
+            "old":       "nuc:Old",
+            "maiden":    "nuc:Maiden"
+          }
+        }
+      }
+    },
+    "Address": {
+      "@id": "sc:Address",
+      "@context": {
+        "use": {
+          "@id": "sc:use",
+          "@type": "@vocab",
+          "@context": {
+            "@vocab": "https://ns.socialcaredata.io/address-use-code#",
+            "home":    "auc:Home",
+            "work":    "auc:Work",
+            "temp":    "auc:Temp",
+            "old":     "auc:Old",
+            "billing": "auc:Billing"
+          }
+        }
+      }
+    },
+    "Contact": {
+      "@id": "sc:Contact",
+      "@context": {
+        "name": "sc:contactName"
+      }
+    },
+
+    "value":         "sc:value",
+    "system":        { "@id": "sc:system", "@type": "@id" },
+
+    "familyName":    { "@id": "sc:familyName", "@container": "@set" },
+    "givenName":     { "@id": "sc:givenName",  "@container": "@set" },
+    "preferredName": "sc:preferredName",
+
+    "line1":    "sc:line1",
+    "line2":    "sc:line2",
+    "city":     "sc:city",
+    "postcode": "sc:postcode",
+    "UPRN":     "sc:UPRN",
+    "USRN":     "sc:USRN",
+
+    "email":     { "@id": "sc:email",     "@container": "@set" },
+    "telephone": { "@id": "sc:telephone", "@container": "@set" },
+
+    "questionId":   "sc:questionId",
+    "category":     "sc:category",
+    "questionText": "sc:questionText",
+    "answer":       { "@id": "sc:answer",   "@container": "@set" },
+    "required":     { "@id": "sc:required", "@type": "xsd:boolean" },
+    "answerType": {
+      "@id": "sc:answerType",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/answer-type#",
+        "String":  "at:String",
+        "Boolean": "at:Boolean",
+        "Date":    "at:Date",
+        "Number":  "at:Number",
+        "Enum":    "at:Enum"
+      }
+    },
+
+    "frequency":     "sc:frequency",
+    "startDateTime": { "@id": "sc:startDateTime", "@type": "xsd:dateTime" },
+    "endDateTime":   { "@id": "sc:endDateTime",   "@type": "xsd:dateTime" }
+  }
+}

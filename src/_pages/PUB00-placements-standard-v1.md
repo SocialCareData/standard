@@ -8,7 +8,7 @@ tags:
 reference: PUB00
 version: 1
 status: draft
-data_model: src/assets/model/placements/placements-standard-v0_1.yaml
+data_model: src/_data/model/placements/placements-standard-v0_1.yaml
 non_technical_summary: |
   The market for children’s social care placements -- that is, the accommodation and support provided to children when they are taken into the care of the local authority -- has been described by the Local Government Association as '[broken](https://www.local.gov.uk/about/news/childrens-social-care-placements-costing-ps10000-plus-rise-sharply-five-years-new-lga)'. Many children in residential care nationally are currently placed more than 20 miles from home.
 
@@ -71,7 +71,7 @@ The top-level record. Captures the unique child identifier and links the placeme
   <h5 id="example-placement">Example - Placement (top level)</h5>
 {% highlight json %}
 {
-  "@context": "https://socialcaredata.github.io/assets/model/placements/context.jsonld",
+  "@context": "https://socialcaredata.github.io/_data/model/placements/context.jsonld",
   "@id": "ex:ABCD2012-001",
   "@type": "Placement",
   "childId": "ABCD2012",
@@ -87,7 +87,7 @@ The top-level record. Captures the unique child identifier and links the placeme
 
 <div class="note">
   <h5 id="note-placement">Note - full lifecycle</h5>
-  <p>The example above only sketches the top-level wiring. See <a href="/assets/model/placements/examples/valid-placement.jsonld"><code>assets/model/placements/examples/valid-placement.jsonld</code></a> for a full lifecycle example, and <a href="/assets/model/placements/examples/valid-other-options.jsonld"><code>assets/model/placements/examples/valid-other-options.jsonld</code></a> for an example exercising every "Other" controlled-vocab option with paired free-text values.</p>
+  <p>The example above only sketches the top-level wiring. See <a href="https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-placement.jsonld"><code>valid-placement.jsonld</code></a> for a full lifecycle example, and <a href="https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-placement-full.jsonld"><code>valid-placement-full.jsonld</code></a> for an example exercising every "Other" controlled-vocab option with paired free-text values.</p>
 </div>
 
 
@@ -129,7 +129,7 @@ The referral request: how urgently the child needs to be placed, how many siblin
 
 <div class="note">
   <h5 id="note-availability">Note</h5>
-  <p>See <a href="/assets/model/placements/examples/valid-other-options.jsonld"><code>assets/model/placements/examples/valid-other-options.jsonld</code></a> for a worked example using <code>olr:OutOfLAReasonOther</code> with multiple paired free-text reasons.</p>
+  <p>See <a href="https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-placement-full.jsonld"><code>valid-placement-full.jsonld</code></a> for a worked example using <code>olr:OutOfLAReasonOther</code> with multiple paired free-text reasons.</p>
 </div>
 
 
@@ -193,7 +193,7 @@ The child's needs that the placement must accommodate: communication, cultural, 
 
 <div class="note">
   <h5 id="note-requirements">Note - "Other" pairings</h5>
-  <p>Each controlled-vocab field that exposes an "Other" option is paired with a multi-valued free-text property: <code>cn:Other</code> ↔ <code>specificCommunicationRequirementOther</code>, <code>cln:Other</code> ↔ <code>culturalNeedsOther</code>, <code>st:Other</code> ↔ <code>additionalSupportOther</code>. Whenever the "Other" concept is selected, the paired free-text property must be provided. See <a href="/assets/model/placements/examples/valid-other-options.jsonld"><code>assets/model/placements/examples/valid-other-options.jsonld</code></a>.</p>
+  <p>Each controlled-vocab field that exposes an "Other" option is paired with a multi-valued free-text property: <code>cn:Other</code> ↔ <code>specificCommunicationRequirementOther</code>, <code>cln:Other</code> ↔ <code>culturalNeedsOther</code>, <code>st:Other</code> ↔ <code>additionalSupportOther</code>. Whenever the "Other" concept is selected, the paired free-text property must be provided. See <a href="https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-placement-full.jsonld"><code>valid-placement-full.jsonld</code></a>.</p>
 </div>
 
 
@@ -426,7 +426,7 @@ LA-internal metadata about who recorded each part of the placement record (refer
 
 ## Ontology
 
-The ontology for this specification is defined in Turtle format and is available at: [placements-standard.ttl](/assets/model/placements/placements-standard-v1.ttl).
+The ontology for this specification is defined in Turtle format and is available at: [placements-standard.ttl](https://github.com/SocialCareData/ontology/releases/latest).
 
 ## Taxonomies
 
@@ -502,15 +502,21 @@ Used by `additionalSupport` on [PlacementRequirements](#placementrequirements).
 
 ## Validation
 
-A [SHACL shape](/assets/model/placements/placements-standard-shape-v1.ttl) encodes:
+A SHACL shape ([placements-standard-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest)) encodes:
 
-- structural cardinality (mirroring the OWL restrictions in [placements-standard.ttl](/assets/model/placements/placements-standard-v1.ttl)),
+- structural cardinality (mirroring the OWL restrictions in [placements-standard.ttl](https://github.com/SocialCareData/ontology/releases/latest)),
 - controlled-vocabulary enforcement (`sh:in` over each SKOS scheme),
 - pattern checks (UK postcode prefix on `placementLocation`),
 - conditional checks for the `Other` vocab pairings,
 - and severity-`Warning` cost sense-checks.
 
-A small Node.js [validator](/assets/shacl/validation/README.md) loads the shape and example records, applies the [JSON-LD context file](/assets/model/placements/context.jsonld), runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
+The [Social Care Data Validator](https://github.com/SocialCareData/validator) checks records against this shape, runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
+
+**[Validate your data in your browser](https://socialcaredata.github.io/validator/)** - paste a record, choose *Children's Social Care Placements*, and see what needs fixing. Or from a terminal:
+
+```bash
+npx @socialcaredata/validator -p placements yourdata.jsonld
+```
 
 ## Standard Placement Reporting Spreadsheet
 

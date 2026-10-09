@@ -1,0 +1,28 @@
+id: https://ns.socialcaredata.io/social-care
+name: social-care-ontology
+title: Social Care Ontology
+description: >-
+  The umbrella Social Care ontology. It
+  has no classes or slots of its own; it composes the independently-versioned
+  modules - common, person, placements, safeguarding, and assessments-and-plans
+  - into a single ontology under one flat namespace
+  (https://ns.socialcaredata.io/).
+
+  Each module is authored and versioned on its own cadence; a MAIS release pins a
+  compatible set of module versions (see manifest.yml) and is generated from this
+  file.
+license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+version: 2026.1.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  sc: https://ns.socialcaredata.io/
+default_prefix: sc
+default_range: string
+imports:
+  - linkml:types
+  - https://ns.socialcaredata.io/common
+  - https://ns.socialcaredata.io/person-subject-of-care
+  - https://ns.socialcaredata.io/placements
+  - https://ns.socialcaredata.io/safeguarding
+  - https://ns.socialcaredata.io/assessments-and-plans

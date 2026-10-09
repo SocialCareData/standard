@@ -1,0 +1,12 @@
+# Toolchain for scripts/build_ontology.py — generating the OWL and SHACL
+# artifacts published to https://github.com/SocialCareData/ontology.
+#
+# These are pinned rather than floated on purpose. LinkML's generators change
+# their defaults between releases (1.11.1 already warns that three
+# vacuous-axiom flags will flip), and rdflib owns the Turtle serialisation that
+# the build canonicalises, so an unpinned upgrade can silently rewrite every
+# published file. Bump them deliberately, and re-run the determinism check in
+# the CI "ontology build is reproducible" step when you do.
+linkml==1.11.1
+linkml-runtime==1.11.1
+rdflib==7.6.0

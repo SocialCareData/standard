@@ -1,0 +1,376 @@
+id: https://ns.socialcaredata.io/common
+name: common
+title: Social Care MAIS - Common Objects
+description: >-
+  The shared, cross-cutting objects of the Social Care MAIS ontology: the
+  building blocks reused by every domain module.
+license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+version: 1.0.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  sc: https://ns.socialcaredata.io/
+  nuc: https://ns.socialcaredata.io/name-use-code#
+  auc: https://ns.socialcaredata.io/address-use-code#
+  at: https://ns.socialcaredata.io/answer-type#
+  skos: http://www.w3.org/2004/02/skos/core#
+  dct: http://purl.org/dc/terms/
+  xsd: http://www.w3.org/2001/XMLSchema#
+default_prefix: sc
+default_range: string
+imports:
+  - linkml:types
+
+# ---------------------------------------------------------------------------
+# Classes
+# ---------------------------------------------------------------------------
+classes:
+
+  Identifier:
+    class_uri: sc:Identifier
+    description: >-
+      A single identifier for a person or entity, comprising the value and the
+      system in whose namespace the value is unique. Aligned with FHIR
+      Identifier and the NHS PDS UNIQUE_REFERENCE definition.
+    slots:
+      - value
+      - system
+
+  Name:
+    class_uri: sc:Name
+    description: >-
+      Container for a person's name parts, aligned with FHIR HumanName. A person
+      may have multiple names with different uses.
+    slots:
+      - familyName
+      - givenName
+      - preferredName
+      - nameUse
+
+  Address:
+    class_uri: sc:Address
+    description: >-
+      A postal address. Aligned with FHIR Address. UPRN and USRN support
+      property- and street-level disambiguation.
+    slots:
+      - line1
+      - line2
+      - city
+      - postcode
+      - UPRN
+      - USRN
+      - addressUse
+
+  Contact:
+    class_uri: sc:Contact
+    description: >-
+      Contact details, such as a home, work, or other contact channel grouping.
+    slots:
+      - contactName
+      - email
+      - telephone
+
+  AssessmentQuestion:
+    class_uri: sc:AssessmentQuestion
+    description: >-
+      A generic Question-and-Answer model used to represent both statutory and
+      local, personalised questions.
+    slots:
+      - questionId
+      - category
+      - questionText
+      - answer
+      - answerType
+      - required
+
+  Timing:
+    class_uri: sc:Timing
+    description: >-
+      The schedule and timing information of an activity, episode or event:
+      when it started and ended and how frequently it recurs.
+    slots:
+      - frequency
+      - startDateTime
+      - endDateTime
+
+  Any:
+    class_uri: linkml:Any
+    description: >-
+      An open value whose structure is defined and validated elsewhere, not by
+      this model. Serialised as an arbitrary JSON object.
+
+# ---------------------------------------------------------------------------
+# Slots
+# ---------------------------------------------------------------------------
+slots:
+
+  # --- Identifier ---
+  value:
+    slot_uri: sc:value
+    range: string
+    required: true
+    multivalued: false
+    description: The identifier value, unique within the issuing system.
+  system:
+    slot_uri: sc:system
+    range: uri
+    required: true
+    multivalued: false
+    description: >-
+      The URI of the system or namespace within which the identifier is unique
+      (e.g. https://fhir.nhs.uk/Id/nhs-number).
+
+  # --- Name ---
+  familyName:
+    slot_uri: sc:familyName
+    range: string
+    required: true
+    multivalued: true
+    description: >-
+      The surname or family name. Multi-valued to support compound or hyphenated
+      family names recorded as separate parts.
+  givenName:
+    slot_uri: sc:givenName
+    range: string
+    required: true
+    multivalued: true
+    description: The first name and any middle names.
+  preferredName:
+    slot_uri: sc:preferredName
+    range: string
+    required: false
+    multivalued: false
+    description: >-
+      Any preferred given or middle name used by the person - for example, "Joe"
+      where their legal first name is "Joseph".
+  nameUse:
+    slot_uri: sc:use
+    title: use
+    range: NameUseCode
+    required: false
+    multivalued: false
+    description: The purpose of this name instance - usual, official, former, etc.
+
+  # --- Address ---
+  line1:
+    slot_uri: sc:line1
+    range: string
+    required: true
+    multivalued: false
+    description: Street address (e.g. "1 High Street") or care-of line.
+  line2:
+    slot_uri: sc:line2
+    range: string
+    required: false
+    multivalued: false
+    description: Apartment, suite, unit, building, floor, etc.
+  city:
+    slot_uri: sc:city
+    range: string
+    required: true
+    multivalued: false
+    description: City, town, or village.
+  postcode:
+    slot_uri: sc:postcode
+    range: string
+    required: true
+    multivalued: false
+    pattern: "^[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}$"
+    description: UK postcode in standard format (e.g. AB1 2CD).
+  UPRN:
+    slot_uri: sc:UPRN
+    range: string
+    required: false
+    multivalued: false
+    description: Unique Property Reference Number of the address.
+  USRN:
+    slot_uri: sc:USRN
+    range: string
+    required: false
+    multivalued: false
+    description: Unique Street Reference Number of the address.
+  addressUse:
+    slot_uri: sc:use
+    title: use
+    range: AddressUseCode
+    required: false
+    multivalued: false
+    description: How this address is used - home, work, temp, etc.
+
+  # --- Contact ---
+  contactName:
+    slot_uri: sc:contactName
+    title: name
+    range: string
+    required: false
+    multivalued: false
+    description: Name of the contact type (for example, "Home", "Work", "Other").
+  email:
+    slot_uri: sc:email
+    range: string
+    required: false
+    multivalued: true
+    description: One or more email addresses.
+  telephone:
+    slot_uri: sc:telephone
+    range: string
+    required: false
+    multivalued: true
+    description: One or more telephone numbers.
+
+  # --- AssessmentQuestion ---
+  questionId:
+    slot_uri: sc:questionId
+    range: string
+    required: false
+    multivalued: false
+    description: An ID for the question. Standards may define a dictionary of IDs for statutory or well-known questions; for personalised, local questions, this can be anything or left blank.
+  category:
+    slot_uri: sc:category
+    range: string
+    required: true
+    multivalued: false
+    description: The domain/category of the question.
+  questionText:
+    slot_uri: sc:questionText
+    range: string
+    required: true
+    multivalued: false
+    description: The exact wording of the question as it appears on the form.
+  answer:
+    slot_uri: sc:answer
+    range: string
+    required: true
+    multivalued: true
+    description: The answer to the question.
+  answerType:
+    slot_uri: sc:answerType
+    range: AnswerType
+    required: true
+    multivalued: false
+    description: Indicates how the answer should be parsed (e.g., String, Boolean, Date, Number, Enum). Ensures data like dates or booleans aren't trapped as unparsable text.
+  required:
+    slot_uri: sc:required
+    range: boolean
+    required: true
+    multivalued: false
+    description: Whether this question was mandatory on the form.
+
+  # --- Timing ---
+  frequency:
+    slot_uri: sc:frequency
+    range: Any
+    required: false
+    multivalued: false
+    inlined: true
+    description: >-
+      How frequently the activity, episode or event recurs, expressed as a
+      [FHIR Timing](https://build.fhir.org/datatypes.html#Timing) datatype. This
+      model does not define or validate its structure; the value is an
+      arbitrary JSON object conforming to FHIR Timing.
+  startDateTime:
+    slot_uri: sc:startDateTime
+    range: datetime
+    required: true
+    multivalued: false
+    description: The start of the activity, episode or event (or the first date it was scheduled to be performed), as an ISO 8601 date-time.
+  endDateTime:
+    slot_uri: sc:endDateTime
+    range: datetime
+    required: false
+    multivalued: false
+    description: The end of the activity, episode or event (or the last date it was performed), as an ISO 8601 date-time.
+
+# ---------------------------------------------------------------------------
+# Enums (controlled vocabularies / SKOS concept schemes)
+# ---------------------------------------------------------------------------
+enums:
+
+  NameUseCode:
+    enum_uri: sc:name-use-code
+    title: Name Use Code
+    description: >-
+      The intended purpose of a person's name. Aligned with the FHIR name-use
+      value set.
+    permissible_values:
+      usual:
+        title: Usual name
+        meaning: nuc:Usual
+        description: The name commonly used by the person - what they normally go by.
+      official:
+        title: Official name
+        meaning: nuc:Official
+        description: The formal name registered in a government register.
+      temp:
+        title: Temporary name
+        meaning: nuc:Temp
+        description: A temporary name; assigned at birth, in emergencies, or where the full name is not yet known.
+      nickname:
+        title: Nickname
+        meaning: nuc:Nickname
+        description: An informal name not part of the person's formal or usual name.
+      anonymous:
+        title: Anonymous
+        meaning: nuc:Anonymous
+        description: A pseudonym used to protect the person's privacy.
+      old:
+        title: Old name
+        meaning: nuc:Old
+        description: A name no longer in use, retained for record-matching purposes.
+      maiden:
+        title: Maiden name
+        meaning: nuc:Maiden
+        description: A name used prior to marriage. Applies regardless of gender.
+
+  AddressUseCode:
+    enum_uri: sc:address-use-code
+    title: Address Use Code
+    description: >-
+      How an address is used. Aligned with the FHIR address-use value set.
+    permissible_values:
+      home:
+        title: Home
+        meaning: auc:Home
+        description: A communication address at a home.
+      work:
+        title: Work
+        meaning: auc:Work
+        description: An office address. First choice for business-related contacts during business hours.
+      temp:
+        title: Temporary
+        meaning: auc:Temp
+        description: A temporary address.
+      old:
+        title: Old / Incorrect
+        meaning: auc:Old
+        description: This address is no longer in use (or was never correct but retained for records).
+      billing:
+        title: Billing
+        meaning: auc:Billing
+        description: An address to be used to send bills, invoices, receipts etc.
+
+  AnswerType:
+    enum_uri: sc:answer-type
+    title: Answer Type
+    description: Indicates how the answer to a question should be parsed and represented.
+    permissible_values:
+      String:
+        title: String
+        meaning: at:String
+        description: Free-form text value.
+      Boolean:
+        title: Boolean
+        meaning: at:Boolean
+        description: True/False value.
+      Date:
+        title: Date
+        meaning: at:Date
+        description: ISO date-time or date value.
+      Number:
+        title: Number
+        meaning: at:Number
+        description: Numeric value.
+      Enum:
+        title: Enum
+        meaning: at:Enum
+        description: Value from a controlled vocabulary.

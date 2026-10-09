@@ -10,7 +10,7 @@ tags:
   - Publication
 reference: PUB01
 status: draft
-data_model: src/assets/model/person/person-standard.yaml
+data_model: src/_data/model/person/person-standard.yaml
 non_technical_summary: |
   The core objective of our work is to facilitate the sharing of information about a person in care (whether a child or an adult) between agencies and organisations across the country (multi-agency information sharing). To do so, each of these agencies and organisations must be speaking the same "language" talking about the person, communicating with each other in the same way. This requires a common data model for identifying and describing a person across data systems, which we have designed here in our **Person Standard**.
 
@@ -105,7 +105,7 @@ The top-level record describing an individual. Consolidates the core identity at
   <h5 id="example-person">Example - Person</h5>
 {% highlight json %}
 {
-  "@context": "https://socialcaredata.github.io/assets/model/person/context.jsonld",
+  "@context": "https://socialcaredata.github.io/_data/model/person/context.jsonld",
   "@id": "ex:person-9434765919",
   "@type": "Person",
   "identifier": [{
@@ -506,9 +506,9 @@ The Person Standard is a reduced subset of the FHIR `Patient` resource, extended
 
 ## Ontology
 
-The ontology for this specification is defined in Turtle format and is available at: [person-standard.ttl](/assets/model/person/person-standard.ttl).
+The ontology for this specification is defined in Turtle format and is available at: [person-standard.ttl](https://github.com/SocialCareData/ontology/releases/latest).
 
-To validate a `Person` record against the constraints that apply in a given context, two SHACL shapes are provided. Use [person-subject-of-care-shape.ttl](/assets/model/person/person-subject-of-care-shape.ttl) where the `Person` is the subject of care, and [person-connected-shape.ttl](/assets/model/person/person-connected-shape.ttl) where the `Person` is a connected or related individual. Each shape applies the cardinality and content rules appropriate to that role.
+To validate a `Person` record against the constraints that apply in a given context, two SHACL shapes are provided. Use [person-subject-of-care-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest) where the `Person` is the subject of care, and [person-connected-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest) where the `Person` is a connected or related individual. Each shape applies the cardinality and content rules appropriate to that role.
 
 ## Report an issue
 
