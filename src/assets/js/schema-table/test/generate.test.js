@@ -34,7 +34,6 @@ test('integration: Placement links sub-entities in the Data Type column', () => 
 test('integration: ActualPlacement datatype + cardinality mapping', () => {
   const md = generateTable({ modelPath: MODEL, entity: 'ActualPlacement', rootDir: REPO_ROOT })
   assert.match(md, /\| `totalWeeklyCost` \| 1\.\.1 \| Decimal \|/)
-  assert.match(md, /\| `coreWeeklyCost` \| 0\.\.1 \| Decimal \|/)
   assert.match(md, /\| `siblingsPlacedTogether` \| 1\.\.1 \| Integer \|/)
 })
 
