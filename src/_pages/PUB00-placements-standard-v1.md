@@ -87,7 +87,7 @@ The top-level record. Captures the unique child identifier and links the placeme
 
 <div class="note">
   <h5 id="note-placement">Note - full lifecycle</h5>
-  <p>The example above only sketches the top-level wiring. See <a href="https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-placement.jsonld"><code>examples/placements/valid-placement.jsonld</code></a> for a full lifecycle example, and <a href="https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-other-options.jsonld"><code>examples/placements/valid-other-options.jsonld</code></a> for an example exercising every "Other" controlled-vocab option with paired free-text values.</p>
+  <p>The example above only sketches the top-level wiring. See <a href="https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-placement.jsonld"><code>valid-placement.jsonld</code></a> for a full lifecycle example, and <a href="https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-placement-full.jsonld"><code>valid-placement-full.jsonld</code></a> for an example exercising every "Other" controlled-vocab option with paired free-text values.</p>
 </div>
 
 
