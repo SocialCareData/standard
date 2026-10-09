@@ -1,4 +1,4 @@
-id: https://ontology.socialcaredata.io/person
+id: https://ns.socialcaredata.io/person
 name: person
 title: Person Standard Data Model
 description: >-
@@ -21,11 +21,11 @@ version: 1.0.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
-  p: https://ontology.socialcaredata.io/
-  gc: https://ontology.socialcaredata.io/gender-code#
-  psc: https://ontology.socialcaredata.io/phenotypic-sex-code#
-  ec: https://ontology.socialcaredata.io/ethnicity-code#
-  prc: https://ontology.socialcaredata.io/person-relationship-code#
+  p: https://ns.socialcaredata.io/
+  gc: https://ns.socialcaredata.io/gender-code#
+  psc: https://ns.socialcaredata.io/phenotypic-sex-code#
+  ec: https://ns.socialcaredata.io/ethnicity-code#
+  prc: https://ns.socialcaredata.io/person-relationship-code#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -38,7 +38,7 @@ imports:
   # module and imported here, so this schema reuses their ontology IRIs rather
   # than redefining them. The top-level imports.json maps this id to the local
   # common/common.yaml file.
-  - https://ontology.socialcaredata.io/common
+  - https://ns.socialcaredata.io/common
 
 # ---------------------------------------------------------------------------
 # Classes

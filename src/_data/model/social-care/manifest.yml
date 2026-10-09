@@ -4,8 +4,8 @@
 # module is versioned independently by its owning team; a MAIS release is cut by
 # recording a compatible set of module versions here and tagging. The release
 # project consumes this file to generate and publish the merged ontology.
-mais_version: 2026.1.0
-namespace: https://ontology.socialcaredata.io/
+ontlogy_version: 2026.1.0
+namespace: https://ns.socialcaredata.io/
 modules:
   common: 1.0.0
   person: 1.0.0

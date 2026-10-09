@@ -14,7 +14,7 @@ JSON Schema and docs are generated from the YAML.
 | File | Role |
 | --- | --- |
 | `safeguarding-standard.yaml` | **Authoritative source.** Prefixes, the five top-level classes (`Organisation`, `Service`, `Professional`, `ServiceEpisode`, `LifeEvent`), the linking/supporting objects (`SubjectPerson`, `RelatedProfessional`, `Finding`, `Observation`, `Measurement`), every slot, and the controlled vocabularies (enums). The shared objects (`Identifier`, `Name`, `Address`, `Contact`, `Timing`) are **imported** from the common module (see below). |
-| `../imports.json` | Top-level importmap shared by all modules: maps each module id (e.g. `https://ontology.socialcaredata.io/common`) to its local `*.yaml` file, so imports can be written as clean IRIs. |
+| `../imports.json` | Top-level importmap shared by all modules: maps each module id (e.g. `https://ns.socialcaredata.io/common`) to its local `*.yaml` file, so imports can be written as clean IRIs. |
 | `safeguarding-standard-shape.ttl` | *Generated* SHACL — one `NodeShape` per class, including the imported `p:Identifier` / `p:Name` / `p:Address` / `p:Contact` shapes. |
 | `safeguarding-standard.ttl` | *Generated* OWL/RDF ontology. Declares `owl:imports` of the common module and references the shared-object IRIs (`Identifier` …) rather than redefining them. |
 | `context.jsonld` | JSON-LD context used by the examples. Maps friendly keys to the flat ontology predicates (including the shared objects' fields), and each coded value to its concept IRI. |

@@ -1,4 +1,4 @@
-id: https://ontology.socialcaredata.io/person-connected
+id: https://ns.socialcaredata.io/person-connected
 name: person-connected
 title: Person Standard - Connected Person profile
 description: >-
@@ -17,14 +17,14 @@ version: 1.0.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
-  p: https://ontology.socialcaredata.io/
+  p: https://ns.socialcaredata.io/
 default_prefix: p
 imports:
   - linkml:types
   # The Person core, imported by its ontology id so the generated OWL carries a
   # canonical `owl:imports` rather than a file-relative one. The top-level
   # imports.json maps this id to the local person/person-standard.yaml file.
-  - https://ontology.socialcaredata.io/person
+  - https://ns.socialcaredata.io/person
 
 # ---------------------------------------------------------------------------
 # Person (Connected)

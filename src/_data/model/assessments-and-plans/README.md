@@ -14,7 +14,7 @@ JSON Schema and docs are generated from the YAML.
 | File | Role |
 | --- | --- |
 | `assessments-and-plans-standard.yaml` | **Authoritative source.** Prefixes, the two top-level classes (`CareNeedsAssessment`, `CarePlan`), the `FoundationalInformation` mixin they share, the supporting objects (`Review`, `CareAssessmentQuestion`, `CareComponent`, `CareActor`, `CareActivity`), every slot, and the controlled vocabularies (enums). `Identifier`, `AssessmentQuestion`, `Timing` and the `AnswerType` enum are **imported** from the common module (see below). |
-| `../imports.json` | Top-level importmap shared by all modules: maps each module id (e.g. `https://ontology.socialcaredata.io/common`) to its local `*.yaml` file, so imports can be written as clean IRIs. |
+| `../imports.json` | Top-level importmap shared by all modules: maps each module id (e.g. `https://ns.socialcaredata.io/common`) to its local `*.yaml` file, so imports can be written as clean IRIs. |
 | `assessments-and-plans-standard-shape.ttl` | *Generated* SHACL — one `NodeShape` per class, including the imported `p:Identifier` shape. |
 | `assessments-and-plans-standard.ttl` | *Generated* OWL/RDF ontology. Declares `owl:imports` of the common module and references `Identifier` rather than redefining it. |
 | `context.jsonld` | JSON-LD context used by the examples. Maps friendly keys to the flat ontology predicates (including the shared object's fields), and each coded value to its concept IRI. |

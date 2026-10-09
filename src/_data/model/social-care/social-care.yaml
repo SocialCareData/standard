@@ -1,4 +1,4 @@
-id: https://ontology.socialcaredata.io/mais
+id: https://ns.socialcaredata.io/mais
 name: social-care-mais
 title: Social Care MAIS Ontology
 description: >-
@@ -6,7 +6,7 @@ description: >-
   has no classes or slots of its own; it composes the independently-versioned
   modules - common, person, placements, safeguarding, and assessments-and-plans
   - into a single ontology under one flat namespace
-  (https://ontology.socialcaredata.io/).
+  (https://ns.socialcaredata.io/).
 
   Each module is authored and versioned on its own cadence; a MAIS release pins a
   compatible set of module versions (see manifest.yml) and is generated from this
@@ -16,13 +16,13 @@ version: 2026.1.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
-  sc: https://ontology.socialcaredata.io/
+  sc: https://ns.socialcaredata.io/
 default_prefix: sc
 default_range: string
 imports:
   - linkml:types
-  - https://ontology.socialcaredata.io/common
-  - https://ontology.socialcaredata.io/person-subject-of-care
-  - https://ontology.socialcaredata.io/placements
-  - https://ontology.socialcaredata.io/safeguarding
-  - https://ontology.socialcaredata.io/assessments-and-plans
+  - https://ns.socialcaredata.io/common
+  - https://ns.socialcaredata.io/person-subject-of-care
+  - https://ns.socialcaredata.io/placements
+  - https://ns.socialcaredata.io/safeguarding
+  - https://ns.socialcaredata.io/assessments-and-plans

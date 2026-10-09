@@ -2,7 +2,7 @@
 """Run the LinkML linter over every schema under src/_data/model.
 
 linkml-lint has no import map option, so on its own it fetches each
-https://ontology.socialcaredata.io/<module> import over the network instead of
+https://ns.socialcaredata.io/<module> import over the network instead of
 using the files in this checkout. This runs the same linter with imports.json.
 
 Run it with::

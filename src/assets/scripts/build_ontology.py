@@ -49,8 +49,8 @@ MANIFEST = MODEL_ROOT / "social-care" / "manifest.yml"
 
 # Flags copied verbatim from src/_data/model/model-management.md, plus
 # --ontology-uri-suffix. Without that flag LinkML appends its default
-# ".owl.ttl", so a schema declaring id https://ontology.socialcaredata.io/mais
-# publishes itself as https://ontology.socialcaredata.io/mais.owl.ttl and is not
+# ".owl.ttl", so a schema declaring id https://ns.socialcaredata.io/mais
+# publishes itself as https://ns.socialcaredata.io/mais.owl.ttl and is not
 # dereferenceable at its own IRI. The artifacts checked in under
 # src/assets/model/ predate this and still carry the bug.
 OWL_FLAGS = [
@@ -215,10 +215,10 @@ def resolve_pins(schemas: list[Schema], manifest: dict) -> dict[str, Schema]:
     umbrella = next((s for s in schemas if s.rel == UMBRELLA), None)
     if umbrella is None:
         raise BuildError(f"{UMBRELLA} not found")
-    if umbrella.version != str(manifest["mais_version"]):
+    if umbrella.version != str(manifest["ontlogy_version"]):
         raise BuildError(
             f"social-care.yaml declares version {umbrella.version} but manifest.yml "
-            f"pins mais_version {manifest['mais_version']}"
+            f"pins ontlogy_version {manifest['ontlogy_version']}"
         )
     return resolved
 

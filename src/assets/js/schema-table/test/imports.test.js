@@ -11,7 +11,7 @@ const { loadModelFile, loadImportMap, resolveImport, _resetImportCaches } = requ
 /**
  * Coverage for importmap discovery and multi-level import resolution — the
  * mechanism that lets a module schema import a shared core by its ontology id
- * (`https://ontology.socialcaredata.io/common`) and have it resolve to a local
+ * (`https://ns.socialcaredata.io/common`) and have it resolve to a local
  * file through a single `imports.json` sitting above the module directories.
  *
  * Fixtures are written to a throwaway tree shaped like the real repo:

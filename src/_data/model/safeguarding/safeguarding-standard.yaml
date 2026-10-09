@@ -1,4 +1,4 @@
-id: https://ontology.socialcaredata.io/safeguarding
+id: https://ns.socialcaredata.io/safeguarding
 name: safeguarding
 title: Safeguarding Standard Data Model
 description: >-
@@ -11,17 +11,17 @@ version: 1.0.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
-  sg: https://ontology.socialcaredata.io/
-  oc: https://ontology.socialcaredata.io/organisation-code#
-  svc: https://ontology.socialcaredata.io/service-code#
-  scf: https://ontology.socialcaredata.io/service-cost-frequency#
-  sd: https://ontology.socialcaredata.io/service-delivery#
-  epc: https://ontology.socialcaredata.io/episode-code#
-  eo: https://ontology.socialcaredata.io/episode-outcome#
-  evc: https://ontology.socialcaredata.io/event-code#
-  mt: https://ontology.socialcaredata.io/measurement-type#
-  mu: https://ontology.socialcaredata.io/measurement-unit#
-  ot: https://ontology.socialcaredata.io/observation-type#
+  sg: https://ns.socialcaredata.io/
+  oc: https://ns.socialcaredata.io/organisation-code#
+  svc: https://ns.socialcaredata.io/service-code#
+  scf: https://ns.socialcaredata.io/service-cost-frequency#
+  sd: https://ns.socialcaredata.io/service-delivery#
+  epc: https://ns.socialcaredata.io/episode-code#
+  eo: https://ns.socialcaredata.io/episode-outcome#
+  evc: https://ns.socialcaredata.io/event-code#
+  mt: https://ns.socialcaredata.io/measurement-type#
+  mu: https://ns.socialcaredata.io/measurement-unit#
+  ot: https://ns.socialcaredata.io/observation-type#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -34,7 +34,7 @@ imports:
   # module and imported here, so this schema reuses their ontology IRIs rather
   # than redefining them. The top-level imports.json maps this id to the local
   # common/common.yaml file.
-  - https://ontology.socialcaredata.io/common
+  - https://ns.socialcaredata.io/common
 
 # ---------------------------------------------------------------------------
 # Classes

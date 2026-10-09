@@ -27,7 +27,7 @@ under `src/_data/model/` — that compose into one **Social Care MAIS** ontology
   `social-care/manifest.yml` pins the module versions that make up a release.
 
 Everything lives under a **single flat namespace**,
-`https://ontology.socialcaredata.io/`, so a term keeps the same IRI whether used
+`https://ns.socialcaredata.io/`, so a term keeps the same IRI whether used
 in a module or in the merged ontology. Same-named slots across modules therefore
 share one IRI — keep genuinely different fields distinctly named (e.g.
 `specialCommunicationNeeds`, `measurementValue`). A field that really is the
@@ -35,7 +35,7 @@ same in several modules (e.g. `Timing`'s `startDateTime`) belongs in the common
 module rather than being defined in each.
 
 Cross-module imports use each module's ontology id (e.g.
-`https://ontology.socialcaredata.io/common`) and are resolved to local files by
+`https://ns.socialcaredata.io/common`) and are resolved to local files by
 the single top-level `imports.json`. **Importmap paths are resolved relative to
 the importing file**, so they are written `../<module>/<file>` and generators
 are run from the module's own directory:
@@ -143,7 +143,7 @@ gen-doc -im ../imports.json placements-standard.yaml
 `--non-closed` produces open shapes and `--suffix Shape` names them
 `…Shape` — both keep the output aligned with any hand-written shapes.
 `-im ../imports.json` resolves each cross-module import (e.g.
-`https://ontology.socialcaredata.io/common`) to its local file; the path is
+`https://ns.socialcaredata.io/common`) to its local file; the path is
 `../` because the single importmap sits one level above the module directories.
 `gen-shacl` keeps `--include-imports` (the default) so the shared-object shapes
 are emitted and validate the nested objects; `gen-owl` uses `--no-mergeimports`
@@ -152,7 +152,7 @@ copied in.
 
 `--ontology-uri-suffix ''` is **not** optional. Left off, `gen-owl` appends its
 default `.owl.ttl`, so a schema declaring
-`id: https://ontology.socialcaredata.io/placements` publishes itself as
+`id: https://ns.socialcaredata.io/placements` publishes itself as
 `…/placements.owl.ttl` and is not dereferenceable at its own IRI. (The older
 artifacts under `src/assets/model/` predate this and still carry the bug.) Where
 several files share one `id` — placements keeps frozen v1 and v0.1 alongside the
@@ -220,7 +220,7 @@ schemas that `import` it and redefine the root class:
 The Person model uses this (`person-standard.yaml` core +
 `person-subject-of-care.yaml` / `person-connected.yaml`); see
 [`person/README.md`](person/README.md). The profiles import the core by its
-ontology id (`https://ontology.socialcaredata.io/person`), resolved through the
+ontology id (`https://ns.socialcaredata.io/person`), resolved through the
 same top-level `imports.json` as every other cross-module import.
 
 ## Validating the examples

@@ -25,7 +25,7 @@ never clobbered by a sibling branch re-importing the same base.
 
 ### Resolving an import by its ontology id
 
-An import written as a schema id IRI (`https://ontology.socialcaredata.io/common`)
+An import written as a schema id IRI (`https://ns.socialcaredata.io/common`)
 is resolved to a local file through an `imports.json` importmap, mirroring
 LinkML's own `--importmap` / `-im`. The map is looked for **in the schema's own
 directory and in every ancestor up to the repository root**, because a modular
@@ -61,7 +61,7 @@ notice — a slot ranged on one of its classes renders with a blank Data Type ce
 instead of a link.
 
 ```
-schema-table: Unresolved import "https://ontology.socialcaredata.io/common" in
+schema-table: Unresolved import "https://ns.socialcaredata.io/common" in
 …/person-standard.yaml: no "imports.json" entry for it was found in …/person or
 any directory up to …/standard.
 ```

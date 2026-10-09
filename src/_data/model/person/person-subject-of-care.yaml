@@ -1,4 +1,4 @@
-id: https://ontology.socialcaredata.io/person-subject-of-care
+id: https://ns.socialcaredata.io/person-subject-of-care
 name: person-subject-of-care
 title: Person Standard - Subject of Care profile
 description: >-
@@ -16,14 +16,14 @@ version: 1.0.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
-  p: https://ontology.socialcaredata.io/
+  p: https://ns.socialcaredata.io/
 default_prefix: p
 imports:
   - linkml:types
   # The Person core, imported by its ontology id so the generated OWL carries a
   # canonical `owl:imports` rather than a file-relative one. The top-level
   # imports.json maps this id to the local person/person-standard.yaml file.
-  - https://ontology.socialcaredata.io/person
+  - https://ns.socialcaredata.io/person
 
 # ---------------------------------------------------------------------------
 # Person (Subject of Care)
