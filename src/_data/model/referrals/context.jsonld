@@ -1,0 +1,69 @@
+{
+  "@context": {
+    "ref":  "https://ns.socialcaredata.io/",
+    "rt":   "https://ns.socialcaredata.io/referral-type#",
+    "con":  "https://ns.socialcaredata.io/concern#",
+    "rp":   "https://ns.socialcaredata.io/request-purpose#",
+    "rsc":  "https://ns.socialcaredata.io/referral-service-code#",
+    "rqc":  "https://ns.socialcaredata.io/referral-question-category#",
+    "rr":   "https://ns.socialcaredata.io/referral-relationship#",
+    "rft":  "https://ns.socialcaredata.io/referrer-type#",
+    "p":    "https://ns.socialcaredata.io/",
+    "sg":   "https://ns.socialcaredata.io/",
+    "xsd":  "http://www.w3.org/2001/XMLSchema#",
+
+    "Referral":                   "ref:Referral",
+    "Request":                    "ref:Request",
+    "QualityOfCareConcern":       "ref:QualityOfCareConcern",
+    "qocConcern":                 "ref:QualityOfCareConcern",
+    "HouseholdMember":            "ref:HouseholdMember",
+    "ReferrerDetails":            "ref:ReferrerDetails",
+    "ConcernDetail":              "ref:ConcernDetail",
+    "ReferralInvolvement":        "ref:ReferralInvolvement",
+    "DocumentReference":          "ref:DocumentReference",
+    "ReferralRelationship":       "ref:ReferralRelationship",
+    "ReferralAssessmentQuestion": "ref:ReferralAssessmentQuestion",
+    "Person":                     "p:Person",
+    "Professional":               "sg:Professional",
+    "Identifier":                 "p:Identifier",
+
+    "identifier":                 { "@id": "ref:identifier",                 "@type": "@id" },
+    "dateCompleted":              { "@id": "ref:dateCompleted",              "@type": "xsd:dateTime" },
+    "type":                       { "@id": "ref:type",                       "@type": "@vocab" },
+    "subject":                    { "@id": "ref:subject",                    "@type": "@id", "@container": "@set" },
+    "household":                  { "@id": "ref:household",                  "@type": "@id", "@container": "@set" },
+    "referrer":                   { "@id": "ref:referrer",                   "@type": "@id" },
+    "concern":                    { "@id": "ref:concern",                    "@type": "@id", "@container": "@set" },
+    "involvement":                { "@id": "ref:referralInvolvement",        "@type": "@id" },
+    "pathway":                    { "@id": "ref:pathway",                    "@type": "@vocab", "@container": "@set" },
+    "recipient":                  { "@id": "ref:recipient",                  "@type": "@id", "@container": "@set" },
+    "purpose":                    { "@id": "ref:purpose",                    "@type": "@vocab" },
+    "assessmentQuestion":         { "@id": "ref:referralAssessmentQuestion", "@type": "@id", "@container": "@set" },
+    "attachment":                 { "@id": "ref:attachment",                 "@type": "@id", "@container": "@set" },
+    "relatedReferral":            { "@id": "ref:relatedReferral",            "@type": "@id", "@container": "@set" },
+
+    "householdPerson":            { "@id": "ref:householdPerson",            "@type": "@id" },
+    "householdRelationship":      { "@id": "ref:householdRelationship",      "@type": "@vocab" },
+    "householdDescription":       "ref:householdDescription",
+
+    "referrerPerson":             { "@id": "ref:referrerPerson",             "@type": "@id" },
+    "referrerProfessional":       { "@id": "ref:referrerProfessional",       "@type": "@id" },
+    "referrerType":               { "@id": "ref:referrerType",               "@type": "@vocab" },
+    "relationshipDescription":    "ref:relationshipDescription",
+
+    "concernType":                { "@id": "ref:concernType",                "@type": "@vocab" },
+    "concernDescription":         "ref:concernDescription",
+
+    "involvementProfessional":    { "@id": "ref:involvementProfessional",    "@type": "@id", "@container": "@set" },
+    "involvementDescription":     "ref:involvementDescription",
+
+    "documentId":                 { "@id": "ref:documentId",                 "@type": "@id" },
+    "documentTitle":              "ref:documentTitle",
+    "documentUrl":                { "@id": "ref:documentUrl",                "@type": "@id" },
+    "documentMimeType":           "ref:documentMimeType",
+    "documentDescription":        "ref:documentDescription",
+
+    "relatedReferralId":          { "@id": "ref:relatedReferralId",          "@type": "@id" },
+    "relationshipType":           { "@id": "ref:referralRelationshipType",   "@type": "@vocab" }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "@context": "../../../_data/model/referrals/context.jsonld",
+  "@id": "https://example.org/referrals/REF-2026-001",
+  "@type": "Referral",
+  "identifier": {
+    "@type": "Identifier",
+    "value": "REF-2026-001",
+    "system": "https://example.org/referrals"
+  },
+  "type": "child.safeguarding",
+  "dateCompleted": "2026-10-14T09:00:00Z",
+  "subject": [
+    {
+      "@type": "Person",
+      "name": [
+        {
+          "@type": "Name",
+          "givenName": ["Jane"],
+          "familyName": "Doe"
+        }
+      ]
+    }
+  ],
+  "referrer": {
+    "@type": "ReferrerDetails",
+    "referrerType": "Professional",
+    "professional": {
+      "@type": "Professional",
+      "name": {
+        "@type": "Name",
+        "givenName": ["John"],
+        "familyName": "Smith"
+      }
+    }
+  },
+  "concern": [
+    {
+      "@type": "ConcernDetail",
+      "concernType": "child.neglect",
+      "description": "Observed severe neglect concerns."
+    }
+  ],
+  "recipient": [
+    {
+      "@type": "Identifier",
+      "value": "ORG-CSC-01",
+      "system": "https://example.org/organisations"
+    }
+  ]
+}
