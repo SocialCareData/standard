@@ -21,16 +21,30 @@
       ]
     }
   ],
+  "personalNetwork": [
+    {
+      "@type": "PersonalNetworkMember",
+      "networkPerson": {
+        "@type": "ConnectedPerson",
+        "name": [
+          {
+            "@type": "Name",
+            "givenName": ["Mary"],
+            "familyName": "Smith"
+          }
+        ]
+      },
+      "networkRelationship": "AUNT",
+      "networkDescription": "Maternal aunt providing child care"
+    }
+  ],
   "referrer": {
     "@type": "ReferrerDetails",
     "referrerType": "Professional",
-    "professional": {
-      "@type": "Professional",
-      "name": {
-        "@type": "Name",
-        "givenName": ["John"],
-        "familyName": "Smith"
-      }
+    "referrerProfessionalId": {
+      "@type": "Identifier",
+      "value": "PROF-001",
+      "system": "https://example.org/professionals"
     }
   },
   "concern": [
@@ -39,6 +53,14 @@
       "concernType": "child.neglect",
       "description": "Observed severe neglect concerns."
     }
+  ],
+  "involvement": {
+    "@type": "ReferralInvolvement",
+    "actorType": "Self",
+    "involvementDescription": "Contacted emergency duty team."
+  },
+  "pathway": [
+    "early-help"
   ],
   "recipient": [
     {

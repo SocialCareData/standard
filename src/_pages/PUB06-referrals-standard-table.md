@@ -22,9 +22,9 @@ data_model: src/_data/model/referrals/referrals-standard.yaml
 
 {% schema_table page.data_model QualityOfCareConcern %}
 
-### HouseholdMember
+### PersonalNetworkMember
 
-{% schema_table page.data_model HouseholdMember %}
+{% schema_table page.data_model PersonalNetworkMember %}
 
 ### ReferrerDetails
 
@@ -42,9 +42,9 @@ data_model: src/_data/model/referrals/referrals-standard.yaml
 
 {% schema_table page.data_model DocumentReference %}
 
-### ReferralRelationship
+### RelatedRecord
 
-{% schema_table page.data_model ReferralRelationship %}
+{% schema_table page.data_model RelatedRecord %}
 
 ### ReferralAssessmentQuestion
 
@@ -78,17 +78,13 @@ See [Safeguarding.Professional](PUB02_safeguarding_standard_table#professional)
 
 {% schema_table page.data_model RequestPurposeCode %}
 
-### Outcomes (Service Codes) Taxonomy
-
-{% schema_table page.data_model ReferralServiceCode %}
-
 ### Question Categories Taxonomy
 
 {% schema_table page.data_model ReferralQuestionCategory %}
 
-### Relationships Between Linked Referrals Taxonomy
+### Relationships Between Linked Records Taxonomy
 
-{% schema_table page.data_model ReferralRelationshipCode %}
+{% schema_table page.data_model RecordRelationshipCode %}
 
 ### Referrer Types Taxonomy
 

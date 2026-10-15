@@ -14,10 +14,10 @@ prefixes:
   rt: https://ns.socialcaredata.io/referral-type#
   con: https://ns.socialcaredata.io/concern#
   rp: https://ns.socialcaredata.io/request-purpose#
-  rsc: https://ns.socialcaredata.io/referral-service-code#
   rqc: https://ns.socialcaredata.io/referral-question-category#
-  rr: https://ns.socialcaredata.io/referral-relationship#
+  rr: https://ns.socialcaredata.io/record-relationship#
   rft: https://ns.socialcaredata.io/referrer-type#
+  svc: https://ns.socialcaredata.io/service-code#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -42,7 +42,7 @@ classes:
       - refIdentifier
       - referralType
       - refSubject
-      - household
+      - personalNetwork
       - refReferrer
       - concern
       - refInvolvement
@@ -50,7 +50,7 @@ classes:
       - refRecipient
       - refAssessmentQuestion
       - attachment
-      - relatedReferral
+      - relatedRecord
       - refDateCompleted
 
   Request:
@@ -65,7 +65,7 @@ classes:
       - purpose
       - refAssessmentQuestion
       - attachment
-      - relatedReferral
+      - relatedRecord
       - refDateCompleted
 
   QualityOfCareConcern:
@@ -80,17 +80,17 @@ classes:
       - concern
       - refAssessmentQuestion
       - attachment
-      - relatedReferral
+      - relatedRecord
       - refDateCompleted
 
-  HouseholdMember:
-    class_uri: ref:HouseholdMember
+  PersonalNetworkMember:
+    class_uri: ref:PersonalNetworkMember
     description: >-
-      Person in the subject's family, household, or network.
+      Person in the subject's family, household, or broader personal support network (non-professionals only).
     slots:
-      - householdPerson
-      - householdRelationship
-      - householdDescription
+      - networkPerson
+      - networkRelationship
+      - networkDescription
 
   ReferrerDetails:
     class_uri: ref:ReferrerDetails
@@ -99,7 +99,9 @@ classes:
     slots:
       - referrerPerson
       - referrerProfessional
+      - referrerProfessionalId
       - referrerType
+      - referrerRelationshipCode
       - relationshipDescription
 
   ConcernDetail:
@@ -113,29 +115,31 @@ classes:
   ReferralInvolvement:
     class_uri: ref:ReferralInvolvement
     description: >-
-      Actions taken so far and professionals involved.
+      Actions taken so far and parties involved.
     slots:
-      - involvementProfessional
+      - involvementActorType
+      - involvementActorId
       - involvementDescription
 
   DocumentReference:
     class_uri: ref:DocumentReference
     description: >-
       Reference to an attached document or evidence supporting the referral or request.
-    slots:
-      - documentId
-      - documentTitle
-      - documentUrl
-      - documentMimeType
-      - documentDescription
+      [TODO: Define document reference properties]
+    # slots:
+    #   - documentId
+    #   - documentTitle
+    #   - documentUrl
+    #   - documentMimeType
+    #   - documentDescription
 
-  ReferralRelationship:
-    class_uri: ref:ReferralRelationship
+  RelatedRecord:
+    class_uri: ref:RelatedRecord
     description: >-
-      Reference to another related referral or request and their relationship.
+      Reference to another related referral, request, or record and their relationship.
     slots:
-      - relatedReferralId
-      - referralRelationshipType
+      - relatedRecordId
+      - relationshipType
 
   ReferralAssessmentQuestion:
     class_uri: ref:ReferralAssessmentQuestion
@@ -188,13 +192,13 @@ slots:
     multivalued: true
     description: Who is the person?
 
-  household:
-    slot_uri: ref:household
-    title: household
-    range: HouseholdMember
+  personalNetwork:
+    slot_uri: ref:personalNetwork
+    title: personalNetwork
+    range: PersonalNetworkMember
     required: false
     multivalued: true
-    description: Who is in the person's family, household, or network?
+    description: Who is in the person's family, household, or personal network?
 
   refReferrer:
     slot_uri: ref:referrer
@@ -223,7 +227,7 @@ slots:
   pathway:
     slot_uri: ref:pathway
     title: pathway
-    range: ReferralServiceCode
+    range: ServiceCode
     required: false
     multivalued: true
     description: What kind of support pathway do you think this referral should initiate?
@@ -311,38 +315,38 @@ slots:
     multivalued: true
     description: Attachments and reference to documents.
 
-  relatedReferral:
-    slot_uri: ref:relatedReferral
-    title: relatedReferral
-    range: ReferralRelationship
+  relatedRecord:
+    slot_uri: ref:relatedRecord
+    title: relatedRecord
+    range: RelatedRecord
     required: false
     multivalued: true
-    description: Other, related referrals.
+    description: Other, related referrals or records.
 
   # --- Supporting class slots ---
-  householdPerson:
-    slot_uri: ref:householdPerson
+  networkPerson:
+    slot_uri: ref:networkPerson
     title: person
     range: Person
     required: true
     multivalued: false
-    description: "[TODO: Add description]"
+    description: Person in the personal network.
 
-  householdRelationship:
-    slot_uri: ref:householdRelationship
+  networkRelationship:
+    slot_uri: ref:networkRelationship
     title: relationship
     range: PersonRelationshipCode
     required: true
     multivalued: false
-    description: "[TODO: Add description]"
+    description: Relationship to the subject.
 
-  householdDescription:
-    slot_uri: ref:householdDescription
+  networkDescription:
+    slot_uri: ref:networkDescription
     title: description
     range: string
     required: false
     multivalued: false
-    description: Text description of household relationship.
+    description: Text description of the personal network relationship.
 
   referrerPerson:
     slot_uri: ref:referrerPerson
@@ -350,7 +354,7 @@ slots:
     range: Person
     required: false
     multivalued: false
-    description: "[TODO: Add description]"
+    description: The person referring, when a non-professional.
 
   referrerProfessional:
     slot_uri: ref:referrerProfessional
@@ -358,7 +362,15 @@ slots:
     range: Professional
     required: false
     multivalued: false
-    description: "[TODO: Add description]"
+    description: Professional object for the referrer.
+
+  referrerProfessionalId:
+    slot_uri: ref:referrerProfessionalId
+    title: professionalId
+    range: Identifier
+    required: false
+    multivalued: false
+    description: Lightweight identifier reference for a professional referrer.
 
   referrerType:
     slot_uri: ref:referrerType
@@ -366,7 +378,15 @@ slots:
     range: ReferrerTypeCode
     required: true
     multivalued: false
-    description: "[TODO: Add description]"
+    description: The type of referrer.
+
+  referrerRelationshipCode:
+    slot_uri: ref:referrerRelationshipCode
+    title: relationshipCode
+    range: PersonRelationshipCode
+    required: false
+    multivalued: false
+    description: Relationship code of the referrer to the subject.
 
   relationshipDescription:
     slot_uri: ref:relationshipDescription
@@ -382,7 +402,7 @@ slots:
     range: ConcernCode
     required: true
     multivalued: false
-    description: "[TODO: Add description]"
+    description: The code identifying the concern.
 
   concernDescription:
     slot_uri: ref:concernDescription
@@ -392,13 +412,21 @@ slots:
     multivalued: false
     description: Free text description of concern.
 
-  involvementProfessional:
-    slot_uri: ref:involvementProfessional
-    title: professional
-    range: Professional
+  involvementActorType:
+    slot_uri: ref:involvementActorType
+    title: actorType
+    range: ReferrerTypeCode
+    required: false
+    multivalued: false
+    description: Category of the actor involved (e.g. Self, Professional).
+
+  involvementActorId:
+    slot_uri: ref:involvementActorId
+    title: actorId
+    range: Identifier
     required: false
     multivalued: true
-    description: "[TODO: Add description]"
+    description: Identifier(s) of the professional or actor involved.
 
   involvementDescription:
     slot_uri: ref:involvementDescription
@@ -408,61 +436,21 @@ slots:
     multivalued: false
     description: Free text description of involvement.
 
-  documentId:
-    slot_uri: ref:documentId
-    title: documentId
-    range: Identifier
-    required: false
-    multivalued: false
-    description: "[TODO: Add description]"
-
-  documentTitle:
-    slot_uri: ref:documentTitle
-    title: title
-    range: string
-    required: false
-    multivalued: false
-    description: "[TODO: Add description]"
-
-  documentUrl:
-    slot_uri: ref:documentUrl
-    title: url
-    range: uri
-    required: false
-    multivalued: false
-    description: "[TODO: Add description]"
-
-  documentMimeType:
-    slot_uri: ref:documentMimeType
-    title: mimeType
-    range: string
-    required: false
-    multivalued: false
-    description: "[TODO: Add description]"
-
-  documentDescription:
-    slot_uri: ref:documentDescription
-    title: description
-    range: string
-    required: false
-    multivalued: false
-    description: "[TODO: Add description]"
-
-  relatedReferralId:
-    slot_uri: ref:relatedReferralId
-    title: relatedReferralId
+  relatedRecordId:
+    slot_uri: ref:relatedRecordId
+    title: relatedRecordId
     range: Identifier
     required: true
     multivalued: false
-    description: "[TODO: Add description]"
+    description: Identifier of the related referral or request.
 
-  referralRelationshipType:
-    slot_uri: ref:referralRelationshipType
+  relationshipType:
+    slot_uri: ref:relationshipType
     title: relationshipType
-    range: ReferralRelationshipCode
+    range: RecordRelationshipCode
     required: true
     multivalued: false
-    description: "[TODO: Add description]"
+    description: Type of relationship to the related record.
 
 # ---------------------------------------------------------------------------
 # Controlled Vocabularies (Enums)
@@ -475,31 +463,31 @@ enums:
     description: Codes representing the type of inward referral.
     permissible_values:
       child.safeguarding:
-        title: "Safeguarding concern, child"
+        title: Safeguarding concern
         meaning: rt:ChildSafeguarding
       child.infoRequest:
-        title: "Information request, child"
+        title: Information request
         meaning: rt:ChildInfoRequest
       child.crossService:
-        title: "Professional concern about a child from engagement with an adult, child"
+        title: Professional concern about a child from engagement with an adult
         meaning: rt:ChildCrossService
       adult.general:
-        title: "General referral to social care, adult"
+        title: General referral to social care
         meaning: rt:AdultGeneral
       adult.safeguarding:
-        title: "Safeguarding concern, adult"
+        title: Safeguarding concern
         meaning: rt:AdultSafeguarding
       adult.independentLiving:
-        title: "Request for occupational therapy or home equipment, adult"
+        title: Request for occupational therapy or home equipment
         meaning: rt:AdultIndependentLiving
       adult.careActAssessment:
-        title: "Request for care needs assessment or review, adult"
+        title: Request for care needs assessment or review
         meaning: rt:AdultCareActAssessment
       adult.infoRequest:
-        title: "Information request, adult"
+        title: Information request
         meaning: rt:AdultInfoRequest
       adult.crossService:
-        title: "Professional concern about an adult from engagement with a child, adult"
+        title: Professional concern about an adult from engagement with a child
         meaning: rt:AdultCrossService
 
   ConcernCode:
@@ -508,67 +496,67 @@ enums:
     description: Codes representing the nature of concerns in referrals and quality-of-care reports.
     permissible_values:
       child.physicalAbuse:
-        title: "Physical abuse, child"
+        title: Physical abuse
         meaning: con:ChildPhysicalAbuse
       child.sexualAbuse:
-        title: "Sexual abuse, child"
+        title: Sexual abuse
         meaning: con:ChildSexualAbuse
       child.emotionalAbuse:
-        title: "Emotional abuse, child"
+        title: Emotional abuse
         meaning: con:ChildEmotionalAbuse
       child.neglect:
-        title: "Neglect, child"
+        title: Neglect
         meaning: con:ChildNeglect
       child.exploitation:
-        title: "Exploitation, child"
+        title: Exploitation
         meaning: con:ChildExploitation
       child.parentalConcern:
-        title: "Parental mental health or substance abuse issues, child"
+        title: Parental mental health or substance abuse issues
         meaning: con:ChildParentalConcern
       child.missingEducation:
-        title: "Missing education, child"
+        title: Missing education
         meaning: con:ChildMissingEducation
       child.goingMissing:
-        title: "Going missing, child"
+        title: Going missing
         meaning: con:ChildGoingMissing
       child.contextualRisk:
-        title: "Contextual risk, child"
+        title: Contextual risk
         meaning: con:ChildContextualRisk
       child.Other:
-        title: "Other, child"
+        title: Other
         meaning: con:ChildOther
       adult.physicalAbuse:
-        title: "Physical abuse, adult"
+        title: Physical abuse
         meaning: con:AdultPhysicalAbuse
       adult.sexualAbuse:
-        title: "Sexual abuse, adult"
+        title: Sexual abuse
         meaning: con:AdultSexualAbuse
       adult.emotionalAbuse:
-        title: "Emotional abuse, adult"
+        title: Emotional abuse
         meaning: con:AdultEmotionalAbuse
       adult.neglect:
-        title: "Neglect or acts of omission, adult"
+        title: Neglect or acts of omission
         meaning: con:AdultNeglect
       adult.financialCoercion:
-        title: "Financial coercion, adult"
+        title: Financial coercion
         meaning: con:AdultFinancialCoercion
       adult.discrimination:
-        title: "Discrimination, adult"
+        title: Discrimination
         meaning: con:AdultDiscrimination
       adult.domesticAbuse:
-        title: "Domestic abuse, adult"
+        title: Domestic abuse
         meaning: con:AdultDomesticAbuse
       adult.modernSlavery:
-        title: "Modern slavery, adult"
+        title: Modern slavery
         meaning: con:AdultModernSlavery
       adult.selfHarm:
-        title: "Self-neglect or self-harm, adult"
+        title: Self-neglect or self-harm
         meaning: con:AdultSelfHarm
       adult.substanceAbuse:
-        title: "Substance abuse, adult"
+        title: Substance abuse
         meaning: con:AdultSubstanceAbuse
       adult.other:
-        title: "Other, adult"
+        title: Other
         meaning: con:AdultOther
 
   RequestPurposeCode:
@@ -577,77 +565,32 @@ enums:
     description: Codes indicating the purpose of an outward request for services.
     permissible_values:
       notification:
-        title: "Notification or signposting"
+        title: Notification or signposting
         meaning: rp:Notification
       child.earlyHelp:
-        title: "Request to Early Help services, child"
+        title: Request to Early Help services
         meaning: rp:ChildEarlyHelp
       child.CIN:
-        title: "Escalation to s17 CiN assessment, child"
+        title: Escalation to s17 CiN assessment
         meaning: rp:ChildCIN
       child.s47:
-        title: "Escalation to s47 enquiry, child"
+        title: Escalation to s47 enquiry
         meaning: rp:ChildS47
       child.emergency:
-        title: "Immediate emergency protection, child"
+        title: Immediate emergency protection
         meaning: rp:ChildEmergency
       child.statutoryServices:
-        title: "Request to statutory services (like CAMHS or advocacy), child"
+        title: Request to statutory services (like CAMHS or advocacy)
         meaning: rp:ChildStatutoryServices
       child.nonStatutoryServices:
-        title: "Request to non-statutory services, child"
+        title: Request to non-statutory services
         meaning: rp:ChildNonStatutoryServices
       adult.statutoryServices:
-        title: "Request to statutory services (like NHS CHC or advocacy), adult"
+        title: Request to statutory services (like NHS CHC or advocacy)
         meaning: rp:AdultStatutoryServices
       adult.nonStatutoryServices:
-        title: "Request to non-statutory services, adult"
+        title: Request to non-statutory services
         meaning: rp:AdultNonStatutoryServices
-
-  ReferralServiceCode:
-    enum_uri: ref:referral-service-code
-    title: Outcomes (Service Codes)
-    description: Service codes indicating suggested pathways or requested services.
-    permissible_values:
-      MASH:
-        title: "MASH / safeguarding services"
-        meaning: rsc:MASH
-      early-help:
-        title: "Early help"
-        meaning: rsc:EarlyHelp
-      education-welfare:
-        title: "Education welfare officer"
-        meaning: rsc:EducationWelfare
-      home-adaptations:
-        title: "Home adaptations"
-        meaning: rsc:HomeAdaptations
-      occupational-therapy:
-        title: "Occupational therapy"
-        meaning: rsc:OccupationalTherapy
-      CHC:
-        title: "NHS CHC"
-        meaning: rsc:CHC
-      CMHT:
-        title: "CMHT"
-        meaning: rsc:CMHT
-      s117-aftercare:
-        title: "S117 aftercare"
-        meaning: rsc:S117Aftercare
-      DoLS:
-        title: "DoLs"
-        meaning: rsc:DoLS
-      D2A:
-        title: "D2A"
-        meaning: rsc:D2A
-      sensory-team:
-        title: "Sensory teams"
-        meaning: rsc:SensoryTeam
-      advocacy:
-        title: "Advocacy"
-        meaning: rsc:Advocacy
-      LGA:
-        title: "Local Government Association Service Taxonomy"
-        meaning: rsc:LGA
 
   ReferralQuestionCategory:
     enum_uri: ref:referral-question-category
@@ -655,76 +598,76 @@ enums:
     description: Categories for atypical, locally-configured questions.
     permissible_values:
       REFERRAL_TYPE_ROUTING:
-        title: "Referral type and routing"
+        title: Referral type and routing
         meaning: rqc:ReferralTypeRouting
       REFERRER_DETAILS:
-        title: "Referrer details"
+        title: Referrer details
         meaning: rqc:ReferrerDetails
       SUBJECT.CONSENT_CAPACITY:
-        title: "Person being referred (consent, awareness, capacity, authority)"
+        title: Person being referred (consent, awareness, capacity, authority)
         meaning: rqc:SubjectConsentCapacity
       SUBJECT.DEMOGRAPHICS:
-        title: "Person being referred (demographics)"
+        title: Person being referred (demographics)
         meaning: rqc:SubjectDemographics
       SUBJECT.ASSESSED_STATUS:
-        title: "Person being referred (assessed status)"
+        title: Person being referred (assessed status)
         meaning: rqc:SubjectAssessedStatus
       CONCERN:
-        title: "Concern and reason for referral"
+        title: Concern and reason for referral
         meaning: rqc:Concern
       RISK_HARM_SAFETY:
-        title: "Risk, harm, and immediate safety"
+        title: Risk, harm, and immediate safety
         meaning: rqc:RiskHarmSafety
       FAMILY_NETWORK:
-        title: "Family, household, and support network"
+        title: Family, household, and support network
         meaning: rqc:FamilyNetwork
       IMPACT_DAILY_LIFE:
-        title: "Impact, needs, and daily life"
+        title: Impact, needs, and daily life
         meaning: rqc:ImpactDailyLife
       SUBJECT.VOICE_WISHES:
-        title: "Subject's voice, wishes, and desired outcomes"
+        title: Subject's voice, wishes, and desired outcomes
         meaning: rqc:SubjectVoiceWishes
       SUBJECT.SERVICES_NETWORK:
-        title: "Current services, previous support and professional network"
+        title: Current services, previous support and professional network
         meaning: rqc:SubjectServicesNetwork
       STRENGTHS_POSITIVES:
-        title: "Strengths, protective factors, and what is working well / signs of safety"
+        title: Strengths, protective factors, and what is working well / signs of safety
         meaning: rqc:StrengthsPositives
       ACTIONS_TAKEN:
-        title: "Actions already taken"
+        title: Actions already taken
         meaning: rqc:ActionsTaken
       REQUESTED_SERVICE:
-        title: "Requested service, response required, and next steps"
+        title: Requested service, response required, and next steps
         meaning: rqc:RequestedService
       COMMUNICATION_ACCESSIBILITY:
-        title: "Communication, accessibility, and adjustments"
+        title: Communication, accessibility, and adjustments
         meaning: rqc:CommunicationAccessibility
       ATTACHMENTS:
-        title: "Attachments, evidence, and provenance"
+        title: Attachments, evidence, and provenance
         meaning: rqc:Attachments
       SUBMISSION_WORKFLOW:
-        title: "Submission and receiving-service workflow"
+        title: Submission and receiving-service workflow
         meaning: rqc:SubmissionWorkflow
 
-  ReferralRelationshipCode:
-    enum_uri: ref:referral-relationship
-    title: Relationships Between Linked Referrals
-    description: Relationship types between linked referrals or requests.
+  RecordRelationshipCode:
+    enum_uri: ref:record-relationship
+    title: Relationships Between Linked Records
+    description: Relationship types between linked referrals, requests, or concerns.
     permissible_values:
       escalationOf:
-        title: "Escalation of"
+        title: Escalation of
         meaning: rr:EscalationOf
       deescalationOf:
-        title: "Deescalation of"
+        title: Deescalation of
         meaning: rr:DeescalationOf
       followupTo:
-        title: "Follow up to"
+        title: Follow up to
         meaning: rr:FollowupTo
       reactivationOf:
-        title: "Reactivation of"
+        title: Reactivation of
         meaning: rr:ReactivationOf
       concurrentWith:
-        title: "Concurrent with"
+        title: Concurrent with
         meaning: rr:ConcurrentWith
 
   ReferrerTypeCode:
@@ -733,14 +676,14 @@ enums:
     description: Nature of the referrer's relationship to the subject or process.
     permissible_values:
       Self:
-        title: "Self"
+        title: Self
         meaning: rft:Self
       FamilyMember:
-        title: "Family member"
+        title: Family member
         meaning: rft:FamilyMember
       Professional:
-        title: "Professional"
+        title: Professional
         meaning: rft:Professional
       MemberOfThePublic:
-        title: "Member of the public"
+        title: Member of the public
         meaning: rft:MemberOfThePublic
