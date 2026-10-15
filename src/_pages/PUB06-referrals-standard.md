@@ -53,8 +53,8 @@ Inward, person-centric, point-of-entry referral into social services.
 <span id="referral-subject">subject</span>
 : Who is the person being referred? Multi-valued (`1..*`). Required. *Person object*. See [Person](#person).
 
-<span id="referral-household">household</span>
-: Who is in the person's family, household, or network? Multi-valued (`0..*`). Optional. *HouseholdMember object*. See [HouseholdMember](#householdmember).
+<span id="referral-personalNetwork">personalNetwork</span>
+: Who is in the person's family, household, or personal network? Multi-valued (`0..*`). Optional. *PersonalNetworkMember object*. See [PersonalNetworkMember](#personalnetworkmember).
 
 <span id="referral-referrer">referrer</span>
 : Who is the referrer? Required (`1..1`). *ReferrerDetails object*. See [ReferrerDetails](#referrerdetails).
@@ -66,7 +66,7 @@ Inward, person-centric, point-of-entry referral into social services.
 : What have you or others done so far? Optional (`0..1`). *ReferralInvolvement object*. See [ReferralInvolvement](#referralinvolvement).
 
 <span id="referral-pathway">pathway</span>
-: What kind of support pathway do you think this referral should initiate? Multi-valued (`0..*`). Optional. *Enum*. See the [Outcomes (Service Codes) Taxonomy](#outcomes-service-codes-taxonomy).
+: What kind of support pathway do you think this referral should initiate? Multi-valued (`0..*`). Optional. *Enum*. See the Safeguarding Standard's [Service Code Taxonomy](/PUB02_safeguarding_standard#service-code-taxonomy).
 
 <span id="referral-recipient">recipient</span>
 : Who was this referral sent to? Multi-valued (`1..*`). Required. *Identifier object*. See [Identifier](#identifier).
@@ -77,8 +77,8 @@ Inward, person-centric, point-of-entry referral into social services.
 <span id="referral-attachment">attachment</span>
 : Reference to attached documents or evidence supporting the referral. Multi-valued (`0..*`). Optional. *DocumentReference object*. See [DocumentReference](#documentreference).
 
-<span id="referral-relatedReferral">relatedReferral</span>
-: Other, related referrals and their relationship. Multi-valued (`0..*`). Optional. *ReferralRelationship object*. See [ReferralRelationship](#referralrelationship).
+<span id="referral-relatedRecord">relatedRecord</span>
+: Other, related referrals, requests, or records and their relationship. Multi-valued (`0..*`). Optional. *RelatedRecord object*. See [RelatedRecord](#relatedrecord).
 
 <span id="referral-dateCompleted">dateCompleted</span>
 : Date and time the referral was completed. Optional (`0..1`). *DateTime*.
@@ -168,8 +168,8 @@ Outward request for services for an existing subject of care.
 <span id="request-attachment">attachment</span>
 : Reference to attached documents or evidence supporting the request. Multi-valued (`0..*`). Optional. *DocumentReference object*. See [DocumentReference](#documentreference).
 
-<span id="request-relatedReferral">relatedReferral</span>
-: Other, related referrals or requests. Multi-valued (`0..*`). Optional. *ReferralRelationship object*. See [ReferralRelationship](#referralrelationship).
+<span id="request-relatedRecord">relatedRecord</span>
+: Other, related referrals, requests, or records. Multi-valued (`0..*`). Optional. *RelatedRecord object*. See [RelatedRecord](#relatedrecord).
 
 <span id="request-dateCompleted">dateCompleted</span>
 : Date and time the request was completed. Optional (`0..1`). *DateTime*.
@@ -241,8 +241,8 @@ Quality-of-care concern raised about a care provider or service.
 <span id="qoc-attachment">attachment</span>
 : Reference to attached documents or evidence supporting the concern. Multi-valued (`0..*`). Optional. *DocumentReference object*. See [DocumentReference](#documentreference).
 
-<span id="qoc-relatedReferral">relatedReferral</span>
-: Other, related referrals or concerns. Multi-valued (`0..*`). Optional. *ReferralRelationship object*. See [ReferralRelationship](#referralrelationship).
+<span id="qoc-relatedRecord">relatedRecord</span>
+: Other, related referrals, requests, or records. Multi-valued (`0..*`). Optional. *RelatedRecord object*. See [RelatedRecord](#relatedrecord).
 
 <span id="qoc-dateCompleted">dateCompleted</span>
 : Date and time the concern was completed. Optional (`0..1`). *DateTime*.
@@ -280,20 +280,20 @@ Quality-of-care concern raised about a care provider or service.
 
 ## Supporting Entities
 
-### HouseholdMember
+### PersonalNetworkMember
 
-Person in the subject's family, household, or network.
+Person in the subject's family, household, or broader personal support network (non-professionals only).
 
 #### Properties
 
-<span id="household-person">person</span>
-: The person in the household/family/network. Required (`1..1`). *Person object*. See [Person](#person).
+<span id="network-person">person</span>
+: The person in the personal network. Required (`1..1`). *Person object*. See [Person Standard](/PUB01_person_standard#person).
 
-<span id="household-relationship">relationship</span>
+<span id="network-relationship">relationship</span>
 : Relationship code to the subject person. Required (`1..1`). *Enum*. See [Person Standard → Relationship Code](/PUB01_person_standard#person-relationship-code-vocabulary).
 
-<span id="household-description">description</span>
-: Text description of the household relationship. Optional (`0..1`). *String*.
+<span id="network-description">description</span>
+: Text description of the personal network relationship. Optional (`0..1`). *String*.
 
 ### ReferrerDetails
 
@@ -302,13 +302,19 @@ Details of the referrer initiating the referral or concern.
 #### Properties
 
 <span id="referrer-person">person</span>
-: Details of the referrer when a person or member of the public. Optional (`0..1`). *Person object*. See [Person](#person).
+: Details of the referrer when a non-professional person or family member. Optional (`0..1`). *Person object*. See [Person Standard](/PUB01_person_standard#person).
 
 <span id="referrer-professional">professional</span>
-: Details of the referrer when a professional. Optional (`0..1`). *Professional object*. See [Professional](#professional).
+: Full professional details when available. Optional (`0..1`). *Professional object*. See [Professional](#professional).
+
+<span id="referrer-professionalId">professionalId</span>
+: Lightweight identifier for a professional referrer. Optional (`0..1`). *Identifier object*. See [Identifier](#identifier).
 
 <span id="referrer-referrerType">referrerType</span>
 : The role or nature of the referrer. Required (`1..1`). *Enum*. See the [Referrer Types Taxonomy](#referrer-types-taxonomy).
+
+<span id="referrer-relationshipCode">relationshipCode</span>
+: Relationship code of the referrer to the subject. Optional (`0..1`). *Enum*. See [Person Standard → Relationship Code](/PUB01_person_standard#person-relationship-code-vocabulary).
 
 <span id="referrer-relationshipDescription">relationshipDescription</span>
 : Relationship description of the referrer. Optional (`0..1`). *String*.
@@ -327,12 +333,15 @@ Identified concern and optional descriptive details.
 
 ### ReferralInvolvement
 
-Actions taken so far and professionals involved.
+Actions taken so far and parties involved.
 
 #### Properties
 
-<span id="involvement-professional">professional</span>
-: Professionals or teams who have been involved so far. Multi-valued (`0..*`). Optional. *Professional object*. See [Professional](#professional).
+<span id="involvement-actorType">actorType</span>
+: Role or category of the actor involved (e.g. Self, Professional). Optional (`0..1`). *Enum*. See the [Referrer Types Taxonomy](#referrer-types-taxonomy).
+
+<span id="involvement-actorId">actorId</span>
+: Identifier(s) of the professional or actor involved. Multi-valued (`0..*`). Optional. *Identifier object*. See [Identifier](#identifier).
 
 <span id="involvement-description">description</span>
 : Free text description of actions taken or involvement to date. Optional (`0..1`). *String*.
@@ -341,34 +350,19 @@ Actions taken so far and professionals involved.
 
 Reference to an attached document or evidence supporting the referral or request.
 
-#### Properties
+<!-- TODO: Detailed document reference properties are under review and will be defined in a future version. -->
 
-<span id="document-documentId">documentId</span>
-: Unique identifier for the document. Optional (`0..1`). *Identifier object*. See [Identifier](#identifier).
+### RelatedRecord
 
-<span id="document-title">title</span>
-: Title or display name of the document. Optional (`0..1`). *String*.
-
-<span id="document-url">url</span>
-: Web address or storage URI where the document can be retrieved. Optional (`0..1`). *URI*.
-
-<span id="document-mimeType">mimeType</span>
-: Media type / MIME type of the document. Optional (`0..1`). *String*.
-
-<span id="document-description">description</span>
-: Text description of the document. Optional (`0..1`). *String*.
-
-### ReferralRelationship
-
-Reference to another related referral or request and their relationship.
+Reference to another related referral, request, or record and their relationship.
 
 #### Properties
 
-<span id="refrel-relatedReferralId">relatedReferralId</span>
-: Unique identifier for the related referral or request. Required (`1..1`). *Identifier object*. See [Identifier](#identifier).
+<span id="record-relatedRecordId">relatedRecordId</span>
+: Unique identifier for the related referral, request, or record. Required (`1..1`). *Identifier object*. See [Identifier](#identifier).
 
-<span id="refrel-relationshipType">relationshipType</span>
-: The nature of the relationship to the other referral. Required (`1..1`). *Enum*. See the [Relationships Between Linked Referrals Taxonomy](#relationships-between-linked-referrals-taxonomy).
+<span id="record-relationshipType">relationshipType</span>
+: The nature of the relationship to the related record. Required (`1..1`). *Enum*. See the [Relationships Between Linked Records Taxonomy](#relationships-between-linked-records-taxonomy).
 
 ### ReferralAssessmentQuestion
 
@@ -389,7 +383,7 @@ A generic Question-and-Answer model used to represent atypical, locally configur
 : The recorded answer(s). Multi-valued (`0..*`). Optional. *String / value*.
 
 <span id="question-answerType">answerType</span>
-: Indicates how the answer should be parsed. Optional (`0..1`). *Enum*. See [Person Standard → Answer Type](/PUB05_assessments_and_plans_standard#answer-type-taxonomy).
+: Indicates how the answer should be parsed. Optional (`0..1`). *Enum*. See [Assessments and Plans → Answer Type](/PUB05_assessments_and_plans_standard#answer-type-taxonomy).
 
 <span id="question-required">required</span>
 : Whether this question is mandatory on the form. Optional (`0..1`). *Boolean*.
@@ -432,17 +426,13 @@ The model is parameterised by the following controlled vocabularies.
 
 {% schema_table page.data_model RequestPurposeCode expanded %}
 
-### Outcomes (Service Codes) Taxonomy
-
-{% schema_table page.data_model ReferralServiceCode expanded %}
-
 ### Question Categories Taxonomy
 
 {% schema_table page.data_model ReferralQuestionCategory expanded %}
 
-### Relationships Between Linked Referrals Taxonomy
+### Relationships Between Linked Records Taxonomy
 
-{% schema_table page.data_model ReferralRelationshipCode expanded %}
+{% schema_table page.data_model RecordRelationshipCode expanded %}
 
 ### Referrer Types Taxonomy
 

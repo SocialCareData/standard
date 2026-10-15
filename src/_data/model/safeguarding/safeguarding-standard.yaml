@@ -650,6 +650,58 @@ enums:
         title: Other Carer Support
         description: Other unpaid carer support
         meaning: svc:OtherCarerSupport
+      MASH:
+        title: MASH / Safeguarding Services
+        description: MASH / safeguarding services
+        meaning: svc:MASH
+      early-help:
+        title: Early Help
+        description: Early help
+        meaning: svc:EarlyHelp
+      education-welfare:
+        title: Education Welfare Officer
+        description: Education welfare officer
+        meaning: svc:EducationWelfare
+      home-adaptations:
+        title: Home Adaptations
+        description: Home adaptations
+        meaning: svc:HomeAdaptations
+      occupational-therapy:
+        title: Occupational Therapy
+        description: Occupational therapy
+        meaning: svc:OccupationalTherapy
+      CHC:
+        title: NHS CHC
+        description: NHS CHC
+        meaning: svc:CHC
+      CMHT:
+        title: CMHT
+        description: CMHT
+        meaning: svc:CMHT
+      s117-aftercare:
+        title: S117 Aftercare
+        description: S117 aftercare
+        meaning: svc:S117Aftercare
+      DoLS:
+        title: DoLs
+        description: DoLs
+        meaning: svc:DoLS
+      D2A:
+        title: D2A
+        description: D2A
+        meaning: svc:D2A
+      sensory-team:
+        title: Sensory Teams
+        description: Sensory teams
+        meaning: svc:SensoryTeam
+      advocacy:
+        title: Advocacy
+        description: Advocacy
+        meaning: svc:Advocacy
+      LGA:
+        title: Local Government Association Service Taxonomy
+        description: Local Government Association Service Taxonomy
+        meaning: svc:LGA
 
   ServiceCostFrequency:
     enum_uri: sg:service-cost-frequency
