@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -108,7 +109,8 @@ def run(cmd: list[str], cwd: Path, dest: Path) -> None:
     redirection would otherwise leave a truncated or zero-byte .ttl that looks
     like a legitimate artifact.
     """
-    proc = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
+    env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
+    proc = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, encoding="utf-8", env=env)
     if proc.returncode != 0:
         raise BuildError(
             f"{cmd[0]} failed for {dest.name} (exit {proc.returncode})\n"
@@ -118,7 +120,7 @@ def run(cmd: list[str], cwd: Path, dest: Path) -> None:
     if not proc.stdout.strip():
         raise BuildError(f"{cmd[0]} produced no output for {dest.name}")
     dest.parent.mkdir(parents=True, exist_ok=True)
-    dest.write_text(proc.stdout)
+    dest.write_text(proc.stdout, encoding="utf-8")
 
 
 def canonicalise(path: Path) -> None:

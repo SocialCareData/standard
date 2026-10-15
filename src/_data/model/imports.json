@@ -6,5 +6,6 @@
   "https://ns.socialcaredata.io/placements": "../placements/placements-standard",
   "https://ns.socialcaredata.io/safeguarding": "../safeguarding/safeguarding-standard",
   "https://ns.socialcaredata.io/assessments-and-plans": "../assessments-and-plans/assessments-and-plans-standard",
+  "https://ns.socialcaredata.io/referrals": "../referrals/referrals-standard",
   "https://ns.socialcaredata.io/social-care": "../social-care/social-care"
 }
