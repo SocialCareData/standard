@@ -292,11 +292,8 @@ While a single service episode may reflect routine support, changes in the numbe
 <span id="episode-outcome">outcome</span>
 : Outcome of the episode for the subject. Optional (`0..1`). See [Episode Outcome vocabulary](#episode-outcome-vocabulary).
 
-<span id="episode-assessmentId">assessmentId</span>
-: Unique identifiers for any care needs assessments completed during this episode. Multi-valued. Optional (`0..*`). See [Care Needs Assessment](/PUB05_assessments_and_plans_standard#careneedsassessment).
-
-<span id="episode-planId">planId</span>
-: Unique identifiers for any care plans created or active during this episode. Multi-valued. Optional (`0..*`). See [Care Plan](/PUB05_assessments_and_plans_standard#careplan).
+<span id="episode-linkedRecord">linkedRecord</span>
+: Associated records from other standards (such as referrals, service requests, quality-of-care concerns, care needs assessments, or care plans) linked to this episode. Multi-valued. Optional (`0..*`). See [LinkedRecord](#linkedrecord).
 
 #### Example
 
@@ -324,8 +321,18 @@ While a single service episode may reflect routine support, changes in the numbe
   } ],
   "location": ["Anytown Family Centre"],
   "finding": [ { "see Finding example" } ],
-  "assessmentId": [ { "@type": "Identifier", "value": "ASS-2026-001", "system": "https://example.org/Id/assessment" } ],
-  "planId": [ { "@type": "Identifier", "value": "PLAN-2026-001", "system": "https://example.org/Id/plan" } ]
+  "linkedRecord": [
+    {
+      "@type": "LinkedRecord",
+      "recordId": { "@type": "Identifier", "value": "ASS-2026-001", "system": "https://example.org/Id/assessment" },
+      "recordType": "assessment"
+    },
+    {
+      "@type": "LinkedRecord",
+      "recordId": { "@type": "Identifier", "value": "PLAN-2026-001", "system": "https://example.org/Id/plan" },
+      "recordType": "plan"
+    }
+  ]
 }
 {% endhighlight %}
 </div>
@@ -360,6 +367,9 @@ Safeguarding professionals will be interested in the recency of events (when the
 <span id="event-location">location</span>
 : Details about the location of the life event. Multi-valued. Optional (`0..*`). _String_.
 
+<span id="event-linkedRecord">linkedRecord</span>
+: Associated records from other standards (such as a source referral, service request, or quality-of-care concern) linked to this life event. Multi-valued. Optional (`0..*`). See [LinkedRecord](#linkedrecord).
+
 #### Example
 
 <div class="example">
@@ -384,7 +394,14 @@ Safeguarding professionals will be interested in the recency of events (when the
     "@type": "Timing",
     "startDateTime": "2026-05-01T09:30:00Z"
   } ],
-  "location": ["Anytown town centre"]
+  "location": ["Anytown town centre"],
+  "linkedRecord": [
+    {
+      "@type": "LinkedRecord",
+      "recordId": { "@type": "Identifier", "value": "REF-2026-001", "system": "https://example.org/Id/referral" },
+      "recordType": "referral"
+    }
+  ]
 }
 {% endhighlight %}
 </div>
@@ -574,6 +591,36 @@ A quantitative measurement of something related to the subject or their circumst
 </div>
 
 
+### LinkedRecord
+
+A reference to an associated external or cross-standard record (such as an inward referral, outward service request, quality-of-care concern, care needs assessment, or care plan).
+
+#### Properties
+
+<span id="linkedrecord-recordId">recordId</span>
+: The unique identifier of the linked record. Required (`1..1`). See [Person Standard → Identifier](/PUB01_person_standard#identifier).
+
+<span id="linkedrecord-recordType">recordType</span>
+: The type of the linked record (e.g. `referral`, `request`, `quality-of-care-concern`, `assessment`, `plan`). Required (`1..1`). See the [Record Type Vocabulary](#record-type-vocabulary).
+
+<span id="linkedrecord-recordRelationship">recordRelationship</span>
+: The nature of the relationship (for example, `trigger`, `outcome`, `context`). Optional (`0..1`). _String_.
+
+#### Example
+
+<div class="example">
+  <h5 id="example-linkedrecord">Example - LinkedRecord</h5>
+{% highlight json %}
+{
+  "@type": "LinkedRecord",
+  "recordId": { "@type": "Identifier", "value": "REF-2026-001", "system": "https://example.org/Id/referrals" },
+  "recordType": "referral",
+  "recordRelationship": "trigger"
+}
+{% endhighlight %}
+</div>
+
+
 ## Shared objects
 
 The `Identifier`, `Name`, `Address` and `Contact` objects used throughout this standard are defined once in the [Person Standard](/PUB01_person_standard) and reused here unchanged, so that people, professionals and organisations are identified and described consistently across the whole data model. Refer to the Person Standard for the full property list, cardinalities and examples of each:
@@ -708,6 +755,12 @@ Used by [`Measurement.type`](#measurement-type). Codes to indicate the type of m
 Used by [`Measurement.unit`](#measurement-unit). Codes to indicate the unit of measurement.
 
 {% schema_table page.data_model MeasurementUnit no-label %}
+
+### Record Type Vocabulary
+
+Used by [`LinkedRecord.recordType`](#linkedrecord-recordType). Codes to indicate the type of linked record across standards.
+
+{% schema_table page.data_model RecordTypeCode no-label %}
 
 
 ## Ontology
