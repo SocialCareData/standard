@@ -22,9 +22,16 @@ under `src/_data/model/` — that compose into one **Social Care MAIS** ontology
   and their vocabularies), depended on by the domain modules.
 - `person/`, `placements/`, `safeguarding/`, `assessments-and-plans/` — the
   domain standards; each imports `common` for the shared objects.
-- `social-care/social-care.yaml` — the **umbrella** schema. It has no terms of its own; it
-  `imports` every module so the merged ontology can be generated from one file.
-  `social-care/manifest.yml` pins the module versions that make up a release.
+- `social-care.yaml` — the **umbrella** schema, at the model root. It has no
+  terms of its own; it `imports` every module. `manifest.yaml` pins the module
+  versions that make up a release, and `context.jsonld` combines the modules'
+  JSON-LD contexts.
+
+The published `social-care.ttl` (at the root of
+[SocialCareData/ontology](https://github.com/SocialCareData/ontology)) is **not**
+merged: it `owl:imports` the `main`-branch raw file of each module at the version
+pinned in `manifest.yaml`. Only `social-care-shape.ttl` is merged, so a single
+shapes file validates every module.
 
 Everything lives under a **single flat namespace**,
 `https://ns.socialcaredata.io/`, so a term keeps the same IRI whether used
@@ -43,10 +50,11 @@ are run from the module's own directory:
 ```bash
 # a module (references common via the shared importmap)
 cd safeguarding && gen-owl --no-mergeimports -im ../imports.json safeguarding-standard.yaml
-
-# the whole merged MAIS ontology
-cd mais && gen-owl --mergeimports -im ../imports.json mais.yaml > social-care-mais.ttl
 ```
+
+The root-level `social-care.yaml` cannot use these `../` paths as written; build it
+with `build_ontology.py` (below), which passes the generators an absolute copy
+of the map.
 
 The `{% schema_table %}` generator finds this map by walking up from the schema's
 own directory to the repository root, so a module never needs its own copy. A

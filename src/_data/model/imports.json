@@ -5,6 +5,5 @@
   "https://ns.socialcaredata.io/person-connected": "../person/person-connected",
   "https://ns.socialcaredata.io/placements": "../placements/placements-standard",
   "https://ns.socialcaredata.io/safeguarding": "../safeguarding/safeguarding-standard",
-  "https://ns.socialcaredata.io/assessments-and-plans": "../assessments-and-plans/assessments-and-plans-standard",
-  "https://ns.socialcaredata.io/social-care": "../social-care/social-care"
+  "https://ns.socialcaredata.io/assessments-and-plans": "../assessments-and-plans/assessments-and-plans-standard"
 }

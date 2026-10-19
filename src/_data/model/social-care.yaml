@@ -9,7 +9,7 @@ description: >-
   (https://ns.socialcaredata.io/).
 
   Each module is authored and versioned on its own cadence; a MAIS release pins a
-  compatible set of module versions (see manifest.yml) and is generated from this
+  compatible set of module versions (see manifest.yaml) and is generated from this
   file.
 license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
 version: 2026.1.0

@@ -22,7 +22,11 @@ Here are things to keep in mind:
 
 * **Import maps resolve relative to the importing schema, not to the map.** That
   is why every value is ``../<module>/<stem>`` and why the modules must stay
-  exactly one directory below ``src/_data/model``.
+  exactly one directory below ``src/_data/model``. The umbrella schema sits at
+  the model root, so it is built against an absolute copy of the map.
+
+* **social-care.ttl is not merged.** It ``owl:imports`` the raw ``main``-branch
+  file of each module at the version pinned in ``manifest.yaml``.
 """
 
 from __future__ import annotations
@@ -37,15 +41,20 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import yaml
-from rdflib import Graph
+from rdflib import Graph, URIRef
 from rdflib.compare import to_canonical_graph
+from rdflib.namespace import OWL, RDF
 
 # src/assets/scripts/build_ontology.py -> repo root is four levels up.
 REPO_ROOT = Path(__file__).resolve().parents[3]
 MODEL_ROOT = REPO_ROOT / "src" / "_data" / "model"
 ASSETS_MODEL_ROOT = REPO_ROOT / "src" / "assets" / "model"
 IMPORTS_JSON = MODEL_ROOT / "imports.json"
-MANIFEST = MODEL_ROOT / "social-care" / "manifest.yml"
+MANIFEST = MODEL_ROOT / "manifest.yaml"
+UMBRELLA = MODEL_ROOT / "social-care.yaml"
+CONTEXT = MODEL_ROOT / "context.jsonld"
+# Where the module ontologies are served from once synced to SocialCareData/ontology.
+PUBLISHED_BASE = "https://raw.githubusercontent.com/SocialCareData/ontology/main/"
 
 # Flags copied verbatim from src/_data/model/model-management.md, plus
 # --ontology-uri-suffix. Without that flag LinkML appends its default
@@ -66,12 +75,6 @@ SHACL_FLAGS = ["--non-closed", "--suffix", "Shape"]
 # a person-standard-shape.ttl would ship a shape the modellers forbid. The OWL
 # is still generated - it is the vocabulary the profiles build on.
 SHACL_SKIP = {"person/person-standard.yaml"}
-
-# social-care.yaml is built separately: merged (--mergeimports) and against the
-# manifest-resolved import map. Generating it in the per-module loop as well
-# would write the same path twice, the second time with a stub containing
-# nothing but owl:imports.
-UMBRELLA = "social-care/social-care.yaml"
 
 
 class BuildError(RuntimeError):
@@ -97,6 +100,10 @@ class Schema:
     def importmap_value(self) -> str:
         """Path as an import map value: relative to the *importing* schema."""
         return f"../{self.module}/{self.stem}"
+
+    @property
+    def published_url(self) -> str:
+        return f"{PUBLISHED_BASE}{self.module}/{self.stem}.ttl"
 
 
 def run(cmd: list[str], cwd: Path, dest: Path) -> None:
@@ -179,7 +186,7 @@ def load_schemas() -> list[Schema]:
 def resolve_pins(schemas: list[Schema], manifest: dict) -> dict[str, Schema]:
     """Resolve each manifest version pin to exactly one schema file.
 
-    A social-care MAIS release is defined by the module versions recorded in manifest.yml,
+    A social-care MAIS release is defined by the module versions recorded in manifest.yaml,
     so a pin that cannot be resolved to precisely one file means the release
     does not describe a buildable ontology. That is always fatal - falling back
     to "whatever imports.json points at" would publish a release whose contents
@@ -212,29 +219,44 @@ def resolve_pins(schemas: list[Schema], manifest: dict) -> dict[str, Schema]:
             )
         resolved[key] = matches[0]
 
-    umbrella = next((s for s in schemas if s.rel == UMBRELLA), None)
-    if umbrella is None:
+    if not UMBRELLA.exists():
         raise BuildError(f"{UMBRELLA} not found")
-    if umbrella.version != str(manifest["ontology_version"]):
+    umbrella_version = str(yaml.safe_load(UMBRELLA.read_text())["version"])
+    if umbrella_version != str(manifest["ontology_version"]):
         raise BuildError(
-            f"social-care.yaml declares version {umbrella.version} but manifest.yml "
+            f"social-care.yaml declares version {umbrella_version} but manifest.yaml "
             f"pins ontology_version {manifest['ontology_version']}"
         )
     return resolved
 
 
 def resolved_importmap(resolved: dict[str, Schema]) -> dict[str, str]:
-    """The repo import map, overridden by the manifest-pinned files.
+    """The repo import map, overridden by the manifest-pinned files, as absolute paths.
 
     Overriding rather than rebuilding matters: imports.json may carry entries
     the manifest does not pin (or that are only needed transitively), and
-    dropping those would break the merged build in a way that is tedious to
-    diagnose.
+    dropping those would break the umbrella build in a way that is tedious to
+    diagnose. Absolute paths let the root-level umbrella use a map whose values
+    are written relative to a module directory.
     """
     importmap = json.loads(IMPORTS_JSON.read_text())
     for schema in resolved.values():
         importmap[schema.id] = schema.importmap_value
-    return importmap
+    return {k: str((MODEL_ROOT / "_" / v).resolve()) for k, v in importmap.items()}
+
+
+def point_imports_at_published(path: Path, resolved: dict[str, Schema]) -> None:
+    """Replace each owl:imports module IRI with its pinned, published file URL."""
+    by_id = {s.id: s for s in resolved.values()}
+    graph = Graph()
+    graph.parse(path, format="turtle")
+    for ontology, _, target in list(graph.triples((None, OWL.imports, None))):
+        schema = by_id.get(str(target))
+        if schema is None:
+            raise BuildError(f"social-care.yaml imports {target}, which manifest.yaml does not pin")
+        graph.remove((ontology, OWL.imports, target))
+        graph.add((ontology, OWL.imports, URIRef(schema.published_url)))
+    graph.serialize(destination=path, format="turtle")
 
 
 def ontology_uri_suffixes(schemas: list[Schema]) -> dict[str, str]:
@@ -279,8 +301,6 @@ def assert_unique_ontology_iris(out_dir: Path) -> None:
     self-contradictory graph in any reasoner or triplestore that loads the repo
     wholesale, which is exactly the failure this repo exists to avoid.
     """
-    from rdflib.namespace import OWL, RDF
-
     seen: dict[str, str] = {}
     for path in sorted(out_dir.rglob("*.ttl")):
         if path.name.endswith("-shape.ttl"):
@@ -303,7 +323,7 @@ def copy_aux(schemas: list[Schema], out_dir: Path) -> None:
     for module in modules:
         for name in ("context.jsonld", "README.md"):
             src = MODEL_ROOT / module / name
-            if src.exists():  # common/ and social-care/ have no README
+            if src.exists():  # common/ has no README
                 shutil.copy2(src, out_dir / module / name)
         # The hand-maintained *-rules-shape.ttl files carry the conditional
         # constraints gen-shacl cannot produce, because it ignores LinkML
@@ -316,7 +336,8 @@ def copy_aux(schemas: list[Schema], out_dir: Path) -> None:
         for rules in sorted((ASSETS_MODEL_ROOT / module).glob("*-rules-shape.ttl")):
             target.mkdir(parents=True, exist_ok=True)
             shutil.copy2(rules, target / rules.name)
-    shutil.copy2(MANIFEST, out_dir / "social-care" / "manifest.yml")
+    shutil.copy2(MANIFEST, out_dir / MANIFEST.name)
+    shutil.copy2(CONTEXT, out_dir / CONTEXT.name)
     # The per-module READMEs link to ../model-management.md, so it has to come
     # along or every one of those links 404s in the published repo. Being
     # overwritten on each run, this copy cannot drift from the original.
@@ -336,8 +357,6 @@ def build(out_dir: Path) -> list[Schema]:
     generated: list[Path] = []
 
     for schema in schemas:
-        if schema.rel == UMBRELLA:
-            continue
         module_dir = MODEL_ROOT / schema.module
         target_dir = out_dir / schema.module
 
@@ -371,38 +390,38 @@ def build(out_dir: Path) -> list[Schema]:
         generated.append(shacl_dest)
         print(f"  {schema.rel}: OWL + SHACL")
 
-    # The umbrella, merged and resolved through the manifest-pinned import map.
-    # The map is written outside src/ deliberately: Jekyll's source is src/, and
-    # it parses every JSON file under src/_data/ into site.data, so a generated
-    # file there would pollute the site build.
+    # The umbrella, resolved through the manifest-pinned import map and written
+    # to the root of the published tree. The map is written outside src/
+    # deliberately: Jekyll's source is src/, and it parses every JSON file under
+    # src/_data/ into site.data, so a generated file there would pollute the site build.
     with tempfile.TemporaryDirectory() as tmp:
         importmap_path = Path(tmp) / "resolved-imports.json"
         importmap_path.write_text(json.dumps(resolved_importmap(resolved), indent=2))
-        social_care_dir = MODEL_ROOT / "social-care"
 
-        social_care_ttl = out_dir / "social-care" / "social-care.ttl"
+        social_care_ttl = out_dir / "social-care.ttl"
         run(
             [
                 "gen-owl",
-                "--mergeimports",
+                "--no-mergeimports",
                 "--ontology-uri-suffix",
                 "",
                 *OWL_FLAGS,
                 "-im",
                 str(importmap_path),
-                "social-care.yaml",
+                UMBRELLA.name,
             ],
-            cwd=social_care_dir,
+            cwd=MODEL_ROOT,
             dest=social_care_ttl,
         )
-        social_care_shape = out_dir / "social-care" / "social-care-shape.ttl"
+        point_imports_at_published(social_care_ttl, resolved)
+        social_care_shape = out_dir / "social-care-shape.ttl"
         run(
-            ["gen-shacl", *SHACL_FLAGS, "-im", str(importmap_path), "social-care.yaml"],
-            cwd=social_care_dir,
+            ["gen-shacl", *SHACL_FLAGS, "-im", str(importmap_path), UMBRELLA.name],
+            cwd=MODEL_ROOT,
             dest=social_care_shape,
         )
         generated.extend([social_care_ttl, social_care_shape])
-        print("  social-care/social-care.yaml: merged OWL + SHACL")
+        print("  social-care.yaml: OWL (imports pinned modules) + merged SHACL")
 
     print(f"canonicalising {len(generated)} files")
     for path in generated:

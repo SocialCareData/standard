@@ -29,8 +29,12 @@ from linkml_runtime.loaders import yaml_loader
 # src/assets/scripts/check_slot_conflicts.py -> repo root is four levels up.
 REPO_ROOT = Path(__file__).resolve().parents[3]
 MODEL_ROOT = REPO_ROOT / "src" / "_data" / "model"
-UMBRELLA = MODEL_ROOT / "social-care" / "social-care.yaml"
-IMPORTMAP = json.loads((MODEL_ROOT / "imports.json").read_text(encoding="utf-8"))
+UMBRELLA = MODEL_ROOT / "social-care.yaml"
+IMPORTMAP = {
+    # Values are relative to a module directory; absolute paths also serve the root-level umbrella.
+    k: str((MODEL_ROOT / "_" / v).resolve())
+    for k, v in json.loads((MODEL_ROOT / "imports.json").read_text(encoding="utf-8")).items()
+}
 
 
 @dataclass(frozen=True)
