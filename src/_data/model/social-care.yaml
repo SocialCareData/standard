@@ -12,7 +12,6 @@ description: >-
   compatible set of module versions (see manifest.yaml) and is generated from this
   file.
 license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
-version: 2026.1.0
 
 prefixes:
   linkml: https://w3id.org/linkml/

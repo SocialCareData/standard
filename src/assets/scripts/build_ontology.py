@@ -222,15 +222,28 @@ def resolve_pins(schemas: list[Schema], manifest: dict) -> dict[str, Schema]:
             )
         resolved[key] = matches[0]
 
+    return resolved
+
+
+def versioned_umbrella(manifest: dict, dest_dir: Path) -> Path:
+    """Write social-care.yaml into ``dest_dir`` with the manifest's ``ontology_version``.
+
+    The release version is recorded once, in manifest.yaml. The umbrella
+    deliberately declares no version of its own, so the two cannot disagree;
+    one written there anyway is refused rather than silently overridden.
+    """
     if not UMBRELLA.exists():
         raise BuildError(f"{UMBRELLA} not found")
-    umbrella_version = str(yaml.safe_load(UMBRELLA.read_text())["version"])
-    if umbrella_version != str(manifest["ontology_version"]):
+    doc = yaml.safe_load(UMBRELLA.read_text())
+    if "version" in doc:
         raise BuildError(
-            f"social-care.yaml declares version {umbrella_version} but manifest.yaml "
-            f"pins ontology_version {manifest['ontology_version']}"
+            "social-care.yaml declares a version; remove it, the release version "
+            "is ontology_version in manifest.yaml"
         )
-    return resolved
+    doc["version"] = str(manifest["ontology_version"])
+    dest = dest_dir / UMBRELLA.name
+    dest.write_text(yaml.safe_dump(doc, sort_keys=False, allow_unicode=True))
+    return dest
 
 
 def resolved_importmap(resolved: dict[str, Schema]) -> dict[str, str]:
@@ -397,9 +410,12 @@ def build(out_dir: Path) -> list[Schema]:
     # to the root of the published tree. The map is written outside src/
     # deliberately: Jekyll's source is src/, and it parses every JSON file under
     # src/_data/ into site.data, so a generated file there would pollute the site build.
+    # The umbrella copy carrying the manifest's version is written there too; the
+    # import map's absolute paths let it resolve the modules from outside MODEL_ROOT.
     with tempfile.TemporaryDirectory() as tmp:
         importmap_path = Path(tmp) / "resolved-imports.json"
         importmap_path.write_text(json.dumps(resolved_importmap(resolved), indent=2))
+        umbrella = versioned_umbrella(manifest, Path(tmp))
 
         social_care_ttl = out_dir / "social-care.ttl"
         run(
@@ -411,7 +427,7 @@ def build(out_dir: Path) -> list[Schema]:
                 *OWL_FLAGS,
                 "-im",
                 str(importmap_path),
-                UMBRELLA.name,
+                str(umbrella),
             ],
             cwd=MODEL_ROOT,
             dest=social_care_ttl,
@@ -419,7 +435,7 @@ def build(out_dir: Path) -> list[Schema]:
         point_imports_at_published(social_care_ttl, resolved)
         social_care_shape = out_dir / "social-care-shape.ttl"
         run(
-            ["gen-shacl", *SHACL_FLAGS, "-im", str(importmap_path), UMBRELLA.name],
+            ["gen-shacl", *SHACL_FLAGS, "-im", str(importmap_path), str(umbrella)],
             cwd=MODEL_ROOT,
             dest=social_care_shape,
         )

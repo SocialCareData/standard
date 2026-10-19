@@ -111,7 +111,7 @@ with:
 - `social-care-shape.ttl` at the root, with every module's shapes merged into one file.
 
 To cut a release, update the module versions and `ontology_version` in
-`manifest.yaml`, and set the `version` of `social-care.yaml` to the same
+`manifest.yaml`. `social-care.yaml` declares no version: the build gives it
 `ontology_version`.
 
 **Manually.** Requires Python ≥ 3.11. To reproduce the published output:
