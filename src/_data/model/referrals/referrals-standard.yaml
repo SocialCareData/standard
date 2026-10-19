@@ -50,7 +50,7 @@ classes:
       - refRecipient
       - refAssessmentQuestion
       - attachment
-      - relatedRecord
+      - linkedRecord
       - refDateCompleted
 
   Request:
@@ -65,7 +65,7 @@ classes:
       - purpose
       - refAssessmentQuestion
       - attachment
-      - relatedRecord
+      - linkedRecord
       - refDateCompleted
 
   QualityOfCareConcern:
@@ -80,7 +80,7 @@ classes:
       - concern
       - refAssessmentQuestion
       - attachment
-      - relatedRecord
+      - linkedRecord
       - refDateCompleted
 
   PersonalNetworkMember:
@@ -132,14 +132,6 @@ classes:
     #   - documentUrl
     #   - documentMimeType
     #   - documentDescription
-
-  RelatedRecord:
-    class_uri: ref:RelatedRecord
-    description: >-
-      Reference to another related referral, request, or record and their relationship.
-    slots:
-      - relatedRecordId
-      - relationshipType
 
   ReferralAssessmentQuestion:
     class_uri: ref:ReferralAssessmentQuestion
@@ -315,14 +307,6 @@ slots:
     multivalued: true
     description: Attachments and reference to documents.
 
-  relatedRecord:
-    slot_uri: ref:relatedRecord
-    title: relatedRecord
-    range: RelatedRecord
-    required: false
-    multivalued: true
-    description: Other, related referrals or records.
-
   # --- Supporting class slots ---
   networkPerson:
     slot_uri: ref:networkPerson
@@ -435,22 +419,6 @@ slots:
     required: false
     multivalued: false
     description: Free text description of involvement.
-
-  relatedRecordId:
-    slot_uri: ref:relatedRecordId
-    title: relatedRecordId
-    range: Identifier
-    required: true
-    multivalued: false
-    description: Identifier of the related referral or request.
-
-  relationshipType:
-    slot_uri: ref:relationshipType
-    title: relationshipType
-    range: RecordRelationshipCode
-    required: true
-    multivalued: false
-    description: Type of relationship to the related record.
 
 # ---------------------------------------------------------------------------
 # Controlled Vocabularies (Enums)

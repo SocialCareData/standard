@@ -42,10 +42,6 @@ data_model: src/_data/model/referrals/referrals-standard.yaml
 
 {% schema_table page.data_model DocumentReference %}
 
-### RelatedRecord
-
-{% schema_table page.data_model RelatedRecord %}
-
 ### ReferralAssessmentQuestion
 
 {% schema_table page.data_model ReferralAssessmentQuestion %}
@@ -63,6 +59,10 @@ See [Person](PUB01_person_standard_table#person)
 ### Professional
 
 See [Safeguarding.Professional](PUB02_safeguarding_standard_table#professional)
+
+### LinkedRecord
+
+See [Safeguarding.LinkedRecord](PUB02_safeguarding_standard_table#linkedrecord)
 
 ## Taxonomies
 

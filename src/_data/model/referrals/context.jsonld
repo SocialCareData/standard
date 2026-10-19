@@ -21,7 +21,7 @@
     "ConcernDetail":              "ref:ConcernDetail",
     "ReferralInvolvement":        "ref:ReferralInvolvement",
     "DocumentReference":          "ref:DocumentReference",
-    "RelatedRecord":              "ref:RelatedRecord",
+    "LinkedRecord":               "sg:LinkedRecord",
     "ReferralAssessmentQuestion": "ref:ReferralAssessmentQuestion",
     "Person":                     "p:Person",
     "Professional":               "sg:Professional",
@@ -40,7 +40,7 @@
     "purpose":                    { "@id": "ref:purpose",                    "@type": "@vocab" },
     "assessmentQuestion":         { "@id": "ref:referralAssessmentQuestion", "@type": "@id", "@container": "@set" },
     "attachment":                 { "@id": "ref:attachment",                 "@type": "@id", "@container": "@set" },
-    "relatedRecord":              { "@id": "ref:relatedRecord",              "@type": "@id", "@container": "@set" },
+    "linkedRecord":               { "@id": "sg:linkedRecord",               "@type": "@id", "@container": "@set" },
 
     "networkPerson":              { "@id": "ref:networkPerson",              "@type": "@id" },
     "networkRelationship":        { "@id": "ref:networkRelationship",        "@type": "@vocab" },
@@ -60,7 +60,8 @@
     "actorId":                    { "@id": "ref:involvementActorId",         "@type": "@id", "@container": "@set" },
     "involvementDescription":     "ref:involvementDescription",
 
-    "relatedRecordId":            { "@id": "ref:relatedRecordId",            "@type": "@id" },
-    "relationshipType":           { "@id": "ref:relationshipType",           "@type": "@vocab" }
+    "recordId":                   { "@id": "sg:recordId",                    "@type": "@id" },
+    "recordType":                 { "@id": "sg:recordType",                  "@type": "@vocab" },
+    "recordRelationship":         "sg:recordRelationship"
   }
 }

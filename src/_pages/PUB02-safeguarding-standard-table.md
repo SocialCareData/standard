@@ -55,6 +55,10 @@ data_model: src/_data/model/safeguarding/safeguarding-standard.yaml
 
 {% schema_table page.data_model Measurement %}
 
+### LinkedRecord
+
+{% schema_table page.data_model LinkedRecord %}
+
 ## Shared objects
 
 ### Identifier
@@ -114,3 +118,7 @@ See [Person.Contact](PUB01_person_standard_table#contact)
 ### Measurement Unit Taxonomy
 
 {% schema_table page.data_model MeasurementUnit no-label %}
+
+### Record Type Taxonomy
+
+{% schema_table page.data_model RecordTypeCode no-label %}

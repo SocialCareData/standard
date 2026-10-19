@@ -77,8 +77,8 @@ Inward, person-centric, point-of-entry referral into social services.
 <span id="referral-attachment">attachment</span>
 : Reference to attached documents or evidence supporting the referral. Multi-valued (`0..*`). Optional. *DocumentReference object*. See [DocumentReference](#documentreference).
 
-<span id="referral-relatedRecord">relatedRecord</span>
-: Other, related referrals, requests, or records and their relationship. Multi-valued (`0..*`). Optional. *RelatedRecord object*. See [RelatedRecord](#relatedrecord).
+<span id="referral-linkedRecord">linkedRecord</span>
+: Other, related referrals, requests, or records and their relationship. Multi-valued (`0..*`). Optional. *LinkedRecord object*. See [LinkedRecord](#linkedrecord).
 
 <span id="referral-dateCompleted">dateCompleted</span>
 : Date and time the referral was completed. Optional (`0..1`). *DateTime*.
@@ -168,8 +168,8 @@ Outward request for services for an existing subject of care.
 <span id="request-attachment">attachment</span>
 : Reference to attached documents or evidence supporting the request. Multi-valued (`0..*`). Optional. *DocumentReference object*. See [DocumentReference](#documentreference).
 
-<span id="request-relatedRecord">relatedRecord</span>
-: Other, related referrals, requests, or records. Multi-valued (`0..*`). Optional. *RelatedRecord object*. See [RelatedRecord](#relatedrecord).
+<span id="request-linkedRecord">linkedRecord</span>
+: Other, related referrals, requests, or records. Multi-valued (`0..*`). Optional. *LinkedRecord object*. See [LinkedRecord](#linkedrecord).
 
 <span id="request-dateCompleted">dateCompleted</span>
 : Date and time the request was completed. Optional (`0..1`). *DateTime*.
@@ -241,8 +241,8 @@ Quality-of-care concern raised about a care provider or service.
 <span id="qoc-attachment">attachment</span>
 : Reference to attached documents or evidence supporting the concern. Multi-valued (`0..*`). Optional. *DocumentReference object*. See [DocumentReference](#documentreference).
 
-<span id="qoc-relatedRecord">relatedRecord</span>
-: Other, related referrals, requests, or records. Multi-valued (`0..*`). Optional. *RelatedRecord object*. See [RelatedRecord](#relatedrecord).
+<span id="qoc-linkedRecord">linkedRecord</span>
+: Other, related referrals, requests, or records. Multi-valued (`0..*`). Optional. *LinkedRecord object*. See [LinkedRecord](#linkedrecord).
 
 <span id="qoc-dateCompleted">dateCompleted</span>
 : Date and time the concern was completed. Optional (`0..1`). *DateTime*.
@@ -352,18 +352,6 @@ Reference to an attached document or evidence supporting the referral or request
 
 <!-- TODO: Detailed document reference properties are under review and will be defined in a future version. -->
 
-### RelatedRecord
-
-Reference to another related referral, request, or record and their relationship.
-
-#### Properties
-
-<span id="record-relatedRecordId">relatedRecordId</span>
-: Unique identifier for the related referral, request, or record. Required (`1..1`). *Identifier object*. See [Identifier](#identifier).
-
-<span id="record-relationshipType">relationshipType</span>
-: The nature of the relationship to the related record. Required (`1..1`). *Enum*. See the [Relationships Between Linked Records Taxonomy](#relationships-between-linked-records-taxonomy).
-
 ### ReferralAssessmentQuestion
 
 A generic Question-and-Answer model used to represent atypical, locally configured questions.
@@ -409,6 +397,10 @@ Full person demographic object. See [Person Standard](/PUB01_person_standard#per
 ### Professional
 
 Social care professional record. See [Safeguarding Standard](/PUB02_safeguarding_standard#professional).
+
+### LinkedRecord
+
+Reference to another related referral, request, concern, or cross-standard record. See [Safeguarding Standard → LinkedRecord](/PUB02_safeguarding_standard#linkedrecord).
 
 ## Taxonomies
 
