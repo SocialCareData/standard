@@ -742,9 +742,9 @@ enums:
         title: Advocacy
         description: Advocacy
         meaning: svc:Advocacy
-      LGA:
+      LGA.<LGA Taxonomy Code>:
         title: Local Government Association Service Taxonomy
-        description: Local Government Association Service Taxonomy
+        description: "Numeric code from the [Local Government Association Service Taxonomy](https://standards.esd.org.uk/?uri=list%2Fservices)"
         meaning: svc:LGA
 
   ServiceCostFrequency:
