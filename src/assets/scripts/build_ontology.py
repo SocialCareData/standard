@@ -67,7 +67,10 @@ OWL_FLAGS = [
     "--skip-vacuous-min-zero-cardinality-axioms",
     "--skip-vacuous-local-range-axioms",
 ]
-SHACL_FLAGS = ["--non-closed", "--suffix", "Shape"]
+# --include-annotations turns a slot's `annotations: {sh:message: ...}` into an
+# sh:message on its property shape, which the validator shows when the slot's
+# sh:pattern fails. See "Pattern messages" in model-management.md.
+SHACL_FLAGS = ["--non-closed", "--suffix", "Shape", "--include-annotations"]
 
 # person-standard.yaml is the shared core: its Person is deliberately permissive
 # so the two profiles can tighten it. src/_data/model/person/README.md is

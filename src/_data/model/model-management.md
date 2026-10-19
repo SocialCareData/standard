@@ -69,6 +69,28 @@ Quote keys that contain spaces or look like booleans or numbers (`"No"`, `"-8"`)
 In `context.jsonld`, map vocabulary properties with `"@type": "@vocab"` so their
 values expand to the concept IRI and can be validated.
 
+### Pattern messages
+
+A failed `pattern` is hard to explain from the regex alone. Give the slot an
+`sh:message` annotation saying what a valid value looks like, and the validator
+shows it under the error:
+
+```yaml
+prefixes:
+  sh: http://www.w3.org/ns/shacl#
+
+slots:
+  postcode:
+    pattern: "^[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}$"
+    annotations:
+      sh:message: "Use a UK postcode in upper case, with an optional space - for example `AB1 2CD`."
+```
+
+Write a whole sentence; `` `code` `` and `**bold**` are rendered. The message
+lands on the slot's property shape, so other SHACL tools show it for any failure
+on that slot, not only the pattern. Keep `:` out of the text: LinkML reads such
+a value as a CURIE, and gen-shacl fails with "does not look like a valid URI".
+
 ### Profiles
 
 When one class needs different cardinalities in different contexts, a **core**
@@ -104,7 +126,7 @@ To inspect a single schema, run the generators from its module directory.
 
 ```bash
 cd src/_data/model/placements
-gen-shacl --non-closed --suffix Shape -im ../imports.json placements-standard.yaml > placements-standard-shape.ttl
+gen-shacl --non-closed --suffix Shape --include-annotations -im ../imports.json placements-standard.yaml > placements-standard-shape.ttl
 gen-owl --no-mergeimports --ontology-uri-suffix '' --consolidate-cardinality-axioms --skip-vacuous-min-zero-cardinality-axioms --skip-vacuous-local-range-axioms -im ../imports.json placements-standard.yaml > placements-standard.ttl
 ```
 
