@@ -8,8 +8,8 @@ they are not kept in this repository.
 
 | Repository | Holds |
 | --- | --- |
-| this one | LinkML schemas, JSON-LD contexts, release manifest |
-| [SocialCareData/ontology](https://github.com/SocialCareData/ontology) | generated OWL (`*.ttl`) and SHACL (`*-shape.ttl`), JSON-LD examples |
+| this one | LinkML schemas, JSON-LD contexts, JSON-LD examples, release manifest |
+| [SocialCareData/ontology](https://github.com/SocialCareData/ontology) | generated OWL (`*.ttl`) and SHACL (`*-shape.ttl`) |
 | [SocialCareData/validator](https://github.com/SocialCareData/validator) | the validator that checks data against those shapes |
 
 Each module's own `README.md` covers what is specific to that module.
@@ -23,6 +23,7 @@ src/_data/model/
 ├── placements/
 ├── safeguarding/
 ├── assessments-and-plans/
+├── examples/               valid and invalid JSON-LD records, one folder per module (and profile)
 ├── social-care.yaml        umbrella schema: imports every module, no terms of its own
 ├── manifest.yaml           module versions that make up an ontology release
 ├── context.jsonld          all module JSON-LD contexts combined
@@ -116,6 +117,21 @@ generated shape.
 
 ## Validation
 
+The [examples](https://github.com/SocialCareData/standard/tree/main/src/_data/model/examples)
+are organised as `examples/<module>[/<profile>]/`. `valid-*.jsonld` must conform
+and `invalid-*.jsonld` must not, and each folder's `expectations.json` pins the
+violations every invalid record must produce. CI checks them on every pull
+request, against shapes built from that commit's schemas:
+
+```bash
+pip install -r src/assets/scripts/requirements.txt
+python src/assets/scripts/validate_examples.py            # check
+python src/assets/scripts/validate_examples.py --update   # rewrite expectations.json, then review the diff
+```
+
+To validate your own data, use the
+[validator](https://github.com/SocialCareData/validator):
+
 ```bash
 npx @socialcaredata/validator -p placements yourdata.jsonld
 npx @socialcaredata/validator profiles   # list the available profiles
@@ -124,7 +140,6 @@ npx @socialcaredata/validator profiles   # list the available profiles
 Or use the browser version at <https://socialcaredata.github.io/validator/>.
 The validator fetches shapes and contexts from
 [SocialCareData/ontology](https://github.com/SocialCareData/ontology), so it always
-checks against the published artifacts. Example data (`valid-*.jsonld` must
-conform, `invalid-*.jsonld` must not) lives in that repository's `examples/`
-folder. To add a standard or profile, see the validator's
+checks against the published artifacts, and offers the `valid-*` examples from
+this repository. To add a standard or profile, see the validator's
 [contributing guide](https://github.com/SocialCareData/validator/blob/main/docs/contributing.md).
