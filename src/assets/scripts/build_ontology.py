@@ -215,10 +215,10 @@ def resolve_pins(schemas: list[Schema], manifest: dict) -> dict[str, Schema]:
     umbrella = next((s for s in schemas if s.rel == UMBRELLA), None)
     if umbrella is None:
         raise BuildError(f"{UMBRELLA} not found")
-    if umbrella.version != str(manifest["ontlogy_version"]):
+    if umbrella.version != str(manifest["ontology_version"]):
         raise BuildError(
             f"social-care.yaml declares version {umbrella.version} but manifest.yml "
-            f"pins ontlogy_version {manifest['ontlogy_version']}"
+            f"pins ontology_version {manifest['ontology_version']}"
         )
     return resolved
 

@@ -45,8 +45,8 @@ jobs:
       - name: Read release version
         id: manifest
         run: |
-          version=$(python -c "import yaml;print(yaml.safe_load(open('src/_data/model/social-care/manifest.yml'))['ontlogy_version'])")
-          echo "ontlogy_version=$version" >> "$GITHUB_OUTPUT"
+          version=$(python -c "import yaml;print(yaml.safe_load(open('src/_data/model/ontology/manifest.yml'))['ontology_version'])")
+          echo "ontology_version=$version" >> "$GITHUB_OUTPUT"
 
       - uses: actions/checkout@v7
         with:
@@ -102,7 +102,7 @@ jobs:
             [SocialCareData/standard](https://github.com/SocialCareData/standard)
             at [`${{ github.sha }}`](https://github.com/${{ github.repository }}/commit/${{ github.sha }}).
 
-            - Ontology release: `${{ steps.manifest.outputs.ontlogy_version }}`
+            - Ontology release: `${{ steps.manifest.outputs.ontology_version }}`
 
             > Generated files — review the diff, but make corrections in the
             > LinkML YAML upstream rather than here.

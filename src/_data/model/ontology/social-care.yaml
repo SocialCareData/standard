@@ -2,7 +2,7 @@ id: https://ns.socialcaredata.io/social-care
 name: social-care-ontology
 title: Social Care Ontology
 description: >-
-  The umbrella Social Care ontology. It
+  The Social Care ontology. It
   has no classes or slots of its own; it composes the independently-versioned
   modules - common, person, placements, safeguarding, and assessments-and-plans
   - into a single ontology under one flat namespace
