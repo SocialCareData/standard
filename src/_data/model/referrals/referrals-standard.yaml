@@ -125,13 +125,12 @@ classes:
     class_uri: ref:DocumentReference
     description: >-
       Reference to an attached document or evidence supporting the referral or request.
-      [TODO: Define document reference properties]
-    # slots:
-    #   - documentId
-    #   - documentTitle
-    #   - documentUrl
-    #   - documentMimeType
-    #   - documentDescription
+    slots:
+      - documentId
+      - documentTitle
+      - documentUrl
+      - documentMimeType
+      - documentDescription
 
   ReferralAssessmentQuestion:
     class_uri: ref:ReferralAssessmentQuestion
