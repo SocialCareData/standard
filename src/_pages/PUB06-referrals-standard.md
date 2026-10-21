@@ -350,7 +350,20 @@ Actions taken so far and parties involved.
 
 Reference to an attached document or evidence supporting the referral or request.
 
-<!-- TODO: Detailed document reference properties are under review and will be defined in a future version. -->
+<span id="document-documentId">documentId</span>
+: Unique identifier for the document. Optional (`0..1`). *Identifier object*. See [Identifier](#identifier).
+
+<span id="document-title">title</span>
+: Title or display name of the document. Optional (`0..1`). *String*.
+
+<span id="document-url">url</span>
+: Web address or storage URI where the document can be retrieved. Optional (`0..1`). *URI*.
+
+<span id="document-mimeType">mimeType</span>
+: Media type / MIME type of the document. Optional (`0..1`). *String*.
+
+<span id="document-description">description</span>
+: Text description of the document. Optional (`0..1`). *String*.
 
 ### ReferralAssessmentQuestion
 
