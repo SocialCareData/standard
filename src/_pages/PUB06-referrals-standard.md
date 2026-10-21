@@ -1,7 +1,7 @@
 ---
 layout: publication
 title: Referrals and Requests Standard
-description: "[TODO: Add description]"
+description: "A common, extensible data standard for referrals, requests, and quality-of-care concerns, providing a reusable, customisable pattern for messages into, out of, and between social services."
 breadcrumbs:
   - Publications
 tags:
@@ -11,7 +11,11 @@ reference: PUB06
 status: draft
 data_model: src/_data/model/referrals/referrals-standard.yaml
 non_technical_summary: |
-  <!-- TODO: Non-technical summary -->
+  Referrals, requests, and quality-of-care concerns are often captured in questionnaire-style forms and exchanged inconsistently between organisations, with a heavy reliance on manual form-filling. In turn, this limits the reusability of information across systems and creates inefficiency for practitioners and partner organisations. Where integrations do exist, the underlying information is often specific to one pathway and cannot easily be reused across similar referral, request, notification or transition scenarios.
+
+  We set out to build a data standard that can sit behind these forms to enable interoperability and, importantly, provide a common pattern that technical tools and applications can be built on top of to facilitate more efficient form-filling, freeing up time for social workers to focus on actual care.
+
+  The three objects -- `Referral` (used for inward, person-centric referrals into social care), `Request` (used for outward requests for services, originating from social care), and `qocConcern` (used for reporting a quality-of-care concern) -- each have a set of core fields, but in a similar fashion to our [Assessments and Plans standard](/PUB05_assessments_and_plans_standard), also facilitate customisation, with local authorities able to build their own locally-configured question and answer pairs. In this way our standard provides a technical backbone, a skeleton, for requests, referrals, and concerns to follow, rather than dictating exactly what information should and should not be captured in them.
 ---
 
 <a href="/PUB06_referrals_standard_table" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
