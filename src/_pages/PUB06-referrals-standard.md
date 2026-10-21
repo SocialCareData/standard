@@ -22,19 +22,23 @@ non_technical_summary: |
 
 ## Introduction
 
-<!-- TODO: Introduction -->
+The Referrals Standard aims to standardise the structure of data collected in forms and questionnaires across social care, focusing specifically on referrals, requests, and quality-of-care concerns. The goal is to facilitate machine-readability, interoperability, and extensibility when information is shared between organisations, while respecting that each organisation and local authority will have different custom designs for their forms. In doing so, the standard provides a common foundational data pattern for technical tools and applications (including AI integrations) to be built on top of, enabling innovations that save social workers from manual form-filling and instead allow them to focus on what matters most.
 
 ### Purpose
 
-<!-- TODO: Purpose -->
+This standard aims to define a common, machine-readable format for referrals, requests, and quality-of-care concerns. It also seeks to remain flexible in order to respect and adapt to diverse customisations and workflows across local authorities.
 
 ### Scope
 
-<!-- TODO: Scope -->
+This standard applies to a range of referral types, taxonomised below.
+
+![Taxonomy of referral types that are in the scope of this standard](<../assets/img/referrals/Social care working group -- rough work - referrals.svg>)
+
+Importantly, this work standardises the back-end data architecture behind referrals, not the front-end that social workers see and interact with.
 
 ### Audience
 
-<!-- TODO: Audience -->
+This document is for developers of Case Management Systems, single-view portals, care providers, integration engineers, and local authority data teams.
 
 ## Data Model Overview
 
