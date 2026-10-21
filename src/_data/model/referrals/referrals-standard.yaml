@@ -365,7 +365,7 @@ slots:
 
   referrerRelationshipCode:
     slot_uri: ref:referrerRelationshipCode
-    title: relationshipCode
+    title: relationship
     range: PersonRelationshipCode
     required: false
     multivalued: false
