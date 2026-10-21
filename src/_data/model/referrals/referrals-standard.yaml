@@ -142,7 +142,7 @@ classes:
         range: ReferralQuestionCategory
         required: true
         multivalued: false
-        description: "[TODO: Add description]"
+        description: "The domain of the question."
 
 # ---------------------------------------------------------------------------
 # Slots
