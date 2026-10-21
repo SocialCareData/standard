@@ -32,7 +32,7 @@ This standard aims to define a common, machine-readable format for referrals, re
 
 This standard applies to a range of referral types, taxonomised below.
 
-![Taxonomy of referral types that are in the scope of this standard](<../assets/img/referrals/Social care working group -- rough work - referrals.svg>)
+![Taxonomy of referral types that are in the scope of this standard](<../assets/img/referrals/referrals_taxonomy.svg>)
 
 Importantly, this work standardises the back-end data architecture behind referrals, not the front-end that social workers see and interact with.
 
