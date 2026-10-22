@@ -18,12 +18,6 @@ Choose a standard, paste a JSON-LD record or load an example, then select
   document.querySelector('data-standard-validator').config = {{ site.data.validator.config | jsonify }}
 </script>
 
-## Your data stays private
-
-Validation runs entirely in your browser. Your record is never uploaded: only
-the standard's published rules (its SHACL shapes) and JSON-LD context are
-downloaded.
-
 ## Other ways to validate
 
 To check many records at once, or as part of an automated pipeline, use the
