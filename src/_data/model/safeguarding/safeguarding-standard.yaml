@@ -429,7 +429,7 @@ slots:
   recordRelationship:
     slot_uri: sg:recordRelationship
     title: recordRelationship
-    range: string
+    range: RecordRelationshipCode
     required: false
     multivalued: false
     description: The nature of the relationship (e.g. trigger, outcome, context).

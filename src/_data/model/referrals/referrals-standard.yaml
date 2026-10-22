@@ -243,10 +243,10 @@ slots:
   requestReferrer:
     slot_uri: ref:requestReferrer
     title: referrer
-    range: Professional
+    range: Identifier
     required: true
     multivalued: false
-    description: Who is the referrer? (Professional object).
+    description: Who is the referrer? (Identifier object).
 
   requestRecipient:
     slot_uri: ref:requestRecipient
