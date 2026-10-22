@@ -1,6 +1,7 @@
 ---
 layout: publication
 title: Safeguarding Standard Tabular View
+description: Tabular view of the Safeguarding Standard, a common data model for recording the services, professionals, organisations, service episodes and life events involved in safeguarding and promoting the wellbeing of a person, to support multi-agency information sharing.
 tags:
   - MAIS
   - Safeguarding

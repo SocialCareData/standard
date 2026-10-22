@@ -1,5 +1,6 @@
 ---
 title: Social Care Interoperability Standards
+description: Social Finance, the Open Data Institute and Coram are working with Local Authorities and system vendors to develop interoperability standards for social care.
 tags:
   - Programme
 ---

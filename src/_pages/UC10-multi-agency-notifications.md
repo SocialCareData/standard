@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: Multi-agency Notifications
+description: This use case outlines how standards can support multi-agency notifications about important events.
 breadcrumbs:
   - Use Cases
 tags:

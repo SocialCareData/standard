@@ -1,5 +1,6 @@
 ---
 title: Get Involved
+description: There are many different ways to get involved with the programme including giving feedback on our standards, joining our working group or becoming a contributor.
 tags:
   - Programme
 ---
