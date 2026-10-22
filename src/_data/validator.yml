@@ -1,7 +1,3 @@
-# To upgrade the element, release a new version of
-# theodi/data-standard-validator-component and change the tag in `bundle`.
-bundle: https://cdn.jsdelivr.net/gh/theodi/data-standard-validator-component@v0.2.0/standalone/data-standard-validator.js
-
 config:
   standards:
     - name: Person - subject of care
