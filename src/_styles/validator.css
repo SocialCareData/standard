@@ -1,0 +1,15 @@
+/* The /validator page. <data-standard-validator> fills a sized flex column. */
+.validator-frame {
+  display: flex;
+  flex-direction: column;
+  height: min(85vh, 60rem);
+  min-height: 36rem;
+  margin: var(--main-margin);
+}
+
+/* On narrow screens the element stacks its panes, so let it grow instead. */
+@media (max-width: 860px) {
+  .validator-frame {
+    height: auto;
+  }
+}

@@ -12,6 +12,10 @@ regenerate: true
     {% if p.description %}<p>{{ p.description }}</p>{% endif %}
   </li>
 {% endfor %}
+  <li>
+    <h2 class="heading"><a href="/validator">Validator</a></h2>
+    <p>Check your records against the published standards, in your browser.</p>
+  </li>
 </ul>
 {% else %}
 <p>No publications found.</p>

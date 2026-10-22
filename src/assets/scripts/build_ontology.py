@@ -344,7 +344,7 @@ def copy_aux(schemas: list[Schema], out_dir: Path) -> None:
         # The hand-maintained *-rules-shape.ttl files carry the conditional
         # constraints gen-shacl cannot produce, because it ignores LinkML
         # `rules:`. They are published alongside the generated shapes so that
-        # SocialCareData/validator can fetch them by URL like anything else -
+        # the validator can fetch them by URL like anything else -
         # without them, the "Other requires free text" rules are enforced
         # nowhere. They must use the same flat namespace as the generated
         # shapes or they match nothing.
