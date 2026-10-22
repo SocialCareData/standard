@@ -1,6 +1,9 @@
 ---
 title: Validator
 description: Check that your data follows the published social care data standards, in your browser.
+breadcrumbs:
+  - Publications
+publication_group: tool
 ---
 
 Check that a record follows one of the published standards before you share it.
