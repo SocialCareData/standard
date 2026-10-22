@@ -1,24 +1,7 @@
-# The /validator page: which build of <data-standard-validator> it loads, and
-# the standards it offers. src/_pages/validator.md passes `config` to the
-# element as JSON; every field is described at
-# https://theodi.github.io/data-standard-validator-component/usage/#config
-#
 # To upgrade the element, release a new version of
 # theodi/data-standard-validator-component and change the tag in `bundle`.
 bundle: https://cdn.jsdelivr.net/gh/theodi/data-standard-validator-component@v0.2.0/standalone/data-standard-validator.js
 
-# Shapes are never copied here. They are generated from the LinkML schemas in
-# this repository and published to SocialCareData/ontology, and these are URLs
-# into that repository - so the page can never check against a shape that
-# disagrees with the published standard. The `blob/main` in each URL is only the
-# default: the page's version box swaps in any tag or branch. The examples are
-# this repository's own and are not versioned with the shapes.
-#
-# Every standard names its module context, although the examples declare the
-# ontology's released combined context. That combined context defines `outcome`
-# twice - safeguarding's and assessments-and-plans' - and the later one wins,
-# which fails valid-safeguarding-full. Browsers also cannot fetch GitHub release
-# assets (no CORS). Drop these once the ontology fixes both.
 config:
   standards:
     - name: Person - subject of care
