@@ -23,6 +23,7 @@ prefixes:
   mu: https://ns.socialcaredata.io/measurement-unit#
   ot: https://ns.socialcaredata.io/observation-type#
   rtc: https://ns.socialcaredata.io/record-type#
+  rr: https://ns.socialcaredata.io/record-relationship#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -1650,6 +1651,27 @@ enums:
         title: Care Plan
         description: Care plan or support plan record (PUB05).
         meaning: rtc:Plan
+
+  RecordRelationshipCode:
+    enum_uri: sg:record-relationship
+    title: Relationships Between Linked Records
+    description: Relationship types between linked referrals, requests, or concerns.
+    permissible_values:
+      escalationOf:
+        title: Escalation of
+        meaning: rr:EscalationOf
+      deescalationOf:
+        title: Deescalation of
+        meaning: rr:DeescalationOf
+      followupTo:
+        title: Follow up to
+        meaning: rr:FollowupTo
+      reactivationOf:
+        title: Reactivation of
+        meaning: rr:ReactivationOf
+      concurrentWith:
+        title: Concurrent with
+        meaning: rr:ConcurrentWith
 
   # NameUseCode and AddressUseCode are imported from the Person Standard
   # (person-standard.yaml) and reused unchanged; they are not redefined here.

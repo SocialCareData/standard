@@ -419,6 +419,46 @@ slots:
     multivalued: false
     description: Free text description of involvement.
 
+  documentId:
+    slot_uri: ref:documentId
+    title: documentId
+    range: Identifier
+    required: false
+    multivalued: false
+    description: Unique identifier for the document.
+
+  documentTitle:
+    slot_uri: ref:documentTitle
+    title: title
+    range: string
+    required: false
+    multivalued: false
+    description: Title or display name of the document.
+
+  documentUrl:
+    slot_uri: ref:documentUrl
+    title: url
+    range: uri
+    required: false
+    multivalued: false
+    description: Web address or storage URI where the document can be retrieved.
+
+  documentMimeType:
+    slot_uri: ref:documentMimeType
+    title: mimeType
+    range: string
+    required: false
+    multivalued: false
+    description: Media type / MIME type of the document.
+
+  documentDescription:
+    slot_uri: ref:documentDescription
+    title: description
+    range: string
+    required: false
+    multivalued: false
+    description: Text description of the document.
+
 # ---------------------------------------------------------------------------
 # Controlled Vocabularies (Enums)
 # ---------------------------------------------------------------------------
@@ -615,27 +655,6 @@ enums:
       SUBMISSION_WORKFLOW:
         title: Submission and receiving-service workflow
         meaning: rqc:SubmissionWorkflow
-
-  RecordRelationshipCode:
-    enum_uri: ref:record-relationship
-    title: Relationships Between Linked Records
-    description: Relationship types between linked referrals, requests, or concerns.
-    permissible_values:
-      escalationOf:
-        title: Escalation of
-        meaning: rr:EscalationOf
-      deescalationOf:
-        title: Deescalation of
-        meaning: rr:DeescalationOf
-      followupTo:
-        title: Follow up to
-        meaning: rr:FollowupTo
-      reactivationOf:
-        title: Reactivation of
-        meaning: rr:ReactivationOf
-      concurrentWith:
-        title: Concurrent with
-        meaning: rr:ConcurrentWith
 
   ReferrerTypeCode:
     enum_uri: ref:referrer-type
