@@ -13,11 +13,12 @@ Our website is currently under development and we will be iterating it over the 
 **Website objectives**
 
 Our website aims to:
-•	Engage the sector: Explain the programme, its purpose, benefits and progress, and provide clear routes for audiences to ask questions, contribute and stay involved. Act as a vehicle to support collaboration between the programme team, different government departments, local authorities, vendors.
-•	Repository for the standards: Act as the single source of truth for the latest standards, technical documentation, records of decisions/rationale and supporting materials.
-•	Explain the standards: Provide plain English content that explains why open standards matter, how standards are developed and governed, and what they mean for different users.
-•	Support implementation: Give technical implementers and vendors, data providers, commissioners and local authorities practical guidance on how to adopt, test and use the standards in practice.
-•	Provide latest information on programme activity: Provide updates on pilots, implementation learning, working groups and future development so users can understand what is current, what is changing and how decisions are made. Long term, this will be replaced with latest ‘standards body’ activity and explanation of how standards are maintained by the body.
+
+* **Engage the sector:** Explain the programme, its purpose, benefits and progress, and provide clear routes for audiences to ask questions, contribute and stay involved. Act as a vehicle to support collaboration between the programme team, different government departments, local authorities, vendors.
+* **Repository for the standards:** Act as the single source of truth for the latest standards, technical documentation, records of decisions/rationale and supporting materials.
+* **Explain the standards:** Provide plain English content that explains why open standards matter, how standards are developed and governed, and what they mean for different users.
+* **Support implementation:** Give technical implementers and vendors, data providers, commissioners and local authorities practical guidance on how to adopt, test and use the standards in practice.
+* **Provide latest information on programme activity:** Provide updates on pilots, implementation learning, working groups and future development so users can understand what is current, what is changing and how decisions are made. Long term, this will be replaced with latest ‘standards body’ activity and explanation of how standards are maintained by the body.
 
 **Website roadmap**
 
