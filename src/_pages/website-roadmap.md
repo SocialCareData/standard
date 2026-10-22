@@ -26,7 +26,7 @@ We have split our website development into three phases.
 
 **Phase 1 (Complete)**: Develop an MVP website outlining the programme, our latest standards, and providing information on how to get involved.
 
-**Phase 2 (Current)**
+**Phase 2 (Current - by end of 2026)**
 
 _Goal:_ The website is sufficient to provide an introduction to the programme for new audiences and can be shared with new stakeholders e.g. potential pilot sites. The website provides key information to support pilots (including relevant use cases and implementation guidance) alongside insight into the impact of our pilots.
 
@@ -41,7 +41,7 @@ Our backlog of future content for this phase includes:
 * Research repository of our previous research to support use case development
 * Alongside this, we will continue to provide ongoing updates to key content including adding Working Group minutes and the latest standards documentation.
 
-**Phase 3 (Future)**
+**Phase 3 (Future - 2027 and beyond)**
 
 _Goal:_ Website becomes the long-term home for our standards, guidance on how to implement them, a route to provide ongoing feedback, and information on how they are maintained.
 
