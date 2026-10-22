@@ -1,15 +1,61 @@
-/* The /validator page. <data-standard-validator> fills a sized flex column. */
+/*
+ * The /validator page. <data-standard-validator> styles itself inside a shadow
+ * root, so the page does two things only: it frames the element like the
+ * site's other cards, and it hands the site's palette in through the element's
+ * --dsv-* tokens (custom properties inherit into the shadow root).
+ */
+data-standard-validator {
+  --dsv-text: var(--main-text-color);
+  --dsv-link: var(--link-color);
+  --dsv-link-hover: var(--link-hover-color);
+  --dsv-accent: var(--background);
+  --dsv-accent-soft: var(--main-link-background);
+  /* The tint and rule of .summary-card, for the toolbar, gutter and pills. */
+  --dsv-surface-2: #f2f7fa;
+  --dsv-border: #d4e3eb;
+  --dsv-info-bg: #f2f7fa;
+  --dsv-info-edge: var(--background);
+  --dsv-ok: var(--highlight-2-color);
+  --dsv-ok-bg: var(--highlight-2-background);
+  --dsv-ok-edge: var(--highlight-2-border);
+  --dsv-warning: var(--highlight-1-color);
+  --dsv-warning-bg: var(--highlight-1-background);
+  --dsv-warning-edge: var(--highlight-1-border);
+  --dsv-violation: var(--highlight-4-color);
+  --dsv-violation-bg: var(--highlight-4-background);
+  --dsv-violation-edge: var(--highlight-4-border);
+  --dsv-radius: 6px;
+}
+
+/*
+ * The element fills a sized flex column. It breaks out of the text column to
+ * 90% of the window, centred, but is never narrower than the column itself.
+ */
 .validator-frame {
+  --frame-width: max(100%, 90vw);
+  width: var(--frame-width);
+  margin-left: calc((100% - var(--frame-width)) / 2);
   display: flex;
   flex-direction: column;
   height: min(85vh, 60rem);
   min-height: 36rem;
-  margin: var(--main-margin);
+  margin-top: 1.8rem;
+  margin-bottom: 2.4rem;
+  border: 1px solid #d4e3eb;
+  border-top: 5px solid var(--background);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 /* On narrow screens the element stacks its panes, so let it grow instead. */
 @media (max-width: 860px) {
   .validator-frame {
     height: auto;
+    min-height: 0;
   }
+}
+
+.validator-standards td:first-child {
+  white-space: nowrap;
 }

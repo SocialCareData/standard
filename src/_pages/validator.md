@@ -1,11 +1,11 @@
 ---
 title: Validator
-description: Check social care records against the published standards, in your browser.
+description: Check that your data follows the published social care data standards, in your browser.
 ---
 
-Check a JSON-LD record against one of the published standards. Choose the
-standard, paste your record or load an example, and see what needs fixing and
-on which line.
+Check that a record follows one of the published standards before you share it.
+Choose a standard, paste a JSON-LD record or load an example, then select
+**Validate**. Each problem is explained in plain English, with the line it is on.
 
 <div class="validator-frame" markdown="0">
   <data-standard-validator theme="light"></data-standard-validator>
@@ -15,6 +15,20 @@ on which line.
   document.querySelector('data-standard-validator').config = {{ site.data.validator.config | jsonify }}
 </script>
 
-[What the messages mean](https://github.com/theodi/data-standard-validator/blob/main/docs/error-reference.md)
-· [Command-line tool](https://theodi.github.io/data-standard-validator/)
-· [Give feedback](https://github.com/SocialCareData/standard/issues/new)
+## Your data stays private
+
+Validation runs entirely in your browser. Your record is never uploaded: only
+the standard's published rules (its SHACL shapes) and JSON-LD context are
+downloaded.
+
+## Other ways to validate
+
+To check many records at once, or as part of an automated pipeline, use the
+[command-line tool](https://theodi.github.io/data-standard-validator/). It runs
+the same checks against the same
+[published shapes](https://github.com/SocialCareData/ontology).
+
+## Feedback
+
+If a message is unclear, or you think a valid record is being rejected, please
+[create a new issue on GitHub](https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&page={{ site.url | append: page.url | url_encode }}&category=Standards).
