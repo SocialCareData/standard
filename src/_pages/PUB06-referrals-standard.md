@@ -42,7 +42,7 @@ This document is for developers of Case Management Systems, single-view portals,
 
 ## Data Model Overview
 
-<p class="data-model-diagram"><img src="/assets/img/referrals/referrals-data-model-2026-10-21" alt="Referrals Data Model" title="Referrals Data Model" width="80%"/></p>
+<p class="data-model-diagram"><img src="/assets/img/referrals/referrals-data-model-2026-10-21.svg" alt="Referrals Data Model" title="Referrals Data Model" width="80%"/></p>
 
 ## Core Entities
 
