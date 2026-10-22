@@ -23,6 +23,7 @@ prefixes:
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
+  sh: http://www.w3.org/ns/shacl#
 default_prefix: pl
 default_range: string
 imports:
@@ -505,6 +506,8 @@ slots:
     description: >-
       First 3-4 characters of the postcode (UK outward code) for the actual
       placement location.
+    annotations:
+      sh:message: "Use the first part of a UK postcode (the outward code) in upper case - for example `AB1`."
   isLocationPreferred:
     slot_uri: pl:isLocationPreferred
     range: boolean

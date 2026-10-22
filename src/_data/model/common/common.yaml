@@ -16,6 +16,7 @@ prefixes:
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
+  sh: http://www.w3.org/ns/shacl#
 default_prefix: sc
 default_range: string
 imports:
@@ -177,6 +178,8 @@ slots:
     multivalued: false
     pattern: "^[A-Z]{1,2}[0-9][0-9A-Z]? ?[0-9][A-Z]{2}$"
     description: UK postcode in standard format (e.g. AB1 2CD).
+    annotations:
+      sh:message: "Use a UK postcode in upper case, with an optional space - for example `AB1 2CD`."
   UPRN:
     slot_uri: sc:UPRN
     range: string

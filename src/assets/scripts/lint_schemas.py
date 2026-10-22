@@ -27,7 +27,11 @@ from linkml_runtime.utils.schemaview import SchemaView
 REPO_ROOT = Path(__file__).resolve().parents[3]
 MODEL_ROOT = REPO_ROOT / "src" / "_data" / "model"
 CONFIG = MODEL_ROOT / ".linkmllint.yaml"
-IMPORTMAP = json.loads((MODEL_ROOT / "imports.json").read_text(encoding="utf-8"))
+IMPORTMAP = {
+    # Values are relative to a module directory; absolute paths also serve the root-level umbrella.
+    k: str((MODEL_ROOT / "_" / v).resolve())
+    for k, v in json.loads((MODEL_ROOT / "imports.json").read_text(encoding="utf-8")).items()
+}
 
 linter_module.SchemaView = functools.partial(SchemaView, importmap=IMPORTMAP)
 
@@ -39,7 +43,7 @@ def annotate(level: str, path: str, title: str, message: str) -> None:
 def main() -> int:
     linter = Linter(yaml.safe_load(CONFIG.read_text(encoding="utf-8")))
     errors = warnings = 0
-    schemas = sorted(MODEL_ROOT.glob("*/*.yaml"))
+    schemas = sorted(MODEL_ROOT.glob("*/*.yaml")) + [MODEL_ROOT / "social-care.yaml"]
     for schema in schemas:
         rel = os.path.relpath(schema)
         try:

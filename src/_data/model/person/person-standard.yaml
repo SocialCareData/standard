@@ -29,6 +29,7 @@ prefixes:
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
+  sh: http://www.w3.org/ns/shacl#
 default_prefix: p
 default_range: string
 imports:
@@ -234,6 +235,8 @@ slots:
     description: >-
       A three-character code in day-month-year order indicating which parts of
       the date are accurate (A), estimated (E), or unknown (U).
+    annotations:
+      sh:message: "Use three letters, each one A, E or U - for example `AEU`."
 
   aboutMe:
     slot_uri: p:aboutMe

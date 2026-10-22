@@ -18,7 +18,7 @@ JSON Schema and docs are generated from the YAML.
 | `assessments-and-plans-standard-shape.ttl` | *Generated* SHACL — one `NodeShape` per class, including the imported `p:Identifier` shape. |
 | `assessments-and-plans-standard.ttl` | *Generated* OWL/RDF ontology. Declares `owl:imports` of the common module and references `Identifier` rather than redefining it. |
 | `context.jsonld` | JSON-LD context used by the examples. Maps friendly keys to the flat ontology predicates (including the shared object's fields), and each coded value to its concept IRI. |
-| `examples/` | JSON-LD examples. `valid-*.jsonld` must conform; `invalid-*.jsonld` must not. |
+| [`../examples/assessments-and-plans/`](https://github.com/SocialCareData/standard/tree/main/src/_data/model/examples/assessments-and-plans) | JSON-LD examples. `valid-*.jsonld` must conform; `invalid-*.jsonld` must not. |
 
 ## Model shape
 
@@ -114,11 +114,12 @@ Person classes are referenced via `owl:imports` rather than copied in.
 
 ## Validating the examples
 
-The examples live in `examples/` of
-[SocialCareData/ontology](https://github.com/SocialCareData/ontology), beside the
-shapes below, and the validator in
-[SocialCareData/validator](https://github.com/SocialCareData/validator), which
-fetches both from there.
+The examples live in
+[`src/_data/model/examples/assessments-and-plans/`](https://github.com/SocialCareData/standard/tree/main/src/_data/model/examples/assessments-and-plans)
+of SocialCareData/standard and are checked by `validate_examples.py` (see
+[`../model-management.md`](../model-management.md)). The validator in
+[SocialCareData/validator](https://github.com/SocialCareData/validator) fetches
+the published shapes from SocialCareData/ontology.
 
 ```bash
 npx @socialcaredata/validator -p assessments-and-plans yourdata.jsonld

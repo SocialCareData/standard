@@ -45,8 +45,8 @@ jobs:
       - name: Read release version
         id: manifest
         run: |
-          version=$(python -c "import yaml;print(yaml.safe_load(open('src/_data/model/social-care/manifest.yml'))['ontlogy_version'])")
-          echo "ontlogy_version=$version" >> "$GITHUB_OUTPUT"
+          version=$(python -c "import yaml;print(yaml.safe_load(open('src/_data/model/manifest.yaml'))['ontology_version'])")
+          echo "ontology_version=$version" >> "$GITHUB_OUTPUT"
 
       - uses: actions/checkout@v7
         with:
@@ -61,14 +61,12 @@ jobs:
           # --delete so a schema removed upstream also disappears downstream;
           # without it the two repositories silently diverge. The ontology
           # repo's own hand-written root files are anchored out with a leading
-          # slash so they are never touched, as are its hand-written examples
-          # and workflows.
+          # slash so they are never touched, as are its workflows.
           rsync -a --delete \
             --exclude '.git/' \
             --exclude '/.github/' \
             --exclude '/README.md' \
             --exclude '/LICENSE' \
-            --exclude '/examples/' \
             "$RUNNER_TEMP/ontology/" ontology/
 
       - name: Commit changes
@@ -102,7 +100,7 @@ jobs:
             [SocialCareData/standard](https://github.com/SocialCareData/standard)
             at [`${{ github.sha }}`](https://github.com/${{ github.repository }}/commit/${{ github.sha }}).
 
-            - Ontology release: `${{ steps.manifest.outputs.ontlogy_version }}`
+            - Ontology release: `${{ steps.manifest.outputs.ontology_version }}`
 
             > Generated files — review the diff, but make corrections in the
             > LinkML YAML upstream rather than here.
