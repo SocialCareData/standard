@@ -68,4 +68,4 @@ The same approach could support prevention at a population level. Local teams co
 More detail can be found in the following use cases:
 
 * [Multi-agency Notifications](/UC10_multi_agency_notifications)
-* [Analysing Information from the CMS](https://standard.socialcaredata.io/UC04_analysing_information_from_the_cms)
+* [Analysing Information from the CMS](/UC04_analysing_information_from_the_cms)
