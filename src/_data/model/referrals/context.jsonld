@@ -1,0 +1,67 @@
+{
+  "@context": {
+    "ref":  "https://ns.socialcaredata.io/",
+    "rt":   "https://ns.socialcaredata.io/referral-type#",
+    "con":  "https://ns.socialcaredata.io/concern#",
+    "rp":   "https://ns.socialcaredata.io/request-purpose#",
+    "rqc":  "https://ns.socialcaredata.io/referral-question-category#",
+    "rr":   "https://ns.socialcaredata.io/record-relationship#",
+    "rft":  "https://ns.socialcaredata.io/referrer-type#",
+    "svc":  "https://ns.socialcaredata.io/service-code#",
+    "p":    "https://ns.socialcaredata.io/",
+    "sg":   "https://ns.socialcaredata.io/",
+    "xsd":  "http://www.w3.org/2001/XMLSchema#",
+
+    "Referral":                   "ref:Referral",
+    "Request":                    "ref:Request",
+    "QualityOfCareConcern":       "ref:QualityOfCareConcern",
+    "qocConcern":                 "ref:QualityOfCareConcern",
+    "PersonalNetworkMember":      "ref:PersonalNetworkMember",
+    "ReferrerDetails":            "ref:ReferrerDetails",
+    "ConcernDetail":              "ref:ConcernDetail",
+    "ReferralInvolvement":        "ref:ReferralInvolvement",
+    "DocumentReference":          "ref:DocumentReference",
+    "LinkedRecord":               "sg:LinkedRecord",
+    "ReferralAssessmentQuestion": "ref:ReferralAssessmentQuestion",
+    "Person":                     "p:Person",
+    "Professional":               "sg:Professional",
+    "Identifier":                 "p:Identifier",
+
+    "identifier":                 { "@id": "ref:identifier",                 "@type": "@id" },
+    "dateCompleted":              { "@id": "ref:dateCompleted",              "@type": "xsd:dateTime" },
+    "type":                       { "@id": "ref:type",                       "@type": "@vocab" },
+    "subject":                    { "@id": "ref:subject",                    "@type": "@id", "@container": "@set" },
+    "personalNetwork":            { "@id": "ref:personalNetwork",            "@type": "@id", "@container": "@set" },
+    "referrer":                   { "@id": "ref:referrer",                   "@type": "@id" },
+    "concern":                    { "@id": "ref:concern",                    "@type": "@id", "@container": "@set" },
+    "involvement":                { "@id": "ref:referralInvolvement",        "@type": "@id" },
+    "pathway":                    { "@id": "ref:pathway",                    "@type": "@vocab", "@container": "@set" },
+    "recipient":                  { "@id": "ref:recipient",                  "@type": "@id", "@container": "@set" },
+    "purpose":                    { "@id": "ref:purpose",                    "@type": "@vocab" },
+    "assessmentQuestion":         { "@id": "ref:referralAssessmentQuestion", "@type": "@id", "@container": "@set" },
+    "attachment":                 { "@id": "ref:attachment",                 "@type": "@id", "@container": "@set" },
+    "linkedRecord":               { "@id": "sg:linkedRecord",               "@type": "@id", "@container": "@set" },
+
+    "networkPerson":              { "@id": "ref:networkPerson",              "@type": "@id" },
+    "networkRelationship":        { "@id": "ref:networkRelationship",        "@type": "@vocab" },
+    "networkDescription":         "ref:networkDescription",
+
+    "referrerPerson":             { "@id": "ref:referrerPerson",             "@type": "@id" },
+    "referrerProfessional":       { "@id": "ref:referrerProfessional",       "@type": "@id" },
+    "referrerProfessionalId":     { "@id": "ref:referrerProfessionalId",     "@type": "@id" },
+    "referrerType":               { "@id": "ref:referrerType",               "@type": "@vocab" },
+    "relationshipCode":           { "@id": "ref:referrerRelationshipCode",   "@type": "@vocab" },
+    "relationshipDescription":    "ref:relationshipDescription",
+
+    "concernType":                { "@id": "ref:concernType",                "@type": "@vocab" },
+    "concernDescription":         "ref:concernDescription",
+
+    "actorType":                  { "@id": "ref:involvementActorType",       "@type": "@vocab" },
+    "actorId":                    { "@id": "ref:involvementActorId",         "@type": "@id", "@container": "@set" },
+    "involvementDescription":     "ref:involvementDescription",
+
+    "recordId":                   { "@id": "sg:recordId",                    "@type": "@id" },
+    "recordType":                 { "@id": "sg:recordType",                  "@type": "@vocab" },
+    "recordRelationship":         "sg:recordRelationship"
+  }
+}

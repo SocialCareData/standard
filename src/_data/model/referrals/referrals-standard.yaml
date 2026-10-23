@@ -1,0 +1,675 @@
+id: https://ns.socialcaredata.io/referrals
+name: referrals
+title: Referrals and Requests Standard Data Model
+description: >-
+  A LinkML data model for the Referrals and Requests Standard (PUB06): establishing a common,
+  extensible referral and request data standard that acts as a reusable transfer-of-care message
+  pattern across Children's and Adult Social Care.
+license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+version: 1.0.0
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  ref: https://ns.socialcaredata.io/
+  rt: https://ns.socialcaredata.io/referral-type#
+  con: https://ns.socialcaredata.io/concern#
+  rp: https://ns.socialcaredata.io/request-purpose#
+  rqc: https://ns.socialcaredata.io/referral-question-category#
+  rr: https://ns.socialcaredata.io/record-relationship#
+  rft: https://ns.socialcaredata.io/referrer-type#
+  svc: https://ns.socialcaredata.io/service-code#
+  skos: http://www.w3.org/2004/02/skos/core#
+  dct: http://purl.org/dc/terms/
+  xsd: http://www.w3.org/2001/XMLSchema#
+default_prefix: ref
+default_range: string
+imports:
+  - linkml:types
+  - https://ns.socialcaredata.io/common
+  - https://ns.socialcaredata.io/person
+  - https://ns.socialcaredata.io/safeguarding
+
+# ---------------------------------------------------------------------------
+# Classes
+# ---------------------------------------------------------------------------
+classes:
+
+  Referral:
+    class_uri: ref:Referral
+    description: >-
+      Inward, person-centric, point-of-entry referral into social services.
+    slots:
+      - refIdentifier
+      - referralType
+      - refSubject
+      - personalNetwork
+      - refReferrer
+      - concern
+      - refInvolvement
+      - pathway
+      - refRecipient
+      - refAssessmentQuestion
+      - attachment
+      - linkedRecord
+      - refDateCompleted
+
+  Request:
+    class_uri: ref:Request
+    description: >-
+      Outward request for services for an existing subject of care.
+    slots:
+      - refIdentifier
+      - requestSubject
+      - requestReferrer
+      - requestRecipient
+      - purpose
+      - refAssessmentQuestion
+      - attachment
+      - linkedRecord
+      - refDateCompleted
+
+  QualityOfCareConcern:
+    class_uri: ref:QualityOfCareConcern
+    description: >-
+      Quality-of-care concern raised about a care provider or service.
+    slots:
+      - refIdentifier
+      - qocSubject
+      - qocReferrer
+      - qocRecipient
+      - concern
+      - refAssessmentQuestion
+      - attachment
+      - linkedRecord
+      - refDateCompleted
+
+  PersonalNetworkMember:
+    class_uri: ref:PersonalNetworkMember
+    description: >-
+      Person in the subject's family, household, or broader personal support network (non-professionals only).
+    slots:
+      - networkPerson
+      - networkRelationship
+      - networkDescription
+
+  ReferrerDetails:
+    class_uri: ref:ReferrerDetails
+    description: >-
+      Details of the referrer initiating the referral or concern.
+    slots:
+      - referrerPerson
+      - referrerProfessional
+      - referrerProfessionalId
+      - referrerType
+      - referrerRelationshipCode
+      - relationshipDescription
+
+  ConcernDetail:
+    class_uri: ref:ConcernDetail
+    description: >-
+      Identified concern and optional descriptive details.
+    slots:
+      - concernType
+      - concernDescription
+
+  ReferralInvolvement:
+    class_uri: ref:ReferralInvolvement
+    description: >-
+      Actions taken so far and parties involved.
+    slots:
+      - involvementActorType
+      - involvementActorId
+      - involvementDescription
+
+  DocumentReference:
+    class_uri: ref:DocumentReference
+    description: >-
+      Reference to an attached document or evidence supporting the referral or request.
+    slots:
+      - documentId
+      - documentTitle
+      - documentUrl
+      - documentMimeType
+      - documentDescription
+
+  ReferralAssessmentQuestion:
+    class_uri: ref:ReferralAssessmentQuestion
+    is_a: AssessmentQuestion
+    description: >-
+      A generic Question-and-Answer model used to represent atypical, locally configured questions.
+    slot_usage:
+      category:
+        range: ReferralQuestionCategory
+        required: true
+        multivalued: false
+        description: "The domain of the question."
+
+# ---------------------------------------------------------------------------
+# Slots
+# ---------------------------------------------------------------------------
+slots:
+
+  # --- Identifiers and Dates ---
+  refIdentifier:
+    slot_uri: ref:identifier
+    title: identifier
+    range: Identifier
+    required: false
+    multivalued: false
+    description: Identifier for this referral, request, or concern.
+
+  refDateCompleted:
+    slot_uri: ref:dateCompleted
+    title: dateCompleted
+    range: datetime
+    required: false
+    multivalued: false
+    description: Date completed.
+
+  # --- Referral slots ---
+  referralType:
+    slot_uri: ref:type
+    title: type
+    range: ReferralTypeCode
+    required: true
+    multivalued: false
+    description: Type of referral.
+
+  refSubject:
+    slot_uri: ref:subject
+    title: subject
+    range: Person
+    required: true
+    multivalued: true
+    description: Who is the person?
+
+  personalNetwork:
+    slot_uri: ref:personalNetwork
+    title: personalNetwork
+    range: PersonalNetworkMember
+    required: false
+    multivalued: true
+    description: Who is in the person's family, household, or personal network?
+
+  refReferrer:
+    slot_uri: ref:referrer
+    title: referrer
+    range: ReferrerDetails
+    required: true
+    multivalued: false
+    description: Who is the referrer?
+
+  concern:
+    slot_uri: ref:concern
+    title: concern
+    range: ConcernDetail
+    required: true
+    multivalued: true
+    description: What is the concern?
+
+  refInvolvement:
+    slot_uri: ref:referralInvolvement
+    title: involvement
+    range: ReferralInvolvement
+    required: false
+    multivalued: false
+    description: What have you or others done so far?
+
+  pathway:
+    slot_uri: ref:pathway
+    title: pathway
+    range: ServiceCode
+    required: false
+    multivalued: true
+    description: What kind of support pathway do you think this referral should initiate?
+
+  refRecipient:
+    slot_uri: ref:recipient
+    title: recipient
+    range: Identifier
+    required: true
+    multivalued: true
+    description: Who was this referral sent to?
+
+  # --- Request slots ---
+  requestSubject:
+    slot_uri: ref:requestSubject
+    title: subject
+    range: Identifier
+    required: true
+    multivalued: false
+    description: Who is the person? (Person identifier).
+
+  requestReferrer:
+    slot_uri: ref:requestReferrer
+    title: referrer
+    range: Identifier
+    required: true
+    multivalued: false
+    description: Who is the referrer? (Identifier object).
+
+  requestRecipient:
+    slot_uri: ref:requestRecipient
+    title: recipient
+    range: Identifier
+    required: true
+    multivalued: true
+    description: What service is requested? (Organisation / Service identifier).
+
+  purpose:
+    slot_uri: ref:purpose
+    title: purpose
+    range: RequestPurposeCode
+    required: true
+    multivalued: false
+    description: What is the request?
+
+  # --- Quality of Care Concern slots ---
+  qocSubject:
+    slot_uri: ref:qocSubject
+    title: subject
+    range: Person
+    required: false
+    multivalued: true
+    description: Who is the person? (Optional for anonymisation).
+
+  qocReferrer:
+    slot_uri: ref:qocReferrer
+    title: referrer
+    range: ReferrerDetails
+    required: false
+    multivalued: false
+    description: Who is the referrer? (Optional for anonymisation).
+
+  qocRecipient:
+    slot_uri: ref:qocRecipient
+    title: recipient
+    range: Identifier
+    required: true
+    multivalued: false
+    description: What service is involved? (Organisation / Service identifier).
+
+  # --- Generic / Shared slots ---
+  refAssessmentQuestion:
+    slot_uri: ref:referralAssessmentQuestion
+    title: assessmentQuestion
+    range: ReferralAssessmentQuestion
+    required: false
+    multivalued: true
+    description: Atypical, locally configured questions.
+
+  attachment:
+    slot_uri: ref:attachment
+    title: attachment
+    range: DocumentReference
+    required: false
+    multivalued: true
+    description: Attachments and reference to documents.
+
+  # --- Supporting class slots ---
+  networkPerson:
+    slot_uri: ref:networkPerson
+    title: person
+    range: Person
+    required: true
+    multivalued: false
+    description: Person in the personal network.
+
+  networkRelationship:
+    slot_uri: ref:networkRelationship
+    title: relationship
+    range: PersonRelationshipCode
+    required: true
+    multivalued: false
+    description: Relationship to the subject.
+
+  networkDescription:
+    slot_uri: ref:networkDescription
+    title: description
+    range: string
+    required: false
+    multivalued: false
+    description: Text description of the personal network relationship.
+
+  referrerPerson:
+    slot_uri: ref:referrerPerson
+    title: person
+    range: Person
+    required: false
+    multivalued: false
+    description: The person referring, when a non-professional.
+
+  referrerProfessional:
+    slot_uri: ref:referrerProfessional
+    title: professional
+    range: Professional
+    required: false
+    multivalued: false
+    description: Professional object for the referrer.
+
+  referrerProfessionalId:
+    slot_uri: ref:referrerProfessionalId
+    title: professionalId
+    range: Identifier
+    required: false
+    multivalued: false
+    description: Lightweight identifier reference for a professional referrer.
+
+  referrerType:
+    slot_uri: ref:referrerType
+    title: referrerType
+    range: ReferrerTypeCode
+    required: true
+    multivalued: false
+    description: The type of referrer.
+
+  referrerRelationshipCode:
+    slot_uri: ref:referrerRelationshipCode
+    title: relationship
+    range: PersonRelationshipCode
+    required: false
+    multivalued: false
+    description: Relationship code of the referrer to the subject.
+
+  relationshipDescription:
+    slot_uri: ref:relationshipDescription
+    title: relationshipDescription
+    range: string
+    required: false
+    multivalued: false
+    description: Relationship description of referrer.
+
+  concernType:
+    slot_uri: ref:concernType
+    title: concernType
+    range: ConcernCode
+    required: true
+    multivalued: false
+    description: The code identifying the concern.
+
+  concernDescription:
+    slot_uri: ref:concernDescription
+    title: description
+    range: string
+    required: false
+    multivalued: false
+    description: Free text description of concern.
+
+  involvementActorType:
+    slot_uri: ref:involvementActorType
+    title: actorType
+    range: ReferrerTypeCode
+    required: false
+    multivalued: false
+    description: Category of the actor involved (e.g. Self, Professional).
+
+  involvementActorId:
+    slot_uri: ref:involvementActorId
+    title: actorId
+    range: Identifier
+    required: false
+    multivalued: true
+    description: Identifier(s) of the professional or actor involved.
+
+  involvementDescription:
+    slot_uri: ref:involvementDescription
+    title: description
+    range: string
+    required: false
+    multivalued: false
+    description: Free text description of involvement.
+
+  documentId:
+    slot_uri: ref:documentId
+    title: documentId
+    range: Identifier
+    required: false
+    multivalued: false
+    description: Unique identifier for the document.
+
+  documentTitle:
+    slot_uri: ref:documentTitle
+    title: title
+    range: string
+    required: false
+    multivalued: false
+    description: Title or display name of the document.
+
+  documentUrl:
+    slot_uri: ref:documentUrl
+    title: url
+    range: uri
+    required: false
+    multivalued: false
+    description: Web address or storage URI where the document can be retrieved.
+
+  documentMimeType:
+    slot_uri: ref:documentMimeType
+    title: mimeType
+    range: string
+    required: false
+    multivalued: false
+    description: Media type / MIME type of the document.
+
+  documentDescription:
+    slot_uri: ref:documentDescription
+    title: description
+    range: string
+    required: false
+    multivalued: false
+    description: Text description of the document.
+
+# ---------------------------------------------------------------------------
+# Controlled Vocabularies (Enums)
+# ---------------------------------------------------------------------------
+enums:
+
+  ReferralTypeCode:
+    enum_uri: ref:referral-type
+    title: Referral Types
+    description: Codes representing the type of inward referral.
+    permissible_values:
+      child.safeguarding:
+        title: Safeguarding concern
+        meaning: rt:ChildSafeguarding
+      child.infoRequest:
+        title: Information request
+        meaning: rt:ChildInfoRequest
+      child.crossService:
+        title: Professional concern about a child from engagement with an adult
+        meaning: rt:ChildCrossService
+      adult.general:
+        title: General referral to social care
+        meaning: rt:AdultGeneral
+      adult.safeguarding:
+        title: Safeguarding concern
+        meaning: rt:AdultSafeguarding
+      adult.independentLiving:
+        title: Request for occupational therapy or home equipment
+        meaning: rt:AdultIndependentLiving
+      adult.careActAssessment:
+        title: Request for care needs assessment or review
+        meaning: rt:AdultCareActAssessment
+      adult.infoRequest:
+        title: Information request
+        meaning: rt:AdultInfoRequest
+      adult.crossService:
+        title: Professional concern about an adult from engagement with a child
+        meaning: rt:AdultCrossService
+
+  ConcernCode:
+    enum_uri: ref:concern-code
+    title: Concerns
+    description: Codes representing the nature of concerns in referrals and quality-of-care reports.
+    permissible_values:
+      child.physicalAbuse:
+        title: Physical abuse
+        meaning: con:ChildPhysicalAbuse
+      child.sexualAbuse:
+        title: Sexual abuse
+        meaning: con:ChildSexualAbuse
+      child.emotionalAbuse:
+        title: Emotional abuse
+        meaning: con:ChildEmotionalAbuse
+      child.neglect:
+        title: Neglect
+        meaning: con:ChildNeglect
+      child.exploitation:
+        title: Exploitation
+        meaning: con:ChildExploitation
+      child.parentalConcern:
+        title: Parental mental health or substance abuse issues
+        meaning: con:ChildParentalConcern
+      child.missingEducation:
+        title: Missing education
+        meaning: con:ChildMissingEducation
+      child.goingMissing:
+        title: Going missing
+        meaning: con:ChildGoingMissing
+      child.contextualRisk:
+        title: Contextual risk
+        meaning: con:ChildContextualRisk
+      child.Other:
+        title: Other
+        meaning: con:ChildOther
+      adult.physicalAbuse:
+        title: Physical abuse
+        meaning: con:AdultPhysicalAbuse
+      adult.sexualAbuse:
+        title: Sexual abuse
+        meaning: con:AdultSexualAbuse
+      adult.emotionalAbuse:
+        title: Emotional abuse
+        meaning: con:AdultEmotionalAbuse
+      adult.neglect:
+        title: Neglect or acts of omission
+        meaning: con:AdultNeglect
+      adult.financialCoercion:
+        title: Financial coercion
+        meaning: con:AdultFinancialCoercion
+      adult.discrimination:
+        title: Discrimination
+        meaning: con:AdultDiscrimination
+      adult.domesticAbuse:
+        title: Domestic abuse
+        meaning: con:AdultDomesticAbuse
+      adult.modernSlavery:
+        title: Modern slavery
+        meaning: con:AdultModernSlavery
+      adult.selfHarm:
+        title: Self-neglect or self-harm
+        meaning: con:AdultSelfHarm
+      adult.substanceAbuse:
+        title: Substance abuse
+        meaning: con:AdultSubstanceAbuse
+      adult.other:
+        title: Other
+        meaning: con:AdultOther
+
+  RequestPurposeCode:
+    enum_uri: ref:request-purpose
+    title: Request Purposes
+    description: Codes indicating the purpose of an outward request for services.
+    permissible_values:
+      notification:
+        title: Notification or signposting
+        meaning: rp:Notification
+      child.earlyHelp:
+        title: Request to Early Help services
+        meaning: rp:ChildEarlyHelp
+      child.CIN:
+        title: Escalation to s17 CiN assessment
+        meaning: rp:ChildCIN
+      child.s47:
+        title: Escalation to s47 enquiry
+        meaning: rp:ChildS47
+      child.emergency:
+        title: Immediate emergency protection
+        meaning: rp:ChildEmergency
+      child.statutoryServices:
+        title: Request to statutory services (like CAMHS or advocacy)
+        meaning: rp:ChildStatutoryServices
+      child.nonStatutoryServices:
+        title: Request to non-statutory services
+        meaning: rp:ChildNonStatutoryServices
+      adult.statutoryServices:
+        title: Request to statutory services (like NHS CHC or advocacy)
+        meaning: rp:AdultStatutoryServices
+      adult.nonStatutoryServices:
+        title: Request to non-statutory services
+        meaning: rp:AdultNonStatutoryServices
+
+  ReferralQuestionCategory:
+    enum_uri: ref:referral-question-category
+    title: Question Categories
+    description: Categories for atypical, locally-configured questions.
+    permissible_values:
+      REFERRAL_TYPE_ROUTING:
+        title: Referral type and routing
+        meaning: rqc:ReferralTypeRouting
+      REFERRER_DETAILS:
+        title: Referrer details
+        meaning: rqc:ReferrerDetails
+      SUBJECT.CONSENT_CAPACITY:
+        title: Person being referred (consent, awareness, capacity, authority)
+        meaning: rqc:SubjectConsentCapacity
+      SUBJECT.DEMOGRAPHICS:
+        title: Person being referred (demographics)
+        meaning: rqc:SubjectDemographics
+      SUBJECT.ASSESSED_STATUS:
+        title: Person being referred (assessed status)
+        meaning: rqc:SubjectAssessedStatus
+      CONCERN:
+        title: Concern and reason for referral
+        meaning: rqc:Concern
+      RISK_HARM_SAFETY:
+        title: Risk, harm, and immediate safety
+        meaning: rqc:RiskHarmSafety
+      FAMILY_NETWORK:
+        title: Family, household, and support network
+        meaning: rqc:FamilyNetwork
+      IMPACT_DAILY_LIFE:
+        title: Impact, needs, and daily life
+        meaning: rqc:ImpactDailyLife
+      SUBJECT.VOICE_WISHES:
+        title: Subject's voice, wishes, and desired outcomes
+        meaning: rqc:SubjectVoiceWishes
+      SUBJECT.SERVICES_NETWORK:
+        title: Current services, previous support and professional network
+        meaning: rqc:SubjectServicesNetwork
+      STRENGTHS_POSITIVES:
+        title: Strengths, protective factors, and what is working well / signs of safety
+        meaning: rqc:StrengthsPositives
+      ACTIONS_TAKEN:
+        title: Actions already taken
+        meaning: rqc:ActionsTaken
+      REQUESTED_SERVICE:
+        title: Requested service, response required, and next steps
+        meaning: rqc:RequestedService
+      COMMUNICATION_ACCESSIBILITY:
+        title: Communication, accessibility, and adjustments
+        meaning: rqc:CommunicationAccessibility
+      ATTACHMENTS:
+        title: Attachments, evidence, and provenance
+        meaning: rqc:Attachments
+      SUBMISSION_WORKFLOW:
+        title: Submission and receiving-service workflow
+        meaning: rqc:SubmissionWorkflow
+
+  ReferrerTypeCode:
+    enum_uri: ref:referrer-type
+    title: Referrer Types
+    description: Nature of the referrer's relationship to the subject or process.
+    permissible_values:
+      Self:
+        title: Self
+        meaning: rft:Self
+      FamilyMember:
+        title: Family member
+        meaning: rft:FamilyMember
+      Professional:
+        title: Professional
+        meaning: rft:Professional
+      MemberOfThePublic:
+        title: Member of the public
+        meaning: rft:MemberOfThePublic
