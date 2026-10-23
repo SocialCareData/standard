@@ -69,13 +69,6 @@
       "constraint": "sh:minCount"
     }
   ],
-  "invalid-multiple-names.jsonld": [
-    {
-      "focus": "Person",
-      "path": "name",
-      "constraint": "sh:maxCount"
-    }
-  ],
   "invalid-name-missing-parts.jsonld": [
     {
       "focus": "Name",
