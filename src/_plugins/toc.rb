@@ -25,12 +25,27 @@
 #     min_level: 2
 #     max_level: 3
 #
+# Pass `collapsible` ({% toc collapsible %}) for the standard pages' layout:
+# one row per top-level section, numbered in the markup, with its subsections
+# in a list that assets/js/toc.js folds behind a toggle button. The buttons
+# ship `hidden`, so without JS every section simply renders expanded.
+#
 # Requirements: kramdown auto_ids must be enabled (it is by default),
 # since the tag links to the ids kramdown puts on headings.
+
+require "cgi"
 
 module Jekyll
   class TocTag < Liquid::Tag
     HEADING_RE = %r{<h([1-6])[^>]*\bid="([^"]+)"[^>]*>(.*?)</h\1>}m.freeze
+
+    CHEVRON = %(<svg class="toc-chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false">) +
+              %(<path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>)
+
+    def initialize(tag_name, markup, tokens)
+      super
+      @collapsible = markup.split.include?("collapsible")
+    end
 
     def render(context)
       page = context.registers[:page]
@@ -55,10 +70,54 @@ module Jekyll
 
       return "" if headings.empty?
 
-      build_list(headings)
+      @collapsible ? build_sections(headings, min) : build_list(headings)
     end
 
     private
+
+    # Groups headings into top-level sections (level `min`) with their direct
+    # subsections (level `min + 1`); deeper headings are left out. Headings
+    # before the first top-level one have no section to sit in and are skipped.
+    def build_sections(headings, min)
+      sections = []
+      headings.each do |h|
+        if h[:level] == min
+          sections << { heading: h, children: [] }
+        elsif h[:level] == min + 1 && sections.any?
+          sections.last[:children] << h
+        end
+      end
+      return "" if sections.empty?
+
+      out = +%(<ol class="toc-sections">)
+      sections.each_with_index do |section, i|
+        h = section[:heading]
+        children = section[:children]
+        number = i + 1
+        sub_id = "toc-sub-#{h[:id]}"
+
+        out << %(\n<li class="toc-section">)
+        out << %(<div class="toc-row">)
+        out << %(<span class="toc-num">#{number}</span>)
+        out << %(<a class="toc-title" href="##{h[:id]}">#{h[:text]}</a>)
+        if children.any?
+          label = "Show subsections of #{CGI.unescapeHTML(h[:text])}"
+          out << %(<button type="button" class="toc-toggle" aria-expanded="true" aria-controls="#{sub_id}" aria-label="#{CGI.escapeHTML(label)}" hidden>)
+          out << %(#{CHEVRON}</button>)
+        end
+        out << %(</div>)
+        if children.any?
+          out << %(\n<ol class="toc-subsections" id="#{sub_id}">)
+          children.each_with_index do |c, j|
+            out << %(\n<li><span class="toc-subnum">#{number}.#{j + 1}</span><a href="##{c[:id]}">#{c[:text]}</a></li>)
+          end
+          out << %(\n</ol>)
+        end
+        out << %(</li>)
+      end
+      out << %(\n</ol>)
+      out
+    end
 
     # Builds a nested <ol> from a flat list of headings, tolerating
     # level jumps (e.g. h2 -> h4) and out-of-order documents.

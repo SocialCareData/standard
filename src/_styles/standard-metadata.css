@@ -1,0 +1,63 @@
+/* "About this version" block under a standard page's title (_includes/standard_metadata.html) */
+.standard-metadata {
+  color: var(--main-text-color);
+  column-gap: 1.25rem;
+  display: grid;
+  font-size: .875rem;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  margin: 0 0 1.25rem;
+  row-gap: .2rem;
+}
+
+.standard-metadata dt {
+  font-weight: bold;
+}
+
+.standard-metadata dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.standard-metadata a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.standard-metadata a:hover,
+.standard-metadata a:focus {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+  transition: var(--link-transition);
+}
+
+.standard-metadata .format-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.standard-metadata .view-changes {
+  font-weight: bold;
+  margin-left: 1rem;
+  white-space: nowrap;
+}
+
+.standard-metadata .view-changes svg {
+  height: 1em;
+  margin-right: .3rem;
+  vertical-align: -.125em;
+  width: 1em;
+}
+
+@media (max-width: 600px) {
+  .standard-metadata {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .standard-metadata dd + dt {
+    margin-top: .4rem;
+  }
+}

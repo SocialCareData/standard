@@ -11,6 +11,20 @@ reference: PUB00
 version: latest
 status: draft
 data_model: src/_data/model/placements/placements-standard.yaml
+editors:
+  - name: Ivjyot S. Oberoi
+    organisation: Social Finance
+  - name: Disha Javur
+    organisation: Social Finance
+  - name: Huseyin Kir
+    organisation: Open Data Institute
+other_formats:
+  - label: Table view
+    url: /PUB00_placements_standard_table
+  - label: Ontology
+    url: https://github.com/SocialCareData/ontology/blob/main/placements/placements-standard.ttl
+  - label: SHACL
+    url: https://github.com/SocialCareData/ontology/blob/main/placements/placements-standard-shape.ttl
 changelog:
   - Removed unused quality assurance fields
   - Added data validation rules
