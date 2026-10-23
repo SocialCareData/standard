@@ -37,8 +37,8 @@ data-standard-validator {
   margin-left: calc((100% - var(--frame-width)) / 2);
   display: flex;
   flex-direction: column;
-  height: min(85vh, 60rem);
-  min-height: 36rem;
+  height: min(95vh, 70rem);
+  min-height: 40rem;
   margin-top: 1.8rem;
   margin-bottom: 2.4rem;
   border: 1px solid #d4e3eb;
