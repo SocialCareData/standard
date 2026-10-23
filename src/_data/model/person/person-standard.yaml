@@ -128,11 +128,11 @@ slots:
   name:
     slot_uri: p:name
     range: Name
-    multivalued: false
+    multivalued: true
     required: true
     description: >-
-      A name for the person, with a usage indicating its purpose (usual, maiden,
-      nickname, etc.).
+      One or more names for the person, each with a usage indicating its purpose
+      (usual, maiden, nickname, etc.).
   dateOfBirth:
     slot_uri: p:dateOfBirth
     range: PartialDate
