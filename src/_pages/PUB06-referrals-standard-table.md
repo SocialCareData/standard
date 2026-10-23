@@ -89,3 +89,11 @@ See [Safeguarding.LinkedRecord](PUB02_safeguarding_standard_table#linkedrecord)
 ### Referrer Types Taxonomy
 
 {% schema_table page.data_model ReferrerTypeCode %}
+
+### Service Code Taxonomy
+
+{% schema_table page.data_model ServiceCode %}
+
+### Person Relationship Code Taxonomy
+
+{% schema_table page.data_model PersonRelationshipCode %}
