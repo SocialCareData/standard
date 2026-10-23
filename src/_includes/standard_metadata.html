@@ -1,0 +1,24 @@
+{% if page.reference %}
+{% assign format_links = page.other_formats | where_exp: "f", "f.url" %}
+{% if page.model_version or page.latest_url or page.previous_version_url or page.editors.size > 0 or format_links.size > 0 %}
+<dl class="standard-metadata" aria-label="About this version">{% if page.model_version %}
+    <dt>Version</dt>
+    <dd>{{ page.model_version }}</dd>{% endif %}{% if page.latest_url %}
+    <dt>Latest version</dt>
+    <dd><a href="{{ page.latest_url }}">{{ page.latest_url | absolute_url }}</a></dd>{% endif %}{% if page.previous_version_url %}
+    <dt>Previous version</dt>
+    <dd>
+        <a href="{{ page.previous_version_url }}">{{ page.previous_version_url | absolute_url }}</a>
+        <a class="view-changes" href="{{ page.data_model_diff }}"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4.5 2v10.5M2 10l2.5 2.5L7 10M11.5 14V3.5M9 6l2.5-2.5L14 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>View changes</a>
+    </dd>{% endif %}{% if page.editors.size > 0 %}
+    <dt>Editors</dt>
+    <dd>{% for editor in page.editors %}{{ editor.name }}{% if editor.organisation %} ({{ editor.organisation }}){% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</dd>{% endif %}{% if format_links.size > 0 %}
+    <dt>Other formats</dt>
+    <dd>
+        <ul class="format-links">{% for f in format_links %}
+            <li><a href="{{ f.url }}">{{ f.label }}</a></li>{% endfor %}
+        </ul>
+    </dd>{% endif %}
+</dl>
+{% endif %}
+{% endif %}

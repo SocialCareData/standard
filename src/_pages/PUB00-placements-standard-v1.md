@@ -9,6 +9,20 @@ reference: PUB00
 version: 1
 status: draft
 data_model: src/_data/model/placements/placements-standard-v0_1.yaml
+editors:
+  - name: Ivjyot S. Oberoi
+    organisation: Social Finance
+  - name: Disha Javur
+    organisation: Social Finance
+  - name: Huseyin Kir
+    organisation: Open Data Institute
+other_formats:
+  - label: Table view
+    url: /PUB00_placements_standard_table_v1
+  - label: Ontology
+    url: https://github.com/SocialCareData/ontology/blob/main/placements/placements-standard-v0_1.ttl
+  - label: SHACL
+    url: https://github.com/SocialCareData/ontology/blob/main/placements/placements-standard-v0_1-shape.ttl
 non_technical_summary: |
   The market for children’s social care placements -- that is, the accommodation and support provided to children when they are taken into the care of the local authority -- has been described by the Local Government Association as '[broken](https://www.local.gov.uk/about/news/childrens-social-care-placements-costing-ps10000-plus-rise-sharply-five-years-new-lga)'. Many children in residential care nationally are currently placed more than 20 miles from home.
 

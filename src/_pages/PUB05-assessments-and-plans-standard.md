@@ -10,6 +10,18 @@ tags:
 reference: PUB05
 status: draft
 data_model: src/_data/model/assessments-and-plans/assessments-and-plans-standard.yaml
+editors:
+  - name: Neil Majithia
+    organisation: Open Data Institute
+  - name: Huseyin Kir
+    organisation: Open Data Institute
+other_formats:
+  - label: Table view
+    url: /PUB05_assessments_and_plans_standard_table
+  - label: Ontology
+    url: https://github.com/SocialCareData/ontology/blob/main/assessments-and-plans/assessments-and-plans-standard.ttl
+  - label: SHACL
+    url: https://github.com/SocialCareData/ontology/blob/main/assessments-and-plans/assessments-and-plans-standard-shape.ttl
 non_technical_summary: |
   As part of the joined-up care workstream, we’re working on standardising care needs assessments and plans. Each are important components of an adult’s social care: an assessment is conducted when an adult contacts (or is referred to) a local authority’s social services team, and a social care plan is created immediately after if the person is assessed to be eligible.
 
