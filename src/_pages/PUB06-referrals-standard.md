@@ -22,7 +22,7 @@ non_technical_summary: |
 
 ## Introduction
 
-The Referrals Standard aims to standardise the structure of data collected in forms and questionnaires across social care, focusing specifically on referrals, requests, and quality-of-care concerns. The goal is to facilitate machine-readability, interoperability, and extensibility when information is shared between organisations, while respecting that each organisation and local authority will have different custom designs for their forms. In doing so, the standard provides a common foundational data pattern for technical tools and applications (including AI integrations) to be built on top of, enabling innovations that save social workers from manual form-filling and instead allow them to focus on what matters most.
+The Referrals and Requests Standard aims to standardise the structure of data collected in forms and questionnaires across social care, focusing specifically on referrals, requests, and quality-of-care concerns. The goal is to facilitate machine-readability, interoperability, and extensibility when information is shared between organisations, while respecting that each organisation and local authority will have different custom designs for their forms. In doing so, the standard provides a common foundational data pattern for technical tools and applications (including AI integrations) to be built on top of, enabling innovations that save social workers from manual form-filling and instead allow them to focus on what matters most.
 
 ### Purpose
 
