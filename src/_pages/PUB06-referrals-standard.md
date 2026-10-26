@@ -34,7 +34,12 @@ This standard applies to a range of referral types, taxonomised below.
 
 ![Taxonomy of referral types that are in the scope of this standard](<../assets/img/referrals/referrals_taxonomy.svg>)
 
-Importantly, this work standardises the back-end data architecture behind referrals, not the front-end that social workers see and interact with.
+While each of these are colloquially named a "referral", we designate three distinct profiles within the taxonomy:
+* `Referrals`, which are made by a subject, their family, a professional (like their teacher), or a member of the public *into* social services. These forms are generally "point-of-entry" into social care: the subject is likely not known to services beforehand.
+* `Requests`, which are made by social services and sent *outward* to statutory or non-statutory services. These forms concern subjects that are already known to, and involved with, social services.
+* `QualityOfCareConcerns`, which are made by anyone (including the subject, and can be anonymous) and are centred on a care service rather than a person themselves.
+
+Importantly, this work standardises the back-end data architecture behind each of these profiles, not the front-end that social workers see and interact with.
 
 ### Audience
 
