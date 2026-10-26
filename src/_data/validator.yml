@@ -45,4 +45,3 @@ config:
       "@type": "Person",
       "name": [{ "@type": "Name", "givenName": ["Ada"], "familyName": "Lovelace" }]
     }
-  storageKey: scd-validator:last
