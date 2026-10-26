@@ -167,7 +167,7 @@ Outward request for services for an existing subject of care.
 : Who is the person? (Person identifier). Required (`1..1`). *Identifier object*. See [Identifier](#identifier).
 
 <span id="request-referrer">referrer</span>
-: Who is the referrer? (Professional object). Required (`1..1`). *Professional object*. See [Professional](#professional).
+: Who is the referrer? (Professional identifier). Required (`1..1`). *Identifier object*. See [Identifier](#identifier).
 
 <span id="request-recipient">recipient</span>
 : What service is requested? Multi-valued (`1..*`). Required. *Identifier object*. See [Identifier](#identifier).
