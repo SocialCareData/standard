@@ -9,6 +9,7 @@ tags:
   - Publication
   - MAIS
 reference: PUB04
+publication_group: guide
 ---
 
 ## Introduction

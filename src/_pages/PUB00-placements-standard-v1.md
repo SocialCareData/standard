@@ -494,10 +494,10 @@ A SHACL shape ([placements-standard-shape.ttl](https://github.com/SocialCareData
 
 The [Social Care Data Validator](https://github.com/SocialCareData/validator) checks records against this shape, runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
 
-**[Validate your data in your browser](https://socialcaredata.github.io/validator/)** - paste a record, choose *Children's Social Care Placements*, and see what needs fixing. Or from a terminal:
+**[Validate your data in your browser](/validator)** - paste a record, choose *Children's Social Care Placements*, and see what needs fixing. Or from a terminal:
 
 ```bash
-npx @socialcaredata/validator -p placements yourdata.jsonld
+npx @theodi/data-standard-validator -s src/_data/model/placements/placements-standard-v1.yaml yourdata.jsonld
 ```
 
 ## Standard Placement Reporting Spreadsheet

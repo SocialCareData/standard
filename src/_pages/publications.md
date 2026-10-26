@@ -4,16 +4,36 @@ regenerate: true
 ---
 
 {% assign publications = site.pages | where_exp: "p", "p.breadcrumbs contains 'Publications'" | where_exp: "p", "p.version == nil or p.version == 'latest'" | sort: "reference" %}
-{% if publications.size > 0 %}
+
+## Data standards
+
 <ul class="content-list">
-{% for p in publications %}
+{% for p in publications %}{% if p.publication_group == nil %}
   <li>
-    <h2 class="heading">[{{ p.reference }}] <a href="{{ p.url }}">{{ p.title }}</a></h2>
+    <h3 class="heading">[{{ p.reference }}] <a href="{{ p.url }}">{{ p.title }}</a></h3>
     {% if p.description %}<p>{{ p.description }}</p>{% endif %}
   </li>
-{% endfor %}
+{% endif %}{% endfor %}
 </ul>
-{% else %}
-<p>No publications found.</p>
-{% endif %}
 
+## Guides
+
+<ul class="content-list">
+{% for p in publications %}{% if p.publication_group == "guide" %}
+  <li>
+    <h3 class="heading">[{{ p.reference }}] <a href="{{ p.url }}">{{ p.title }}</a></h3>
+    {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+  </li>
+{% endif %}{% endfor %}
+</ul>
+
+## Tools
+
+<ul class="content-list">
+{% for p in publications %}{% if p.publication_group == "tool" %}
+  <li>
+    <h3 class="heading"><a href="{{ p.url }}">{{ p.title }}</a></h3>
+    {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+  </li>
+{% endif %}{% endfor %}
+</ul>

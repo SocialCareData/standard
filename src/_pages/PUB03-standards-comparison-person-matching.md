@@ -9,6 +9,7 @@ tags:
   - MAIS
   - Publication
 reference: PUB03
+publication_group: guide
 status: draft
 ---
 
