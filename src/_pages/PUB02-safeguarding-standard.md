@@ -604,7 +604,7 @@ A reference to an associated external or cross-standard record (such as an inwar
 : The type of the linked record (e.g. `referral`, `request`, `quality-of-care-concern`, `assessment`, `plan`). Required (`1..1`). See the [Record Type Vocabulary](#record-type-vocabulary).
 
 <span id="linkedrecord-recordRelationship">recordRelationship</span>
-: The nature of the relationship (for example, `trigger`, `outcome`, `context`). Optional (`0..1`). _String_.
+: The nature of the relationship between this record and the linked record. Optional (`0..1`). See the [Record Relationship Type Vocabulary](#record-relationship-type-vocabulary).
 
 #### Example
 
@@ -615,7 +615,7 @@ A reference to an associated external or cross-standard record (such as an inwar
   "@type": "LinkedRecord",
   "recordId": { "@type": "Identifier", "value": "REF-2026-001", "system": "https://example.org/Id/referrals" },
   "recordType": "referral",
-  "recordRelationship": "trigger"
+  "recordRelationship": "escalationOf"
 }
 {% endhighlight %}
 </div>
@@ -762,6 +762,11 @@ Used by [`LinkedRecord.recordType`](#linkedrecord-recordType). Codes to indicate
 
 {% schema_table page.data_model RecordTypeCode no-label %}
 
+### Record Relationship Type Vocabulary
+
+Used by [`LinkedRecord.recordRelationship`](#linkedrecord-recordRelationship). Codes to indicate the relationship that this record has to another.
+
+{% schema_table page.data_model RecordRelationshipCode no-label %}
 
 ## Ontology
 
