@@ -448,10 +448,6 @@ The model is parameterised by the following controlled vocabularies.
 
 {% schema_table page.data_model ReferralQuestionCategory expanded %}
 
-### Relationships Between Linked Records Taxonomy
-
-{% schema_table page.data_model RecordRelationshipCode expanded %}
-
 ### Referrer Types Taxonomy
 
 {% schema_table page.data_model ReferrerTypeCode expanded %}

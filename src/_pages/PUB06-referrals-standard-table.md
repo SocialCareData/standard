@@ -82,10 +82,6 @@ See [Safeguarding.LinkedRecord](PUB02_safeguarding_standard_table#linkedrecord)
 
 {% schema_table page.data_model ReferralQuestionCategory %}
 
-### Relationships Between Linked Records Taxonomy
-
-{% schema_table page.data_model RecordRelationshipCode %}
-
 ### Referrer Types Taxonomy
 
 {% schema_table page.data_model ReferrerTypeCode %}
