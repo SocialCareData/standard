@@ -16,6 +16,8 @@ editors:
     organisation: Social Finance
   - name: Disha Javur
     organisation: Social Finance
+  - name: Neil Majithia
+    organisation: Open Data Institute
   - name: Huseyin Kir
     organisation: Open Data Institute
 other_formats:
