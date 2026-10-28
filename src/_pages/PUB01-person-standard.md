@@ -10,7 +10,7 @@ tags:
   - Publication
 reference: PUB01
 status: draft
-data_model: src/assets/model/person/person-standard.yaml
+data_model: src/_data/model/person/person-standard.yaml
 non_technical_summary: |
   The core objective of our work is to facilitate the sharing of information about a person in care (whether a child or an adult) between agencies and organisations across the country (multi-agency information sharing). To do so, each of these agencies and organisations must be speaking the same "language" talking about the person, communicating with each other in the same way. This requires a common data model for identifying and describing a person across data systems, which we have designed here in our **Person Standard**.
 
@@ -46,58 +46,62 @@ The following diagram illustrates the elements of the Person Standard.
 
 <p class="data-model-diagram"><img src="/assets/img/person/person-data-model.svg" alt="Person Data Model" title="Person Data Model" width="80%"/></p>
 
-A `Person` is the top-level record. It aggregates zero or more `Identifier`s, one or more `Name`s, zero or more `Address`es, zero or more `Contact` entries, zero or more `PersonRelationship`s linking to other people, an optional `dateOfBirth` (with `PartialDate`), an optional `isDeceased` flag and optional `deceasedDate` (with `PartialDate`). Cross-system matches established with other agencies are recorded as `matchedPersonRef` — an array of `Identifier`s pointing to the same person as it is known in other systems. The person's gender, phenotypic sex, and ethnicity are captured via controlled vocabularies.
+A `Person` is the top-level record. It brings together the person's identifiers, name, dates of birth and death, addresses, contact details and relationships to other people, using the supporting entities described below. Demographic attributes such as gender, sex and ethnicity are recorded using controlled vocabularies.
+
+The standard defines two conformance profiles for `Person`: the **Subject of Care** profile, described in [Person](#person) below, and the more permissive [Connected Person profile](#connected-person-profile). Both share the same structure, sub-entities and vocabularies, and differ only in cardinality.
 
 ### Person
 
 The top-level record describing an individual. Consolidates the core identity attributes required to distinguish one person from another and to record relationships between individuals. Corresponds to the [Person](https://build.fhir.org/person.html) entity in FHIR and root `Person` entity in the [GDS Person Domain Logical Model](https://www.digitalservicedesigner.com/dsdrender/?id=logicalmodel_699dbdcbf751de507cd22dc5_version_69baca1afdc87488d1f0af42).
 
+The properties below describe a `Person` who is the **subject of care**: the core identity, demographic and contact data required to deliver and coordinate care must be present. For family members, friends, carers and other people recorded because of their connection to a subject of care, a more permissive profile applies — see [Connected Person profile](#connected-person-profile).
+
 #### Properties
 
 <span id="person-identifier">identifier</span>
-: Unique identifiers associated with the person (e.g. NHS number, internal case-management system ID). Multi-valued. See [Identifier](#identifier).
+: Unique identifiers associated with the person (e.g. NHS number, internal case-management system ID). Multi-valued. Required (`1..*`). See [Identifier](#identifier).
 
 <span id="person-name">name</span>
-: One or more names for the person, each with a usage indicating its purpose (usual, maiden, nickname, etc.). Multi-valued. See [Name](#name).
+: One or more names for the person, each with a usage indicating its purpose (usual, maiden, nickname, etc.). Multi-valued. Required (`1..*`). See [Name](#name).
 
 <span id="person-dateOfBirth">dateOfBirth</span>
-: The person's date of birth, with an optional accuracy indicator. Optional. See [PartialDate](#partialdate).
+: The person's date of birth, with an optional accuracy indicator. Required (`1..1`). See [PartialDate](#partialdate).
 
 <span id="person-isDeceased">isDeceased</span>
-: Whether the person is deceased. Optional. _Boolean_.
+: Whether the person is deceased. Required (`1..1`). _Boolean_.
 
 <span id="person-deceasedDate">deceasedDate</span>
-: The person's date of death, with an optional accuracy indicator. Optional — `isDeceased` may be `true` without a known date. See [PartialDate](#partialdate).
+: The person's date of death, with an optional accuracy indicator. Optional (`0..1`) — `isDeceased` may be `true` without a known date. See [PartialDate](#partialdate).
 
 <span id="person-addresses">address</span>
-: Physical addresses where the person can be contacted. Multi-valued. Optional. See [Address](#address).
+: Physical addresses where the person can be contacted. Multi-valued. Required (`1..*`). See [Address](#address).
 
 <span id="person-contact">contact</span>
-: Person's contact information. Multi-valued. Optional. See [Contact](#contact).
+: Person's contact information. Multi-valued. Optional (`0..*`). See [Contact](#contact).
 
 <span id="person-genderCode">genderCode</span>
-: The person's stated gender. Optional. See the [Gender Code Vocabulary](#gender-code-vocabulary).
+: The person's stated gender. Required (`1..1`). See the [Gender Code Vocabulary](#gender-code-vocabulary).
 
 <span id="person-sexCode">sexCode</span>
-: Observed phenotypic sex, where recorded. Optional. See the [Phenotypic Sex Code Vocabulary](#phenotypic-sex-code-vocabulary).
+: Observed phenotypic sex, where recorded. Optional (`0..1`). See the [Phenotypic Sex Code Vocabulary](#phenotypic-sex-code-vocabulary).
 
 <span id="person-ethnicityCode">ethnicityCode</span>
-: The person's stated ethnicity, using the ONS 18+1 categories from the 2021 census. Statutorily required in adult social care; optional elsewhere. See the [Ethnicity Code Vocabulary](#ethnicity-code-vocabulary).
+: The person's stated ethnicity, using the ONS 18+1 categories from the 2021 census. Required (`1..1`), reflecting the statutory recording requirement in adult social care. See the [Ethnicity Code Vocabulary](#ethnicity-code-vocabulary).
 
 <span id="person-aboutMe">aboutMe</span>
-: A reference pointing to the person's "About Me" profile (as per the [PRSB AboutMe Standard](https://theprsb.org/standards/aboutme/)). Optional. See [Identifier](#identifier) entity for the structure.
+: A reference pointing to the person's "About Me" profile (as per the [PRSB AboutMe Standard](https://theprsb.org/standards/aboutme/)). Optional (`0..1`). See [Identifier](#identifier) entity for the structure.
 
 <span id="person-communication">communication</span>
-: The person's communication requirements and language proficiencies. Multi-valued. Optional. See [Communication](#communication).
+: The person's communication requirements and language proficiencies. Multi-valued. Optional (`0..*`). See [Communication](#communication).
 
 <span id="person-relatedPerson">relatedPerson</span>
-: References to other people related to this person, with the kind of relationship. Multi-valued. See [PersonRelationship](#personrelationship).
+: References to other people related to this person, with the kind of relationship. Multi-valued. Optional (`0..*`). See [PersonRelationship](#personrelationship).
 
 <span id="person-primaryContactProfessional">primaryContactProfessional</span>
-: References to the primary professionals related to this person. For example, care coordinators or a GP. Implementers should record professional references using the [`Identifier`](#identifier) structure. Multi-valued. Optional. See also `Professional` in the [safeguarding standard](PUB02_safeguarding_standard#professional).
+: References to the primary professionals related to this person. For example, care coordinators or a GP. Implementers should record professional references using the [`Identifier`](#identifier) structure. Multi-valued. Optional (`0..*`). See also `Professional` in the [safeguarding standard](PUB02_safeguarding_standard#professional).
 
 <span id="person-matchedPersonRef">matchedPersonRef</span>
-: A reference to another Person record, if a match has been identified. Multi-valued. Optional. See [Identifier](#identifier) entity for the structure.
+: A reference to another Person record, if a match has been identified. Multi-valued. Optional (`0..*`). See [Identifier](#identifier) entity for the structure.
 
 #### Example
 
@@ -105,7 +109,7 @@ The top-level record describing an individual. Consolidates the core identity at
   <h5 id="example-person">Example - Person</h5>
 {% highlight json %}
 {
-  "@context": "https://socialcaredata.github.io/assets/model/person/context.jsonld",
+  "@context": "https://socialcaredata.github.io/_data/model/person/context.jsonld",
   "@id": "ex:person-9434765919",
   "@type": "Person",
   "identifier": [{
@@ -152,7 +156,7 @@ The top-level record describing an individual. Consolidates the core identity at
 
 <div class="note">
   <h5 id="note-person">Note - conformance minimum</h5>
-  <p>A conformant <code>Person</code> record MUST include at least one <code>Identifier</code>, at least one <code>Name</code> with a family name and at least one given name. All other properties are OPTIONAL where their cardinality permits, though several are statutorily required by specific data collections (e.g. <code>ethnicityCode</code> in adult social care, and <code>isDeceased</code> with optional <code>deceasedDate</code>).</p>
+  <p>A conformant subject-of-care <code>Person</code> record MUST include every property marked Required above. People recorded only as connected to a subject of care follow the <a href="#connected-person-profile">Connected Person profile</a> instead.</p>
 </div>
 
 
@@ -402,6 +406,40 @@ A specific language the person is proficient in, including proficiency level.
 </div>
 
 
+### Connected Person profile
+
+A connected person is someone recorded because of their relationship to a subject of care, such as a parent, friend or informal carer. Often little more than their name and relationship is known, so this profile uses the same [Person](#person) structure with a much lighter minimum: only `name` is required and every other property is optional. A connected person may hold at most one `contact` and one `relatedPerson`, which typically points back to the subject of care.
+
+#### Example
+
+<div class="example">
+  <h5 id="example-connected-person">Example - Connected Person</h5>
+{% highlight json %}
+{
+  "@context": "https://socialcaredata.github.io/_data/model/person/context.jsonld",
+  "@id": "ex:person-9009999991",
+  "@type": "Person",
+  "name": [{
+      "@type": "Name",
+      "familyName": ["Doe"],
+      "givenName": ["Mary"],
+      "use": "official"
+  }],
+  "contact": {
+    "@type": "Contact",
+    "name": "Home",
+    "telephone": ["+44 20 7946 0001"]
+  },
+  "relatedPerson": {
+    "@type": "PersonRelationship",
+    "identifier": { "@type": "Identifier", "value": "LA-12345", "system": "https://example.org/Id/local-authority-id" },
+    "relationship": ["DAU"]
+  }
+}
+{% endhighlight %}
+</div>
+
+
 ## Vocabularies
 
 The model is parameterised by seven controlled vocabularies.
@@ -506,9 +544,9 @@ The Person Standard is a reduced subset of the FHIR `Patient` resource, extended
 
 ## Ontology
 
-The ontology for this specification is defined in Turtle format and is available at: [person-standard.ttl](/assets/model/person/person-standard.ttl).
+The ontology for this specification is defined in Turtle format and is available at: [person-standard.ttl](https://github.com/SocialCareData/ontology/releases/latest).
 
-To validate a `Person` record against the constraints that apply in a given context, two SHACL shapes are provided. Use [person-subject-of-care-shape.ttl](/assets/model/person/person-subject-of-care-shape.ttl) where the `Person` is the subject of care, and [person-connected-shape.ttl](/assets/model/person/person-connected-shape.ttl) where the `Person` is a connected or related individual. Each shape applies the cardinality and content rules appropriate to that role.
+To validate a `Person` record against the constraints that apply in a given context, two SHACL shapes are provided. Use [person-subject-of-care-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest) where the `Person` is the subject of care, and [person-connected-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest) where the `Person` is a connected or related individual (see [Connected Person profile](#connected-person-profile)). Each shape applies the cardinality and content rules appropriate to that role.
 
 ## Report an issue
 

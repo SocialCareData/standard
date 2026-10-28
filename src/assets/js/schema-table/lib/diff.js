@@ -4,8 +4,8 @@ const { getClass } = require('./linkml')
 const { extractProperties, resolveVocabulary } = require('./model')
 const { cardinality, datatypeLabel } = require('./format')
 const {
-  escapeHtml, normalizeOptionsLimit, hasHierarchy, vocabularyColumns,
-  HIERARCHY_INDENT, HIERARCHY_BRANCH, COLUMNS
+  escapeHtml, normalizeOptionsLimit, hasHierarchy, vocabularyColumns, isBooleanRow,
+  BOOLEAN_OPTIONS, HIERARCHY_INDENT, HIERARCHY_BRANCH, COLUMNS
 } = require('./table')
 
 /**
@@ -47,10 +47,15 @@ function dataTypeCellDiff (row) {
  * `text` covers the taxonomy title and every value label (so a change to the
  * vocabulary is detected regardless of whether the page links to it); the `html`
  * mirrors the plain table (link + up to three examples when the taxonomy has a
- * section on the page, otherwise the full list inline).
+ * section on the page, otherwise the full list inline). With `explainBoolean`,
+ * a boolean property lists "Yes, No", as in the plain table.
  */
-function optionsCellDiff (row, availableAnchors, optionsLimit) {
-  if (!row.options) return { text: '', html: '' }
+function optionsCellDiff (row, availableAnchors, optionsLimit, explainBoolean = false) {
+  if (!row.options) {
+    if (!explainBoolean || !isBooleanRow(row)) return { text: '', html: '' }
+    const text = BOOLEAN_OPTIONS.join(', ')
+    return { text, html: escapeHtml(text) }
+  }
   const { title, anchor, labels } = row.options
   const text = `${title}: ${labels.join(', ')}`
   const linked = !availableAnchors || availableAnchors.has(anchor)
@@ -65,14 +70,14 @@ function optionsCellDiff (row, availableAnchors, optionsLimit) {
 }
 
 /** The five `{ text, html }` cells of a property row, in {@link COLUMNS} order. */
-function propertyCells (row, availableAnchors, optionsLimit) {
+function propertyCells (row, availableAnchors, optionsLimit, explainBoolean = false) {
   const card = cardinality(row.cardinality.min, row.cardinality.max)
   return [
     { text: row.name, html: `<code>${escapeHtml(row.name)}</code>` },
     { text: card, html: escapeHtml(card) },
     dataTypeCellDiff(row),
     { text: (row.description || '').replace(/\s+/g, ' ').trim(), html: escapeHtml(row.description) },
-    optionsCellDiff(row, availableAnchors, optionsLimit)
+    optionsCellDiff(row, availableAnchors, optionsLimit, explainBoolean)
   ]
 }
 
@@ -172,7 +177,7 @@ function diffRows (curList, prevList, keyOf, cellsOf) {
  * Diff the property rows of one class between two model versions.
  * @returns {{classStatus:'present'|'added'|'removed', rows:object[]}}
  */
-function diffClassProperties (currentModel, previousModel, className, availableAnchors, optionsLimit) {
+function diffClassProperties (currentModel, previousModel, className, availableAnchors, optionsLimit, explainBoolean = false) {
   const inCurrent = !!getClass(currentModel, className)
   const inPrevious = !!getClass(previousModel, className)
   const curRows = inCurrent ? extractProperties(currentModel, className) : []
@@ -181,7 +186,7 @@ function diffClassProperties (currentModel, previousModel, className, availableA
   const rows = diffRows(
     curRows, prevRows,
     r => r.name,
-    r => propertyCells(r, availableAnchors, optionsLimit)
+    r => propertyCells(r, availableAnchors, optionsLimit, explainBoolean)
   )
   return { classStatus, rows }
 }

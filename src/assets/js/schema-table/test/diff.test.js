@@ -9,8 +9,8 @@ const { diffClassProperties, diffVocabulary, renderDiffTable, renderDiffVocabula
 const { generateDiffTable } = require('../lib/generate')
 
 const REPO_ROOT = path.resolve(__dirname, '..', '..', '..', '..', '..')
-const CURRENT = 'src/assets/model/placements/placements-standard-01.yaml'
-const PREVIOUS = 'src/assets/model/placements/placements-standard.yaml'
+const CURRENT = 'src/_data/model/placements/placements-standard.yaml'
+const PREVIOUS = 'src/_data/model/placements/placements-standard-v1.yaml'
 
 // Two hand-built versions of one class exercising every row status.
 const CUR = loadModel(`
@@ -66,6 +66,35 @@ test('diffClassProperties: statuses and unified order', () => {
     ['d', 'unchanged'],
     ['e', 'removed']
   ])
+})
+
+test('diffClassProperties: explainBoolean lists Yes, No for boolean properties', () => {
+  const cur = loadModel(`
+name: cur
+classes:
+  T: { slots: [flag, note] }
+slots:
+  flag: { range: boolean }
+  note: { range: string }
+`)
+  const prev = loadModel(`
+name: prev
+classes:
+  T: { slots: [flag, note] }
+slots:
+  flag: { range: string }
+  note: { range: string }
+`)
+  const optionsOf = (rows, key) => rows.find(r => r.key === key).cells[4]
+  const plain = diffClassProperties(cur, prev, 'T').rows
+  assert.equal(optionsOf(plain, 'flag').html, '')
+
+  const explained = diffClassProperties(cur, prev, 'T', null, undefined, true).rows
+  const flag = optionsOf(explained, 'flag')
+  // string -> boolean, so the options appear as a change.
+  assert.equal(flag.changed, true)
+  assert.match(flag.html, /Yes, No/)
+  assert.equal(optionsOf(explained, 'note').html, '')
 })
 
 test('diffClassProperties: a changed cell carries old + new html', () => {

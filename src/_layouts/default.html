@@ -12,7 +12,12 @@
             </article>
         </main>
         {% include footer.html %}
-        <script src="/assets/js/menu.js"></script>{% if site.pagefind %}
-        <script src="/pagefind/pagefind-component-ui.js" type="module"></script>{% endif %}
+        <script src="/assets/js/menu.js"></script>
+        {%- if site.pagefind %}
+        <script src="/pagefind/pagefind-component-ui.js" type="module"></script>
+        {%- endif %}
+        {%- if jekyll.environment == "production" %}
+        <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "1985cd74df5e4c03a1a018b0e8e318d2"}'></script>
+        {%- endif %}
     </body>
 </html>

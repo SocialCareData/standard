@@ -86,6 +86,15 @@ test('optionsCell is empty for a non-vocabulary property', () => {
   assert.equal(optionsCell({ datatype: 'x' }, new Set()), '')
 })
 
+test('optionsCell lists Yes, No for a boolean property only with explainBoolean', () => {
+  const bool = { datatype: XSD + 'boolean' }
+  assert.equal(optionsCell(bool, new Set()), '')
+  assert.equal(optionsCell(bool, new Set(), undefined, true), 'Yes, No')
+  // Non-boolean and class-ranged rows stay empty even with the flag on.
+  assert.equal(optionsCell({ datatype: XSD + 'string' }, new Set(), undefined, true), '')
+  assert.equal(optionsCell({ classRef: 'Boolean' }, new Set(), undefined, true), '')
+})
+
 test('optionsCell previews a configurable number of values', () => {
   const anchors = new Set(['urgency-taxonomy'])
   // integer limit

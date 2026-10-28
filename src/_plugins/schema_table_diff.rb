@@ -27,6 +27,8 @@
 #   4+. (optional) modifiers:
 #       - "no-label" / "no-labels": render a vocabulary diff without the Label
 #         column, leaving Code / Definition (default includes Label).
+#       - "explain-boolean" / "yes-no": list "Yes, No" in a class diff's Options
+#         column for boolean properties, for non-technical readers (default off).
 
 require "open3"
 require "shellwords"
@@ -52,6 +54,8 @@ module Jekyll
     # {% schema_table %} accepts.
     NO_LABEL_TOKENS = %w[no-label no-labels nolabel hide-label hide-labels].freeze
     LABEL_TOKENS = %w[label labels].freeze
+    # Tokens that list "Yes, No" in the Options column of boolean properties.
+    EXPLAIN_BOOLEAN_TOKENS = %w[explain-boolean yes-no].freeze
 
     # A Markdown heading line, capturing its text (ignoring any closing #s).
     HEADING_RE = /^\s{0,3}\#{1,6}\s+(.+?)\s*#*\s*$/.freeze
@@ -80,12 +84,14 @@ module Jekyll
       previous = resolve_value(previous, context)
       entity   = resolve_value(entity, context)
 
-      show_label = true
+      show_label      = true
+      explain_boolean = false
       modifiers.each do |raw|
         d = resolve_value(raw, context).to_s.strip.downcase
         next if d.empty?
         show_label = false if NO_LABEL_TOKENS.include?(d)
         show_label = true if LABEL_TOKENS.include?(d)
+        explain_boolean = true if EXPLAIN_BOOLEAN_TOKENS.include?(d)
       end
 
       # Tell Jekyll's incremental regenerator that this page depends on BOTH model
@@ -100,8 +106,8 @@ module Jekyll
       # part of the key so a long-running `--watch` process regenerates when
       # either model changes rather than serving a stale cached copy.
       page_id = (context.registers[:page] && context.registers[:page]["path"]).to_s
-      key = "#{page_id}\t#{current}\t#{previous}\t#{entity}\t#{show_label}\t#{model_mtime(current)}\t#{model_mtime(previous)}"
-      self.class.cache[key] ||= generate(context, current, previous, entity, headings, show_label)
+      key = "#{page_id}\t#{current}\t#{previous}\t#{entity}\t#{show_label}\t#{explain_boolean}\t#{model_mtime(current)}\t#{model_mtime(previous)}"
+      self.class.cache[key] ||= generate(context, current, previous, entity, headings, show_label, explain_boolean)
     end
 
     private
@@ -217,13 +223,14 @@ module Jekyll
       parts.join("\n")
     end
 
-    def generate(context, current, previous, entity, headings, show_label = true)
+    def generate(context, current, previous, entity, headings, show_label = true, explain_boolean = false)
       cmd = [
         "node", CLI, current, entity,
         "--previous", previous,
         "--page-headings", headings.join("\n")
       ]
       cmd << "--no-label" unless show_label
+      cmd << "--explain-boolean" if explain_boolean
       stdout, stderr, status = Open3.capture3(*cmd)
 
       unless status.success?

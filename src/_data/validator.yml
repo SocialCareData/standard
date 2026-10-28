@@ -1,0 +1,47 @@
+config:
+  standards:
+    - name: Person - subject of care
+      description: A person receiving care, with the fuller identity and demographic detail that role requires.
+      shapes: https://github.com/SocialCareData/ontology/blob/main/person/person-subject-of-care-shape.ttl
+      context: https://github.com/SocialCareData/ontology/blob/main/person/context.jsonld
+      examples:
+        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/person/subject-of-care/valid-subject-of-care.jsonld
+        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/person/subject-of-care/valid-subject-of-care-full.jsonld
+
+    - name: Person - connected person
+      description: Someone connected to a subject of care - a relative, carer or contact - held to a lighter standard.
+      shapes: https://github.com/SocialCareData/ontology/blob/main/person/person-connected-shape.ttl
+      context: https://github.com/SocialCareData/ontology/blob/main/person/context.jsonld
+      examples:
+        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/person/connected/valid-connected.jsonld
+        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/person/connected/valid-connected-full.jsonld
+
+    - name: Children's Social Care Placements
+      description: A placement record across its whole lifecycle, from requirements through to quality assurance.
+      shapes: https://github.com/SocialCareData/ontology/blob/main/placements/placements-standard-shape.ttl
+      context: https://github.com/SocialCareData/ontology/blob/main/placements/context.jsonld
+      examples:
+        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/placements/valid-placement.jsonld
+        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/placements/valid-placement-full.jsonld
+
+    - name: Safeguarding
+      description: Organisations, services, professionals and service episodes involved in safeguarding.
+      shapes: https://github.com/SocialCareData/ontology/blob/main/safeguarding/safeguarding-standard-shape.ttl
+      context: https://github.com/SocialCareData/ontology/blob/main/safeguarding/context.jsonld
+      examples:
+        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/safeguarding/valid-safeguarding.jsonld
+        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/safeguarding/valid-safeguarding-full.jsonld
+
+    - name: Care Needs Assessments and Care Plans
+      description: Care needs assessments and the care plans that follow from them.
+      shapes: https://github.com/SocialCareData/ontology/blob/main/assessments-and-plans/assessments-and-plans-standard-shape.ttl
+      context: https://github.com/SocialCareData/ontology/blob/main/assessments-and-plans/context.jsonld
+      examples:
+        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/assessments-and-plans/valid-assessments-and-plans.jsonld
+        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/assessments-and-plans/valid-assessments-and-plans-full.jsonld
+
+  placeholder: |-
+    {
+      "@type": "Person",
+      "name": [{ "@type": "Name", "givenName": ["Ada"], "familyName": "Lovelace" }]
+    }

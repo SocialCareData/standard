@@ -114,7 +114,7 @@ With ability to input:
 
 * [Families First Partnership programme - GOV.UK](https://www.gov.uk/government/publications/families-first-partnership-programme)
 * [NHS England » Shared care records](https://www.england.nhs.uk/digitaltechnology/connecteddigitalsystems/shared-care-records/)
-* [Multidisciplinary teams working for integrated care - SCIE](https://www.scie.org.uk/integrated-care/research-practice/activities/multidisciplinary-teams/)
+* [Multidisciplinary teams working for integrated care - SCIE](https://www.scie.org.uk/integrated-care/multidisciplinary-teams/)
 * [Neighbourhood health framework - GOV.UK](https://www.gov.uk/government/publications/neighbourhood-health-framework/neighbourhood-health-framework)
 
 

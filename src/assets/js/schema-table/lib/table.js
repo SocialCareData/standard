@@ -55,6 +55,17 @@ function dataTypeCell (row) {
 // Default number of example values previewed in the Options column.
 const DEFAULT_OPTIONS_LIMIT = 3
 
+// The values a boolean property's Options cell lists when `explainBoolean` is
+// on, so non-technical readers see "Yes, No" rather than having to know what
+// "Boolean" means.
+const BOOLEAN_OPTIONS = ['Yes', 'No']
+
+/** Whether a property row is a plain boolean (not a class or enum range). */
+function isBooleanRow (row) {
+  return !row.classRef && !row.enumName && !!row.datatype &&
+    datatypeLabel(row.datatype) === 'Boolean'
+}
+
 /**
  * Normalise an options-preview limit to a positive integer or Infinity.
  * Accepts a number, a numeric string, or the string `'all'` (→ Infinity).
@@ -75,9 +86,12 @@ function normalizeOptionsLimit (limit) {
  *
  * `availableAnchors` of `null`/`undefined` means "page context unknown" (e.g.
  * the CLI), in which case the link is always emitted.
+ *
+ * With `explainBoolean`, a boolean property (which has no vocabulary) lists
+ * {@link BOOLEAN_OPTIONS} ("Yes, No") instead of leaving the cell empty.
  */
-function optionsCell (row, availableAnchors, optionsLimit = DEFAULT_OPTIONS_LIMIT) {
-  if (!row.options) return ''
+function optionsCell (row, availableAnchors, optionsLimit = DEFAULT_OPTIONS_LIMIT, explainBoolean = false) {
+  if (!row.options) return explainBoolean && isBooleanRow(row) ? BOOLEAN_OPTIONS.join(', ') : ''
   const { title, anchor, labels } = row.options
   const linked = !availableAnchors || availableAnchors.has(anchor)
   if (linked) {
@@ -90,13 +104,13 @@ function optionsCell (row, availableAnchors, optionsLimit = DEFAULT_OPTIONS_LIMI
 }
 
 /** Convert a semantic property row into escaped display cells. */
-function toViewRow (row, availableAnchors, optionsLimit) {
+function toViewRow (row, availableAnchors, optionsLimit, explainBoolean = false) {
   return [
     `\`${escapeCell(row.label || row.name)}\``,
     escapeCell(cardinality(row.cardinality.min, row.cardinality.max)),
     escapeCell(dataTypeCell(row)),
     escapeCell(row.description),
-    escapeCell(optionsCell(row, availableAnchors, optionsLimit))
+    escapeCell(optionsCell(row, availableAnchors, optionsLimit, explainBoolean))
   ]
 }
 
@@ -118,9 +132,11 @@ function renderMarkdown (viewRows) {
  *   lists its values inline. See {@link optionsCell}.
  * @param {number|string} [optionsLimit] How many example values the Options
  *   column previews (default 3; `'all'` shows every value). See {@link optionsCell}.
+ * @param {boolean} [explainBoolean=false] List "Yes, No" in the Options column
+ *   of boolean properties. See {@link optionsCell}.
  */
-function renderTable (rows, availableAnchors, optionsLimit) {
-  return renderMarkdown(rows.map(row => toViewRow(row, availableAnchors, optionsLimit)))
+function renderTable (rows, availableAnchors, optionsLimit, explainBoolean = false) {
+  return renderMarkdown(rows.map(row => toViewRow(row, availableAnchors, optionsLimit, explainBoolean)))
 }
 
 // A hierarchical vocabulary indents each level by four non-breaking spaces and
@@ -201,8 +217,10 @@ module.exports = {
   toViewRow,
   dataTypeCell,
   optionsCell,
+  isBooleanRow,
   normalizeOptionsLimit,
   DEFAULT_OPTIONS_LIMIT,
+  BOOLEAN_OPTIONS,
   escapeCell,
   escapeHtml,
   vocabularyColumns,
