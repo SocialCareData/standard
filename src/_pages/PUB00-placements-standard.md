@@ -490,10 +490,10 @@ A SHACL shape ([placements-standard-shape.ttl](https://github.com/SocialCareData
 - pattern checks (UK postcode prefix on `placementLocation`),
 - and severity-`Warning` cost sense-checks.
 
-**[Validate your data in your browser](https://socialcaredata.github.io/validator/)** - paste a record, choose *Children's Social Care Placements*, and see what needs fixing. Or from a terminal:
+**[Validate your data in your browser](/validator)** - paste a record, choose *Children's Social Care Placements*, and see what needs fixing. Or from a terminal:
 
 ```bash
-npx @socialcaredata/validator -p placements yourdata.jsonld
+npx @theodi/data-standard-validator -s src/_data/model/placements/placements-standard.yaml yourdata.jsonld
 ```
 
 

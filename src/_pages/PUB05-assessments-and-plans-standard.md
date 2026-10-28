@@ -450,10 +450,11 @@ A SHACL shape ([assessments-and-plans-standard-shape.ttl](https://github.com/Soc
 
 JSON-LD payloads are validated with the [Social Care Data Validator](https://github.com/SocialCareData/validator).
 
-**[Validate your data in your browser](https://socialcaredata.github.io/validator/)**, or from a terminal:
+**[Validate your data in your browser](/validator)**, or from a terminal:
 
 ```bash
 npx @socialcaredata/validator -p assessments-and-plans yourdata.jsonld
+npx @theodi/data-standard-validator -s src/_data/model/assessments-and-plans/assessments-and-plans-standard.yaml yourdata.jsonld
 ```
 
 ## Report an issue

@@ -30,7 +30,7 @@ imports:
 # Person (Connected)
 #
 #   identifier                  0..*
-#   name                        1..1
+#   name                        1..*
 #   dateOfBirth                 0..1
 #   isDeceased                  0..1
 #   deceasedDate                0..1
@@ -74,8 +74,8 @@ classes:
         description: Identifiers (multi-valued, optional).
       name:
         required: true
-        multivalued: false
-        description: Connected Person must have exactly one Name.
+        multivalued: true
+        description: Connected Person must have at least one Name.
       contact:
         required: false
         multivalued: false
