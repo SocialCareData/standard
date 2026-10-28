@@ -122,3 +122,8 @@ See [Person.Contact](PUB01_person_standard_table#contact)
 ### Record Type Taxonomy
 
 {% schema_table page.data_model RecordTypeCode no-label %}
+
+### Record Relationship Type Taxonomy
+
+{% schema_table page.data_model RecordRelationshipCode no-label %}
+
