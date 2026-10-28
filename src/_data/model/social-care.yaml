@@ -25,3 +25,4 @@ imports:
   - https://ns.socialcaredata.io/placements
   - https://ns.socialcaredata.io/safeguarding
   - https://ns.socialcaredata.io/assessments-and-plans
+  - https://ns.socialcaredata.io/referrals

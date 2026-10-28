@@ -22,6 +22,8 @@ prefixes:
   mt: https://ns.socialcaredata.io/measurement-type#
   mu: https://ns.socialcaredata.io/measurement-unit#
   ot: https://ns.socialcaredata.io/observation-type#
+  rtc: https://ns.socialcaredata.io/record-type#
+  rr: https://ns.socialcaredata.io/record-relationship#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -127,6 +129,7 @@ classes:
       - location
       - finding
       - episodeOutcome
+      - linkedRecord
     slot_usage:
       relatedServiceRef:
         required: true
@@ -157,6 +160,7 @@ classes:
       - relatedServiceRef
       - timeInformation
       - location
+      - linkedRecord
 
   # --- Linking / supporting objects ----------------------------------------
 
@@ -204,6 +208,17 @@ classes:
       - measurementValue
       - measurementUnit
       - measurementType
+
+  LinkedRecord:
+    class_uri: sg:LinkedRecord
+    description: >-
+      A reference to an associated external or cross-standard record (such as a
+      referral, service request, quality-of-care concern, care needs assessment,
+      or care plan).
+    slots:
+      - recordId
+      - recordType
+      - recordRelationship
 
   # --- Shared objects -------------------------------------------------------
   # Identifier, Name, Address and Contact (and the NameUseCode / AddressUseCode
@@ -389,6 +404,36 @@ slots:
     required: false
     multivalued: false
     description: Outcome of the episode for the subject.
+  linkedRecord:
+    slot_uri: sg:linkedRecord
+    title: linkedRecord
+    range: LinkedRecord
+    required: false
+    multivalued: true
+    description: Linked records associated with this episode or life event (e.g. referrals, requests, concerns, assessments, plans).
+
+  # --- LinkedRecord ---
+  recordId:
+    slot_uri: sg:recordId
+    title: recordId
+    range: Identifier
+    required: true
+    multivalued: false
+    description: The unique identifier of the linked record.
+  recordType:
+    slot_uri: sg:recordType
+    title: recordType
+    range: RecordTypeCode
+    required: true
+    multivalued: false
+    description: The type of the linked record.
+  recordRelationship:
+    slot_uri: sg:recordRelationship
+    title: recordRelationship
+    range: RecordRelationshipCode
+    required: false
+    multivalued: false
+    description: The nature of the relationship (e.g. trigger, outcome, context).
 
   # --- SubjectPerson / RelatedProfessional ---
   person:
@@ -650,6 +695,58 @@ enums:
         title: Other Carer Support
         description: Other unpaid carer support
         meaning: svc:OtherCarerSupport
+      MASH:
+        title: MASH / Safeguarding Services
+        description: MASH / safeguarding services
+        meaning: svc:MASH
+      early-help:
+        title: Early Help
+        description: Early help
+        meaning: svc:EarlyHelp
+      education-welfare:
+        title: Education Welfare Officer
+        description: Education welfare officer
+        meaning: svc:EducationWelfare
+      home-adaptations:
+        title: Home Adaptations
+        description: Home adaptations
+        meaning: svc:HomeAdaptations
+      occupational-therapy:
+        title: Occupational Therapy
+        description: Occupational therapy
+        meaning: svc:OccupationalTherapy
+      CHC:
+        title: NHS CHC
+        description: NHS CHC
+        meaning: svc:CHC
+      CMHT:
+        title: CMHT
+        description: CMHT
+        meaning: svc:CMHT
+      s117-aftercare:
+        title: S117 Aftercare
+        description: S117 aftercare
+        meaning: svc:S117Aftercare
+      DoLS:
+        title: DoLs
+        description: DoLs
+        meaning: svc:DoLS
+      D2A:
+        title: D2A
+        description: D2A
+        meaning: svc:D2A
+      sensory-team:
+        title: Sensory Teams
+        description: Sensory teams
+        meaning: svc:SensoryTeam
+      advocacy:
+        title: Advocacy
+        description: Advocacy
+        meaning: svc:Advocacy
+      LGA.<LGA Taxonomy Code>:
+        title: Local Government Association Service Taxonomy
+        description: "Numeric code from the [Local Government Association Service Taxonomy](https://webservices.esd.org.uk/lists/services)"
+        meaning: svc:LGA
 
   ServiceCostFrequency:
     enum_uri: sg:service-cost-frequency
@@ -776,6 +873,14 @@ enums:
         title: Other Assessment
         description: Any other enquiry, discovery, assessment, evaluation, triage, or review.
         meaning: epc:OtherAssessment
+      "assessment.MASH-review":
+        title: MASH Review
+        description: Multi-Agency Safeguarding Hub (MASH) review and triage of incoming referral or concern.
+        meaning: epc:MashReview
+      "assessment.referral-review":
+        title: Referral Review
+        description: Review, screening, or triage of an incoming referral by social care.
+        meaning: epc:ReferralReview
       plan:
         title: Plan and Order
         description: Creation of a plan, definition of statutory responsibilities (via a court order), or commission of services.
@@ -840,6 +945,46 @@ enums:
         title: Miscellaneous
         description: Other care provision activities not covered elsewhere.
         meaning: epc:Miscellaneous
+      request:
+        title: Request and Escalation
+        description: Outward request for services, intervention, or statutory escalation.
+        meaning: epc:Request
+      "request.notification":
+        title: Notification or Signposting
+        description: Notification or signposting request to partner agency or community service.
+        meaning: epc:Notification
+      "request.child-early-help":
+        title: Early Help Request (Child)
+        description: Request to Early Help services for a child.
+        meaning: epc:ChildEarlyHelp
+      "request.child-cin":
+        title: Child in Need Escalation (s17)
+        description: Escalation to section 17 Child in Need (CiN) assessment.
+        meaning: epc:ChildCin
+      "request.child-s47":
+        title: Section 47 Enquiry Escalation
+        description: Escalation to section 47 child protection enquiry.
+        meaning: epc:ChildS47
+      "request.child-emergency":
+        title: Emergency Protection Request (Child)
+        description: Immediate emergency protection request for a child.
+        meaning: epc:ChildEmergency
+      "request.child-statutory":
+        title: Statutory Services Request (Child)
+        description: Request to statutory services for a child (e.g. CAMHS, statutory advocacy).
+        meaning: epc:ChildStatutoryServices
+      "request.child-non-statutory":
+        title: Non-Statutory Services Request (Child)
+        description: Request to non-statutory or community services for a child.
+        meaning: epc:ChildNonStatutoryServices
+      "request.adult-statutory":
+        title: Statutory Services Request (Adult)
+        description: Request to statutory services for an adult (e.g. NHS Continuing Healthcare, statutory advocacy).
+        meaning: epc:AdultStatutoryServices
+      "request.adult-non-statutory":
+        title: Non-Statutory Services Request (Adult)
+        description: Request to non-statutory or community services for an adult.
+        meaning: epc:AdultNonStatutoryServices
 
   EpisodeOutcome:
     enum_uri: sg:episode-outcome
@@ -912,6 +1057,18 @@ enums:
         title: NFA Other
         description: "No Further Action: Other"
         meaning: eo:NfaOther
+      referral:
+        title: Referral
+        description: Episode concluded by making an onward referral to external or partner services.
+        meaning: eo:Referral
+      request:
+        title: Request
+        description: Episode concluded by requesting a specific statutory or non-statutory service.
+        meaning: eo:Request
+      "quality-of-care-concern":
+        title: Quality of Care Concern
+        description: Episode concluded or resulted in raising a quality-of-care concern regarding a provider or service.
+        meaning: eo:QualityOfCareConcern
 
   EventCode:
     enum_uri: sg:event-code
@@ -948,8 +1105,48 @@ enums:
         meaning: evc:SafeguardingConcern
       referral:
         title: Referral
-        description: Referral made to relevant authority
+        description: Referral made to relevant social care authority.
         meaning: evc:Referral
+      "referral.child-safeguarding":
+        title: Safeguarding Concern Referral (Child)
+        description: Inward safeguarding concern referral regarding a child.
+        meaning: evc:ChildSafeguardingReferral
+      "referral.child-info-request":
+        title: Information Request (Child)
+        description: Inward information request regarding a child.
+        meaning: evc:ChildInfoRequestReferral
+      "referral.child-cross-service":
+        title: Cross-Service Concern (Child)
+        description: Professional concern about a child arising from engagement with an adult.
+        meaning: evc:ChildCrossServiceReferral
+      "referral.adult-general":
+        title: General Referral (Adult)
+        description: General referral to adult social care.
+        meaning: evc:AdultGeneralReferral
+      "referral.adult-safeguarding":
+        title: Safeguarding Concern Referral (Adult)
+        description: Inward safeguarding concern referral regarding an adult.
+        meaning: evc:AdultSafeguardingReferral
+      "referral.adult-independent-living":
+        title: Independent Living Request (Adult)
+        description: Request for occupational therapy or home equipment for an adult.
+        meaning: evc:AdultIndependentLivingReferral
+      "referral.adult-care-act-assessment":
+        title: Care Act Assessment Request (Adult)
+        description: Request for Care Act needs assessment or review for an adult.
+        meaning: evc:AdultCareActAssessmentReferral
+      "referral.adult-info-request":
+        title: Information Request (Adult)
+        description: Inward information request regarding an adult.
+        meaning: evc:AdultInfoRequestReferral
+      "referral.adult-cross-service":
+        title: Cross-Service Concern (Adult)
+        description: Professional concern about an adult arising from engagement with a child.
+        meaning: evc:AdultCrossServiceReferral
+      "quality-of-care-concern":
+        title: Quality of Care Concern
+        description: Quality-of-care concern raised about a care provider or service.
+        meaning: evc:QualityOfCareConcern
       homeless:
         title: Homeless
         description: Made homeless
@@ -1428,6 +1625,58 @@ enums:
         title: PCT
         description: Percentage (%)
         meaning: mu:Pct
+
+  RecordTypeCode:
+    enum_uri: sg:record-type
+    title: Record Type
+    description: Codes to indicate the type of linked record.
+    permissible_values:
+      referral:
+        title: Referral
+        description: Inward referral into social services (PUB06).
+        meaning: rtc:Referral
+      request:
+        title: Request
+        description: Outward request for services (PUB06).
+        meaning: rtc:Request
+      "quality-of-care-concern":
+        title: Quality of Care Concern
+        description: Quality-of-care concern raised about a care provider or service (PUB06).
+        meaning: rtc:QualityOfCareConcern
+      assessment:
+        title: Care Needs Assessment
+        description: Care needs assessment record (PUB05).
+        meaning: rtc:Assessment
+      plan:
+        title: Care Plan
+        description: Care plan or support plan record (PUB05).
+        meaning: rtc:Plan
+
+  RecordRelationshipCode:
+    enum_uri: sg:record-relationship
+    title: Relationships Between Linked Records
+    description: Relationship types between linked referrals, requests, or concerns.
+    permissible_values:
+      escalationOf:
+        title: Escalation of
+        description: This record is an escalation of the linked record.
+        meaning: rr:EscalationOf
+      deescalationOf:
+        title: Deescalation of
+        description: This record is a deescalation of the linked record.
+        meaning: rr:DeescalationOf
+      followupTo:
+        title: Follow up to
+        description: This record is a follow up to the linked record.
+        meaning: rr:FollowupTo
+      reactivationOf:
+        title: Reactivation of
+        description: This record is a reactivation of the linked record.
+        meaning: rr:ReactivationOf
+      concurrentWith:
+        title: Concurrent with
+        description: This record is concurrent with the linked record.
+        meaning: rr:ConcurrentWith
 
   # NameUseCode and AddressUseCode are imported from the Person Standard
   # (person-standard.yaml) and reused unchanged; they are not redefined here.
