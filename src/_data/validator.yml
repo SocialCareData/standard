@@ -41,7 +41,7 @@ config:
         - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/assessments-and-plans/valid-assessments-and-plans-full.jsonld
 
     - name: Referrals and Requests
-      description:Referrals, requests, and quality-of-care concerns.
+      description: Referrals, requests, and quality-of-care concerns.
       shapes: https://github.com/SocialCareData/ontology/blob/main/referrals/referrals-standard-shape.ttl
       context: https://github.com/SocialCareData/ontology/blob/main/referrals/context.jsonld
       examples:
