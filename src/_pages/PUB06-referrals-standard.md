@@ -207,12 +207,9 @@ Outward request for services for an existing subject of care.
     "system": "https://example.org/people"
   },
   "referrer": {
-    "@type": "Professional",
-    "name": {
-      "@type": "Name",
-      "givenName": ["Sarah"],
-      "familyName": "Connor"
-    }
+    "@type": "Identifier",
+    "value": "PROF-001",
+    "system": "https://example.org/professionals"
   },
   "recipient": [
     {

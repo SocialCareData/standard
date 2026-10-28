@@ -3,14 +3,14 @@
     {
       "focus": "Referral",
       "path": "subject",
-      "constraint": "sh:in"
+      "constraint": "sh:minCount"
     }
   ],
   "invalid-request-missing-purpose.jsonld": [
     {
       "focus": "Request",
       "path": "purpose",
-      "constraint": "sh:in"
+      "constraint": "sh:minCount"
     }
   ]
 }
