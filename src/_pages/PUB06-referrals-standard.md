@@ -458,10 +458,10 @@ A SHACL shape ([referrals-standard-shape.ttl](https://github.com/SocialCareData/
 
 JSON-LD payloads are validated with the [Social Care Data Validator](https://github.com/SocialCareData/validator).
 
-**[Validate your data in your browser](https://socialcaredata.github.io/validator/)**, or from a terminal:
+**[Validate your data in your browser](/validator)**, or from a terminal:
 
 ```bash
-npx @socialcaredata/validator -p referrals yourdata.jsonld
+npx @theodi/data-standard-validator -s https://raw.githubusercontent.com/SocialCareData/ontology/refs/heads/main/safeguarding/safeguarding-standard.ttl yourdata.jsonld
 ```
 
 ## Report an issue

@@ -1659,18 +1659,23 @@ enums:
     permissible_values:
       escalationOf:
         title: Escalation of
+        description: This record is an escalation of the linked record.
         meaning: rr:EscalationOf
       deescalationOf:
         title: Deescalation of
+        description: This record is a deescalation of the linked record.
         meaning: rr:DeescalationOf
       followupTo:
         title: Follow up to
+        description: This record is a follow up to the linked record.
         meaning: rr:FollowupTo
       reactivationOf:
         title: Reactivation of
+        description: This record is a reactivation of the linked record.
         meaning: rr:ReactivationOf
       concurrentWith:
         title: Concurrent with
+        description: This record is concurrent with the linked record.
         meaning: rr:ConcurrentWith
 
   # NameUseCode and AddressUseCode are imported from the Person Standard
