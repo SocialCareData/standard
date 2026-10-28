@@ -4,13 +4,11 @@ layout: default
 
 {% include standard_metadata.html %}
 
-<nav class="toc toc-collapsible" aria-labelledby="table-of-contents">
+<nav class="toc numbered-toc">
 
-    <div class="toc-header">
-        <h2 id="table-of-contents">Table of Contents</h2>
-    </div>
+    <h2 id="table-of-contents">Table of Contents</h2>
 
-    {% toc collapsible %}
+    {% toc %}
 
 </nav>
 
@@ -21,5 +19,3 @@ layout: default
     {{ content }}
 
 </article>
-
-<script src="/assets/js/toc.js" defer></script>
