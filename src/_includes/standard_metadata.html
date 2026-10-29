@@ -1,9 +1,10 @@
 {% if page.reference %}
 {% assign format_links = page.other_formats | where_exp: "f", "f.url" %}
-{% if page.model_version or page.latest_url or page.previous_version_url or page.editors.size > 0 or format_links.size > 0 %}
-<dl class="standard-metadata" aria-label="About this version">{% if page.model_version %}
+{% assign version_number = page.version_number | default: page.model_version %}
+{% if version_number or page.latest_url or page.previous_version_url or page.editors.size > 0 or format_links.size > 0 %}
+<dl class="standard-metadata" aria-label="About this version">{% if version_number %}
     <dt>Version</dt>
-    <dd>{{ page.model_version }}</dd>{% endif %}{% if page.latest_url %}
+    <dd>{{ version_number }}</dd>{% endif %}{% if page.latest_url %}
     <dt>Latest version</dt>
     <dd><a href="{{ page.latest_url }}">{{ page.latest_url | absolute_url }}</a></dd>{% endif %}{% if page.previous_version_url %}
     <dt>Previous version</dt>

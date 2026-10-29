@@ -11,6 +11,10 @@ tags:
 reference: PUB03
 publication_group: guide
 status: draft
+version_number: "1.0"
+editors:
+  - name: Neil Majithia
+    organisation: Open Data Institute
 ---
 
 ## Introduction

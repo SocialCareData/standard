@@ -5,7 +5,7 @@
 # Runs for every page with both a `reference` (e.g. PUB00) and a `data_model`,
 # and sets:
 #
-#   model_version         `version` of the LinkML model named by `data_model`
+#   model_version         page version_number if present, otherwise `version` of the LinkML model named by `data_model`
 #   latest_url            url of the page with the same `reference` whose
 #                         file name has no -vN suffix (PUB00-placements-standard.md
 #                         rather than PUB00-placements-standard-v1.md)
