@@ -14,6 +14,8 @@ data_model: src/_data/model/person/person-standard.yaml
 editors:
   - name: Neil Majithia
     organisation: Open Data Institute
+  - name: Charlotte Moberly
+    organisation: Social Finance
   - name: Huseyin Kir
     organisation: Open Data Institute
 other_formats:
