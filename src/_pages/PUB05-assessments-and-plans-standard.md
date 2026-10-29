@@ -13,6 +13,8 @@ data_model: src/_data/model/assessments-and-plans/assessments-and-plans-standard
 editors:
   - name: Neil Majithia
     organisation: Open Data Institute
+  - name: Charlotte Moberly
+    organisation: Social Finance
   - name: Huseyin Kir
     organisation: Open Data Institute
 other_formats:
