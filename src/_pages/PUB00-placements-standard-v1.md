@@ -8,7 +8,7 @@ tags:
 reference: PUB00
 version: 1
 status: draft
-data_model: src/_data/model/placements/placements-standard-v0_1.yaml
+data_model: src/_data/model/placements/placements-standard-v1.yaml
 editors:
   - name: Ivjyot S. Oberoi
     organisation: Social Finance
