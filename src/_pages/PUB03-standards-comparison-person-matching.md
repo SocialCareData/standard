@@ -13,7 +13,9 @@ publication_group: guide
 status: draft
 version_number: "1.0"
 editors:
-  - name: Neil Majithia
+  - name: Andrew Newman
+    organisation: Open Data Institute
+  - name: Matthieu Bosquet
     organisation: Open Data Institute
 ---
 
