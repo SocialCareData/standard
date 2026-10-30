@@ -11,6 +11,22 @@ tags:
 reference: PUB01
 status: draft
 data_model: src/_data/model/person/person-standard.yaml
+editors:
+  - name: Neil Majithia
+    organisation: Open Data Institute
+  - name: Charlotte Moberly
+    organisation: Social Finance
+  - name: Huseyin Kir
+    organisation: Open Data Institute
+other_formats:
+  - label: Table view
+    url: /PUB01_person_standard_table
+  - label: Ontology
+    url: https://github.com/SocialCareData/ontology/blob/main/person/person-standard.ttl
+  - label: SHACL (subject of care)
+    url: https://github.com/SocialCareData/ontology/blob/main/person/person-subject-of-care-shape.ttl
+  - label: SHACL (connected person)
+    url: https://github.com/SocialCareData/ontology/blob/main/person/person-connected-shape.ttl
 non_technical_summary: |
   The core objective of our work is to facilitate the sharing of information about a person in care (whether a child or an adult) between agencies and organisations across the country (multi-agency information sharing). To do so, each of these agencies and organisations must be speaking the same "language" talking about the person, communicating with each other in the same way. This requires a common data model for identifying and describing a person across data systems, which we have designed here in our **Person Standard**.
 
