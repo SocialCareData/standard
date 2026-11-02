@@ -508,8 +508,6 @@ A SHACL shape ([placements-standard-shape.ttl](https://github.com/SocialCareData
 - conditional checks for the `Other` vocab pairings,
 - and severity-`Warning` cost sense-checks.
 
-Use the [data standard validator](/validator) to check records against this standard.
-
 **[Validate your data in your browser](/validator)** - paste a record, choose *Children's Social Care Placements*, and see what needs fixing. Or from a terminal:
 
 ```bash

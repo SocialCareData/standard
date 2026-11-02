@@ -1,5 +1,3 @@
-# _plugins/validator_component.rb
-#
 # Publishes the browser build of the <data-standard-validator> web component
 # (the npm package @theodi/data-standard-validator-component) at
 # /assets/js/data-standard-validator/, where the /validator page imports it.
