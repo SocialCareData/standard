@@ -495,7 +495,7 @@ A SHACL shape ([placements-standard-shape.ttl](https://github.com/SocialCareData
 **[Validate your data in your browser](/validator)** - paste a record, choose *Children's Social Care Placements*, and see what needs fixing. Or from a terminal:
 
 ```bash
-npx @theodi/data-standard-validator -s src/_data/model/placements/placements-standard.yaml yourdata.jsonld
+npx @theodi/data-standard-validator -s https://raw.githubusercontent.com/SocialCareData/ontology/main/placements/placements-standard-shape.ttl yourdata.jsonld
 ```
 
 
