@@ -10,6 +10,10 @@ tags:
   - MAIS
 reference: PUB04
 publication_group: guide
+version_number: "1.0"
+editors:
+  - name: Matthieu Bosquet
+    organisation: Open Data Institute
 ---
 
 ## Introduction
