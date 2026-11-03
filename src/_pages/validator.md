@@ -21,7 +21,7 @@ your own organisation's systems.
   <data-standard-validator theme="light"></data-standard-validator>
 </div>
 <script type="module">
-  import '{{ "/assets/js/data-standard-validator/data-standard-validator.js" | relative_url }}'
+  import 'https://cdn.jsdelivr.net/npm/@theodi/data-standard-validator-component@{{ site.validator_component.version }}/standalone/data-standard-validator.js'
   document.querySelector('data-standard-validator').config = {{ site.data.validator.config | jsonify }}
 </script>
 
