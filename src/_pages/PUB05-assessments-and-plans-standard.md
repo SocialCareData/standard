@@ -10,6 +10,20 @@ tags:
 reference: PUB05
 status: draft
 data_model: src/_data/model/assessments-and-plans/assessments-and-plans-standard.yaml
+editors:
+  - name: Neil Majithia
+    organisation: Open Data Institute
+  - name: Charlotte Moberly
+    organisation: Social Finance
+  - name: Huseyin Kir
+    organisation: Open Data Institute
+other_formats:
+  - label: Table view
+    url: /PUB05_assessments_and_plans_standard_table
+  - label: Ontology
+    url: https://github.com/SocialCareData/ontology/blob/main/assessments-and-plans/assessments-and-plans-standard.ttl
+  - label: SHACL
+    url: https://github.com/SocialCareData/ontology/blob/main/assessments-and-plans/assessments-and-plans-standard-shape.ttl
 non_technical_summary: |
   As part of the joined-up care workstream, we’re working on standardising care needs assessments and plans. Each are important components of an adult’s social care: an assessment is conducted when an adult contacts (or is referred to) a local authority’s social services team, and a social care plan is created immediately after if the person is assessed to be eligible.
 
@@ -42,7 +56,7 @@ This document is for developers of Case Management Systems, single-view portals,
 
 The following diagram illustrates the elements of the Care Needs Assessments and Plans Standard.
 
-<p class="data-model-diagram"><img src="assets\img\assessments-and-plans\assessments-and-plans-data-model.svg" alt="Assessments and Plans Data Model" title="Assessments and Plans Data Model" width="80%"/></p>
+<p class="data-model-diagram"><img src="assets\img\assessments-and-plans\assessments-and-plans-data-model-2026-10-21.svg" alt="Assessments and Plans Data Model" title="Assessments and Plans Data Model" width="80%"/></p>
 
 
 ## Care Needs Assessments
@@ -438,10 +452,11 @@ A SHACL shape ([assessments-and-plans-standard-shape.ttl](https://github.com/Soc
 
 JSON-LD payloads are validated with the [Social Care Data Validator](https://github.com/SocialCareData/validator).
 
-**[Validate your data in your browser](https://socialcaredata.github.io/validator/)**, or from a terminal:
+**[Validate your data in your browser](/validator)**, or from a terminal:
 
 ```bash
 npx @socialcaredata/validator -p assessments-and-plans yourdata.jsonld
+npx @theodi/data-standard-validator -s src/_data/model/assessments-and-plans/assessments-and-plans-standard.yaml yourdata.jsonld
 ```
 
 ## Report an issue

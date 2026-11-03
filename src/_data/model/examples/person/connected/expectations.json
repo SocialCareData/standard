@@ -27,13 +27,6 @@
       "constraint": "sh:maxCount"
     }
   ],
-  "invalid-multiple-names.jsonld": [
-    {
-      "focus": "Person",
-      "path": "name",
-      "constraint": "sh:maxCount"
-    }
-  ],
   "invalid-multiple-relatedPersons.jsonld": [
     {
       "focus": "Person",
