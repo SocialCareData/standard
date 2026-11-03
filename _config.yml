@@ -95,6 +95,3 @@ kramdown:
 plugins:
   - jekyll-feed
   - jekyll-sitemap
-# @theodi/data-standard-validator-component version
-validator_component:
-  version: 1.0.0
