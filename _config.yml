@@ -101,8 +101,6 @@ plugins:
 related_pages:
   max_links: 5
   min_links: 2              # fewer than this and the sidebar is not shown
-  # hide_on and never_suggest take urls or patterns: * matches any characters,
-  # ? one character, {a,b} either (e.g. /*_mais_swg for all MAIS group posts).
   hide_on:                  # no sidebar on these pages (they can still be suggested)
     - /
     - /use_cases

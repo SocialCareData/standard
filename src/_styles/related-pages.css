@@ -1,6 +1,8 @@
-/* Related pages: a list of up to five links (_includes/related_pages.html).
-   From 1280px wide it sits in a 238px column beside the article and stays in
-   view on scroll; narrower than that it follows the article. */
+/* Related pages: a list of up to five links (_includes/related_pages.html),
+   placed by _plugins/related_pages.rb in <div class="with-related"> next to
+   the page content.
+   From 1280px wide it sits in a 238px column beside the article; narrower
+   than that it follows the article. */
 
 .related-pages {
   border-top: 4px solid var(--background);
@@ -14,6 +16,13 @@
   font-weight: bold;
   line-height: 1.4;
   margin: 0 0 4px;
+}
+
+/* The sidebar sits inside .numbered-headings on standards, use cases and
+   posts; its heading is not a numbered section. */
+.numbered-headings .related-pages__heading::before {
+  content: none;
+  counter-increment: none;
 }
 
 .related-pages__list {
@@ -96,8 +105,6 @@
 
   .related-pages {
     margin-top: 0;
-    position: sticky;
-    top: 1.5rem;
   }
 
   .related-pages__item {
@@ -107,11 +114,5 @@
 
   .related-pages__link::after {
     content: none;
-  }
-
-  /* `body > *` sets overflow-x: auto, which makes <main> a scroll container
-     and stops position: sticky from working inside it. */
-  main:has(.related-pages) {
-    overflow: visible;
   }
 }

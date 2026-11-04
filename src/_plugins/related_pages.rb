@@ -1,8 +1,9 @@
 # _plugins/related_pages.rb
 #
 # Works out each page's "Related pages" list at build time and stores it as
-# page.related_links ([{url, title, label, code}]) for
-# _includes/related_pages.html to print.
+# page.related_links ([{url, title, label, code}]). After the page is
+# rendered, Sidebar puts _includes/related_pages.html beside the page content,
+# so layouts need no changes.
 #
 # For each page that shows the list:
 #   1. Editor picks first, in the order listed in the page's front matter:
@@ -180,5 +181,45 @@ module Jekyll
         end
       end
     end
+
+    # Puts the rendered "Related pages" sidebar next to the page content in the
+    # final HTML:
+    #
+    #   <div class="with-related"><div>CONTENT</div><aside>…</aside></div>
+    #
+    # The content is found by its exact converted HTML, so whichever layout
+    # wraps it (a numbered article, the default layout's article) still does.
+    # Running after rendering keeps the sidebar out of page.content, which the
+    # Table of Contents, the feed and the updates page read.
+    module Sidebar
+      INCLUDE_FILE = "related_pages.html"
+
+      module_function
+
+      def insert(doc)
+        return unless doc.data["related_links"] && doc.output
+
+        content = doc.content.to_s
+        start   = content.strip.empty? ? nil : doc.output.index(content, doc.output.index("<main").to_i)
+        unless start
+          Jekyll.logger.warn("RelatedPages:", "#{doc.relative_path}: page content not found, sidebar not added")
+          return
+        end
+
+        wrapped = %(<div class="with-related"><div>#{content}</div>#{render(doc)}</div>)
+        doc.output = doc.output[0...start] + wrapped + doc.output[(start + content.length)..-1]
+      end
+
+      def render(doc)
+        site = doc.site
+        path = site.in_source_dir(site.config["includes_dir"], INCLUDE_FILE)
+        site.liquid_renderer.file(path).parse(File.read(path))
+            .render!({ "page" => { "related_links" => doc.data["related_links"] } }, registers: { site: site })
+      end
+    end
   end
+end
+
+Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
+  Jekyll::RelatedPages::Sidebar.insert(doc)
 end

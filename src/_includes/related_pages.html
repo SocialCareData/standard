@@ -1,6 +1,7 @@
 {%- comment -%}
   "Related pages" sidebar. page.related_links is set at build time by
-  _plugins/related_pages.rb, only when the page has at least two links.
+  _plugins/related_pages.rb, only when the page has at least two links, and
+  the plugin places this next to the page content (no layout includes it).
 {%- endcomment -%}
 {%- if page.related_links and page.related_links.size >= 2 %}
 <aside class="related-pages" aria-labelledby="related-pages-heading" data-pagefind-ignore>
