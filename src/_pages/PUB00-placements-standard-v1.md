@@ -8,7 +8,23 @@ tags:
 reference: PUB00
 version: 1
 status: draft
-data_model: src/_data/model/placements/placements-standard-v0_1.yaml
+data_model: src/_data/model/placements/placements-standard-v1.yaml
+editors:
+  - name: Ivjyot S. Oberoi
+    organisation: Social Finance
+  - name: Disha Javur
+    organisation: Social Finance
+  - name: Neil Majithia
+    organisation: Open Data Institute
+  - name: Huseyin Kir
+    organisation: Open Data Institute
+other_formats:
+  - label: Table view
+    url: /PUB00_placements_standard_table_v1
+  - label: Ontology
+    url: https://github.com/SocialCareData/ontology/blob/main/placements/placements-standard-v1.ttl
+  - label: SHACL
+    url: https://github.com/SocialCareData/ontology/blob/main/placements/placements-standard-v1-shape.ttl
 non_technical_summary: |
   The market for children’s social care placements -- that is, the accommodation and support provided to children when they are taken into the care of the local authority -- has been described by the Local Government Association as '[broken](https://www.local.gov.uk/about/news/childrens-social-care-placements-costing-ps10000-plus-rise-sharply-five-years-new-lga)'. Many children in residential care nationally are currently placed more than 20 miles from home.
 
@@ -494,10 +510,10 @@ A SHACL shape ([placements-standard-shape.ttl](https://github.com/SocialCareData
 
 The [Social Care Data Validator](https://github.com/SocialCareData/validator) checks records against this shape, runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
 
-**[Validate your data in your browser](https://socialcaredata.github.io/validator/)** - paste a record, choose *Children's Social Care Placements*, and see what needs fixing. Or from a terminal:
+**[Validate your data in your browser](/validator)** - paste a record, choose *Children's Social Care Placements*, and see what needs fixing. Or from a terminal:
 
 ```bash
-npx @socialcaredata/validator -p placements yourdata.jsonld
+npx @theodi/data-standard-validator -s src/_data/model/placements/placements-standard-v1.yaml yourdata.jsonld
 ```
 
 ## Standard Placement Reporting Spreadsheet

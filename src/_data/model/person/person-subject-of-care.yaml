@@ -29,7 +29,7 @@ imports:
 # Person (Subject of Care)
 #
 #   identifier                  1..*
-#   name                        1..1
+#   name                        1..*
 #   dateOfBirth                 1..1
 #   isDeceased                  1..1
 #   deceasedDate                0..1
@@ -73,8 +73,8 @@ classes:
         description: Subject-of-care Person must have at least one Identifier.
       name:
         required: true
-        multivalued: false
-        description: Subject-of-care Person must have exactly one Name.
+        multivalued: true
+        description: Subject-of-care Person must have at least one Name.
       dateOfBirth:
         required: true
         multivalued: false
