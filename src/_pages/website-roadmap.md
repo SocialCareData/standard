@@ -53,8 +53,7 @@ Our backlog of future content for this includes:
 
 ## Future Content and Website Feedback
 
-If you have any feedback on the website or additional content you would like to see, please reach out via [email](mailto:DataStandards-SocialCare@socialfinance.org.uk) with any comments.
-
+If you have any feedback on the website or additional content you would like to see, please reach out via [email](mailto:DataStandards-SocialCare@socialfinance.org.uk) with any comments or [raise an issue on our Github](https://github.com/SocialCareData/standard/issues/new).
 
 
 </article>
