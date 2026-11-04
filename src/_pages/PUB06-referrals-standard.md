@@ -10,6 +10,14 @@ tags:
 reference: PUB06
 status: draft
 data_model: src/_data/model/referrals/referrals-standard.yaml
+version_number: "0.9.0"
+editors:
+  - name: Neil Majithia
+    organisation: Open Data Institute
+  - name: Charlotte Moberly
+    organisation: Social Finance
+  - name: Huseyin Kir
+    organisation: Open Data Institute
 non_technical_summary: |
   Referrals, requests, and quality-of-care concerns are often captured in questionnaire-style forms and exchanged inconsistently between organisations, with a heavy reliance on manual form-filling. In turn, this limits the reusability of information across systems and creates inefficiency for practitioners and partner organisations. Where integrations do exist, the underlying information is often specific to one pathway and cannot easily be reused across similar referral, request, notification or transition scenarios.
 
