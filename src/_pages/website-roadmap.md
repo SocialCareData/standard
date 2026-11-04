@@ -10,7 +10,7 @@ breadcrumbs:
 
 Our website is currently under development and we will be iterating it over the coming months. This page outlines current plans for website content. 
 
-**Website objectives**
+## Website objectives
 
 Our website aims to:
 
