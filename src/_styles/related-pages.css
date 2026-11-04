@@ -1,0 +1,117 @@
+/* Related pages: a list of up to five links (_includes/related_pages.html).
+   From 1280px wide it sits in a 238px column beside the article and stays in
+   view on scroll; narrower than that it follows the article. */
+
+.related-pages {
+  border-top: 4px solid var(--background);
+  margin-top: 2.5rem;
+  padding-top: 14px;
+}
+
+.related-pages__heading {
+  color: var(--main-text-color);
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.4;
+  margin: 0 0 4px;
+}
+
+.related-pages__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.related-pages__item {
+  border-bottom: 1px solid var(--rule-color-light);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 14px 0;
+  position: relative;
+}
+
+.related-pages__label {
+  color: var(--muted-text-color);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.related-pages__link {
+  color: var(--link-color);
+  font-size: 16px;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Narrow screens: the whole item is the tap target (at least 44px tall). */
+.related-pages__link::after {
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.related-pages__link:hover,
+.related-pages__link:focus {
+  color: var(--link-hover-color-strong);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.related-pages__link:focus-visible {
+  border-radius: 3px;
+  outline: 3px solid var(--background);
+  outline-offset: 2px;
+}
+
+@media (min-width: 1280px) {
+  /* 1180px of content - 238px rail - 44px gap leaves the article its full
+     56rem (--max-width-text), so text keeps the same line length.
+
+     A grid item's first child cannot collapse its top margin into the element
+     above (the Table of Contents or the h1) as it does without the grid. The
+     margin is moved onto the grid, where it still collapses, so the article
+     starts exactly where it did: 2rem for an h2, 1em for a p or ul (a details
+     has none, and 1rem is below the Table of Contents' 1.5rem anyway). Two
+     levels are covered because some pages wrap their own content in an
+     <article> (governance.md, for example). */
+  .with-related:has(> .related-pages) {
+    align-items: start;
+    column-gap: 2.75rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 238px;
+    margin-top: 1rem;
+  }
+
+  .with-related:has(> .related-pages):has(> :first-child > h2:first-child,
+                                          > :first-child > :first-child > h2:first-child) {
+    margin-top: 2rem;
+  }
+
+  .with-related:has(> .related-pages) > :first-child > :first-child,
+  .with-related:has(> .related-pages) > :first-child > :first-child > :first-child {
+    margin-top: 0;
+  }
+
+  .related-pages {
+    margin-top: 0;
+    position: sticky;
+    top: 1.5rem;
+  }
+
+  .related-pages__item {
+    padding: 12px 0;
+    position: static;
+  }
+
+  .related-pages__link::after {
+    content: none;
+  }
+
+  /* `body > *` sets overflow-x: auto, which makes <main> a scroll container
+     and stops position: sticky from working inside it. */
+  main:has(.related-pages) {
+    overflow: visible;
+  }
+}

@@ -1,0 +1,15 @@
+{%- comment -%}
+  "Related pages" sidebar. page.related_links is set at build time by
+  _plugins/related_pages.rb, only when the page has at least two links.
+{%- endcomment -%}
+{%- if page.related_links and page.related_links.size >= 2 %}
+<aside class="related-pages" aria-labelledby="related-pages-heading" data-pagefind-ignore>
+    <h2 id="related-pages-heading" class="related-pages__heading">Related pages</h2>
+    <ul class="related-pages__list">{% for link in page.related_links %}
+        <li class="related-pages__item">
+            <span class="related-pages__label">{{ link.label }}{% if link.code %} · {{ link.code }}{% endif %}</span>
+            <a class="related-pages__link" href="{{ link.url }}">{{ link.title }}</a>
+        </li>{% endfor %}
+    </ul>
+</aside>
+{%- endif %}
