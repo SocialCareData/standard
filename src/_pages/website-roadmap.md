@@ -4,6 +4,7 @@ tags:
   - Programme
 breadcrumbs:
   - About
+description: Our roadmap for the website.
 ---
 
 <article class="numbered-headings">
