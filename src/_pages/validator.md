@@ -6,15 +6,17 @@ breadcrumbs:
 publication_group: tool
 ---
 
-Check that a record follows one of the published standards before you share it.
-Choose a standard, paste a JSON-LD record or load an example, then select
-**Validate**. Each problem is explained in plain English, with the line it is on.
+## Using the Validator: Our Position on Data Protection
 
-Records are checked entirely within your browser. They are not sent to any
-server and are not stored. However, you should only use test or anonymised
-records here. To check records that contain real personal data, use the
-[command-line tool](https://theodi.github.io/data-standard-validator/) within
-your own organisation's systems.
+The Social Care Data Validator helps organisations check that records conform to the published interoperability standards before they are shared. It runs entirely in the user’s browser. We do not receive, store or have access to any record entered into it.
+
+Because we never receive this data, we do not act as a controller or processor for it. Responsibility for the data stays with the organisation using the tool, along with its obligations under UK GDPR and the Data Protection Act 2018.
+
+The web validator is intended for test, synthetic or genuinely anonymised records only. Social care data frequently includes special category and children’s information, and pseudonymised records remain personal data in law. For live records, organisations should use our [command-line tool](https://theodi.github.io/data-standard-validator/) . It runs the same checks inside their own secure environment and under their own information governance controls.
+
+A successful validation confirms that a record meets the technical standard. It does not confirm that sharing the record is lawful. That judgement remains with each organisation’s data protection officer and governance processes.
+
+The standards and supporting content are published under the Open Government Licence v3. We welcome feedback through GitHub as we continue to develop the service.
 
 {% comment %}The standards the validator offers are configured in src/_data/validator.yml.{% endcomment %}
 <div class="validator-frame" markdown="0">
