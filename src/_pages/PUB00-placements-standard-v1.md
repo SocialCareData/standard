@@ -508,12 +508,10 @@ A SHACL shape ([placements-standard-shape.ttl](https://github.com/SocialCareData
 - conditional checks for the `Other` vocab pairings,
 - and severity-`Warning` cost sense-checks.
 
-The [Social Care Data Validator](https://github.com/SocialCareData/validator) checks records against this shape, runs SHACL via [`rdf-validate-shacl`](https://www.npmjs.com/package/rdf-validate-shacl), and additionally performs a cross-record duplicate `childId` check that SHACL Core cannot express.
-
 **[Validate your data in your browser](/validator)** - paste a record, choose *Children's Social Care Placements*, and see what needs fixing. Or from a terminal:
 
 ```bash
-npx @theodi/data-standard-validator -s src/_data/model/placements/placements-standard-v1.yaml yourdata.jsonld
+npx @theodi/data-standard-validator -s https://raw.githubusercontent.com/SocialCareData/ontology/main/placements/placements-standard-v1-shape.ttl yourdata.jsonld
 ```
 
 ## Standard Placement Reporting Spreadsheet
