@@ -1,5 +1,3 @@
-# _plugins/related_pages.rb
-#
 # Works out each page's "Related pages" list at build time and stores it as
 # page.related_links ([{url, title, label, code}]). After the page is
 # rendered, Sidebar puts _includes/related_pages.html beside the page content,
@@ -12,7 +10,7 @@
 #          - /UC09_multi_agency_enquiries
 #   2. Remaining slots (up to max_links) are filled automatically: candidates
 #      are scored on text similarity, links, shared tags and reverse editor
-#      picks (posts decay with age), weak matches are dropped, and the rest
+#      picks, weak matches are dropped, and the rest
 #      are picked with MMR so the list is varied.
 #   3. Pages with fewer than min_links get no list.
 #
@@ -22,32 +20,29 @@
 # below. Run `jekyll build --verbose` to log each page's scores.
 
 require "set"
-require_relative "internal_links"
 require_relative "standard_metadata"
+require_relative "breadcrumb_pages"
 require_relative "related_pages/page_rules"
 require_relative "related_pages/text_index"
 require_relative "related_pages/link_graph"
 require_relative "related_pages/tag_index"
 require_relative "related_pages/scorer"
-require_relative "related_pages/mmr_selector"
 
 module Jekyll
   module RelatedPages
     class Settings
-      # Scoring and selection tuning. Change these here, then check the effect
-      # with `jekyll build --verbose`.
+      # Scoring and selection tuning.
       WEIGHTS = {
         "text"   => 0.5,  # TF-IDF similarity of the page text
         "links"  => 0.25, # pages link to each other, or are linked from the same pages
         "tags"   => 0.1, # shared tags, rare tags counting more
         "editor" => 0.15   # an editor listed this page as related the other way round
       }.freeze
-      MIN_SCORE           = 0.3 # automatic suggestions scoring below this are dropped
+      MIN_SCORE           = 0.35 # automatic suggestions scoring below this are dropped
       TEXT_SCALE_FLOOR    = 0.1  # a page's best text match below this is not scaled up to 1
       MMR_LAMBDA          = 0.7  # 1 = relevance only, 0 = variety only
-      MAX_SAME_TYPE       = 2    # at most this many of one label (e.g. Use case)
+      MAX_SAME_TYPE       = 3    # at most this many of one label (e.g. Use Cases)
       MAX_POSTS           = 1
-      POST_HALF_LIFE_DAYS = 365  # a post this old counts half as much as a new one
       GENERIC_TAGS        = ["Publication", "Use Case", "Programme"].freeze # page-type tags that count for almost nothing
 
       # Defaults for the `related_pages:` block in _config.yml.
@@ -75,8 +70,20 @@ module Jekyll
       def mmr_lambda;          MMR_LAMBDA;          end
       def max_same_type;       MAX_SAME_TYPE;       end
       def max_posts;           MAX_POSTS;           end
-      def post_half_life_days; POST_HALF_LIFE_DAYS; end
       def generic_tags;        GENERIC_TAGS;        end
+    end
+
+    # Links to other pages in a page's source: [text](/path) or href="/path".
+    LINK_RE = %r{\]\((/[^)\s]*)|href="(/[^"]*)"}.freeze
+
+    # "/foo#bar", "/foo?x=1" and "/foo/" all mean the page /foo.
+    def self.page_url(href)
+      url = href.to_s.strip.sub(/[?#].*/, "")
+      url.length > 1 ? url.chomp("/") : url
+    end
+
+    def self.links_in(text)
+      text.to_s.scan(LINK_RE).map { |markdown, html| page_url(markdown || html) }.uniq
     end
 
     class Generator < Jekyll::Generator
@@ -85,7 +92,7 @@ module Jekyll
 
       def generate(site)
         @settings = Settings.new(site.config["related_pages"])
-        @rules    = PageRules.new(@settings, get_involved_urls(site))
+        @rules    = PageRules.new(@settings, site.config["nav"])
 
         docs          = (site.pages + site.posts.docs).select { |doc| @rules.content_page?(doc) }
         @docs_by_url  = docs.to_h { |doc| [doc.url, doc] }
@@ -93,7 +100,7 @@ module Jekyll
         @candidates   = docs.select { |doc| @rules.suggestable?(doc) }
         rail_docs     = docs.select { |doc| @rules.shows_rail?(doc) }
 
-        build_indexes(indexed_docs(rail_docs), site.time)
+        build_indexes(indexed_docs(rail_docs))
 
         rail_docs.each do |doc|
           links = related_docs(doc).map { |related| link_data(related) }
@@ -103,20 +110,17 @@ module Jekyll
 
       private
 
-      # Only pages that are scored or need a list of their own are indexed, so
-      # never_suggest pages that show no list are left out from the start.
-      # Editor picks are included so the variety check can compare against them.
+      # Only pages that are scored or need a list of their own are indexed
       def indexed_docs(rail_docs)
         picked = @editor_picks.values.flatten.filter_map { |url| @docs_by_url[url] }
         (rail_docs + @candidates + picked).uniq
       end
 
-      def build_indexes(docs, now)
+      def build_indexes(docs)
         text_index = TextIndex.new(docs)
         @scorer    = Scorer.new(text_index: text_index, link_graph: LinkGraph.new(docs),
                                 tag_index: TagIndex.new(docs, @settings.generic_tags),
-                                rules: @rules, settings: @settings,
-                                editor_picks: @editor_picks, now: now)
+                                settings: @settings, editor_picks: @editor_picks)
         @selector  = MmrSelector.new(text_index: text_index, rules: @rules, settings: @settings)
       end
 
@@ -147,7 +151,7 @@ module Jekyll
       def editor_picks_by_url(docs)
         urls = docs.map(&:url).to_set
         docs.to_h do |doc|
-          listed = Array(doc.data["related"]).map { |url| InternalLinks.canonical_url(url) }.uniq
+          listed = Array(doc.data["related"]).map { |url| RelatedPages.page_url(url) }.uniq
           listed.each do |url|
             Jekyll.logger.warn("RelatedPages:", "#{doc.relative_path}: related page #{url} not found") unless urls.include?(url)
           end
@@ -163,12 +167,6 @@ module Jekyll
           "label" => @rules.label_for(doc), "code" => @rules.code_for(doc) }
       end
 
-      # Urls listed under the "Get Involved" section of the site nav.
-      def get_involved_urls(site)
-        section = Array(site.config["nav"]).find { |item| item["title"].to_s.casecmp?("Get Involved") }
-        Array(section && section["children"]).map { |child| InternalLinks.canonical_url(child["url"]) }.to_set
-      end
-
       def log_scores(doc, scored, chosen)
         return unless Jekyll.logger.level == :debug
 
@@ -177,7 +175,7 @@ module Jekyll
         Jekyll.logger.debug("RelatedPages:", "#{doc.url} -> #{picks.join(', ')}")
         scored.sort_by { |c| -c.relevance }.first(10).each do |c|
           signals = c.signals.map { |name, value| format("%s=%.2f", name, value) }.join(" ")
-          Jekyll.logger.debug("", format("  %.3f %-55s %s recency=%.2f", c.relevance, c.doc.url, signals, c.recency))
+          Jekyll.logger.debug("", format("  %.3f %-55s %s", c.relevance, c.doc.url, signals))
         end
       end
     end

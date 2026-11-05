@@ -1,8 +1,5 @@
-# _plugins/related_pages/link_graph.rb
-#
 # Which pages link to which, read from each page's source (the generator runs
-# before rendering, so the built HTML the link checker reads does not exist
-# yet). Link parsing is shared with check_internal_links.rb via InternalLinks.
+# before rendering, so there is no built HTML yet).
 
 require "set"
 
@@ -37,7 +34,7 @@ module Jekyll
 
       def build_from_sources(docs, known)
         docs.to_h do |doc|
-          targets = InternalLinks.links_in_source(doc.content)
+          targets = RelatedPages.links_in(doc.content)
                                  .select { |url| known.include?(url) && url != doc.url }
           [doc.url, targets.to_set]
         end

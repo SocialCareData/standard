@@ -1,5 +1,3 @@
-# _plugins/related_pages/text_index.rb
-#
 # TF-IDF vectors over page text, and cosine similarity between them.
 #
 # Each page's text is its body with Liquid and Markdown syntax stripped, plus

@@ -1,17 +1,17 @@
-# _plugins/related_pages/page_rules.rb
-#
 # Which pages take part in "Related pages", and how each one is labelled.
 #
 #   suggestable?  may appear in another page's list
 #   shows_rail?   gets a "Related pages" list of its own
-#   label_for     "Standard", "Use case", "Learn" or "Get involved"
-#   code_for      PUBxx / UCxx reference, or nil
+#   label_for     the title of the site nav section the page belongs to
+#                 (e.g. "Standards"): the section that links to the page, or
+#                 to its first breadcrumb. Posts are "Updates"; pages in no
+#                 section are "Learn".
+#   code_for      the page's reference (PUB01, UC07), or nil
 #
 # UrlPatterns holds the hide_on / never_suggest lists from _config.yml. Each
 # entry is an exact url (/use_cases) or a glob pattern (/*_mais_swg):
 # * any characters, ? any one character, {a,b} either a or b. Entries are
-# canonicalised like page urls, so /use_cases/ and /use_cases.html both match
-# /use_cases.
+# read like page urls, so /use_cases/ matches /use_cases.
 
 module Jekyll
   module RelatedPages
@@ -19,7 +19,7 @@ module Jekyll
       FNMATCH_FLAGS = File::FNM_EXTGLOB
 
       def initialize(entries)
-        @patterns = Array(entries).map { |entry| InternalLinks.canonical_url(entry.to_s.strip) }.uniq
+        @patterns = Array(entries).map { |entry| RelatedPages.page_url(entry) }.uniq
       end
 
       def match?(url)
@@ -30,11 +30,12 @@ module Jekyll
     class PageRules
       TABLE_SUFFIX_RE = /-table(-v\d+)?\z/.freeze
       DIFF_INFIX_RE   = /-diff-/.freeze
-      LABELS_WITH_CODE = ["Standard", "Use case"].freeze
+      POSTS_LABEL     = "Updates"
+      FALLBACK_LABEL  = "Learn"
 
-      def initialize(settings, get_involved_urls)
-        @settings          = settings
-        @get_involved_urls = get_involved_urls
+      def initialize(settings, nav)
+        @settings   = settings
+        @nav_labels = nav_labels(nav)
       end
 
       def suggestable?(doc)
@@ -79,26 +80,33 @@ module Jekyll
       end
 
       def label_for(doc)
-        reference = doc.data["reference"].to_s
-        return "Standard" if reference.start_with?("PUB")
-        return "Use case" if reference.start_with?("UC") || doc.data["layout"] == "use-case"
-        return "Get involved" if get_involved?(doc)
+        return POSTS_LABEL if post?(doc)
 
-        "Learn"
+        @nav_labels[doc.url] || @nav_labels[breadcrumb_url(doc)] || FALLBACK_LABEL
       end
 
-      # Only standards and use cases carry a code ("Standard · PUB00").
       def code_for(doc)
-        return nil unless LABELS_WITH_CODE.include?(label_for(doc))
-
         reference = doc.data["reference"].to_s.strip
         reference.empty? ? nil : reference
       end
 
       private
 
-      def get_involved?(doc)
-        Array(doc.data["tags"]).include?("Working Group") || @get_involved_urls.include?(doc.url)
+      # url => title of the top-level nav section it sits in. A section is also
+      # reachable by the url its title would have as a breadcrumb (/about).
+      def nav_labels(nav)
+        Array(nav).each_with_object({}) do |section, labels|
+          title = section["title"].to_s
+          urls  = [section["url"], *Array(section["children"]).map { |child| child["url"] }].compact
+          urls.each { |url| labels[RelatedPages.page_url(url)] ||= title }
+          labels["/#{BreadcrumbPage.slugify(title)}"] ||= title
+        end
+      end
+
+      # The page generated for the first breadcrumb (Publications -> /publications).
+      def breadcrumb_url(doc)
+        first = Array(doc.data["breadcrumbs"]).first
+        first && "/#{BreadcrumbPage.slugify(first.to_s)}"
       end
 
       def basename(doc)

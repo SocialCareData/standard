@@ -1,5 +1,3 @@
-# _plugins/related_pages/tag_index.rb
-#
 # Shared-tag similarity where rare tags count for more than common ones: a
 # shared "Placements" tag says more than a shared "MAIS", and page-type tags
 # such as "Publication" (listed in Settings::GENERIC_TAGS) count for almost nothing.
