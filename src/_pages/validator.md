@@ -12,11 +12,11 @@ The Social Care Data Validator helps organisations check that records conform to
 
 Because we never receive this data, we do not act as a controller or processor for it. Responsibility for the data stays with the organisation using the tool, along with its obligations under UK GDPR and the Data Protection Act 2018.
 
-The web validator is intended for test, synthetic or genuinely anonymised records only. Social care data frequently includes special category and children’s information, and pseudonymised records remain personal data in law. For live records, organisations should use our [command-line tool](https://theodi.github.io/data-standard-validator/) . It runs the same checks inside their own secure environment and under their own information governance controls.
+The web validator is intended for test, synthetic or genuinely anonymised records only. Social care data frequently includes special category and children’s information, and pseudonymised records remain personal data in law. For live records, organisations should use our [command-line tool](https://theodi.github.io/data-standard-validator/). It can run the same checks inside their own secure environment and under their own information governance controls.
 
 A successful validation confirms that a record meets the technical standard. It does not confirm that sharing the record is lawful. That judgement remains with each organisation’s data protection officer and governance processes.
 
-The standards and supporting content are published under the Open Government Licence v3. We welcome feedback through GitHub as we continue to develop the service.
+The standards and supporting content are published under the Open Government Licence v3. We welcome [feedback through GitHub](https://github.com/SocialCareData/standard/issues/new?template=content_issue.yml&page=https%3A%2F%2Fstandard.socialcaredata.io%2Fvalidator&category=Website+Content) as we continue to develop the service.
 
 {% comment %}The standards the validator offers are configured in src/_data/validator.yml.{% endcomment %}
 <div class="validator-frame" markdown="0">
