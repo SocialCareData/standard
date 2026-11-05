@@ -27,9 +27,9 @@ Jekyll::Hooks.register :site, :post_write do |site|
         next
       end
 
-      target = Jekyll::InternalLinks.internal_path(href)
-      next unless target
+      next unless href.start_with?('/')
 
+      target     = URI(href).path
       candidates = [
         File.join(dest, target),
         File.join(dest, target, 'index.html'),
