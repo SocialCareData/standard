@@ -15,7 +15,6 @@
   --highlight-4-border: rgb(224, 82, 82);
   --highlight-4-color: rgb(130, 23, 23);
   --link-hover-color: rgb(56, 111, 196);
-  --link-hover-color-strong: rgb(26, 61, 117);
   --link-color: rgb(48, 86, 169);
   --link-transition: color 0.3s ease;
   --main-link-background-hover: rgb(193, 237, 215);
@@ -38,7 +37,6 @@
   --nav-panel-muted: rgba(255, 255, 255, 0.72);
   --nav-panel-rule: rgba(255, 255, 255, 0.28);
   --nav-panel-shadow: 0 1rem 1.4rem -0.5rem rgba(0, 0, 0, 0.45);
-  --rule-color-light: rgb(225, 228, 232);
 }
 
 /* Adaptive Layout */
