@@ -16,9 +16,9 @@ Pages and posts have additional properties for organising information that can b
 - `status`: Used to indicate the status of a publication, could be `draft`, `proposed`, `effective`, `obsolete`.
 - `version`: The version number of a document, for example: `00`, `01`, `02`.
 - `related`: Pages to show first in the page's "Related pages" sidebar, as a list of URLs, for example `- /PUB01_person_standard`. Up to five; remaining slots are filled automatically at build time.
-- `related_pages`: Set to `false` to hide the "Related pages" sidebar on this page. The page can still appear in other pages' sidebars.
+- `related_pages`: Set to `false` to hide the "Related pages" sidebar on this page. The page can still appear in other pages' sidebars. The sidebar appears wherever `{% include related_pages.html %}` is used, in a layout or in a page.
+- `suggest_as_related`: Set to `false` to stop this page being suggested in other pages' "Related pages" sidebars. Posts are not suggested unless this is set to `true`.
 
-Which pages show or are suggested in "Related pages" is set under `related_pages:` in `_config.yml`; how suggestions are scored (including which tags count for little) is set by constants in `src/_plugins/related_pages.rb`. Run `jekyll build --verbose` to see why each page was suggested.
 
 
 ## License

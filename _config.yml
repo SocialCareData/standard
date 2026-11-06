@@ -101,17 +101,3 @@ plugins:
 related_pages:
   max_links: 5
   min_links: 2              # fewer than this and the sidebar is not shown
-  hide_on:                  # no sidebar on these pages (they can still be suggested)
-    - /
-    - /use_cases
-    - /publications
-    - /validator
-    - /404
-    - /use_case_standard_matrix
-    - /calendar
-  never_suggest:            # never suggested on other pages
-    - /
-    - /404
-    - /*_mais_swg
-    - /*_placements_swg
-    - /*_newsletter

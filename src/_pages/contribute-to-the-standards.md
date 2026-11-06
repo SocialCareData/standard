@@ -1,4 +1,5 @@
 ---
+layout: article
 title: Get Involved
 tags:
   - Programme

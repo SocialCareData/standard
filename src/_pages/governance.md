@@ -1,4 +1,5 @@
 ---
+layout: article
 title: Governance
 tags:
   - Programme

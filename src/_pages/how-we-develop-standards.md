@@ -1,4 +1,5 @@
 ---
+layout: article
 title: How we develop standards
 breadcrumbs:
   - Learn

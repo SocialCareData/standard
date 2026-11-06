@@ -1,7 +1,8 @@
 # Works out each page's "Related pages" list at build time and stores it as
-# page.related_links ([{url, title, label, code}]). After the page is
-# rendered, Sidebar puts _includes/related_pages.html beside the page content,
-# so layouts need no changes.
+# page.related_links ([{url, title, label, code}]) for
+# _includes/related_pages.html. Lists are worked out only for pages that
+# include it (in their content or any of their layouts); any page can be
+# suggested.
 #
 # For each page that shows the list:
 #   1. Editor picks first, in the order listed in the page's front matter:
@@ -14,10 +15,11 @@
 #      are picked with MMR so the list is varied.
 #   3. Pages with fewer than min_links get no list.
 #
-# A page can opt out of showing the list with `related_pages: false`; it can
-# still be suggested on other pages. Which pages show or are suggested lives
-# under `related_pages:` in _config.yml; scoring constants are in Settings
-# below. Run `jekyll build --verbose` to log each page's scores.
+# Front matter: `related_pages: false` hides a page's own list (it can still
+# be suggested); `suggest_as_related: false` stops it being suggested (posts
+# are not suggested unless it is true). Link counts are under `related_pages:`
+# in _config.yml; scoring constants are in Settings below. Run
+# `jekyll build --verbose` to log each page's scores.
 
 require "set"
 require_relative "standard_metadata"
@@ -48,20 +50,16 @@ module Jekyll
       # Defaults for the `related_pages:` block in _config.yml.
       CONFIG_DEFAULTS = {
         "max_links"     => 5,
-        "min_links"     => 2,
-        "hide_on"       => [],
-        "never_suggest" => ["/"]
+        "min_links"     => 2
       }.freeze
 
-      attr_reader :max_links, :min_links, :hide_on, :never_suggest
+      attr_reader :max_links, :min_links
 
       def initialize(config)
         values = CONFIG_DEFAULTS.merge(config || {})
 
         @max_links     = values["max_links"].to_i
         @min_links     = values["min_links"].to_i
-        @hide_on       = UrlPatterns.new(values["hide_on"])
-        @never_suggest = UrlPatterns.new(values["never_suggest"])
       end
 
       def weights;             WEIGHTS;             end
@@ -92,7 +90,7 @@ module Jekyll
 
       def generate(site)
         @settings = Settings.new(site.config["related_pages"])
-        @rules    = PageRules.new(@settings, site.config["nav"])
+        @rules    = PageRules.new(site.config["nav"], site.layouts)
 
         docs          = (site.pages + site.posts.docs).select { |doc| @rules.content_page?(doc) }
         @docs_by_url  = docs.to_h { |doc| [doc.url, doc] }
@@ -179,45 +177,5 @@ module Jekyll
         end
       end
     end
-
-    # Puts the rendered "Related pages" sidebar next to the page content in the
-    # final HTML:
-    #
-    #   <div class="with-related"><div>CONTENT</div><aside>…</aside></div>
-    #
-    # The content is found by its exact converted HTML, so whichever layout
-    # wraps it (a numbered article, the default layout's article) still does.
-    # Running after rendering keeps the sidebar out of page.content, which the
-    # Table of Contents, the feed and the updates page read.
-    module Sidebar
-      INCLUDE_FILE = "related_pages.html"
-
-      module_function
-
-      def insert(doc)
-        return unless doc.data["related_links"] && doc.output
-
-        content = doc.content.to_s
-        start   = content.strip.empty? ? nil : doc.output.index(content, doc.output.index("<main").to_i)
-        unless start
-          Jekyll.logger.warn("RelatedPages:", "#{doc.relative_path}: page content not found, sidebar not added")
-          return
-        end
-
-        wrapped = %(<div class="with-related"><div>#{content}</div>#{render(doc)}</div>)
-        doc.output = doc.output[0...start] + wrapped + doc.output[(start + content.length)..-1]
-      end
-
-      def render(doc)
-        site = doc.site
-        path = site.in_source_dir(site.config["includes_dir"], INCLUDE_FILE)
-        site.liquid_renderer.file(path).parse(File.read(path))
-            .render!({ "page" => { "related_links" => doc.data["related_links"] } }, registers: { site: site })
-      end
-    end
   end
-end
-
-Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
-  Jekyll::RelatedPages::Sidebar.insert(doc)
 end

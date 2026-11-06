@@ -57,28 +57,20 @@
   position: absolute;
 }
 
+/* Wide screens: the article keeps a column free on its right for the sidebar
+   (238px + 44px gap). Body text keeps its full width (1180px - 282px > 56rem).
+   No calc(): the style minifier removes the spaces it needs. */
 @media (min-width: 1280px) {
-  .with-related {
-    align-items: start;
-    column-gap: 2.75rem;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 238px;
-    margin-top: 1rem;
+  article:has(> .related-pages) {
+    padding-right: 282px;
+    position: relative;
   }
 
   .related-pages {
     margin-top: 0;
-  }
-
-  /* Grid items don't collapse margins, so the first element's top margin is
-     moved onto the grid to keep the article where it was. */
-  .with-related:has(> :first-child > h2:first-child,
-                    > :first-child > :first-child > h2:first-child) {
-    margin-top: 2rem;
-  }
-
-  .with-related > :first-child > :first-child,
-  .with-related > :first-child > :first-child > :first-child {
-    margin-top: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 238px;
   }
 }

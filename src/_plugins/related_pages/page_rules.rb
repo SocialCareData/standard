@@ -1,46 +1,34 @@
 # Which pages take part in "Related pages", and how each one is labelled.
 #
-#   suggestable?  may appear in another page's list
-#   shows_rail?   gets a "Related pages" list of its own
+#   suggestable?  may appear in another page's list. Front matter
+#                 `suggest_as_related: false` opts a page out; posts are
+#                 opted out unless they set it to true.
+#   shows_rail?   gets a "Related pages" list of its own: pages that include
+#                 related_pages.html (in their content or any of their
+#                 layouts), unless front matter says `related_pages: false`
 #   label_for     the title of the site nav section the page belongs to
 #                 (e.g. "Standards"): the section that links to the page, or
 #                 to its first breadcrumb. Posts are "Updates"; pages in no
 #                 section are "Learn".
 #   code_for      the page's reference (PUB01, UC07), or nil
-#
-# UrlPatterns holds the hide_on / never_suggest lists from _config.yml. Each
-# entry is an exact url (/use_cases) or a glob pattern (/*_mais_swg):
-# * any characters, ? any one character, {a,b} either a or b. Entries are
-# read like page urls, so /use_cases/ matches /use_cases.
 
 module Jekyll
   module RelatedPages
-    class UrlPatterns
-      FNMATCH_FLAGS = File::FNM_EXTGLOB
-
-      def initialize(entries)
-        @patterns = Array(entries).map { |entry| RelatedPages.page_url(entry) }.uniq
-      end
-
-      def match?(url)
-        @patterns.any? { |pattern| File.fnmatch?(pattern, url, FNMATCH_FLAGS) }
-      end
-    end
-
     class PageRules
       TABLE_SUFFIX_RE = /-table(-v\d+)?\z/.freeze
       DIFF_INFIX_RE   = /-diff-/.freeze
       POSTS_LABEL     = "Updates"
       FALLBACK_LABEL  = "Learn"
+      INCLUDE_RE      = /\{%-?\s*include\s+related_pages\.html\b/.freeze
 
-      def initialize(settings, nav)
-        @settings   = settings
+      def initialize(nav, layouts)
         @nav_labels = nav_labels(nav)
+        @layouts    = layouts
       end
 
       def suggestable?(doc)
         content_page?(doc) &&
-          !@settings.never_suggest.match?(doc.url) &&
+          doc.data.fetch("suggest_as_related", !post?(doc)) != false &&
           !versioned_page?(doc) &&
           !table_page?(doc) &&
           !diff_page?(doc)
@@ -48,8 +36,8 @@ module Jekyll
 
       def shows_rail?(doc)
         content_page?(doc) &&
+          includes_sidebar?(doc) &&
           doc.data["related_pages"] != false &&
-          !@settings.hide_on.match?(doc.url) &&
           !table_page?(doc) &&
           !diff_page?(doc)
       end
@@ -91,6 +79,20 @@ module Jekyll
       end
 
       private
+
+      # The page's own content, or a layout it uses (directly or via a parent
+      # layout), has {% include related_pages.html %}.
+      def includes_sidebar?(doc)
+        return true if doc.content.to_s.match?(INCLUDE_RE)
+
+        layout = @layouts[doc.data["layout"]]
+        while layout
+          return true if layout.content.match?(INCLUDE_RE)
+
+          layout = @layouts[layout.data["layout"]]
+        end
+        false
+      end
 
       # url => title of the top-level nav section it sits in. A section is also
       # reachable by the url its title would have as a breadcrumb (/about).
