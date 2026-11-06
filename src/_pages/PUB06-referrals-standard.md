@@ -464,12 +464,10 @@ The model is parameterised by the following controlled vocabularies.
 
 A SHACL shape ([referrals-standard-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest)) is automatically generated from our LinkML model schema. It defines structure, cardinalities, and controlled vocabulary bindings.
 
-JSON-LD payloads are validated with the [Social Care Data Validator](https://github.com/SocialCareData/validator).
-
 **[Validate your data in your browser](/validator)**, or from a terminal:
 
 ```bash
-npx @theodi/data-standard-validator -s https://raw.githubusercontent.com/SocialCareData/ontology/refs/heads/main/safeguarding/safeguarding-standard.ttl yourdata.jsonld
+npx @theodi/data-standard-validator -s https://raw.githubusercontent.com/SocialCareData/ontology/main/referrals/referrals-standard-shape.ttl yourdata.jsonld
 ```
 
 ## Report an issue
