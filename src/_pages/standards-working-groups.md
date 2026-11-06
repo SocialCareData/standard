@@ -1,4 +1,5 @@
 ---
+layout: article
 title: Standards Working Groups
 tags:
   - Programme

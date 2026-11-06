@@ -1,4 +1,5 @@
 ---
+layout: article
 title: Related Programmes
 tags:
   - Programme

@@ -98,3 +98,6 @@ kramdown:
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+related_pages:
+  max_links: 5
+  min_links: 2              # fewer than this and the sidebar is not shown

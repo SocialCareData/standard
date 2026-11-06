@@ -1,4 +1,5 @@
 ---
+layout: article
 title: Learn About the Standards
 tags:
   - Programme

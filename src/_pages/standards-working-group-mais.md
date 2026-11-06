@@ -1,4 +1,5 @@
 ---
+layout: article
 title: Multi-Agency Information Sharing (MAIS) Standards Working Group
 breadcrumbs:
   - Standards Working Groups

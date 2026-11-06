@@ -1,4 +1,5 @@
 ---
+layout: article
 title: Steering Group
 tags:
   - Programme

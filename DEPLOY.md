@@ -25,13 +25,12 @@ plugins, which fail on any broken internal or external link:
 docker compose run --rm build
 ```
 
-Data validation lives in
-[SocialCareData/validator](https://github.com/SocialCareData/validator), not here.
-It checks records against the shapes published to
+Data validation uses
+[@theodi/data-standard-validator](https://www.npmjs.com/package/@theodi/data-standard-validator). It checks records against the shapes published to
 [SocialCareData/ontology](https://github.com/SocialCareData/ontology):
 
 ```bash
-npx @socialcaredata/validator -p placements yourdata.jsonld
+npx @theodi/data-standard-validator -s https://raw.githubusercontent.com/SocialCareData/ontology/main/placements/placements-standard-shape.ttl yourdata.jsonld
 ```
 
 If you have changed a LinkML schema under `src/_data/model/`, regenerate the
