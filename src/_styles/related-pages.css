@@ -1,0 +1,76 @@
+/* Related pages sidebar (_includes/related_pages.html). Links, list and
+   heading use the site defaults; only the extras are set here. */
+
+.related-pages {
+  border-top: 4px solid var(--background);
+  line-height: 1.4;
+  margin-top: 2.5rem;
+  padding-top: 14px;
+}
+
+.related-pages h2 {
+  font-size: 1.125rem;
+  margin: 0 0 4px;
+}
+
+/* Not a numbered section on standards, use cases and posts. */
+.numbered-headings .related-pages h2::before {
+  content: none;
+  counter-increment: none;
+}
+
+.related-pages ul {
+  margin: 0;
+}
+
+.related-pages li {
+  border-bottom: 1px solid var(--highlight-3-border);
+  padding: 12px 0;
+  position: relative;
+}
+
+.related-pages small {
+  color: var(--muted-text-color);
+  display: block;
+  font-size: .8125rem;
+  margin-bottom: 3px;
+}
+
+.related-pages a {
+  text-underline-offset: 3px;
+}
+
+.related-pages a:hover,
+.related-pages a:focus {
+  text-decoration-thickness: 2px;
+}
+
+.related-pages a:focus-visible {
+  outline: 3px solid var(--background);
+  outline-offset: 2px;
+}
+
+/* The whole item is the link, so it is an easy tap target. */
+.related-pages a::after {
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+/* Wide screens: the article keeps a column free on its right for the sidebar
+   (238px + 44px gap). Body text keeps its full width (1180px - 282px > 56rem).
+   No calc(): the style minifier removes the spaces it needs. */
+@media (min-width: 1280px) {
+  article:has(> .related-pages) {
+    padding-right: 282px;
+    position: relative;
+  }
+
+  .related-pages {
+    margin-top: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 238px;
+  }
+}
