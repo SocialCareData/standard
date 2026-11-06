@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: Finding and Synthesising Information from the CMS
+description: This use case outlines how standards can support finding and synthesising information stored across a CMS to support informed and efficient decision-making.
 breadcrumbs:
   - Use Cases
 tags:

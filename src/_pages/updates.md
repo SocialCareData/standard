@@ -1,5 +1,6 @@
 ---
 title: Updates
+description: The latest information on the programme including working group summaries and newsletters.
 regenerate: true
 ---
 

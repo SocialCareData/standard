@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: Multi-agency Enquiries
+description: This use case outlines how standards can support multi-agency enquiries to support safe, timely and well-coordinated decision making.
 breadcrumbs:
   - Use Cases
 tags:

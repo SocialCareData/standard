@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: Transition from Children’s Social Care to Adult Social Care
+description: This use case outlines how standards can support sharing and tracking information about young people transitioning from children's to adult services to ensure their care is continuous.
 breadcrumbs:
   - Use Cases
 tags:

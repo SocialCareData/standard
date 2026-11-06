@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: Recording and Sharing Adult Social Care Needs Assessments and Care Plans
+description: This use case outlines how standards could enable recording of adult social care needs assessments to be recorded in a structured, standardised way and shared securely across the professionals, agencies and individuals involved in a person’s care.
 breadcrumbs:
   - Use Cases
 tags:

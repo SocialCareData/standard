@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: "Provide Contact Details for Safeguarding Enquiries"
+description: This use case outlines how standards could support providing contact details for relevant professionals to a social worker conducting safeguarding enquiries.
 breadcrumbs:
   - Use Cases
 tags:

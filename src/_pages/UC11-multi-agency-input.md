@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: Multiagency Input into a Person’s Record
+description: This use case outlines how standards can support agencies and professionals involved in a person’s care to view and contribute directly to relevant parts of a shared record.
 breadcrumbs:
   - Use Cases
 tags:
@@ -28,13 +29,13 @@ Enable multiple agencies and professionals involved in a person’s care to view
 
 ## Description
 
-Case records, especially more complex ones, will require input from a range of agencies and specialisms. At present, these agencies will record interactions and involvements with the individual on their own case management system, with the local authority case record being recorded only by the allocated social worker, and that being the ‘master’ record due to the local authority holding the statutory responsibility for the care of that individual.
+Case records, especially more complex ones, will require input from a range of agencies and specialisms. At present, these agencies will record interactions and involvements with the individual on their own case management system, with the local authority case record being recorded only by the allocated family first practitioner, and that being the ‘master’ record due to the local authority holding the statutory responsibility for the care of that individual.
 
 As highlighted in other use cases, this siloed working can lead to a range of inefficiencies and challenges around information sharing, increasing risks for individuals and raising frustrations with them having to ‘repeat their story’ to multiple practitioners who they are working with.
 
 Current government initiatives, such as the Families First programme and Neighbourhood health Framework, are increasing the need for local authorities to engage in multiagency case management through multidisciplinary Family Help teams. This is also the case in the health service and within adult’s social care, with the NHS increasing funding for the creation of community based multidisciplinary teams.
 
-This multiagency work does however create a recording challenge: where should information about the case be kept? Presently, the onus remains on the local authority as the ‘lead practitioner’ to double key information to maintain the master record, which may create additional recording burdens on already stretched social workers.
+This multiagency work does however create a recording challenge: where should information about the case be kept? Presently, the onus remains on the local authority as the ‘lead practitioner’ to double key information to maintain the master record, which may create additional recording burdens on already stretched family first practitioners.
 
 ### Primary challenge
 

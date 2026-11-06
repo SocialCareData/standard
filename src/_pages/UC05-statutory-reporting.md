@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: Social Care Statutory Reporting
+description: This use case outlines how standards can support reliable, standardised, high qualify data and efficient processes for generating and submitting statutory returns.
 breadcrumbs:
   - Use Cases
 tags:

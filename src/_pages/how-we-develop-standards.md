@@ -1,6 +1,7 @@
 ---
 layout: article
 title: How we develop standards
+description: We develop standards through an iterative, collaborative process with input from across the sector.
 breadcrumbs:
   - Learn
 tags:
