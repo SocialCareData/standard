@@ -11,9 +11,9 @@ tags:
 reference: UC16
 ---
 
-Families First brings practitioners and agencies together to provide more connected help and protection for children and families. But bringing teams together does not automatically connect the different systems they use. Relevant information needs to be accessible, understandable and usable across organisational boundaries, without families repeatedly having to tell their story. 
+Families First brings practitioners and agencies together to provide more connected help and protection for children and families. However, bringing teams together does not automatically connect the different systems they use. Relevant information needs to be accessible, understandable and usable across organisational boundaries, without families repeatedly having to tell their story. 
 
-Our data standards provide common definitions and structures for recording and exchanging information. They cover both the content of records—such as people, services, significant events, assessments and plans—and how systems make information available and exchange it securely. Our use cases illustrate how these standards could support Families First in practice. 
+Our data standards provide common definitions and structures for recording and exchanging information. They cover both the content of records, such as people, services, significant events, assessments and plans, and how systems make information available and exchange it securely. Our use cases illustrate how these standards could support Families First in practice. 
 
  
 
@@ -21,9 +21,9 @@ Our data standards provide common definitions and structures for recording and e
 
 Family Help brings targeted early help and child in need support into a more connected offer. Practitioners from different agencies need to understand who is involved with a family, what support is already being provided and what has happened previously. This becomes particularly important when the lead practitioner and other team members use different recording systems.  
 
-Our standards could help systems present this information consistently. Standards can help Family Help Lead practitioners identify relevant information from potentially long, complex case histories by enabling tools that find and synthesise case management system information, drawing on standards for people, professionals, organisations, services, service episodes, life events and assessments.  
+Standards could help systems present this information consistently. Standards can help Family Help Lead practitioners identify relevant information from potentially long, complex case histories by enabling tools that find and synthesise case management system information, drawing on standards for people, professionals, organisations, services, service episodes, life events and assessments.  
 
-Standards could also enable authorised agencies to easily share relevant information about people, professionals, organisations and services. This includes contributing data to single view systems. Implemented in local systems, these applications could reduce time spent searching across records and help practitioners build on existing knowledge rather than asking families to start again and repeat their story. More detail on this is outlined in our
+Standards could also enable authorised agencies to easily share relevant information about people, professionals, organisations and services. This includes bringing data from disperse systems together into a single view. These applications could reduce time spent searching across records and help practitioners build on existing knowledge rather than asking families to start again and repeat their story. More detail on this is outlined in our
 [Multi-agency Enquiries](/UC09_multi_agency_enquiries) use case.
 
 **What this could look like in practice:**
@@ -47,7 +47,7 @@ Our standards would also support multi-agency notifications, helping to provide 
 
 **What this could look like in practice:**
 
-* A family receiving Family Help support has escalating needs that require a Child Protection response. The Family Help Lead can share a clear history and case file with the Lead Child Protection practitioner and multi-agency enquiries can be conducted in a timely way.
+* A family receiving Family Help support has escalating needs that require a Child Protection response. The Family Help Lead can share a clear history and case file with the Lead Child Protection practitioner. Therefore meaning that multi-agency enquiries can be conducted in a timely way.
 * Education, police or health services can contribute authorised information to the child’s record in a consistent format, while the source, date and context remain clear. 
 * Relevant practitioners are notified when a significant event occurs or responsibility changes, supporting timely review and action without relying on informal emails or telephone calls. 
 
