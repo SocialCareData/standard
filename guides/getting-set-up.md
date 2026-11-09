@@ -18,6 +18,18 @@ You can edit files in any text editor, but we recommend [Visual Studio Code](htt
 
 Help: [Setting up Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
 
+### Install Git for VS Code
+
+GitHub Desktop comes with its own copy of Git, but VS Code can't use it. If VS Code says it can't find Git, install it separately:
+
+- **Windows:** download and run the installer from [git-scm.com/downloads](https://git-scm.com/downloads). The default options are fine.
+- **macOS:** open Terminal and run `git --version`. If Git is missing, macOS offers to install the command line developer tools. Click **Install**.
+- **Linux:** Git is usually already installed. If not, install the `git` package with your package manager.
+
+Then restart VS Code.
+
+Help: [Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Using Git in VS Code](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git)
+
 ## 4. Clone the project
 
 In GitHub Desktop, go to **File > Clone repository**, pick `SocialCareData/standard` and choose a folder on your computer.
