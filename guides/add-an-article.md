@@ -60,7 +60,7 @@ For a real example, see [learn-about-the-standards.md](../src/_pages/learn-about
 | --- | --- |
 | `article` | Most pages, for example About, Governance, Pilots. Shows "Related pages". **Use this if unsure.** |
 | `use-case` | Use case pages (`UC…` files). Adds a table of contents and numbered headings. |
-| `publication` | Standards and publications (`PUB…` files). Adds a table of contents, version and editor details. Needs extra fields, so copy an existing `PUB…` file to start. |
+| `publication` | Standards and publications (`PUB…` files). Adds a table of contents, version and editor details. Needs extra fields: see [Standard page](standards/standard-page.md). |
 | `version` | An older, archived version of a standard. |
 | *(leave out)* | A plain page with no sidebar or table of contents. |
 
