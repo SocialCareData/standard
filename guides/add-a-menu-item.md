@@ -50,4 +50,4 @@ Add `draft: true` to a dropdown item to hide it from the menu without deleting i
 
 This file is YAML, so indentation matters. Use spaces, not tabs, and line up your new item exactly with the ones around it. A wrong indent breaks the build and the CI check will fail.
 
-Check the result on the [preview site](getting-set-up.md#6-check-the-build).
+Check the result on the [preview site](getting-set-up.md#7-check-the-build).

@@ -1,6 +1,6 @@
 # Run the site on your computer (optional)
 
-This is optional. For most changes the [preview site](getting-set-up.md#6-check-the-build) on your pull request is enough. Running the site locally lets you see changes straight away, without pushing.
+This is optional. For most changes the [preview site](getting-set-up.md#7-check-the-build) on your pull request is enough. Running the site locally lets you see changes straight away, without pushing.
 
 ## Steps
 

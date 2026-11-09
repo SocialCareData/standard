@@ -1,6 +1,6 @@
 # Add an article
 
-Don't worry about breaking anything. Nothing changes on the live site until your pull request is reviewed, approved and merged. Every pull request also gets its own [preview site](getting-set-up.md#6-check-the-build), so you can see your changes first.
+Don't worry about breaking anything. Nothing changes on the live site until your pull request is reviewed, approved and merged. Every pull request also gets its own [preview site](getting-set-up.md#7-check-the-build), so you can see your changes first.
 
 ## 1. Create the file
 
@@ -92,4 +92,4 @@ A few rules for this site:
 ## 4. Next steps
 
 - Add the page to the menu if it needs to be there: [Add a menu item](add-a-menu-item.md)
-- Commit, push and open a pull request: [Getting set up](getting-set-up.md#5-open-a-pull-request)
+- Commit, push and open a pull request: [Getting set up](getting-set-up.md#6-open-a-pull-request)

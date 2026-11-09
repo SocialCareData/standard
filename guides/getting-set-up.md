@@ -1,6 +1,6 @@
 # Getting set up and making changes
 
-You only need to do steps 1–3 once.
+You only need to do steps 1–4 once.
 
 ## 1. Get access
 
@@ -12,25 +12,31 @@ Download it from [desktop.github.com](https://desktop.github.com) and sign in wi
 
 Help: [Installing GitHub Desktop](https://docs.github.com/en/desktop/installing-and-authenticating-to-github-desktop/installing-github-desktop)
 
-## 3. Clone the project
+## 3. Install VS Code (optional, recommended)
+
+You can edit files in any text editor, but we recommend [Visual Studio Code](https://code.visualstudio.com/). It's free and works on Windows, macOS and Linux. Download it from [code.visualstudio.com/download](https://code.visualstudio.com/download).
+
+Help: [Setting up Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+
+## 4. Clone the project
 
 In GitHub Desktop, go to **File > Clone repository**, pick `SocialCareData/standard` and choose a folder on your computer.
 
 Help: [Cloning a repository](https://docs.github.com/en/desktop/adding-and-cloning-repositories/cloning-a-repository-from-github-to-github-desktop)
 
-## 4. Create a branch
+## 5. Create a branch
 
 Never work directly on `main`. For each change:
 
 1. Make sure **Current branch** is `main`, then click **Fetch origin** to get the latest version.
 2. Go to **Branch > New branch** and give it a short name, for example `add-pilot-article`.
-3. Edit the files in any text editor (for example [VS Code](https://code.visualstudio.com/)).
+3. Open the project in VS Code (or any other editor you prefer). In GitHub Desktop, go to **Repository > Open in Visual Studio Code**, then edit the files.
 4. Back in GitHub Desktop, write a short summary at the bottom left and click **Commit**.
 5. Click **Publish branch** (or **Push origin** after the first time).
 
 Help: [Managing branches](https://docs.github.com/en/desktop/making-changes-in-a-branch/managing-branches-in-github-desktop), [Committing changes](https://docs.github.com/en/desktop/making-changes-in-a-branch/committing-and-reviewing-changes-to-your-project-in-github-desktop)
 
-## 5. Open a pull request
+## 6. Open a pull request
 
 1. In GitHub Desktop, click **Create Pull Request**. It opens GitHub in your browser.
 2. Add a title and a short description of what changed.
@@ -41,7 +47,7 @@ Your changes go live only after a reviewer approves and the pull request is merg
 
 Help: [Requesting a review](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/requesting-a-pull-request-review)
 
-## 6. Check the build
+## 7. Check the build
 
 Each pull request runs automatic checks. You can see them near the bottom of the pull request page.
 
