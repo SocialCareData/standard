@@ -46,8 +46,8 @@ config:
       context: https://github.com/SocialCareData/ontology/blob/main/referrals/context.jsonld
       examples:
         - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/referrals/valid-referral.jsonld
-        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/referrrals/valid-request.jsonld
-        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/referrrals/valid-qoc-concern.jsonld
+        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/referrals/valid-request.jsonld
+        - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/referrals/valid-qoc-concern.jsonld
 
   placeholder: |-
     {
