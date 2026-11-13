@@ -532,6 +532,7 @@ enums:
       child.Other:
         title: Other
         meaning: con:ChildOther
+        aliases: ["child.other"]
       adult.physicalAbuse:
         title: Physical abuse
         meaning: con:AdultPhysicalAbuse
@@ -580,6 +581,7 @@ enums:
       child.CIN:
         title: Escalation to s17 CiN assessment
         meaning: rp:ChildCIN
+        aliases: ["child.cin"]
       child.s47:
         title: Escalation to s47 enquiry
         meaning: rp:ChildS47
