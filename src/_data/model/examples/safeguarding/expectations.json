@@ -2,7 +2,7 @@
   "invalid-episode-bad-outcome.jsonld": [
     {
       "focus": "ServiceEpisode",
-      "path": "episodeOutcome",
+      "path": "outcome",
       "constraint": "sh:in"
     }
   ],

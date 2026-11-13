@@ -727,6 +727,7 @@ enums:
         title: S117 Aftercare
         description: S117 aftercare
         meaning: svc:S117Aftercare
+        aliases: ["S117-aftercare"]
       DoLS:
         title: DoLs
         description: DoLs
