@@ -10,6 +10,14 @@ must produce - focus type, property and constraint, named through the module
 context - so an invalid example cannot start failing for the wrong reason, or
 for more reasons than intended, without someone noticing.
 
+valid-*.csv and invalid-*.csv are checked the same way, read through the
+module's csv-metadata.json (see build_csvw.py) by the data-standard-validator
+command line - the converter the validator page uses, rather than a second
+implementation here. Their expectations are pinned as the row, column and
+issue code a CSV author would see. Set DATA_STANDARD_VALIDATOR to the command
+to run, e.g. "npx --yes @theodi/data-standard-validator@1.1.0"; without it the
+CSV examples are skipped, and --update keeps what is pinned for them.
+
     python src/assets/scripts/validate_examples.py                 # build shapes, then check
     python src/assets/scripts/validate_examples.py --shapes DIR    # check against a built tree
     python src/assets/scripts/validate_examples.py --update        # rewrite expectations.json
@@ -19,6 +27,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import shlex
+import subprocess
 import sys
 import tempfile
 from pathlib import Path
@@ -34,16 +45,49 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 MODEL_ROOT = REPO_ROOT / "src" / "_data" / "model"
 EXAMPLES = MODEL_ROOT / "examples"
 EXPECTATIONS = "expectations.json"
+EXAMPLE_SUFFIXES = (".jsonld", ".csv")
+CSV_METADATA = "csv-metadata.json"
+# The command that validates CSV examples; see the module docstring.
+VALIDATOR_ENV = "DATA_STANDARD_VALIDATOR"
 
 
-def shapes_for(example_dir: Path, shapes_root: Path) -> Graph:
+def shape_path(example_dir: Path, shapes_root: Path) -> Path:
     parts = example_dir.relative_to(EXAMPLES).parts
     standard = parts[0]
     profile = parts[1] if len(parts) > 1 else "standard"
     main = shapes_root / standard / f"{standard}-{profile}-shape.ttl"
     if not main.is_file():
         raise FileNotFoundError(f"no shape file {standard}/{main.name} in {shapes_root}")
-    return Graph().parse(main, format="turtle")
+    return main
+
+
+def shapes_for(example_dir: Path, shapes_root: Path) -> Graph:
+    return Graph().parse(shape_path(example_dir, shapes_root), format="turtle")
+
+
+def validate_csv(path: Path, shapes: Path, command: list[str]) -> tuple[bool, list[dict], str]:
+    """Run the validator CLI on a CSV example: (conforms, issues as row/column/code, report text)."""
+    metadata = MODEL_ROOT / path.relative_to(EXAMPLES).parts[0] / CSV_METADATA
+    if not metadata.is_file():
+        raise FileNotFoundError(f"no {metadata.relative_to(REPO_ROOT)}; run build_csvw.py")
+    proc = subprocess.run(
+        [*command, "-s", str(shapes), "--csv-metadata", str(metadata), "-f", "json", str(path)],
+        capture_output=True, text=True, encoding="utf-8",
+    )
+    if proc.returncode not in (0, 1):
+        raise RuntimeError(proc.stderr.strip() or f"exit {proc.returncode}")
+    report = json.loads(proc.stdout)
+    document = report["documents"][0]
+    issues = []
+    for issue in document["issues"]:
+        if issue["severity"] == "info":
+            continue
+        cell = issue["location"].get("cell", {})
+        entry = {"row": cell.get("row"), "column": cell.get("column"), "code": issue["code"]}
+        issues.append({k: v for k, v in entry.items() if v is not None})
+    issues.sort(key=lambda e: (e.get("row", -1), e.get("column", ""), e["code"]))
+    lines = [f"  {i['code']}: {i['title']} (at {i['location']['jsonPath']})" for i in document["issues"]]
+    return report["conforms"], issues, "\n".join(lines)
 
 
 def module_context(standard: str) -> dict:
@@ -124,7 +168,10 @@ def violations(report: Graph, data: Graph, names: dict[str, str], context: Conte
 def check(shapes_root: Path, update: bool) -> int:
     failures = 0
     checked = 0
-    dirs = sorted({p.parent for p in EXAMPLES.rglob("*.jsonld")})
+    command = shlex.split(os.environ.get(VALIDATOR_ENV, ""))
+    if not command:
+        print(f"note  CSV examples are skipped: set {VALIDATOR_ENV} to the data-standard-validator command")
+    dirs = sorted({p.parent for p in EXAMPLES.rglob("*") if p.suffix in EXAMPLE_SUFFIXES})
     for example_dir in dirs:
         rel_dir = example_dir.relative_to(EXAMPLES)
         try:
@@ -137,11 +184,11 @@ def check(shapes_root: Path, update: bool) -> int:
         context = Context(raw_context)
         names = term_names(raw_context, context, titles_by_iri(rel_dir.parts[0]))
         expectations_file = example_dir / EXPECTATIONS
-        pinned = {} if update or not expectations_file.is_file() \
-            else json.loads(expectations_file.read_text())
+        committed = json.loads(expectations_file.read_text()) if expectations_file.is_file() else {}
+        pinned = {} if update else committed
         produced = {}
 
-        for path in sorted(example_dir.glob("*.jsonld")):
+        for path in sorted(p for p in example_dir.iterdir() if p.suffix in EXAMPLE_SUFFIXES):
             rel = path.relative_to(REPO_ROOT)
             if path.name.startswith("valid-"):
                 expected = True
@@ -151,6 +198,41 @@ def check(shapes_root: Path, update: bool) -> int:
                 print(f"::error file={rel}::{rel}: name must start with valid- or invalid-")
                 failures += 1
                 continue
+            if path.suffix == ".csv":
+                if not command:
+                    # Keep what is pinned for an example this run cannot check.
+                    if path.name in committed:
+                        produced[path.name] = committed[path.name]
+                    continue
+                checked += 1
+                try:
+                    conforms, actual, text = validate_csv(path, shape_path(example_dir, shapes_root), command)
+                except Exception as e:
+                    print(f"::error file={rel}::{rel}: could not validate: {e}")
+                    failures += 1
+                    continue
+                if conforms != expected:
+                    failures += 1
+                    want = "conform" if expected else "fail validation"
+                    print(f"FAIL  {rel}")
+                    print(f"::error file={rel}::{rel}: expected to {want}")
+                    print(f"::group::Validation report for {rel}\n{text}\n::endgroup::")
+                    continue
+                if not expected:
+                    produced[path.name] = actual
+                    if not update and pinned.get(path.name) != actual:
+                        failures += 1
+                        print(f"FAIL  {rel}")
+                        print(f"::error file={rel}::{rel}: issues differ from {rel_dir}/{EXPECTATIONS}; "
+                              "run with --update and review the diff")
+                        print("::group::Expected and actual issues")
+                        print("expected:", json.dumps(pinned.get(path.name), indent=2))
+                        print("actual:  ", json.dumps(actual, indent=2))
+                        print("::endgroup::")
+                        continue
+                print(f"ok    {rel}")
+                continue
+
             checked += 1
             try:
                 data = load_example(path, raw_context)

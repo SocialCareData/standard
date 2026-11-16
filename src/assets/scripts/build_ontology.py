@@ -54,6 +54,14 @@ IMPORTS_JSON = MODEL_ROOT / "imports.json"
 MANIFEST = MODEL_ROOT / "manifest.yaml"
 UMBRELLA = MODEL_ROOT / "social-care.yaml"
 CONTEXT = MODEL_ROOT / "context.jsonld"
+# Annotation namespaces that describe the CSV representation of a model (see
+# build_csvw.py). gen-owl and gen-shacl --include-annotations copy every slot
+# annotation into their output; these belong in csv-metadata.json only, so
+# canonicalise() drops them from the published ontologies and shapes.
+CSV_MAPPING_NAMESPACES = (
+    "http://www.w3.org/ns/csvw#",
+    "https://theodi.github.io/data-standard-validator/ns#",
+)
 # Where the module ontologies are served from once synced to SocialCareData/ontology.
 PUBLISHED_BASE = "https://raw.githubusercontent.com/SocialCareData/ontology/main/"
 
@@ -141,16 +149,22 @@ def canonicalise(path: Path) -> None:
     stable, while keeping the readable nested ``[ a owl:Restriction ; ... ]``
     form that makes these files reviewable. Prefixes are rebound from the
     original graph because the canonical graph does not carry them.
+
+    The CSV mapping annotations are dropped here too: they only feed
+    csv-metadata.json and say nothing about the ontology or its constraints.
     """
     graph = Graph()
     graph.parse(path, format="turtle")
+    for triple in [t for t in graph if str(t[1]).startswith(CSV_MAPPING_NAMESPACES)]:
+        graph.remove(triple)
     canonical = to_canonical_graph(graph)
 
     out = Graph()
     for triple in canonical:
         out.add(triple)
     for prefix, namespace in graph.namespaces():
-        out.bind(prefix, namespace)
+        if str(namespace) not in CSV_MAPPING_NAMESPACES:
+            out.bind(prefix, namespace)
     out.serialize(destination=path, format="turtle")
 
 
@@ -339,9 +353,9 @@ def copy_aux(schemas: list[Schema], out_dir: Path) -> None:
     """Copy the non-generated files consumers need alongside the ontologies."""
     modules = sorted({s.module for s in schemas})
     for module in modules:
-        for name in ("context.jsonld", "README.md"):
+        for name in ("context.jsonld", "csv-metadata.json", "README.md"):
             src = MODEL_ROOT / module / name
-            if src.exists():  # common/ has no README
+            if src.exists():  # common/ has no README; only some modules have a CSV form
                 shutil.copy2(src, out_dir / module / name)
         # The hand-maintained *-rules-shape.ttl files carry the conditional
         # constraints gen-shacl cannot produce, because it ignores LinkML

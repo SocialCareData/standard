@@ -12,6 +12,7 @@ on:
       - 'src/assets/scripts/validate_examples.py'
       - 'src/assets/scripts/build_ontology.py'
       - 'src/assets/scripts/build_contexts.py'
+      - 'src/assets/scripts/build_csvw.py'
       - 'src/assets/scripts/requirements.txt'
       - '.github/workflows/validate-standards.yml'
   workflow_dispatch:
@@ -80,6 +81,11 @@ jobs:
       # run build_contexts.py and commit the result.
       - name: Check the generated contexts are up to date
         run: python src/assets/scripts/build_contexts.py --check
+
+      # csv-metadata.json (CSVW) is generated from the same schemas, for the
+      # modules that map slots to CSV columns. Same rule: regenerate, commit.
+      - name: Check the generated CSV metadata is up to date
+        run: python src/assets/scripts/build_csvw.py --check
 
   examples:
     name: Examples conform to the shapes
