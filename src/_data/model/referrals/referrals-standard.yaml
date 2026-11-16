@@ -55,7 +55,11 @@ classes:
   Request:
     class_uri: ref:Request
     description: >-
-      Outward request for services for an existing subject of care.
+      Outward request for services for a person already known to social care.
+      A request can be the outcome of a Multi-Agency Safeguarding Hub (MASH)
+      decision in children's services or a front-door decision in adult social care.
+      However, it is most commonly any request made from social services to
+      statutory and non-statutory services, for both children and adults.
     slots:
       - refIdentifier
       - requestSubject
@@ -293,7 +297,8 @@ slots:
     range: RequestPurposeCode
     required: true
     multivalued: false
-    description: What is the request?
+    description: >-
+      What kind of request is this? The function this request serves.
 
   # --- Quality of Care Concern slots ---
   qocSubject:
@@ -882,35 +887,98 @@ enums:
   RequestPurposeCode:
     enum_uri: ref:request-purpose
     title: Request Purposes
-    description: Codes indicating the purpose of an outward request for services.
+    description: >-
+      The purpose of an outward request for services. Requests are made at
+      any stage of a person's involvement with social care: some carry out a
+      front-door decision (such as a MASH decision in children's services),
+      others come from ongoing work, such as asking for specialist support
+      alongside a plan. Where a purpose has a statutory basis or implies
+      urgency (such as escalation to a section 47 or section 42 enquiry), the
+      code carries it. A request may
+      go to a team within the same local authority (for example, the team that
+      carries out child in need assessments) as well as to an outside service,
+      whether statutory (eg. advocacy or CAMHS) or non-statutory (eg. a community
+      organisation)
     permissible_values:
       notification:
         title: Notification or signposting
         meaning: rp:Notification
+        description: >-
+          Letting a service know about the person, or signposting the person to
+          it, without asking it to take action. Used where no further
+          involvement is needed but another service should be aware.
       child.earlyHelp:
         title: Request to Early Help services
         meaning: rp:ChildEarlyHelp
+        description: >-
+          Request for early help: support for the child and family where needs
+          do not meet the threshold for statutory children's social care, as set
+          out in Working Together to Safeguard Children 2023.
       child.CIN:
         title: Escalation to s17 CiN assessment
         meaning: rp:ChildCIN
+        description: >-
+          Request for an assessment of whether the child is a child in need,
+          under section 17 of the Children Act 1989.
       child.s47:
         title: Escalation to s47 enquiry
         meaning: rp:ChildS47
+        description: >-
+          Escalation to enquiries under section 47 of the Children Act 1989,
+          where there is reasonable cause to suspect the child is suffering, or
+          is likely to suffer, significant harm. Normally follows a strategy
+          discussion.
       child.emergency:
         title: Immediate emergency protection
         meaning: rp:ChildEmergency
+        description: >-
+          Immediate action to protect the child, such as police protection
+          (section 46 of the Children Act 1989) or an emergency protection order
+          (section 44).
       child.statutoryServices:
         title: Request to statutory services (like CAMHS or advocacy)
         meaning: rp:ChildStatutoryServices
+        description: >-
+          Request to a statutory service other than children's social care, such
+          as child and adolescent mental health services or independent
+          advocacy.
       child.nonStatutoryServices:
         title: Request to non-statutory services
         meaning: rp:ChildNonStatutoryServices
+        description: >-
+          Request to a voluntary, community or other non-statutory service.
+      adult.prevention:
+        title: Request for prevention or reablement services
+        meaning: rp:AdultPrevention
+        description: >-
+          Request for services that prevent, reduce or delay the need for care
+          and support, under section 2 of the Care Act 2014. For example,
+          reablement, intermediate care, or equipment and minor adaptations.
+      adult.needsAssessment:
+        title: Request for Care Act needs or carer's assessment
+        meaning: rp:AdultNeedsAssessment
+        description: >-
+          Request for a needs assessment (section 9 of the Care Act 2014) or a
+          carer's assessment (section 10).
+      adult.s42Enquiry:
+        title: Escalation to s42 safeguarding enquiry
+        meaning: rp:AdultS42Enquiry
+        description: >-
+          Escalation to an enquiry under section 42 of the Care Act 2014, where
+          an adult with care and support needs is experiencing, or is at risk
+          of, abuse or neglect and cannot protect themselves because of those
+          needs.
       adult.statutoryServices:
         title: Request to statutory services (like NHS CHC or advocacy)
         meaning: rp:AdultStatutoryServices
+        description: >-
+          Request to a statutory service other than adult social care, such as
+          NHS Continuing Healthcare or independent advocacy.
       adult.nonStatutoryServices:
         title: Request to non-statutory services
         meaning: rp:AdultNonStatutoryServices
+        description: >-
+          Request to a voluntary, community or other non-statutory service.
 
   ReferralQuestionCategory:
     enum_uri: ref:referral-question-category

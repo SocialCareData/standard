@@ -47,7 +47,7 @@ This standard applies to a range of referral types, taxonomised below.
 
 While each of these are colloquially named a "referral", we designate three distinct profiles within the taxonomy:
 * `Referrals`, which are made by a subject, their family, a professional (like their teacher), or a member of the public *into* social services. These forms are generally "point-of-entry" into social care: the subject is likely not known to services beforehand.
-* `Requests`, which are made by social services and sent *outward* to statutory or non-statutory services. These forms concern subjects that are already known to, and involved with, social services.
+* `Requests`, which are made by social services and sent *outward* to statutory or non-statutory services. These forms concern subjects that are already known to, and involved with, social services, and can be the outcome of a decision made at the front door by, eg., a Multi-Agency Safeguarding Hub (MASH).
 * `QualityOfCareConcerns`, which are made by anyone (including the subject, and can be anonymous) and are centred on a care service rather than a person themselves.
 
 Importantly, this work standardises the back-end data architecture behind each of these profiles, not the front-end that social workers see and interact with.
@@ -164,7 +164,13 @@ Inward, person-centric, point-of-entry referral into social services.
 
 ### Request
 
-Outward request for services for an existing subject of care.
+Outward request for services for a person already known to social care.
+
+Social services make requests to other services at every stage of their work with a person. A social worker supporting a family might ask CAMHS for a mental health assessment, an adult's care team might ask the NHS to consider Continuing Healthcare, or a practitioner might put someone in touch with a community organisation. Some requests go to another team in the same local authority rather than an outside service.
+
+Requests can often carry out a decision made at the "front door". When a referral arrives, a front-door team triages it (in children's services, often a Multi-Agency Safeguarding Hub, or MASH) and decides what should happen next, such as early help, an assessment of whether a child is in need, or an enquiry into whether a child is suffering significant harm. In adult social care, the front door may decide on preventative support such as reablement, a Care Act assessment, or a safeguarding enquiry. These decisions can also be made later on, for example when concerns escalate during ongoing work.
+
+Where a request follows a referral, the two can be connected using `linkedRecord`.
 
 #### Properties
 
@@ -181,7 +187,7 @@ Outward request for services for an existing subject of care.
 : What service is requested? Multi-valued (`1..*`). Required. *Identifier object*. See [Identifier](#identifier).
 
 <span id="request-purpose">purpose</span>
-: What is the request? Required (`1..1`). *Enum*. See the [Request Purposes Taxonomy](#request-purposes-taxonomy).
+: What is the request? What is being asked of the receiving service and, where it applies, the statutory basis and urgency it is made under. Required (`1..1`). *Enum*. See the [Request Purposes Taxonomy](#request-purposes-taxonomy).
 
 <span id="request-assessmentQuestion">assessmentQuestion</span>
 : Atypical, locally configured questions and answers. Multi-valued (`0..*`). Optional. *ReferralAssessmentQuestion object*. See [ReferralAssessmentQuestion](#referralassessmentquestion).
@@ -582,6 +588,8 @@ The types of concern about a care provider or service. Each type is one of the f
 {% schema_table page.data_model QocConcernCode expanded %}
 
 ### Request Purposes Taxonomy
+
+The purposes of an outward request, made at any stage of a person's involvement with social care. Some purposes are the decisions typically made at the front door, such as by a MASH under the Children Act 1989, or by an adult social care front door under the Care Act 2014. Where a purpose has a statutory basis or implies urgency, the code carries it. See [Request](#request).
 
 {% schema_table page.data_model RequestPurposeCode expanded %}
 

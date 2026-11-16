@@ -232,6 +232,9 @@
         "child.emergency":           "rp:ChildEmergency",
         "child.statutoryServices":   "rp:ChildStatutoryServices",
         "child.nonStatutoryServices": "rp:ChildNonStatutoryServices",
+        "adult.prevention":          "rp:AdultPrevention",
+        "adult.needsAssessment":     "rp:AdultNeedsAssessment",
+        "adult.s42Enquiry":          "rp:AdultS42Enquiry",
         "adult.statutoryServices":   "rp:AdultStatutoryServices",
         "adult.nonStatutoryServices": "rp:AdultNonStatutoryServices"
       }
