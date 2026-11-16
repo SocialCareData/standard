@@ -585,8 +585,18 @@ enums:
         meaning: svc:AlternativeProvisionSchool
       social-care:
         title: Social Care
-        description: Social Care Department
+        description: >-
+          Local authority social care, where children's and adult services are
+          not distinguished. Use the children's or adult code where known.
         meaning: svc:SocialCare
+      social-care.children:
+        title: Children's Social Care
+        description: Local authority children's social care services.
+        meaning: svc:ChildrensSocialCare
+      social-care.adults:
+        title: Adult Social Care
+        description: Local authority adult social care services.
+        meaning: svc:AdultSocialCare
       family-court:
         title: Family Court
         description: Family Court
@@ -695,6 +705,14 @@ enums:
         title: Other Carer Support
         description: Other unpaid carer support
         meaning: svc:OtherCarerSupport
+      leaving-care:
+        title: Leaving Care Service
+        description: >-
+          The local authority's service for care leavers, including personal
+          advisers and support for former relevant children up to age 25 under
+          the Children Act 1989. Also known locally as a 16+, after care or
+          independent living service.
+        meaning: svc:LeavingCare
       MASH:
         title: MASH / Safeguarding Services
         description: MASH / safeguarding services
@@ -743,6 +761,49 @@ enums:
         title: Advocacy
         description: Advocacy
         meaning: svc:Advocacy
+      adult-front-door:
+        title: Adult Social Care Front Door
+        description: >-
+          The first point of contact for adult social care, which receives and
+          triages contacts, referrals and requests for support. Also known
+          locally as a contact centre, first contact or access team.
+        meaning: svc:AdultFrontDoor
+      adult-safeguarding:
+        title: Adult Safeguarding Team
+        description: >-
+          The team that receives adult safeguarding concerns and makes or
+          coordinates enquiries under section 42 of the Care Act 2014.
+        meaning: svc:AdultSafeguarding
+      information-and-advice:
+        title: Information and Advice
+        description: >-
+          Information, advice and signposting about care and support, which
+          local authorities must provide under section 4 of the Care Act 2014.
+        meaning: svc:InformationAndAdvice
+      hospital-social-work:
+        title: Hospital Social Work Team
+        description: >-
+          Social workers based in or linked to a hospital, who assess and plan
+          support for people being discharged.
+        meaning: svc:HospitalSocialWork
+      telecare:
+        title: Telecare / Assistive Technology
+        description: >-
+          Technology that helps a person stay safe and independent at home, such
+          as community alarms, sensors and monitoring.
+        meaning: svc:Telecare
+      AMHP:
+        title: AMHP Service
+        description: >-
+          Approved Mental Health Professional service, which coordinates
+          assessments under the Mental Health Act 1983.
+        meaning: svc:AMHP
+      emergency-duty-team:
+        title: Emergency Duty Team
+        description: >-
+          Out-of-hours social care service covering urgent situations for
+          children and adults when daytime teams are closed.
+        meaning: svc:EmergencyDutyTeam
       LGA.<LGA Taxonomy Code>:
         title: Local Government Association Service Taxonomy
         description: "Numeric code from the [Local Government Association Service Taxonomy](https://webservices.esd.org.uk/lists/services)"

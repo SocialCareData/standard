@@ -257,6 +257,8 @@
             "SEN-high-school": "svc:SenHighSchool",
             "alternative-provision-school": "svc:AlternativeProvisionSchool",
             "social-care": "svc:SocialCare",
+            "social-care.children": "svc:ChildrensSocialCare",
+            "social-care.adults": "svc:AdultSocialCare",
             "family-court": "svc:FamilyCourt",
             "CAMHS": "svc:Camhs",
             "reablement": "svc:Reablement",
@@ -283,7 +285,27 @@
             "carer-respite": "svc:CarerRespite",
             "carer-sitting-service": "svc:CarerSittingService",
             "carer-universal-services": "svc:CarerUniversalServices",
-            "other-carer-support": "svc:OtherCarerSupport"
+            "other-carer-support": "svc:OtherCarerSupport",
+            "leaving-care": "svc:LeavingCare",
+            "MASH": "svc:MASH",
+            "early-help": "svc:EarlyHelp",
+            "education-welfare": "svc:EducationWelfare",
+            "home-adaptations": "svc:HomeAdaptations",
+            "occupational-therapy": "svc:OccupationalTherapy",
+            "CHC": "svc:CHC",
+            "CMHT": "svc:CMHT",
+            "s117-aftercare": "svc:S117Aftercare",
+            "DoLS": "svc:DoLS",
+            "D2A": "svc:D2A",
+            "sensory-team": "svc:SensoryTeam",
+            "advocacy": "svc:Advocacy",
+            "adult-front-door": "svc:AdultFrontDoor",
+            "adult-safeguarding": "svc:AdultSafeguarding",
+            "information-and-advice": "svc:InformationAndAdvice",
+            "hospital-social-work": "svc:HospitalSocialWork",
+            "telecare": "svc:Telecare",
+            "AMHP": "svc:AMHP",
+            "emergency-duty-team": "svc:EmergencyDutyTeam"
           }
         }
       }
