@@ -64,6 +64,30 @@ See [Person.Identifier](PUB01_person_standard_table#identifier)
 
 See [Person](PUB01_person_standard_table#person)
 
+### Name
+
+See [Person.Name](PUB01_person_standard_table#name)
+
+### Address
+
+See [Person.Address](PUB01_person_standard_table#address)
+
+### Contact
+
+See [Person.Contact](PUB01_person_standard_table#contact)
+
+### PersonRelationship
+
+See [Person.PersonRelationship](PUB01_person_standard_table#personrelationship)
+
+### PartialDate
+
+See [Person.PartialDate](PUB01_person_standard_table#partialdate)
+
+### Communication
+
+See [Person.Communication](PUB01_person_standard_table#communication)
+
 ### Professional
 
 See [Safeguarding.Professional](PUB02_safeguarding_standard_table#professional)
@@ -94,6 +118,10 @@ See [Safeguarding.LinkedRecord](PUB02_safeguarding_standard_table#linkedrecord)
 
 {% schema_table page.data_model ReferralQuestionCategory %}
 
+### Answer Type Taxonomy
+
+{% schema_table page.data_model AnswerType %}
+
 ### Referrer Types Taxonomy
 
 {% schema_table page.data_model ReferrerTypeCode %}
@@ -101,3 +129,15 @@ See [Safeguarding.LinkedRecord](PUB02_safeguarding_standard_table#linkedrecord)
 ### Person Relationship Code Taxonomy
 
 {% schema_table page.data_model PersonRelationshipCode %}
+
+### Gender Code Taxonomy
+
+{% schema_table page.data_model GenderCode %}
+
+### Phenotypic Sex Code Taxonomy
+
+{% schema_table page.data_model PhenotypicSexCode %}
+
+### Ethnicity Code Taxonomy
+
+{% schema_table page.data_model EthnicityCode %}

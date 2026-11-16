@@ -1,4 +1,25 @@
 {
+  "invalid-qoc-bad-concern-code.jsonld": [
+    {
+      "focus": "QocConcernDetail",
+      "path": "concernType",
+      "constraint": "sh:in"
+    }
+  ],
+  "invalid-referral-bad-concern-code.jsonld": [
+    {
+      "focus": "ConcernDetail",
+      "path": "concernType",
+      "constraint": "sh:in"
+    }
+  ],
+  "invalid-referral-bad-question-category.jsonld": [
+    {
+      "focus": "ReferralAssessmentQuestion",
+      "path": "category",
+      "constraint": "sh:in"
+    }
+  ],
   "invalid-referral-missing-subject.jsonld": [
     {
       "focus": "Referral",
