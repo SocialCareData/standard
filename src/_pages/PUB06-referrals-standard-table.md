@@ -22,6 +22,10 @@ data_model: src/_data/model/referrals/referrals-standard.yaml
 
 {% schema_table page.data_model QualityOfCareConcern %}
 
+### Response
+
+{% schema_table page.data_model Response %}
+
 ### IntakePerson
 
 {% schema_table page.data_model IntakePerson %}
@@ -113,6 +117,14 @@ See [Safeguarding.LinkedRecord](PUB02_safeguarding_standard_table#linkedrecord)
 ### Request Purposes Taxonomy
 
 {% schema_table page.data_model RequestPurposeCode %}
+
+### Response Statuses Taxonomy
+
+{% schema_table page.data_model ResponseStatusCode %}
+
+### Record Type Taxonomy
+
+{% schema_table page.data_model RecordTypeCode %}
 
 ### Question Categories Taxonomy
 

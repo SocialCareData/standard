@@ -13,7 +13,7 @@ JSON Schema and docs are generated from the YAML.
 
 | File | Role |
 | --- | --- |
-| `referrals-standard.yaml` | **Authoritative source.** Prefixes, the three core classes (`Referral`, `Request`, `QualityOfCareConcern`), supporting objects (`IntakePerson`, `PersonalNetworkMember`, `ReferrerDetails`, `ConcernDetail`, `QocConcernDetail`, `ReferralInvolvement`, `DocumentReference`, `ReferralAssessmentQuestion`), slots, and controlled vocabularies. Imports `common`, `person` (core), and `safeguarding`. |
+| `referrals-standard.yaml` | **Authoritative source.** Prefixes, the three core classes (`Referral`, `Request`, `QualityOfCareConcern`), the `Response` class, supporting objects (`IntakePerson`, `PersonalNetworkMember`, `ReferrerDetails`, `ConcernDetail`, `QocConcernDetail`, `ReferralInvolvement`, `DocumentReference`, `ReferralAssessmentQuestion`), slots, and controlled vocabularies. Imports `common`, `person` (core), and `safeguarding`. |
 | `../imports.json` | Top-level importmap shared by all modules: maps each module id (e.g. `https://ns.socialcaredata.io/referrals`) to its local `*.yaml` file. |
 | `context.jsonld` | JSON-LD context used by examples and external consumers. |
 
@@ -70,3 +70,29 @@ home-care visits, medication errors, falls, pressure ulcers) are named in the
 descriptions of the regulations they fall under. Also has `UNASSIGNED` and
 `other`. Registration-level regulations (4 to 7) and 20A (displaying ratings)
 are deliberately left out.
+
+## Response
+
+`Response` records that a response to a `Referral`, `Request` or
+`QualityOfCareConcern` was sent or received. It is a separate top-level record
+that points back at what it responds to (`respondsTo`, an `Identifier`, with an
+optional `respondsToType` from safeguarding's `RecordTypeCode`), so the original
+record is never edited. Each response is one event, not a changing status: a
+referral that is acknowledged then accepted has two `Response` records.
+
+- `responder` (an `Identifier`) shows the direction: the local authority as
+  responder means a response was sent, another service as responder means one
+  was received. There is no separate direction field.
+- The JSON keys `identifier`, `status` and `description` map to the slots
+  `refIdentifier`, `responseStatus` and `responseDescription`. `status` cannot be
+  a slot name because assessments-and-plans already defines `status` with a
+  different range. `description` resolves through the class-scoped context on
+  `Response`.
+- `ResponseStatusCode` (concept namespace `…/response-status#`, `rs:`) uses
+  dotted codes for the hierarchy: `accepted.waitlisted` and
+  `declined.ineligible`.
+- There is deliberately no outcome field. Safeguarding's `EpisodeOutcome` is
+  adult-only and describes the outcome of an episode, not of a referral. Detail
+  goes in `description`, `attachment` and `linkedRecord`.
+- `RecordTypeCode` in safeguarding has a `response` value, so other records can
+  link to a response.

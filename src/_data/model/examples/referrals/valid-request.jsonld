@@ -25,5 +25,17 @@
     }
   ],
   "purpose": "child.statutoryServices",
-  "dateCompleted": "2026-10-14T10:15:00Z"
+  "dateCompleted": "2026-10-14T10:15:00Z",
+  "linkedRecord": [
+    {
+      "@type": "LinkedRecord",
+      "recordId": {
+        "@type": "Identifier",
+        "value": "REF-2026-001",
+        "system": "https://example.org/referrals"
+      },
+      "recordType": "referral",
+      "recordRelationship": "followupTo"
+    }
+  ]
 }

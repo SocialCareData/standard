@@ -27,11 +27,25 @@
       "constraint": "sh:minCount"
     }
   ],
+  "invalid-request-bad-record-relationship.jsonld": [
+    {
+      "focus": "LinkedRecord",
+      "path": "recordRelationship",
+      "constraint": "sh:in"
+    }
+  ],
   "invalid-request-missing-purpose.jsonld": [
     {
       "focus": "Request",
       "path": "purpose",
       "constraint": "sh:minCount"
+    }
+  ],
+  "invalid-response-bad-status.jsonld": [
+    {
+      "focus": "Response",
+      "path": "responseStatus",
+      "constraint": "sh:in"
     }
   ]
 }

@@ -26,7 +26,9 @@ non_technical_summary: |
 
   We set out to build a data standard that can sit behind these forms to enable interoperability and, importantly, provide a common pattern that technical tools and applications can be built on top of to facilitate more efficient form-filling, freeing up time for social workers to focus on actual care.
 
-  The three objects -- `Referral` (used for inward, person-centric referrals into social care), `Request` (used for outward requests for services, originating from social care), and `QualityOfCareConcern` (used for reporting a quality-of-care concern) -- each have a set of core fields, but in a similar fashion to our [Assessments and Plans standard](/PUB05_assessments_and_plans_standard), also facilitate customisation, with local authorities able to build their own locally-configured question and answer pairs. In this way our standard provides a technical backbone, a skeleton, for requests, referrals, and concerns to follow, rather than dictating exactly what information should and should not be captured in them.
+  The three main objects -- `Referral` (used for inward, person-centric referrals into social care), `Request` (used for outward requests for services, originating from social care), and `QualityOfCareConcern` (used for reporting a quality-of-care concern) -- each have a set of core fields, but in a similar fashion to our [Assessments and Plans standard](/PUB05_assessments_and_plans_standard), also facilitate customisation, with local authorities able to build their own locally-configured question and answer pairs. In this way our standard provides a technical backbone, a skeleton, for requests, referrals, and concerns to follow, rather than dictating exactly what information should and should not be captured in them.
+
+  We also model `Response` objects to provide a basic, common pattern for recording answers given to referrals, requests, and quality-of-care concerns.
 ---
 
 <a href="/PUB06_referrals_standard_table" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
@@ -49,6 +51,8 @@ While each of these are colloquially named a "referral", we designate three dist
 * `Referrals`, which are made by a subject, their family, a professional (like their teacher), or a member of the public *into* social services. These forms are generally "point-of-entry" into social care: the subject is likely not known to services beforehand.
 * `Requests`, which are made by social services and sent *outward* to statutory or non-statutory services. These forms concern subjects that are already known to, and involved with, social services, and can be the outcome of a decision made at the front door by, eg., a Multi-Agency Safeguarding Hub (MASH).
 * `QualityOfCareConcerns`, which are made by anyone (including the subject, and can be anonymous) and are centred on a care service rather than a person themselves.
+
+Any of these can have a corresponding `Response`: a record that a response was sent or received, such as an acknowledgement or a decision to accept or decline.
 
 Importantly, this work standardises the back-end data architecture behind each of these profiles, not the front-end that social workers see and interact with.
 
@@ -233,7 +237,19 @@ Where a request follows a referral, the two can be connected using `linkedRecord
     }
   ],
   "purpose": "child.statutoryServices",
-  "dateCompleted": "2026-10-14T10:15:00Z"
+  "dateCompleted": "2026-10-14T10:15:00Z",
+  "linkedRecord": [
+    {
+      "@type": "LinkedRecord",
+      "recordId": {
+        "@type": "Identifier",
+        "value": "REF-2026-001",
+        "system": "https://example.org/referrals"
+      },
+      "recordType": "referral",
+      "recordRelationship": "followupTo"
+    }
+  ]
 }
 {% endhighlight %}
 </div>
@@ -298,6 +314,100 @@ Quality-of-care concern raised about a care provider or service.
     }
   ],
   "dateCompleted": "2026-10-14T11:00:00Z"
+}
+{% endhighlight %}
+</div>
+
+### Response
+
+A record that a response to a referral, request or quality-of-care concern was sent or received.
+
+People who make referrals, requests and concerns want to know that they have arrived, and to have a rough idea of what will happen next. A `Response` is the record in a case management system that a response was sent or received. It is not necessarily a message between the two parties, and it does not try to capture everything the responder said or how they reached their decision. The services that receive referrals, requests and concerns (eg. police, CAMHS, and advocacy organisations) are not obliged to send one: the standard only gives a common way to record a response in a care managements system when there has been one.
+
+The same object is used in both directions. When a local authority acknowledges a referral from a teacher at a school, the local authority is the `responder`. When CAMHS replies to a request from the local authority, CAMHS is the `responder`. So the `responder` shows whether a response was sent or received.
+
+Each `Response` records what happened at one point in time, and is not updated afterwards. A referral that is acknowledged, then has more information requested, then is accepted has three responses. Read together, they give the history of the referral, and nobody needs to change the original record.
+
+The `status` is deliberately brief. It describes if a referral was declined, for example, but not why, or what the person should do instead. Where the responder gives more detail, record it in `description`, attach the letter or email itself with `attachment`, and use `linkedRecord` to point to what happened next, such as the new referral when a referral is redirected, or the service episode the responder opened. A reader of the response will often need these to understand it.
+
+#### Properties
+
+<span id="response-identifier">identifier</span>
+: Unique identifier for this response record. Optional (`0..1`). *Identifier object*. See [Identifier](#identifier).
+
+<span id="response-respondsTo">respondsTo</span>
+: The referral, request or quality-of-care concern being responded to. Required (`1..1`). *Identifier object*. See [Identifier](#identifier).
+
+<span id="response-respondsToType">respondsToType</span>
+: The type of record being responded to (`referral`, `request` or `quality-of-care-concern`). Helps where the identifier alone is ambiguous. Optional (`0..1`). *Enum*. See the [Safeguarding Standard → Record Type Vocabulary](/PUB02_safeguarding_standard#record-type-vocabulary).
+
+<span id="response-responder">responder</span>
+: The organisation, service or professional that responded. Required (`1..1`). *Identifier object*. See [Identifier](#identifier).
+
+<span id="response-dateTimeReceived">dateTimeReceived</span>
+: When the response was received by the party it was sent to. For a response the record holder sent, where the time it was received is not known, use the time it was sent. Required (`1..1`). *DateTime*.
+
+<span id="response-status">status</span>
+: What was the response? Required (`1..1`). *Enum*. See the [Response Statuses Taxonomy](#response-statuses-taxonomy).
+
+<span id="response-description">description</span>
+: Free-text summary of what the responder said. Optional (`0..1`). *String*.
+
+<span id="response-attachment">attachment</span>
+: The response itself or other supporting documents, such as a letter or email. Multi-valued (`0..*`). Optional. *DocumentReference object*. See [DocumentReference](#documentreference).
+
+<span id="response-linkedRecord">linkedRecord</span>
+: Records that follow from the response, such as the new referral when a referral is redirected, or the responder's service episode. Multi-valued (`0..*`). Optional. *LinkedRecord object*. See [LinkedRecord](#linkedrecord).
+
+#### Example
+
+A response from CAMHS to the request above, recorded by the local authority that sent the request. CAMHS has redirected the request to another service and sent a letter explaining why.
+
+<div class="example">
+  <h5 id="example-response">Example - Response</h5>
+{% highlight json %}
+{
+  "@context": "https://ns.socialcaredata.io/referrals/context.jsonld",
+  "@id": "https://example.org/responses/RES-2026-002",
+  "@type": "Response",
+  "identifier": {
+    "@type": "Identifier",
+    "value": "RES-2026-002",
+    "system": "https://example.org/responses"
+  },
+  "respondsTo": {
+    "@type": "Identifier",
+    "value": "REQ-2026-001",
+    "system": "https://example.org/requests"
+  },
+  "respondsToType": "request",
+  "responder": {
+    "@type": "Identifier",
+    "value": "CAMHS-01",
+    "system": "https://example.org/services"
+  },
+  "dateTimeReceived": "2026-10-21T14:30:00Z",
+  "status": "redirected",
+  "description": "Does not meet the threshold for specialist CAMHS. Passed to the mental health support team in the young person's school.",
+  "attachment": [
+    {
+      "@type": "DocumentReference",
+      "title": "CAMHS triage outcome letter",
+      "url": "https://example.org/documents/CAMHS-01-2026-0412.pdf",
+      "mimeType": "application/pdf"
+    }
+  ],
+  "linkedRecord": [
+    {
+      "@type": "LinkedRecord",
+      "recordId": {
+        "@type": "Identifier",
+        "value": "MHST-REF-2026-0412",
+        "system": "https://example.org/camhs/referrals"
+      },
+      "recordType": "referral"
+    }
+  ]
 }
 {% endhighlight %}
 </div>
@@ -592,6 +702,12 @@ The types of concern about a care provider or service. Each type is one of the f
 The purposes of an outward request, made at any stage of a person's involvement with social care. Some purposes are the decisions typically made at the front door, such as by a MASH under the Children Act 1989, or by an adult social care front door under the Care Act 2014. Where a purpose has a statutory basis or implies urgency, the code carries it. See [Request](#request).
 
 {% schema_table page.data_model RequestPurposeCode expanded %}
+
+### Response Statuses Taxonomy
+
+What a response says. Each status is what the responder said at one point in time, and a later response may give a different one. See [Response](#response).
+
+{% schema_table page.data_model ResponseStatusCode expanded %}
 
 ### Question Categories Taxonomy
 

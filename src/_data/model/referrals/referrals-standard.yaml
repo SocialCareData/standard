@@ -18,6 +18,7 @@ prefixes:
   rqc: https://ns.socialcaredata.io/referral-question-category#
   rr: https://ns.socialcaredata.io/record-relationship#
   rft: https://ns.socialcaredata.io/referrer-type#
+  rs: https://ns.socialcaredata.io/response-status#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -85,6 +86,28 @@ classes:
       - attachment
       - linkedRecord
       - refDateCompleted
+
+  Response:
+    class_uri: ref:Response
+    description: >-
+      A record, held in a case management system, that describes a response to a
+      referral, request or quality-of-care concern that has been sent or received. It
+      confirms receipt and gives basic information about its contents. It is not
+      necessarily a message between the parties, it does not capture the full
+      response, and counterparty services that receive referrals, requests and concerns
+      are not obliged to send one. Each response is a separate record of what
+      happened at a point in time, so a referral that is acknowledged and later
+      accepted has two responses.
+    slots:
+      - refIdentifier
+      - respondsTo
+      - respondsToType
+      - responder
+      - responseDateTimeReceived
+      - responseStatus
+      - responseDescription
+      - attachment
+      - linkedRecord
 
   IntakePerson:
     is_a: Person
@@ -197,7 +220,7 @@ slots:
     range: Identifier
     required: false
     multivalued: false
-    description: Identifier for this referral, request, or concern.
+    description: Identifier for this referral, request, concern, or response.
 
   refDateCompleted:
     slot_uri: ref:dateCompleted
@@ -334,6 +357,63 @@ slots:
     description: >-
       What is the concern? Initially, this may be left UNASSIGNED, to be
       assigned at triage by professionals.
+
+  # --- Response slots ---
+  respondsTo:
+    slot_uri: ref:respondsTo
+    title: respondsTo
+    range: Identifier
+    required: true
+    multivalued: false
+    description: The referral, request or quality-of-care concern being responded to.
+
+  respondsToType:
+    slot_uri: ref:respondsToType
+    title: respondsToType
+    range: RecordTypeCode
+    required: false
+    multivalued: false
+    description: >-
+      The type of record being responded to (referral, request or
+      quality-of-care concern). Helps where the identifier alone is ambiguous.
+
+  responder:
+    slot_uri: ref:responder
+    title: responder
+    range: Identifier
+    required: true
+    multivalued: false
+    description: >-
+      The organisation, service or professional that responded. Shows the
+      direction of the response, for example whether a local authority sent it
+      or received it.
+
+  responseDateTimeReceived:
+    slot_uri: ref:dateTimeReceived
+    title: dateTimeReceived
+    range: datetime
+    required: true
+    multivalued: false
+    description: >-
+      When the response was received by the party it was sent to. For a
+      response the record holder sent, where the time it was received is
+      not known, use the time it was sent.
+
+  responseStatus:
+    slot_uri: ref:responseStatus
+    title: status
+    range: ResponseStatusCode
+    required: true
+    multivalued: false
+    description: What was the response?
+
+  responseDescription:
+    slot_uri: ref:responseDescription
+    title: description
+    range: string
+    required: false
+    multivalued: false
+    description: Free-text summary of what the responder said.
 
   # --- Generic / Shared slots ---
   refAssessmentQuestion:
@@ -1054,3 +1134,56 @@ enums:
       MemberOfThePublic:
         title: Member of the public
         meaning: rft:MemberOfThePublic
+
+  ResponseStatusCode:
+    enum_uri: ref:response-status
+    title: Response Statuses
+    description: >-
+      What a response to a referral, request or quality-of-care concern says.
+      Each status is what the responder said at one point in time; a later
+      response may give a different status.
+    permissible_values:
+      acknowledged:
+        title: Acknowledged
+        meaning: rs:Acknowledged
+        description: Received, but no decision has been made yet.
+      information-requested:
+        title: Information requested
+        meaning: rs:InformationRequested
+        description: >-
+          The responder needs more information before it can make a decision.
+      accepted:
+        title: Accepted
+        meaning: rs:Accepted
+        description: The responder will act on the referral, request or concern.
+      accepted.waitlisted:
+        title: Accepted, waitlisted
+        meaning: rs:AcceptedWaitlisted
+        description: Accepted, but there will be a wait before the responder acts.
+      delayed:
+        title: Delayed
+        meaning: rs:Delayed
+        description: >-
+          A decision, or the start of a service, will be later than expected.
+      redirected:
+        title: Redirected
+        meaning: rs:Redirected
+        description: >-
+          Passed on to another team or service. Where the new referral or
+          request is known, link it with linkedRecord.
+      declined:
+        title: Declined
+        meaning: rs:Declined
+        description: The responder will not act on the referral, request or concern.
+      declined.ineligible:
+        title: Declined, ineligible
+        meaning: rs:DeclinedIneligible
+        description: >-
+          Declined because the person or the need does not meet the
+          responder's eligibility criteria or threshold.
+      closed:
+        title: Closed
+        meaning: rs:Closed
+        description: >-
+          No further action, after the referral, request or concern was
+          accepted or assessed.

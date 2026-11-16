@@ -9,6 +9,8 @@
     "at":   "https://ns.socialcaredata.io/answer-type#",
     "rr":   "https://ns.socialcaredata.io/record-relationship#",
     "rft":  "https://ns.socialcaredata.io/referrer-type#",
+    "rs":   "https://ns.socialcaredata.io/response-status#",
+    "rtc":  "https://ns.socialcaredata.io/record-type#",
     "prc":  "https://ns.socialcaredata.io/person-relationship-code#",
     "nuc":  "https://ns.socialcaredata.io/name-use-code#",
     "auc":  "https://ns.socialcaredata.io/address-use-code#",
@@ -35,6 +37,28 @@
         "referrer":  { "@id": "ref:qocReferrer",  "@type": "@id" },
         "recipient": { "@id": "ref:qocRecipient", "@type": "@id" },
         "concern":   { "@id": "ref:qocConcern",   "@type": "@id", "@container": "@set" }
+      }
+    },
+    "Response": {
+      "@id": "ref:Response",
+      "@context": {
+        "status": {
+          "@id": "ref:responseStatus",
+          "@type": "@vocab",
+          "@context": {
+            "@vocab": "https://ns.socialcaredata.io/response-status#",
+            "acknowledged":          "rs:Acknowledged",
+            "information-requested": "rs:InformationRequested",
+            "accepted":              "rs:Accepted",
+            "accepted.waitlisted":   "rs:AcceptedWaitlisted",
+            "delayed":               "rs:Delayed",
+            "redirected":            "rs:Redirected",
+            "declined":              "rs:Declined",
+            "declined.ineligible":   "rs:DeclinedIneligible",
+            "closed":                "rs:Closed"
+          }
+        },
+        "description": "ref:responseDescription"
       }
     },
     "QocConcernDetail": {
@@ -107,7 +131,7 @@
       "@id": "ref:DocumentReference",
       "@context": {
         "title":       "ref:documentTitle",
-        "url":         { "@id": "ref:documentUrl", "@type": "xsd:anyURI" },
+        "url":         { "@id": "ref:documentUrl", "@type": "@id" },
         "mimeType":    "ref:documentMimeType",
         "description": "ref:documentDescription"
       }
@@ -243,6 +267,41 @@
     "attachment":                 { "@id": "ref:attachment",                 "@type": "@id", "@container": "@set" },
     "linkedRecord":               { "@id": "sg:linkedRecord",                "@type": "@id", "@container": "@set" },
 
+    "respondsTo":                 { "@id": "ref:respondsTo",                 "@type": "@id" },
+    "respondsToType": {
+      "@id": "ref:respondsToType",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/record-type#",
+        "referral":                "rtc:Referral",
+        "request":                 "rtc:Request",
+        "quality-of-care-concern": "rtc:QualityOfCareConcern",
+        "response":                "rtc:Response",
+        "assessment":              "rtc:Assessment",
+        "plan":                    "rtc:Plan"
+      }
+    },
+    "responder":                  { "@id": "ref:responder",                  "@type": "@id" },
+    "dateTimeReceived":           { "@id": "ref:dateTimeReceived",           "@type": "xsd:dateTime" },
+    "responseDateTimeReceived":   { "@id": "ref:dateTimeReceived",           "@type": "xsd:dateTime" },
+    "responseStatus": {
+      "@id": "ref:responseStatus",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/response-status#",
+        "acknowledged":          "rs:Acknowledged",
+        "information-requested": "rs:InformationRequested",
+        "accepted":              "rs:Accepted",
+        "accepted.waitlisted":   "rs:AcceptedWaitlisted",
+        "delayed":               "rs:Delayed",
+        "redirected":            "rs:Redirected",
+        "declined":              "rs:Declined",
+        "declined.ineligible":   "rs:DeclinedIneligible",
+        "closed":                "rs:Closed"
+      }
+    },
+    "responseDescription":        "ref:responseDescription",
+
     "requestSubject":             { "@id": "ref:requestSubject",             "@type": "@id" },
     "requestReferrer":            { "@id": "ref:requestReferrer",            "@type": "@id" },
     "requestRecipient":           { "@id": "ref:requestRecipient",           "@type": "@id", "@container": "@set" },
@@ -346,7 +405,7 @@
 
     "documentId":                 { "@id": "ref:documentId",                 "@type": "@id" },
     "documentTitle":              "ref:documentTitle",
-    "documentUrl":                { "@id": "ref:documentUrl",                "@type": "xsd:anyURI" },
+    "documentUrl":                { "@id": "ref:documentUrl",                "@type": "@id" },
     "documentMimeType":           "ref:documentMimeType",
     "documentDescription":        "ref:documentDescription",
 
@@ -392,8 +451,31 @@
     },
 
     "recordId":                   { "@id": "sg:recordId",                    "@type": "@id" },
-    "recordType":                 { "@id": "sg:recordType",                  "@type": "@vocab" },
-    "recordRelationship":         "sg:recordRelationship",
+    "recordType": {
+      "@id": "sg:recordType",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/record-type#",
+        "referral":                "rtc:Referral",
+        "request":                 "rtc:Request",
+        "quality-of-care-concern": "rtc:QualityOfCareConcern",
+        "response":                "rtc:Response",
+        "assessment":              "rtc:Assessment",
+        "plan":                    "rtc:Plan"
+      }
+    },
+    "recordRelationship": {
+      "@id": "sg:recordRelationship",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/record-relationship#",
+        "escalationOf":   "rr:EscalationOf",
+        "deescalationOf": "rr:DeescalationOf",
+        "followupTo":     "rr:FollowupTo",
+        "reactivationOf": "rr:ReactivationOf",
+        "concurrentWith": "rr:ConcurrentWith"
+      }
+    },
 
     "notes":                      "ref:intakeNotes",
     "intakeNotes":                "ref:intakeNotes",
