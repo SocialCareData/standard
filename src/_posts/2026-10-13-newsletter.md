@@ -94,7 +94,7 @@ You can now more easily:
 
 * [Learn](/learn_about_the_standards) about why we’re developing standards and our use cases
 * Understand how standards are developed and how [piloting fits into the process](/placements_impact_story)
-* Find and review the [latest versions of our standards](/standards)
+* Find and review the [latest versions of our standards](/publications)
 * Find out how you can [contribute](/contribute_to_the_standards) to our work and see upcoming events
 
 We’ll continue to add to the website over the coming months, if you have any suggestions on what you’d like to see, please reach out at [DataStandards-SocialCare@socialfinance.org.uk](mailto:DataStandards-SocialCare@socialfinance.org.uk).
