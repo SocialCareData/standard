@@ -22,6 +22,10 @@ data_model: src/_data/model/referrals/referrals-standard.yaml
 
 {% schema_table page.data_model QualityOfCareConcern %}
 
+### IntakePerson
+
+{% schema_table page.data_model IntakePerson %}
+
 ### PersonalNetworkMember
 
 {% schema_table page.data_model PersonalNetworkMember %}

@@ -75,7 +75,7 @@ Inward, person-centric, point-of-entry referral into social services.
 : The type of referral. Required (`1..1`). *Enum*. See the [Referral Types Taxonomy](#referral-types-taxonomy).
 
 <span id="referral-subject">subject</span>
-: Who is the person being referred? Multi-valued (`1..*`). Required. *Person object*. See [Person](#person).
+: Who is the person being referred? Multi-valued (`1..*`). Required. *IntakePerson object*. See [IntakePerson](#intakeperson).
 
 <span id="referral-personalNetwork">personalNetwork</span>
 : Who is in the person's family, household, or personal network? Multi-valued (`0..*`). Optional. *PersonalNetworkMember object*. See [PersonalNetworkMember](#personalnetworkmember).
@@ -125,7 +125,7 @@ Inward, person-centric, point-of-entry referral into social services.
   "dateCompleted": "2026-10-14T09:00:00Z",
   "subject": [
     {
-      "@type": "Person",
+      "@type": "IntakePerson",
       "name": [
         {
           "@type": "Name",
@@ -245,7 +245,7 @@ Quality-of-care concern raised about a care provider or service.
 : Unique identifier for this quality of care concern. Optional (`0..1`). *Identifier object*. See [Identifier](#identifier).
 
 <span id="qoc-subject">subject</span>
-: Who is the person? Multi-valued (`0..*`). Optional (for anonymisation or systemic concerns). *Person object*. See [Person](#person).
+: Who is the person? Multi-valued (`0..*`). Optional (for anonymisation or systemic concerns). *IntakePerson object*. See [IntakePerson](#intakeperson).
 
 <span id="qoc-referrer">referrer</span>
 : Who is the referrer? Optional (`0..1`) (for anonymisation). *ReferrerDetails object*. See [ReferrerDetails](#referrerdetails).
@@ -301,6 +301,44 @@ Quality-of-care concern raised about a care provider or service.
 
 ## Supporting Entities
 
+### IntakePerson
+
+A person as first recorded when their details enter social care: the subject of a referral, the subject of a quality-of-care concern, or a member of the subject's personal network. `IntakePerson` has every property of the [Person Standard's Person](/PUB01_person_standard#person), but all of them are optional, and it adds a free-text `notes` property.
+
+The person raising a referral often knows only part of the picture. A police officer called to a domestic disturbance may know the address of a child they saw but not the child's name. A neighbour may know a name and nothing else. Sometimes all that can be given is an account ("I saw a woman in distress at the bus station") that is still worth recording, because it may line up with other referrals.
+
+An `IntakePerson` should carry at least one detail, whether a name, an address, an identifier or notes. The data model does not enforce this, so systems capturing referrals should check it when the form is completed.
+
+Once the person is identified and recorded in a case management system, their details can be completed and checked against the [subject of care](/PUB01_person_standard#person) or [connected person](/PUB01_person_standard#connected-person-profile) profile of the Person Standard.
+
+#### Properties
+
+<span id="intakeperson-person">Person properties</span>
+: `identifier`, `name`, `dateOfBirth`, `isDeceased`, `deceasedDate`, `address`, `contact`, `genderCode`, `sexCode`, `ethnicityCode`, `relatedPerson`, `primaryContactProfessional`, `matchedPersonRef`, `aboutMe` and `communication`, as defined in the [Person Standard](/PUB01_person_standard#person). All are optional.
+
+<span id="intakeperson-notes">notes</span>
+: Free-text notes about the person, such as an overall account of who they are and what was seen, where little else is known. Optional (`0..1`). *String*.
+
+#### Example
+
+<div class="example">
+  <h5 id="example-intakeperson">Example - IntakePerson known only by address</h5>
+{% highlight json %}
+{
+  "@type": "IntakePerson",
+  "address": [
+    {
+      "@type": "Address",
+      "line1": "14 Example Road",
+      "city": "Exampletown",
+      "postcode": "AB1 2CD"
+    }
+  ],
+  "notes": "Child of about 5 or 6 seen at the property while officers attended a reported domestic disturbance. Name not known."
+}
+{% endhighlight %}
+</div>
+
 ### PersonalNetworkMember
 
 Person in the subject's family, household, or broader personal support network (non-professionals only).
@@ -308,7 +346,7 @@ Person in the subject's family, household, or broader personal support network (
 #### Properties
 
 <span id="network-person">person</span>
-: The person in the personal network. Required (`1..1`). *Person object*. See [Person Standard](/PUB01_person_standard#person).
+: The person in the personal network. Required (`1..1`). *IntakePerson object*. See [IntakePerson](#intakeperson).
 
 <span id="network-relationship">relationship</span>
 : Relationship code to the subject person. Required (`1..1`). *Enum*. See [Person Standard → Relationship Code](/PUB01_person_standard#person-relationship-code-vocabulary).
@@ -426,7 +464,7 @@ A unique identifier, identical to the definition in the [Person Standard](/PUB01
 
 ### Person
 
-Full person demographic object. See [Person Standard](/PUB01_person_standard#person).
+Full person demographic object, used for a non-professional referrer. See [Person Standard](/PUB01_person_standard#person). The people a referral is about use [IntakePerson](#intakeperson) instead.
 
 ### Professional
 

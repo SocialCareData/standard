@@ -7,6 +7,12 @@
     "value": "QOC-2026-001",
     "system": "https://example.org/concerns"
   },
+  "subject": [
+    {
+      "@type": "IntakePerson",
+      "notes": "Resident in the ground-floor lounge, seen without water for several hours."
+    }
+  ],
   "recipient": {
     "@type": "Identifier",
     "value": "CARE-HOME-01",

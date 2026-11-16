@@ -83,6 +83,31 @@ classes:
       - linkedRecord
       - refDateCompleted
 
+  IntakePerson:
+    is_a: Person
+    class_uri: ref:IntakePerson
+    description: >-
+      A person as first recorded when their details enter social care, for example
+      as the subject of a referral. Every Person field is optional, because the
+      referrer may know only some details (only an address, or
+      only a name), and a free-text note can capture an overall account where
+      very little else is known.
+
+      Guidance for implementers:
+      * A record should carry at least one detail, but this is not enforced by the model.
+      * Referrals submitted by professionals (like social workers, teachers, and doctors) should generally be held to a higher standard, requiring more data than a referral from, say, a member of the public.
+    slots:
+      - intakeNotes
+    slot_usage:
+      identifier:    {required: false, multivalued: true}
+      name:          {required: false, multivalued: true}
+      dateOfBirth:   {required: false, multivalued: false}
+      isDeceased:    {required: false, multivalued: false}
+      deceasedDate:  {required: false, multivalued: false}
+      address:       {required: false, multivalued: true}
+      genderCode:    {required: false, multivalued: false}
+      ethnicityCode: {required: false, multivalued: false}
+
   PersonalNetworkMember:
     class_uri: ref:PersonalNetworkMember
     description: >-
@@ -178,7 +203,7 @@ slots:
   refSubject:
     slot_uri: ref:subject
     title: subject
-    range: Person
+    range: IntakePerson
     required: true
     multivalued: true
     description: Who is the person?
@@ -268,7 +293,7 @@ slots:
   qocSubject:
     slot_uri: ref:qocSubject
     title: subject
-    range: Person
+    range: IntakePerson
     required: false
     multivalued: true
     description: Who is the person? (Optional for anonymisation).
@@ -307,10 +332,20 @@ slots:
     description: Attachments and reference to documents.
 
   # --- Supporting class slots ---
+  intakeNotes:
+    slot_uri: ref:intakeNotes
+    title: notes
+    range: string
+    required: false
+    multivalued: false
+    description: >-
+      Free-text notes about the person to convey identifying information
+      where little else is known (eg. where they have been seen in the local area).
+
   networkPerson:
     slot_uri: ref:networkPerson
     title: person
-    range: Person
+    range: IntakePerson
     required: true
     multivalued: false
     description: Person in the personal network.
