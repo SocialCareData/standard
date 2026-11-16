@@ -59,14 +59,22 @@
     "actorType": "Self",
     "involvementDescription": "Contacted emergency duty team."
   },
-  "pathway": [
-    "early-help"
-  ],
   "recipient": [
     {
       "@type": "Identifier",
       "value": "ORG-CSC-01",
       "system": "https://example.org/organisations"
+    }
+  ],
+  "assessmentQuestion": [
+    {
+      "@type": "ReferralAssessmentQuestion",
+      "questionId": "suggestedPathway",
+      "category": "REQUESTED_SERVICE",
+      "questionText": "What kind of support do you think would help?",
+      "answer": ["early-help"],
+      "answerType": "Enum",
+      "required": false
     }
   ]
 }

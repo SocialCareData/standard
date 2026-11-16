@@ -18,7 +18,6 @@ prefixes:
   rqc: https://ns.socialcaredata.io/referral-question-category#
   rr: https://ns.socialcaredata.io/record-relationship#
   rft: https://ns.socialcaredata.io/referrer-type#
-  svc: https://ns.socialcaredata.io/service-code#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -47,7 +46,6 @@ classes:
       - refReferrer
       - concern
       - refInvolvement
-      - pathway
       - refRecipient
       - refAssessmentQuestion
       - attachment
@@ -255,14 +253,6 @@ slots:
     required: false
     multivalued: false
     description: What have you or others done so far?
-
-  pathway:
-    slot_uri: ref:pathway
-    title: pathway
-    range: ServiceCode
-    required: false
-    multivalued: true
-    description: What kind of support pathway do you think this referral should initiate?
 
   refRecipient:
     slot_uri: ref:recipient

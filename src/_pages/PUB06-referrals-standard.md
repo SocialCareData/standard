@@ -89,9 +89,6 @@ Inward, person-centric, point-of-entry referral into social services.
 <span id="referral-involvement">involvement</span>
 : What have you or others done so far? Optional (`0..1`). *ReferralInvolvement object*. See [ReferralInvolvement](#referralinvolvement).
 
-<span id="referral-pathway">pathway</span>
-: What kind of support pathway do you think this referral should initiate? Multi-valued (`0..*`). Optional. *Enum*. See the Safeguarding Standard's [Service Code Taxonomy](/PUB02_safeguarding_standard#service-code-taxonomy).
-
 <span id="referral-recipient">recipient</span>
 : Who was this referral sent to? Multi-valued (`1..*`). Required. *Identifier object*. See [Identifier](#identifier).
 
@@ -506,16 +503,37 @@ A generic Question-and-Answer model used to represent atypical, locally configur
 : The domain or question category. Required (`1..1`). *Enum*. See the [Question Categories Taxonomy](#question-categories-taxonomy).
 
 <span id="question-questionText">questionText</span>
-: The exact wording as displayed on the local form. Optional (`0..1`). *String*.
+: The exact wording as displayed on the local form. Required (`1..1`). *String*.
 
 <span id="question-answer">answer</span>
-: The recorded answer(s). Multi-valued (`0..*`). Optional. *String / value*.
+: The recorded answer(s). Multi-valued (`1..*`). Required. *String / value*.
 
 <span id="question-answerType">answerType</span>
-: Indicates how the answer should be parsed. Optional (`0..1`). *Enum*. See [Assessments and Plans → Answer Type](/PUB05_assessments_and_plans_standard#answer-type-taxonomy).
+: Indicates how the answer should be parsed. Required (`1..1`). *Enum*. See [Assessments and Plans → Answer Type](/PUB05_assessments_and_plans_standard#answer-type-taxonomy).
 
 <span id="question-required">required</span>
-: Whether this question is mandatory on the form. Optional (`0..1`). *Boolean*.
+: Whether this question is mandatory on the form. Required (`1..1`). *Boolean*.
+
+#### Locally configured pathways and services
+
+Some referral forms ask what category of support or pathway the referrer thinks would help the subject. Our standard does not include a dedicated property for this question because pathways are usually configured locally: they differ between local authorities, some can only be considered after a professional assessment, and referrers often won't know which ones are relevant. The referrer's concern is much more useful than their suggestion for its resolution.
+
+Where a form does ask for a recommended pathway, record the answer as a `ReferralAssessmentQuestion` in the `REQUESTED_SERVICE` category. If the answer comes from a list of options, the Safeguarding Standard's [Service Code Taxonomy](/PUB02_safeguarding_standard#service-code-taxonomy) can be used, with `answerType` set to `Enum`.
+
+<div class="example">
+  <h5 id="example-pathway-question">Example - suggested pathway as a local question</h5>
+{% highlight json %}
+{
+  "@type": "ReferralAssessmentQuestion",
+  "questionId": "suggestedPathway",
+  "category": "REQUESTED_SERVICE",
+  "questionText": "What kind of support do you think would help?",
+  "answer": ["early-help"],
+  "answerType": "Enum",
+  "required": false
+}
+{% endhighlight %}
+</div>
 
 ## Shared Objects
 
