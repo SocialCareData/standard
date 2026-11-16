@@ -60,5 +60,13 @@ assigns it. Rules such as "UNASSIGNED must not appear alongside other
 codes" and "no UNASSIGNED after triage" cannot be expressed in the model; they
 are guidance on the PUB06 page.
 
-`QocConcernCode` is a temporary copy of the earlier shared list, pending its own
-revision.
+`QocConcernCode` uses the CQC fundamental standards: Regulations 9 to 20 of the
+Health and Social Care Act 2008 (Regulated Activities) Regulations 2014. A code
+means "concern that the provider is not meeting this regulation", so titles are
+the regulations' own and nothing is reworded into a negative. Codes are plain
+camelCase, not dotted, because dotted codes render as a hierarchy in the schema
+tables. Common concerns with no regulation of their own (missed or late
+home-care visits, medication errors, falls, pressure ulcers) are named in the
+descriptions of the regulations they fall under. Also has `UNASSIGNED` and
+`other`. Registration-level regulations (4 to 7) and 20A (displaying ratings)
+are deliberately left out.

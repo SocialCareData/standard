@@ -21,8 +21,8 @@
   "concern": [
     {
       "@type": "QocConcernDetail",
-      "concernType": "adult.neglect",
-      "description": "Provider failure to provide basic hydration."
+      "concernType": "UNASSIGNED",
+      "description": "On three afternoon visits this week, residents in the ground-floor lounge had empty water jugs left out of reach. Staff said they were too short-handed to do regular drinks rounds."
     }
   ],
   "dateCompleted": "2026-10-14T11:00:00Z"

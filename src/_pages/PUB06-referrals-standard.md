@@ -254,7 +254,7 @@ Quality-of-care concern raised about a care provider or service.
 : What service is involved? Required (`1..1`). *Identifier object*. See [Identifier](#identifier).
 
 <span id="qoc-concern">concern</span>
-: What is the concern? Multi-valued (`1..*`). Required. *QocConcernDetail object*. See [QocConcernDetail](#qocconcerndetail).
+: What is the concern? Multi-valued (`1..*`). Required. *QocConcernDetail object*. See [QocConcernDetail](#qocconcerndetail). The type of concern may be left unassigned for the triage team to assign: see [Assigning concerns at triage](#assigning-concerns-at-triage).
 
 <span id="qoc-assessmentQuestion">assessmentQuestion</span>
 : Atypical, locally configured questions and answers. Multi-valued (`0..*`). Optional. *ReferralAssessmentQuestion object*. See [ReferralAssessmentQuestion](#referralassessmentquestion).
@@ -290,8 +290,8 @@ Quality-of-care concern raised about a care provider or service.
   "concern": [
     {
       "@type": "QocConcernDetail",
-      "concernType": "adult.neglect",
-      "description": "Provider failure to provide basic hydration."
+      "concernType": "UNASSIGNED",
+      "description": "On three afternoon visits this week, residents in the ground-floor lounge had empty water jugs left out of reach. Staff said they were too short-handed to do regular drinks rounds."
     }
   ],
   "dateCompleted": "2026-10-14T11:00:00Z"
@@ -347,6 +347,14 @@ The two options mean different things:
 - Where it matters locally, keep a record of the type the referrer originally gave, so that changes made at triage can be reviewed.
 
 The data model cannot enforce these rules itself; it relies on the forms and systems that create and process referrals to follow them.
+
+### Quality-of-care concerns
+
+The same pattern applies to a `QualityOfCareConcern`. The person raising a concern about a care provider, whether a resident, a relative, a member of staff or a visiting professional, can describe what they have seen without having to classify it, and the concern can arrive unassigned. The team that triages it then assigns the type. Depending on local arrangements, that may be a quality assurance, commissioning or contract monitoring team, or the safeguarding team where someone is at risk of harm.
+
+Everything in the guidance above applies in the same way. The types of quality-of-care concern are the fundamental standards that every provider registered with the Care Quality Commission (CQC) must meet, so assigning a type means deciding which standard the provider may not be meeting. One incident can involve several concern types: a missed home-care visit, for example, may be a concern about person-centred care, safe care and staffing all at once, in which case triage records a concern for each. See the [Quality-of-Care Concerns Taxonomy](#quality-of-care-concerns-taxonomy).
+
+A concern about a provider that puts a particular person at risk of harm is also a safeguarding matter. As well as the quality-of-care concern, an adult safeguarding `Referral` should be raised (usually with the concern type `adult.organisationalAbuse`), and the two records linked using `linkedRecord`.
 
 ## Supporting Entities
 
@@ -441,15 +449,15 @@ A concern raised in a referral: its type and the referrer's description of it.
 
 ### QocConcernDetail
 
-A concern raised in a quality-of-care concern: its type and an optional description. This currently uses the earlier concern list, which will be revised for quality-of-care concerns separately.
+A concern raised about a care provider or service: its type and a description of it.
 
 #### Properties
 
 <span id="qocconcern-concernType">concernType</span>
-: The categorised nature of the concern. Required (`1..1`). *Enum*. See the [Quality-of-Care Concerns Taxonomy](#quality-of-care-concerns-taxonomy).
+: The type of concern, or `UNASSIGNED` if no type was given when the concern was raised. Required (`1..1`). *Enum*. See the [Quality-of-Care Concerns Taxonomy](#quality-of-care-concerns-taxonomy) and [Assigning concerns at triage](#assigning-concerns-at-triage).
 
 <span id="qocconcern-description">description</span>
-: Free text description of the concern. Optional (`0..1`). *String*.
+: Free-text description of the concern, in the words of the person raising it. Optional (`0..1`), but should be given whenever `concernType` is `UNASSIGNED` or `other`. *String*.
 
 ### ReferralInvolvement
 
@@ -550,6 +558,8 @@ The concern types for referrals. The child types are the four categories of abus
 {% schema_table page.data_model ConcernCode expanded %}
 
 ### Quality-of-Care Concerns Taxonomy
+
+The types of concern about a care provider or service. Each type is one of the fundamental standards in Regulations 9 to 20 of the Health and Social Care Act 2008 (Regulated Activities) Regulations 2014, which every CQC-registered provider must meet. A concern of a given type is a concern that the provider is not meeting that regulation, so the titles are the regulations' own. One incident may relate to several regulations; record a concern for each. `UNASSIGNED` is for concerns not yet classified: see [Quality-of-care concerns](#quality-of-care-concerns). `other` is for concerns that fit none of the regulations, for example about a service that is not registered with CQC.
 
 {% schema_table page.data_model QocConcernCode expanded %}
 

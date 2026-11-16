@@ -143,8 +143,10 @@ classes:
   QocConcernDetail:
     class_uri: ref:QocConcernDetail
     description: >-
-      A concern raised in a quality-of-care concern: its type and an optional
-      description.
+      A concern raised about a care provider or service: a keyword type and a
+      description of it. The type may be left UNASSIGNED when the concern is
+      raised (by the choice of the person raising it, or by not presenting them
+      an option in the user-facing form) and assigned at triage.
     slots:
       - qocConcernType
       - qocConcernDescription
@@ -334,7 +336,9 @@ slots:
     range: QocConcernDetail
     required: true
     multivalued: true
-    description: What is the concern?
+    description: >-
+      What is the concern? Initially, this may be left UNASSIGNED, to be
+      assigned at triage by professionals.
 
   # --- Generic / Shared slots ---
   refAssessmentQuestion:
@@ -462,7 +466,9 @@ slots:
     range: QocConcernCode
     required: true
     multivalued: false
-    description: The code identifying the concern.
+    description: >-
+      The type of concern, or UNASSIGNED if no type was given when the concern
+      was raised. An UNASSIGNED concern is assigned a type at triage.
 
   qocConcernDescription:
     slot_uri: ref:qocConcernDescription
@@ -470,7 +476,9 @@ slots:
     range: string
     required: false
     multivalued: false
-    description: Free text description of concern.
+    description: >-
+      Free-text description of the concern, in the words of the person raising
+      it. This is what triage relies on when the type is UNASSIGNED.
 
   involvementActorType:
     slot_uri: ref:involvementActorType
@@ -710,73 +718,126 @@ enums:
     enum_uri: ref:qoc-concern-code
     title: Quality-of-Care Concerns
     description: >-
-      Codes representing the nature of concerns in quality-of-care reports.
-      Carried over unchanged from the earlier shared concern list, pending its
-      own revision.
+      The nature of a quality-of-care concern about a care provider or service.
+      Each type is one of the fundamental standards in Regulations 9 to 20 of
+      the Health and Social Care Act 2008 (Regulated Activities) Regulations
+      2014, which every CQC-registered provider must meet: a concern of that
+      type is a concern that the provider is not meeting that regulation. One
+      incident may relate to several regulations (a missed home-care visit, for
+      example, may concern Regulations 9, 12 and 18), in which case record a
+      concern for each. UNASSIGNED marks a concern that was not classified when
+      it was raised, to be assigned at triage.
     permissible_values:
-      child.physicalAbuse:
-        title: Physical abuse
-        meaning: qcon:ChildPhysicalAbuse
-      child.sexualAbuse:
-        title: Sexual abuse
-        meaning: qcon:ChildSexualAbuse
-      child.emotionalAbuse:
-        title: Emotional abuse
-        meaning: qcon:ChildEmotionalAbuse
-      child.neglect:
-        title: Neglect
-        meaning: qcon:ChildNeglect
-      child.exploitation:
-        title: Exploitation
-        meaning: qcon:ChildExploitation
-      child.parentalConcern:
-        title: Parental mental health or substance abuse issues
-        meaning: qcon:ChildParentalConcern
-      child.missingEducation:
-        title: Missing education
-        meaning: qcon:ChildMissingEducation
-      child.goingMissing:
-        title: Going missing
-        meaning: qcon:ChildGoingMissing
-      child.contextualRisk:
-        title: Contextual risk
-        meaning: qcon:ChildContextualRisk
-      child.Other:
+      UNASSIGNED:
+        title: Unassigned
+        meaning: qcon:Unassigned
+        description: >-
+          Not yet classified. The concern has been described but no type was
+          given when it was raised, either by the person raising it or because
+          the form did not ask; the type is assigned at triage, by professionals.
+      personCentredCare:
+        title: Person-centred care (Regulation 9)
+        meaning: qcon:PersonCentredCare
+        description: >-
+          Concerns that care does not meet the person's needs or reflect their
+          preferences. For example, care plans not being followed; home-care
+          visits that are missed, late or cut short; or the person and their
+          family not being involved in decisions about their care.
+      dignityAndRespect:
+        title: Dignity and respect (Regulation 10)
+        meaning: qcon:DignityAndRespect
+        description: >-
+          Concerns that people are not treated with dignity and respect. For
+          example, a lack of privacy during personal care, being left in soiled
+          clothing or bedding, being spoken to disrespectfully, or not being
+          supported to stay independent.
+      needForConsent:
+        title: Need for consent (Regulation 11)
+        meaning: qcon:NeedForConsent
+        description: >-
+          Concerns that care or treatment is given without the person's
+          consent, or without following the Mental Capacity Act 2005 where the
+          person lacks capacity to consent.
+      safeCareAndTreatment:
+        title: Safe care and treatment (Regulation 12)
+        meaning: qcon:SafeCareAndTreatment
+        description: >-
+          Concerns that care or treatment is unsafe. For example, medication
+          errors (missed, late or wrong doses), avoidable falls or pressure
+          ulcers, unsafe moving and handling, poor infection control, or missed
+          or late home-care visits that leave the person at risk, such as a
+          missed medication visit.
+      safeguarding:
+        title: Safeguarding service users from abuse and improper treatment (Regulation 13)
+        meaning: qcon:Safeguarding
+        description: >-
+          Concerns that people are not protected from abuse or improper
+          treatment. For example, abuse or neglect by staff, theft from
+          residents, degrading treatment, or restraint or deprivation of liberty
+          without lawful authority. Where a particular person is at risk of
+          harm, also raise an adult safeguarding referral and link the two
+          records.
+      nutritionAndHydration:
+        title: Meeting nutritional and hydration needs (Regulation 14)
+        meaning: qcon:NutritionAndHydration
+        description: >-
+          Concerns that people do not get enough to eat and drink, or the help
+          they need to eat and drink. For example, food or drink left out of
+          reach, unexplained weight loss or dehydration, or dietary, medical or
+          cultural needs being ignored.
+      premisesAndEquipment:
+        title: Premises and equipment (Regulation 15)
+        meaning: qcon:PremisesAndEquipment
+        description: >-
+          Concerns about the premises or equipment used for care. For example,
+          dirty or unsafe premises, poor maintenance or security, or equipment
+          such as hoists, call bells or pressure-relieving mattresses missing,
+          broken or not maintained.
+      complaints:
+        title: Receiving and acting on complaints (Regulation 16)
+        meaning: qcon:Complaints
+        description: >-
+          Concerns about how the provider handles complaints. For example,
+          complaints being ignored or not investigated, or people being afraid
+          to complain.
+      goodGovernance:
+        title: Good governance (Regulation 17)
+        meaning: qcon:GoodGovernance
+        description: >-
+          Concerns about how the service is run and overseen. For example,
+          missing or inaccurate care records, no effective checks on the quality
+          and safety of care, or the provider not acting on feedback or known
+          problems.
+      staffing:
+        title: Staffing (Regulation 18)
+        meaning: qcon:Staffing
+        description: >-
+          Concerns that there are not enough suitably skilled staff. For
+          example, persistent understaffing, staff without the training,
+          supervision or skills their role needs, or home-care visits missed,
+          late or shortened because of staff shortages.
+      fitAndProperPersons:
+        title: Fit and proper persons employed (Regulation 19)
+        meaning: qcon:FitAndProperPersons
+        description: >-
+          Concerns that the provider employs people who are not suitable for
+          their role. For example, staff working without the required
+          recruitment or DBS checks.
+      dutyOfCandour:
+        title: Duty of candour (Regulation 20)
+        meaning: qcon:DutyOfCandour
+        description: >-
+          Concerns that the provider has not been open and honest when something
+          has gone wrong. For example, not telling the person or their family
+          about a serious incident, or not apologising or explaining what
+          happened.
+      other:
         title: Other
-        meaning: qcon:ChildOther
-      adult.physicalAbuse:
-        title: Physical abuse
-        meaning: qcon:AdultPhysicalAbuse
-      adult.sexualAbuse:
-        title: Sexual abuse
-        meaning: qcon:AdultSexualAbuse
-      adult.emotionalAbuse:
-        title: Emotional abuse
-        meaning: qcon:AdultEmotionalAbuse
-      adult.neglect:
-        title: Neglect or acts of omission
-        meaning: qcon:AdultNeglect
-      adult.financialCoercion:
-        title: Financial coercion
-        meaning: qcon:AdultFinancialCoercion
-      adult.discrimination:
-        title: Discrimination
-        meaning: qcon:AdultDiscrimination
-      adult.domesticAbuse:
-        title: Domestic abuse
-        meaning: qcon:AdultDomesticAbuse
-      adult.modernSlavery:
-        title: Modern slavery
-        meaning: qcon:AdultModernSlavery
-      adult.selfHarm:
-        title: Self-neglect or self-harm
-        meaning: qcon:AdultSelfHarm
-      adult.substanceAbuse:
-        title: Substance abuse
-        meaning: qcon:AdultSubstanceAbuse
-      adult.other:
-        title: Other
-        meaning: qcon:AdultOther
+        meaning: qcon:Other
+        description: >-
+          A concern that does not fit any of the regulations above, for example
+          about a service that is not registered with CQC. Describe it in the
+          concern's description.
 
   RequestPurposeCode:
     enum_uri: ref:request-purpose
