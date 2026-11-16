@@ -35,8 +35,8 @@
   "concern": [
     {
       "@type": "ConcernDetail",
-      "concernType": "child.contextualRisk",
-      "description": "Child present at a domestic disturbance."
+      "concernType": "UNASSIGNED",
+      "description": "Officers attended a reported domestic disturbance. Raised voices and breaking glass heard from the street; a man and a woman at the property were both intoxicated. A young child was in the living room throughout and appeared frightened."
     }
   ],
   "recipient": [

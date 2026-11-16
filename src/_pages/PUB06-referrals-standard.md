@@ -84,7 +84,7 @@ Inward, person-centric, point-of-entry referral into social services.
 : Who is the referrer? Required (`1..1`). *ReferrerDetails object*. See [ReferrerDetails](#referrerdetails).
 
 <span id="referral-concern">concern</span>
-: What is the concern? Multi-valued (`1..*`). Required. *ConcernDetail object*. See [ConcernDetail](#concerndetail).
+: What is the concern? Multi-valued (`1..*`). Required. *ConcernDetail object*. See [ConcernDetail](#concerndetail). The initial referral may leave the type of concern unassigned for the triage team to assign: see [Assigning concerns at triage](#assigning-concerns-at-triage).
 
 <span id="referral-involvement">involvement</span>
 : What have you or others done so far? Optional (`0..1`). *ReferralInvolvement object*. See [ReferralInvolvement](#referralinvolvement).
@@ -254,7 +254,7 @@ Quality-of-care concern raised about a care provider or service.
 : What service is involved? Required (`1..1`). *Identifier object*. See [Identifier](#identifier).
 
 <span id="qoc-concern">concern</span>
-: What is the concern? Multi-valued (`1..*`). Required. *ConcernDetail object*. See [ConcernDetail](#concerndetail).
+: What is the concern? Multi-valued (`1..*`). Required. *QocConcernDetail object*. See [QocConcernDetail](#qocconcerndetail).
 
 <span id="qoc-assessmentQuestion">assessmentQuestion</span>
 : Atypical, locally configured questions and answers. Multi-valued (`0..*`). Optional. *ReferralAssessmentQuestion object*. See [ReferralAssessmentQuestion](#referralassessmentquestion).
@@ -289,7 +289,7 @@ Quality-of-care concern raised about a care provider or service.
   },
   "concern": [
     {
-      "@type": "ConcernDetail",
+      "@type": "QocConcernDetail",
       "concernType": "adult.neglect",
       "description": "Provider failure to provide basic hydration."
     }
@@ -298,6 +298,55 @@ Quality-of-care concern raised about a care provider or service.
 }
 {% endhighlight %}
 </div>
+
+## Assigning concerns at triage
+
+Every `Referral` records a concern about the subject. This standard lets the person making a referral leave the *type* of concern unassigned, so that the team receiving the referral can assign it as part of triage.
+
+### Why do concern "types" matter?
+
+Recording the type of concern (eg.neglect, physical abuse or financial abuse) as one of a fixed set of options rather than only as free text is a large part of what makes a referral useful once it arrives. It helps the receiving team route the referral to the right people, prioritise it, spot links with other referrals about the same person or place, and, via easier aggregation and analysis, report on the concerns being raised across an area.
+
+### Why referrers should not have to choose a type
+
+The concern types in this standard follow the categories in statutory guidance: the four categories of abuse and neglect for children under the Children Act 1989 (with the addition of extrafamilial harm), and the types of abuse and neglect for adults under the Care Act 2014. Deciding which of these categories a concern falls into is often *a professional judgement*; a neighbour, a member of the public, or even a professional from outside social care (a police officer, a teacher, a GP) may know that something is wrong without knowing whether it amounts to neglect or emotional abuse.
+
+If referrers are made to choose, some will guess, and a wrong type can send a referral down the wrong route. Some may be put off completing the referral at all. But if the type is simply left optional, therefore reducing the burden on these referrers, many referrals will arrive without one, and the benefits of the standard are lost.
+
+### How our standard works
+
+1. **The referrer describes their concern in their own words.** Depending on how the referral form is designed, they may also be able to choose a type of concern (see [Designing the referral form](#designing-the-referral-form)). Where no type is chosen, whether because the referrer isn't sure or because the form doesn't ask, the concern is recorded as **Unassigned**.
+2. **The referral arrives at the front door.** The receiving team, whether a front door service, a Multi-Agency Safeguarding Hub (MASH) or another triage function, sees that the concern is unassigned.
+3. **Triage assigns the type.** As part of their usual triage decision, the practitioner reads the referrer's description and replaces Unassigned with the right type or types. They can also correct a type the referrer chose.
+4. **From then on, the referral carries a concern type** that can be used for routing, linking and reporting, just as if the referrer had chosen it.
+
+The referrer's description matters most when the concern is unassigned, because it is what the triage practitioner will rely on.
+
+### Designing the referral form
+
+Local authorities, and the providers of their referral portals, can choose whether to show referrers the list of concern types at all. Both of these approaches conform to the standard:
+
+- **Ask for a description only.** The form does not show concern types. Every referral arrives with its concern unassigned, and triage assigns all types. This is the simplest option for referrers, and leaves classification to the people best placed to do it.
+- **Offer concern types, with an "I'm not sure" option.** Referrers who are confident can choose a type, and everyone else chooses "I'm not sure". This can give triage a head start, but a type chosen by a referrer is still a starting point that triage should check.
+
+A form can also mix the two, for example by showing concern types to professional referrers but not to members of the public.
+
+### Unassigned and Other
+
+The two options mean different things:
+
+- **Unassigned** means the concern has *not yet been classified*. It is a temporary state that triage should resolve.
+- **Other** means the concern *has been classified* and does not fit any of the listed categories. It is a final answer, and the description should explain what the concern is.
+
+### Guidance for systems and forms
+
+- If the form shows concern types, offer the "I'm not sure" option clearly alongside them. Do not choose a type on the referrer's behalf.
+- Always ask for a description of the concern, and make it required whenever the concern will be sent unassigned.
+- Record a concern as Unassigned on its own, not alongside other types. If a referrer is sure of one concern and unsure about others, record the type they are sure of and describe the rest.
+- No referral should still have an Unassigned concern after triage. Case management systems should prompt triage practitioners to assign a type, and an Unassigned concern found after triage should be treated as a data quality issue.
+- Where it matters locally, keep a record of the type the referrer originally gave, so that changes made at triage can be reviewed.
+
+The data model cannot enforce these rules itself; it relies on the forms and systems that create and process referrals to follow them.
 
 ## Supporting Entities
 
@@ -380,14 +429,26 @@ Details of the referrer initiating the referral or concern.
 
 ### ConcernDetail
 
-Identified concern and optional descriptive details.
+A concern raised in a referral: its type and the referrer's description of it.
 
 #### Properties
 
 <span id="concern-concernType">concernType</span>
-: The categorized nature of the concern. Required (`1..1`). *Enum*. See the [Concerns Taxonomy](#concerns-taxonomy).
+: The type of concern, or `UNASSIGNED` if the referrer has not classified it. Required (`1..1`). *Enum*. See the [Concerns Taxonomy](#concerns-taxonomy) and [Assigning concerns at triage](#assigning-concerns-at-triage).
 
 <span id="concern-description">description</span>
+: Free-text description of the concern, in the referrer's own words. Optional (`0..1`), but should be given whenever `concernType` is `UNASSIGNED` or an Other code. *String*.
+
+### QocConcernDetail
+
+A concern raised in a quality-of-care concern: its type and an optional description. This currently uses the earlier concern list, which will be revised for quality-of-care concerns separately.
+
+#### Properties
+
+<span id="qocconcern-concernType">concernType</span>
+: The categorised nature of the concern. Required (`1..1`). *Enum*. See the [Quality-of-Care Concerns Taxonomy](#quality-of-care-concerns-taxonomy).
+
+<span id="qocconcern-description">description</span>
 : Free text description of the concern. Optional (`0..1`). *String*.
 
 ### ReferralInvolvement
@@ -484,7 +545,13 @@ The model is parameterised by the following controlled vocabularies.
 
 ### Concerns Taxonomy
 
+The concern types for referrals. The child types are the four categories of abuse and neglect used for the significant harm threshold under the Children Act 1989, as set out in Working Together to Safeguard Children 2023, plus extra-familial harm. The adult types are those in the Care and Support Statutory Guidance under the Care Act 2014. `UNASSIGNED` is for concerns the referrer has not classified: see [Assigning concerns at triage](#assigning-concerns-at-triage).
+
 {% schema_table page.data_model ConcernCode expanded %}
+
+### Quality-of-Care Concerns Taxonomy
+
+{% schema_table page.data_model QocConcernCode expanded %}
 
 ### Request Purposes Taxonomy
 

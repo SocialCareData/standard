@@ -3,6 +3,7 @@
     "ref":  "https://ns.socialcaredata.io/",
     "rt":   "https://ns.socialcaredata.io/referral-type#",
     "con":  "https://ns.socialcaredata.io/concern#",
+    "qcon": "https://ns.socialcaredata.io/qoc-concern#",
     "rp":   "https://ns.socialcaredata.io/request-purpose#",
     "rqc":  "https://ns.socialcaredata.io/referral-question-category#",
     "rr":   "https://ns.socialcaredata.io/record-relationship#",
@@ -32,10 +33,46 @@
       "@context": {
         "subject":   { "@id": "ref:qocSubject",   "@type": "@id", "@container": "@set" },
         "referrer":  { "@id": "ref:qocReferrer",  "@type": "@id" },
-        "recipient": { "@id": "ref:qocRecipient", "@type": "@id" }
+        "recipient": { "@id": "ref:qocRecipient", "@type": "@id" },
+        "concern":   { "@id": "ref:qocConcern",   "@type": "@id", "@container": "@set" }
       }
     },
-    "qocConcern":                 "ref:QualityOfCareConcern",
+    "QocConcernDetail": {
+      "@id": "ref:QocConcernDetail",
+      "@context": {
+        "concernType": {
+          "@id": "ref:qocConcernType",
+          "@type": "@vocab",
+          "@context": {
+            "@vocab": "https://ns.socialcaredata.io/qoc-concern#",
+            "child.physicalAbuse":     "qcon:ChildPhysicalAbuse",
+            "child.sexualAbuse":       "qcon:ChildSexualAbuse",
+            "child.emotionalAbuse":    "qcon:ChildEmotionalAbuse",
+            "child.neglect":           "qcon:ChildNeglect",
+            "child.exploitation":      "qcon:ChildExploitation",
+            "child.parentalConcern":   "qcon:ChildParentalConcern",
+            "child.missingEducation":  "qcon:ChildMissingEducation",
+            "child.goingMissing":      "qcon:ChildGoingMissing",
+            "child.contextualRisk":    "qcon:ChildContextualRisk",
+            "child.Other":             "qcon:ChildOther",
+            "adult.physicalAbuse":     "qcon:AdultPhysicalAbuse",
+            "adult.sexualAbuse":       "qcon:AdultSexualAbuse",
+            "adult.emotionalAbuse":    "qcon:AdultEmotionalAbuse",
+            "adult.neglect":           "qcon:AdultNeglect",
+            "adult.financialCoercion": "qcon:AdultFinancialCoercion",
+            "adult.discrimination":    "qcon:AdultDiscrimination",
+            "adult.domesticAbuse":     "qcon:AdultDomesticAbuse",
+            "adult.modernSlavery":     "qcon:AdultModernSlavery",
+            "adult.selfHarm":          "qcon:AdultSelfHarm",
+            "adult.substanceAbuse":    "qcon:AdultSubstanceAbuse",
+            "adult.other":             "qcon:AdultOther"
+          }
+        },
+        "description": "ref:qocConcernDescription"
+      }
+    },
+    "qocConcern":                 { "@id": "ref:qocConcern",                 "@type": "@id", "@container": "@set" },
+    "qocConcernDescription":      "ref:qocConcernDescription",
     "PersonalNetworkMember": {
       "@id": "ref:PersonalNetworkMember",
       "@context": {
@@ -316,28 +353,24 @@
       "@type": "@vocab",
       "@context": {
         "@vocab": "https://ns.socialcaredata.io/concern#",
-        "child.physicalAbuse":     "con:ChildPhysicalAbuse",
-        "child.sexualAbuse":       "con:ChildSexualAbuse",
-        "child.emotionalAbuse":    "con:ChildEmotionalAbuse",
-        "child.neglect":           "con:ChildNeglect",
-        "child.exploitation":      "con:ChildExploitation",
-        "child.parentalConcern":   "con:ChildParentalConcern",
-        "child.missingEducation":  "con:ChildMissingEducation",
-        "child.goingMissing":      "con:ChildGoingMissing",
-        "child.contextualRisk":    "con:ChildContextualRisk",
-        "child.other":             "con:ChildOther",
-        "child.Other":             "con:ChildOther",
-        "adult.physicalAbuse":     "con:AdultPhysicalAbuse",
-        "adult.sexualAbuse":       "con:AdultSexualAbuse",
-        "adult.emotionalAbuse":    "con:AdultEmotionalAbuse",
-        "adult.neglect":           "con:AdultNeglect",
-        "adult.financialCoercion": "con:AdultFinancialCoercion",
-        "adult.discrimination":    "con:AdultDiscrimination",
-        "adult.domesticAbuse":     "con:AdultDomesticAbuse",
-        "adult.modernSlavery":     "con:AdultModernSlavery",
-        "adult.selfHarm":          "con:AdultSelfHarm",
-        "adult.substanceAbuse":    "con:AdultSubstanceAbuse",
-        "adult.other":             "con:AdultOther"
+        "UNASSIGNED":                "con:Unassigned",
+        "child.physicalAbuse":       "con:ChildPhysicalAbuse",
+        "child.sexualAbuse":         "con:ChildSexualAbuse",
+        "child.emotionalAbuse":      "con:ChildEmotionalAbuse",
+        "child.neglect":             "con:ChildNeglect",
+        "child.extrafamilialHarm":   "con:ChildExtrafamilialHarm",
+        "child.other":               "con:ChildOther",
+        "adult.physicalAbuse":       "con:AdultPhysicalAbuse",
+        "adult.domesticAbuse":       "con:AdultDomesticAbuse",
+        "adult.sexualAbuse":         "con:AdultSexualAbuse",
+        "adult.emotionalAbuse":      "con:AdultEmotionalAbuse",
+        "adult.financialAbuse":      "con:AdultFinancialAbuse",
+        "adult.modernSlavery":       "con:AdultModernSlavery",
+        "adult.discriminatoryAbuse": "con:AdultDiscriminatoryAbuse",
+        "adult.organisationalAbuse": "con:AdultOrganisationalAbuse",
+        "adult.neglect":             "con:AdultNeglect",
+        "adult.selfNeglect":         "con:AdultSelfNeglect",
+        "adult.other":               "con:AdultOther"
       }
     },
     "concernDescription":         "ref:concernDescription",

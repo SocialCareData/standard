@@ -38,6 +38,10 @@ data_model: src/_data/model/referrals/referrals-standard.yaml
 
 {% schema_table page.data_model ConcernDetail %}
 
+### QocConcernDetail
+
+{% schema_table page.data_model QocConcernDetail %}
+
 ### ReferralInvolvement
 
 {% schema_table page.data_model ReferralInvolvement %}
@@ -77,6 +81,10 @@ See [Safeguarding.LinkedRecord](PUB02_safeguarding_standard_table#linkedrecord)
 ### Concerns Taxonomy
 
 {% schema_table page.data_model ConcernCode %}
+
+### Quality-of-Care Concerns Taxonomy
+
+{% schema_table page.data_model QocConcernCode %}
 
 ### Request Purposes Taxonomy
 

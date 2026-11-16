@@ -13,6 +13,7 @@ prefixes:
   ref: https://ns.socialcaredata.io/
   rt: https://ns.socialcaredata.io/referral-type#
   con: https://ns.socialcaredata.io/concern#
+  qcon: https://ns.socialcaredata.io/qoc-concern#
   rp: https://ns.socialcaredata.io/request-purpose#
   rqc: https://ns.socialcaredata.io/referral-question-category#
   rr: https://ns.socialcaredata.io/record-relationship#
@@ -77,7 +78,7 @@ classes:
       - qocSubject
       - qocReferrer
       - qocRecipient
-      - concern
+      - qocConcern
       - refAssessmentQuestion
       - attachment
       - linkedRecord
@@ -132,10 +133,21 @@ classes:
   ConcernDetail:
     class_uri: ref:ConcernDetail
     description: >-
-      Identified concern and optional descriptive details.
+      A concern raised in a referral: a keyword type and the referrer's description of
+      it. The type may be left UNASSIGNED in the initial referral (by referrer's choice,
+      or by not presenting them an option in the user-facing form) and assigned at triage.
     slots:
       - concernType
       - concernDescription
+
+  QocConcernDetail:
+    class_uri: ref:QocConcernDetail
+    description: >-
+      A concern raised in a quality-of-care concern: its type and an optional
+      description.
+    slots:
+      - qocConcernType
+      - qocConcernDescription
 
   ReferralInvolvement:
     class_uri: ref:ReferralInvolvement
@@ -230,7 +242,9 @@ slots:
     range: ConcernDetail
     required: true
     multivalued: true
-    description: What is the concern?
+    description: >-
+      What is the concern? Initially, this may be left UNASSIGNED, to be
+      assigned at triage by professionals.
 
   refInvolvement:
     slot_uri: ref:referralInvolvement
@@ -313,6 +327,14 @@ slots:
     required: true
     multivalued: false
     description: What service is involved? (Organisation / Service identifier).
+
+  qocConcern:
+    slot_uri: ref:qocConcern
+    title: concern
+    range: QocConcernDetail
+    required: true
+    multivalued: true
+    description: What is the concern?
 
   # --- Generic / Shared slots ---
   refAssessmentQuestion:
@@ -420,10 +442,30 @@ slots:
     range: ConcernCode
     required: true
     multivalued: false
-    description: The code identifying the concern.
+    description: >-
+      The type of concern, or UNASSIGNED if no type was given when the referral
+      was made. An UNASSIGNED concern is assigned a type at triage.
 
   concernDescription:
     slot_uri: ref:concernDescription
+    title: description
+    range: string
+    required: false
+    multivalued: false
+    description: >-
+      Free-text description of the concern, in the referrer's own words. When the type
+      is UNASSIGNED, triage by professionals relies on this description.
+
+  qocConcernType:
+    slot_uri: ref:qocConcernType
+    title: concernType
+    range: QocConcernCode
+    required: true
+    multivalued: false
+    description: The code identifying the concern.
+
+  qocConcernDescription:
+    slot_uri: ref:qocConcernDescription
     title: description
     range: string
     required: false
@@ -535,71 +577,206 @@ enums:
   ConcernCode:
     enum_uri: ref:concern-code
     title: Concerns
-    description: Codes representing the nature of concerns in referrals and quality-of-care reports.
+    description: >-
+      The nature of the concern raised in a referral. The child codes are the
+      four categories of abuse and neglect that Working Together to Safeguard
+      Children 2023 uses for the significant harm threshold in the Children Act
+      1989, plus extra-familial harm. The adult codes are the types of abuse and
+      neglect in the Care and Support Statutory Guidance under the Care Act
+      2014. Each group has an Other code for concerns outside these categories.
+      UNASSIGNED marks a concern that was not classified when the referral was
+      made, either by the referrer's choice or because the form did not ask,
+      to be assigned at triage.
     permissible_values:
+      UNASSIGNED:
+        title: Unassigned
+        meaning: con:Unassigned
+        description: >-
+          Not yet classified. The concern has been described but no type was
+          given when the referral was made, either by the referrer's choice or
+          because the form did not ask; the type is assigned at triage, by
+          professionals.
       child.physicalAbuse:
         title: Physical abuse
         meaning: con:ChildPhysicalAbuse
+        description: >-
+          Deliberately causing physical harm to a child, for example hitting,
+          shaking, burning or poisoning, or fabricating or inducing illness.
       child.sexualAbuse:
         title: Sexual abuse
         meaning: con:ChildSexualAbuse
+        description: >-
+          Forcing or enticing a child to take part in sexual activities, whether
+          or not the child is aware of what is happening, including online and
+          non-contact abuse.
       child.emotionalAbuse:
         title: Emotional abuse
         meaning: con:ChildEmotionalAbuse
+        description: >-
+          Persistent emotional maltreatment that severely affects a child's
+          emotional development, including seeing or hearing the ill-treatment
+          of others, such as domestic abuse.
       child.neglect:
         title: Neglect
         meaning: con:ChildNeglect
-      child.exploitation:
-        title: Exploitation
-        meaning: con:ChildExploitation
-      child.parentalConcern:
-        title: Parental mental health or substance abuse issues
-        meaning: con:ChildParentalConcern
-      child.missingEducation:
-        title: Missing education
-        meaning: con:ChildMissingEducation
-      child.goingMissing:
-        title: Going missing
-        meaning: con:ChildGoingMissing
-      child.contextualRisk:
-        title: Contextual risk
-        meaning: con:ChildContextualRisk
-      child.Other:
+        description: >-
+          Persistent failure to meet a child's basic physical or psychological
+          needs, likely to seriously impair their health or development.
+      child.extrafamilialHarm:
+        title: Extra-familial harm
+        meaning: con:ChildExtrafamilialHarm
+        description: >-
+          Harm from outside the family, for example criminal or sexual
+          exploitation, serious youth violence, county lines or radicalisation.
+      child.other:
         title: Other
         meaning: con:ChildOther
+        description: >-
+          A concern about a child that does not fit the categories above.
+          Describe it in the concern's description.
       adult.physicalAbuse:
         title: Physical abuse
         meaning: con:AdultPhysicalAbuse
+        description: >-
+          Includes assault, hitting, slapping, misuse of medication, restraint
+          and inappropriate physical sanctions.
+      adult.domesticAbuse:
+        title: Domestic violence or abuse
+        meaning: con:AdultDomesticAbuse
+        description: >-
+          Abuse within an intimate or family relationship, including coercive
+          control and psychological, physical, sexual, financial and emotional
+          abuse, and so-called honour-based violence.
       adult.sexualAbuse:
         title: Sexual abuse
         meaning: con:AdultSexualAbuse
+        description: >-
+          Includes rape, indecent exposure, sexual harassment, inappropriate
+          touching, and sexual acts the adult has not consented to or could not
+          consent to.
       adult.emotionalAbuse:
-        title: Emotional abuse
+        title: Psychological or emotional abuse
         meaning: con:AdultEmotionalAbuse
-      adult.neglect:
-        title: Neglect or acts of omission
-        meaning: con:AdultNeglect
-      adult.financialCoercion:
-        title: Financial coercion
-        meaning: con:AdultFinancialCoercion
-      adult.discrimination:
-        title: Discrimination
-        meaning: con:AdultDiscrimination
-      adult.domesticAbuse:
-        title: Domestic abuse
-        meaning: con:AdultDomesticAbuse
+        description: >-
+          Includes threats, humiliation, controlling, intimidation, coercion,
+          harassment, verbal abuse, isolation, and withdrawal from services or
+          support.
+      adult.financialAbuse:
+        title: Financial or material abuse
+        meaning: con:AdultFinancialAbuse
+        description: >-
+          Includes theft, fraud, scams, coercion over financial affairs, and
+          misuse of property, possessions or benefits.
       adult.modernSlavery:
         title: Modern slavery
         meaning: con:AdultModernSlavery
-      adult.selfHarm:
-        title: Self-neglect or self-harm
-        meaning: con:AdultSelfHarm
-      adult.substanceAbuse:
-        title: Substance abuse
-        meaning: con:AdultSubstanceAbuse
+        description: >-
+          Includes slavery, human trafficking, forced labour and domestic
+          servitude.
+      adult.discriminatoryAbuse:
+        title: Discriminatory abuse
+        meaning: con:AdultDiscriminatoryAbuse
+        description: >-
+          Harassment, slurs or similar treatment because of a protected
+          characteristic such as race, sex, age, disability, religion or sexual
+          orientation.
+      adult.organisationalAbuse:
+        title: Organisational or institutional abuse
+        meaning: con:AdultOrganisationalAbuse
+        description: >-
+          Neglect and poor practice within an institution or care setting, or in
+          care provided at home, from one-off incidents to ongoing ill-treatment.
+      adult.neglect:
+        title: Neglect or acts of omission
+        meaning: con:AdultNeglect
+        description: >-
+          Includes ignoring medical, emotional or physical care needs, failing to
+          provide access to services, and withholding medication, food or
+          heating.
+      adult.selfNeglect:
+        title: Self-neglect
+        meaning: con:AdultSelfNeglect
+        description: >-
+          Neglecting one's own personal hygiene, health or surroundings,
+          including hoarding.
       adult.other:
         title: Other
         meaning: con:AdultOther
+        description: >-
+          A concern about an adult that does not fit the categories above.
+          Describe it in the concern's description.
+
+  QocConcernCode:
+    enum_uri: ref:qoc-concern-code
+    title: Quality-of-Care Concerns
+    description: >-
+      Codes representing the nature of concerns in quality-of-care reports.
+      Carried over unchanged from the earlier shared concern list, pending its
+      own revision.
+    permissible_values:
+      child.physicalAbuse:
+        title: Physical abuse
+        meaning: qcon:ChildPhysicalAbuse
+      child.sexualAbuse:
+        title: Sexual abuse
+        meaning: qcon:ChildSexualAbuse
+      child.emotionalAbuse:
+        title: Emotional abuse
+        meaning: qcon:ChildEmotionalAbuse
+      child.neglect:
+        title: Neglect
+        meaning: qcon:ChildNeglect
+      child.exploitation:
+        title: Exploitation
+        meaning: qcon:ChildExploitation
+      child.parentalConcern:
+        title: Parental mental health or substance abuse issues
+        meaning: qcon:ChildParentalConcern
+      child.missingEducation:
+        title: Missing education
+        meaning: qcon:ChildMissingEducation
+      child.goingMissing:
+        title: Going missing
+        meaning: qcon:ChildGoingMissing
+      child.contextualRisk:
+        title: Contextual risk
+        meaning: qcon:ChildContextualRisk
+      child.Other:
+        title: Other
+        meaning: qcon:ChildOther
+      adult.physicalAbuse:
+        title: Physical abuse
+        meaning: qcon:AdultPhysicalAbuse
+      adult.sexualAbuse:
+        title: Sexual abuse
+        meaning: qcon:AdultSexualAbuse
+      adult.emotionalAbuse:
+        title: Emotional abuse
+        meaning: qcon:AdultEmotionalAbuse
+      adult.neglect:
+        title: Neglect or acts of omission
+        meaning: qcon:AdultNeglect
+      adult.financialCoercion:
+        title: Financial coercion
+        meaning: qcon:AdultFinancialCoercion
+      adult.discrimination:
+        title: Discrimination
+        meaning: qcon:AdultDiscrimination
+      adult.domesticAbuse:
+        title: Domestic abuse
+        meaning: qcon:AdultDomesticAbuse
+      adult.modernSlavery:
+        title: Modern slavery
+        meaning: qcon:AdultModernSlavery
+      adult.selfHarm:
+        title: Self-neglect or self-harm
+        meaning: qcon:AdultSelfHarm
+      adult.substanceAbuse:
+        title: Substance abuse
+        meaning: qcon:AdultSubstanceAbuse
+      adult.other:
+        title: Other
+        meaning: qcon:AdultOther
 
   RequestPurposeCode:
     enum_uri: ref:request-purpose

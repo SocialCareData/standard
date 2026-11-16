@@ -13,7 +13,9 @@ JSON Schema and docs are generated from the YAML.
 
 | File | Role |
 | --- | --- |
-| `referrals-standard.yaml` | **Authoritative source.** Prefixes, the three core classes (`Referral`, `Request`, `QualityOfCareConcern`), supporting objects (`IntakePerson`, `PersonalNetworkMember`, `ReferrerDetails`, `ConcernDetail`, `ReferralInvolvement`, `DocumentReference`, `ReferralAssessmentQuestion`), slots, and controlled vocabularies. Imports `common`, `person` (core), and `safeguarding`. |
+| `referrals-standard.yaml` | **Authoritative source.** Prefixes, the three core classes (`Referral`, `Request`, `QualityOfCareConcern`), supporting objects (`IntakePerson`, `PersonalNetworkMember`, `ReferrerDetails`, `ConcernDetail`, `QocConcernDetail`, `ReferralInvolvement`, `DocumentReference`, `ReferralAssessmentQuestion`), slots, and controlled vocabularies. Imports `common`, `person` (core), and `safeguarding`. |
+| `../imports.json` | Top-level importmap shared by all modules: maps each module id (e.g. `https://ns.socialcaredata.io/referrals`) to its local `*.yaml` file. |
+| `context.jsonld` | JSON-LD context used by examples and external consumers. |
 
 ## IntakePerson
 
@@ -34,5 +36,29 @@ optional, plus a free-text `notes` (slot `intakeNotes`).
   guidance on the PUB06 page, not a constraint.
 - Validation runs without RDFS inference, so `PersonShape` does not fire on
   `IntakePerson` instances despite the subclass relationship.
-| `../imports.json` | Top-level importmap shared by all modules: maps each module id (e.g. `https://ns.socialcaredata.io/referrals`) to its local `*.yaml` file. |
-| `context.jsonld` | JSON-LD context used by examples and external consumers. |
+
+## Concerns
+
+`Referral` and `QualityOfCareConcern` have separate concern structures:
+
+| Class | Slot (JSON key) | Detail class | Code list | Concept namespace |
+| --- | --- | --- | --- | --- |
+| `Referral` | `concern` (`concern`) | `ConcernDetail` | `ConcernCode` | `…/concern#` (`con:`) |
+| `QualityOfCareConcern` | `qocConcern` (`concern`) | `QocConcernDetail` | `QocConcernCode` | `…/qoc-concern#` (`qcon:`) |
+
+The JSON key is `concern` in both. `context.jsonld` maps it to the right
+predicate through the class-scoped contexts on `QualityOfCareConcern` and
+`QocConcernDetail`, so a QoC concern must be typed `QocConcernDetail` for its
+`concernType` to resolve against the QoC code list.
+
+`ConcernCode` follows the statutory categories (Children Act 1989 / Working
+Together 2023 for children, Care Act 2014 for adults), with an Other code for
+each group and an `UNASSIGNED` code. `UNASSIGNED` supports the "assign at
+triage" pattern: a referral may arrive with the type unclassified (the referrer
+chose not to give one, or the form never asked) and the front door or MASH
+assigns it. Rules such as "UNASSIGNED must not appear alongside other
+codes" and "no UNASSIGNED after triage" cannot be expressed in the model; they
+are guidance on the PUB06 page.
+
+`QocConcernCode` is a temporary copy of the earlier shared list, pending its own
+revision.

@@ -20,7 +20,7 @@
   },
   "concern": [
     {
-      "@type": "ConcernDetail",
+      "@type": "QocConcernDetail",
       "concernType": "adult.neglect",
       "description": "Provider failure to provide basic hydration."
     }
