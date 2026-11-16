@@ -41,7 +41,7 @@
   "referrer": {
     "@type": "ReferrerDetails",
     "referrerType": "Professional",
-    "referrerProfessionalId": {
+    "professionalId": {
       "@type": "Identifier",
       "value": "PROF-001",
       "system": "https://example.org/professionals"

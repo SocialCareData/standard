@@ -27,6 +27,13 @@
       "constraint": "sh:minCount"
     }
   ],
+  "invalid-referral-professional-id-missing-value.jsonld": [
+    {
+      "focus": "Identifier",
+      "path": "value",
+      "constraint": "sh:minCount"
+    }
+  ],
   "invalid-request-bad-record-relationship.jsonld": [
     {
       "focus": "LinkedRecord",

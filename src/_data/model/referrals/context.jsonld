@@ -107,7 +107,7 @@
       "@context": {
         "person":                 { "@id": "ref:referrerPerson",           "@type": "@id" },
         "professional":           { "@id": "ref:referrerProfessional",     "@type": "@id" },
-        "professionalIdentifier": { "@id": "ref:referrerProfessionalId",   "@type": "@id" },
+        "professionalId":         { "@id": "ref:referrerProfessionalId",   "@type": "@id" },
         "relationship": {
           "@id": "ref:referrerRelationshipCode",
           "@type": "@vocab",
@@ -251,7 +251,6 @@
         "notification":              "rp:Notification",
         "child.earlyHelp":           "rp:ChildEarlyHelp",
         "child.CIN":                 "rp:ChildCIN",
-        "child.cin":                 "rp:ChildCIN",
         "child.s47":                 "rp:ChildS47",
         "child.emergency":           "rp:ChildEmergency",
         "child.statutoryServices":   "rp:ChildStatutoryServices",
@@ -332,13 +331,6 @@
         "FamilyMember":       "rft:FamilyMember",
         "Professional":       "rft:Professional",
         "MemberOfThePublic":  "rft:MemberOfThePublic"
-      }
-    },
-    "relationshipCode": {
-      "@id": "ref:referrerRelationshipCode",
-      "@type": "@vocab",
-      "@context": {
-        "@vocab": "https://ns.socialcaredata.io/person-relationship-code#"
       }
     },
     "referrerRelationshipCode": {

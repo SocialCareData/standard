@@ -542,7 +542,7 @@ Details of the referrer initiating the referral or concern.
 <span id="referrer-referrerType">referrerType</span>
 : The role or nature of the referrer. Required (`1..1`). *Enum*. See the [Referrer Types Taxonomy](#referrer-types-taxonomy).
 
-<span id="referrer-relationshipCode">relationshipCode</span>
+<span id="referrer-relationship">relationship</span>
 : Relationship code of the referrer to the subject. Optional (`0..1`). *Enum*. See [Person Standard → Relationship Code](/PUB01_person_standard#person-relationship-code-vocabulary).
 
 <span id="referrer-relationshipDescription">relationshipDescription</span>
