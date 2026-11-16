@@ -11,6 +11,7 @@
     "mt": "https://ns.socialcaredata.io/measurement-type#",
     "mu": "https://ns.socialcaredata.io/measurement-unit#",
     "rtc": "https://ns.socialcaredata.io/record-type#",
+    "rr": "https://ns.socialcaredata.io/record-relationship#",
     "p": "https://ns.socialcaredata.io/",
     "nuc": "https://ns.socialcaredata.io/name-use-code#",
     "auc": "https://ns.socialcaredata.io/address-use-code#",
@@ -159,11 +160,23 @@
         "referral": "rtc:Referral",
         "request": "rtc:Request",
         "quality-of-care-concern": "rtc:QualityOfCareConcern",
+        "response": "rtc:Response",
         "assessment": "rtc:Assessment",
         "plan": "rtc:Plan"
       }
     },
-    "recordRelationship": "sg:recordRelationship",
+    "recordRelationship": {
+      "@id": "sg:recordRelationship",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/record-relationship#",
+        "escalationOf":   "rr:EscalationOf",
+        "deescalationOf": "rr:DeescalationOf",
+        "followupTo":     "rr:FollowupTo",
+        "reactivationOf": "rr:ReactivationOf",
+        "concurrentWith": "rr:ConcurrentWith"
+      }
+    },
     "person": {
       "@id": "sg:person",
       "@type": "@id"

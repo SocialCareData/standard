@@ -213,8 +213,8 @@ classes:
     class_uri: sg:LinkedRecord
     description: >-
       A reference to an associated external or cross-standard record (such as a
-      referral, service request, quality-of-care concern, care needs assessment,
-      or care plan).
+      referral, service request, quality-of-care concern, response, care needs
+      assessment, or care plan).
     slots:
       - recordId
       - recordType
@@ -410,7 +410,9 @@ slots:
     range: LinkedRecord
     required: false
     multivalued: true
-    description: Linked records associated with this episode or life event (e.g. referrals, requests, concerns, assessments, plans).
+    description: >-
+      Other records linked to this one, such as related referrals, requests,
+      quality-of-care concerns, responses, assessments or plans.
 
   # --- LinkedRecord ---
   recordId:
@@ -433,7 +435,9 @@ slots:
     range: RecordRelationshipCode
     required: false
     multivalued: false
-    description: The nature of the relationship (e.g. trigger, outcome, context).
+    description: >-
+      How this record relates to the linked record, for example as an
+      escalation of it or a follow-up to it.
 
   # --- SubjectPerson / RelatedProfessional ---
   person:
@@ -1704,6 +1708,12 @@ enums:
         title: Quality of Care Concern
         description: Quality-of-care concern raised about a care provider or service (PUB06).
         meaning: rtc:QualityOfCareConcern
+      response:
+        title: Response
+        description: >-
+          Record of a response to a referral, request or quality-of-care
+          concern (PUB06).
+        meaning: rtc:Response
       assessment:
         title: Care Needs Assessment
         description: Care needs assessment record (PUB05).
