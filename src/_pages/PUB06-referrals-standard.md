@@ -10,7 +10,6 @@ tags:
 reference: PUB06
 status: draft
 data_model: src/_data/model/referrals/referrals-standard.yaml
-version_number: "0.9.0"
 related:
   - /PUB01_person_standard
   - /PUB05_assessments_and_plans_standard
