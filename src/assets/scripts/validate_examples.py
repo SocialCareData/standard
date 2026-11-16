@@ -14,9 +14,9 @@ valid-*.csv and invalid-*.csv are checked the same way, read through the
 module's csv-metadata.json (see build_csvw.py) by the data-standard-validator
 command line - the converter the validator page uses, rather than a second
 implementation here. Their expectations are pinned as the row, column and
-issue code a CSV author would see. Set DATA_STANDARD_VALIDATOR to the command
-to run, e.g. "npx --yes @theodi/data-standard-validator@1.1.0"; without it the
-CSV examples are skipped, and --update keeps what is pinned for them.
+issue code a CSV author would see. The installed data-standard-validator
+command is used; if there is none, the latest release is installed with
+npm install -g, which needs Node.js 22 or later.
 
     python src/assets/scripts/validate_examples.py                 # build shapes, then check
     python src/assets/scripts/validate_examples.py --shapes DIR    # check against a built tree
@@ -27,8 +27,7 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
-import shlex
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -47,8 +46,9 @@ EXAMPLES = MODEL_ROOT / "examples"
 EXPECTATIONS = "expectations.json"
 EXAMPLE_SUFFIXES = (".jsonld", ".csv")
 CSV_METADATA = "csv-metadata.json"
-# The command that validates CSV examples; see the module docstring.
-VALIDATOR_ENV = "DATA_STANDARD_VALIDATOR"
+VALIDATOR_COMMAND = "data-standard-validator"
+VALIDATOR_PACKAGE = "@theodi/data-standard-validator"
+_validator: str | None = None
 
 
 def shape_path(example_dir: Path, shapes_root: Path) -> Path:
@@ -65,18 +65,44 @@ def shapes_for(example_dir: Path, shapes_root: Path) -> Graph:
     return Graph().parse(shape_path(example_dir, shapes_root), format="turtle")
 
 
-def validate_csv(path: Path, shapes: Path, command: list[str]) -> tuple[bool, list[dict], str]:
+def validator() -> str:
+    """The data-standard-validator command, installing the latest release if there is none."""
+    global _validator
+    if _validator is None:
+        found = shutil.which(VALIDATOR_COMMAND)
+        if found is None:
+            if shutil.which("npm") is None:
+                raise RuntimeError(f"{VALIDATOR_COMMAND} is not installed, and neither is npm "
+                                   "to install it; CSV examples need Node.js 22 or later")
+            print(f"note  {VALIDATOR_COMMAND} not found; installing {VALIDATOR_PACKAGE}@latest")
+            proc = subprocess.run(["npm", "install", "-g", f"{VALIDATOR_PACKAGE}@latest"],
+                                  capture_output=True, text=True, encoding="utf-8")
+            found = shutil.which(VALIDATOR_COMMAND)
+            if proc.returncode != 0 or found is None:
+                raise RuntimeError(f"could not install {VALIDATOR_PACKAGE}: "
+                                   f"{proc.stderr.strip() or f'exit {proc.returncode}'}")
+        version = subprocess.run([found, "--version"], capture_output=True, text=True).stdout.strip()
+        print(f"note  CSV examples are checked by {VALIDATOR_COMMAND} {version} ({found})")
+        _validator = found
+    return _validator
+
+
+def validate_csv(path: Path, shapes: Path) -> tuple[bool, list[dict], str]:
     """Run the validator CLI on a CSV example: (conforms, issues as row/column/code, report text)."""
     metadata = MODEL_ROOT / path.relative_to(EXAMPLES).parts[0] / CSV_METADATA
     if not metadata.is_file():
         raise FileNotFoundError(f"no {metadata.relative_to(REPO_ROOT)}; run build_csvw.py")
     proc = subprocess.run(
-        [*command, "-s", str(shapes), "--csv-metadata", str(metadata), "-f", "json", str(path)],
+        [validator(), "-s", str(shapes), "--csv-metadata", str(metadata), "-f", "json", str(path)],
         capture_output=True, text=True, encoding="utf-8",
     )
-    if proc.returncode not in (0, 1):
+    # Exit 1 means "does not conform"; only a JSON report counts as a result.
+    try:
+        report = json.loads(proc.stdout) if proc.returncode in (0, 1) else None
+    except json.JSONDecodeError:
+        report = None
+    if report is None:
         raise RuntimeError(proc.stderr.strip() or f"exit {proc.returncode}")
-    report = json.loads(proc.stdout)
     document = report["documents"][0]
     issues = []
     for issue in document["issues"]:
@@ -168,9 +194,6 @@ def violations(report: Graph, data: Graph, names: dict[str, str], context: Conte
 def check(shapes_root: Path, update: bool) -> int:
     failures = 0
     checked = 0
-    command = shlex.split(os.environ.get(VALIDATOR_ENV, ""))
-    if not command:
-        print(f"note  CSV examples are skipped: set {VALIDATOR_ENV} to the data-standard-validator command")
     dirs = sorted({p.parent for p in EXAMPLES.rglob("*") if p.suffix in EXAMPLE_SUFFIXES})
     for example_dir in dirs:
         rel_dir = example_dir.relative_to(EXAMPLES)
@@ -184,8 +207,7 @@ def check(shapes_root: Path, update: bool) -> int:
         context = Context(raw_context)
         names = term_names(raw_context, context, titles_by_iri(rel_dir.parts[0]))
         expectations_file = example_dir / EXPECTATIONS
-        committed = json.loads(expectations_file.read_text()) if expectations_file.is_file() else {}
-        pinned = {} if update else committed
+        pinned = {} if update or not expectations_file.is_file() else json.loads(expectations_file.read_text())
         produced = {}
 
         for path in sorted(p for p in example_dir.iterdir() if p.suffix in EXAMPLE_SUFFIXES):
@@ -199,14 +221,9 @@ def check(shapes_root: Path, update: bool) -> int:
                 failures += 1
                 continue
             if path.suffix == ".csv":
-                if not command:
-                    # Keep what is pinned for an example this run cannot check.
-                    if path.name in committed:
-                        produced[path.name] = committed[path.name]
-                    continue
                 checked += 1
                 try:
-                    conforms, actual, text = validate_csv(path, shape_path(example_dir, shapes_root), command)
+                    conforms, actual, text = validate_csv(path, shape_path(example_dir, shapes_root))
                 except Exception as e:
                     print(f"::error file={rel}::{rel}: could not validate: {e}")
                     failures += 1

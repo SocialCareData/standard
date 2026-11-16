@@ -247,15 +247,12 @@ python src/assets/scripts/validate_examples.py --update   # rewrite expectations
 ```
 
 `valid-*.csv` and `invalid-*.csv` follow the same rules. They are read through the
-module's `csv-metadata.json` by the validator's command line. Their expectations
-are pinned as the row, column and issue code a CSV author sees. Set
-`DATA_STANDARD_VALIDATOR` to the command to run; without it, the CSV examples
-are skipped:
-
-```bash
-DATA_STANDARD_VALIDATOR="npx --yes @theodi/data-standard-validator@1.1.0" \
-  python src/assets/scripts/validate_examples.py
-```
+module's `csv-metadata.json` by the installed `data-standard-validator`
+command. If it is not installed, the script installs the latest release with
+`npm install -g @theodi/data-standard-validator@latest`, so checking the
+examples also needs Node.js 22 or later. CI installs the latest release before
+every run. Their expectations are pinned as the row, column and issue code a
+CSV author sees.
 
 To validate your own data, use
 [@theodi/data-standard-validator](https://www.npmjs.com/package/@theodi/data-standard-validator) with the
