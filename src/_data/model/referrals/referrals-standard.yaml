@@ -557,30 +557,80 @@ enums:
       child.safeguarding:
         title: Safeguarding concern
         meaning: rt:ChildSafeguarding
+        description: >-
+          A concern that a child is being, or is at risk of being, abused,
+          neglected or otherwise harmed, inside or outside the family. Depending
+          on (MASH) triage, this may lead to enquiries under section 47 of the Children
+          Act 1989, an assessment of the child's needs, or early help.
       child.infoRequest:
         title: Information request
         meaning: rt:ChildInfoRequest
+        description: >-
+          A request for information or advice about a child or family, or about
+          the support available, that does not itself raise a concern. For
+          example, a parent asking what help is available, or a professional
+          asking for advice.
       child.crossService:
         title: Professional concern about a child from engagement with an adult
         meaning: rt:ChildCrossService
+        description: >-
+          A concern about a child raised by a professional working with an adult
+          connected to them, such as the child's parent or someone in their
+          household. For example, from adult mental health, drug and alcohol,
+          probation or adult social care services.
+      child.returningCareLeaver:
+        title: Care leaver returning for support
+        meaning: rt:ChildReturningCareLeaver
+        description: >-
+          A care leaver getting back in touch with the local authority to ask for
+          support, such as a personal adviser, which former relevant children can
+          request up to age 25 under the Children Act 1989 (as amended by the
+          Children and Social Work Act 2017). Usually a self-referral. The care
+          leaver is an adult, but leaving care support is provided by children's
+          services.
       adult.general:
-        title: General referral to social care
+        title: Contact or request for support
         meaning: rt:AdultGeneral
+        description: >-
+          A person, or someone on their behalf, contacting adult social care
+          about care and support needs, where the kind of help needed is not yet
+          clear.
       adult.safeguarding:
         title: Safeguarding concern
         meaning: rt:AdultSafeguarding
+        description: >-
+          A concern that an adult with care and support needs is experiencing,
+          or is at risk of, abuse or neglect, and cannot protect themselves
+          because of those needs. Triage decides whether this meets the criteria
+          for a safeguarding enquiry under section 42 of the Care Act 2014.
       adult.independentLiving:
         title: Request for occupational therapy or home equipment
         meaning: rt:AdultIndependentLiving
+        description: >-
+          A request for an occupational therapy assessment, equipment or minor
+          adaptations to help a person stay safe and independent at home, such
+          as grab rails or bathing equipment.
       adult.careActAssessment:
         title: Request for care needs assessment or review
         meaning: rt:AdultCareActAssessment
+        description: >-
+          A request for a needs assessment (section 9 of the Care Act 2014)
+          or a review of an existing care and support plan (section 27).
       adult.infoRequest:
         title: Information request
         meaning: rt:AdultInfoRequest
+        description: >-
+          A request for information or advice about care and support, which
+          local authorities must provide under section 4 of the Care Act 2014,
+          that does not itself raise a concern or ask for an assessment.
       adult.crossService:
         title: Professional concern about an adult from engagement with a child
         meaning: rt:AdultCrossService
+        description: >-
+          A concern about an adult raised by a professional working with a child
+          connected to them, such as the child's parent or carer. For example,
+          from a school, health visitor, children's social care or child and
+          adolescent mental health services.
 
   ConcernCode:
     enum_uri: ref:concern-code
