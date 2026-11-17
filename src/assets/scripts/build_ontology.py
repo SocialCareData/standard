@@ -12,6 +12,12 @@ Run it with::
 which produces a tree mirroring ``src/_data/model`` but carrying ``.ttl``
 ontologies and ``-shape.ttl`` SHACL shapes in place of the YAML.
 
+Only the schema versions pinned in ``manifest.yaml`` are published, and each is
+published under its unversioned name: if the manifest pins ``placements: 1.0.0``
+and that version lives in ``placements-standard-v1.yaml``, it is written as
+``placements/placements-standard.ttl`` (and ``placements-standard-shape.ttl``).
+Unpinned versions are not published at all.
+
 Here are things to keep in mind:
 
 * **LinkML output is not byte-reproducible.** Two identical invocations emit
@@ -34,6 +40,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -64,6 +71,10 @@ CSV_MAPPING_NAMESPACES = (
 )
 # Where the module ontologies are served from once synced to SocialCareData/ontology.
 PUBLISHED_BASE = "https://raw.githubusercontent.com/SocialCareData/ontology/main/"
+# A trailing version marker on a schema file stem, e.g. "-v1" or "-v1_1" in
+# placements-standard-v1_1.yaml. It is dropped from the published file name, so
+# whichever version the manifest pins is always served at the same URL.
+VERSION_SUFFIX = re.compile(r"-v\d+(?:[._]\d+)*$")
 
 # Flags copied verbatim from src/_data/model/model-management.md, plus
 # --ontology-uri-suffix. Without that flag LinkML appends its default
@@ -114,8 +125,17 @@ class Schema:
         return f"../{self.module}/{self.stem}"
 
     @property
+    def published_stem(self) -> str:
+        """File stem in the published repo: the source stem minus any version marker."""
+        return VERSION_SUFFIX.sub("", self.stem)
+
+    @property
+    def published_rel(self) -> str:
+        return f"{self.module}/{self.published_stem}"
+
+    @property
     def published_url(self) -> str:
-        return f"{PUBLISHED_BASE}{self.module}/{self.stem}.ttl"
+        return f"{PUBLISHED_BASE}{self.published_rel}.ttl"
 
 
 def run(cmd: list[str], cwd: Path, dest: Path) -> None:
@@ -291,39 +311,39 @@ def point_imports_at_published(path: Path, resolved: dict[str, Schema]) -> None:
     graph.serialize(destination=path, format="turtle")
 
 
-def ontology_uri_suffixes(schemas: list[Schema]) -> dict[str, str]:
-    """Decide the ``--ontology-uri-suffix`` for each schema file.
+def assert_unique_published_names(resolved: dict[str, Schema]) -> None:
+    """No two pinned schemas may publish to the same file once versions are stripped."""
+    seen: dict[str, Schema] = {}
+    for schema in resolved.values():
+        other = seen.get(schema.published_rel)
+        if other is not None:
+            raise BuildError(
+                f"{schema.rel} and {other.rel} would both be published as "
+                f"{schema.published_rel}.ttl"
+            )
+        seen[schema.published_rel] = schema
 
-    Several placements files share ``id: .../placements`` and differ only by
-    version, so published side by side they would each assert ``a owl:Ontology``
-    on the same IRI with contradictory axioms on ``sc:Placement``. The file that
-    imports.json points at keeps the bare IRI and is the current version; the
-    frozen ones are qualified with their version (``.../placements/1.0.0``) so
-    every published file has a distinct ontology identity.
+
+def warn_on_stale_aux(resolved: dict[str, Schema]) -> None:
+    """Flag modules whose context.jsonld / csv-metadata.json describe another version.
+
+    Those files are generated (build_contexts.py, build_csvw.py) from the schema
+    imports.json points at, not from the manifest pin. When the two differ, the
+    published aux files describe a different version from the published ontology.
     """
     importmap = json.loads(IMPORTS_JSON.read_text())
-    current = {value.rsplit("/", 1)[-1] for value in importmap.values()}
-
-    by_id: dict[str, list[Schema]] = {}
-    for schema in schemas:
-        by_id.setdefault(schema.id, []).append(schema)
-
-    suffixes: dict[str, str] = {}
-    for schema_id, group in by_id.items():
-        if len(group) == 1:
-            suffixes[group[0].rel] = ""
+    for key, schema in sorted(resolved.items()):
+        current = importmap.get(schema.id)
+        if current is None or current == schema.importmap_value:
             continue
-        canonical = [s for s in group if s.stem in current]
-        if len(canonical) != 1:
-            names = ", ".join(sorted(s.stem for s in group))
-            raise BuildError(
-                f"{len(group)} schemas share id {schema_id} ({names}) but "
-                f"{len(canonical)} of them are referenced by imports.json; "
-                "exactly one must be, to identify the current version"
+        aux = [n for n in ("context.jsonld", "csv-metadata.json") if (MODEL_ROOT / schema.module / n).exists()]
+        if aux:
+            print(
+                f"warning: manifest pins {key} to {schema.rel}, but imports.json points at "
+                f"{current.removeprefix('../')}.yaml, which {', '.join(aux)} "
+                f"{'is' if len(aux) == 1 else 'are'} generated from",
+                file=sys.stderr,
             )
-        for schema in group:
-            suffixes[schema.rel] = "" if schema is canonical[0] else f"/{schema.version}"
-    return suffixes
 
 
 def assert_unique_ontology_iris(out_dir: Path) -> None:
@@ -380,7 +400,12 @@ def build(out_dir: Path) -> list[Schema]:
     manifest = yaml.safe_load(MANIFEST.read_text())
     schemas = load_schemas()
     resolved = resolve_pins(schemas, manifest)
-    suffixes = ontology_uri_suffixes(schemas)
+    assert_unique_published_names(resolved)
+    pinned = sorted(resolved.values(), key=lambda s: s.rel)
+
+    for schema in schemas:
+        if schema not in pinned:
+            print(f"  {schema.rel}: skipped (version {schema.version} not pinned in manifest.yaml)")
 
     if out_dir.exists():
         shutil.rmtree(out_dir)
@@ -388,50 +413,57 @@ def build(out_dir: Path) -> list[Schema]:
 
     generated: list[Path] = []
 
-    for schema in schemas:
-        module_dir = MODEL_ROOT / schema.module
-        target_dir = out_dir / schema.module
-
-        owl_dest = target_dir / f"{schema.stem}.ttl"
-        run(
-            [
-                "gen-owl",
-                "--no-mergeimports",
-                "--ontology-uri-suffix",
-                suffixes[schema.rel],
-                *OWL_FLAGS,
-                "-im",
-                "../imports.json",
-                schema.path.name,
-            ],
-            cwd=module_dir,
-            dest=owl_dest,
-        )
-        generated.append(owl_dest)
-
-        if schema.rel in SHACL_SKIP:
-            print(f"  {schema.rel}: OWL only (core schema, see person/README.md)")
-            continue
-
-        shacl_dest = target_dir / f"{schema.stem}-shape.ttl"
-        run(
-            ["gen-shacl", *SHACL_FLAGS, "-im", "../imports.json", schema.path.name],
-            cwd=module_dir,
-            dest=shacl_dest,
-        )
-        generated.append(shacl_dest)
-        print(f"  {schema.rel}: OWL + SHACL")
-
-    # The umbrella, resolved through the manifest-pinned import map and written
-    # to the root of the published tree. The map is written outside src/
-    # deliberately: Jekyll's source is src/, and it parses every JSON file under
-    # src/_data/ into site.data, so a generated file there would pollute the site build.
-    # The umbrella copy carrying the manifest's version is written there too; the
-    # import map's absolute paths let it resolve the modules from outside MODEL_ROOT.
+    # Every schema - modules and umbrella alike - is resolved through the
+    # manifest-pinned import map, so a module importing another gets the pinned
+    # version rather than whatever imports.json happens to point at. The map is
+    # written outside src/ deliberately: Jekyll's source is src/, and it parses
+    # every JSON file under src/_data/ into site.data, so a generated file there
+    # would pollute the site build. The umbrella copy carrying the manifest's
+    # version is written there too; the import map's absolute paths let it
+    # resolve the modules from outside MODEL_ROOT.
     with tempfile.TemporaryDirectory() as tmp:
         importmap_path = Path(tmp) / "resolved-imports.json"
         importmap_path.write_text(json.dumps(resolved_importmap(resolved), indent=2))
         umbrella = versioned_umbrella(manifest, Path(tmp))
+
+        for schema in pinned:
+            module_dir = MODEL_ROOT / schema.module
+            target_dir = out_dir / schema.module
+            label = f"{schema.rel} -> {schema.published_rel}"
+
+            # Only the pinned version of each IRI is published, so every file
+            # keeps the bare ontology IRI (e.g. .../placements).
+            owl_dest = target_dir / f"{schema.published_stem}.ttl"
+            run(
+                [
+                    "gen-owl",
+                    "--no-mergeimports",
+                    "--ontology-uri-suffix",
+                    "",
+                    *OWL_FLAGS,
+                    "-im",
+                    str(importmap_path),
+                    schema.path.name,
+                ],
+                cwd=module_dir,
+                dest=owl_dest,
+            )
+            generated.append(owl_dest)
+
+            if schema.rel in SHACL_SKIP:
+                print(f"  {label}: OWL only (core schema, see person/README.md)")
+                continue
+
+            shacl_dest = target_dir / f"{schema.published_stem}-shape.ttl"
+            run(
+                ["gen-shacl", *SHACL_FLAGS, "-im", str(importmap_path), schema.path.name],
+                cwd=module_dir,
+                dest=shacl_dest,
+            )
+            generated.append(shacl_dest)
+            print(f"  {label}: OWL + SHACL")
+
+        # The umbrella, written to the root of the published tree.
 
         social_care_ttl = out_dir / "social-care.ttl"
         run(
@@ -463,8 +495,9 @@ def build(out_dir: Path) -> list[Schema]:
         canonicalise(path)
 
     assert_unique_ontology_iris(out_dir)
-    copy_aux(schemas, out_dir)
-    return schemas
+    copy_aux(pinned, out_dir)
+    warn_on_stale_aux(resolved)
+    return pinned
 
 
 def main() -> int:
