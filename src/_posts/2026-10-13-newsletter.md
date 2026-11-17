@@ -65,7 +65,7 @@ We are also developing a maturity assessment model to help local authorities, su
 
 **Looking ahead**
 
-The ambition is for all nine regions in the England to use the Placements standards by mid-2027 and we're delighted that DfE are using as the basis for the regional sufficiency analysis  to be done by the five new Regional Care cooperatives.
+The ambition is for all nine regions in England to use the Placements standards by mid-2027 and we're delighted that DfE are using this as the basis for the regional sufficiency analysis  to be done by the five new Regional Care cooperatives.
 
 ## Turning standards into practice: Exploring routes to standards assurance
 
@@ -80,7 +80,7 @@ _Potential benefits of a Catalogue Agreement_
 * Benefits for local authorities:
     * A clearer way to identify standards-compliant products
     * Greater confidence when considering technology solutions
-* Benefits for suppliers
+* Benefits for suppliers:
     * Clearer and more transparent requirements
     * A way to demonstrate how products meet standards
 
@@ -97,7 +97,7 @@ You can now more easily:
 * Find and review the [latest versions of our standards](/publications)
 * Find out how you can [contribute](/contribute_to_the_standards) to our work and see upcoming events
 
-We’ll continue to add to the website over the coming months, if you have any suggestions on what you’d like to see, please reach out at [DataStandards-SocialCare@socialfinance.org.uk](mailto:DataStandards-SocialCare@socialfinance.org.uk).
+We’ll continue to add to the website over the coming months. If you have any suggestions on what you’d like to see, please reach out at [DataStandards-SocialCare@socialfinance.org.uk](mailto:DataStandards-SocialCare@socialfinance.org.uk).
 
 ## Upcoming events and opportunities
 
