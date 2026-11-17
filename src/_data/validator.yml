@@ -20,7 +20,7 @@ config:
       description: A placement record across its whole lifecycle, from requirements through to quality assurance.
       shapes: https://github.com/SocialCareData/ontology/blob/main/placements/placements-standard-shape.ttl
       context: https://github.com/SocialCareData/ontology/blob/main/placements/context.jsonld
-      csvMetadata: https://github.com/SocialCareData/ontology/blob/csv_example/placements/csv-metadata.json
+      csvMetadata: https://github.com/SocialCareData/standard/blob/csv_example/src/_data/model/placements/csv-metadata.json
       examples:
         - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/placements/valid-placement.jsonld
         - https://github.com/SocialCareData/standard/blob/main/src/_data/model/examples/placements/valid-placement-full.jsonld
