@@ -42,18 +42,40 @@ This standard aims to define a common, machine-readable format for referrals, re
 
 ### Scope
 
-This standard applies to a range of referral types, taxonomised below.
-
 <p class="data-model-diagram"><img src="/assets/img/referrals/referrals_taxonomy.svg" alt="Taxonomy of referral types that are in the scope of this standard" title="Taxonomy of referral types"></p>
 
-While each of these are colloquially named a "referral", we designate three distinct profiles within the taxonomy:
-* `Referrals`, which are made by a subject, their family, a professional (like their teacher), or a member of the public *into* social services. These forms are generally "point-of-entry" into social care: the subject is likely not known to services beforehand.
+This standard applies to a range of forms colloquially named "referrals". Here we designate three distinct profiles -- "patterns" -- that these forms take, but importantly, our terminology is not reflective of, nor an enforced change to, the terminologies social workers use in practice. The three profiles are:
+* `Referrals`, which are made by a subject, their family, a professional (like their teacher), or a member of the public *into* social services. These forms are generally "point-of-entry" into social care: the subject is likely not known to services beforehand. This includes:
+  * (Children's Social Care) Safeguarding concerns
+  * (Children's Social Care) Information requests
+  * (Children's Social Care) Professional concerns raised about a child from engagements with an adult
+  * (Children's Social Care) Care leaver support
+  * (Adults' Social Care) Contacts or requests for support
+  * (Adults' Social Care) Safeguarding concerns
+  * (Adults' Social Care) Requests for occupational therapy or home equipment
+  * (Adults' Social Care) Requests for care needs assessments or care plan reviews
+  * (Adults' Social Care) Information requests
+  * (Adults' Social Care) Professional concerns raised about an adult from engagements with a child
 * `Requests`, which are made by social services and sent *outward* to statutory or non-statutory services. These forms concern subjects that are already known to, and involved with, social services, and can be the outcome of a decision made at the front door by, eg., a Multi-Agency Safeguarding Hub (MASH).
-* `QualityOfCareConcerns`, which are made by anyone (including the subject, and can be anonymous) and are centred on a care service rather than a person themselves.
+  * Notifications or signposting to external providers
+  * (Children's Social Care) Outcomes from MASH triage
+  * (Children's Social Care) Requests to statutory services outside of social care, like Child and Adolescent Mental Health Services (CAMHS) or providers of advocacy services
+  * (Children's Social Care) Requests to non-statutory services, like voluntary or community organisations
+  * (Adults' Social Care) Outcomes from front-door triage
+  * (Adults' Social Care) Requests to statutory services outside of social care, like NHS services
+  * (Adults' Social Care) Requests to non-statutory services, like voluntary or community organisations
+* `QualityOfCareConcerns`, which are made by anyone (including the subject, and can be anonymous) and are centred on a care service rather than a person themselves. This standard is most suitable for Adults' Social Care.
 
-Any of these can have a corresponding `Response`: a record that a response was sent or received, such as an acknowledgement or a decision to accept or decline.
+Any of these objects can have a corresponding `Response`: a record that a response was sent or received, such as an acknowledgement or a decision to accept or decline.
 
+#### Out of scope
 Importantly, this work standardises the back-end data architecture behind each of these profiles, not the front-end that social workers see and interact with.
+
+Our standard does not apply to the following "referral" patterns:
+* (Children's Social Care) Quality-of-care concerns raised about Children's services, which can take the form of Local Authority Designated Officer (LADO) referral
+* (Children's Social Care) Cross-authority transfers of care
+* (Adults' Social Care) Requesting authorisation for Deprivation of Liberty Safeguards (DoLS) or Liberty Protection Safeguards (LPS)
+* (Adults' Social Care) Hospital discharge and Discharge to Assess (D2A)
 
 ### Audience
 
