@@ -44,7 +44,7 @@ This standard aims to define a common, machine-readable format for referrals, re
 
 This standard applies to a range of referral types, taxonomised below.
 
-![Taxonomy of referral types that are in the scope of this standard](<../assets/img/referrals/referrals_taxonomy.svg>)
+<p class="data-model-diagram"><img src="/assets/img/referrals/referrals_taxonomy.svg" alt="Taxonomy of referral types that are in the scope of this standard" title="Taxonomy of referral types"></p>
 
 While each of these are colloquially named a "referral", we designate three distinct profiles within the taxonomy:
 * `Referrals`, which are made by a subject, their family, a professional (like their teacher), or a member of the public *into* social services. These forms are generally "point-of-entry" into social care: the subject is likely not known to services beforehand.
@@ -61,7 +61,7 @@ This document is for developers of Case Management Systems, single-view portals,
 
 ## Data Model Overview
 
-<p class="data-model-diagram"><img src="/assets/img/referrals/referrals-data-model-2026-10-21.svg" alt="Referrals Data Model" title="Referrals Data Model" width="95%"/></p>
+<p class="data-model-diagram"><img src="/assets/img/referrals/referrals-data-model-2026-10-21.svg" alt="Referrals Data Model" title="Referrals Data Model"/></p>
 
 ## Core Entities
 
