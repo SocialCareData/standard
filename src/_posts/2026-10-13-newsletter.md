@@ -21,7 +21,7 @@ Through extensive engagement with local authorities and suppliers in working gro
 
 Each use case is supported by a set of standards that define both what information should be recorded and how it can be shared between systems. Together, these standards help ensure information is captured consistently and can be transferred more easily when needed. 
 
-Visit [our website](/use_cases) to learn more about the programme's use cases and standards.
+Visit [use cases](/use_cases) and [standards](/publications) sections of the website to learn more.
 
 <img width="1216" height="618" alt="image" src="https://github.com/user-attachments/assets/ef81673f-8d49-492d-9cfb-1c1dffd28e0f" />
 
