@@ -32,7 +32,9 @@ Here are things to keep in mind:
   the model root, so it is built against an absolute copy of the map.
 
 * **social-care.ttl is not merged.** It ``owl:imports`` the raw ``main``-branch
-  file of each module at the version pinned in ``manifest.yaml``.
+  file of each module at the version pinned in ``manifest.yaml``, and describes
+  that manifest in RDF (see :func:`describe_release`), so the standard versions
+  a release is made of can be read from the ontology alone.
 """
 
 from __future__ import annotations
@@ -49,9 +51,9 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import yaml
-from rdflib import Graph, URIRef
+from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.compare import to_canonical_graph
-from rdflib.namespace import OWL, RDF
+from rdflib.namespace import DCTERMS, OWL, RDF
 
 # src/assets/scripts/build_ontology.py -> repo root is four levels up.
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -71,6 +73,10 @@ CSV_MAPPING_NAMESPACES = (
 )
 # Where the module ontologies are served from once synced to SocialCareData/ontology.
 PUBLISHED_BASE = "https://raw.githubusercontent.com/SocialCareData/ontology/main/"
+# Used to record the pinned standard versions in social-care.ttl. LinkML
+# already writes each schema's `version` as pav:version, so the versions the
+# release records line up with the ones each module states about itself.
+PAV = Namespace("http://purl.org/pav/")
 # A trailing version marker on a schema file stem, e.g. "-v1" or "-v1_1" in
 # placements-standard-v1_1.yaml. It is dropped from the published file name, so
 # whichever version the manifest pins is always served at the same URL.
@@ -311,6 +317,34 @@ def point_imports_at_published(path: Path, resolved: dict[str, Schema]) -> None:
     graph.serialize(destination=path, format="turtle")
 
 
+def describe_release(path: Path, resolved: dict[str, Schema]) -> None:
+    """Record the manifest.yaml pins in social-care.ttl, so the release says what it is made of.
+
+    The release version is already there as ``pav:version`` (from the
+    ``ontology_version`` written into the umbrella). This adds each pinned
+    module and profile as a ``dcterms:hasPart`` of the release, with the
+    version pinned::
+
+        sc: dcterms:hasPart sc:placements, ... .
+        sc:placements pav:version "2.0.0" .
+
+    pav:version agrees with the triple each module file asserts about itself,
+    so loading the release with its imports adds no conflicting statement.
+    """
+    graph = Graph()
+    graph.parse(path, format="turtle")
+    releases = list(graph.subjects(RDF.type, OWL.Ontology))
+    if len(releases) != 1:
+        raise BuildError(f"{path.name} declares {len(releases)} ontologies; expected exactly 1")
+    release = releases[0]
+    graph.bind("pav", PAV)
+    for schema in resolved.values():
+        part = URIRef(schema.id)
+        graph.add((release, DCTERMS.hasPart, part))
+        graph.add((part, PAV.version, Literal(schema.version)))
+    graph.serialize(destination=path, format="turtle")
+
+
 def assert_unique_published_names(resolved: dict[str, Schema]) -> None:
     """No two pinned schemas may publish to the same file once versions are stripped."""
     seen: dict[str, Schema] = {}
@@ -373,9 +407,10 @@ def copy_aux(schemas: list[Schema], out_dir: Path) -> None:
     """Copy the non-generated files consumers need alongside the ontologies."""
     modules = sorted({s.module for s in schemas})
     for module in modules:
-        for name in ("context.jsonld", "csv-metadata.json", "README.md"):
+        # The module READMEs are documentation for this repo and are not published.
+        for name in ("context.jsonld", "csv-metadata.json"):
             src = MODEL_ROOT / module / name
-            if src.exists():  # common/ has no README; only some modules have a CSV form
+            if src.exists():  # only some modules have a CSV form
                 shutil.copy2(src, out_dir / module / name)
         # The hand-maintained *-rules-shape.ttl files carry the conditional
         # constraints gen-shacl cannot produce, because it ignores LinkML
@@ -388,12 +423,19 @@ def copy_aux(schemas: list[Schema], out_dir: Path) -> None:
         for rules in sorted((ASSETS_MODEL_ROOT / module).glob("*-rules-shape.ttl")):
             target.mkdir(parents=True, exist_ok=True)
             shutil.copy2(rules, target / rules.name)
-    shutil.copy2(MANIFEST, out_dir / MANIFEST.name)
+    # manifest.yaml is not published as a file: social-care.ttl carries it in RDF
+    # (see describe_release).
     shutil.copy2(CONTEXT, out_dir / CONTEXT.name)
-    # The per-module READMEs link to ../model-management.md, so it has to come
-    # along or every one of those links 404s in the published repo. Being
+    # The ontology repo's README links to model-management.md. Being
     # overwritten on each run, this copy cannot drift from the original.
     shutil.copy2(MODEL_ROOT / "model-management.md", out_dir / "model-management.md")
+    # The example records (JSON-LD and CSV) and their expectations.json, so the
+    # published shapes ship with data to try them on.
+    shutil.copytree(
+        MODEL_ROOT / "examples",
+        out_dir / "examples",
+        ignore=shutil.ignore_patterns(".DS_Store"),
+    )
 
 
 def build(out_dir: Path) -> list[Schema]:
@@ -481,6 +523,7 @@ def build(out_dir: Path) -> list[Schema]:
             dest=social_care_ttl,
         )
         point_imports_at_published(social_care_ttl, resolved)
+        describe_release(social_care_ttl, resolved)
         social_care_shape = out_dir / "social-care-shape.ttl"
         run(
             ["gen-shacl", *SHACL_FLAGS, "-im", str(importmap_path), str(umbrella)],
