@@ -3,7 +3,7 @@ layout: use-case
 title: "How our standards could support neighbourhood health"
 description: Use case outlining how our standards support neighbourhood health priorities
 breadcrumbs:
-  - Use Cases
+
 tags:
   - MAIS
   - Use Case
@@ -18,9 +18,9 @@ Neighbourhood Health requires a standards-based data exchange integrated system 
 
 ## From hospital to community: standards facilitate joined-up care by improving information-sharing
 
-Integrated Neighbourhood Teams will bring together specialists from local services to provide joined-up, person-centred care. 
+Integrated Neighbourhood Teams will bring together specialists from local services to provide joined-up, person-centred care.
 
-To do this, they will need a shared, up-to-date view of the person, the professionals and services involved, and the person’s current needs, risks, assessments, plans and agreed outcomes. Different services will also need to add information to a person’s record and notify relevant partners about important events. 
+To do this, they will need a shared, up-to-date view of the person, the professionals and services involved, and the person’s current needs, risks, assessments, plans and agreed outcomes. Different services will also need to add information to a person’s record and notify relevant partners about important events.
 
 Our standards could support this by making key information consistent and exchangeable, meaning that social care data can be consistently incorporated into care records and people do not have to repeat their story. This would improve their experience, improve safety and continuity of care and reduce unnecessary delays.
 
@@ -39,9 +39,9 @@ More detail can be found in the following use cases:
 
 ## From analogue to digital: standards enable improved digital record-keeping and use of AI tooling
 
-Digital neighbourhood working requires information to be easy to record, find, share and reuse across organisations. 
+Digital neighbourhood working requires information to be easy to record, find, share and reuse across organisations.
 
-Our standards will help information to be recorded in a consistent, structured form, exchanged securely and reused for authorised purposes. This could reduce manual searches, duplicate entry and parallel spreadsheets, making it easier for frontline staff to get a clear view of relevant history. Interoperability standards could also support the implementation of AI tooling, for example to enable automated transcription and summarisation. 
+Our standards will help information to be recorded in a consistent, structured form, exchanged securely and reused for authorised purposes. This could reduce manual searches, duplicate entry and parallel spreadsheets, making it easier for frontline staff to get a clear view of relevant history. Interoperability standards could also support the implementation of AI tooling, for example to enable automated transcription and summarisation.
 
 **What this could look like in practice:**
 
@@ -59,7 +59,7 @@ Preventative neighbourhood working depends on teams recognising changing needs e
 
 To do this successfully would require timely access to relevant information from across different authorised services, such as changes in support needs, new admissions, care plans, or safeguarding concerns. Our standards could make this information more consistent, securely shareable and usable. They could support both information sharing on request and proactive notifications when a significant event occurs. This needs to be done safely and securely, protecting privacy by design. Our standards support this by defining consistent data structures that allow systems to identify and share only the information needed for an authorised purpose, while applying appropriate access controls through our data sharing standard.
 
-The same approach could support prevention at a population level. Local teams could use patterns in joined up health and social care data to understand where further preventative work is needed. 
+The same approach could support prevention at a population level. Local teams could use patterns in joined up health and social care data to understand where further preventative work is needed.
 
 **What this could look like in practice:**
 
