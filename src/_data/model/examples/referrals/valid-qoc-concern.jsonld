@@ -13,10 +13,21 @@
       "notes": "Resident in the ground-floor lounge, seen without water for several hours."
     }
   ],
-  "recipient": {
-    "@type": "Identifier",
-    "value": "CARE-HOME-01",
-    "system": "https://example.org/providers"
+  "recipient": [
+    {
+      "@type": "Identifier",
+      "value": "ORG-ASC-01",
+      "system": "https://example.org/organisations"
+    }
+  ],
+  "service": {
+    "@type": "QocService",
+    "identifier": {
+      "@type": "Identifier",
+      "value": "1-000000001",
+      "system": "https://www.cqc.org.uk/location"
+    },
+    "name": "Example House Care Home"
   },
   "concern": [
     {

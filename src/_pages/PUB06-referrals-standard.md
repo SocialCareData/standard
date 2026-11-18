@@ -279,6 +279,8 @@ Where a request follows a referral, the two can be connected using `linkedRecord
 
 Quality-of-care concern raised about a care provider or service.
 
+The concern is sent to a `recipient` (like the local authority, or the Care Quality Commission (CQC)), regarding a care provider (the `service`). A concern that involves more than one provider, such as a care home and a home care agency that visits it, should be raised as separate concerns, one for each provider.
+
 #### Properties
 
 <span id="qoc-identifier">identifier</span>
@@ -291,7 +293,10 @@ Quality-of-care concern raised about a care provider or service.
 : Who is the referrer? Optional (`0..1`) (for anonymisation). *ReferrerDetails object*. See [ReferrerDetails](#referrerdetails).
 
 <span id="qoc-recipient">recipient</span>
-: What service is involved? Required (`1..1`). *Identifier object*. See [Identifier](#identifier).
+: Who was this concern sent to? Generally, the local authority and the Care Quality Commission. Multi-valued (`1..*`). Required. *Identifier object*. See [Identifier](#identifier).
+
+<span id="qoc-service">service</span>
+: Which care provider or service is the concern about? Required (`1..1`). *QocService object*. See [QocService](#qocservice).
 
 <span id="qoc-concern">concern</span>
 : What is the concern? Multi-valued (`1..*`). Required. *QocConcernDetail object*. See [QocConcernDetail](#qocconcerndetail). The type of concern may be left unassigned for the triage team to assign: see [Assigning concerns at triage](#assigning-concerns-at-triage).
@@ -322,10 +327,21 @@ Quality-of-care concern raised about a care provider or service.
     "value": "QOC-2026-001",
     "system": "https://example.org/concerns"
   },
-  "recipient": {
-    "@type": "Identifier",
-    "value": "CARE-HOME-01",
-    "system": "https://example.org/providers"
+  "recipient": [
+    {
+      "@type": "Identifier",
+      "value": "ORG-ASC-01",
+      "system": "https://example.org/organisations"
+    }
+  ],
+  "service": {
+    "@type": "QocService",
+    "identifier": {
+      "@type": "Identifier",
+      "value": "1-000000001",
+      "system": "https://www.cqc.org.uk/location"
+    },
+    "name": "Example House Care Home"
   },
   "concern": [
     {
@@ -580,6 +596,35 @@ A concern raised in a referral: its type and the referrer's description of it.
 
 <span id="concern-description">description</span>
 : Free-text description of the concern, in the referrer's own words. Optional (`0..1`), but should be given whenever `concernType` is `UNASSIGNED` or an Other code. *String*.
+
+### QocService
+
+The care provider or service a quality-of-care concern is about, as far as the person raising the concern can describe it.
+
+The person raising a concern may not know the service's proper name, and the service may not be recorded in the local authority's system, leaving it without a known identifier. A complainant may only be able to describe "the agency that visits my dad in the mornings", rather than its name. Every property here is therefore optional. We recommend that this should carry at least one of fields, but the data model does not enforce this. Triage once the concern has been received can add (or correct) the identifier and name.
+
+#### Properties
+
+<span id="qocservice-identifier">identifier</span>
+: Identifier for the service, if known, such as its Care Quality Commission location ID or its identifier in the local authority's system. Optional (`0..1`). *Identifier object*. See [Identifier](#identifier).
+
+<span id="qocservice-name">name</span>
+: The name of the service, if known. Optional (`0..1`). *String*.
+
+<span id="qocservice-description">description</span>
+: Free-text description of the service, in the words of the person raising the concern. Optional (`0..1`). *String*.
+
+#### Example
+
+<div class="example">
+  <h5 id="example-qocservice">Example - QocService known only by description</h5>
+{% highlight json %}
+{
+  "@type": "QocService",
+  "description": "The home care agency that visits my dad in the mornings."
+}
+{% endhighlight %}
+</div>
 
 ### QocConcernDetail
 

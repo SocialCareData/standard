@@ -71,6 +71,20 @@ descriptions of the regulations they fall under. Also has `UNASSIGNED` and
 `other`. Registration-level regulations (4 to 7) and 20A (displaying ratings)
 are deliberately left out.
 
+## Quality-of-care concerns: recipient and service
+
+On `QualityOfCareConcern`, `recipient` (slot `qocRecipient`, `1..*`) is who the
+concern was sent to, usually the local authority, as on `Referral`. The provider
+the concern is about is `service` (slot `qocService`, `1..1`), a `QocService` with
+an optional `identifier`, `name` and `description` (slots `qocServiceIdentifier`,
+`qocServiceName`, `qocServiceDescription`). All three are optional because the
+person raising the concern may know only a description; "at least one" is
+guidance on the PUB06 page. The service sits on the concern, not on each
+`QocConcernDetail`, because triage records one detail per regulation and the
+provider would otherwise be repeated. A concern about two providers is raised as
+two concerns. `qocServiceIdentifier` shares the `identifier` predicate, as every
+module's identifier slot does.
+
 ## Response
 
 `Response` records that a response to a `Referral`, `Request` or

@@ -42,6 +42,10 @@ data_model: src/_data/model/referrals/referrals-standard.yaml
 
 {% schema_table page.data_model ConcernDetail %}
 
+### QocService
+
+{% schema_table page.data_model QocService %}
+
 ### QocConcernDetail
 
 {% schema_table page.data_model QocConcernDetail %}

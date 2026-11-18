@@ -557,6 +557,17 @@
         "description": "ref:qocConcernDescription"
       }
     },
+    "QocService": {
+      "@id": "ref:QocService",
+      "@context": {
+        "description": "ref:qocServiceDescription",
+        "identifier": {
+          "@id": "ref:identifier",
+          "@type": "@id"
+        },
+        "name": "ref:qocServiceName"
+      }
+    },
     "QualityOfCareConcern": {
       "@id": "ref:QualityOfCareConcern",
       "@context": {
@@ -571,7 +582,8 @@
         },
         "recipient": {
           "@id": "ref:qocRecipient",
-          "@type": "@id"
+          "@type": "@id",
+          "@container": "@set"
         },
         "referrer": {
           "@id": "ref:qocReferrer",
@@ -1854,12 +1866,23 @@
     },
     "qocRecipient": {
       "@id": "ref:qocRecipient",
-      "@type": "@id"
+      "@type": "@id",
+      "@container": "@set"
     },
     "qocReferrer": {
       "@id": "ref:qocReferrer",
       "@type": "@id"
     },
+    "qocService": {
+      "@id": "ref:qocService",
+      "@type": "@id"
+    },
+    "qocServiceDescription": "ref:qocServiceDescription",
+    "qocServiceIdentifier": {
+      "@id": "ref:identifier",
+      "@type": "@id"
+    },
+    "qocServiceName": "ref:qocServiceName",
     "qocSubject": {
       "@id": "ref:qocSubject",
       "@type": "@id",
@@ -2210,6 +2233,10 @@
     "role": {
       "@id": "ref:role",
       "@container": "@set"
+    },
+    "service": {
+      "@id": "ref:qocService",
+      "@type": "@id"
     },
     "serviceType": {
       "@id": "ref:serviceType",

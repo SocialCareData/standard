@@ -81,6 +81,7 @@ classes:
       - qocSubject
       - qocReferrer
       - qocRecipient
+      - qocService
       - qocConcern
       - refAssessmentQuestion
       - attachment
@@ -164,6 +165,22 @@ classes:
     slots:
       - concernType
       - concernDescription
+
+  QocService:
+    class_uri: ref:QocService
+    description: >-
+      The care provider or service a quality-of-care concern is about, as far
+      as the person raising the concern can describe it. Every property is
+      optional, because they may not know the service's name or identifier, and
+      the service may not be recorded in the local authority's system. Triage
+      can complete the details and update the record later.
+
+      Guidance for implementers:
+      * A record should carry at least one detail (most likely, the description), but this is not enforced by the model.
+    slots:
+      - qocServiceIdentifier
+      - qocServiceName
+      - qocServiceDescription
 
   QocConcernDetail:
     class_uri: ref:QocConcernDetail
@@ -345,8 +362,46 @@ slots:
     title: recipient
     range: Identifier
     required: true
+    multivalued: true
+    description: >-
+      Who was this concern sent to? Generally the local authority and
+      the Care Quality Commission.
+
+  qocService:
+    slot_uri: ref:qocService
+    title: service
+    range: QocService
+    required: true
     multivalued: false
-    description: What service is involved? (Organisation / Service identifier).
+    description: Which care provider or service is the concern about?
+
+  qocServiceIdentifier:
+    slot_uri: ref:identifier
+    title: identifier
+    range: Identifier
+    required: false
+    multivalued: false
+    description: >-
+      Identifier for the service, if known, such as its Care Quality
+      Commission location ID or its identifier in the local authority's system.
+
+  qocServiceName:
+    slot_uri: ref:qocServiceName
+    title: name
+    range: string
+    required: false
+    multivalued: false
+    description: The name of the service, if known.
+
+  qocServiceDescription:
+    slot_uri: ref:qocServiceDescription
+    title: description
+    range: string
+    required: false
+    multivalued: false
+    description: >-
+      Free-text description of the service (not the concern), in the words of the person raising
+      the concern. For example, "the carers that visit my dad in the mornings".
 
   qocConcern:
     slot_uri: ref:qocConcern
