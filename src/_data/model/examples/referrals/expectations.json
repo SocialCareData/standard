@@ -6,6 +6,13 @@
       "constraint": "sh:in"
     }
   ],
+  "invalid-qoc-missing-service.jsonld": [
+    {
+      "focus": "QualityOfCareConcern",
+      "path": "service",
+      "constraint": "sh:minCount"
+    }
+  ],
   "invalid-referral-bad-concern-code.jsonld": [
     {
       "focus": "ConcernDetail",
@@ -18,6 +25,13 @@
       "focus": "ReferralAssessmentQuestion",
       "path": "category",
       "constraint": "sh:in"
+    }
+  ],
+  "invalid-referral-missing-awareness.jsonld": [
+    {
+      "focus": "IntakePerson",
+      "path": "isAwareOfReferral",
+      "constraint": "sh:minCount"
     }
   ],
   "invalid-referral-missing-subject.jsonld": [
