@@ -27,6 +27,8 @@ from pyshacl import validate
 from rdflib import RDF, SH, Graph, URIRef
 from rdflib.plugins.shared.jsonld.context import Context
 
+from build_contexts import titles_by_iri
+
 # src/assets/scripts/validate_examples.py -> repo root is four levels up.
 REPO_ROOT = Path(__file__).resolve().parents[3]
 MODEL_ROOT = REPO_ROOT / "src" / "_data" / "model"
@@ -62,14 +64,19 @@ def constraint_name(component: URIRef) -> str:
     return "sh:" + (local.lower() if local.isupper() else local[0].lower() + local[1:])
 
 
-def term_names(raw: dict, context: Context) -> dict[str, str]:
+def term_names(raw: dict, context: Context, titles: dict[str, str] | None = None) -> dict[str, str]:
     """IRI -> the context term a record writes for it.
 
     Walks type- and property-scoped contexts too (an Organisation's `name` is
     sg:entityName), with top-level terms taking precedence. rdflib's own
     to_symbol() misses scoped terms and terms that carry type coercion.
+
+    The generated contexts accept both a slot's title and its name, so one IRI
+    can have two terms. ``titles`` (slot IRI -> title, from the schema) picks
+    the documented one where the context defines it.
     """
     names: dict[str, str] = {}
+    keys: dict[str, set[str]] = {}
     pending = [raw]
     while pending:
         scope = pending.pop(0)
@@ -78,9 +85,14 @@ def term_names(raw: dict, context: Context) -> dict[str, str]:
                 continue
             iri = definition if isinstance(definition, str) else (definition or {}).get("@id")
             if isinstance(iri, str) and not iri.startswith("@"):
-                names.setdefault(context.expand(iri) or iri, name)
+                expanded = context.expand(iri) or iri
+                names.setdefault(expanded, name)
+                keys.setdefault(expanded, set()).add(name)
             if isinstance(definition, dict) and isinstance(definition.get("@context"), dict):
                 pending.append(definition["@context"])
+    for iri, title in (titles or {}).items():
+        if title in keys.get(iri, ()):
+            names[iri] = title
     return names
 
 
@@ -123,7 +135,7 @@ def check(shapes_root: Path, update: bool) -> int:
             continue
         raw_context = module_context(rel_dir.parts[0])
         context = Context(raw_context)
-        names = term_names(raw_context, context)
+        names = term_names(raw_context, context, titles_by_iri(rel_dir.parts[0]))
         expectations_file = example_dir / EXPECTATIONS
         pinned = {} if update or not expectations_file.is_file() \
             else json.loads(expectations_file.read_text())

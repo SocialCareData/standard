@@ -25,7 +25,7 @@
     {
       "@type": "PersonalNetworkMember",
       "networkPerson": {
-        "@type": "ConnectedPerson",
+        "@type": "Person",
         "name": [
           {
             "@type": "Name",

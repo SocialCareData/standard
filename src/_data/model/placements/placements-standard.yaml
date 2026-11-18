@@ -552,6 +552,7 @@ enums:
       "Not specified":
         title: Not specified
         meaning: yns:NotSpecified
+        aliases: ["Not Specified"]
         description: Not specified.
 
   CommunicationNeed:
@@ -614,14 +615,17 @@ enums:
       "With other children recommended":
         title: With other children recommended
         meaning: la:WithOtherChildren
+        aliases: ["With Other children recommended"]
         description: Living with other children is recommended.
       "Only with other older children":
         title: Only with other older children
         meaning: la:OnlyWithOlderChildren
+        aliases: ["Only With Other older children"]
         description: The child should only live with other children who are older.
       "Only with other younger children":
         title: Only with other younger children
         meaning: la:OnlyWithYoungerChildren
+        aliases: ["Only With Other younger children"]
         description: The child should only live with other children who are younger.
       "No preference":
         title: No preference
@@ -714,6 +718,7 @@ enums:
       "Risk present":
         title: Risk present
         meaning: rl:RiskPresent
+        aliases: ["Risk Present"]
         description: A risk is known to be present.
 
   PlacementType:
