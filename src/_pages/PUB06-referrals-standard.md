@@ -62,7 +62,7 @@ This standard applies to a range of forms commonly called "referrals". For the p
   * requests for care needs assessments or care plan reviews;
   * information requests; and
   * professional concerns raised about an adult from engagements with a child.
-* `Requests`are made by social services and sent *outward* to statutory or non-statutory services.  They concern people who are already known to and involved with social services and may, for example, follow a decision made at the front door by a Multi-Agency Safeguarding Hub (MASH) or equivalent triage process. They include:
+* `Requests` are made by social services and sent *outward* to statutory or non-statutory services.  They concern people who are already known to and involved with social services and may, for example, follow a decision made at the front door by a Multi-Agency Safeguarding Hub (MASH) or equivalent triage process. They include:
 
   **Children's Social Care**
   * Notifications or signposting to external providers
