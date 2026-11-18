@@ -11,6 +11,7 @@ on:
       - 'src/assets/scripts/check_slot_conflicts.py'
       - 'src/assets/scripts/validate_examples.py'
       - 'src/assets/scripts/build_ontology.py'
+      - 'src/assets/scripts/build_contexts.py'
       - 'src/assets/scripts/requirements.txt'
       - '.github/workflows/validate-standards.yml'
   workflow_dispatch:
@@ -59,6 +60,26 @@ jobs:
       # repeated slot name silently replaces the earlier one.
       - name: Check the slots merged by social-care.yaml
         run: python src/assets/scripts/check_slot_conflicts.py
+
+  contexts:
+    name: JSON-LD contexts match the schemas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      # Same pin as src/assets/scripts/requirements.txt.
+      - name: Install linkml-runtime
+        run: pip install linkml-runtime==1.11.1
+
+      # The context.jsonld files are generated from the LinkML schemas. This
+      # regenerates them and fails, with a diff, if the committed ones differ:
+      # run build_contexts.py and commit the result.
+      - name: Check the generated contexts are up to date
+        run: python src/assets/scripts/build_contexts.py --check
 
   examples:
     name: Examples conform to the shapes

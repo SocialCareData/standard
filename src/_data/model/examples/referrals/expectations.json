@@ -51,7 +51,7 @@
   "invalid-response-bad-status.jsonld": [
     {
       "focus": "Response",
-      "path": "responseStatus",
+      "path": "status",
       "constraint": "sh:in"
     }
   ]

@@ -1000,6 +1000,7 @@ enums:
         description: >-
           Request for an assessment of whether the child is a child in need,
           under section 17 of the Children Act 1989.
+        aliases: ["child.cin"]
       child.s47:
         title: Escalation to s47 enquiry
         meaning: rp:ChildS47

@@ -4,12 +4,13 @@ Each data standard is a [LinkML](https://linkml.io/) schema under
 `src/_data/model/<module>/`. The LinkML YAML is the **single source of truth**.
 The OWL ontologies and SHACL shapes are generated from it automatically and
 published to [SocialCareData/ontology](https://github.com/SocialCareData/ontology);
-they are not kept in this repository.
+they are not kept in this repository. The JSON-LD contexts are generated from it
+too, but are committed here (see [JSON-LD contexts](#json-ld-contexts)).
 
 | Repository | Holds |
 | --- | --- |
-| this one | LinkML schemas, JSON-LD contexts, JSON-LD examples, release manifest |
-| [SocialCareData/ontology](https://github.com/SocialCareData/ontology) | generated OWL (`*.ttl`) and SHACL (`*-shape.ttl`) |
+| this one | LinkML schemas, generated JSON-LD contexts, JSON-LD examples, release manifest |
+| [SocialCareData/ontology](https://github.com/SocialCareData/ontology) | generated OWL (`*.ttl`) and SHACL (`*-shape.ttl`), and a copy of the contexts |
 
 Each module's own `README.md` covers what is specific to that module.
 
@@ -25,7 +26,7 @@ src/_data/model/
 ├── examples/               valid and invalid JSON-LD records, one folder per module (and profile)
 ├── social-care.yaml        umbrella schema: imports every module, no terms of its own
 ├── manifest.yaml           module versions that make up an ontology release
-├── context.jsonld          all module JSON-LD contexts combined
+├── context.jsonld          references every module's JSON-LD context (maintained by hand)
 └── imports.json            maps module IRIs to local files for the LinkML tools
 ```
 
@@ -65,8 +66,19 @@ enums:
 ```
 
 Quote keys that contain spaces or look like booleans or numbers (`"No"`, `"-8"`).
-In `context.jsonld`, map vocabulary properties with `"@type": "@vocab"` so their
-values expand to the concept IRI and can be validated.
+The generated JSON-LD context expands each code, its `title` and the concept's
+local name (`WithinFiveDays`) to the concept IRI, so SHACL can validate the value.
+To accept another spelling as well, list it under `aliases`:
+
+```yaml
+      "Risk present":
+        title: Risk present
+        meaning: rl:RiskPresent
+        aliases: ["Risk Present"]       # also accepted in data
+```
+
+Codes and aliases must be unique within the enum, and must not contain `:` or `/`
+(JSON-LD would read them as IRIs).
 
 ### Pattern messages
 
@@ -95,6 +107,41 @@ a value as a CURIE, and gen-shacl fails with "does not look like a valid URI".
 When one class needs different cardinalities in different contexts, a **core**
 schema defines everything once and **profile** schemas import it and redefine the
 root class. Person does this; see [person/README.md](person/README.md).
+
+## JSON-LD contexts
+
+Each module's `context.jsonld` is **generated** from the LinkML YAML by
+[`build_contexts.py`](../../assets/scripts/build_contexts.py). Don't edit them
+by hand: change the schema and regenerate. CI fails a pull request whose
+committed contexts differ from the generated ones. The root `context.jsonld` is
+not generated: it is maintained by hand and only lists references to the module
+contexts.
+
+```bash
+pip install -r src/assets/scripts/requirements.txt
+python src/assets/scripts/build_contexts.py            # regenerate every context
+python src/assets/scripts/build_contexts.py --check    # what CI runs: fail, with a diff, if any is stale
+```
+
+How the schema maps to the context:
+
+| In the schema | In the context |
+| --- | --- |
+| slot `title` (or the slot name if it has none) | the JSON key records use. The slot name is accepted too |
+| `slot_uri` | the property IRI (`@id`) |
+| `range:` a class, or `uri` | `"@type": "@id"` |
+| `range:` date, datetime, boolean, decimal, integer | coerced to that XSD datatype |
+| `range: Any` (e.g. a FHIR Timing) | `"@type": "@json"`: kept whole as a JSON literal |
+| `multivalued: true` | `"@container": "@set"` |
+| `range:` an enum | `"@type": "@vocab"`: each code, title, concept local name and alias expands to the `meaning` IRI |
+| one JSON key used for different slots on different classes (`name` on a Person and on a Contact) | defined in a type-scoped context on each class, so records must give those objects an `@type` |
+
+A module's context covers everything it imports, so each is self-contained. For
+`person` it is generated from the core `person-standard.yaml`, which the profiles share.
+
+The `@context` written in the example records is not used for validation: both
+`validate_examples.py` and the browser validator replace it with the module
+context.
 
 ## Generating the ontology and shapes
 
