@@ -31,6 +31,14 @@ optional, plus a free-text `notes` (slot `intakeNotes`).
   the ones the core requires. The umbrella `social-care.yaml` merges the
   subject-of-care `Person`, so `IntakePerson` stays lax whichever `Person` it
   inherits from.
+- `isAwareOfReferral` (boolean, required) records whether the person knows the
+  referral or concern is being made. It is on `IntakePerson` so that it covers
+  the subject and every personal network member; it therefore also applies to
+  the subject of a quality-of-care concern. A boolean, not a code list with
+  "not known", because the person making the referral always knows whether they
+  told someone. Reasons for not telling someone, and contact instructions, go
+  in `notes` (guidance on the PUB06 page), not in their own fields. Awareness of
+  professionals is not modelled yet (it needs `ReferralInvolvement` restructured).
 - An `IntakePerson` should carry at least one detail. This cannot be expressed
   in LinkML and SHACL (`gen-shacl` ignores `any_of`), so it is implementer
   guidance on the PUB06 page, not a constraint.

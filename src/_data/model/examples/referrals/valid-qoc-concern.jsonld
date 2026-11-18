@@ -10,6 +10,7 @@
   "subject": [
     {
       "@type": "IntakePerson",
+      "isAwareOfReferral": false,
       "notes": "Resident in the ground-floor lounge, seen without water for several hours."
     }
   ],

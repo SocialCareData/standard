@@ -12,6 +12,7 @@
   "subject": [
     {
       "@type": "IntakePerson",
+      "isAwareOfReferral": true,
       "name": [
         {
           "@type": "Name",
@@ -26,11 +27,18 @@
       "@type": "PersonalNetworkMember",
       "networkPerson": {
         "@type": "IntakePerson",
+        "isAwareOfReferral": true,
         "name": [
           {
             "@type": "Name",
             "givenName": ["Mary"],
             "familyName": "Smith"
+          }
+        ],
+        "contact": [
+          {
+            "@type": "Contact",
+            "telephone": ["07700 900123"]
           }
         ]
       },

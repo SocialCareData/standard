@@ -1510,6 +1510,10 @@
       }
     },
     "involvementDescription": "ref:involvementDescription",
+    "isAwareOfReferral": {
+      "@id": "ref:isAwareOfReferral",
+      "@type": "xsd:boolean"
+    },
     "isDeceased": {
       "@id": "ref:isDeceased",
       "@type": "xsd:boolean"

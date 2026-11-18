@@ -12,6 +12,7 @@
   "subject": [
     {
       "@type": "IntakePerson",
+      "isAwareOfReferral": true,
       "name": [
         {
           "@type": "Name",

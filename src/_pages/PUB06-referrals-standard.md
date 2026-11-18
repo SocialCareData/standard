@@ -150,6 +150,7 @@ Inward, person-centric, point-of-entry referral into social services.
   "subject": [
     {
       "@type": "IntakePerson",
+      "isAwareOfReferral": true,
       "name": [
         {
           "@type": "Name",
@@ -512,11 +513,21 @@ A concern about a provider that puts a particular person at risk of harm is also
 
 ### IntakePerson
 
-A person as first recorded when their details enter social care: the subject of a referral, the subject of a quality-of-care concern, or a member of the subject's personal network. `IntakePerson` has every property of the [Person Standard's Person](/PUB01_person_standard#person), but all of them are optional, and it adds a free-text `notes` property.
+A person as first recorded when their details enter social care: the subject of a referral, the subject of a quality-of-care concern, or a member of the subject's personal network. `IntakePerson` has every property of the [Person Standard's Person](/PUB01_person_standard#person), but all of them are optional. It adds a required `isAwareOfReferral` and a free-text `notes` property.
 
 The person raising a referral often knows only part of the picture. A police officer called to a domestic disturbance may know the address of a child they saw but not the child's name. A neighbour may know a name and nothing else. Sometimes all that can be given is an account ("I saw a woman in distress at the bus station") that is still worth recording, because it may line up with other referrals.
 
 An `IntakePerson` should carry at least one detail, whether a name, an address, an identifier or notes. The data model does not enforce this, so systems capturing referrals should check it when the form is completed.
+
+Contact details, such as a phone number or email address, go in the Person Standard's `contact` and `address` properties. Any detail regarding getting in touch with the person (eg. when or how it is safe to contact them, or what to avoid) should be written in in `notes`.
+
+#### Awareness of the referral
+
+Referrals should generally be made with the knowledge of the person being referred and, for a child, their parents or carers, unless telling them could put the child or someone else at greater risk of harm. `isAwareOfReferral` records whether each person knows that the referral or concern is being made. It is required for the subject and for each member of their personal network, because the team receiving the referral needs to know who has been told before contacting anyone.
+
+`isAwareOfReferral` concerns awareness of the *referral itself*, not of the problem it describes, so the person making the referral will always know the answer: either they told the person, or they did not. However, being aware is not the same as consenting; where a form asks about consent, record it as a locally configured question in the `SUBJECT.CONSENT_CAPACITY` category (see [ReferralAssessmentQuestion](#referralassessmentquestion)).
+
+Where a person is not aware of the referral, say why in `notes`, for example because telling them could increase the risk to the child, or because they could not be reached.
 
 Once the person is identified and recorded in a case management system, their details can be completed and checked against the [subject of care](/PUB01_person_standard#person) or [connected person](/PUB01_person_standard#connected-person-profile) profile of the Person Standard.
 
@@ -525,8 +536,11 @@ Once the person is identified and recorded in a case management system, their de
 <span id="intakeperson-person">Person properties</span>
 : `identifier`, `name`, `dateOfBirth`, `isDeceased`, `deceasedDate`, `address`, `contact`, `genderCode`, `sexCode`, `ethnicityCode`, `relatedPerson`, `primaryContactProfessional`, `matchedPersonRef`, `aboutMe` and `communication`, as defined in the [Person Standard](/PUB01_person_standard#person). All are optional.
 
+<span id="intakeperson-isAwareOfReferral">isAwareOfReferral</span>
+: Does this person know that the referral or concern is being made? Required (`1..1`). *Boolean*. See [Awareness of the referral](#awareness-of-the-referral).
+
 <span id="intakeperson-notes">notes</span>
-: Free-text notes about the person, such as an overall account of who they are and what was seen, where little else is known. Optional (`0..1`). *String*.
+: Free-text notes about the person, such as an overall account of who they are and what was seen, where little else is known. Also where to record how to contact the person safely, and why they are not aware of the referral, if they are not. Optional (`0..1`). *String*.
 
 #### Example
 
@@ -535,6 +549,7 @@ Once the person is identified and recorded in a case management system, their de
 {% highlight json %}
 {
   "@type": "IntakePerson",
+  "isAwareOfReferral": false,
   "address": [
     {
       "@type": "Address",
@@ -543,7 +558,7 @@ Once the person is identified and recorded in a case management system, their de
       "postcode": "AB1 2CD"
     }
   ],
-  "notes": "Child of about 5 or 6 seen at the property while officers attended a reported domestic disturbance. Name not known."
+  "notes": "Child of about 5 or 6 seen at the property while officers attended a reported domestic disturbance. Name not known. The family were not told about the referral, as officers believed it could put the child at greater risk."
 }
 {% endhighlight %}
 </div>

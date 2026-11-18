@@ -12,6 +12,7 @@
   "subject": [
     {
       "@type": "IntakePerson",
+      "isAwareOfReferral": false,
       "address": [
         {
           "@type": "Address",
@@ -20,7 +21,7 @@
           "postcode": "AB1 2CD"
         }
       ],
-      "notes": "Child of about 5 or 6 seen at the property while officers attended a reported domestic disturbance. Name not known."
+      "notes": "Child of about 5 or 6 seen at the property while officers attended a reported domestic disturbance. Name not known. The family were not told about the referral, as officers believed it could put the child at greater risk."
     }
   ],
   "referrer": {
