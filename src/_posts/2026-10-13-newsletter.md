@@ -23,9 +23,7 @@ Each use case is supported by a set of standards that define both what informati
 
 Visit the [use cases](/use_cases) and [standards](/publications) sections of the website to learn more.
 
-<img width="1216" height="618" alt="image" src="https://github.com/user-attachments/assets/ef81673f-8d49-492d-9cfb-1c1dffd28e0f" />
-
-_Figure 1: Fifteen use cases grouped into six categories across children's and adult social care_
+![Figure 1: Fifteen use cases grouped into six categories across children's and adult social care](/assets/img/use-cases.png)
 
 ### Get involved
 
