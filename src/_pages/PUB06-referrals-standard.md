@@ -28,6 +28,8 @@ non_technical_summary: |
   The three main objects -- `Referral` (used for inward, person-centric referrals into social care), `Request` (used for outward requests for services, originating from social care), and `QualityOfCareConcern` (used for reporting a quality-of-care concern) -- each have a set of core fields, but in a similar fashion to our [Assessments and Plans standard](/PUB05_assessments_and_plans_standard), also facilitate customisation, with local authorities able to build their own locally-configured question and answer pairs. In this way our standard provides a technical backbone, a skeleton, for requests, referrals, and concerns to follow, rather than dictating exactly what information should and should not be captured in them.
 
   We also model `Response` objects to provide a basic, common pattern for recording answers given to referrals, requests, and quality-of-care concerns.
+
+  **Terminology**: The three objects at the core of this standard (Referrals, Requests, and Quality-of-Care Concerns) are all colloquially named "referrals" in the world of social care. Our terminology is not intended to replace or prescribe the terminology used by social care practitioners and organisations, only to disambiguate different data patterns in our standard.
 ---
 
 <a href="/PUB06_referrals_standard_table" style="float: right;"><img src="/assets/icon/table-view.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Table View</a>
