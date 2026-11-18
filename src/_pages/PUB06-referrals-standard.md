@@ -46,51 +46,69 @@ This standard aims to define a common, machine-readable format for referrals, re
 
 <p class="data-model-diagram"><img src="/assets/img/referrals/referrals_taxonomy.svg" alt="Taxonomy of referral types that are in the scope of this standard" title="Taxonomy of referral types"></p>
 
-This standard applies to a range of forms commonly called "referrals". For the purposes of the standard, we designate three distinct "patterns" that these forms take. These terms describe how information is structured within the standard, and are not intended to replace or prescribe the terminology used by social care practitioners and organisations. The three patterns are:
-* `Referrals` are made *into* social services by a person themselves, their family, a professional (like their teacher), or a member of the public. They generally represent a "point-of-entry" into social care, where the person may not previously have been known to services. They include:
+This standard applies to a range of forms commonly called "referrals". For the purposes of the standard, we designate three distinct "patterns" that these forms take. These terms describe how information is structured within the standard, and are not intended to replace or prescribe the terminology used by social care practitioners and organisations. The three patterns are `Referrals`, `Requests` and `QualityOfCareConcerns`, and any of them can have a `Response`.
 
-  **Children's Social Care**
-  * safeguarding concerns;
-  * information requests;
-  * professional concerns raised about a child from engagements with an adult; and
-  * care leaver support.
+#### Referrals {#scope-referrals}
 
-  **Adults' Social Care**
-  * contacts or requests for support;
-  * safeguarding concerns;
-  * requests for occupational therapy or home equipment;
-  * requests for care needs assessments or care plan reviews;
-  * information requests; and
-  * professional concerns raised about an adult from engagements with a child.
-* `Requests` are made by social services and sent *outward* to statutory or non-statutory services.  They concern people who are already known to and involved with social services and may, for example, follow a decision made at the front door by a Multi-Agency Safeguarding Hub (MASH) or equivalent triage process. They include:
+`Referrals` are made *into* social services by a person themselves, their family, a professional (like their teacher), or a member of the public. They generally represent a "point-of-entry" into social care, where the person may not previously have been known to services.
 
-  **Children's Social Care**
-  * Notifications or signposting to external providers
-  * outcomes from MASH triage;
-  * requests to statutory services outside of social care, like Child and Adolescent Mental Health Services (CAMHS) or providers of advocacy services; and
-  * requests to non-statutory services, like voluntary or community organisations.
+##### Children's Social Care {#scope-referrals-csc}
 
-  **Adults' Social Care**
-  * notifications or signposting to external providers;
-  * outcomes from front-door triage;
-  * requests to statutory services outside of social care, like NHS services; and
-  * requests to non-statutory services, like voluntary or community organisations.
-* `QualityOfCareConcerns` relate to a care service rather than primarily to an individual receiving care. They can be raised by anyone, including the person receiving care, and may be made anonymously. This pattern is primarily intended for use in Adults’ Social Care.
+* safeguarding concerns;
+* information requests;
+* professional concerns raised about a child from engagements with an adult; and
+* care leaver support.
+
+##### Adults' Social Care {#scope-referrals-asc}
+
+* contacts or requests for support;
+* safeguarding concerns;
+* requests for occupational therapy or home equipment;
+* requests for care needs assessments or care plan reviews;
+* information requests; and
+* professional concerns raised about an adult from engagements with a child.
+
+#### Requests {#scope-requests}
+
+`Requests` are made by social services and sent *outward* to statutory or non-statutory services. They concern people who are already known to and involved with social services and may, for example, follow a decision made at the front door by a Multi-Agency Safeguarding Hub (MASH) or equivalent triage process.
+
+##### Children's Social Care {#scope-requests-csc}
+
+* notifications or signposting to external providers;
+* outcomes from MASH triage;
+* requests to statutory services outside of social care, like Child and Adolescent Mental Health Services (CAMHS) or providers of advocacy services; and
+* requests to non-statutory services, like voluntary or community organisations.
+
+##### Adults' Social Care {#scope-requests-asc}
+
+* notifications or signposting to external providers;
+* outcomes from front-door triage;
+* requests to statutory services outside of social care, like NHS services; and
+* requests to non-statutory services, like voluntary or community organisations.
+
+#### Quality-of-care concerns {#scope-qoc}
+
+`QualityOfCareConcerns` relate to a care service rather than primarily to an individual receiving care. They can be raised by anyone, including the person receiving care, and may be made anonymously. This pattern is primarily intended for use in Adults’ Social Care.
+
+#### Responses {#scope-responses}
 
 Any of these objects can have a corresponding `Response`: a record that a response was sent or received, for example an acknowledgement or a decision to accept or decline.
 
 #### Out of scope
+
 Importantly, this work standardises the back-end data architecture behind each of these profiles, not the front-end that social workers see and interact with.
 
 Our standard does not apply to the following "referral" patterns:
 
-  **Children's Social Care**
-  * quality-of-care concerns raised about children's services, including those that take the form of Local Authority Designated Officer (LADO) referral; and
-  * cross-authority transfers of care.
+##### Children's Social Care {#out-of-scope-csc}
 
-  **Adult's Social Care**
-  * requesting authorisation for Deprivation of Liberty Safeguards (DoLS) or Liberty Protection Safeguards (LPS); and
-  * hospital discharge and Discharge to Assess (D2A).
+* quality-of-care concerns raised about children's services, including those that take the form of Local Authority Designated Officer (LADO) referral; and
+* cross-authority transfers of care.
+
+##### Adults' Social Care {#out-of-scope-asc}
+
+* requesting authorisation for Deprivation of Liberty Safeguards (DoLS) or Liberty Protection Safeguards (LPS); and
+* hospital discharge and Discharge to Assess (D2A).
 
 Our standard also does not apply to emergencies where someone is in immediate danger, which should be reported to the emergency services by calling 999. See [Emergencies](#emergencies).
 
