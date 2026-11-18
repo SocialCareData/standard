@@ -73,4 +73,9 @@
     top: 0;
     width: 238px;
   }
+
+  /* Expand large data model diagrams. */
+  article:has(> .related-pages) .data-model-diagram {
+    margin-right: -282px;
+  }
 }
