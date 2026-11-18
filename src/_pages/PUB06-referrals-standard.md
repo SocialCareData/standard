@@ -78,6 +78,20 @@ Our standard does not apply to the following "referral" patterns:
 * (Children's Social Care) Cross-authority transfers of care
 * (Adults' Social Care) Requesting authorisation for Deprivation of Liberty Safeguards (DoLS) or Liberty Protection Safeguards (LPS)
 * (Adults' Social Care) Hospital discharge and Discharge to Assess (D2A)
+* Emergencies where someone is in immediate danger, which should be reported to the emergency services by calling 999. See [Emergencies](#emergencies).
+
+#### Terminology and ISO 13940
+
+[ISO 13940:2026](https://www.iso.org/standard/91284.html) (known as ContSys, and accessible via [contsys.org](https://contsys.org/)) defines a system of concepts for continuity of care, and its second edition brings social care into its core model. It uses several of the same terms as our standard, but with different meanings:
+
+| Term | In ISO 13940 | In this standard |
+| --- | --- | --- |
+| Referral | A request for care made by a *care professional*. A request from anyone else is an "initial request for care". | A `Referral` can be made by anyone, including the person themselves, their family or a member of the public. |
+| Request | A "request for service": a care professional asks a care provider to deliver a service. | Close to a `Request`, except that a `Request` can also be a notification, which ISO 13940 would call a care communication. |
+| Concern | A "health concern": an extract of the health record, containing everything linked to one health issue. | The reason for a referral (`ConcernDetail`), or a report about the quality of a care service (`QualityOfCareConcern`). |
+| Response | ISO 13940 has no response concept. The nearest is a "care commitment", in which a care provider accepts responsibility for a person's care. | A `Response` records that a response was sent or received. Even an `accepted` response does not necessitate a care commitment. |
+
+In ISO 13940 terms, a `Referral`, a `Request` and a `QualityOfCareConcern` are all requests for care. This standard does not claim conformance to ISO 13940.
 
 ### Audience
 
@@ -92,6 +106,10 @@ This document is for developers of Case Management Systems, single-view portals,
 ### Referral
 
 Inward, person-centric, point-of-entry referral into social services.
+
+#### Emergencies
+
+A referral is not the way to report an emergency. If someone is in immediate danger, established safeguarding guidance suggests that referral forms should encourage referrers to call emergency services first. A referral can follow once the immediate danger has been dealt with. Our standard does not include a property for the urgency of a referral.
 
 #### Properties
 
@@ -783,6 +801,8 @@ The types of concern about a care provider or service. Each type is one of the f
 ### Request Purposes Taxonomy
 
 The purposes of an outward request, made at any stage of a person's involvement with social care. Some purposes are the decisions typically made at the front door, such as by a MASH under the Children Act 1989, or by an adult social care front door under the Care Act 2014. Where a purpose has a statutory basis or implies urgency, the code carries it. See [Request](#request).
+
+This list is likely to change as safeguarding practice and workflows change, and it will be updated accordingly. Out-of-date terms will not be removed from this list, but will be demaracated as not-for-use.
 
 {% schema_table page.data_model RequestPurposeCode expanded %}
 

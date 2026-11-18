@@ -39,6 +39,8 @@ classes:
     class_uri: ref:Referral
     description: >-
       Inward, person-centric, point-of-entry referral into social services.
+      A referral is not the way to report an emergency: where someone is in
+      immediate danger, the emergency services should be called on 999 first.
     slots:
       - refIdentifier
       - referralType
@@ -1049,7 +1051,10 @@ enums:
       go to a team within the same local authority (for example, the team that
       carries out child in need assessments) as well as to an outside service,
       whether statutory (eg. advocacy or CAMHS) or non-statutory (eg. a community
-      organisation)
+      organisation).
+      This list is likely to change as safeguarding practice and workflows
+      change, and will be updated accordingly, most likely by adding new
+      purposes.
     permissible_values:
       notification:
         title: Notification or signposting
