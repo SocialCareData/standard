@@ -12,6 +12,7 @@ on:
       - 'src/assets/scripts/validate_examples.py'
       - 'src/assets/scripts/build_ontology.py'
       - 'src/assets/scripts/build_contexts.py'
+      - 'src/assets/scripts/build_csvw.py'
       - 'src/assets/scripts/requirements.txt'
       - '.github/workflows/validate-standards.yml'
   workflow_dispatch:
@@ -81,6 +82,11 @@ jobs:
       - name: Check the generated contexts are up to date
         run: python src/assets/scripts/build_contexts.py --check
 
+      # csv-metadata.json (CSVW) is generated from the same schemas, for the
+      # modules that map slots to CSV columns. Same rule: regenerate, commit.
+      - name: Check the generated CSV metadata is up to date
+        run: python src/assets/scripts/build_csvw.py --check
+
   examples:
     name: Examples conform to the shapes
     runs-on: ubuntu-latest
@@ -95,6 +101,15 @@ jobs:
 
       - name: Install LinkML and pySHACL
         run: pip install -r src/assets/scripts/requirements.txt
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Install the latest data-standard-validator
+        run: |
+          npm install -g @theodi/data-standard-validator@latest
+          data-standard-validator --version
 
       # Builds the shapes from this commit's schemas, then checks every example
       # and the violations pinned in each folder's expectations.json.

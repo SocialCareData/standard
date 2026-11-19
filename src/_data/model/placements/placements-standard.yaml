@@ -27,8 +27,14 @@ prefixes:
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
   sh: http://www.w3.org/ns/shacl#
+  csvw: http://www.w3.org/ns/csvw#
+  dsv: https://theodi.github.io/data-standard-validator/ns#
 default_prefix: pl
 default_range: string
+annotations:
+  dsv:headerMatch: first-line
+  # Separates the values of a multivalued slot within one cell.
+  csvw:separator: ","
 imports:
   - linkml:types
 
@@ -174,6 +180,8 @@ slots:
     required: true
     multivalued: false
     description: Identifier unique to each child within the LA, allowing linking between multiple referrals for the same child.
+    annotations:
+      csvw:titles: child_ID
   placementAvailability:
     slot_uri: pl:placementAvailability
     range: PlacementAvailability
@@ -222,6 +230,8 @@ slots:
     description: >-
       When the child needs to be placed by. Captures urgency rather than an
       absolute date.
+    annotations:
+      csvw:titles: when_placement_is_needed_by
   siblingCount:
     slot_uri: pl:siblingCount
     range: nonNegativeInteger
@@ -231,12 +241,16 @@ slots:
       How many siblings the child should ideally be placed with according to the
       care plan. 0 if the child has no siblings or is not to be placed with
       siblings.
+    annotations:
+      csvw:titles: number_of_siblings_to_place_with
   uascStatus:
     slot_uri: pl:uascStatus
     range: UASCStatus
     required: true
     multivalued: false
     description: Whether the child is an unaccompanied asylum-seeking child (UASC).
+    annotations:
+      csvw:titles: uasc
 
   # --- PlacementRequirements ---
   communicationNeeds:
@@ -245,6 +259,8 @@ slots:
     required: true
     multivalued: false
     description: Whether the child has any communication, language or learning needs.
+    annotations:
+      csvw:titles: communication_language_learning_needs
   specificCommunicationRequirement:
     slot_uri: pl:specificCommunicationRequirement
     range: CommunicationNeed
@@ -253,6 +269,8 @@ slots:
     description: >-
       Specific communication or language requirement (ESOL, BSL, Makaton, Other,
       None). Multi-valued: a placement may have several.
+    annotations:
+      csvw:titles: specific_communication_and_language_requirements
   culturalNeeds:
     slot_uri: pl:culturalNeeds
     range: CulturalNeed
@@ -261,6 +279,8 @@ slots:
     description: >-
       Whether the placement must accommodate specific cultural needs (e.g.,
       access to places of worship).
+    annotations:
+      csvw:titles: cultural_needs
   livingCompanions:
     slot_uri: pl:livingCompanions
     range: LivingArrangement
@@ -269,12 +289,16 @@ slots:
     description: >-
       Recommendation as to who the child can be cared for alongside (e.g., solo
       placement, with other children, only older children).
+    annotations:
+      csvw:titles: who_can_the_child_be_cared_for_alongside
   pets:
     slot_uri: pl:pets
     range: PetsAllowance
     required: true
     multivalued: false
     description: Whether the child can or must live in a home with pets/animals.
+    annotations:
+      csvw:titles: can_child_live_with_pets
   additionalSupport:
     slot_uri: pl:additionalSupport
     range: SupportType
@@ -283,24 +307,32 @@ slots:
     description: >-
       Additional support provision required (e.g., additional supervision,
       therapeutic support, taxis to school).
+    annotations:
+      csvw:titles: additional_support
   homeAdaptationRequired:
     slot_uri: pl:homeAdaptationRequired
     range: boolean
     required: false
     multivalued: false
     description: Whether adaptations to the home are required to accommodate the child's needs.
+    annotations:
+      csvw:titles: adaptation_to_the_home
   deprivationOfLiberty:
     slot_uri: pl:deprivationOfLiberty
     range: boolean
     required: false
     multivalued: false
     description: Whether the child has a Deprivation of Liberty Order (DOL).
+    annotations:
+      csvw:titles: dol
   needsAssessmentMethod:
     slot_uri: pl:needsAssessmentMethod
     range: NeedsAssessmentMethod
     required: true
     multivalued: false
     description: How the child's needs were assessed.
+    annotations:
+      csvw:titles: needs_assessment
 
   # --- PlacementRecommendation ---
   fosterCareSuitability:
@@ -309,18 +341,24 @@ slots:
     required: true
     multivalued: false
     description: Suitability of foster care for this child, as judged by the social worker.
+    annotations:
+      csvw:titles: foster_care_suitability
   residentialCareSuitability:
     slot_uri: pl:residentialCareSuitability
     range: SuitabilityLevel
     required: true
     multivalued: false
     description: Suitability of residential care for this child.
+    annotations:
+      csvw:titles: residential_care_suitability
   supportedAccommodationSuitability:
     slot_uri: pl:supportedAccommodationSuitability
     range: SuitabilityLevel
     required: true
     multivalued: false
     description: Suitability of supported accommodation for this child.
+    annotations:
+      csvw:titles: supported_accommodation_suitability
 
   # --- RiskAssessment ---
   riskSelfHarm:
@@ -329,66 +367,88 @@ slots:
     required: true
     multivalued: false
     description: Whether the child is known to be at risk of self-harm.
+    annotations:
+      csvw:titles: risk_to_child_self_harm
   riskCriminalExploitation:
     slot_uri: pl:riskCriminalExploitation
     range: RiskLevel
     required: true
     multivalued: false
     description: Whether the child is known to be at risk of criminal exploitation.
+    annotations:
+      csvw:titles: risk_to_child_criminal_exploitation
   riskDrugAlcohol:
     slot_uri: pl:riskDrugAlcohol
     range: RiskLevel
     required: true
     multivalued: false
     description: Whether the child is known to be at risk of drug and alcohol use.
+    annotations:
+      csvw:titles: risk_to_child_drug_and_alcohol_use
   riskEatingDisorder:
     slot_uri: pl:riskEatingDisorder
     range: RiskLevel
     required: true
     multivalued: false
     description: Whether the child is known to be at risk of an eating disorder.
+    annotations:
+      csvw:titles: risk_to_child_eating_disorder
   riskMissing:
     slot_uri: pl:riskMissing
     range: RiskLevel
     required: true
     multivalued: false
     description: Whether the child is known to be at risk of going missing.
+    annotations:
+      csvw:titles: risk_to_child_going_missing
   riskSexualExploitation:
     slot_uri: pl:riskSexualExploitation
     range: RiskLevel
     required: true
     multivalued: false
     description: Whether the child is known to be at risk of sexual exploitation.
+    annotations:
+      csvw:titles: risk_to_child_sexual_exploitation
   riskToOthersPhysical:
     slot_uri: pl:riskToOthersPhysical
     range: RiskLevel
     required: true
     multivalued: false
     description: Whether there is a known risk of physical harm to others.
+    annotations:
+      csvw:titles: risk_to_others_physical_harm
   riskToOthersSexual:
     slot_uri: pl:riskToOthersSexual
     range: RiskLevel
     required: true
     multivalued: false
     description: Whether there is a known risk of sexual harm to others.
+    annotations:
+      csvw:titles: risk_to_others_sexual_harm
   riskToOthersFire:
     slot_uri: pl:riskToOthersFire
     range: RiskLevel
     required: true
     multivalued: false
     description: Whether there is a known risk of fire-setting.
+    annotations:
+      csvw:titles: risk_to_others_fire_setting
   riskToOthersAnimals:
     slot_uri: pl:riskToOthersAnimals
     range: RiskLevel
     required: true
     multivalued: false
     description: Whether there is a known risk of harm to animals.
+    annotations:
+      csvw:titles: risk_to_others_harm_to_animals
   riskToOthersCriminal:
     slot_uri: pl:riskToOthersCriminal
     range: RiskLevel
     required: true
     multivalued: false
     description: Whether there is a known risk of criminal exploitation for others in the home.
+    annotations:
+      csvw:titles: risk_to_others_criminal_exploitation
 
   # --- ActualPlacement ---
   placementType:
@@ -397,18 +457,24 @@ slots:
     required: true
     multivalued: false
     description: The type of placement the child received.
+    annotations:
+      csvw:titles: placement_type
   placementStartDate:
     slot_uri: pl:placementStartDate
     range: date
     required: true
     multivalued: false
     description: The date the placement started.
+    annotations:
+      csvw:titles: placement_start_date
   placementSource:
     slot_uri: pl:placementSource
     range: PlacementSource
     required: true
     multivalued: false
     description: How the placement was sourced.
+    annotations:
+      csvw:titles: placement_sourced
   providerURN:
     slot_uri: pl:providerURN
     range: string
@@ -417,6 +483,8 @@ slots:
     description: >-
       Provider Unique Reference Number, linked to Ofsted registration. Allows the
       placement to be linked to Ofsted data about the provider.
+    annotations:
+      csvw:titles: provider_URN
   placementLocation:
     slot_uri: pl:placementLocation
     range: string
@@ -428,12 +496,15 @@ slots:
       placement location.
     annotations:
       sh:message: "Use the first part of a UK postcode (the outward code) in upper case - for example `AB1`."
+      csvw:titles: placement_location
   isLocationPreferred:
     slot_uri: pl:isLocationPreferred
     range: boolean
     required: true
     multivalued: false
     description: Whether the actual placement location was a preferred location.
+    annotations:
+      csvw:titles: preferrability_of_placement_location
   nonPreferredLocationReason:
     slot_uri: pl:nonPreferredLocationReason
     range: NonPreferredLocationReason
@@ -442,6 +513,8 @@ slots:
     description: >-
       The reason the placement was not found in the preferred location. Use 'Not
       applicable' when the placement was in the preferred location.
+    annotations:
+      csvw:titles: isLocationPreferred
   isEducationContinuous:
     slot_uri: pl:isEducationContinuous
     range: boolean
@@ -450,12 +523,19 @@ slots:
     description: >-
       Whether the child's education was continuous (i.e., not disrupted) as a
       result of this placement.
+    annotations:
+      csvw:titles: education_continuity
+      # The column asks whether education was *disrupted*, so "No" means it was
+      # continuous. CSVW boolean format: "<true value>|<false value>".
+      csvw:format: "No|Yes"
   siblingsPlacedTogether:
     slot_uri: pl:siblingsPlacedTogether
     range: nonNegativeInteger
     required: true
     multivalued: false
     description: How many siblings were actually placed together.
+    annotations:
+      csvw:titles: how_many_siblings_were_placed_together
   totalWeeklyCost:
     slot_uri: pl:totalWeeklyCost
     range: decimal
@@ -464,6 +544,8 @@ slots:
     minimum_value: 100
     maximum_value: 100000
     description: Total weekly fee paid for the placement, excluding VAT. Expected to be between £100 and £100,000.
+    annotations:
+      csvw:titles: total_weekly_cost
   costIncludesAdditionalPackages:
     slot_uri: pl:costIncludesAdditionalPackages
     range: boolean
@@ -474,6 +556,8 @@ slots:
       services beyond the core placement fee, such as additional staffing (e.g.
       2:1 or waking night cover), therapeutic or clinical input, education
       provision, or other bespoke support agreed for the child.
+    annotations:
+      csvw:titles: total_weekly_cost_additions
 
   # --- QualityAssurance ---
   referralDate:
@@ -482,36 +566,48 @@ slots:
     required: true
     multivalued: false
     description: Date of when referral was captured on the Case Management System.
+    annotations:
+      csvw:titles: date_entry_referral
   placementDateAdmin:
     slot_uri: pl:placementDateAdmin
     range: date
     required: true
     multivalued: false
     description: Date of agreed placement start captured on the Case Management System.
+    annotations:
+      csvw:titles: date_entry_placement_admin
   placementOfficerName:
     slot_uri: pl:placementOfficerName
     range: string
     required: true
     multivalued: false
     description: Name of the officer who recorded the actual placement information.
+    annotations:
+      csvw:titles: name_of_officer_placement
   costDate:
     slot_uri: pl:costDate
     range: date
     required: true
     multivalued: false
     description: Date when placement cost data was captured on the Case Management System.
+    annotations:
+      csvw:titles: date_entry_placement_cost
   referralOfficerName:
     slot_uri: pl:referralOfficerName
     range: string
     required: false
     multivalued: false
     description: Name of the officer who recorded the referral information. LA-internal QA only.
+    annotations:
+      csvw:titles: name_of_officer_referral
   costOfficerName:
     slot_uri: pl:costOfficerName
     range: string
     required: false
     multivalued: false
     description: Name of the officer who recorded the placement cost data.
+    annotations:
+      csvw:titles: name_of_officer_placement_cost
 
 # ---------------------------------------------------------------------------
 # Enums (controlled vocabularies / SKOS concept schemes)
@@ -580,6 +676,8 @@ enums:
         title: None
         meaning: cn:None
         description: No specific communication or language requirements.
+        annotations:
+          csvw:titles: N/A
 
   CulturalNeed:
     enum_uri: pl:cultural-need
@@ -679,6 +777,8 @@ enums:
         title: Not applicable
         meaning: st:NotApplicable
         description: No additional support is required.
+        annotations:
+          csvw:titles: N/A
       Other:
         title: Other
         meaning: st:Other
@@ -755,6 +855,7 @@ enums:
       "Other formalised tool":
         title: Other formalised tool
         meaning: nam:OtherFormalisedTool
+        aliases: ["Other formalised need assessment tool"]
         description: Needs assessed using another formalised needs-assessment tool.
       "Other social worker assessment":
         title: Other social worker assessment
