@@ -512,7 +512,7 @@ Recording the type of concern (eg.neglect, physical abuse or financial abuse) as
 
 ### Why referrers should not have to choose a type
 
-The concern types in this standard follow the categories in statutory guidance: the four categories of abuse and neglect for children under the Children Act 1989 (with the addition of extrafamilial harm), and the types of abuse and neglect for adults under the Care Act 2014. Deciding which of these categories a concern falls into is often *a professional judgement*; a neighbour, a member of the public, or even a professional from outside social care (a police officer, a teacher, a GP) may know that something is wrong without knowing whether it amounts to neglect or emotional abuse.
+The concern types in this standard follow the categories in statutory guidance: the four categories of abuse and neglect for children under the [Children Act 1989](https://www.legislation.gov.uk/ukpga/1989/41/contents) (with the addition of extrafamilial harm), and the types of abuse and neglect for adults under the [Care Act 2014](https://www.legislation.gov.uk/ukpga/2014/23/contents). Deciding which of these categories a concern falls into is often *a professional judgement*; a neighbour, a member of the public, or even a professional from outside social care (a police officer, a teacher, a GP) may know that something is wrong without knowing whether it amounts to neglect or emotional abuse.
 
 If referrers are made to choose, some will guess, and a wrong type can send a referral down the wrong route. Some may be put off completing the referral at all. But if the type is simply left optional, therefore reducing the burden on these referrers, many referrals will arrive without one, and the benefits of the standard are lost.
 
