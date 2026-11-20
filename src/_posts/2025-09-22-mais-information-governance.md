@@ -7,6 +7,7 @@ tags:
   - MAIS
 breadcrumbs:
   - Updates
+suggest_as_related: true
 ---
 
 ## Links

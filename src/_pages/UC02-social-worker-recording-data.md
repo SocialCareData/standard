@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: Social Worker Recording
+description: This use case outlines how standards can support the the creation of written records of activities and observations following an interaction with a client, or their representative.
 breadcrumbs:
   - Use Cases
 tags:

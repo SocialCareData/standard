@@ -11,6 +11,22 @@ reference: PUB00
 version: latest
 status: draft
 data_model: src/_data/model/placements/placements-standard.yaml
+editors:
+  - name: Ivjyot S. Oberoi
+    organisation: Social Finance
+  - name: Disha Javur
+    organisation: Social Finance
+  - name: Neil Majithia
+    organisation: Open Data Institute
+  - name: Huseyin Kir
+    organisation: Open Data Institute
+other_formats:
+  - label: Table view
+    url: /PUB00_placements_standard_table
+  - label: Ontology
+    url: https://github.com/SocialCareData/ontology/blob/main/placements/placements-standard.ttl
+  - label: SHACL
+    url: https://github.com/SocialCareData/ontology/blob/main/placements/placements-standard-shape.ttl
 changelog:
   - Removed unused quality assurance fields
   - Added data validation rules
@@ -479,7 +495,7 @@ A SHACL shape ([placements-standard-shape.ttl](https://github.com/SocialCareData
 **[Validate your data in your browser](/validator)** - paste a record, choose *Children's Social Care Placements*, and see what needs fixing. Or from a terminal:
 
 ```bash
-npx @theodi/data-standard-validator -s src/_data/model/placements/placements-standard.yaml yourdata.jsonld
+npx @theodi/data-standard-validator -s https://raw.githubusercontent.com/SocialCareData/ontology/main/placements/placements-standard-shape.ttl yourdata.jsonld
 ```
 
 

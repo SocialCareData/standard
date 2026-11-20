@@ -2,9 +2,9 @@ id: https://ns.socialcaredata.io/placements
 name: placements
 title: Children's Social Care Placements Data Model
 description: >-
-  A single LinkML data model for Children's Social Care Placements Standard. Exactly matches with https://socialcaredata.github.io/spec/placements/?tab=specification and this is the initial version.
+  A single LinkML data model for Children's Social Care Placements Standard.
 license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
-version: 0.1.0
+version: 1.1.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
@@ -19,9 +19,11 @@ prefixes:
   sl: https://ns.socialcaredata.io/suitability-level#
   st: https://ns.socialcaredata.io/support-type#
   yns: https://ns.socialcaredata.io/presence-status#
+  olr: https://ns.socialcaredata.io/outof-la-reason#
   skos: http://www.w3.org/2004/02/skos/core#
   dct: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
+  sh: http://www.w3.org/ns/shacl#
 default_prefix: pl
 default_range: string
 imports:
@@ -65,12 +67,24 @@ classes:
     class_uri: pl:PlacementAvailability
     description: >-
       The referral request details: how urgently the child needs to be placed,
-      how many siblings should be placed together, and the preferred location
-      for the home search.
+      how many siblings should be placed together, whether the preferred
+      location is local, and (if out of area) why.
     slots:
       - neededBy
       - siblingCount
-      - preferredLocation
+      - isPreferredLocationLocal
+      - outOfLAReason
+      - outOfLAReasonOther
+    rules:
+      - title: outOfLAReasonOther required when outOfLAReason is 'Other'
+        preconditions:
+          slot_conditions:
+            outOfLAReason:
+              equals_string: Other
+        postconditions:
+          slot_conditions:
+            outOfLAReasonOther:
+              required: true
 
   PlacementRequirements:
     class_uri: pl:PlacementRequirements
@@ -85,8 +99,41 @@ classes:
       - livingCompanions
       - pets
       - additionalSupport
+      - additionalSupportOther
+      - culturalNeedsOther
+      - specificCommunicationRequirementOther
       - homeAdaptationRequired
       - deprivationOfLiberty
+    rules:
+      - title: culturalNeedsOther required when culturalNeeds is 'Other'
+        preconditions:
+          slot_conditions:
+            culturalNeeds:
+              equals_string: Other
+        postconditions:
+          slot_conditions:
+            culturalNeedsOther:
+              required: true
+      - title: specificCommunicationRequirementOther required when 'Other' is selected
+        preconditions:
+          slot_conditions:
+            specificCommunicationRequirement:
+              has_member:
+                equals_string: Other
+        postconditions:
+          slot_conditions:
+            specificCommunicationRequirementOther:
+              required: true
+      - title: additionalSupportOther required when additionalSupport includes 'Other'
+        preconditions:
+          slot_conditions:
+            additionalSupport:
+              has_member:
+                equals_string: Other
+        postconditions:
+          slot_conditions:
+            additionalSupportOther:
+              required: true
 
   PlacementRecommendation:
     class_uri: pl:PlacementRecommendation
@@ -123,9 +170,9 @@ classes:
   ActualPlacement:
     class_uri: pl:ActualPlacement
     description: >-
-      The placement actually arranged for the child, including total weekly
-      cost, location, provider URN, sibling co-placement and educational
-      continuity. Optional - a Placement may not (yet) have one.
+      The placement actually arranged for the child, including weekly cost (with
+      optional breakdown), location, provider URN, sibling co-placement and
+      educational continuity. Optional - a Placement may not (yet) have one.
     slots:
       - placementType
       - providerURN
@@ -134,6 +181,10 @@ classes:
       - isEducationContinuous
       - siblingsPlacedTogether
       - totalWeeklyCost
+      - coreWeeklyCost
+      - additionalSupportWeeklyCost
+      - educationWeeklyCost
+      - otherWeeklyCost
 
   QualityAssurance:
     class_uri: pl:QualityAssurance
@@ -210,7 +261,7 @@ slots:
   neededBy:
     slot_uri: pl:neededBy
     range: PlacementUrgency
-    required: false
+    required: true
     multivalued: false
     description: >-
       When the child needs to be placed by. Captures urgency rather than an
@@ -224,12 +275,27 @@ slots:
       How many siblings the child should ideally be placed with according to the
       care plan. 0 if the child has no siblings or is not to be placed with
       siblings.
-  preferredLocation:
-    slot_uri: pl:preferredLocation
-    range: string
+  isPreferredLocationLocal:
+    slot_uri: pl:isPreferredLocationLocal
+    range: boolean
+    required: true
+    multivalued: false
+    description: Is the preferred placement location in the same LA as the placing LA?
+  outOfLAReason:
+    slot_uri: pl:outOfLAReason
+    range: OutOfLAReason
     required: false
     multivalued: false
-    description: Preferred location for the home search.
+    description: If preferred placement location is in a different LA than the placing LA, why is this?
+  outOfLAReasonOther:
+    slot_uri: pl:outOfLAReasonOther
+    range: string
+    required: false
+    multivalued: true
+    description: >-
+      Free-text description of why the preferred placement location is in a
+      different LA when the standard outof-la-reason options do not apply. Used
+      when the 'Other' OutOfLAReason concept is selected.
 
   # --- PlacementRequirements ---
   communicationNeeds:
@@ -272,14 +338,41 @@ slots:
     slot_uri: pl:additionalSupport
     range: SupportType
     required: false
-    multivalued: false
+    multivalued: true
     description: >-
       Additional support provision required (e.g., additional supervision,
-      therapeutic support, taxis to school).
+      therapeutic support, taxis to school). Multi-valued.
+  additionalSupportOther:
+    slot_uri: pl:additionalSupportOther
+    range: string
+    required: false
+    multivalued: true
+    description: >-
+      Free-text description of any additional support not captured by the
+      standard SupportType options. Used when the 'Other' SupportType concept is
+      selected.
+  culturalNeedsOther:
+    slot_uri: pl:culturalNeedsOther
+    range: string
+    required: false
+    multivalued: true
+    description: >-
+      Free-text description of cultural needs not captured by the standard
+      CulturalNeed options. Used when the 'Other' CulturalNeed concept is
+      selected.
+  specificCommunicationRequirementOther:
+    slot_uri: pl:specificCommunicationRequirementOther
+    range: string
+    required: false
+    multivalued: true
+    description: >-
+      Free-text description of communication or language requirements not
+      captured by the standard CommunicationNeed options. Used when the 'Other'
+      CommunicationNeed concept is among the selected values.
   homeAdaptationRequired:
     slot_uri: pl:homeAdaptationRequired
     range: boolean
-    required: true
+    required: false
     multivalued: false
     description: Whether adaptations to the home are required to accommodate the child's needs.
   deprivationOfLiberty:
@@ -409,7 +502,12 @@ slots:
     range: string
     required: true
     multivalued: false
-    description: The location of the actual placement.
+    pattern: "^[A-Z]{1,2}[0-9][0-9A-Z]?$"
+    description: >-
+      First 3-4 characters of the postcode (UK outward code) for the actual
+      placement location.
+    annotations:
+      sh:message: "Use the first part of a UK postcode (the outward code) in upper case - for example `AB1`."
   isLocationPreferred:
     slot_uri: pl:isLocationPreferred
     range: boolean
@@ -432,10 +530,49 @@ slots:
     description: How many siblings were actually placed together.
   totalWeeklyCost:
     slot_uri: pl:totalWeeklyCost
-    range: integer
+    range: decimal
     required: true
     multivalued: false
-    description: Total weekly fee paid for the placement (actual weekly fee paid).
+    minimum_value: 100
+    maximum_value: 100000
+    description: Total weekly fee paid for the placement, excluding VAT. Expected to be between £100 and £100,000.
+  coreWeeklyCost:
+    slot_uri: pl:coreWeeklyCost
+    range: decimal
+    required: false
+    multivalued: false
+    minimum_value: 0
+    description: >-
+      Total weekly core cost: the basic price quoted by a provider to deliver the
+      service outlined in their Statement of Purpose, excluding child-specific
+      additional costs.
+  additionalSupportWeeklyCost:
+    slot_uri: pl:additionalSupportWeeklyCost
+    range: decimal
+    required: false
+    multivalued: false
+    minimum_value: 0
+    description: >-
+      Total weekly additional-support cost: costs incurred over and above the
+      core cost to meet the specific needs of the child.
+  educationWeeklyCost:
+    slot_uri: pl:educationWeeklyCost
+    range: decimal
+    required: false
+    multivalued: false
+    minimum_value: 0
+    description: >-
+      Total weekly education cost: recorded when the placement includes both care
+      and registered education provision.
+  otherWeeklyCost:
+    slot_uri: pl:otherWeeklyCost
+    range: decimal
+    required: false
+    multivalued: false
+    minimum_value: 0
+    description: >-
+      Any weekly placement costs that do not clearly fall within the core,
+      additional-support or education categories.
 
   # --- QualityAssurance ---
   referralDate:
@@ -498,6 +635,28 @@ enums:
         meaning: pu:MoreThanFiveDays
         description: Placement is needed in more than five days.
 
+  OutOfLAReason:
+    enum_uri: pl:outof-la-reason
+    title: Out of LA Reason
+    description: Controlled vocabulary describing the reason the preferred placement location is in a different LA.
+    permissible_values:
+      "Safeguarding concerns":
+        title: Safeguarding concerns
+        meaning: olr:SafeguardingConcerns
+        description: Placement is sought outside the placing LA due to safeguarding concerns.
+      "Bail conditions":
+        title: Bail conditions
+        meaning: olr:BailConditions
+        description: Placement is sought outside the placing LA because of bail conditions.
+      "Court order":
+        title: Court order
+        meaning: olr:CourtOrder
+        description: Placement is sought outside the placing LA because of a court order.
+      Other:
+        title: Other
+        meaning: olr:OutOfLAReasonOther
+        description: Another reason not listed. When this concept is selected, supply the details via the paired pl:outOfLAReasonOther free-text property on PlacementAvailability.
+
   PresenceStatus:
     enum_uri: pl:presence-status
     title: Yes / No / Not Specified
@@ -536,7 +695,7 @@ enums:
       Other:
         title: Other
         meaning: cn:Other
-        description: Another communication or language requirement not listed.
+        description: Another communication or language requirement not listed. When this concept is selected, supply the details via the paired pl:specificCommunicationRequirementOther free-text property on PlacementRequirements.
       None:
         title: None
         meaning: cn:None
@@ -562,7 +721,7 @@ enums:
       Other:
         title: Other
         meaning: cln:Other
-        description: Other cultural needs apply.
+        description: Other cultural needs apply. When this concept is selected, supply the details via the paired pl:culturalNeedsOther free-text property on PlacementRequirements.
 
   LivingArrangement:
     enum_uri: pl:living-arrangement
@@ -640,7 +799,7 @@ enums:
       Other:
         title: Other
         meaning: st:Other
-        description: Other additional support is required (please specify).
+        description: Other additional support is required. When this concept is selected, supply the details via the paired pl:additionalSupportOther free-text property on PlacementRequirements.
 
   SuitabilityLevel:
     enum_uri: pl:suitability-level

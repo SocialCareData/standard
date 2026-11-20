@@ -11,6 +11,8 @@ on:
       - 'src/assets/scripts/check_slot_conflicts.py'
       - 'src/assets/scripts/validate_examples.py'
       - 'src/assets/scripts/build_ontology.py'
+      - 'src/assets/scripts/build_contexts.py'
+      - 'src/assets/scripts/build_csvw.py'
       - 'src/assets/scripts/requirements.txt'
       - '.github/workflows/validate-standards.yml'
   workflow_dispatch:
@@ -29,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.11'
 
@@ -47,7 +49,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.11'
 
@@ -60,13 +62,38 @@ jobs:
       - name: Check the slots merged by social-care.yaml
         run: python src/assets/scripts/check_slot_conflicts.py
 
+  contexts:
+    name: JSON-LD contexts match the schemas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      # Same pin as src/assets/scripts/requirements.txt.
+      - name: Install linkml-runtime
+        run: pip install linkml-runtime==1.11.1
+
+      # The context.jsonld files are generated from the LinkML schemas. This
+      # regenerates them and fails, with a diff, if the committed ones differ:
+      # run build_contexts.py and commit the result.
+      - name: Check the generated contexts are up to date
+        run: python src/assets/scripts/build_contexts.py --check
+
+      # csv-metadata.json (CSVW) is generated from the same schemas, for the
+      # modules that map slots to CSV columns. Same rule: regenerate, commit.
+      - name: Check the generated CSV metadata is up to date
+        run: python src/assets/scripts/build_csvw.py --check
+
   examples:
     name: Examples conform to the shapes
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.11'
           cache: pip
@@ -74,6 +101,15 @@ jobs:
 
       - name: Install LinkML and pySHACL
         run: pip install -r src/assets/scripts/requirements.txt
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Install the latest data-standard-validator
+        run: |
+          npm install -g @theodi/data-standard-validator@latest
+          data-standard-validator --version
 
       # Builds the shapes from this commit's schemas, then checks every example
       # and the violations pinned in each folder's expectations.json.

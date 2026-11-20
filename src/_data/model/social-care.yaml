@@ -1,4 +1,4 @@
-id: https://ns.socialcaredata.io/social-care
+id: https://ns.socialcaredata.io/
 name: social-care-ontology
 title: Social Care Ontology
 description: >-
@@ -25,3 +25,4 @@ imports:
   - https://ns.socialcaredata.io/placements
   - https://ns.socialcaredata.io/safeguarding
   - https://ns.socialcaredata.io/assessments-and-plans
+  - https://ns.socialcaredata.io/referrals
