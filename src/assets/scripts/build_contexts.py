@@ -122,6 +122,16 @@ def json_keys(slot) -> list[str]:
     return sorted({slot.title or slot.name, slot.name})
 
 
+def enum_meanings(sv: SchemaView, enum_name: str) -> list[tuple[str, object, str]]:
+    """(code, permissible value, expanded concept IRI) for each value of an enum."""
+    result = []
+    for code, pv in (sv.get_enum(enum_name).permissible_values or {}).items():
+        if not pv.meaning:
+            raise ContextError(f"enum {enum_name}: {code!r} has no meaning, so it has no concept IRI")
+        result.append((code, pv, sv.expand_curie(pv.meaning)))
+    return result
+
+
 def enum_context(sv: SchemaView, enum_name: str, iri: Compactor) -> dict:
     """Map every accepted spelling of each permissible value to its concept IRI.
 
@@ -131,14 +141,10 @@ def enum_context(sv: SchemaView, enum_name: str, iri: Compactor) -> dict:
     as JSON-LD terms - two values may share a title ("Physical abuse" for a
     child and for an adult).
     """
-    enum = sv.get_enum(enum_name)
     labels: dict[str, str] = {}
     optional: dict[str, set[str]] = defaultdict(set)
     namespaces: Counter[str] = Counter()
-    for code, pv in (enum.permissible_values or {}).items():
-        if not pv.meaning:
-            raise ContextError(f"enum {enum_name}: {code!r} has no meaning, so it has no concept IRI")
-        meaning = sv.expand_curie(pv.meaning)
+    for code, pv, meaning in enum_meanings(sv, enum_name):
         namespaces[re.sub(r"[^#/]*$", "", meaning)] += 1
         for label in (code, *(pv.aliases or [])):
             if not SAFE_LABEL.fullmatch(label):
