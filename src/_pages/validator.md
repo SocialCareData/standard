@@ -2,7 +2,7 @@
 title: Validator
 description: Check that your data follows the published social care data standards, in your browser.
 breadcrumbs:
-  - Publications
+ ## - Publications
 publication_group: tool
 ---
 
@@ -17,6 +17,7 @@ records here. To check records that contain real personal data, use the
 your own organisation's systems.
 
 {% comment %}The standards the validator offers are configured in src/_data/validator.yml.{% endcomment %}
+{% comment %}
 <div class="validator-frame" markdown="0">
   <data-standard-validator theme="light"></data-standard-validator>
 </div>
@@ -24,6 +25,7 @@ your own organisation's systems.
   import 'https://cdn.jsdelivr.net/npm/@theodi/data-standard-validator-component@1.2.0/standalone/data-standard-validator.js'
   document.querySelector('data-standard-validator').config = {{ site.data.validator.config | jsonify }}
 </script>
+{% endcomment %}
 
 ## Other ways to validate
 
