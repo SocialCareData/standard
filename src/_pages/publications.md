@@ -1,5 +1,6 @@
 ---
 title: Publications
+description: The latest publications of our standards.
 regenerate: true
 ---
 

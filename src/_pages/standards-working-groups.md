@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Standards Working Groups
+description: We run several standards working groups for the sector to help shape our standards.
 tags:
   - Programme
   - Working Group

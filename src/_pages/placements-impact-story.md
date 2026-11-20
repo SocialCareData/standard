@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Our Pilots
+description: We are now moving into piloting our standards, starting with the Placements standard.
 tags:
   - Programme
 ---
