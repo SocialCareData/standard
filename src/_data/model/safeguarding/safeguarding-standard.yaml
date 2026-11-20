@@ -7,7 +7,7 @@ description: >-
   life events involved in safeguarding and promoting the wellbeing of a person,
   to support multi-agency information sharing (MAIS).
 license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
-version: 1.0.0
+version: 1.1.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
