@@ -1,4 +1,5 @@
 ---
+layout: article
 title: Children's Social Care Placements Standards Working Group
 description: The children's social care placements standards working group will support the development of the Placements standard.
 breadcrumbs:

@@ -4,5 +4,6 @@ dist
 .jekyll-cache
 .jekyll-metadata
 Gemfile.lock
-*.local
+*.local*
 node_modules/
+__pycache__/

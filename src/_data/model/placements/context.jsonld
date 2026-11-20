@@ -1,0 +1,381 @@
+{
+  "@context": {
+    "pl": "https://ns.socialcaredata.io/",
+    "cln": "https://ns.socialcaredata.io/cultural-need#",
+    "la": "https://ns.socialcaredata.io/living-arrangement#",
+    "nam": "https://ns.socialcaredata.io/needs-assessment-method#",
+    "nplr": "https://ns.socialcaredata.io/non-preferred-location-reason#",
+    "pa": "https://ns.socialcaredata.io/pets-allowance#",
+    "psr": "https://ns.socialcaredata.io/placement-source#",
+    "pt": "https://ns.socialcaredata.io/placement-type#",
+    "pu": "https://ns.socialcaredata.io/placement-urgency#",
+    "rl": "https://ns.socialcaredata.io/risk-level#",
+    "sl": "https://ns.socialcaredata.io/suitability-level#",
+    "st": "https://ns.socialcaredata.io/support-type#",
+    "uasc": "https://ns.socialcaredata.io/uasc-status#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "yns": "https://ns.socialcaredata.io/presence-status#",
+    "ex": "https://example.org/placement/",
+    "ActualPlacement": "pl:ActualPlacement",
+    "Placement": "pl:Placement",
+    "PlacementAvailability": "pl:PlacementAvailability",
+    "PlacementRecommendation": "pl:PlacementRecommendation",
+    "PlacementRequirements": "pl:PlacementRequirements",
+    "QualityAssurance": "pl:QualityAssurance",
+    "RiskAssessment": "pl:RiskAssessment",
+    "actualPlacement": {
+      "@id": "pl:actualPlacement",
+      "@type": "@id"
+    },
+    "additionalSupport": {
+      "@id": "pl:additionalSupport",
+      "@type": "@vocab",
+      "@container": "@set",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/support-type#",
+        "A worker for respite": "st:WorkerForRespite",
+        "Additional supervision": "st:AdditionalSupervision",
+        "NA": "st:NotApplicable",
+        "Not applicable": "st:NotApplicable",
+        "Taxis to school": "st:TaxisToSchool",
+        "Therapeutic support": "st:TherapeuticSupport"
+      }
+    },
+    "childId": "pl:childId",
+    "communicationNeeds": {
+      "@id": "pl:communicationNeeds",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/presence-status#",
+        "False": "yns:No",
+        "Not Specified": "yns:NotSpecified",
+        "Not specified": "yns:NotSpecified",
+        "True": "yns:Yes"
+      }
+    },
+    "costDate": {
+      "@id": "pl:costDate",
+      "@type": "xsd:date"
+    },
+    "costIncludesAdditionalPackages": {
+      "@id": "pl:costIncludesAdditionalPackages",
+      "@type": "xsd:boolean"
+    },
+    "costOfficerName": "pl:costOfficerName",
+    "culturalNeeds": {
+      "@id": "pl:culturalNeeds",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/cultural-need#",
+        "Not Known": "cln:NotKnown",
+        "Not Required": "cln:NotRequired",
+        "Not known": "cln:NotKnown",
+        "Not required": "cln:NotRequired"
+      }
+    },
+    "deprivationOfLiberty": {
+      "@id": "pl:deprivationOfLiberty",
+      "@type": "xsd:boolean"
+    },
+    "fosterCareSuitability": {
+      "@id": "pl:fosterCareSuitability",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/suitability-level#",
+        "Not specified": "sl:NotSpecified",
+        "Suitable but not preferred": "sl:SuitableButNotPreferred"
+      }
+    },
+    "homeAdaptationRequired": {
+      "@id": "pl:homeAdaptationRequired",
+      "@type": "xsd:boolean"
+    },
+    "isEducationContinuous": {
+      "@id": "pl:isEducationContinuous",
+      "@type": "xsd:boolean"
+    },
+    "isLocationPreferred": {
+      "@id": "pl:isLocationPreferred",
+      "@type": "xsd:boolean"
+    },
+    "livingCompanions": {
+      "@id": "pl:livingCompanions",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/living-arrangement#",
+        "No preference": "la:NoPreference",
+        "Only With Other older children": "la:OnlyWithOlderChildren",
+        "Only With Other younger children": "la:OnlyWithYoungerChildren",
+        "Only with other older children": "la:OnlyWithOlderChildren",
+        "Only with other younger children": "la:OnlyWithYoungerChildren",
+        "Solo placement recommended": "la:SoloPlacement",
+        "With Other children recommended": "la:WithOtherChildren",
+        "With other children recommended": "la:WithOtherChildren"
+      }
+    },
+    "neededBy": {
+      "@id": "pl:neededBy",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/placement-urgency#",
+        "< 5 days": "pu:WithinFiveDays",
+        "> 5 days": "pu:MoreThanFiveDays",
+        "More than 5 days": "pu:MoreThanFiveDays",
+        "Within 5 days": "pu:WithinFiveDays"
+      }
+    },
+    "needsAssessmentMethod": {
+      "@id": "pl:needsAssessmentMethod",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/needs-assessment-method#",
+        "Other formalised need assessment tool": "nam:OtherFormalisedTool",
+        "Other formalised tool": "nam:OtherFormalisedTool",
+        "Other social worker assessment": "nam:OtherSocialWorkerAssessment"
+      }
+    },
+    "nonPreferredLocationReason": {
+      "@id": "pl:nonPreferredLocationReason",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/non-preferred-location-reason#",
+        "CYP or parental preference": "nplr:CYPParentalPreference",
+        "Carer moving out of area": "nplr:CarerMovingOutOfArea",
+        "Legal reasons": "nplr:LegalReasons",
+        "Not applicable": "nplr:NotApplicable",
+        "Provision within distance does not exist": "nplr:ProvisionWithinDistanceDoesNotExist",
+        "Provision within distance exists but is not available": "nplr:ProvisionWithinDistanceNotAvailable",
+        "Safeguarding requirement": "nplr:SafeguardingRequirement"
+      }
+    },
+    "pets": {
+      "@id": "pl:pets",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/pets-allowance#",
+        "False": "pa:No",
+        "Not known": "pa:NotKnown",
+        "Yes - can": "pa:YesCan",
+        "Yes - must": "pa:YesMust",
+        "Yes-can": "pa:YesCan",
+        "Yes-must": "pa:YesMust"
+      }
+    },
+    "placementAvailability": {
+      "@id": "pl:placementAvailability",
+      "@type": "@id"
+    },
+    "placementDateAdmin": {
+      "@id": "pl:placementDateAdmin",
+      "@type": "xsd:date"
+    },
+    "placementId": "pl:placementId",
+    "placementLocation": "pl:placementLocation",
+    "placementOfficerName": "pl:placementOfficerName",
+    "placementRecommendation": {
+      "@id": "pl:placementRecommendation",
+      "@type": "@id"
+    },
+    "placementRequirements": {
+      "@id": "pl:placementRequirements",
+      "@type": "@id"
+    },
+    "placementSource": {
+      "@id": "pl:placementSource",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/placement-source#",
+        "Block contract": "psr:BlockContract",
+        "Direct award off framework": "psr:DirectAwardOffFramework",
+        "Local contract or framework": "psr:LocalContractOrFramework",
+        "Other regional contract": "psr:OtherRegionalContract",
+        "RCC contract": "psr:RCCContract",
+        "Secure Welfare Hub": "psr:SecureWelfareHub"
+      }
+    },
+    "placementStartDate": {
+      "@id": "pl:placementStartDate",
+      "@type": "xsd:date"
+    },
+    "placementType": {
+      "@id": "pl:placementType",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/placement-type#",
+        "Supported Accommodation": "pt:SupportedAccommodation"
+      }
+    },
+    "providerURN": "pl:providerURN",
+    "qualityAssurance": {
+      "@id": "pl:qualityAssurance",
+      "@type": "@id"
+    },
+    "referralDate": {
+      "@id": "pl:referralDate",
+      "@type": "xsd:date"
+    },
+    "referralOfficerName": "pl:referralOfficerName",
+    "residentialCareSuitability": {
+      "@id": "pl:residentialCareSuitability",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/suitability-level#",
+        "Not specified": "sl:NotSpecified",
+        "Suitable but not preferred": "sl:SuitableButNotPreferred"
+      }
+    },
+    "riskAssessment": {
+      "@id": "pl:riskAssessment",
+      "@type": "@id"
+    },
+    "riskCriminalExploitation": {
+      "@id": "pl:riskCriminalExploitation",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/risk-level#",
+        "No known risk": "rl:NoKnownRisk",
+        "Risk Present": "rl:RiskPresent",
+        "Risk present": "rl:RiskPresent"
+      }
+    },
+    "riskDrugAlcohol": {
+      "@id": "pl:riskDrugAlcohol",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/risk-level#",
+        "No known risk": "rl:NoKnownRisk",
+        "Risk Present": "rl:RiskPresent",
+        "Risk present": "rl:RiskPresent"
+      }
+    },
+    "riskEatingDisorder": {
+      "@id": "pl:riskEatingDisorder",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/risk-level#",
+        "No known risk": "rl:NoKnownRisk",
+        "Risk Present": "rl:RiskPresent",
+        "Risk present": "rl:RiskPresent"
+      }
+    },
+    "riskMissing": {
+      "@id": "pl:riskMissing",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/risk-level#",
+        "No known risk": "rl:NoKnownRisk",
+        "Risk Present": "rl:RiskPresent",
+        "Risk present": "rl:RiskPresent"
+      }
+    },
+    "riskSelfHarm": {
+      "@id": "pl:riskSelfHarm",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/risk-level#",
+        "No known risk": "rl:NoKnownRisk",
+        "Risk Present": "rl:RiskPresent",
+        "Risk present": "rl:RiskPresent"
+      }
+    },
+    "riskSexualExploitation": {
+      "@id": "pl:riskSexualExploitation",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/risk-level#",
+        "No known risk": "rl:NoKnownRisk",
+        "Risk Present": "rl:RiskPresent",
+        "Risk present": "rl:RiskPresent"
+      }
+    },
+    "riskToOthersAnimals": {
+      "@id": "pl:riskToOthersAnimals",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/risk-level#",
+        "No known risk": "rl:NoKnownRisk",
+        "Risk Present": "rl:RiskPresent",
+        "Risk present": "rl:RiskPresent"
+      }
+    },
+    "riskToOthersCriminal": {
+      "@id": "pl:riskToOthersCriminal",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/risk-level#",
+        "No known risk": "rl:NoKnownRisk",
+        "Risk Present": "rl:RiskPresent",
+        "Risk present": "rl:RiskPresent"
+      }
+    },
+    "riskToOthersFire": {
+      "@id": "pl:riskToOthersFire",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/risk-level#",
+        "No known risk": "rl:NoKnownRisk",
+        "Risk Present": "rl:RiskPresent",
+        "Risk present": "rl:RiskPresent"
+      }
+    },
+    "riskToOthersPhysical": {
+      "@id": "pl:riskToOthersPhysical",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/risk-level#",
+        "No known risk": "rl:NoKnownRisk",
+        "Risk Present": "rl:RiskPresent",
+        "Risk present": "rl:RiskPresent"
+      }
+    },
+    "riskToOthersSexual": {
+      "@id": "pl:riskToOthersSexual",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/risk-level#",
+        "No known risk": "rl:NoKnownRisk",
+        "Risk Present": "rl:RiskPresent",
+        "Risk present": "rl:RiskPresent"
+      }
+    },
+    "siblingCount": {
+      "@id": "pl:siblingCount",
+      "@type": "xsd:nonNegativeInteger"
+    },
+    "siblingsPlacedTogether": {
+      "@id": "pl:siblingsPlacedTogether",
+      "@type": "xsd:nonNegativeInteger"
+    },
+    "specificCommunicationRequirement": {
+      "@id": "pl:specificCommunicationRequirement",
+      "@type": "@vocab",
+      "@container": "@set",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/communication-need#"
+      }
+    },
+    "supportedAccommodationSuitability": {
+      "@id": "pl:supportedAccommodationSuitability",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/suitability-level#",
+        "Not specified": "sl:NotSpecified",
+        "Suitable but not preferred": "sl:SuitableButNotPreferred"
+      }
+    },
+    "totalWeeklyCost": {
+      "@id": "pl:totalWeeklyCost",
+      "@type": "xsd:decimal"
+    },
+    "uascStatus": {
+      "@id": "pl:uascStatus",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/uasc-status#",
+        "False": "uasc:No",
+        "Not Applicable": "uasc:NotApplicable",
+        "True": "uasc:Yes"
+      }
+    }
+  }
+}

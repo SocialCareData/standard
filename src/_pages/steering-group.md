@@ -1,4 +1,5 @@
 ---
+layout: article
 title: Steering Group
 description: The Programme is governed by a Steering Group which meets quarterly.
 tags:

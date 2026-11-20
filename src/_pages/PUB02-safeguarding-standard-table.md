@@ -5,7 +5,7 @@ description: Tabular view of the Safeguarding Standard, a common data model for 
 tags:
   - MAIS
   - Safeguarding
-data_model: src/assets/model/safeguarding/safeguarding-standard.yaml
+data_model: src/_data/model/safeguarding/safeguarding-standard.yaml
 ---
 
 <a href="/PUB02_safeguarding_standard" style="float: right;"><img src="/assets/icon/data-model.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Standard View</a>
@@ -40,9 +40,9 @@ data_model: src/assets/model/safeguarding/safeguarding-standard.yaml
 
 {% schema_table page.data_model RelatedProfessional %}
 
-### TimeInformation
+### Timing
 
-{% schema_table page.data_model TimeInformation %}
+{% schema_table page.data_model Timing %}
 
 ### Finding
 
@@ -55,6 +55,10 @@ data_model: src/assets/model/safeguarding/safeguarding-standard.yaml
 ### Measurement
 
 {% schema_table page.data_model Measurement %}
+
+### LinkedRecord
+
+{% schema_table page.data_model LinkedRecord %}
 
 ## Shared objects
 
@@ -115,3 +119,12 @@ See [Person.Contact](PUB01_person_standard_table#contact)
 ### Measurement Unit Taxonomy
 
 {% schema_table page.data_model MeasurementUnit no-label %}
+
+### Record Type Taxonomy
+
+{% schema_table page.data_model RecordTypeCode no-label %}
+
+### Record Relationship Type Taxonomy
+
+{% schema_table page.data_model RecordRelationshipCode no-label %}
+

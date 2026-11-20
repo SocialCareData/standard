@@ -11,7 +11,21 @@ tags:
   - Safeguarding
 reference: PUB02
 status: draft
-data_model: src/assets/model/safeguarding/safeguarding-standard.yaml
+data_model: src/_data/model/safeguarding/safeguarding-standard.yaml
+editors:
+  - name: Neil Majithia
+    organisation: Open Data Institute
+  - name: Charlotte Moberly
+    organisation: Social Finance
+  - name: Huseyin Kir
+    organisation: Open Data Institute
+other_formats:
+  - label: Table view
+    url: /PUB02_safeguarding_standard_table
+  - label: Ontology
+    url: https://github.com/SocialCareData/ontology/blob/main/safeguarding/safeguarding-standard.ttl
+  - label: SHACL
+    url: https://github.com/SocialCareData/ontology/blob/main/safeguarding/safeguarding-standard-shape.ttl
 non_technical_summary: |
   The Person Standard enables us to describe core attributes of a person in care, like their name or age, but not any safeguarding information about them. To that end we've built the Safeguarding Standard, a set of connected points of data that, together, can build a picture of a person's context and care history.
 
@@ -58,15 +72,15 @@ This document is for all personnel involved in collecting, storing and processin
 
 The following diagram illustrates the elements of the Safeguarding Standard.
 
-<p class="data-model-diagram"><img src="/assets/img/safeguarding/safeguarding-data-model-2026-08-17.svg" alt="Safeguarding Data Model" title="Safeguarding Data Model" /></p>
+<p class="data-model-diagram"><img src="/assets/img/safeguarding/safeguarding-data-model-2026-10-21.svg" alt="Safeguarding Data Model" title="Safeguarding Data Model" /></p>
 
 The model is organised around five top-level entities and the shared objects that link them together:
 
 - An **`Organisation`** has one or more `Identifier`s and a `name`, provides one or more `Service`s (`relatedService`), and may be associated with zero or more `Professional`s (`relatedProfessional`).
 - A **`Service`** has one or more `Identifier`s and a `name`, is provided by zero or more `Organisation`s (`relatedOrganisation`), and involves zero or more `Professional`s (`relatedProfessional`).
 - A **`Professional`** has one or more `Identifier`s, a `Name`, and one or more `role`s, and is related to zero or more `Service`s and zero or more `Organisation`s.
-- A **`ServiceEpisode`** concerns one or more `SubjectPerson`s, involves zero or more `RelatedProfessional`s, relates to one or more `Service`s, carries one or more `TimeInformation` blocks, one or more `location`s, and zero or more `Finding`s.
-- A **`LifeEvent`** concerns one or more `SubjectPerson`s, involves zero or more `RelatedProfessional`s, relates to zero or more `Service`s, and carries zero or more `TimeInformation` blocks and zero or more `location`s.
+- A **`ServiceEpisode`** concerns one or more `SubjectPerson`s, involves zero or more `RelatedProfessional`s, relates to one or more `Service`s, carries one or more `Timing` blocks, one or more `location`s, and zero or more `Finding`s.
+- A **`LifeEvent`** concerns one or more `SubjectPerson`s, involves zero or more `RelatedProfessional`s, relates to zero or more `Service`s, and carries zero or more `Timing` blocks and zero or more `location`s.
 
 <p class="logical-model-diagram" style="text-align: center;"><img src="/assets/img/safeguarding/safeguarding-logical-model-2026-07-17.png" alt="Placements Logical Model" title="Placements Logical Model" style="width: 70%; height: auto;" /></p>
 
@@ -243,7 +257,7 @@ An individual acting in a formal role within an organisation who has responsibil
     "use": "official"
   },
   "role": ["Social Worker", "Team Lead - Referral & Assessment"],
-  "status": true,
+  "workingStatus": true,
   "contact": {
     "@type": "Contact",
     "email": ["contact@example.org"],
@@ -281,7 +295,7 @@ While a single service episode may reflect routine support, changes in the numbe
 : References to the `Service`(s) involved in the episode. Multi-valued (`1..*`). See [Service](#service). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 <span id="episode-timeInformation">timeInformation</span>
-: Details about the timing of the episode. Multi-valued (`1..*`). See [TimeInformation](#timeinformation).
+: Details about the timing of the episode. Multi-valued (`1..*`). See [Timing](#timing).
 
 <span id="episode-location">location</span>
 : Details about the location of the episode. Multi-valued (`1..*`). _String_.
@@ -292,11 +306,8 @@ While a single service episode may reflect routine support, changes in the numbe
 <span id="episode-outcome">outcome</span>
 : Outcome of the episode for the subject. Optional (`0..1`). See [Episode Outcome vocabulary](#episode-outcome-vocabulary).
 
-<span id="episode-assessmentId">assessmentId</span>
-: Unique identifiers for any care needs assessments completed during this episode. Multi-valued. Optional (`0..*`). See [Care Needs Assessment](/PUB05_assessments_and_plans_standard#careneedsassessment).
-
-<span id="episode-planId">planId</span>
-: Unique identifiers for any care plans created or active during this episode. Multi-valued. Optional (`0..*`). See [Care Plan](/PUB05_assessments_and_plans_standard#careplan).
+<span id="episode-linkedRecord">linkedRecord</span>
+: Associated records from other standards (such as referrals, service requests, quality-of-care concerns, care needs assessments, or care plans) linked to this episode. Multi-valued. Optional (`0..*`). See [LinkedRecord](#linkedrecord).
 
 #### Example
 
@@ -319,13 +330,23 @@ While a single service episode may reflect routine support, changes in the numbe
   } ],
   "relatedService": [ { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } ],
   "timeInformation": [ {
-    "@type": "TimeInformation",
+    "@type": "Timing",
     "startDateTime": "2026-05-01T09:30:00Z"
   } ],
   "location": ["Anytown Family Centre"],
   "finding": [ { "see Finding example" } ],
-  "assessmentId": [ { "@type": "Identifier", "value": "ASS-2026-001", "system": "https://example.org/Id/assessment" } ],
-  "planId": [ { "@type": "Identifier", "value": "PLAN-2026-001", "system": "https://example.org/Id/plan" } ]
+  "linkedRecord": [
+    {
+      "@type": "LinkedRecord",
+      "recordId": { "@type": "Identifier", "value": "ASS-2026-001", "system": "https://example.org/Id/assessment" },
+      "recordType": "assessment"
+    },
+    {
+      "@type": "LinkedRecord",
+      "recordId": { "@type": "Identifier", "value": "PLAN-2026-001", "system": "https://example.org/Id/plan" },
+      "recordType": "plan"
+    }
+  ]
 }
 {% endhighlight %}
 </div>
@@ -355,10 +376,13 @@ Safeguarding professionals will be interested in the recency of events (when the
 : References to the `Service`(s) involved in the life event. Multi-valued. Optional (`0..*`). See [Service](#service). Each reference is by [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 <span id="event-timeInformation">timeInformation</span>
-: Details about the timing of the life event. Multi-valued. Optional (`0..*`). See [TimeInformation](#timeinformation).
+: Details about the timing of the life event. Multi-valued. Optional (`0..*`). See [Timing](#timing).
 
 <span id="event-location">location</span>
 : Details about the location of the life event. Multi-valued. Optional (`0..*`). _String_.
+
+<span id="event-linkedRecord">linkedRecord</span>
+: Associated records from other standards (such as a source referral, service request, or quality-of-care concern) linked to this life event. Multi-valued. Optional (`0..*`). See [LinkedRecord](#linkedrecord).
 
 #### Example
 
@@ -381,10 +405,17 @@ Safeguarding professionals will be interested in the recency of events (when the
   } ],
   "relatedService": [ { "@type": "Identifier", "value": "SVC-001", "system": "https://example.org/Id/service" } ],
   "timeInformation": [ {
-    "@type": "TimeInformation",
+    "@type": "Timing",
     "startDateTime": "2026-05-01T09:30:00Z"
   } ],
-  "location": ["Anytown town centre"]
+  "location": ["Anytown town centre"],
+  "linkedRecord": [
+    {
+      "@type": "LinkedRecord",
+      "recordId": { "@type": "Identifier", "value": "REF-2026-001", "system": "https://example.org/Id/referral" },
+      "recordType": "referral"
+    }
+  ]
 }
 {% endhighlight %}
 </div>
@@ -442,28 +473,28 @@ A typed reference to a `Professional` involved in a service episode or life even
 </div>
 
 
-### TimeInformation
+### Timing
 
 Details about the timing of a service episode or life event, including when it started and ended and how frequently it recurs.
 
 #### Properties
 
-<span id="timeinformation-startDateTime">startDateTime</span>
+<span id="timing-startDateTime">startDateTime</span>
 : The start of the episode or life event, as an ISO 8601 date-time. Required (`1..1`). _DateTime_.
 
-<span id="timeinformation-endDateTime">endDateTime</span>
+<span id="timing-endDateTime">endDateTime</span>
 : The end of the episode or life event, as an ISO 8601 date-time. Optional (`0..1`). _DateTime_.
 
-<span id="timeinformation-frequency">frequency</span>
+<span id="timing-frequency">frequency</span>
 : The frequency of the episode or life event, including whether it is spontaneous. Optional (`0..1`). See the [Frequency Code Vocabulary](#frequency-code-vocabulary).
 
 #### Example
 
 <div class="example">
-  <h5 id="example-timeinformation">Example - TimeInformation</h5>
+  <h5 id="example-timing">Example - Timing</h5>
 {% highlight json %}
 {
-  "@type": "TimeInformation",
+  "@type": "Timing",
   "startDateTime": "2026-05-01T09:30:00Z",
   "endDateTime": "2026-05-01T11:00:00Z",
   "frequency": {
@@ -504,7 +535,7 @@ An observation or measurement made during the course of a service episode about 
   } ],
   "measurement": [ {
     "@type": "Measurement",
-    "value": 12,
+    "value": "12",
     "unit": "count",
     "type": "Authorised Absences"
   } ],
@@ -569,6 +600,36 @@ A quantitative measurement of something related to the subject or their circumst
   "value": 12,
   "unit": "count",
   "type": "Authorised Absences"
+}
+{% endhighlight %}
+</div>
+
+
+### LinkedRecord
+
+A reference to an associated external or cross-standard record (such as an inward referral, outward service request, quality-of-care concern, care needs assessment, or care plan).
+
+#### Properties
+
+<span id="linkedrecord-recordId">recordId</span>
+: The unique identifier of the linked record. Required (`1..1`). See [Person Standard → Identifier](/PUB01_person_standard#identifier).
+
+<span id="linkedrecord-recordType">recordType</span>
+: The type of the linked record (e.g. `referral`, `request`, `quality-of-care-concern`, `assessment`, `plan`). Required (`1..1`). See the [Record Type Vocabulary](#record-type-vocabulary).
+
+<span id="linkedrecord-recordRelationship">recordRelationship</span>
+: The nature of the relationship between this record and the linked record. Optional (`0..1`). See the [Record Relationship Type Vocabulary](#record-relationship-type-vocabulary).
+
+#### Example
+
+<div class="example">
+  <h5 id="example-linkedrecord">Example - LinkedRecord</h5>
+{% highlight json %}
+{
+  "@type": "LinkedRecord",
+  "recordId": { "@type": "Identifier", "value": "REF-2026-001", "system": "https://example.org/Id/referrals" },
+  "recordType": "referral",
+  "recordRelationship": "escalationOf"
 }
 {% endhighlight %}
 </div>
@@ -647,7 +708,7 @@ This standard does **not** define its own involvement codes. Instead, use a code
 
 ### Frequency Code Vocabulary
 
-Used by [`TimeInformation.frequency`](#timeinformation-frequency) to record how frequently an episode or life event recurs.
+Used by [`Timing.frequency`](#timing-frequency) to record how frequently an episode or life event recurs.
 
 This standard does **not** define its own frequency codes. Instead, express the frequency as a FHIR [`Timing`](https://build.fhir.org/datatypes.html#Timing) datatype. A `Timing` describes a recurring schedule through its nested `repeat` structure — combining fields such as `frequency` / `period` / `periodUnit` (how often, where `periodUnit` is one of `s`, `min`, `h`, `d`, `wk`, `mo`, `a`), `dayOfWeek` (`mon`…`sun`), `timeOfDay` (`hh:mm:ss`), and `when` (event-related timings such as `MORN` for the morning) — and/or a `code` giving a common shorthand (for example `BID` for twice a day or `TID` for three times a day). See the [FHIR Timing documentation](https://build.fhir.org/datatypes.html#Timing) for the full set of fields and value sets. Some illustrative examples are shown below.
 
@@ -709,12 +770,23 @@ Used by [`Measurement.unit`](#measurement-unit). Codes to indicate the unit of m
 
 {% schema_table page.data_model MeasurementUnit no-label %}
 
+### Record Type Vocabulary
+
+Used by [`LinkedRecord.recordType`](#linkedrecord-recordType). Codes to indicate the type of linked record across standards.
+
+{% schema_table page.data_model RecordTypeCode no-label %}
+
+### Record Relationship Type Vocabulary
+
+Used by [`LinkedRecord.recordRelationship`](#linkedrecord-recordRelationship). Codes to indicate the relationship that this record has to another.
+
+{% schema_table page.data_model RecordRelationshipCode no-label %}
 
 ## Ontology
 
-The ontology for this specification is defined in Turtle format and is available at: [safeguarding-standard.ttl](/assets/model/safeguarding/safeguarding-standard.ttl). It reuses the shared objects (`Identifier`, `Name`, `Address`, `Contact`) from the [Person Standard](/PUB01_person_standard).
+The ontology for this specification is defined in Turtle format and is available at: [safeguarding-standard.ttl](https://github.com/SocialCareData/ontology/releases/latest). It reuses the shared objects (`Identifier`, `Name`, `Address`, `Contact`) from the [Person Standard](/PUB01_person_standard).
 
-To validate a record against the constraints defined by this standard, a SHACL shape is provided: [safeguarding-standard-shape.ttl](/assets/model/safeguarding/safeguarding-standard-shape.ttl). It defines one shape per class, applying the cardinality and content rules for each.
+To validate a record against the constraints defined by this standard, a SHACL shape is provided: [safeguarding-standard-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest). It defines one shape per class, applying the cardinality and content rules for each.
 
 ## Report an issue
 

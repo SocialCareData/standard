@@ -5,7 +5,7 @@ description: Tabular view of the children's social care placements standard, whi
 tags:
 tags:
   - Placements
-data_model: src/assets/model/placements/placements-standard-v1.yaml
+data_model: src/_data/model/placements/placements-standard-v1_1.yaml
 ---
 
 <a href="/PUB00_placements_standard_v1" style="float: right;"><img src="/assets/icon/data-model.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Standard View</a>

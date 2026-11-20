@@ -1,4 +1,5 @@
 ---
+layout: article
 title: Multi-Agency Information Sharing (MAIS) Standards Working Group
 description: The Multi-Agency Information Sharing (MAIS) standards working group will support the development of standards relevant for multi-agency information sharing across children's and adults social care.
 breadcrumbs:

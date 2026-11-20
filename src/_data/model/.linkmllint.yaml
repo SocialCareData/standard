@@ -1,0 +1,8 @@
+extends: recommended
+rules:
+  # Slots are camelCase to match the published JSON keys.
+  standard_naming:
+    level: disabled
+  # sc, sg, pl, ... are this project's own prefixes, not the prefix.cc ones.
+  canonical_prefixes:
+    level: disabled

@@ -4,7 +4,7 @@ title: Person Standard Tabular View
 description: Tabular view of the Person Standard, a common data model for identifying and describing a person across social care systems, designed to unblock multi-agency information sharing and single-view use cases.
 tags:
   - Person
-data_model: src/assets/model/person/person-subject-of-care.yaml
+data_model: src/_data/model/person/person-subject-of-care.yaml
 ---
 
 <a href="/PUB01_person_standard" style="float: right;"><img src="/assets/icon/data-model.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Standard View</a>

@@ -4,7 +4,7 @@ title: Care Needs Assessments and Care Plans Tabular View
 description: A tabular view of the Assessments and Plans standard, a common data model for Care Needs Assessments and Care Plans, designed to standardise the back-end fields of information shared between agencies and services without compromising front-end customisation by local authorities.
 tags:
   - Joined Up Care
-data_model: src/assets/model/assessments-and-plans/assessments-and-plans-standard.yaml
+data_model: src/_data/model/assessments-and-plans/assessments-and-plans-standard.yaml
 ---
 
 <a href="/PUB05_assessments_and_plans_standard" style="float: right;"><img src="/assets/icon/data-model.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Standard View</a>
@@ -23,9 +23,9 @@ data_model: src/assets/model/assessments-and-plans/assessments-and-plans-standar
 
 {% schema_table page.data_model Review %}
 
-### AssessmentQuestion
+### CareAssessmentQuestion
 
-{% schema_table page.data_model AssessmentQuestion %}
+{% schema_table page.data_model CareAssessmentQuestion %}
 
 ### CareComponent
 
@@ -35,9 +35,9 @@ data_model: src/assets/model/assessments-and-plans/assessments-and-plans-standar
 
 {% schema_table page.data_model CareActor %}
 
-### CareTiming
+### Timing
 
-{% schema_table page.data_model CareTiming %}
+{% schema_table page.data_model Timing %}
 
 ### CareActivity
 

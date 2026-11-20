@@ -18,20 +18,27 @@ Once running, view the site at **`http://localhost:4000`**.
 
 ## 2. Testing & Validation
 
-Always run these two checks before pushing your changes:
+Compile the site locally before pushing. The build runs the link-checking
+plugins, which fail on any broken internal or external link:
 
-### A. Check for Broken Links
-Compile the site locally to run the automated link-checking plugins:
 ```bash
 docker compose run --rm build
 ```
 
-### B. Validate JSON-LD Data Schemas
-Run the automated SHACL schema validator:
+Data validation uses
+[@theodi/data-standard-validator](https://www.npmjs.com/package/@theodi/data-standard-validator). It checks records against the shapes published to
+[SocialCareData/ontology](https://github.com/SocialCareData/ontology):
+
 ```bash
-cd src/assets/shacl/validation
-npm install
-npm run validate
+npx @theodi/data-standard-validator -s https://raw.githubusercontent.com/SocialCareData/ontology/main/placements/placements-standard-shape.ttl yourdata.jsonld
+```
+
+If you have changed a LinkML schema under `src/_data/model/`, regenerate the
+artifacts and confirm the build is clean:
+
+```bash
+pip install -r src/assets/scripts/requirements.txt
+python src/assets/scripts/build_ontology.py --out build/ontology
 ```
 
 ---

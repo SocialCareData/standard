@@ -4,7 +4,7 @@ title: Children's Social Care Placements Standard Tabular View
 description: Tabular view of the children's social care placements standard, which helps regions answer their sufficiency questions by establishing a common data model to gather data about placements.
 tags:
   - Placements
-data_model: src/assets/model/placements/placements-standard.yaml
+data_model: src/_data/model/placements/placements-standard.yaml
 ---
 
 <a href="/PUB00_placements_standard" style="float: right;"><img src="/assets/icon/data-model.svg" alt="" aria-hidden="true" style="width: 1em; height: 1em; vertical-align: text-bottom; margin-right: 0.35rem;">Standard View</a>

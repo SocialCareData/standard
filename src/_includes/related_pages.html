@@ -1,0 +1,11 @@
+{%- if page.related_links and page.related_links.size >= 2 %}
+<aside class="related-pages" aria-labelledby="related-pages-heading" data-pagefind-ignore>
+    <h2 id="related-pages-heading">Related pages</h2>
+    <ul class="list-style-none">{% for link in page.related_links %}
+        <li>
+            <small>{{ link.label }}{% if link.code %} · {{ link.code }}{% endif %}</small>
+            <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>{% endfor %}
+    </ul>
+</aside>
+{%- endif %}

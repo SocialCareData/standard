@@ -1,0 +1,331 @@
+{
+  "@context": {
+    "ap": "https://ns.socialcaredata.io/",
+    "act": "https://ns.socialcaredata.io/care-actor-type#",
+    "apc": "https://ns.socialcaredata.io/care-outcome-type#",
+    "auc": "https://ns.socialcaredata.io/address-use-code#",
+    "cds": "https://ns.socialcaredata.io/care-document-status#",
+    "nuc": "https://ns.socialcaredata.io/name-use-code#",
+    "qc": "https://ns.socialcaredata.io/question-category#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ex": "https://example.org/assessments-and-plans/",
+    "Address": {
+      "@id": "ap:Address",
+      "@context": {
+        "use": {
+          "@id": "ap:use",
+          "@type": "@vocab",
+          "@context": {
+            "@vocab": "https://ns.socialcaredata.io/address-use-code#",
+            "Temporary": "auc:Temp",
+            "billing": "auc:Billing",
+            "home": "auc:Home",
+            "old": "auc:Old",
+            "temp": "auc:Temp",
+            "work": "auc:Work"
+          }
+        }
+      }
+    },
+    "AssessmentQuestion": {
+      "@id": "ap:AssessmentQuestion",
+      "@context": {
+        "category": "ap:category"
+      }
+    },
+    "CareActivity": "ap:CareActivity",
+    "CareActor": "ap:CareActor",
+    "CareAssessmentQuestion": {
+      "@id": "ap:CareAssessmentQuestion",
+      "@context": {
+        "category": {
+          "@id": "ap:category",
+          "@type": "@vocab",
+          "@context": {
+            "@vocab": "https://ns.socialcaredata.io/question-category#",
+            "CA.WTEV": "qc:CAWTEV",
+            "CA.clothing": "qc:CAClothing",
+            "CA.communityServices": "qc:CACommunityServices",
+            "CA.habitableHome": "qc:CAHabitableHome",
+            "CA.homeSafety": "qc:CAHomeSafety",
+            "CA.hygiene": "qc:CAHygiene",
+            "CA.maintainingRelationships": "qc:CAMaintainingRelationships",
+            "CA.nutrition": "qc:CANutrition",
+            "CA.responsibilityForOthers": "qc:CAResponsibilityForOthers",
+            "CA.toilet": "qc:CAToilet",
+            "Communication Needs": "qc:CommunicationNeeds",
+            "Communication needs": "qc:CommunicationNeeds",
+            "Personal Context": "qc:PersonalContext"
+          }
+        }
+      }
+    },
+    "CareComponent": "ap:CareComponent",
+    "CareNeedsAssessment": "ap:CareNeedsAssessment",
+    "CarePlan": "ap:CarePlan",
+    "Contact": "ap:Contact",
+    "FoundationalInformation": "ap:FoundationalInformation",
+    "Identifier": "ap:Identifier",
+    "Name": {
+      "@id": "ap:Name",
+      "@context": {
+        "use": {
+          "@id": "ap:use",
+          "@type": "@vocab",
+          "@context": {
+            "@vocab": "https://ns.socialcaredata.io/name-use-code#",
+            "Maiden name": "nuc:Maiden",
+            "Official name": "nuc:Official",
+            "Old name": "nuc:Old",
+            "Temporary name": "nuc:Temp",
+            "Usual name": "nuc:Usual",
+            "anonymous": "nuc:Anonymous",
+            "maiden": "nuc:Maiden",
+            "nickname": "nuc:Nickname",
+            "official": "nuc:Official",
+            "old": "nuc:Old",
+            "temp": "nuc:Temp",
+            "usual": "nuc:Usual"
+          }
+        }
+      }
+    },
+    "Review": "ap:Review",
+    "Timing": "ap:Timing",
+    "UPRN": "ap:UPRN",
+    "USRN": "ap:USRN",
+    "activity": {
+      "@id": "ap:activity",
+      "@type": "@id"
+    },
+    "activityDescription": "ap:activityDescription",
+    "actor": {
+      "@id": "ap:actor",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "actorId": {
+      "@id": "ap:actorId",
+      "@type": "@id"
+    },
+    "actorType": {
+      "@id": "ap:actorType",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/care-actor-type#",
+        "Other Unpaid Carer": "act:OtherUnpaidCarer",
+        "Other unpaid carer": "act:OtherUnpaidCarer",
+        "Professional Services": "act:ProfessionalServices",
+        "Professional services": "act:ProfessionalServices"
+      }
+    },
+    "addressUse": {
+      "@id": "ap:use",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/address-use-code#",
+        "Temporary": "auc:Temp",
+        "billing": "auc:Billing",
+        "home": "auc:Home",
+        "old": "auc:Old",
+        "temp": "auc:Temp",
+        "work": "auc:Work"
+      }
+    },
+    "advocateRequired": {
+      "@id": "ap:advocateRequired",
+      "@type": "xsd:boolean"
+    },
+    "answer": {
+      "@id": "ap:answer",
+      "@container": "@set"
+    },
+    "answerType": {
+      "@id": "ap:answerType",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/answer-type#"
+      }
+    },
+    "apIdentifier": {
+      "@id": "ap:identifier",
+      "@type": "@id"
+    },
+    "assessmentId": {
+      "@id": "ap:assessmentId",
+      "@type": "@id"
+    },
+    "assessmentQuestion": {
+      "@id": "ap:assessmentQuestion",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "capacityToCompleteAssessment": {
+      "@id": "ap:capacityToCompleteAssessment",
+      "@type": "xsd:boolean"
+    },
+    "careComponent": {
+      "@id": "ap:careComponent",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "city": "ap:city",
+    "consentToInformationSharing": {
+      "@id": "ap:consentToInformationSharing",
+      "@type": "xsd:boolean"
+    },
+    "contactName": "ap:contactName",
+    "dateCompleted": {
+      "@id": "ap:dateCompleted",
+      "@type": "xsd:dateTime"
+    },
+    "directPayment": {
+      "@id": "ap:directPayment",
+      "@type": "xsd:boolean"
+    },
+    "email": {
+      "@id": "ap:email",
+      "@container": "@set"
+    },
+    "endDateTime": {
+      "@id": "ap:endDateTime",
+      "@type": "xsd:dateTime"
+    },
+    "familyName": {
+      "@id": "ap:familyName",
+      "@container": "@set"
+    },
+    "frequency": {
+      "@id": "ap:frequency",
+      "@type": "@json"
+    },
+    "givenName": {
+      "@id": "ap:givenName",
+      "@container": "@set"
+    },
+    "identifier": {
+      "@id": "ap:identifier",
+      "@type": "@id"
+    },
+    "isReview": {
+      "@id": "ap:isReview",
+      "@type": "xsd:boolean"
+    },
+    "line1": "ap:line1",
+    "line2": "ap:line2",
+    "name": "ap:contactName",
+    "nameUse": {
+      "@id": "ap:use",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/name-use-code#",
+        "Maiden name": "nuc:Maiden",
+        "Official name": "nuc:Official",
+        "Old name": "nuc:Old",
+        "Temporary name": "nuc:Temp",
+        "Usual name": "nuc:Usual",
+        "anonymous": "nuc:Anonymous",
+        "maiden": "nuc:Maiden",
+        "nickname": "nuc:Nickname",
+        "official": "nuc:Official",
+        "old": "nuc:Old",
+        "temp": "nuc:Temp",
+        "usual": "nuc:Usual"
+      }
+    },
+    "outcome": {
+      "@id": "ap:outcome",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/care-outcome-type#",
+        "Accessing and engaging in work, training, education, or volunteering": "apc:CAWTEV",
+        "Being able to make use of the home safely": "apc:CAHomeSafety",
+        "Being appropriately clothed": "apc:CAClothing",
+        "CA-CARINGOTHERS": "apc:CAResponsibilityForOthers",
+        "CA-CLOTHING": "apc:CAClothing",
+        "CA-COMMUNITY": "apc:CACommunityServices",
+        "CA-HABITABLEHOME": "apc:CAHabitableHome",
+        "CA-HOMESAFETY": "apc:CAHomeSafety",
+        "CA-HYGIENE": "apc:CAHygiene",
+        "CA-NUTRITION": "apc:CANutrition",
+        "CA-RELATIONSHIPS": "apc:CAMaintainingRelationships",
+        "CA-TOILET": "apc:CAToilet",
+        "CA-WTEV": "apc:CAWTEV",
+        "Carrying out any caring responsibilities for others": "apc:CAResponsibilityForOthers",
+        "Developing and maintaining family or other personal relationships": "apc:CAMaintainingRelationships",
+        "Maintaining a habitable home environment": "apc:CAHabitableHome",
+        "Maintaining personal hygiene": "apc:CAHygiene",
+        "Making use of necessary facilities or services in the local community": "apc:CACommunityServices",
+        "Managing and maintaining nutrition": "apc:CANutrition",
+        "Managing toilet needs": "apc:CAToilet"
+      }
+    },
+    "personId": {
+      "@id": "ap:personId",
+      "@type": "@id"
+    },
+    "planId": {
+      "@id": "ap:planId",
+      "@type": "@id"
+    },
+    "postcode": "ap:postcode",
+    "preferredName": "ap:preferredName",
+    "previousId": {
+      "@id": "ap:previousId",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "professionalId": {
+      "@id": "ap:professionalId",
+      "@type": "@id"
+    },
+    "questionId": "ap:questionId",
+    "questionText": "ap:questionText",
+    "required": {
+      "@id": "ap:required",
+      "@type": "xsd:boolean"
+    },
+    "review": {
+      "@id": "ap:review",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "serviceEpisodeId": {
+      "@id": "ap:serviceEpisodeId",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "startDateTime": {
+      "@id": "ap:startDateTime",
+      "@type": "xsd:dateTime"
+    },
+    "status": {
+      "@id": "ap:status",
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://ns.socialcaredata.io/care-document-status#",
+        "Active": "cds:active",
+        "Completed": "cds:completed",
+        "Draft": "cds:draft",
+        "Ended": "cds:ended",
+        "Entered in Error": "cds:entered-in-error",
+        "On-Hold": "cds:on-hold",
+        "Revoked": "cds:revoked",
+        "Unknown": "cds:unknown"
+      }
+    },
+    "system": {
+      "@id": "ap:system",
+      "@type": "@id"
+    },
+    "telephone": {
+      "@id": "ap:telephone",
+      "@container": "@set"
+    },
+    "time": {
+      "@id": "ap:time",
+      "@type": "@id"
+    },
+    "value": "ap:value"
+  }
+}
