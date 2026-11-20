@@ -607,7 +607,7 @@ A quantitative measurement of something related to the subject or their circumst
 
 ### LinkedRecord
 
-A reference to an associated external or cross-standard record (such as an inward referral, outward service request, quality-of-care concern, care needs assessment, or care plan).
+A reference to an associated external or cross-standard record (such as an inward referral, outward service request, quality-of-care concern, response, care needs assessment, or care plan).
 
 #### Properties
 
@@ -615,7 +615,7 @@ A reference to an associated external or cross-standard record (such as an inwar
 : The unique identifier of the linked record. Required (`1..1`). See [Person Standard → Identifier](/PUB01_person_standard#identifier).
 
 <span id="linkedrecord-recordType">recordType</span>
-: The type of the linked record (e.g. `referral`, `request`, `quality-of-care-concern`, `assessment`, `plan`). Required (`1..1`). See the [Record Type Vocabulary](#record-type-vocabulary).
+: The type of the linked record (e.g. `referral`, `request`, `quality-of-care-concern`, `response`, `assessment`, `plan`). Required (`1..1`). See the [Record Type Vocabulary](#record-type-vocabulary).
 
 <span id="linkedrecord-recordRelationship">recordRelationship</span>
 : The nature of the relationship between this record and the linked record. Optional (`0..1`). See the [Record Relationship Type Vocabulary](#record-relationship-type-vocabulary).
