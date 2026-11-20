@@ -10,6 +10,14 @@ must produce - focus type, property and constraint, named through the module
 context - so an invalid example cannot start failing for the wrong reason, or
 for more reasons than intended, without someone noticing.
 
+valid-*.csv and invalid-*.csv are checked the same way, read through the
+module's csv-metadata.json (see build_csvw.py) by the data-standard-validator
+command line - the converter the validator page uses, rather than a second
+implementation here. Their expectations are pinned as the row, column and
+issue code a CSV author would see. The installed data-standard-validator
+command is used; if there is none, the latest release is installed with
+npm install -g, which needs Node.js 22 or later.
+
     python src/assets/scripts/validate_examples.py                 # build shapes, then check
     python src/assets/scripts/validate_examples.py --shapes DIR    # check against a built tree
     python src/assets/scripts/validate_examples.py --update        # rewrite expectations.json
@@ -19,6 +27,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
+import subprocess
 import sys
 import tempfile
 from pathlib import Path
@@ -27,21 +37,83 @@ from pyshacl import validate
 from rdflib import RDF, SH, Graph, URIRef
 from rdflib.plugins.shared.jsonld.context import Context
 
+from build_contexts import titles_by_iri
+
 # src/assets/scripts/validate_examples.py -> repo root is four levels up.
 REPO_ROOT = Path(__file__).resolve().parents[3]
 MODEL_ROOT = REPO_ROOT / "src" / "_data" / "model"
 EXAMPLES = MODEL_ROOT / "examples"
 EXPECTATIONS = "expectations.json"
+EXAMPLE_SUFFIXES = (".jsonld", ".csv")
+CSV_METADATA = "csv-metadata.json"
+VALIDATOR_COMMAND = "data-standard-validator"
+VALIDATOR_PACKAGE = "@theodi/data-standard-validator"
+_validator: str | None = None
 
 
-def shapes_for(example_dir: Path, shapes_root: Path) -> Graph:
+def shape_path(example_dir: Path, shapes_root: Path) -> Path:
     parts = example_dir.relative_to(EXAMPLES).parts
     standard = parts[0]
     profile = parts[1] if len(parts) > 1 else "standard"
     main = shapes_root / standard / f"{standard}-{profile}-shape.ttl"
     if not main.is_file():
         raise FileNotFoundError(f"no shape file {standard}/{main.name} in {shapes_root}")
-    return Graph().parse(main, format="turtle")
+    return main
+
+
+def shapes_for(example_dir: Path, shapes_root: Path) -> Graph:
+    return Graph().parse(shape_path(example_dir, shapes_root), format="turtle")
+
+
+def validator() -> str:
+    """The data-standard-validator command, installing the latest release if there is none."""
+    global _validator
+    if _validator is None:
+        found = shutil.which(VALIDATOR_COMMAND)
+        if found is None:
+            if shutil.which("npm") is None:
+                raise RuntimeError(f"{VALIDATOR_COMMAND} is not installed, and neither is npm "
+                                   "to install it; CSV examples need Node.js 22 or later")
+            print(f"note  {VALIDATOR_COMMAND} not found; installing {VALIDATOR_PACKAGE}@latest")
+            proc = subprocess.run(["npm", "install", "-g", f"{VALIDATOR_PACKAGE}@latest"],
+                                  capture_output=True, text=True, encoding="utf-8")
+            found = shutil.which(VALIDATOR_COMMAND)
+            if proc.returncode != 0 or found is None:
+                raise RuntimeError(f"could not install {VALIDATOR_PACKAGE}: "
+                                   f"{proc.stderr.strip() or f'exit {proc.returncode}'}")
+        version = subprocess.run([found, "--version"], capture_output=True, text=True).stdout.strip()
+        print(f"note  CSV examples are checked by {VALIDATOR_COMMAND} {version} ({found})")
+        _validator = found
+    return _validator
+
+
+def validate_csv(path: Path, shapes: Path) -> tuple[bool, list[dict], str]:
+    """Run the validator CLI on a CSV example: (conforms, issues as row/column/code, report text)."""
+    metadata = MODEL_ROOT / path.relative_to(EXAMPLES).parts[0] / CSV_METADATA
+    if not metadata.is_file():
+        raise FileNotFoundError(f"no {metadata.relative_to(REPO_ROOT)}; run build_csvw.py")
+    proc = subprocess.run(
+        [validator(), "-s", str(shapes), "--csv-metadata", str(metadata), "-f", "json", str(path)],
+        capture_output=True, text=True, encoding="utf-8",
+    )
+    # Exit 1 means "does not conform"; only a JSON report counts as a result.
+    try:
+        report = json.loads(proc.stdout) if proc.returncode in (0, 1) else None
+    except json.JSONDecodeError:
+        report = None
+    if report is None:
+        raise RuntimeError(proc.stderr.strip() or f"exit {proc.returncode}")
+    document = report["documents"][0]
+    issues = []
+    for issue in document["issues"]:
+        if issue["severity"] == "info":
+            continue
+        cell = issue["location"].get("cell", {})
+        entry = {"row": cell.get("row"), "column": cell.get("column"), "code": issue["code"]}
+        issues.append({k: v for k, v in entry.items() if v is not None})
+    issues.sort(key=lambda e: (e.get("row", -1), e.get("column", ""), e["code"]))
+    lines = [f"  {i['code']}: {i['title']} (at {i['location']['jsonPath']})" for i in document["issues"]]
+    return report["conforms"], issues, "\n".join(lines)
 
 
 def module_context(standard: str) -> dict:
@@ -62,14 +134,19 @@ def constraint_name(component: URIRef) -> str:
     return "sh:" + (local.lower() if local.isupper() else local[0].lower() + local[1:])
 
 
-def term_names(raw: dict, context: Context) -> dict[str, str]:
+def term_names(raw: dict, context: Context, titles: dict[str, str] | None = None) -> dict[str, str]:
     """IRI -> the context term a record writes for it.
 
     Walks type- and property-scoped contexts too (an Organisation's `name` is
     sg:entityName), with top-level terms taking precedence. rdflib's own
     to_symbol() misses scoped terms and terms that carry type coercion.
+
+    The generated contexts accept both a slot's title and its name, so one IRI
+    can have two terms. ``titles`` (slot IRI -> title, from the schema) picks
+    the documented one where the context defines it.
     """
     names: dict[str, str] = {}
+    keys: dict[str, set[str]] = {}
     pending = [raw]
     while pending:
         scope = pending.pop(0)
@@ -78,9 +155,14 @@ def term_names(raw: dict, context: Context) -> dict[str, str]:
                 continue
             iri = definition if isinstance(definition, str) else (definition or {}).get("@id")
             if isinstance(iri, str) and not iri.startswith("@"):
-                names.setdefault(context.expand(iri) or iri, name)
+                expanded = context.expand(iri) or iri
+                names.setdefault(expanded, name)
+                keys.setdefault(expanded, set()).add(name)
             if isinstance(definition, dict) and isinstance(definition.get("@context"), dict):
                 pending.append(definition["@context"])
+    for iri, title in (titles or {}).items():
+        if title in keys.get(iri, ()):
+            names[iri] = title
     return names
 
 
@@ -112,7 +194,7 @@ def violations(report: Graph, data: Graph, names: dict[str, str], context: Conte
 def check(shapes_root: Path, update: bool) -> int:
     failures = 0
     checked = 0
-    dirs = sorted({p.parent for p in EXAMPLES.rglob("*.jsonld")})
+    dirs = sorted({p.parent for p in EXAMPLES.rglob("*") if p.suffix in EXAMPLE_SUFFIXES})
     for example_dir in dirs:
         rel_dir = example_dir.relative_to(EXAMPLES)
         try:
@@ -123,13 +205,12 @@ def check(shapes_root: Path, update: bool) -> int:
             continue
         raw_context = module_context(rel_dir.parts[0])
         context = Context(raw_context)
-        names = term_names(raw_context, context)
+        names = term_names(raw_context, context, titles_by_iri(rel_dir.parts[0]))
         expectations_file = example_dir / EXPECTATIONS
-        pinned = {} if update or not expectations_file.is_file() \
-            else json.loads(expectations_file.read_text())
+        pinned = {} if update or not expectations_file.is_file() else json.loads(expectations_file.read_text())
         produced = {}
 
-        for path in sorted(example_dir.glob("*.jsonld")):
+        for path in sorted(p for p in example_dir.iterdir() if p.suffix in EXAMPLE_SUFFIXES):
             rel = path.relative_to(REPO_ROOT)
             if path.name.startswith("valid-"):
                 expected = True
@@ -139,6 +220,36 @@ def check(shapes_root: Path, update: bool) -> int:
                 print(f"::error file={rel}::{rel}: name must start with valid- or invalid-")
                 failures += 1
                 continue
+            if path.suffix == ".csv":
+                checked += 1
+                try:
+                    conforms, actual, text = validate_csv(path, shape_path(example_dir, shapes_root))
+                except Exception as e:
+                    print(f"::error file={rel}::{rel}: could not validate: {e}")
+                    failures += 1
+                    continue
+                if conforms != expected:
+                    failures += 1
+                    want = "conform" if expected else "fail validation"
+                    print(f"FAIL  {rel}")
+                    print(f"::error file={rel}::{rel}: expected to {want}")
+                    print(f"::group::Validation report for {rel}\n{text}\n::endgroup::")
+                    continue
+                if not expected:
+                    produced[path.name] = actual
+                    if not update and pinned.get(path.name) != actual:
+                        failures += 1
+                        print(f"FAIL  {rel}")
+                        print(f"::error file={rel}::{rel}: issues differ from {rel_dir}/{EXPECTATIONS}; "
+                              "run with --update and review the diff")
+                        print("::group::Expected and actual issues")
+                        print("expected:", json.dumps(pinned.get(path.name), indent=2))
+                        print("actual:  ", json.dumps(actual, indent=2))
+                        print("::endgroup::")
+                        continue
+                print(f"ok    {rel}")
+                continue
+
             checked += 1
             try:
                 data = load_example(path, raw_context)
