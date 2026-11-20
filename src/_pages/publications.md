@@ -27,6 +27,7 @@ regenerate: true
 {% endif %}{% endfor %}
 </ul>
 
+{% comment %}
 ## Tools
 
 <ul class="content-list">
@@ -37,3 +38,4 @@ regenerate: true
   </li>
 {% endif %}{% endfor %}
 </ul>
+{% endcomment %}
