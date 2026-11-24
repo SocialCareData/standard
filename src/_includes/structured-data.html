@@ -1,0 +1,114 @@
+{%- comment -%}
+  JSON-LD structured data (https://schema.org) for search engines.
+
+  - Homepage:        Organization + WebSite
+  - Standards pages: TechArticle (any page using layout: publication)
+  - Article pages:   Article (any page using layout: article)
+  - Posts:           Article (any page located under /_posts)
+
+  Every string value goes through `jsonify` so quotes and newlines are escaped.
+
+  The article-like types end with `common_fields`, which has no trailing comma.
+  Type-specific fields go before it, each line ending with a comma.
+{%- endcomment -%}
+{%- assign org_id = "/#organization" | absolute_url -%}
+{%- assign website_id = "/#website" | absolute_url -%}
+{%- assign logo_url = "/assets/icon/icon.png" | absolute_url -%}
+{%- assign page_url = page.url | absolute_url -%}
+{%- assign page_description = page.description | default: site.description | strip_newlines -%}
+{%- assign date_modified = page.last_modified | default: page.date -%}
+{%- capture common_fields -%}
+  "headline": {{ page.title | jsonify }},
+  "name": {{ page.title | jsonify }},
+  "description": {{ page_description | jsonify }},
+  "url": {{ page_url | jsonify }},
+  "inLanguage": "en-GB",{% if date_modified %}
+  "dateModified": {{ date_modified | date_to_xmlschema | jsonify }},{% endif %}{% if page.image %}
+  "image": {{ page.image | absolute_url | jsonify }},{% endif %}{% if page.tags.size > 0 %}
+  "keywords": {{ page.tags | jsonify }},{% endif %}
+  "license": {{ site.footer.license.url | jsonify }},
+  "isPartOf": { "@id": {{ website_id | jsonify }} },
+  "publisher": {
+    "@type": "Organization",
+    "@id": {{ org_id | jsonify }},
+    "name": {{ site.title | jsonify }},
+    "url": {{ "/" | absolute_url | jsonify }},
+    "logo": {{ logo_url | jsonify }}
+  }
+{%- endcapture -%}
+
+<!-- Homepage structured data -->
+{%- if page.url == "/" %}
+        <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": {{ org_id | jsonify }},
+      "name": {{ site.title | jsonify }},
+      "url": {{ "/" | absolute_url | jsonify }},
+      "logo": {
+        "@type": "ImageObject",
+        "url": {{ logo_url | jsonify }},
+        "width": 192,
+        "height": 192
+      },
+      "description": {{ page_description | jsonify }},
+      "email": "DataStandards-SocialCare@socialfinance.org.uk",
+      "sameAs": [
+        {{ "https://github.com/" | append: site.github_username | jsonify }}
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": {{ website_id | jsonify }},
+      "name": {{ site.title | jsonify }},
+      "url": {{ "/" | absolute_url | jsonify }},
+      "description": {{ site.description | jsonify }},
+      "inLanguage": "en-GB",
+      "publisher": { "@id": {{ org_id | jsonify }} }
+    }
+  ]
+}
+        </script>
+
+<!-- Publication structured data -->
+{%- elsif page.layout == "publication" %}
+{%- assign version_number = page.version_number | default: page.model_version %}
+        <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "@id": {{ page_url | append: "#standard" | jsonify }},{% if version_number %}
+  "version": {{ version_number | jsonify }},{% endif %}{% if page.status %}
+  "creativeWorkStatus": {{ page.status | capitalize | jsonify }},{% endif %}{% if page.editors.size > 0 %}
+  "author": [{% for editor in page.editors %}
+    {
+      "@type": "Person",
+      "name": {{ editor.name | jsonify }}{% if editor.organisation %},
+      "affiliation": { "@type": "Organization", "name": {{ editor.organisation | jsonify }} }{% endif %}
+    }{% unless forloop.last %},{% endunless %}{% endfor %}
+  ],{% endif %}
+  {{ common_fields }}
+}
+        </script>
+
+<!-- Articles & Blog Posts structured data -->
+{%- elsif page.layout == "article" or page.layout == "use-case" or page.collection == "posts" %}
+        <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": {{ page_url | append: "#article" | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "author": {
+    "@type": "Organization",
+    "name": {{ page.author.name | default: page.author | default: site.title | jsonify }},
+    "url": {{ "/" | absolute_url | jsonify }}
+  },
+  {{ common_fields }}
+}
+        </script>
+
+{%- endif %}

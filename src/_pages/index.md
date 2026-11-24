@@ -1,6 +1,6 @@
 ---
 title: Social Care Interoperability Standards
-description: Social Finance, the Open Data Institute and Coram are working with Local Authorities and system vendors to develop interoperability standards for social care.
+description: National data and interoperability standards for children's and adult social care, developed in collaboration with Social Finance, the Open Data Institute, Coram, Local Authorities and system vendors.
 tags:
   - Programme
 suggest_as_related: false
