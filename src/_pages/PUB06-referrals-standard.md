@@ -122,6 +122,7 @@ Our standard also does not apply to emergencies where someone is in immediate da
 | Request for service | Record an ISO 13940 request for service using a `Request` associated with the relevant Referral. The `Request` object is broader, as it can also represent notifications rather than only requests for a service to be delivered. |
 | Health Concern | Represent the relevant reason or concern associated with a `Referral` using the `ConcernDetail`, where appropriate. This is not a direct equivalent of the ISO 13940 health concern, which has a broader meaning as an extract of a person's health record relating to a health issue. A concern can also be registered as a `Finding`, attached to a `ServiceEpisode`, as part of our Safeguarding Standard. See the [Safeguarding Standard → Finding](/PUB02_safeguarding_standard#finding). |
 | Care commitment | Where an ISO 13940 care commitment leads to a response to the referral or request, record the communication using the `Response` object in this standard. A `Response` should not itself be treated as equivalent to a care commitment, because an accepted response in this standard does not necessarily establish responsibility for the person's care. |
+{: .table-bordered}
 
 When recording objects in this standard according to ISO 13940 terms, a `Referral`, a `Request` and a `QualityOfCareConcern` are all considered "requests for care".
 
