@@ -64,7 +64,7 @@ This standard applies to a range of forms commonly called "referrals". For the p
 * contacts or requests for support;
 * safeguarding concerns;
 * requests for occupational therapy or home equipment;
-* requests for care needs assessments or care plan reviews;
+* requests for care needs or carer's assessments, or care plan reviews;
 * information requests; and
 * professional concerns raised about an adult from engagements with a child.
 
@@ -88,7 +88,7 @@ This standard applies to a range of forms commonly called "referrals". For the p
 
 #### Quality-of-care concerns {#scope-qoc}
 
-`QualityOfCareConcerns` relate to a care service rather than primarily to an individual receiving care. They can be raised by anyone, including the person receiving care, and may be made anonymously. This pattern is primarily intended for use in Adults’ Social Care.
+`QualityOfCareConcerns` relate to a care service or provider rather than primarily to an individual receiving care. They can be raised by anyone, including the person receiving care, and may be made anonymously. This pattern is primarily intended for use in Adults’ Social Care.
 
 #### Responses {#scope-responses}
 
@@ -246,7 +246,9 @@ Outward request for services for a person already known to social care.
 
 Social services make requests to other services at every stage of their work with a person. A social worker supporting a family might ask CAMHS for a mental health assessment, an adult's care team might ask the NHS to consider Continuing Healthcare, or a practitioner might put someone in touch with a community organisation. Some requests go to another team in the same local authority rather than an outside service.
 
-Requests can often carry out a decision made at the "front door". When a referral arrives, a front-door team triages it (in children's services, often a Multi-Agency Safeguarding Hub, or MASH) and decides what should happen next, such as early help, an assessment of whether a child is in need, or an enquiry into whether a child is suffering significant harm. In adult social care, the front door may decide on preventative support such as reablement, a Care Act assessment, or a safeguarding enquiry. These decisions can also be made later on, for example when concerns escalate during ongoing work.
+Requests can often carry out a decision made at the "front door". When a referral arrives, a front-door team triages it (in children's services, often a Multi-Agency Safeguarding Hub, or MASH) and decides what should happen next, such as early help, an assessment of whether a child is in need, or an enquiry into whether a child is suffering significant harm. In adult social care, the front door may decide on preventative support such as reablement, a Care Act assessment, or a safeguarding enquiry.
+
+Importantly, these requests can also be made later on, at any stage of work with a child, family, or adult.
 
 Where a request follows a referral, the two can be connected using `linkedRecord`.
 
@@ -512,9 +514,7 @@ Recording the type of concern (eg.neglect, physical abuse or financial abuse) as
 
 ### Why referrers should not have to choose a type
 
-The concern types in this standard follow the categories in statutory guidance: the four categories of abuse and neglect for children under the [Children Act 1989](https://www.legislation.gov.uk/ukpga/1989/41/contents) (with the addition of extrafamilial harm), and the types of abuse and neglect for adults under the [Care Act 2014](https://www.legislation.gov.uk/ukpga/2014/23/contents). Deciding which of these categories a concern falls into is often *a professional judgement*; a neighbour, a member of the public, or even a professional from outside social care (a police officer, a teacher, a GP) may know that something is wrong without knowing whether it amounts to neglect or emotional abuse.
-
-If referrers are made to choose, some will guess, and a wrong type can send a referral down the wrong route. Some may be put off completing the referral at all. But if the type is simply left optional, therefore reducing the burden on these referrers, many referrals will arrive without one, and the benefits of the standard are lost.
+If referrers are required to choose a type, the value of their choice is unclear to the receiving service because they don’t know how familiar the referrer is with the definitions of each type. If referrals are then routed based on the referrer's selections, there will be routing errors.  Furthermore, making fields mandatory may inadvertently cause decision paralysis and put the referrer off completing the referral at all. But if the type is simply left optional, therefore reducing the burden on referrers, many referrals will arrive without one, and a potential benefit of the standard is lost.
 
 ### How our standard works
 
@@ -573,7 +573,7 @@ Contact details, such as a phone number or email address, go in the Person Stand
 
 #### Awareness of the referral
 
-Referrals should generally be made with the knowledge of the person being referred and, for a child, their parents or carers, unless telling them could put the child or someone else at greater risk of harm. `isAwareOfReferral` records whether each person knows that the referral or concern is being made. It is required for the subject and for each member of their personal network, because the team receiving the referral needs to know who has been told before contacting anyone.
+Referrals should generally be made with the knowledge of the person being referred and, for a child, their parents or carers, unless telling them could put the child or someone else at greater risk of harm, or jeopardise a police investigation (as per statutory guidance in [Working Together to Safeguard Children 2026](https://www.gov.uk/government/publications/working-together-to-safeguard-children--2)). `isAwareOfReferral` records whether each person knows that the referral or concern is being made. It is required for the subject and for each member of their personal network, because the team receiving the referral needs to know who has been told before contacting anyone.
 
 `isAwareOfReferral` concerns awareness of the *referral itself*, not of the problem it describes, so the person making the referral will always know the answer: either they told the person, or they did not. However, being aware is not the same as consenting; where a form asks about consent, record it as a locally configured question in the `SUBJECT.CONSENT_CAPACITY` category (see [ReferralAssessmentQuestion](#referralassessmentquestion)).
 
