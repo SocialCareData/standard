@@ -114,16 +114,18 @@ Our standard also does not apply to emergencies where someone is in immediate da
 
 #### Terminology and ISO 13940
 
-[ISO 13940:2026](https://www.iso.org/standard/91284.html) (known as ContSys, and accessible via [contsys.org](https://contsys.org/)) defines a system of concepts for continuity of care, and its second edition brings social care into its core model. It uses several of the same terms as our standard, but with different meanings:
+[ISO 13940:2026](https://www.iso.org/standard/91284.html) (known as ContSys, and accessible via [contsys.org](https://contsys.org/)) defines a system of concepts for the provision of care, and its second edition brings social care into its core model. Some ISO 13940 concepts can be represented using objects in this standard, as demonstrated in the below table:
 
-| Term | In ISO 13940 | In this standard |
-| --- | --- | --- |
-| Referral | A request for care made by a *care professional*. A request from anyone else is an "initial request for care". | A `Referral` can be made by anyone, including the person themselves, their family or a member of the public. |
-| Request | A "request for service": a care professional asks a care provider to deliver a service. | Close to a `Request`, except that a `Request` can also be a notification, which ISO 13940 would call a care communication. |
-| Concern | A "health concern": an extract of the health record, containing everything linked to one health issue. | The reason for a referral (`ConcernDetail`), or a report about the quality of a care service (`QualityOfCareConcern`). |
-| Response | ISO 13940 has no response concept. The nearest is a "care commitment", in which a care provider accepts responsibility for a person's care. | A `Response` records that a response was sent or received. Even an `accepted` response does not necessitate a care commitment. |
+| ISO 13940 concept | How to record it using this standard |
+| --- | --- |
+| Referral | Record an ISO 13940 Referral using the `Referral` object. ISO 13940 referrals are a subset of the broader referrals that can be represented by this standard, because this standard also allows referrals made by the person themselves, family members or members of the public. |
+| Request for service | Record an ISO 13940 request for service using a `Request` associated with the relevant Referral. The `Request` object is broader, as it can also represent notifications rather than only requests for a service to be delivered. |
+| Health Concern | Represent the relevant reason or concern associated with a `Referral` using the `ConcernDetail`, where appropriate. This is not a direct equivalent of the ISO 13940 health concern, which has a broader meaning as an extract of a person's health record relating to a health issue. A concern can also be registered as a `Finding`, attached to a `ServiceEpisode`, as part of our Safeguarding Standard. See the [Safeguarding Standard → Finding](/PUB02_safeguarding_standard#finding). |
+| Care commitment | Where an ISO 13940 care commitment leads to a response to the referral or request, record the communication using the `Response` object in this standard. A `Response` should not itself be treated as equivalent to a care commitment, because an accepted response in this standard does not necessarily establish responsibility for the person's care. |
 
-In ISO 13940 terms, a `Referral`, a `Request` and a `QualityOfCareConcern` are all requests for care. This standard does not claim conformance to ISO 13940.
+When recording objects in this standard according to ISO 13940 terms, a `Referral`, a `Request` and a `QualityOfCareConcern` are all considered "requests for care".
+
+These mappings are intended to support implementation and do not imply that this standard conforms to ISO 13940.
 
 ### Audience
 
