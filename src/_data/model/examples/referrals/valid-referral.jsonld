@@ -19,6 +19,13 @@
           "givenName": ["Jane"],
           "familyName": "Doe"
         }
+      ],
+      "matchedPersonRef": [
+        {
+          "@type": "Identifier",
+          "value": "CMS-PER-004512",
+          "system": "https://example.org/people"
+        }
       ]
     }
   ],

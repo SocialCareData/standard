@@ -39,6 +39,11 @@ optional, plus a free-text `notes` (slot `intakeNotes`).
   told someone. Reasons for not telling someone, and contact instructions, go
   in `notes` (guidance on the PUB06 page), not in their own fields. Awareness of
   professionals is not modelled yet (it needs `ReferralInvolvement` restructured).
+- `matchedPersonRef` (inherited from Person) is how an intake person is
+  connected to an existing record, usually added at triage. `IntakePerson`
+  overrides its description in `slot_usage` (description only) to say so and
+  to contrast it with `identifier`, which holds identifiers the referrer gave.
+  The Person Standard's description is unchanged.
 - An `IntakePerson` should carry at least one detail. This cannot be expressed
   in LinkML and SHACL (`gen-shacl` ignores `any_of`), so it is implementer
   guidance on the PUB06 page, not a constraint.
@@ -61,7 +66,13 @@ predicate through the class-scoped contexts on `QualityOfCareConcern` and
 
 `ConcernCode` follows the statutory categories (Children Act 1989 / Working
 Together 2023 for children, Care Act 2014 for adults), with an Other code for
-each group and an `UNASSIGNED` code. `UNASSIGNED` supports the "assign at
+each group and an `UNASSIGNED` code. The one non-safeguarding code is
+`adult.careAndSupportNeeds`, for general care needs referrals (requests for
+support, occupational therapy or equipment, Care Act assessments) where no
+abuse or neglect is suspected; without it these had to use `adult.other`. It
+is not called "independent living" because `ReferralTypeCode` already has
+`adult.independentLiving`, meaning a request for occupational therapy or home
+equipment. `UNASSIGNED` supports the "assign at
 triage" pattern: a referral may arrive with the type unclassified (the referrer
 chose not to give one, or the form never asked) and the front door or MASH
 assigns it. Rules such as "UNASSIGNED must not appear alongside other

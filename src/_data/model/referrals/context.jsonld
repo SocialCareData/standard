@@ -60,6 +60,7 @@
           "@type": "@vocab",
           "@context": {
             "@vocab": "https://ns.socialcaredata.io/concern#",
+            "Care and support needs": "con:AdultCareAndSupportNeeds",
             "Discriminatory abuse": "con:AdultDiscriminatoryAbuse",
             "Domestic violence or abuse": "con:AdultDomesticAbuse",
             "Emotional abuse": "con:ChildEmotionalAbuse",
@@ -72,6 +73,7 @@
             "Psychological or emotional abuse": "con:AdultEmotionalAbuse",
             "Self-neglect": "con:AdultSelfNeglect",
             "UNASSIGNED": "con:Unassigned",
+            "adult.careAndSupportNeeds": "con:AdultCareAndSupportNeeds",
             "adult.discriminatoryAbuse": "con:AdultDiscriminatoryAbuse",
             "adult.domesticAbuse": "con:AdultDomesticAbuse",
             "adult.emotionalAbuse": "con:AdultEmotionalAbuse",

@@ -208,6 +208,13 @@ A referral is not the way to report an emergency. If someone is in immediate dan
           "givenName": ["Jane"],
           "familyName": "Doe"
         }
+      ],
+      "matchedPersonRef": [
+        {
+          "@type": "Identifier",
+          "value": "CMS-PER-004512",
+          "system": "https://example.org/people"
+        }
       ]
     }
   ],
@@ -580,12 +587,23 @@ Referrals should generally be made with the knowledge of the person being referr
 
 Where a person is not aware of the referral, say why in `notes`, for example because telling them could increase the risk to the child, or because they could not be reached.
 
-Once the person is identified and recorded in a case management system, their details can be completed and checked against the [subject of care](/PUB01_person_standard#person) or [connected person](/PUB01_person_standard#connected-person-profile) profile of the Person Standard.
+#### Matching to an existing record
+
+People named in a referral are already known to social care, or to other services. Connecting a referral to the person's existing record is what lets the team receiving it see their history, such as previous referrals, open cases, or known risks. The connections is drawn with the `matchedPersonRef` field.
+
+The person making the referral records what they know about the person. When the referral is received, usually at triage, the receiving team (or their CMS, automatically) searches for an existing record that matches those details. Once they find one, they add a reference to it in `matchedPersonRef`. A person can be matched to more than one record, for example a record in the case management system and one in another local system. If no match is found, `matchedPersonRef` is left empty, and a new record may be created.
+
+`matchedPersonRef` is not the same as `identifier`. `identifier` holds identifiers that the referrer gave, such as an NHS number, which may help with matching. `matchedPersonRef` records the outcome of matching: the record (or records) this person has been confirmed to be. See [Person matching implementation](/PUB03_standards_comparison_person_matching) for how matches can be established.
+
+Once the person is matched, their details can be completed and checked against the [subject of care](/PUB01_person_standard#person) or [connected person](/PUB01_person_standard#connected-person-profile) profile of the Person Standard.
 
 #### Properties
 
 <span id="intakeperson-person">Person properties</span>
-: `identifier`, `name`, `dateOfBirth`, `isDeceased`, `deceasedDate`, `address`, `contact`, `genderCode`, `sexCode`, `ethnicityCode`, `relatedPerson`, `primaryContactProfessional`, `matchedPersonRef`, `aboutMe` and `communication`, as defined in the [Person Standard](/PUB01_person_standard#person). All are optional.
+: `identifier`, `name`, `dateOfBirth`, `isDeceased`, `deceasedDate`, `address`, `contact`, `genderCode`, `sexCode`, `ethnicityCode`, `relatedPerson`, `primaryContactProfessional`, `aboutMe` and `communication`, as defined in the [Person Standard](/PUB01_person_standard#person). All are optional.
+
+<span id="intakeperson-matchedPersonRef">matchedPersonRef</span>
+: References to existing records for this person, such as their record in the local authority's case management system, once they have been matched. Usually added at triage, not by the referrer. Multi-valued (`0..*`). Optional. *Identifier object*. See [Identifier](#identifier) and [Matching to an existing record](#matching-to-an-existing-record).
 
 <span id="intakeperson-isAwareOfReferral">isAwareOfReferral</span>
 : Does this person know that the referral or concern is being made? Required (`1..1`). *Boolean*. See [Awareness of the referral](#awareness-of-the-referral).
@@ -821,7 +839,7 @@ The model is parameterised by the following controlled vocabularies.
 
 ### Concerns Taxonomy
 
-The concern types for referrals. The child types are the four categories of abuse and neglect used for the significant harm threshold under the Children Act 1989, as set out in Working Together to Safeguard Children 2023, plus extra-familial harm. The adult types are those in the Care and Support Statutory Guidance under the Care Act 2014. `UNASSIGNED` is for concerns the referrer has not classified: see [Assigning concerns at triage](#assigning-concerns-at-triage).
+The concern types for referrals. The child types are the four categories of abuse and neglect used for the significant harm threshold under the Children Act 1989, as set out in Working Together to Safeguard Children 2023, plus extra-familial harm. The adult types are those in the Care and Support Statutory Guidance under the Care Act 2014, plus care and support needs, for referrals where no abuse or neglect is suspected, such as a request for support or for a care needs assessment. `UNASSIGNED` is for concerns the referrer has not classified: see [Assigning concerns at triage](#assigning-concerns-at-triage).
 
 {% schema_table page.data_model ConcernCode expanded %}
 

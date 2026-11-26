@@ -126,6 +126,7 @@ classes:
       * A record should carry at least one detail, but this is not enforced by the model.
       * Record how the person can be contacted with the Person contact and address fields. Anything else about contacting them (when or how it is safe to, or what to avoid) belongs in notes.
       * Where the person is not aware of the referral, record why in notes.
+      * Once the person has been matched to an existing record, such as their record in the case management system, add a reference to it in matchedPersonRef. This is usually done at triage.
       * Referrals submitted by professionals (like social workers, teachers, and doctors) should generally be held to a higher standard, requiring more data than a referral from, say, a member of the public.
     slots:
       - isAwareOfReferral
@@ -139,6 +140,14 @@ classes:
       address:       {required: false, multivalued: true}
       genderCode:    {required: false, multivalued: false}
       ethnicityCode: {required: false, multivalued: false}
+      matchedPersonRef:
+        description: >-
+          References to existing records for this person, such as their record
+          in the local authority's case management system, once they have been
+          matched. This is how a person named in a referral is connected to any
+          prior involvement with care. Most likely to be added at triage, not by the
+          referrer. Unlike identifier, which holds identifiers the referrer gave
+          (eg. an NHS number), it records the outcome of matching.
 
   PersonalNetworkMember:
     class_uri: ref:PersonalNetworkMember
@@ -789,7 +798,8 @@ enums:
       Children 2023 uses for the significant harm threshold in the Children Act
       1989, plus extra-familial harm. The adult codes are the types of abuse and
       neglect in the Care and Support Statutory Guidance under the Care Act
-      2014. Each group has an Other code for concerns outside these categories.
+      2014, plus care and support needs, for referrals where no abuse or
+      neglect is suspected. Each group has an Other code for concerns outside these categories.
       UNASSIGNED marks a concern that was not classified when the referral was
       made, either by the referrer's choice or because the form did not ask,
       to be assigned at triage.
@@ -905,6 +915,16 @@ enums:
         description: >-
           Neglecting one's own personal hygiene, health or surroundings,
           including hoarding.
+      adult.careAndSupportNeeds:
+        title: Care and support needs
+        meaning: con:AdultCareAndSupportNeeds
+        description: >-
+          The adult appears to need care and support (section 9 of the Care Act
+          2014), and no abuse or neglect is suspected. For example, difficulty
+          living independently or managing daily living tasks, or needing
+          equipment or adaptations at home. Used for contacts or requests for
+          support, requests for occupational therapy or home equipment, and
+          requests for care needs assessments.
       adult.other:
         title: Other
         meaning: con:AdultOther
