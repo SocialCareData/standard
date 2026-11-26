@@ -60,7 +60,7 @@ This document is for all personnel involved in collecting, storing and processin
 
 The following diagram illustrates the elements of the Person Standard.
 
-<p class="data-model-diagram"><img src="/assets/img/person/person-data-model.svg" alt="Person Data Model" title="Person Data Model" width="80%"/></p>
+<p class="data-model-diagram"><img src="/assets/img/person/person-data-model.svg" alt="Person Data Model" title="Person Data Model"/></p>
 
 A `Person` is the top-level record. It brings together the person's identifiers, name, dates of birth and death, addresses, contact details and relationships to other people, using the supporting entities described below. Demographic attributes such as gender, sex and ethnicity are recorded using controlled vocabularies.
 
