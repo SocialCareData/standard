@@ -41,7 +41,19 @@
       "constraint": "sh:minCount"
     }
   ],
+  "invalid-referral-professional-id-missing-value.jsonld": [
+    {
+      "focus": "Identifier",
+      "path": "value",
+      "constraint": "sh:minCount"
+    }
+  ],
   "invalid-referral.jsonld": [
+    {
+      "focus": "PersonalNetworkMember",
+      "path": "person",
+      "constraint": "sh:class"
+    },
     {
       "focus": "Referral",
       "path": "dateCompleted",
@@ -53,13 +65,14 @@
       "constraint": "sh:minCount"
     },
     {
+      "focus": "Referral",
+      "path": "subject",
+      "constraint": "sh:class"
+    },
+    {
       "focus": "ReferrerDetails",
       "path": "referrerType",
-  "invalid-referral-professional-id-missing-value.jsonld": [
-    {
-      "focus": "Identifier",
-      "path": "value",
-      "constraint": "sh:minCount"
+      "constraint": "sh:in"
     }
   ],
   "invalid-request-bad-record-relationship.jsonld": [
