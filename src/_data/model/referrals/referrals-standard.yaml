@@ -62,7 +62,7 @@ classes:
       A request can be the outcome of a Multi-Agency Safeguarding Hub (MASH)
       decision in children's services or a front-door decision in adult social care.
       However, it is most commonly any request made from social services to
-      statutory and non-statutory services, for both children and adults.
+      another service (like CAMHS or an advocacy provider), for both children and adults.
     slots:
       - refIdentifier
       - requestSubject
@@ -1050,8 +1050,10 @@ enums:
       code carries it. A request may
       go to a team within the same local authority (for example, the team that
       carries out child in need assessments) as well as to an outside service,
-      whether statutory (eg. advocacy or CAMHS) or non-statutory (eg. a community
-      organisation).
+      such as CAMHS, an advocacy provider or a community organisation.
+      notification and service are general purposes, used for any kind of
+      service which is identified by the request's recipient. The other
+      purposes are specific front-door or statutory decisions.
       This list is likely to change as safeguarding practice and workflows
       change, and will be updated accordingly, most likely by adding new
       purposes.
@@ -1063,6 +1065,14 @@ enums:
           Letting a service know about the person, or signposting the person to
           it, without asking it to take action. Used where no further
           involvement is needed but another service should be aware.
+      service:
+        title: Request to another service
+        meaning: rp:Service
+        description: >-
+          Asking another service to take action for the person, such as child
+          and adolescent mental health services, NHS Continuing Healthcare,
+          advocacy, education, or a voluntary or community organisation. The
+          kind of service is identified by the request's recipient.
       child.earlyHelp:
         title: Request to Early Help services
         meaning: rp:ChildEarlyHelp
@@ -1092,18 +1102,6 @@ enums:
           Immediate action to protect the child, such as police protection
           (section 46 of the Children Act 1989) or an emergency protection order
           (section 44).
-      child.statutoryServices:
-        title: Request to statutory services (like CAMHS or advocacy)
-        meaning: rp:ChildStatutoryServices
-        description: >-
-          Request to a statutory service other than children's social care, such
-          as child and adolescent mental health services or independent
-          advocacy.
-      child.nonStatutoryServices:
-        title: Request to non-statutory services
-        meaning: rp:ChildNonStatutoryServices
-        description: >-
-          Request to a voluntary, community or other non-statutory service.
       adult.prevention:
         title: Request for prevention or reablement services
         meaning: rp:AdultPrevention
@@ -1125,17 +1123,6 @@ enums:
           an adult with care and support needs is experiencing, or is at risk
           of, abuse or neglect and cannot protect themselves because of those
           needs.
-      adult.statutoryServices:
-        title: Request to statutory services (like NHS CHC or advocacy)
-        meaning: rp:AdultStatutoryServices
-        description: >-
-          Request to a statutory service other than adult social care, such as
-          NHS Continuing Healthcare or independent advocacy.
-      adult.nonStatutoryServices:
-        title: Request to non-statutory services
-        meaning: rp:AdultNonStatutoryServices
-        description: >-
-          Request to a voluntary, community or other non-statutory service.
 
   ReferralQuestionCategory:
     enum_uri: ref:referral-question-category

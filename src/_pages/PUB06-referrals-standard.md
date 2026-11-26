@@ -70,21 +70,19 @@ This standard applies to a range of forms commonly called "referrals". For the p
 
 #### Requests {#scope-requests}
 
-`Requests` are made by social services and sent *outward* to statutory or non-statutory services. They concern people who are already known to and involved with social services and may, for example, follow a decision made at the front door by a Multi-Agency Safeguarding Hub (MASH) or equivalent triage process.
+`Requests` are made by social services and sent *outward* to other services, inside or outside the local authority. They concern people who are already known to and involved with social services and may, for example, follow a decision made at the front door by a Multi-Agency Safeguarding Hub (MASH) or equivalent triage process.
 
 ##### Children's Social Care {#scope-requests-csc}
 
 * notifications or signposting to external providers;
-* outcomes from MASH triage;
-* requests to statutory services outside of social care, like Child and Adolescent Mental Health Services (CAMHS) or providers of advocacy services; and
-* requests to non-statutory services, like voluntary or community organisations.
+* outcomes from MASH triage; and
+* requests to other services, like Child and Adolescent Mental Health Services (CAMHS), advocacy providers, or voluntary and community organisations.
 
 ##### Adults' Social Care {#scope-requests-asc}
 
 * notifications or signposting to external providers;
-* outcomes from front-door triage;
-* requests to statutory services outside of social care, like NHS services; and
-* requests to non-statutory services, like voluntary or community organisations.
+* outcomes from front-door triage; and
+* requests to other services, like NHS services, advocacy providers, or voluntary and community organisations.
 
 #### Quality-of-care concerns {#scope-qoc}
 
@@ -315,7 +313,7 @@ Where a request follows a referral, the two can be connected using `linkedRecord
       "system": "https://example.org/services"
     }
   ],
-  "purpose": "child.statutoryServices",
+  "purpose": "service",
   "dateCompleted": "2026-10-14T10:15:00Z",
   "linkedRecord": [
     {
@@ -836,6 +834,8 @@ The types of concern about a care provider or service. Each type is one of the f
 ### Request Purposes Taxonomy
 
 The purposes of an outward request, made at any stage of a person's involvement with social care. Some purposes are the decisions typically made at the front door, such as by a MASH under the Children Act 1989, or by an adult social care front door under the Care Act 2014. Where a purpose has a statutory basis or implies urgency, the code carries it. See [Request](#request).
+
+`notification` and `service` are general purposes that can be used for any kind of service. The kind of service (for example health, education, advocacy, or a voluntary or community organisation) is identified by the request's `recipient`, not by the purpose. The other purposes are specific front-door or statutory decisions.
 
 This list is likely to change as safeguarding practice and workflows change, and it will be updated accordingly. Out-of-date terms will not be removed from this list, but will be demaracated as not-for-use.
 

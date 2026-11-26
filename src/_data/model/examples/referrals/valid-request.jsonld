@@ -24,7 +24,7 @@
       "system": "https://example.org/services"
     }
   ],
-  "purpose": "child.statutoryServices",
+  "purpose": "service",
   "dateCompleted": "2026-10-14T10:15:00Z",
   "linkedRecord": [
     {

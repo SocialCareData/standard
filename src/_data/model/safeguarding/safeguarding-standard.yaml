@@ -1019,6 +1019,10 @@ enums:
         title: Notification or Signposting
         description: Notification or signposting request to partner agency or community service.
         meaning: epc:Notification
+      "request.service":
+        title: Request to Another Service
+        description: Request to another service to take action, such as CAMHS, NHS Continuing Healthcare, advocacy, or a voluntary or community organisation.
+        meaning: epc:Service
       "request.child-early-help":
         title: Early Help Request (Child)
         description: Request to Early Help services for a child.
@@ -1035,22 +1039,6 @@ enums:
         title: Emergency Protection Request (Child)
         description: Immediate emergency protection request for a child.
         meaning: epc:ChildEmergency
-      "request.child-statutory":
-        title: Statutory Services Request (Child)
-        description: Request to statutory services for a child (e.g. CAMHS, statutory advocacy).
-        meaning: epc:ChildStatutoryServices
-      "request.child-non-statutory":
-        title: Non-Statutory Services Request (Child)
-        description: Request to non-statutory or community services for a child.
-        meaning: epc:ChildNonStatutoryServices
-      "request.adult-statutory":
-        title: Statutory Services Request (Adult)
-        description: Request to statutory services for an adult (e.g. NHS Continuing Healthcare, statutory advocacy).
-        meaning: epc:AdultStatutoryServices
-      "request.adult-non-statutory":
-        title: Non-Statutory Services Request (Adult)
-        description: Request to non-statutory or community services for an adult.
-        meaning: epc:AdultNonStatutoryServices
 
   EpisodeOutcome:
     enum_uri: sg:episode-outcome
@@ -1129,7 +1117,7 @@ enums:
         meaning: eo:Referral
       request:
         title: Request
-        description: Episode concluded by requesting a specific statutory or non-statutory service.
+        description: Episode concluded by requesting a specific service.
         meaning: eo:Request
       "quality-of-care-concern":
         title: Quality of Care Concern

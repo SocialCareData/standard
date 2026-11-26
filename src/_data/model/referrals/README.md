@@ -93,6 +93,13 @@ provider would otherwise be repeated. A concern about two providers is raised as
 two concerns. `qocServiceIdentifier` shares the `identifier` predicate, as every
 module's identifier slot does.
 
+## Request purposes
+
+`RequestPurposeCode` has two general purposes, `notification` and `service`
+("Request to another service"), and otherwise `child.*` / `adult.*` codes for
+specific front-door or statutory decisions. Safeguarding's `EpisodeCode` follows the same pattern
+(`request.service`).
+
 ## Response
 
 `Response` records that a response to a `Referral`, `Request` or
