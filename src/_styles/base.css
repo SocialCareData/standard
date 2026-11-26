@@ -128,7 +128,7 @@ main article *:is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote), .table-sma
 .data-model-diagram img {
   display: block;
   margin: 0 auto;
-  max-width: 100%;
+  max-width: 125%;
 }
 
 .icon-text {

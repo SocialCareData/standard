@@ -4,8 +4,8 @@ title: Social Care Ontology
 description: >-
   The Social Care ontology. It
   has no classes or slots of its own; it composes the independently-versioned
-  modules - common, person, placements, safeguarding, and assessments-and-plans
-  - into a single ontology under one flat namespace
+  modules - common, person, placements, safeguarding, assessments-and-plans,
+  and referrals - into a single ontology under one flat namespace
   (https://ns.socialcaredata.io/).
 
   Each module is authored and versioned on its own cadence; a MAIS release pins a

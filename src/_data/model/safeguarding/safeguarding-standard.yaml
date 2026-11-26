@@ -7,7 +7,7 @@ description: >-
   life events involved in safeguarding and promoting the wellbeing of a person,
   to support multi-agency information sharing (MAIS).
 license: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
-version: 1.0.0
+version: 1.1.0
 
 prefixes:
   linkml: https://w3id.org/linkml/
@@ -213,8 +213,8 @@ classes:
     class_uri: sg:LinkedRecord
     description: >-
       A reference to an associated external or cross-standard record (such as a
-      referral, service request, quality-of-care concern, care needs assessment,
-      or care plan).
+      referral, service request, quality-of-care concern, response, care needs
+      assessment, or care plan).
     slots:
       - recordId
       - recordType
@@ -410,7 +410,9 @@ slots:
     range: LinkedRecord
     required: false
     multivalued: true
-    description: Linked records associated with this episode or life event (e.g. referrals, requests, concerns, assessments, plans).
+    description: >-
+      Other records linked to this one, such as related referrals, requests,
+      quality-of-care concerns, responses, assessments or plans.
 
   # --- LinkedRecord ---
   recordId:
@@ -433,7 +435,9 @@ slots:
     range: RecordRelationshipCode
     required: false
     multivalued: false
-    description: The nature of the relationship (e.g. trigger, outcome, context).
+    description: >-
+      How this record relates to the linked record, for example as an
+      escalation of it or a follow-up to it.
 
   # --- SubjectPerson / RelatedProfessional ---
   person:
@@ -585,8 +589,18 @@ enums:
         meaning: svc:AlternativeProvisionSchool
       social-care:
         title: Social Care
-        description: Social Care Department
+        description: >-
+          Local authority social care, where children's and adult services are
+          not distinguished. Use the children's or adult code where known.
         meaning: svc:SocialCare
+      social-care.children:
+        title: Children's Social Care
+        description: Local authority children's social care services.
+        meaning: svc:ChildrensSocialCare
+      social-care.adults:
+        title: Adult Social Care
+        description: Local authority adult social care services.
+        meaning: svc:AdultSocialCare
       family-court:
         title: Family Court
         description: Family Court
@@ -695,6 +709,14 @@ enums:
         title: Other Carer Support
         description: Other unpaid carer support
         meaning: svc:OtherCarerSupport
+      leaving-care:
+        title: Leaving Care Service
+        description: >-
+          The local authority's service for care leavers, including personal
+          advisers and support for former relevant children up to age 25 under
+          the Children Act 1989. Also known locally as a 16+, after care or
+          independent living service.
+        meaning: svc:LeavingCare
       MASH:
         title: MASH / Safeguarding Services
         description: MASH / safeguarding services
@@ -744,6 +766,49 @@ enums:
         title: Advocacy
         description: Advocacy
         meaning: svc:Advocacy
+      adult-front-door:
+        title: Adult Social Care Front Door
+        description: >-
+          The first point of contact for adult social care, which receives and
+          triages contacts, referrals and requests for support. Also known
+          locally as a contact centre, first contact or access team.
+        meaning: svc:AdultFrontDoor
+      adult-safeguarding:
+        title: Adult Safeguarding Team
+        description: >-
+          The team that receives adult safeguarding concerns and makes or
+          coordinates enquiries under section 42 of the Care Act 2014.
+        meaning: svc:AdultSafeguarding
+      information-and-advice:
+        title: Information and Advice
+        description: >-
+          Information, advice and signposting about care and support, which
+          local authorities must provide under section 4 of the Care Act 2014.
+        meaning: svc:InformationAndAdvice
+      hospital-social-work:
+        title: Hospital Social Work Team
+        description: >-
+          Social workers based in or linked to a hospital, who assess and plan
+          support for people being discharged.
+        meaning: svc:HospitalSocialWork
+      telecare:
+        title: Telecare / Assistive Technology
+        description: >-
+          Technology that helps a person stay safe and independent at home, such
+          as community alarms, sensors and monitoring.
+        meaning: svc:Telecare
+      AMHP:
+        title: AMHP Service
+        description: >-
+          Approved Mental Health Professional service, which coordinates
+          assessments under the Mental Health Act 1983.
+        meaning: svc:AMHP
+      emergency-duty-team:
+        title: Emergency Duty Team
+        description: >-
+          Out-of-hours social care service covering urgent situations for
+          children and adults when daytime teams are closed.
+        meaning: svc:EmergencyDutyTeam
       LGA.<LGA Taxonomy Code>:
         title: Local Government Association Service Taxonomy
         description: "Numeric code from the [Local Government Association Service Taxonomy](https://webservices.esd.org.uk/lists/services)"
@@ -954,6 +1019,10 @@ enums:
         title: Notification or Signposting
         description: Notification or signposting request to partner agency or community service.
         meaning: epc:Notification
+      "request.service":
+        title: Request to Another Service
+        description: Request to another service to take action, such as CAMHS, NHS Continuing Healthcare, advocacy, or a voluntary or community organisation.
+        meaning: epc:Service
       "request.child-early-help":
         title: Early Help Request (Child)
         description: Request to Early Help services for a child.
@@ -970,22 +1039,6 @@ enums:
         title: Emergency Protection Request (Child)
         description: Immediate emergency protection request for a child.
         meaning: epc:ChildEmergency
-      "request.child-statutory":
-        title: Statutory Services Request (Child)
-        description: Request to statutory services for a child (e.g. CAMHS, statutory advocacy).
-        meaning: epc:ChildStatutoryServices
-      "request.child-non-statutory":
-        title: Non-Statutory Services Request (Child)
-        description: Request to non-statutory or community services for a child.
-        meaning: epc:ChildNonStatutoryServices
-      "request.adult-statutory":
-        title: Statutory Services Request (Adult)
-        description: Request to statutory services for an adult (e.g. NHS Continuing Healthcare, statutory advocacy).
-        meaning: epc:AdultStatutoryServices
-      "request.adult-non-statutory":
-        title: Non-Statutory Services Request (Adult)
-        description: Request to non-statutory or community services for an adult.
-        meaning: epc:AdultNonStatutoryServices
 
   EpisodeOutcome:
     enum_uri: sg:episode-outcome
@@ -1064,7 +1117,7 @@ enums:
         meaning: eo:Referral
       request:
         title: Request
-        description: Episode concluded by requesting a specific statutory or non-statutory service.
+        description: Episode concluded by requesting a specific service.
         meaning: eo:Request
       "quality-of-care-concern":
         title: Quality of Care Concern
@@ -1644,6 +1697,12 @@ enums:
         title: Quality of Care Concern
         description: Quality-of-care concern raised about a care provider or service (PUB06).
         meaning: rtc:QualityOfCareConcern
+      response:
+        title: Response
+        description: >-
+          Record of a response to a referral, request or quality-of-care
+          concern (PUB06).
+        meaning: rtc:Response
       assessment:
         title: Care Needs Assessment
         description: Care needs assessment record (PUB05).
