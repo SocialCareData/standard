@@ -558,11 +558,28 @@ The Person Standard is a reduced subset of the FHIR `Patient` resource, extended
 
 - [Person matching implementation](/PUB03_standards_comparison_person_matching) — how `matchedPersonRef` is established via the FHIR `$match` operation.
 
-## Ontology
+## Ontology and validation
 
-The ontology for this specification is defined in Turtle format and is available at: [person-standard.ttl](https://github.com/SocialCareData/ontology/releases/latest).
+This standard is also published as machine-readable files in the [SocialCareData/ontology](https://github.com/SocialCareData/ontology) repository:
 
-To validate a `Person` record against the constraints that apply in a given context, two SHACL shapes are provided. Use [person-subject-of-care-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest) where the `Person` is the subject of care, and [person-connected-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest) where the `Person` is a connected or related individual (see [Connected Person profile](#connected-person-profile)). Each shape applies the cardinality and content rules appropriate to that role.
+- [person-standard.ttl](https://github.com/SocialCareData/ontology/blob/main/person/person-standard.ttl) - the ontology (OWL, in Turtle): classes, properties and controlled vocabularies.
+- [person-subject-of-care-shape.ttl](https://github.com/SocialCareData/ontology/blob/main/person/person-subject-of-care-shape.ttl) - the SHACL shape for a person who is the subject of care: the rules a record must meet, such as required fields, allowed values and formats.
+- [person-connected-shape.ttl](https://github.com/SocialCareData/ontology/blob/main/person/person-connected-shape.ttl) - the SHACL shape for a connected person, such as a relative or carer, with fewer required fields (see [Connected Person profile](#connected-person-profile)).
+- [context.jsonld](https://github.com/SocialCareData/ontology/blob/main/person/context.jsonld) - the JSON-LD context, which maps the field names in a JSON record to the ontology.
+
+To check your data:
+
+- **Web validator** - validate [subject of care](/validator?example=https://github.com/SocialCareData/ontology/blob/main/examples/person/subject-of-care/valid-subject-of-care.jsonld) or [connected person](/validator?example=https://github.com/SocialCareData/ontology/blob/main/examples/person/connected/valid-connected.jsonld) on your browser.
+- **[Command-line validator](/validator_cli)** - runs on your own machine, so it suits live data, large files and automated checks:
+
+```bash
+npx --yes @theodi/data-standard-validator \
+  -s https://raw.githubusercontent.com/SocialCareData/ontology/main/person/person-subject-of-care-shape.ttl \
+  -c https://raw.githubusercontent.com/SocialCareData/ontology/main/person/context.jsonld \
+  yourdata.jsonld
+```
+
+For a connected person, use `-s https://raw.githubusercontent.com/SocialCareData/ontology/main/person/person-connected-shape.ttl` instead.
 
 ## Report an issue
 

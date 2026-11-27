@@ -782,11 +782,25 @@ Used by [`LinkedRecord.recordRelationship`](#linkedrecord-recordRelationship). C
 
 {% schema_table page.data_model RecordRelationshipCode no-label %}
 
-## Ontology
+## Ontology and validation
 
-The ontology for this specification is defined in Turtle format and is available at: [safeguarding-standard.ttl](https://github.com/SocialCareData/ontology/releases/latest). It reuses the shared objects (`Identifier`, `Name`, `Address`, `Contact`) from the [Person Standard](/PUB01_person_standard).
+This standard is also published as machine-readable files in the [SocialCareData/ontology](https://github.com/SocialCareData/ontology) repository:
 
-To validate a record against the constraints defined by this standard, a SHACL shape is provided: [safeguarding-standard-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest). It defines one shape per class, applying the cardinality and content rules for each.
+- [safeguarding-standard.ttl](https://github.com/SocialCareData/ontology/blob/main/safeguarding/safeguarding-standard.ttl) - the ontology (OWL, in Turtle): classes, properties and controlled vocabularies.
+- [safeguarding-standard-shape.ttl](https://github.com/SocialCareData/ontology/blob/main/safeguarding/safeguarding-standard-shape.ttl) - the SHACL shape: the rules a record must meet, such as required fields, allowed values and formats.
+- [context.jsonld](https://github.com/SocialCareData/ontology/blob/main/safeguarding/context.jsonld) - the JSON-LD context, which maps the field names in a JSON record to the ontology.
+
+To check your data:
+
+- **[Web validator](/validator?example=https://github.com/SocialCareData/ontology/blob/main/examples/safeguarding/valid-safeguarding.jsonld)** - experiment the standart on your browser.
+- **[Command-line validator](/validator_cli)** - runs on your own machine, so it suits live data, large files and automated checks:
+
+```bash
+npx --yes @theodi/data-standard-validator \
+  -s https://raw.githubusercontent.com/SocialCareData/ontology/main/safeguarding/safeguarding-standard-shape.ttl \
+  -c https://raw.githubusercontent.com/SocialCareData/ontology/main/safeguarding/context.jsonld \
+  yourdata.jsonld
+```
 
 ## Report an issue
 

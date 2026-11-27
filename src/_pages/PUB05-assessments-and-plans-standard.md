@@ -446,15 +446,24 @@ The model is parameterised by the following controlled vocabularies.
 {% schema_table page.data_model CareActEligibilityStatus expanded %}
 
 
-## Validation
+## Ontology and validation
 
-A SHACL shape ([assessments-and-plans-standard-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest)) is automatically generated from our LinkML model schema. It defines structure, cardinalities, and controlled vocabulary bindings.
+This standard is also published as machine-readable files in the [SocialCareData/ontology](https://github.com/SocialCareData/ontology) repository:
 
+- [assessments-and-plans-standard.ttl](https://github.com/SocialCareData/ontology/blob/main/assessments-and-plans/assessments-and-plans-standard.ttl) - the ontology (OWL, in Turtle): classes, properties and controlled vocabularies.
+- [assessments-and-plans-standard-shape.ttl](https://github.com/SocialCareData/ontology/blob/main/assessments-and-plans/assessments-and-plans-standard-shape.ttl) - the SHACL shape: the rules a record must meet, such as required fields, allowed values and formats.
+- [context.jsonld](https://github.com/SocialCareData/ontology/blob/main/assessments-and-plans/context.jsonld) - the JSON-LD context, which maps the field names in a JSON record to the ontology.
 
-**[Validate your data in your browser](/validator)**, or from a terminal:
+To check your data:
+
+- **[Web validator](/validator?example=https://github.com/SocialCareData/ontology/blob/main/examples/assessments-and-plans/valid-assessments-and-plans.jsonld)** - experiment the standart on your browser.
+- **[Command-line validator](/validator_cli)** - runs on your own machine, so it suits live data, large files and automated checks:
 
 ```bash
-npx @theodi/data-standard-validator -s https://raw.githubusercontent.com/SocialCareData/ontology/main/assessments-and-plans/assessments-and-plans-standard-shape.ttl yourdata.jsonld
+npx --yes @theodi/data-standard-validator \
+  -s https://raw.githubusercontent.com/SocialCareData/ontology/main/assessments-and-plans/assessments-and-plans-standard-shape.ttl \
+  -c https://raw.githubusercontent.com/SocialCareData/ontology/main/assessments-and-plans/context.jsonld \
+  yourdata.jsonld
 ```
 
 ## Report an issue

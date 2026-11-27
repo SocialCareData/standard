@@ -409,11 +409,6 @@ LA-internal metadata about who recorded each part of the placement record (refer
 </div>
 
 
-## Ontology
-
-The ontology for this specification is defined in Turtle format and is available at: [placements-standard.ttl](https://github.com/SocialCareData/ontology/releases/latest).
-
-
 ## Taxonomies
 
 The model is parameterised by eight SKOS controlled vocabularies.
@@ -483,21 +478,28 @@ Additional support provision required alongside a placement. Multi-valued: selec
 Used by `additionalSupport` on [PlacementRequirements](#placementrequirements).
 
 
-## Validation
+## Ontology and validation
 
-A SHACL shape ([placements-standard-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest)) encodes:
+This standard is also published as machine-readable files in the [SocialCareData/ontology](https://github.com/SocialCareData/ontology) repository:
 
-- structural cardinality (mirroring the OWL restrictions in [placements-standard.ttl](https://github.com/SocialCareData/ontology/releases/latest)),
-- controlled-vocabulary enforcement (`sh:in` over each SKOS scheme),
-- pattern checks (UK postcode prefix on `placementLocation`),
-- and severity-`Warning` cost sense-checks.
+- [placements-standard.ttl](https://github.com/SocialCareData/ontology/blob/main/placements/placements-standard.ttl) - the ontology (OWL, in Turtle): classes, properties and controlled vocabularies.
+- [placements-standard-shape.ttl](https://github.com/SocialCareData/ontology/blob/main/placements/placements-standard-shape.ttl) - the SHACL shape: the rules a record must meet, such as required fields, allowed values and formats.
+- [context.jsonld](https://github.com/SocialCareData/ontology/blob/main/placements/context.jsonld) - the JSON-LD context, which maps the field names in a JSON record to the ontology.
+- [csv-metadata.json](https://github.com/SocialCareData/ontology/blob/main/placements/csv-metadata.json) - CSV on the Web metadata, which maps CSV columns to the same fields.
 
-**[Validate your data in your browser](/validator)** - paste a record, choose *Children's Social Care Placements*, and see what needs fixing. Or from a terminal:
+To check your data:
+
+- **[Web validator](/validator?example=https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-placement.jsonld)** - experiment the standart on your browser.
+- **[Command-line validator](/validator_cli)** - runs on your own machine, so it suits live data, large files and automated checks:
 
 ```bash
-npx @theodi/data-standard-validator -s https://raw.githubusercontent.com/SocialCareData/ontology/main/placements/placements-standard-shape.ttl yourdata.jsonld
+npx --yes @theodi/data-standard-validator \
+  -s https://raw.githubusercontent.com/SocialCareData/ontology/main/placements/placements-standard-shape.ttl \
+  -c https://raw.githubusercontent.com/SocialCareData/ontology/main/placements/context.jsonld \
+  yourdata.jsonld
 ```
 
+For CSV, use `--csv-metadata https://raw.githubusercontent.com/SocialCareData/ontology/main/placements/csv-metadata.json` in place of `-c`.
 
 ## Standard Placement Reporting Spreadsheet
 
