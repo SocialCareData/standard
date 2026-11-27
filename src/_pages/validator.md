@@ -1,5 +1,5 @@
 ---
-title: Data validator
+title: Web validator
 description: Check that your data follows the published social care data standards, in your browser.
 breadcrumbs:
   - Publications
@@ -23,7 +23,7 @@ The standards and supporting content are published under the Open Government Lic
   <data-standard-validator theme="light"></data-standard-validator>
 </div>
 <script type="module">
-  import 'https://cdn.jsdelivr.net/npm/@theodi/data-standard-validator-component@1.2.0/standalone/data-standard-validator.js'
+  import 'https://cdn.jsdelivr.net/npm/@theodi/data-standard-validator-component@1.3.0/standalone/data-standard-validator.js'
   document.querySelector('data-standard-validator').config = {{ site.data.validator.config | jsonify }}
 </script>
 
