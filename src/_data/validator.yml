@@ -7,6 +7,7 @@ config:
       examples:
         - https://github.com/SocialCareData/ontology/blob/main/examples/person/subject-of-care/valid-subject-of-care.jsonld
         - https://github.com/SocialCareData/ontology/blob/main/examples/person/subject-of-care/valid-subject-of-care-full.jsonld
+        - https://github.com/SocialCareData/ontology/blob/main/examples/person/subject-of-care/invalid-subject-of-care.jsonld
 
     - name: Person - connected person
       description: Someone connected to a subject of care - a relative, carer or contact - held to a lighter standard.
@@ -15,6 +16,7 @@ config:
       examples:
         - https://github.com/SocialCareData/ontology/blob/main/examples/person/connected/valid-connected.jsonld
         - https://github.com/SocialCareData/ontology/blob/main/examples/person/connected/valid-connected-full.jsonld
+        - https://github.com/SocialCareData/ontology/blob/main/examples/person/connected/invalid-connected.jsonld
 
     - name: Children's Social Care Placements
       description: A placement record across its whole lifecycle, from requirements through to quality assurance.
@@ -26,6 +28,8 @@ config:
         - https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-placement-full.jsonld
         - https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-placement.csv
         - https://github.com/SocialCareData/ontology/blob/main/examples/placements/valid-placements-several-rows.csv
+        - https://github.com/SocialCareData/ontology/blob/main/examples/placements/invalid-placement.jsonld
+        - https://github.com/SocialCareData/ontology/blob/main/examples/placements/invalid-placement.csv
 
     - name: Safeguarding
       description: Organisations, services, professionals and service episodes involved in safeguarding.
@@ -34,6 +38,7 @@ config:
       examples:
         - https://github.com/SocialCareData/ontology/blob/main/examples/safeguarding/valid-safeguarding.jsonld
         - https://github.com/SocialCareData/ontology/blob/main/examples/safeguarding/valid-safeguarding-full.jsonld
+        - https://github.com/SocialCareData/ontology/blob/main/examples/safeguarding/invalid-safeguarding.jsonld
 
     - name: Care Needs Assessments and Care Plans
       description: Care needs assessments and the care plans that follow from them.
@@ -42,6 +47,7 @@ config:
       examples:
         - https://github.com/SocialCareData/ontology/blob/main/examples/assessments-and-plans/valid-assessments-and-plans.jsonld
         - https://github.com/SocialCareData/ontology/blob/main/examples/assessments-and-plans/valid-assessments-and-plans-full.jsonld
+        - https://github.com/SocialCareData/ontology/blob/main/examples/assessments-and-plans/invalid-assessments-and-plans.jsonld
 
     - name: Referrals and Requests
       description: Referrals, requests, and quality-of-care concerns.
@@ -52,6 +58,7 @@ config:
         - https://github.com/SocialCareData/ontology/blob/main/examples/referrals/valid-referral-unnamed-subject.jsonld
         - https://github.com/SocialCareData/ontology/blob/main/examples/referrals/valid-request.jsonld
         - https://github.com/SocialCareData/ontology/blob/main/examples/referrals/valid-qoc-concern.jsonld
+        - https://github.com/SocialCareData/ontology/blob/main/examples/referrals/invalid-referral.jsonld
 
   placeholder: |-
     {
@@ -60,3 +67,4 @@ config:
     }
 
   versions: tags
+  readOnly: true

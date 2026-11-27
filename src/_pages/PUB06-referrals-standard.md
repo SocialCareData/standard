@@ -20,6 +20,13 @@ editors:
     organisation: Social Finance
   - name: Huseyin Kir
     organisation: Open Data Institute
+other_formats:
+  - label: Table view
+    url: /PUB06_referrals_standard_table
+  - label: Ontology
+    url: https://github.com/SocialCareData/ontology/blob/main/referrals/referrals-standard.ttl
+  - label: SHACL
+    url: https://github.com/SocialCareData/ontology/blob/main/referrals/referrals-standard-shape.ttl
 non_technical_summary: |
   Referrals, requests, and quality-of-care concerns are often captured in questionnaire-style forms and exchanged inconsistently between organisations, with a heavy reliance on manual form-filling. In turn, this limits the reusability of information across systems and creates inefficiency for practitioners and partner organisations. Where integrations do exist, the underlying information is often specific to one pathway and cannot easily be reused across similar referral, request, notification or transition scenarios.
 
@@ -873,14 +880,24 @@ What a response says. Each status is what the responder said at one point in tim
 
 {% schema_table page.data_model ReferrerTypeCode expanded %}
 
-## Validation
+## Ontology and validation
 
-A SHACL shape ([referrals-standard-shape.ttl](https://github.com/SocialCareData/ontology/releases/latest)) is automatically generated from our LinkML model schema. It defines structure, cardinalities, and controlled vocabulary bindings.
+This standard is also published as machine-readable files in the [SocialCareData/ontology](https://github.com/SocialCareData/ontology) repository:
 
-**[Validate your data in your browser](/validator)**, or from a terminal:
+- [referrals-standard.ttl](https://github.com/SocialCareData/ontology/blob/main/referrals/referrals-standard.ttl) - the ontology (OWL, in Turtle): classes, properties and controlled vocabularies.
+- [referrals-standard-shape.ttl](https://github.com/SocialCareData/ontology/blob/main/referrals/referrals-standard-shape.ttl) - the SHACL shape: the rules a record must meet, such as required fields, allowed values and formats.
+- [context.jsonld](https://github.com/SocialCareData/ontology/blob/main/referrals/context.jsonld) - the JSON-LD context, which maps the field names in a JSON record to the ontology.
+
+To check your data:
+
+- **[Web validator](/validator?example=https://github.com/SocialCareData/ontology/blob/main/examples/referrals/valid-referral.jsonld)** - experiment the standart on your browser.
+- **[Command-line validator](/validator_cli)** - runs on your own machine, so it suits live data, large files and automated checks:
 
 ```bash
-npx @theodi/data-standard-validator -s https://raw.githubusercontent.com/SocialCareData/ontology/main/referrals/referrals-standard-shape.ttl yourdata.jsonld
+npx --yes @theodi/data-standard-validator \
+  -s https://raw.githubusercontent.com/SocialCareData/ontology/main/referrals/referrals-standard-shape.ttl \
+  -c https://raw.githubusercontent.com/SocialCareData/ontology/main/referrals/context.jsonld \
+  yourdata.jsonld
 ```
 
 ## Report an issue
