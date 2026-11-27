@@ -1,6 +1,6 @@
 ---
 layout: publication
-title: Children's Social Care Placements Standard
+title: Children's Social Care Placements Standard v1 (superseded)
 description: The children's social care placements standard helps regions answer their sufficiency questions by establishing a common data model to gather data about placements.
 tags:
   - Placements

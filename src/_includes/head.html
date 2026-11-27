@@ -1,6 +1,7 @@
     <head>
         <meta charset="utf-8" />
-        <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+        {% if page.title and page.title != site.title %}{% capture full_title %}{{ page.title }} - {{ site.title }}{% endcapture %}{% else %}{% assign full_title = site.title %}{% endif %}
+        <title>{{ full_title }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="{{ site.theme_color }}">
         {% if page.url == "/" %}<meta name="google-site-verification" content="DIW54zN6Erh18SzbHUHqfPyEeMQWzMtXCto0oaYR8ow" />{% endif %}
@@ -12,14 +13,15 @@
 
         <meta name="description" content="{{ page.description | default: site.description }}" />
 
-        <meta property="og:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}" />
-        <meta property="og:description" content="{{ page.description }}" />
+        <meta property="og:title" content="{{ full_title }}" />
+        <meta property="og:description" content="{{ page.description | default: site.description }}" />
         <meta property="og:url" content="{{ page.url | absolute_url }}" />{% if page.image %}
         <meta property="og:image" content="{{ page.image | prepend: site.url }}" />{% endif %}
         <meta property="og:site_name" content="{{ site.title }}" />
         <meta property="og:locale" content="{{ site.locale }}" />
 
         {% feed_meta %}
+        {% include structured-data.html %}
 
         <link rel="stylesheet" href="{{ site.styles.output }}" />
     </head>
