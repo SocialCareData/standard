@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Learn About the Standards
+description: We are developing standards to help information flow without technical and commercial barriers to support better social care.
 tags:
   - Programme
 ---

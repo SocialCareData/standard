@@ -1,6 +1,7 @@
 ---
 layout: use-case
 title: Sharing Care Summaries
+description: This use case outlines how standards can support the creation and sharing of intelligible summaries of records to share with those who have left the care system.
 breadcrumbs:
   - Use Cases
 tags:

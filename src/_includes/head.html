@@ -3,6 +3,7 @@
         <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="{{ site.theme_color }}">
+        {% if page.url == "/" %}<meta name="google-site-verification" content="DIW54zN6Erh18SzbHUHqfPyEeMQWzMtXCto0oaYR8ow" />{% endif %}
 
         <link rel="canonical" href="{% if page.canonical %}{{ page.canonical | absolute_url }}{% else %}{{ page.url | absolute_url }}{% endif %}">
 

@@ -1,5 +1,6 @@
 ---
 title: Calendar
+description: Our upcoming programme events including Working Groups and governance meetings.
 tags:
   - Working Group
 regenerate: true

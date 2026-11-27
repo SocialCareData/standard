@@ -10,7 +10,7 @@ modules:
   common: 1.0.0
   person: 1.0.0
   placements: 2.0.0
-  safeguarding: 1.0.0
+  safeguarding: 1.1.0
   assessments-and-plans: 1.0.0
   referrals: 1.0.0
 profiles:
